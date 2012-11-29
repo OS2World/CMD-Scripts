@@ -1,0 +1,15 @@
+TEMPLATE.CMD v3.04 is a skeleton 
+for an OS/2 REXX program.
+
+It contains a complete runtime 
+system for REXX programs builded 
+with more than 20 routines which 
+you can also use in other REXX 
+programs. Included are routines 
+for error handling, including 
+files, logfile handling, message 
+handling, loading dlls and much 
+more. CID return codes are 
+supported.
+
+Free, uploaded by the author.

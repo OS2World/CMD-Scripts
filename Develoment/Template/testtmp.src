@@ -1,0 +1,293 @@
+/* ------------------------------------------------------------------ */
+/* TESTTEMP.CMD - Testprogram for the Template for a REXX program     */
+/*                                                                    */
+/* (c) Copyright Bernd Schemmer 1996                                  */
+/*                                                                    */
+/*-Author:                                                            */
+/*   Bernd Schemmer                                                   */
+/*   Baeckerweg 48                                                    */
+/*   D-60316 Frankfurt am Main                                        */
+/*   Germany                                                          */
+/*   Compuserve: 100104,613                                           */
+/*   Internet:   100104.613@compuserve.com                            */
+/*                                                                    */
+/*-History:                                                           */
+/*   08.08.1996 /bs v1.00                                             */
+/*     - initial release                                              */
+/*                                                                    */
+/*                                                                    */
+/*                                                                    */
+/* Based on TEMPLATE.CMD v3.03, TEMPLATE is (c) 1995 Bernd Schemmer,  */
+/* Baeckerweg 48, D-60316 Frankfurt, Germany, Compuserve: 100104,613  */
+/* ------------------------------------------------------------------ */
+
+  call trace 'off'      /* turn interactive trace off                 */
+
+                  global. = ''  /* init the stem global. with ''      */
+
+/*** change the following values to your need                       ***/
+
+         global.__Version = 1.0          /* Version of YOUR program   */
+
+       global.__SignOnMsg = 1   /* set to 0 if you do not want the    */
+                                /* program start and end messages     */
+
+         global.__NeedCID = 0   /* set to 1 if you need CID support   */
+
+      global.__NeedColors = 1   /* set to 1 if you want colored msgs  */
+
+  global.__NeedPatchCheck = 1   /* set to 1 if you want the program   */
+                                /* to search for a patched version of */
+                                /* this program                       */
+
+              /* set default values for EXPOSELIST if necessary       */
+/*             exposeList = ''                                        */
+
+              /* name of the routine for the message handling         */
+              /* Note: Use '' for hardcoded messages                  */
+/*          global.__GetMsg = ''                                      */
+
+             /* base number for the message numbers (def.: 1000)      */
+/*          global.__BaseMsgNo = 1000                                 */
+
+             /* note: set the variable prog.__STDOUT to "STDERR:"     */
+             /*       or "NUL" if your program is a filter program!   */
+  prog.__STDOUT = 'STDOUT'        /* necessary for Object REXX        */
+  prog.__STDERR = 'STDOUT'        /* necessary for Object REXX        */
+
+                                                                   /*!*/
+/***                End of variables to change                      ***/
+/*      HINT: The further program code is in the function MAIN        */
+
+/***        End of Part 1 of the source code of TEMPLATE.CMD        ***/
+
+/***       Start of Part 4 of the source code of TEMPLATE.CMD       ***/
+                                                                   /*!*/
+
+/* ------------------------------------------------------------------ */
+/*-function: main procedure of the program                            */
+/*                                                                    */
+/*-call:     called by the runtime system with:                       */
+/*           => call main parameter_of_the_program <=                 */
+/*                                                                    */
+/*-returns:  program return code                                      */
+/*           If no return code is returned, the value of the variable */
+/*           prog.__ExitCode is returned to the calling program.      */
+/*                                                                    */
+/*-Note:     YOU MUST FILL THIS ROUTINE WITH CODE.                    */
+/*           If you want to add further global variables you SHOULD   */
+/*           add them to the expose list of the procedure MAIN!       */
+/*                                                                    */
+Main: PROCEDURE expose (exposeList)
+
+
+/* ------------------------------ */
+
+                        /* get the parameter of the program           */
+  parse arg mainArguments
+
+
+  call log 'Arguments for the main routine are: "' || mainArguments || '"'
+  call log
+  call log 'prog.__drive is:            "' || prog.__drive || '"'
+  call log 'prog.__path is:             "' || prog.__path || '"'
+  call log 'prog.__name is:             "' || prog.__name || '"'
+  call log 'prog.__Fullname is:         "' || prog.__fullname || '"'
+  call log
+  call log 'prog.__CurDir is:           "' || prog.__CurDir || '"'
+  call log 'prog.__env is:              "' || prog.__env || '"'
+  call log 'prog.__version is:          "' || prog.__version || '"'
+  call log
+  call log 'prog.__trace is:            "' || prog.__trace || '"'
+  call log 'prog.__defParms is:         "' || prog.__defParms || '"'
+  call log
+  call log 'prog.__LogFile is:          "' || prog.__logFile || '"'
+  call log 'prog.__LogSTDErr is:        "' || prog.__LogStdErr || '"'
+  call log 'prog.__LogSTDOUt is:        "' || prog.__LogStdOut || '"'
+  call log 'prog.__LogAll is:           "' || prog.__LogAll || '"'
+  call log 'prog.__LogFileParm is:      "' || prog.__LogFileParm || '"'
+  call log 'prog.__LogExcludeWords is   "' || prog.__LogExcludeWords || '"'
+  call log 'prog.__STDOUT is:           "' || prog.__STDOUT || '"'
+  call log 'prog.__STDERR is:           "' || prog.__STDERR || '"'
+  call log
+  call log 'global.__ErrorExitCode is:  "' || global.__ErrorExitCode || '"'
+  call log 'global.__OKExitCode is:     "' || global.__OKExitCode || '"'
+  call log 'prog.__ExitCode is:         "' || prog.__ExitCode || '"'
+  call log 'prog.__ExitRoutines is:     "' || prog.__ExitRoutines || '"'
+  call log
+
+  call log 'prog.__UserAbort is:        "' || prog.__UserAbort || '"'
+  call log
+  call log 'prog.__ScreenCols is:       "' || prog.__ScreenCols || '"'
+  call log 'prog.__ScreenRows is:       "' || prog.__ScreenRows || '"'
+
+  call log 'prog.__NOSound is:          "' || prog.__NoSound || '"'
+  call log 'global.__Verbose is:        "' || global.__verbose || '"'
+  call log 'global.__SignOnMsg is:      "' || global.__SignOnMsg || '"'
+  call log 'global.__Version is:        "' || global.__Version || '"'
+  call log 'global.__NeedCID is:        "' || global.__NeedCID || '"'
+  call log 'global.__NeedColors is:     "' || global.__NeedColors || '"'
+  call log 'global.__NeedPatchCheck is: "' || global.__NeedPatchCheck || '"'
+
+  call log 'global.__GetMsg is:         "' || global.__GetMsg || '"'
+  call log 'global.__BaseMsgNo is:      "' || global.__BaseMsgNo || '"'
+  call log
+  call log 'exposeList is:              "' || exposeList || '"'
+
+
+/* ------------------------------ */
+
+                        /* exit the program                           */
+                        /* Note: The program exit code is the return  */
+                        /*       code of the routine MAIN             */
+                        /*       If MAIN returns nothing, the program */
+                        /*       exit code is the current value of    */
+                        /*       the variable "prog.__ExitCode" after */
+                        /*       executing MAIN.                      */
+RETURN
+
+/* ------------------------------------------------------------------ */
+
+/*** INSERT FURTHER SUBROUTINES HERE ***/
+
+/*** Note: Do not forget the string 'EXPOSELIST' in the exposeList  ***/
+/***       of ALL procedures!                                       ***/
+
+/* ------------------------------------------------------------------ */
+/*-function: Show the invocation syntax                               */
+/*                                                                    */
+/*-call:     called by the runtime system with                        */
+/*           => call ShowUsage <=                                     */
+/*                                                                    */
+/*-where:    -                                                        */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+/*-Note:     YOU SHOULD FILL THIS ROUTINE WITH CODE.                  */
+/*           You may change the return code for your program in this  */
+/*           routine. The default for the return code is 253.         */
+/*           (The variable for the return code is prog.__ExitCode)    */
+/*                                                                    */
+/*                                                                    */
+ShowUsage: PROCEDURE expose (exposeList)
+  /*** INSERT THE CODE TO SHOW THE INVOCATION SYNTAX HERE ***/
+  call log I!.__GetMsg( 14 ) || ' ' || prog.__name || prog.__DefParms
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/* NOTE: You must uncomment this routines before using them!!!        */
+
+/*** DEBUGGING SUBROUTINES ***/
+
+/**DEBUG** Delete this line before using the debugging routines!!!
+
+/* ------------------------------------------------------------------ */
+/* function: show all variables defined for the routine calling       */
+/*           this routine.                                            */
+/*                                                                    */
+/* call:     ShowDefinedVariables {N}, {varMask}                      */
+/*                                                                    */
+/* where:    N - no pause if the screen is full                       */
+/*           varMask - mask for the variables                         */
+/*                                                                    */
+/* returns:  nothing                                                  */
+/*                                                                    */
+/* note:     This routine needs the DLL YDBAUTIL or RXU.              */
+/*           Be aware that the special REXX variables SIGL, RC and    */
+/*           RESULT are changed if you call this routine!             */
+/*                                                                    */
+/*           This routine uses Dave Bolls excellent DLL YDBAUTIL      */
+/*                                                                    */
+/*                                                                    */
+ShowDefinedVariables:
+  parse upper arg SDV.__pauseMode, SDV.__varMask
+
+                            /* test, if RXU or YDBAUTIL is accessible */
+  call rxFuncDrop 'rxuQuery'
+  call RxFuncAdd 'rxuQuery', 'YDBAUTIL', 'rxydbautilQuery'
+
+  SDV.__RXUDLL = ''
+
+                    /* install a local error handler for the DLL test */
+  signal on syntax name SDV.__TryRXU
+  call rxuQuery
+  SDV.__RXUDLL = 'YDBAUTIL'
+
+SDV.__TryRXU:
+  if SDV.__RXUDLL = '' then
+    SDV.__RXUDll = 'RXU'
+
+                                /* install a local error handler      */
+  signal on syntax name SDV.__RXUNotFound
+
+                                /* load the necessary DLL function    */
+  if RxFuncQuery( 'RxVList' ) then
+    call rxFuncAdd 'RxVlist', SDV.__RXUDLL, 'RxVList'
+
+  if RxFuncQuery( 'RxPullQueue' ) then
+    call rxFuncAdd 'RxPullQueue', SDV.__RXUDLL, 'RxPullQueue'
+
+                                /* create a queue for the variables   */
+  SDV.__newQueue = rxqueue( 'create' )
+
+                                /* the 'D' parameter of the RxVList   */
+                                /* functions won't pause if the       */
+                                /* screen is full                     */
+  SDV.__thisRC = RxVList( SDV.__varMask, 'V' , SDV.__newQueue )
+
+                                /* ignore local variables of this     */
+                                /* routine                            */
+  SDV.__thisRC = SDV.__thisRC
+
+  call log '  ' || copies( 'Ä',76 )
+
+  if SDV.__thisRC <> 0 then
+  do
+
+    call log '  Defined variable(s) and their values:'
+    SDV.__i = 0
+
+    do SDV.__n = 1 to SDV.__ThisRC
+      if SDV.__i >= prog.__ScreenRows-2 & ,
+         SDV.__pauseMode <> 'N' then
+      do
+        ADDRESS 'CMD' 'PAUSE'
+        SDV.__i = 0
+      end /* if */
+      SDV.__varName = RxPullQueue( SDV.__newQueue, 'Nowait', 'SDV.__dummy' )
+      SDV.__varValue = RxPullQueue( SDV.__newQueue, 'Nowait', 'SDV.__dummy' )
+
+                                /* ignore local variables of this     */
+                                /* routine                            */
+      if left( SDV.__varName, 6 ) <> 'SDV.__' then
+      do
+        call log '     ' || SDV.__varName || ' = "' || SDV.__varValue ||,
+                 '"' || screen.__AttrOff || screen.__DelEOL
+        SDV.__i = SDV.__i+1
+      end /* if right( ... */
+
+    end /* do */
+
+                        /* delete the queue for the variables         */
+    call rxqueue 'Delete', SDV.__newQueue
+  end
+  else
+    call log '  No variables defined.'
+  call log '  ' || copies( 'Ä',76 )
+
+                        /* delete local variables                     */
+  drop SDV.
+RETURN ' '                                                   /* v3.03 */
+
+                        /* error exit for ShowDefinedVariables        */
+SDV.__RXUNotFound:
+  call ShowError global.__ErrorExitCode ,,
+                 'ShowDefinedVariables: RXU and YDBAUTIL not found'
+return
+
+   Delete this line before using the debugging routines!!!    **DEBUG**/
+
+/***        End of Part 4 of the source code of TEMPLATE.CMD        ***/
+/**********************************************************************/
+   
+

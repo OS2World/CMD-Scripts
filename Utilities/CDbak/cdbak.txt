@@ -1,0 +1,26 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: cdbak.zip
+        Short Description: Small Rexx script to aid in automating CD backups.
+        Long Description:  Small rexx script that can be used with other GNU tools to automate CD backups.
+
+
+      Proposed directory
+           for placement: /pub/os2/util/backup
+
+               Your name:  Jason R Stefanovich
+           Email address: stefanj@gte.net
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://home1.gte.net/stefanj/cdbak.rex
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: 
+ Additional requirements: CDRecord/2, InfoZip, Rexx
+                Replaces: none
+
+
+

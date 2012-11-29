@@ -1,0 +1,2173 @@
+;
+; Sample menu description file for RxLBox version v1.30
+;
+; Contents
+; ========
+;
+; A menu description file contains the menu descriptions for RxLBox.
+; This menu description file contains all possible entries for a menu
+; description file including an description for every entry.
+;
+;
+; Last Update:
+; ============
+;
+;   01.05.1997 for Version v1.22 /bs
+;
+;
+; General
+; =======
+:
+;   - lines beginning with a semicolon ';' are comments
+;
+;   - comment lines and empty lines are ignored
+;
+;   - lines before the first section are ignored
+;
+;   - all unknown sections are ignored
+;
+;   - no part of the menu description is case-sensitive
+;
+;   - leading and trailing blanks are ignored
+;
+;   - to use multiple lines for an entry use a backslash
+;     '\' at the end of the line that continues on the
+;     next line. Use '^\' to add a backslash at the end
+;     of a line without using it as continuation char.
+;
+;   - the length of a line is not limited
+;
+;   - the order of the sections is meaningless. The only
+;     exception to this rule is the menu DEFAULTMENU
+;     (see below)
+;
+;   - RxLBox reads the menu descriptions only once at program start
+;
+;
+; Format
+; ======
+;
+; Menu descriptions are in the Windows INI file format.
+;
+; All sections begin with
+;
+;   [section_name]
+;
+;
+; All entries in the sections are in the format
+;
+;   key=value
+;
+; The only exception to this rule are the entries in the
+; sections for the online help topics (see below).
+;
+; 'key' is one of the defined keys for the approbiate section;
+; 'value' is the value for that key. For some, but not all,
+; keys 'value' is optional.
+;
+; You can surround 'value' with '(' and ')'. In this case
+; RxLBox treats the value as a REXX statement and evaluates
+; it using INTERPRET while_reading_the_menu_description.
+; The REXX statement must evaluate to a string!
+; This is possible for _all_ entries in the menu description.
+; You can read and change the exported REXX variables
+; (see below) in REXX statements.
+;
+; You can surround 'value' also with '{' and '}'. In this
+; case RxLBox treats the value also as a REXX statement but
+; the evaluation of the REXX statements takes place
+; just_before_the_value_is_used (executed, displayed,
+; returned, ... depending on the type of the key)
+; The REXX statement must evaluate to a string!
+; You can read and change the exported REXX variables
+; (see below) in REXX statements.
+; Please note that REXX statements enclosed in '{' and '}' can
+; not contain '}'. Use the ASCII code 125 ('7D'x) instead.
+;
+; This is possible for all entries of the menu description
+; except the following keys:
+;
+;   - all entries for color definitions
+;   - the key CLS
+; and
+;   - the key ACCEPTALLINPUT
+;
+;
+; Menu definitions
+; ================
+;
+; Sections with a menu definition must begin with
+;
+;   [*menu_name*]
+;
+; where 'menu_name' is the name of the menu. All characters are
+; possible for the name of a menu.
+; The name of a menu can NOT begin with an exclamation mark '!' or
+; an underscore '_'. 'menu_name' can not have leading or trailing
+; blanks but imbedded blanks are ok.
+; Note: You shouldn't use '[', ']', '*', and ',' in menu names.
+;       You can not use the NULL character '00'x in menu names.
+;
+; The name of a menu can have up to 74 chars. Each menu
+; must have a unique name (except the DEFAULTMENU see below).
+;
+; The number of menu definitions is not limited.
+;
+;
+; Menu names with a special meaning
+; ---------------------------------
+;
+; The following menus have a special meaning (if defined):
+;
+;   DEFAULTMENU
+;
+; This menu contains the default values for all following
+; menus. Menu entries defined in this menu are ignored.
+; You can redefine the DEFAULTMENU at any time and as often
+; as you like.
+; This menu is optional. Menus without a DEFAULTMENU defined
+; before them use the program internal default values.
+; For values not defined in a DEFAULTMENU the value from the
+; previous DEFAULTMENU (or the program internal defaults if
+; no previous DEFAULTMENU exist) are used.
+;
+;   MAINMENU
+;
+; This is the menu called by RxLBox.CMD if there's no menu
+; parameter in the command line.
+; This menu is optional if RxLBox.CMD is called with the
+; menu parameter.
+;
+;
+; Internal menus
+; --------------
+;
+; There are three internal menus. Due to the restrictions 
+; for menu names the user defined menus can not interfere 
+; with them. The internal menus use the colors defined in
+; the _last_ DEFAULTMENU in the menu description.
+; You can not redefine any other part (keys,
+; and so on) of the internal menus. To redefine the
+; messages used in these menus, you must use an external
+; message handling routine.
+;
+;
+; Menu entries
+; ------------
+;
+; All menu entries are in the format
+;
+;   key=value
+;
+; 'key' must be one of the defined keys (see MAINMENU
+; for the description of all defined keys) and 'value'
+; must be an approbiate value for that key.
+;
+;
+; Exported REXX variables
+; -----------------------
+;
+; The following REXX variables are exported by RxLBox (means:
+; They are maintained by RxLBox and you can use them in menu
+; definitions):
+;
+; variable         meaning
+; --------------------------------------------------------------------
+; !curMainMenu     name of the main menu
+; !curMenu         current menu name
+;
+; !curMenuEntry    current menu entry name (not evaluated!)
+; !curMenuEntry1   current menu entry name (evaluated!)
+; !curMenuAction   current menu entry action
+; !curCmd          current command executed by RxLBox
+; !curPageNo       number of the current menu page
+; !totalPageCount  total number of pages in this menu
+; !curLineNo       number of the active menu line (relative, range: 1..14)
+; !curEntryNo      number of the current menu entry
+; !totalEntryCount total number of entries in this menu
+; !curRC           special variable to communicate with RxLBox
+;                  (see below)
+;
+;
+; Note that these variables are set to '' while reading the menu
+; description. You should use them only in REXX statements executed
+; while running a menu (enclosed in '{}'). You can change the value
+; of any of these values but these changes are local on a per
+; statement base.
+;
+; You can read and write to the stem 'MenuDesc.' to use global
+; REXX variables in the menu descriptions (see the menu
+; PasswordMenu below for an example). This stem is initialized
+; with '' at program start.
+; All other REXX variables used in REXX statements in the menu
+; descriptions are local variables on a per statement base!
+;
+; Note further that you can neither read nor write the other REXX
+; variables used by RxLBox!
+;
+; In general you should use the stem 'MenuDesc.' to share variables
+; between REXX statements in the menu descriptions and environment
+; variables to share variables with other REXX programs.
+;
+;
+; Changing the behaviour for CTRL-C
+; ---------------------------------
+;
+; You may set the REXX variable "MenuDesc.__NoHalt" to a value not
+; equal "" to force RXLBOX to ignore CTRL-C.
+; If the variable MenuDesc.__NoHalt is set to "", CTRL-C pressed
+; while in the menu aborts the program.
+; This is the default behaviour.
+;
+; You can set this variable for example in the value for the keyword
+; OnInit or OnMainInit.
+;
+; See the section about "OS/2 commands" below for
+; a bug of the CMD.EXE (including a workaround).
+;
+;
+;
+; Exported REXX routines
+; ----------------------
+;
+; The following routines are exported by RxLBox (means: You can use
+; them in your menu definitions):
+;
+;
+; - ShowWorkingMessage
+;
+;   function: Show a message in a centered box on the screen
+;
+;   usage:    call ShowWorkingMessage msg_to_show {,wait} {,noCLS}
+;
+;   where:    msg_to_show
+;               This is the message text
+;               The maximum length for the message is 76. Messages
+;               longer than 76 chars are truncated.
+;
+;             wait
+;               Do or do not wait for a key
+;               If wait is 1, ShowWorkingMessage waits for a key
+;               after displaying the message.
+;
+;             noCls
+;               If this parameter is 0 RxLBox does not clear the
+;               screen before displaying the message
+;
+;   returns:  ''
+;
+;   Notes:    Note that ShowWorkingMessage used from within a menu
+;             description does not check the quiet parameter.
+;
+;
+; - EnvValue
+;
+;   function: Set and/or get the value of an environment variable
+;
+;   usage:    curEnvValue = EnvValue( envVar {, newEnvValue } )
+;
+;   where:    curEnvValue
+;               This is the current value of the environment variable,
+;             envVar
+;               This is the name of the environment variable
+;             newEnvValue
+;               This is the new value for the environment variable
+;
+;   note:     This is a short cut for the REXX function VALUE().
+;
+;   Examples:
+;
+;   - get the value of an environment variable:
+;
+;       myEnvVar = EnvValue( 'COMSPEC' )
+;
+;   - set the value of an environment variable:
+;
+;       call EnvValue 'MYENVVAR', 'MYENVVALUE'
+;
+;   - get and set the value of an environment variable:
+:
+;       OldValue = EnvValue( 'MYENVVAR', newValue )
+;
+;
+;
+; - WaitForAKey
+;
+;   function: Wait for a single key
+;
+;   usage:    call WaitForAKey {showPrompt}
+;
+;   where:    showPrompt
+;               If this parameter is set to 1, WaitForAkey shows the
+;               default prompt message of the PAUSE command. If the
+;               parameter is not equal 1 or ommitted, WaitForAkey does
+;               not show any prompt.
+;
+;
+;   returns:  ''
+;
+; Hint: To define a REXX subroutine in the menu description file
+;       save it in the stem menuDesc. and execute it with
+;       'interpret menuDesc.myREXXCode' where myREXXCode is the
+;       used tail.
+;
+;
+; Macro definitions
+; =================
+;
+; Sections with macros for the inputline must begin with
+; 
+;   [MACROLIST]
+;
+; See the sample macro lists below for the format of the entries
+; in this section.
+;       
+;
+; Online help topics
+; ==================
+;
+; Sections with a topic for the online help must begin with
+;
+;   [<help_topic>]
+;
+; where 'help_topic' is the name of the online help topic referenced
+; in the menu description keys 'HelpForF1', 'HelpForALT_F1' or
+; 'HelpForCTRL_F1' (see the descriptions of the main menu below;
+; see the end of this file for some example help topic sections).
+;
+; The following help topics are used for the internal menus:
+;
+;   MenuListOnlineHelp
+;     - F1 in the Menu List
+;
+;   HistoryListOnlineHelp
+;     - F1 in the History List
+;
+;   MacroListOnlineHelp
+;     - F1 in the Macro List
+;
+;   InternalMenu_InputLineHelp
+;     - ALT-F1 in the Menu List, the History List and the Macro List
+;
+;   InternalMenu_KeyHelp
+;     - CTRL-F1 in the Menu List, the History List and the Macro List
+;
+;
+;
+;
+; Using OS/2 commands and RxLBox commands
+; =======================================
+;
+; You can use OS/2 commands and RxLBox commands for Menu entry actions,
+; macros, and function keys.
+;
+;
+; OS/2 commands
+; -------------
+;
+; To use an OS/2 command for a function key or a macro just enter 
+; the command and the parameters. Preceed the command with an
+; asterix '*' to wait for a keystroke after the execution. 
+; OS/2 commands can not begin with a dash '#'. 
+;
+; To use an OS/2 command for menu entries you must use the RxLBox
+; command '#EXECUTECMD' (see below).
+;
+; Please note that there is a bug in the CTRL-C handling of the 
+; CMD.EXE. Due to this bug CTRL-C pressed while calling an internal
+; command (like DIR, or PAUSE) from within an RxLBox menu aborts 
+; the program (regardless of the setting of menuDesc.__NoHalt; see
+; above).
+; To get around this bug, you should always call another CMD.EXE 
+; for executing CMD commands, e.g.
+; instead of 
+;
+;    OnInit = 'dir'
+;
+; use
+;
+;    OnInit = 'cmd /c dir'
+;
+; and instead of
+;
+;    OnInit = 'dir & pause'
+;
+; use
+;
+;    OnInit = 'cmd /c "dir & pause"'
+;
+; Note that because of this bug the function #EXECUTECMD() always uses
+;
+;    'cmd /c' command
+;
+; to execute a command. It's also used for commands entered at the
+; input line (like *dir).
+;
+;
+; RxLBox commands
+; ---------------
+;
+; The format for RxLBox commands is:
+;
+;   #commandName( commandOptions ) commandParameter
+;
+; 'commandName' is the name of the command, 'commandOptions' are 
+; the options for the command and 'commandParameter' are the
+; parameter for the command.
+; The purpose of RxLBox commands is to use them in menu actions,
+; key definitions and macros. But you can also enter them
+; interactive on the input line.
+;
+; The following RxLBox commands are defined:
+;
+;   #SHOWHISTORY()
+;   - show the current menu stack entries
+;
+;   #SHOWMENULIST()
+;   - show a menu with all menus found in the menu description
+;
+;   #SHOWMACROLIST()
+;   - show a menu with all macros defined in the menu description
+;
+;   #GOTOMENU() next_menu
+;   - show the menu 'next_menu'. 'next_menu' must be the name of
+;     another menu in the menu description.
+;
+;   #GOBACK() {n}
+;   - go back n menu level
+;     if n is greater than 0 this commands jumps back n level. If n
+;     is greater than the number of nested menus called so far, this
+;     command will end the program. Use -1 for n to go back to the
+;     first menu called. Use -2 for n to go back one menu level only
+;     if there are at least 2 menus on the stack; #GOBACK -2 never
+;     ends the program.
+;     Invalid values for n are treated as 1.
+;
+;   #EXECUTECMD() command
+;   - execute the command 'command' using the default command
+;     processor. Preceed the command with an asterix '*' to
+;     wait after the execution of the command. 
+;     Surround the command with '{' and '}' if it's a REXX statement
+;     returning the command to execute. Example:
+;
+;       #EXECUTECMD() %comspec%
+;
+;         would pass the command "%comspec%" to the command processor
+;         
+;       #EXECUTECMD() { value( 'COMSPEC',,'OS2ENVIRONMENT' ) }
+;
+;         would pass the contents of the environment variable 'COMSPEC'
+;         at runtime to the command processor.
+;
+;     Note: Use the option NOP (see below) to avoid the refresh of the
+;           display after executing the command.
+;           #EXECUTECMD() will always execute the command using
+;           'cmd /c command' to avoid the CTRL-C bug in CMD.EXE.
+;
+;   #REXXCMD() statement
+;   - execute the REXX statement 'statement'. 
+;     You can read and change the exported REXX variables
+;     (see above) in the REXX statement(s).
+;     Note: Use the option NOP (see below) to avoid the refresh of the
+;           display after executing the command.
+;     IMPORTANT: DO NOT USE THE RETURN OR THE EXIT STATEMENT!
+;
+;   #NOP()
+;   - do nothing
+;
+;   #QUIT()
+;   - end the program and return an empty string
+;
+;   #SHOWHELP()
+;   - show the help topic referenced in the menu key 'HelpForF1'
+;
+;   #SHOWLINEHELP()
+;   - show the help topic referenced in the menu key 'HelpForAlt_F1'
+;
+;   #SHOWKEYHELP()
+;   - show the help topic referenced in the menu key 'HelpForCtlr_F1'
+;
+;   #REFRESH()
+;   - refresh the display
+;
+;   #REPEAT()
+;   - repeat the last input line
+;
+;   #USERINPUT() environment_Variable {# checkStatement } {# errorMessage }
+; or
+;   #USERINPUT() menuDesc.REXX_Variable {# checkStatement } {# errorMessage }
+
+;   - save the user input in the environment variable 'environment_variable'.
+;     or in the REXX variable 'MenuDesc.REXX_variable'.
+;    'REXX_Variable' can be any string.
+;     'checkStatement' can be a REXX statement that must evaluate to 1 if
+;     RxLBox should save the user input in the variable.
+;     Use the REXX variable 'EnvValue' in the 'checkStatement' to refer 
+;     to the input of the user.
+;     If checkStatement evaluates to a value not equal 1, RxLBox shows the
+;     error message 'errorMessage' and ignores the user input.
+;
+;     To use REXX statements for 'environment_variable' and 'errorMessage'
+;     enclose them with '{' and '}'. 'checkStatement' and 'errorMessage' 
+;     are optional.
+;
+;     Note: This command supports multiple options (see below).
+;
+;     (see the menu 'InputVarMenu3' for an example)
+;
+; At this time there are only a few options possible (invalid options
+; are ignored by RxLBox):
+;
+;
+; - Options for the command #USERINPUT:
+;
+;   BLANK_OK
+;     delete the environment or REXX variable if the users enter an 
+;     empty string for a #USERINPUT command. By default RxLBox ignores 
+;     empty user input for the #USERINPUT command.
+;
+;   UPPER
+;     translate the user input to uppercase before saving it into the
+;     environment variable. By default RxLBox won't change the
+;     user input. Note that only the chars from a to z are translated!
+;
+;   #USERINPUT supports multiple options.
+;
+;
+; - Options for the commands #REXXCMD and #EXECUTECMD:
+;
+;   GOBACK
+;     go back one menu after executing the command
+;
+;   QUIT
+;     exit the program returning an empty string after executing 
+;     the command
+;
+;   PAUSE
+;     wait for a key after executing the command and refresh the
+;     screen after the user pressed a key
+;
+;   NOP
+;     do not refresh the screen after executing the command
+;
+;   REFRESH
+;     refresh the screen after executing the command
+;
+;   The commands #REXXCMD and #EXECUTECMD uses only one option
+;   per command.
+;
+;   The options are processed in the order given above (e.g. if you use
+;   the options 'QUIT NOP' for a #REXXCMD command, only the option 'QUIT'
+;   is processed.) The default option for #REXXCMD and #EXECUTECMD is
+;   REFRESH. This option is also used if only unknown options are found.
+;
+;
+; The parameter for the commands depend on the type of the command.
+;
+;
+; Hints & Trouble Shooting
+; ========================
+;
+; - To suppress the internal menus you can redefine the function keys  
+;   used to call these menus (F8, F11 and F12) with other commands,
+;   with the command '#NOP', or with an empty string.
+;   See the menus 'Menu2' and 'Menu3' for examples
+;
+; - Use REXX statements and environment variables to implement 
+;   dynamic menus (see the menu 'Numbers' for an example).
+;   Note that the status line and the title lines are refreshed after 
+;   each command execution or function key. To refresh the other lines 
+;   in the menu you must use the #REFRESH command.
+;
+; - Some times the ANSI driver get's confused if you're using a lot
+;   of ANSI esc sequences. In this case the ANSI driver prints strings
+;   like
+;
+;     'pppppppppppp' 
+;
+;   to the screen and the key definitions won't work any more.
+;
+;   The best solution for this problem: 
+;
+;   Close the OS/2 session and open a new one.
+;
+;   If you don't want to close the session you may try to reset the
+;   ANSI driver with the commands:
+;
+;      ANSI OFF
+;      ANSI ON
+;
+;   (This method may work or may not).
+;
+; - If you can't use the cursor keys to navigate on your PC try
+;   using
+;
+;     OnInit = '@keys off'
+;     OnExit = '@keys on'
+;
+;   for the first menu called. Or use
+;
+;     OnMainInit = '@keys off'
+;     OnMainExit = '@keys on'
+;
+;   for the first menu called.
+;
+; --------------------------------------------------------------------
+[MACROLIST]
+; This section contains the macros for the input line. To use a macro
+; just enter it on the inputline of RxLBox.
+;
+; The format for the entries is
+;
+;   MacroName = MacroCommand
+; 
+; 'MacroName' is the name of the macro and can be any string not
+; beginning with '['. Each macro must have a unique name. The
+; maximum length for 'MacroName' is 25; the length of the macro
+; command is not limited.
+; 'macroCommand' can be either a RxLBox command (beginning with
+; a dash '#') or any legal OS/2 command.
+;
+; Preceed the command with an asterix '*' if RxLBox should wait for
+; a keystroke after the execution.
+;
+; The number of macros defined is not limited.
+; Macros are global for all menus.
+;
+; You can define more than one MACROLIST section in the file;
+; the number of sections with macros is not limited.
+;
+CMD1=*@C:\OS2\CMD.EXE /C ECHO. & ECHO. This is the CMD called via 'C:\OS2\CMD.EXE'
+CMD2=*@%comspec% /C ECHO. & ECHO. This is the CMD called via %%comspec%%
+CMD3=('*@' || value( 'COMSPEC',, 'OS2ENVIRONMENT' ) || " /C ECHO. & ECHO. This is the CMD called via value( 'COMSPEC',, 'OS2ENVIRONMENT' )")
+CMD4={ '*@%comspec% /C @ECHO. & ECHO. This macro was evaluated at ' || time()  || ' (just before the execution).' }
+
+;
+; another additional MacroList
+[MACROLIST]
+MACROS=#SHOWMACROLIST
+
+; Macro MAIN: Delete the menu stack and goto the main menu
+Main=#GOBACK() -1
+
+; Macro Up:   Goback one menu level if there are at least 2 menus on the stack
+Up=#GOBACK() -2
+
+; You can use macros to override some of the internal RxLBox commands. The
+; next line implements a macro called #QUIT:
+; (uncomment the line to try it)
+;
+; #QUIT=*ECHO.& ECHO. This is the macro #QUIT!
+
+[*DEFAULTMENU*]
+ESC = #GOBACK() -2
+
+; --------------------------------------------------------------------
+[*MainMenu*]
+;
+; --------------------------------------------------------------------
+; This is the default menu displayed by RxLBox if called without a
+; menu parameter.
+; --------------------------------------------------------------------
+;
+; Note that this menu uses the program internal defaults for not
+; defined values because there's no DEFAULTMENU before it in
+; the menu desription file!
+;
+
+; You can use the key OnMainInit to specify one or more REXX statements
+; that RxLBox should execute before calling the first menu. Note that RxLBox
+; only uses the key OnMainInit of the main menu!
+; The main menu is the first menu found in the parameters (see
+; RXLBOX.CMD for the usage description); the variable !curMenu
+; contains the name of the current menu shown.
+;
+; Set the REXX variable !curRC to a value not equal '' in the REXX code
+; for OnMainInit to suppress the menu. In this case RxLBox ends
+; imediately and returns
+;
+;    'ERROR: 97 : ' !curRC
+;
+; to the calling program. RxLBox sets !curRC to '' before executing the
+; REXX statements.
+;
+OnMainInit =  \
+              nop; MenuDesc.__NoHalt = '1'; /* turn off CTRL-C */ ;  \
+              call ShowWorkingMessage 'Exec. OnMainInit, !MainMenu is' \
+                   !curMainMenu || ', !curMenu is ' || !curMenu || '. Press any key', 1 ; \
+              !curRC = '';
+;         --> The maximum length for a message to show with ShowWorkingMessage
+;             is 76. The message used above is longer than 76 so RxLBox
+;             truncates it after 76 characters.
+
+; You can use the key OnMainExit to specify one or more REXX statements
+; that RxLBox should execute before ending the program. Note that RxLBox
+; only uses the key OnMainExit of the main menu!
+; The main menu is the first menu found in the parameters (see
+; RXLBOX.CMD for the usage description).
+;
+; Note further that the REXX variable !curRC has no meaning for this
+; statement.
+;
+OnMainExit = call ShowWorkingMessage 'Exec. OnMainExit, !MainMenu is' \
+                   !curMainMenu || ', !curMenu is ' || !curMenu || '. Press any key', 1,0 ;
+
+; You can use the key OnInit to specify one or more REXX statements
+; that RxLBox should execute each time before calling a menu.
+;
+; Set the REXX variable !curRC to a value not equal '' in the REXX
+; statements for OnInit to suppress the menu.
+; In this case RxLBox will show the previous menu again (or end the
+; program if this is the first menu). Note that RxLBox sets !curRC to
+; '' before executing the OnInit statement.
+;
+; If you specify OnInit and OnMainInit for the first menu shown, RxLBox will
+; execute both code in the order OnMainInit and than OnInit.
+;
+; Note: See the Menu PasswordMenu below for an example
+;
+;OnInit =  call ShowWorkingMessage 'Executing OnInit for the MainMenu. Press any key .......................................' ; \
+;          call WaitForAKey  ;
+;
+; You can use the key OnExit to specify one or more REXX statements
+; that RxLBox should execute each time after calling a menu.
+;
+; Set the REXX variable !curRC to a value not equal '' in the REXX
+; statements for OnExit to prevent the leaving of this menu.
+; In this case RxLBox will show the current menu again. Note that
+; RxLBox sets !curRC to '' before executing the OnExit statement.
+;
+; If you specify OnExit and OnMainExit for the first menu shown, RxLBox will
+; execute both code in the order OnMainInit and than OnInit.
+;
+; Note: See the Menu PasswordMenu below for an example
+;
+;OnExit =  call ShowWorkingMessage 'Executing OnExit for the MainMenu. Press any key' ; \
+;          call WaitForAKey;
+
+; "Title1" is the title for the 2nd line of the menu (up to 74 chars)
+Title1             = This is the menu "MainMenu" (Use F7 to switch the CTRL-C checking)
+
+; "Title2" is the title for the 3nd line of the menu (up to 74 chars)
+Title2             = This menu uses the internal program default values
+
+; "Title3" is the title for the 5nd line of the menu (up to 74 chars)
+Title3             = This is a sample menu for RxLBox. \
+                     RxLBox is (c) 1998 Bernd Schemmer
+
+; "StatusLine" is the text for the status line (line 22) (up to 74 chars)
+; shown for all menu entries without a value for StatusLine.# (see below).
+;
+; Note that the statusline is refreshed after every command!
+; (cursor keys and function keys are also commands)
+;
+; Note: Use '7D'x for '{' inside REXX Statements.
+;
+StatusLine         = {'Today is {' || date() || '7D'x || \
+                     '. Last statusline update was at ' || time() || '.'}
+
+; "InputPrompt" is the prompt text for the line 24 (up to 15 chars)
+InputPrompt        = Your choice:
+
+; "HelpPrompt" is the prompt to press a key to return from the online help
+; (up to 74 chars)
+HelpPrompt         = Press any key to continue ...
+
+; "ErrorPrompt" is the prompt to press a key after a error occured
+; (up to 74 chars)
+ErrorPrompt        = This is the default error prompt
+
+; "HelpStatusLine" is the status line for the online help (up to 74 chars)
+HelpStatusLine     = Online Help 
+
+; The following entries define the colors for the menu
+;
+; The format of the value for all color entries is:
+;
+;     {attr} fg on {attr} bg
+;
+;   'attr' can be one or more of:
+;     Highlight Normal Blink Invers Invisible
+;
+;   'fg' and 'bg' can be one of:
+;     Black Red Green Yellow Blue Magnenta Cyan White
+;
+; Note: Invalid strings in color values are ignored
+;
+
+; This is the color for the menu frame and background
+FrameColor         = CYAN ON WHITE
+
+; This is the color for the menu items
+ItemColor          = CYAN ON WHITE
+
+; This is the color for the selected menu item
+SelectedItemColor  = HIGHLIGHT YELLOW ON BLUE
+
+; This is the color for the TITLE1
+Title1Color        = HIGHLIGHT YELLOW ON BLACK
+
+; This is the color for the TITLE2
+Title2Color        = HIGHLIGHT RED ON BLACK
+
+; This is the color for the TITLE3
+Title3Color        = HIGHLIGHT GREEN ON BLACK
+
+; This is the color for the status line
+StatusLineColor    = HIGHLIGHT YELLOW ON CYAN
+
+; This is the color for error messages
+ErrorTextColor     = HIGHLIGHT YELLOW ON RED
+
+; This is the color for the input line
+InputLineColor     = BLACK ON YELLOW
+
+; If this color value is set, RxLBox will clear the screen with the
+; colors contained in this value at the program end.
+; If the value of this key is empty, RxLBox does not clear the
+; screen at program end.
+CLS                = WHITE ON BLACK
+
+; If the key AcceptAllInput is set to YES, RxLBox will return any
+; unknown string entered by the user in this menu to the calling
+; program. Any other value for this key suppresses unkown strings
+; entered by the user.
+; The default for this key is NO.
+;
+; Note: To enter a string beginning with one of the chars '#*{'
+;       preceed the line with '^'; to enter a string beginning
+;       with '^' use '^^'.
+;
+AcceptAllInput     = NO
+
+; If the value for the key InputVar is not equal '', RxLBox will save
+; any unknown string entered by the user in an environment variable with
+; the value of this key as name.
+; If you specify AcceptAllInput=YES and InputVar=envVarName for a menu,
+; InputVar is used.
+;
+; Note: To enter a string beginning with one of the chars '#*{'
+;       preceed the line with '^'; to enter a string beginning
+;       with '^' use '^^'.
+;       You can not use numbers to navigate in menus with InputVar
+;       not equal ''.
+;
+InputVar           = 
+
+; You can use the keys 'ESC', 'Fkey1' to 'Fkey12' to define a command for
+; the function keys ESC, and F1 to F12. The command must be a legal OS/2 
+; command or a legal RxLBox Command. RxLBox commands must begin with a 
+; dash '#'.
+; (See above for the defined RxLBox commands). To simulate user input
+; with a function key, preceed the string with a tilde '~' (see the
+; menu InputVarMenu3 for some examples)
+;
+; Preceed OS/2 commands with an asterix '*' if RxLBox should wait for
+; a keystroke after the execution.
+; Note that some function keys have predefined functions. To suppress
+; the predefined functions you can either define another command for
+; the key or you may define an empty string for the key.
+;
+
+; default function: go back one menu level 
+;
+; ESC = { '#GOTOMENU()' !curMainMenu }
+;
+; prohibit leaving the menu with ESC by re-defining ESC to #NOP()
+; ESC = #NOP()
+
+; suppress leaving the program with ESC
+; ESC = #GOBACK() -2
+
+; default function: show the online help
+; Fkey1=
+
+; define a RxLBox command for F2
+Fkey2=#SHOWMACROLIST()
+
+; default function: repeat last command
+; FKey3=
+
+; define an OS/2 command for F4
+Fkey4=cmd /K "ECHO. & ECHO. Opened an OS/2 Shell. Enter EXIT to return to RxLBox ..."
+
+; define another OS/2 command for F5
+Fkey5={'*dir'}
+
+FKey6= #GOTOMENU() RexxCmdMenu
+
+Fkey7= #REXXCMD() \
+        if menudesc.__NoHalt <> '' then ; \
+        do ; \
+          menuDesc.__NoHalt = '' ; \
+          call ShowWorkingMessage 'CTRL-BREAK checking is now active. Press any key' ,1,0 ; \
+        end ; \
+        else ; \
+        do ; \
+          menuDesc.__NoHalt = 1 ; \
+          call ShowWorkingMessage 'CTRL-BREAK checking is now inactive. Press any key' ,1,0 ; \
+        end ; \
+        nop
+
+; def.: show Menu with all defined macros
+; Fkey8=
+
+; def.: refresh the screen
+; Fkey9=
+
+; def.: end program
+; Fkey10=
+
+; def.: Show list of menus
+; Fkey11=
+
+; def.: Show history of called menus
+; Fkey12=
+
+; This is the help topic called by the command #SHOWONLINEHELP
+HelpForF1          = { translate( 'MAIN' ) || 'HELP' }
+
+; This is the help topic called by the command #SHOWKEYHELP
+HelpForCTRL_F1     = MAIN_KEYHELP
+
+; This is the help topic called by the command #SHOWLINEHELP
+HelpForALT_F1      = INPUTLINEHELP
+
+; The following entries contain the menu items.
+; The format for menu items is:
+;
+;   MenuItem.# = menu_text
+;   Action.# = menu_action
+;   StatusLine.# = menu_entry_statusline
+;
+;   # can be a whole number greater than 0, or the dash '#'.
+;   The dash means: Use the next free number.
+;   The number of menu items is not limited. The order of the
+;   entries is meaningless (except for menu entries defined
+;   with a '#' instead of a number).
+;
+;   You can not define a menu entry more than one time.
+;            
+;   'Menu_text' is the menu description for the menu. 
+;   'Menu_text' can be any string with up to 74-(n+3) chars.
+;
+;   n is the number of digits needed for the menu entry numbers.
+;   Example: In a menu with up to 99 entries, the maximum length
+;            for a 'Menu_text' is 69; in a menu with up to 999 
+;            entries the maximum length is 68; and so on.
+;
+;   'Menu_action' can be any string. This is either a command for
+;   RxLBox or the string returned to the calling program.
+;
+;   If 'Menu_action' begins with a dash '#', RxLBox treats it
+;   as RxLBox command. RxLBox commands are interpreted by RxLBox
+;   and never returned to the calling program.
+;
+;   'menu_entry_statusline' is the status line shown if this entry
+;   is the highlighted entry. This entry is optional. The default
+;   status line for all entries is the status line defined with
+;   the key 'StatusLine'.
+;
+;   The number of entries for a menu is not limited.
+;
+;   See above for the defined RxLBox commands.
+;
+MenuItem.#         = Call the menu with sample OS/2 commands
+Action.#           = #GOTOMENU() OS2CmdMenu
+StatusLine.#       = This is the statusline for the menu entry 1
+
+MenuItem.#         = Call the menu with sample REXX commands
+Action.#           = #GOTOMENU() REXXCmdMenu
+StatusLine.#       = { 'This is the statusline for the menu entry 2, the time is ' time() }
+
+MenuItem.#         = Enter some REXX commands in TRACE mode
+StatusLine.#       = { 'This is the statusline for the menu entry 3, the date is ' date() }
+Action.#           = #RexxCmd() \
+                     'cls' ; \
+                     say ; \
+                     say '--- Sample trace mode --- ' ; \
+                     say '' ; \
+                     say 'Available REXX variables: ' ; \
+                     say ; \
+                     say '  !curMenu !curMenuAction !curMenuEntry !curCmd' ; \
+                     say '  !curPageno !totalPageCount !curLineNo !curEntryNo !totalEntryCount'; \
+                     say 'and the stem '; \
+                     say '  MenuDesc. ' ; \
+                     say ; \
+                     say 'The current values of the REXX variables are:' ; \
+                     say '  !curMainMenu is "' || !curMainMenu || '"' ; \
+                     say '  !curMenu is "' || !curMenu || '"' ; \
+                     say '  !curMenuAction is "' || !curMenuAction || '"' ; \
+                     say '  !curMenuEntry is "' || !curMenuEntry || '"' ; \
+                     say '  !curMenuEntry1 is "' || !curMenuEntry1 || '"' ; \
+                     say '  !curCmd is "' || !curCmd || '"' ; \
+                     say '  !curPageNo is "' || !curPageNo || '",' \
+                         '!curLineNo is "' || !curLineNo || '",'  \
+                         '!curEntryNo is "' || !curEntryNo || '"' ; \
+                     say '  !totalEntryCount is "' || !totalEntryCount || '", '  \
+                         '!totalPageCount is "' || !totalPageCount || '"' ; \
+                     say '' ; \
+                     say 'Enter a REXX statement or use <RETURN> to return to the menu ...' ; \
+                     say '' ; \
+                     trace ?a; nop
+
+MenuItem.#         = Try \
+                     the \
+                     included \
+                     REXX \
+                     program ^\
+;                    -->  Use the backslash as continuation char to split an
+;                         entry over several lines.
+;                         Note: Use ^\ to use \ as normal char at the
+;                               end of a line!
+
+Action.#           = #RexxCmd() \
+                     'cls' ; \
+                     say '' ; \
+                     do i = 1 to 20; \
+                       say center( 'This is imbedded REXX code!', 80 ); \
+                     end; \
+                     say '' ; \
+                     say center( 'Press any key to return to the menu', 80 ) ; \
+                     call WaitForAKey ;
+;                    -->  This is an imbedded REXX program on multiple
+;                         lines. Note that you must (!) use a semicolon
+;                         after every REXX statement in imbedded REXX
+;                         programs!
+;
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Call the sample menu using OnMenuInit to implement a password
+Action.#           = #GOTOMENU() PassWordMenu
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = call a random menu
+Action.#           = { "#GOTOMENU()"  "Menu" || random( 1,5 ) }
+;                    -> This is a REXX statement that evaluates to an
+;                       RxLBox command.
+;                       RxLBox evaluates this statement every time the
+;                       user chooses this entry
+
+MenuItem.#         = Call Menu2
+Action.#           = {"#Goto" || "Menu()" "Menu" || 1+1 }
+;                    -> This is a REXX statement that evaluates to an
+;                       RxLBox command.
+;                       RxLBox evaluates this statement every time the
+;                       user chooses this entry
+
+MenuItem.#         = Call Menu3
+Action.#           = ("#Goto" || "Menu()" "Menu" || 1+2)
+;                    -> This is a REXX statement that evaluates to an
+;                       RxLBox command.
+;                       RxLBox evaluates this statement _only_once_ at
+;                       startup time
+
+MenuItem.#         = Call Menu4 (new defined FKeys)
+Action.#           = #GotoMenu() menu4
+
+
+MenuItem.#         = Call Menu5 (gives an error 'cause it's not there!)
+Action.#           = #GotoMenu() menu5
+
+MenuItem.#         = Call Menu6 (gives an error 'cause it's an empty menu)
+Action.#           = #GotoMenu() menu6
+
+MenuItem.#         = Call Menu7 (This is a long menu)
+Action.#           = #GotoMenu() menu7
+
+MenuItem.#         = Call This is a [menu] with a long section name
+Action.#           = #Gotomenu() This is a [menu] with a long section name
+
+MenuItem.#         = ------ Use the routine ShowWorkingmessage in a menu -----------------------
+Action.#           = #NOP
+
+MenuItem.#         = call ShowWorkingMessage
+Action.#           = #REXXCMD( PAUSE ) call ShowWorkingMessage 'You can call ShowWorkingMessage in a menu!',,0
+
+MenuItem.#         = ----- The next menus show how to use environment variables ----------------
+Action.#           = #NOP
+
+MenuItem.#         = { 'Call Number menu (current number is ' || value( 'number',, 'OS2ENVIRONMENT' ) || ')' }
+Action.#           = #GotoMenu() Number
+
+MenuItem.#         = { 'Call the InputVar menu1 (UserInput1 is "' || value( 'UserInput1',, 'OS2ENVIRONMENT' ) || '")' }
+Action.#           = #GotoMenu() InputVarMenu1
+
+MenuItem.#         = { 'Call the InputVar menu2 (UserInput2 is "' || value( 'UserInput2',, 'OS2ENVIRONMENT' ) || '")'}
+Action.#           = #GotoMenu() InputVarMenu2
+
+MenuItem.#         = { 'Call the InputVar menu3 (UserInput3 is "' || value( 'UserInput3',, 'OS2ENVIRONMENT' ) || '")'}
+Action.#           = #GotoMenu() InputVarMenu3
+
+MenuItem.#         = ----- The next three menus are the internal menus -------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Show the history list
+Action.#           = #SHOWHISTORY()
+
+MenuItem.#         = Show the list of all menus defined
+Action.#           = #SHOWMENULIST()
+
+MenuItem.#         = Show the list of all macros defined
+Action.#           = #SHOWMACROLIST()
+
+MenuItem.#         = ------ The next entries are for leaving the program -----------------------
+Action.#           = #NOP
+
+MenuItem.#         = Return 'OK' to the calling program
+Action.#           = OK
+
+MenuItem.#         = GoBack (leave the program, if this is the top level)
+Action.#           = #Goback()
+
+MenuItem.#         = Quit (leave the program, return "" to the calling program)
+Action.#           = #Quit()
+
+MenuItem.#         = Return "OK, I'm done" to the calling program
+Action.#           = OK, I'm done
+
+MenuItem.#         = Return the number 123 to the calling program
+Action.#           = 123
+
+MenuItem.#         = Return "#GOBACK" to the calling program
+Action.#           = ^#GOBACK
+;                    -> You must use the leading '^' if you want
+;                       to return a string beginning with one of the
+;                       chars '*#{'.
+
+MenuItem.#         = Return "*CMD" to the calling program
+Action.#           = ^*CMD
+;                    -> You must use the leading '^' if you want
+;                       to return a string beginning with one of the
+;                       chars '*#{'.
+
+; --------------------------------------------------------------------
+; The menu DEFAULTMENU contains the default values for all following
+; menus. Menus prior to the first DEFAULTMENU use the program internal
+; default values for their data.
+; --------------------------------------------------------------------
+
+[*DefaultMenu*]
+Title1             = This is the default title1
+Title2             = This is the default title2
+Title3             = This is the default title3
+StatusLine         = This is the default status line
+InputPrompt        = Input:
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON BLUE
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT YELLOW ON BLUE
+Title1Color        = HIGHLIGHT YELLOW ON BLACK
+Title2Color        = HIGHLIGHT RED ON BLACK
+Title3Color        = HIGHLIGHT GREEN ON BLACK
+StatusLineColor    = HIGHLIGHT BLUE ON WHITE
+ErrorTextColor     = RED ON GREEN
+InputLineColor     = BLACK ON YELLOW
+CLS                = WHITE ON BLACK
+AcceptAllInput     = NO
+HelpForF1          = DefaultHelp
+HelpForCTRL_F1     = KeyHelp
+HelpForALT_F1      = InputLineHelp
+
+; --------------------------------------------------------------------
+
+[*This is a [menu] with a long section name*]
+
+
+; Note that this menu and all following menus, up to the next DEFAULTMENU,
+; use the default values from the previous DEFAULTMENU!
+;
+Title1             = This is the menu "This is a menu with a long section name"
+Title2             = This menu uses only "automatic" menu numeration
+
+HelpForF1          = This is a menu with a long section name
+
+MenuItem.#         = This is a menu item with a very long action string
+Action.#           = --------------------------------------------1---------------------------------------------
+
+MenuItem.#         = This is a menu item with an empty action
+Action.#           =
+
+MenuItem.#         = Return to the calling menu
+Action.#           = #Goback()
+
+
+; --------------------------------------------------------------------
+[*This is a hidden menu*]
+;
+Title1             = This is a hidden menu ('cause it's not referenced in any other menu)
+Title2             = The only method to call it is the command #SHOWMENULIST
+Title3             = {'The name of this menu is "' || !curMenu || '"'}
+HelpForF1          =
+
+MenuItem.#         = Leave the menu
+Action.#           = #GOBACK()
+
+; --------------------------------------------------------------------
+; This is a menu with sample OS/2 commands
+;
+[*OS2CmdMenu*]
+; You can use the key OnMainInit to specify one or more REXX statements
+; RxLBox should execute before calling the first menu. Note that RxLBox
+; only uses the key OnMainInit of the _first_ menu called!
+;
+; Note: You must call RxLBox with
+;
+;         RxLBox /I:RxLBox.men /M:OS2CmdMenu
+;
+;       to force RxLBox to execute this entry at program start!
+;
+OnMainInit =  call ShowWorkingMessage 'Executing OnMainInit for the OS2CmdMenu.', \
+                   ' Press any key' ; \
+              call WaitForAKey;
+
+; You can use the key OnMainExit to specify one or more REXX statements
+; RxLBox should execute before ending the program. Note that RxLBox only
+; uses the key OnMainExit of the _first_ menu called!
+;
+; Note: You must call RxLBox with
+;
+;         RxLBox /I:RxLBox.men /M:OS2CmdMenu
+;
+;       to force RxLBox to execute _this_ entry at program end!
+;
+OnMainExit =  call ShowWorkingMessage 'Executing OnMainExit for the OS2CmdMenu.', \
+                   'Press any key' ; \
+              call WaitForAKey;
+
+Title1             = This is a menu with OS/2 commands
+Title2             =
+Title3             = {'The name of this menu is "' || !curMenu || '"'}
+
+HelpForF1          =
+
+MenuItem.#         = Exceute a DIR and wait for a key
+Action.#           = #EXECUTECMD() { '*DIR' directory('\') }
+
+MenuItem.#         = Call TEDIT without waiting for a key
+Action.#           = #EXECUTECMD() TEDIT
+
+MenuItem.#         = Call the CMD via C:\OS2\CMD.EXE
+Action.#           = #EXECUTECMD() *@C:\OS2\CMD.EXE /C ECHO. & ECHO. This is the CMD called via 'C:\OS2\CMD.EXE'
+
+MenuItem.#         = Call The CMD via %comspec% variable
+Action.#           = #EXECUTECMD() *@%comspec% /C ECHO. & ECHO. This is the CMD called via %%comspec%%
+
+MenuItem.#         = Call the CMD via "value( 'COMSPEC',, 'OS2ENVIRONMENT' )"
+Action.#           = #EXECUTECMD() {'*@' || value( 'COMSPEC',, 'OS2ENVIRONMENT' ) || " /C ECHO. & ECHO. This is the CMD called via value( 'COMSPEC',, 'OS2ENVIRONMENT' )"}
+
+MenuItem.#         = Call MainMenu
+Action.#           = #GotoMenu() MainMenu
+
+; --------------------------------------------------------------------
+; This is a menu with sample REXX commands
+;
+[*REXXCmdMenu*]
+Title1             = This is a menu with REXX commands
+Title2             =
+Title3             = {'The name of this menu is "' || !curMenu || '"'}
+
+HelpForF1          =
+
+MenuItem.#         = Enter some REXX commands in TRACE mode
+Action.#           = #RexxCmd() \
+                     'cls' ; \
+                     say '1B'x || '[1;36;44;m' ; \
+                     say ; \
+                     say '--- Sample trace mode --- ' ; \
+                     say '' ; \
+                     say 'Available REXX variables: ' ; \
+                     say ; \
+                     say '  !curMenu !curMenuAction !curMenuEntry !curCmd' ; \
+                     say '  !curPageno !totalPageCount !curLineNo !curEntryNo !totalEntryCount'; \
+                     say 'and the stem '; \
+                     say '  MenuDesc. ' ; \
+                     say ; \
+                     say 'The current values of the REXX variables are:' ; \
+                     say '  !curMainMenu is "' || !curMainMenu || '"' ; \
+                     say '  !curMenu is "' || !curMenu || '"' ; \
+                     say '  !curMenuAction is "' || !curMenuAction || '"' ; \
+                     say '  !curMenuEntry is "' || !curMenuEntry || '"' ; \
+                     say '  !curMenuEntry1 is "' || !curMenuEntry1 || '"' ; \
+                     say '  !curCmd is "' || !curCmd || '"' ; \
+                     say '  !curPageNo is "' || !curPageNo || '",' \
+                         '!curLineNo is "' || !curLineNo || '",'  \
+                         '!curEntryNo is "' || !curEntryNo || '"' ; \
+                     say '  !totalEntryCount is "' || !totalEntryCount || '", '  \
+                         '!totalPageCount is "' || !totalPageCount || '"' ; \
+                     say '' ; \
+                     say 'Enter a REXX statement or use <RETURN> to return to the menu ...' ; \
+                     say '' ; \
+                     trace ?a; nop
+
+MenuItem.#         = Return time and date the entry was choosen
+Action.#           = {"Menu entry choosen on "date()" at "time()"."}
+;                    --> This value is evaluated when the users chooses
+;                        the menu entry
+
+MenuItem.#         = Return time and date the menu was read
+Action.#           = ("Menu desc was read on "date()" at "time()".")
+;                    --> This value is evaluated when reading the menu
+;                    description file
+
+; --------------------------------------------------------------------
+
+[*Menu2*]
+Title1             = This is the menu "Menu2"
+Title2             = This menu accepts all user input
+Title3             = Use {rexxstatement} to return the result of a REXX statement
+AcceptAllInput     = YES
+
+HelpForF1          = Menu2_Help
+
+MenuItem.#         = Call MainMenu
+Action.#           = #GotoMenu() MainMenu
+MenuItem.#         = Call Menu3
+Action.#           = #GotoMenu() Menu3
+MenuItem.5         = Call Menu5
+Action.5           = #GotoMenu() menu5
+MenuItem.6         = GoBack 3 level
+Action.6           = #Goback() 3
+MenuItem.7         = GoBack to the first menu called
+Action.7           = #GoBack() -1
+
+[*Menu3*]
+Title1             = This is the menu "Menu3"
+Title2             = This menu has some empty entries and supresses the internal menus
+Title3             = Use <F7> to show the macro list
+HelpForF1          = Menu3_Help
+
+; goback to the main menu
+; ESC = { '#GOTOMENU' !curMainMenu }
+ESC = #GOBACK() -1
+
+; suppress the macro list
+Fkey8=
+
+; suppress the list of menus (another method)
+Fkey11= #NOP()
+
+; suppress the history of called menus
+Fkey12= #NOP()
+
+; redefene the key F7
+Fkey7 = #SHOWMACROLIST()
+
+MenuItem.#         = Call MainMenu
+Action.#           = #GotoMenu() MainMenu
+MenuItem.#         = Call Menu2
+Action.#           = #GotoMenu() Menu2
+MenuItem.5         = Call Menu5
+Action.5           = #GotoMenu() menu5
+MenuItem.6         = GoBack
+Action.6           = #Goback()
+
+; --------------------------------------------------------------------
+[*Menu4*]
+Title1             = This is the menu "Menu4"
+Title2             = This menus shows the meaningless of the entry order
+Title3             = All FKeys ared redefined in this menu (F2 is invalid)
+HelpForF1          = Menu4_Help
+HelpForCTRL_F1     = Menu4_CtrlHelp
+
+FKey1=*ECHO. & ECHO. This is Fkey 1
+
+FKey2=*ERROR This is Fkey 2
+
+; def.: repeat last command
+FKey3=*ECHO. & ECHO. This is Fkey 3
+
+Fkey4=*ECHO. & ECHO. This is Fkey 4
+
+Fkey5=*ECHO. & ECHO. This is Fkey 5
+
+Fkey6=*ECHO. & ECHO. This is Fkey 6
+
+Fkey7=*ECHO. & ECHO. This is Fkey 7
+
+; def.: show the macro list
+Fkey8=*ECHO. & ECHO. This is Fkey 8
+
+; def.: refresh screen
+Fkey9=*ECHO. & ECHO. This is Fkey 9
+
+; default function: end the program
+Fkey10=*ECHO. & ECHO. This is Fkey 10
+
+; def.: Show list of menus
+Fkey11=*ECHO. & ECHO. This is Fkey 11
+
+; def.: Show history of called menus
+Fkey12=*ECHO. & ECHO. This is Fkey 12
+
+MenuItem.5         = Entry 5: Goto MainMenu
+Action.5           = #GotoMenu() MainMenu
+MenuItem.3         = Entry 3: Goto Menu3
+Action.3           = #GotoMenu() Menu3
+MenuItem.4         = Entry 4: Goto Menu2
+Action.4           = #GotoMenu() menu2
+MenuItem.1         = Entry 1: Goto Menu5
+Action.1           = #GotoMenu() menu5
+MenuItem.2         = Entry 2: GoBack
+Action.2           = #Goback()
+
+; --------------------------------------------------------------------
+[*Menu6*]
+Title1             = This is the menu "Menu6"
+Title2             = This is an empty menu
+
+; --------------------------------------------------------------------
+[DummySection]
+Comment            = This is a section ignored by RxLBox
+
+; --------------------------------------------------------------------
+; This is the DEFAULTMENU for all following menus!
+; Note for all entries not defined in this DEFAULTMENU the values from
+; the previous DEFAULTMENU are used.
+; --------------------------------------------------------------------
+
+[*DefaultMenu*]
+Title1             = This is the 2nd default title1
+Title2             = This is the 2nd default title2
+Title3             = This is the 2nd default title3
+StatusLine         = This is the 2nd default status line
+InputPrompt        = Your Choice:
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON RED
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT GREEN ON MAGNENTA
+HelpForAlt_F1      =
+
+; --------------------------------------------------------------------
+
+[*Number*]
+Title1             = This is the menu "Number"
+Title2             = This is an example for dynamic menus
+Title3             = The number in the 1st entry is randomly set when the menu is called
+StatusLine         = { 'Current number is ' || value( 'number',, 'OS2ENVIRONMENT' ) || ', use ESC to leave' }
+HelpForF1          = 
+
+; set the environment variable random with a random number on menu init
+OnInit             = call value 'random', random(), 'OS2ENVIRONMENT'
+
+; delete the environment variable random at menu exit
+OnExit             = call value 'random', '' , 'OS2ENVIRONMENT'
+
+MenuItem.#         = { 'Set the number to' value( 'random',, 'OS2ENVIRONMENT') '(This is a random number!)' }
+Action.#           = #RexxCMD( NOP ) call value 'number', value( 'random',, 'OS2ENVIRONMENT'), 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the number to 1234
+Action.#           = #REXXCmd( NOP ) call value 'number', '1234', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the number to 2345 and return
+Action.#           = #REXXCmd( GOBACK ) call value 'number', '2345', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the number to 3456 and return
+Action.#           = #REXXCmd( GOBACK ) call value 'number', '3456', 'OS2ENVIRONMENT' 
+
+MenuItem.#         = Set the number to 4567
+Action.#           = #REXXCmd( NOP ) call value 'number', '4567', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the number to 5678
+Action.#           = #REXXCmd( NOP ) call value 'number', '5678', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the number to 6789
+Action.#           = #REXXCmd( NOP ) call value 'number', '6789', 'OS2ENVIRONMENT'
+
+
+; --------------------------------------------------------------------
+[*InputVarMenu1*]
+Title1             = This is a menu using the keyword "InputVar"
+Title2             = You can use this type of menu for user input.
+Title3             = In this menu the environment variable "UserInput1" is used.
+StatusLine         = {'The current value of "UserInput1" is "' || value( 'UserInput1',, 'OS2ENVIRONMENT' ) || '"'}
+InputPrompt        = Enter the value
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON BLACK
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT GREEN ON MAGNENTA
+ErrorTextColor     = RED ON GREEN
+HelpForAlt_F1      =
+InputVar           = UserInput1
+
+; there must be at least on menu entry in every menu!
+;
+MenuItem.#         = Accept the current value and leave the menu
+Action.#           = #GoBack()
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Note: Enclose the value with { and } to enter a REXX command;
+Action.#           = #NOP
+
+MenuItem.#         =       Preceed the value with '^' to enter a string with
+Action.#           = #NOP
+
+MenuItem.#         =       one of the chars '{', '*', or '#' as first character.
+Action.#           = #NOP
+
+; --------------------------------------------------------------------
+[*InputVarMenu2*]
+Title1             = This is a menu using the keyword "InputVar"
+Title2             = You can use this type of menu for user input.
+Title3             = In this menu the environment variable "UserInput2" is used.
+StatusLine         = {'The current value of "UserInput2" is "' || value( 'UserInput2',, 'OS2ENVIRONMENT' ) || '"'}
+InputPrompt        = Enter the value
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON BLACK
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT GREEN ON MAGNENTA
+ErrorTextColor     = RED ON GREEN
+HelpForAlt_F1      =
+InputVar           = UserInput2
+
+; there must be at least on menu entry in every menu!
+;
+MenuItem.#         = Accept the current value and leave the menu
+Action.#           = #GoBack()
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Set the variable UserInput2 to "1234"
+Action.#           = #REXXCMD( NOP ) call value 'UserInput2', '1234', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the variable UserInput2 to "4567" and leave the menu
+Action.#           = #REXXCMD( GOBACK ) call value 'UserInput2', '4567', 'OS2ENVIRONMENT'
+
+MenuItem.#         = Set the variable UserInput2 to "789A" and leave the program
+Action.#           = #REXXCMD( QUIT ) call value 'UserInput2', '789A', 'OS2ENVIRONMENT'
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Note: Enclose the value with { and } to enter a REXX command;
+Action.#           = #NOP
+
+MenuItem.#         =       Preceed the value with '^' to enter a string with
+Action.#           = #NOP
+
+MenuItem.#         =       one of the chars '{', '*', or '#' as first character.
+Action.#           = #NOP
+
+
+; --------------------------------------------------------------------
+[*InputVarMenu3*]
+Title1             = This is a menu using the keyword "InputVar" and the command "#UserInput"
+Title2             = You can use this type of menu for user input.
+Title3             = Press ESC to leave the menu
+StatusLine         = {'The current value of "UserInput3" is "' || value( 'UserInput3',, 'OS2ENVIRONMENT' ) || '"'}
+InputPrompt        = Enter a value
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON BLACK
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT GREEN ON MAGNENTA
+ErrorTextColor     = RED ON GREEN
+HelpForAlt_F1      =
+InputVar           = UserInput3
+
+;                    Preceed the string with a ~ to simulate input for
+;                    RxLBox. Example:
+;
+;                    Pressing F6 is the same as entering
+;                    'My Comment' (without the quotes) on the input line
+;
+FKey6              = ~My Comment
+
+;                    Pressing F7 is the same as entering
+;                    '{time()}' (without the quotes) on the input line
+;
+FKey7              = {'~'time()}
+
+MenuItem.#         = Accept the current values and leave the menu
+Action.#           = #GoBack()
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+;                    Get some input from the user. In this example the
+;                    user input must be a number in the range 1 to 100.
+;                    The syntax for #UserInput is
+;
+;                       #UserInput() env_var {# checkStmt } {# errorMessage }
+;
+; If you use #UserInput for a menu entry in a menu with AcceptAllInput=YES,
+; #UserInput is used for that menu entry and AcceptAllInput for the menu
+; entries without #UserInput.
+; If you use #UserInput for a menu entry in a menu with InputVar=envVarName,
+; #UserInput is used for that menu entry and InputVar=envVarName for the menu
+; entries without #UserInput.
+;
+; To save the input of the user in a REXX variable use a variable of the
+; stem 'MENUDESC.'. 
+;
+MenuItem.#         = {'The serial number is "' || envValue( 'SerialNumber' ) || '"' }
+Action.#           = #UserInput() SerialNumber # \
+                                  ( Datatype( envValue ) = 'NUM' ) & 1 <= envValue & envValue <= 100 # \
+                                  Error: Serial number must be a number in the range 1 .. 100!
+StatusLine.#       = Enter the serial number and press ENTER
+
+;                    Get some user input; accept every input
+;
+MenuItem.#         = {'The machine type is "' || Envvalue( 'MachineType' ) || '"' }
+Action.#           = #UserInput( UPPER ) MachineType
+StatusLine.#       = Enter the machine type and press ENTER
+
+MenuItem.#         = {'The memory amount is "' || EnvValue( 'Memory' ) || '"' }
+Action.#           = #UserInput() Memory
+StatusLine.#       = Enter the memory amount and press ENTER
+
+;                    Get some user input; accept every input with up to 20
+;                    characters
+;                    Note that the parts of the statement defining the
+;                    environment variable and the error message are
+;                    REXX statements evaluating to string!
+;
+MenuItem.#         = {'The comment is "' || EnvValue( 'Comment' ) || '"' }
+Action.#           = #UserInput( BLANK_OK ) { 'Comment' } # length( envValue ) <= 20 # { 'Error: The max. length for comment is 20! It''s now ' time() || '.' }
+StatusLine.#       = Enter the comment and press ENTER (or only ENTER to delete the comment)
+
+MenuItem.#         = ---------------------------------------------------------------------------
+Action.#           = #NOP
+
+MenuItem.#         = Set the variable UserInput3 (using the keyword INPUTVAR)
+Action.#           = #NOP
+
+; --------------------------------------------------------------------
+[*PasswordMenu*]
+Title1             = This is a menu using OnInit to implement a password
+Title2             = This menu uses OnExit to check the value entered by the user
+Title3             = Note: You must set numberP to 98765 to leave this menu!
+StatusLine         = { 'Current value of numberP is "' || value( 'numberP',, 'OS2ENVIRONMENT' ) || '"' }
+InputPrompt        = Your input
+ErrorPrompt        = Press any key to continue
+HelpPrompt         = Press any key to continue the program
+FrameColor         = YELLOW ON BLACK
+ItemColor          = HIGHLIGHT CYAN ON BLUE
+SelectedItemColor  = HIGHLIGHT GREEN ON MAGNENTA
+ErrorTextColor     = RED ON GREEN
+HelpForAlt_F1      =
+InputVar           = NumberP
+FKey11             =
+FKey12             =
+FKey8              =
+
+;
+; Note: OnInit and OnExit use the global variable MenuDesc.__pSem
+;       as semaphore.
+;
+OnInit             = \
+  if MenuDesc.__pSem <> 1 then ; \
+  do ; \
+    signal off error; \
+    signal off notready; \
+     call value 'NumberP', '', 'OS2ENVIRONMENT'; \
+    'cls' ; \
+    say '1B'x || '[1;36;44;m' ; \
+    say '' ; \
+    say '' ; \
+    say center( 'This is a password protected menu', 80 ) ; \
+    say '' ; \
+    say 'Hint: The password is 12345'; \
+    say '' ; \
+    call CharOut , 'Enter the password for this menu: ' '1B'x || '[0;8;30;40;m' ; \
+    if translate( strip( lineIn() ) ) <> '12345' then ; \
+    do ; \
+      'cls' ; \
+      say '1B'x || '[1;36;44;m' ; \
+      call beep 537,300 ; \
+      say '' ; \
+      say center( 'Error: You have entered an invalid password!',80 ) ; \
+      say '' ; \
+      call beep 237,300 ; \
+      say center( 'Press any key to return to the previous menu ...', 80 ) ; \
+      call beep 537,300 ; \
+      call WaitForAKey ; \
+      !curRC = 1 ; \
+      MenuDesc.__pSem = 0 ; \
+    end ; \
+    else ; \
+      MenuDesc.__pSem = 1 ; \
+    say '1B'x || '[1;36;44;m' ; \
+  end ;
+
+OnExit             = \
+  'cls' ; \
+  say '1B'x || '[1;36;41;m' ; \
+  if MenuDesc.__pSem = 1 then ; \
+  do ; \
+    if value( 'NumberP', , 'OS2ENVIRONMENT' ) <> '98765' then ; \
+    do ; \
+      'cls' ; \
+      call beep 637,300 ; \
+      say '' ; \
+      say center( 'Error: You must enter the correct value before you can leave this menu!',80 ) ; \
+      say '' ; \
+      call beep 437,300 ; \
+      say center( 'Press any key to return to the menu and try again...', 80 ) ; \
+      call beep 637,300 ; \
+      call WaitForAKey ; \
+      !curRC = 1 ; \
+    end  ; \
+    else ; \
+    do ; \
+      call value 'NumberP', '', 'OS2ENVIRONMENT' ; \
+      MenuDesc.__pSem = '' ; \
+    end ; \
+  end ; \
+  else ; \
+    MenuDesc.__pSem = ''
+
+MenuItem.# = Leave this menu
+Action.#   = #GOBACK
+
+[*Menu7*]
+Title1             = This is the menu "Menu7"
+Title2             = { 'This is a menu with' !totalPageCount 'pages and' !totalEntryCount 'entries (and no online help)' }
+Title3             = This menu contains also 2 invalid ListBox commands
+StatusLine         = { 'The active menu entry is' !curEntryNo '(= entry no' !curLineNo 'on the menu page' !curPageNo ').'}
+
+FrameColor         = YELLOW ON BLUE
+ItemColor          = HIGHLIGHT CYAN ON RED
+SelectedItemColor  = HIGHLIGHT YELLOW ON GREEN
+Title1Color        = HIGHLIGHT YELLOW ON BLACK
+Title2Color        = RED ON WHITE
+Title3Color        = HIGHLIGHT GREEN ON MAGNENTA
+StatusLineColor    = HIGHLIGHT CYAN ON BLUE
+ErrorTextColor     = RED ON GREEN
+InputLineColor     = BLACK ON YELLOW
+CLS                = WHITE ON BLACK
+
+HelpForF1          =
+
+MenuItem.1         = -- MenuEntry 1 --
+Action.1           = -- Action 1 --
+MenuItem.2         = -- MenuEntry 2 --
+Action.2           = -- Action 2 --
+MenuItem.3         = -- MenuEntry 3 --
+Action.3           = -- Action 3 --
+MenuItem.4         = -- MenuEntry 4 (Invalid) --
+Action.4 =         #InvalidMenuCommand()
+MenuItem.5         = -- MenuEntry 5 (Invalid) --
+Action.5 =         #InvalidMenuCommandLongerThan25Chars()
+MenuItem.6         = -- MenuEntry 6 --
+Action.6           = -- Action 6 --
+MenuItem.7         = -- MenuEntry 7 --
+Action.7           = -- Action 7 --
+MenuItem.8         = -- MenuEntry 8 --
+Action.8           = -- Action 8 --
+MenuItem.9         = -- MenuEntry 9 --
+Action.9           = -- Action 9 --
+MenuItem.10        = -- MenuEntry 10 --
+Action.10          = -- Action 10 --
+MenuItem.11        = -- MenuEntry 11 --
+Action.11          = -- Action 11 --
+MenuItem.12        = -- MenuEntry 12 --
+Action.12          = -- Action 12 --
+MenuItem.13        = -- MenuEntry 13 --
+Action.13          = -- Action 13 --
+MenuItem.14        = -- MenuEntry 14 --
+Action.14          = -- Action 14 --
+MenuItem.15        = -- MenuEntry 15 --
+Action.15          = -- Action 15 --
+MenuItem.16        = -- MenuEntry 16 --
+Action.16          = -- Action 16 --
+MenuItem.17        = -- MenuEntry 17 --
+Action.17          = -- Action 17 --
+MenuItem.18        = -- MenuEntry 18 --
+Action.18          = -- Action 18 --
+MenuItem.19        = -- MenuEntry 19 --
+Action.19          = -- Action 19 --
+MenuItem.20        = -- MenuEntry 20 --
+Action.20          = -- Action 20 --
+MenuItem.21        = -- MenuEntry 21 --
+Action.21          = -- Action 21 --
+MenuItem.22        = -- MenuEntry 22 --
+Action.22          = -- Action 22 --
+MenuItem.23        = -- MenuEntry 23 --
+Action.23          = -- Action 23 --
+MenuItem.24        = -- MenuEntry 24 --
+Action.24          = -- Action 24 --
+MenuItem.25        = -- MenuEntry 25 --
+Action.25          = -- Action 25 --
+MenuItem.26        = -- MenuEntry 26 --
+Action.26          = -- Action 26 --
+MenuItem.27        = -- MenuEntry 27 --
+Action.27          = -- Action 27 --
+MenuItem.28        = -- MenuEntry 28 --
+Action.28          = -- Action 28 --
+MenuItem.29        = -- MenuEntry 29 --
+Action.29          = -- Action 29 --
+MenuItem.30        = -- MenuEntry 30 --
+Action.30          = -- Action 30 --
+MenuItem.31        = -- MenuEntry 31 --
+Action.31          = -- Action 31 --
+MenuItem.32        = -- MenuEntry 32 --
+Action.32          = -- Action 32 --
+MenuItem.33        = -- MenuEntry 33 --
+Action.33          = -- Action 33 --
+MenuItem.34        = -- MenuEntry 34 --
+Action.34          = -- Action 34 --
+MenuItem.35        = -- MenuEntry 35 --
+Action.35          = -- Action 35 --
+MenuItem.36        = -- MenuEntry 36 --
+Action.36          = -- Action 36 --
+MenuItem.37        = -- MenuEntry 37 --
+Action.37          = -- Action 37 --
+MenuItem.38        = -- MenuEntry 38 --
+Action.38          = -- Action 38 --
+MenuItem.39        = -- MenuEntry 39 --
+Action.39          = -- Action 39 --
+MenuItem.40        = -- MenuEntry 40 --
+Action.40          = -- Action 40 --
+MenuItem.41        = -- MenuEntry 41 --
+Action.41          = -- Action 41 --
+MenuItem.42        = -- MenuEntry 42 --
+Action.42          = -- Action 42 --
+MenuItem.43        = -- MenuEntry 43 --
+Action.43          = -- Action 43 --
+MenuItem.44        = -- MenuEntry 44 --
+Action.44          = -- Action 44 --
+MenuItem.45        = -- MenuEntry 45 --
+Action.45          = -- Action 45 --
+MenuItem.46        = -- MenuEntry 46 --
+Action.46          = -- Action 46 --
+MenuItem.47        = -- MenuEntry 47 --
+Action.47          = -- Action 47 --
+MenuItem.48        = -- MenuEntry 48 --
+Action.48          = -- Action 48 --
+MenuItem.49        = -- MenuEntry 49 --
+Action.49          = -- Action 49 --
+MenuItem.50        = -- MenuEntry 50 --
+Action.50          = -- Action 50 --
+MenuItem.51        = -- MenuEntry 51 --
+Action.51          = -- Action 51 --
+MenuItem.52        = -- MenuEntry 52 --
+Action.52          = -- Action 52 --
+MenuItem.53        = -- MenuEntry 53 --
+Action.53          = -- Action 53 --
+MenuItem.54        = -- MenuEntry 54 --
+Action.54          = -- Action 54 --
+MenuItem.55        = -- MenuEntry 55 --
+Action.55          = -- Action 55 --
+MenuItem.56        = -- MenuEntry 56 --
+Action.56          = -- Action 56 --
+MenuItem.57        = -- MenuEntry 57 --
+Action.57          = -- Action 57 --
+MenuItem.58        = -- MenuEntry 58 --
+Action.58          = -- Action 58 --
+MenuItem.59        = -- MenuEntry 59 --
+Action.59          = -- Action 59 --
+MenuItem.60        = -- MenuEntry 60 --
+Action.60          = -- Action 60 --
+MenuItem.61        = -- MenuEntry 61 --
+Action.61          = -- Action 61 --
+MenuItem.62        = -- MenuEntry 62 --
+Action.62          = -- Action 62 --
+MenuItem.63        = -- MenuEntry 63 --
+Action.63          = -- Action 63 --
+MenuItem.64        = -- MenuEntry 64 --
+Action.64          = -- Action 64 --
+MenuItem.65        = -- MenuEntry 65 --
+Action.65          = -- Action 65 --
+MenuItem.66        = -- MenuEntry 66 --
+Action.66          = -- Action 66 --
+MenuItem.67        = -- MenuEntry 67 --
+Action.67          = -- Action 67 --
+MenuItem.68        = -- MenuEntry 68 --
+Action.68          = -- Action 68 --
+MenuItem.69        = -- MenuEntry 69 --
+Action.69          = -- Action 69 --
+MenuItem.70        = -- MenuEntry 70 --
+Action.70          = -- Action 70 --
+MenuItem.71        = -- MenuEntry 71 --
+Action.71          = -- Action 71 --
+MenuItem.72        = -- MenuEntry 72 --
+Action.72          = -- Action 72 --
+MenuItem.73        = -- MenuEntry 73 --
+Action.73          = -- Action 73 --
+MenuItem.74        = -- MenuEntry 74 --
+Action.74          = -- Action 74 --
+MenuItem.75        = -- MenuEntry 75 --
+Action.75          = -- Action 75 --
+MenuItem.76        = -- MenuEntry 76 --
+Action.76          = -- Action 76 --
+MenuItem.77        = -- MenuEntry 77 --
+Action.77          = -- Action 77 --
+MenuItem.78        = -- MenuEntry 78 --
+Action.78          = -- Action 78 --
+MenuItem.79        = -- MenuEntry 79 --
+Action.79          = -- Action 79 --
+MenuItem.80        = -- MenuEntry 80 --
+Action.80          = -- Action 80 --
+MenuItem.81        = -- MenuEntry 81 --
+Action.81          = -- Action 81 --
+MenuItem.82        = -- MenuEntry 82 --
+Action.82          = -- Action 82 --
+MenuItem.83        = -- MenuEntry 83 --
+Action.83          = -- Action 83 --
+MenuItem.84        = -- MenuEntry 84 --
+Action.84          = -- Action 84 --
+MenuItem.85        = -- MenuEntry 85 --
+Action.85          = -- Action 85 --
+MenuItem.86        = -- MenuEntry 86 --
+Action.86          = -- Action 86 --
+MenuItem.87        = -- MenuEntry 87 --
+Action.87          = -- Action 87 --
+MenuItem.88        = -- MenuEntry 88 --
+Action.88          = -- Action 88 --
+MenuItem.89        = -- MenuEntry 89 --
+Action.89          = -- Action 89 --
+MenuItem.90        = -- MenuEntry 90 --
+Action.90          = -- Action 90 --
+MenuItem.91        = -- MenuEntry 91 --
+Action.91          = -- Action 91 --
+MenuItem.92        = -- MenuEntry 92 --
+Action.92          = -- Action 92 --
+MenuItem.93        = -- MenuEntry 93 --
+Action.93          = -- Action 93 --
+MenuItem.94        = -- MenuEntry 94 --
+Action.94          = -- Action 94 --
+MenuItem.95        = -- MenuEntry 95 --
+Action.95          = -- Action 95 --
+MenuItem.96        = -- MenuEntry 96 --
+Action.96          = -- Action 96 --
+MenuItem.97        = -- MenuEntry 97 --
+Action.97          = -- Action 97 --
+MenuItem.98        = -- MenuEntry 98 --
+Action.98          = -- Action 98 --
+MenuItem.99        = -- MenuEntry 99 --
+Action.99          = -- Action 99 --
+MenuItem.100       = -- MenuEntry 100 --
+Action.100         = -- Action 100 --
+
+; --------------------------------------------------------------------
+; redefine the ESC key for the internal menus
+;
+[*DefaultMenu*]
+Esc                = #GOBACK()
+
+; --------------------------------------------------------------------
+; The following sections contain the online help for the menus
+;
+; The format of the section header is
+;
+;   [<help_topic>]
+;
+; where 'help_topic' is the name of the online help referenced in
+; the menu description keys 'HelpForF1', 'HelpForALT_F1' and
+; 'HelpForCTRL_F1'.
+;
+; Each line of the online help is displayed centered. You can use
+; any character in the online help. The only exception to this rule:
+; The first character of a line for the online help can NOT be the
+; character '['.
+;
+; Each online help can have up to 14 lines with up to 69 characters.
+; RxLBox displays all lines of the online help centered.
+;
+; Note: Use a dummy section to mark the end of an online help
+;       section (see below).
+;
+; Caution: Comments are NOT possible in online help sections!
+;
+
+
+; ----------------------------
+[<MainHelp>]
+
+This the online help for the main menu. The main menu is the default
+menu displayed by RxLBox if it's called with no menu parameter.
+
+Each online help can have up to 14 lines with up to 69 characters.
+
+---------------------------------
+
+Use <CTRL-F1> to call the online help with the function key description.
+Use <ALT-F1> to call the online help with the input line description.
+[dummy section]
+
+; ----------------------------
+[<MAIN_KeyHelp>]
+F1 - show the online help
+ALT-F1 - input line description   CTRL-F1 - function key description
+F9 - refresh display
+F8 - show macro list
+F11 - show list of all menus      F12 - show menu history list
+F10 - Quit                        ESC - go one menu back
+RETURN - choose the highlighted entry
+
+Use the cursor keys, PgDn, PgUp, Home, End, CTRL-Home and CTRL-End
+to scroll through the menu.
+
+------- additional keys defined in the menu description file -------
+        F2 - show macro list      F4 - call CMD.EXE    F5 - dir
+[dummy section]
+
+; ----------------------------
+[<KeyHelp>]
+F1 - show the online help
+ALT-F1 - show the input line description
+CTRL-F1 - show the function key description
+
+F8 - show macro list              F9 - refresh display
+F11 - show list of all menus      F12 - show menu history list
+
+F10 - Quit                        ESC - go one menu back
+
+RETURN - choose the highlighted entry
+
+Use the cursor keys, PgDn, PgUp, Home, End, CTRL-Home and CTRL-End
+to scroll through the menu.
+[dummy section]
+
+; ----------------------------
+[<InputLineHelp>]
++n - scroll down n entries        -n scroll up n entries
+ n - choose the entry n if its on the current page or
+     jump to the entry if it's not on the current page
+
+ *command - execute the OS/2 command 'command' (Preceed the command
+            with another asterix '*' to wait after execution)
+
+ macroName - execute the macro 'macroName'
+
+ {rexx_statement} - use the result of the REXX statement as input
+
+---------------------------------
+Use <F1> to call the general online help
+Use <CTRL-F1> to call the online help with the key description.
+[dummy section]
+
+
+; ----------------------------
+[<DefaultHelp>]
+This is the default online help for all menus without an own online
+help section.
+[dummy section]
+
+
+; ----------------------------
+[<This is a menu with a long section name>]
+1 This is line 1 of the online help
+2 This is line 2 of the online help
+3 This is line 3 of the online help
+4 This is line 4 of the online help
+5 This is line 5 of the online help
+6 This is line 6 of the online help
+7 This is line 7 of the online help
+8 This is line 8 of the online help
+9 This is line 9 of the online help
+10 This is line 10 of the online help
+11 This is line 11 of the online help
+12 This is line 12 of the online help
+13 This is line 13 of the online help
+14 This is line 14 of the online help
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<Menu2_Help>]
+ This is the online help for the Menu2
+
+ RxLBox returns every input not known by RxLBox entered in this menu
+ to the calling program. To return a string simply enter it; to return
+ the result of a REXX statement surround it with '{' and '}'.
+
+ Example: To return the current time enter
+          {time()}
+
+ Preceed the input with '^', if you want to return a string beginning
+ with one of the chars '#*{^'.
+
+[dummy section to mark the end of the online help!]
+
+
+; ----------------------------
+[<Menu3_Help>]
+ This is the online help for the Menu3
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<Menu4_CtrlHelp>]
+All function keys are redefined in this menu!
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<Menu4_Help>]
+
+ This is the online help for the Menu4
+[dummy section to mark the end of the online help!]
+
+; --------------------------------------
+; The following sections contain the help textes for the
+; internal menus ( MacroList, HistoryList and MenuList)
+;
+; ----------------------------
+[<MacroListOnlineHelp>]
+
+ This is the online help for the Macro List
+
+ This menu contains an entry for every macro
+ defined in the menu descriptions. You can
+ execute a macro by selecting the approbiate
+ entry in this menu and pressing ENTER.
+
+ (Use #SHOWHELP)
+
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<HistoryListOnlineHelp>]
+
+ This is the online help for the History List
+
+ This menu contains an entry for each menu called 
+ so far. The current menu is the last entry in 
+ this menu.
+
+ (Use #SHOWHELP)
+
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<MenuListOnlineHelp>]
+
+ This is the online help for the menu List
+
+ This menu contains an entry for every menu found
+ in the menu descriptions. 
+
+ (Use #SHOWHELP)
+
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<InternalMenu_KeyHelp>]
+
+This is the online help for CTRL-F1 while the MacroList, the
+HistoryList or the MenuList is active.
+(Use #SHOWKEYHELP)
+
+[dummy section to mark the end of the online help!]
+
+; ----------------------------
+[<InternalMenu_InputLineHelp>]
+
+This is the online help for ALT-F1 while the MacroList, the
+HistoryList or the MenuList is active.
+(use #SHOWLINEHELP)
+
+[dummy section to mark the end of the online help!]
+
+; --------------------------------------------------------------------
+

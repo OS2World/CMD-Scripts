@@ -1,0 +1,24 @@
+; ----------------- example message file for GETMSG
+;
+; Note: all messages are marked with a leading '(E) ' to distinguish between
+;       the internal messages from TEMPLATE.CMD and the message from this
+;       file (only for testing the GETMSG routine!)
+;
+; History: 
+;  25.06.1995 /bs v1.00
+;
+1001=(E) Routine "%1" not found
+1002=(E) Can not write to the logfile "%1", the status of the logfile is "%2". Now using the NUL device for logging
+1003=(E) Include file "%1" not found
+1004=(E) Unexpected EOF detected while reading the include file "%1"
+1005=(E) Error loading the DLL "%1"
+1006=(E) Invalid call to LOADDLL
+1007=(E) Warning:
+1008=(E)  %1 - Error %2 detected! The error message is
+1009=(E)  Calling the patched version %1 ...
+1010=(E)  ... the patched version endet with RC = %1
+1011=(E)  Program aborted by the user (sigl=%1)
+1012=(E) %1 %2 started on %3 at %4 ...
+1013=(E) %1 %2 ended on %3 at %4 with RC = %5 (='%6'x)
+1014=(E)  Usage:
+; ----------------- end of message file
