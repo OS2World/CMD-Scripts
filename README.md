@@ -6,7 +6,11 @@ CMD-Scripts. Several REXX scripts
 
 LICENSE
 ===============
-GNU GPL V3
+Depends on the Script
+- GNU GPL V3
+- LGPL
+- Sun Public License
+- Public Domain
 
 COMPILE TOOLS
 ===============
@@ -14,7 +18,11 @@ COMPILE TOOLS
 
 AUTHORS
 ===============
-* 
+* Bernd Schemmer
+* Christian Hennecke
+* Jason R Stefanovich
+* Leonardo Pino
+* Paul Gallagher
 
 LINKS
 ===============
