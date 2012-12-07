@@ -1,0 +1,39 @@
+                           Upload Information For LOCKDOWN.CMD by Kathleen L. Long
+                           =======================================================
+
+            Archive Name:  LOCKDOWN.ZIP
+       Short Description:  LOCKDOWN V1.03 REXX package to lockdown wps by objectid.
+        Long Description:  LOCKDOWN.CMD is a simple REXX script to change folders and icons 
+                           with known objectid's to prevent deleting, copying, moving, renaming, 
+                           shadowing or changing of their settings.  This would be particularly
+                           useful for the LAN administrator who has users who are prone to
+                           over-customization of their desktop beyond their skill and ability
+                           to know what they are doing.
+
+      Proposed directory
+           for placement:  pub/os2/util/wps
+
+               Your name:  Kathleen L. Long
+           Email address:  k2lan@aol.com
+    Program contact name:  Kathleen L. Long
+   Program contact email:  k2lan@aol.com
+        Program homepage:  (none)
+
+      Would you like the
+     contact information
+                included?  yes
+
+Operating System/Version:  OS/2
+ Additional requirements:  REXX, REXXUTIL
+
+                Replaces:  (nothing)
+
+        Package Includes:  LISTIDS.CMD    REXX script by Bernd Schemmer to list objectid's
+                           LOCKDOWN.CMD   Main CMD to lockdown WPS
+                           LOCKDOWN.DAT   Data file containing objectid's to be altered
+                           LOCKDOWN.DOC   Documentation
+                           LOCKDOWN.ICO   Icon for test folder.
+                           LOCKDOWN.LIC   License info.  (normal "at your own risk")
+                           LOCKDOWN.LST   List of some 300 common objectids.
+                           LOCKTEST.CMD   Program to create test folder for altering.
+

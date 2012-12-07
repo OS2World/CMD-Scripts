@@ -1,0 +1,45 @@
+                                                         LOCKDOWN.CMD
+                                                         Version 1.03
+
+                                                      27 January 1998
+
+                                                  by Kathleen L. Long
+                                                        k2lan@aol.com
+
+   LOCKDOWN.CMD is a simple REXX script to change folders and icons 
+with known objectid's to prevent deleting, copying, moving, renaming, 
+shadowing or changing of their settings.  This would be particularly
+useful for the LAN administrator who has users who are prone to
+over-customization of their desktop beyond their skill and ability
+to know what they are doing.
+
+   The script will alter ALL objectid's listed in the companion file,
+LOCKDOWN.DAT.  Edit the file accordnig to your needs, leaving only one
+objectid per line.  (A file LOCKDOWN.BAK has been provided that 
+contains some 300 known object id's, for OS/2 and other common OS/2 
+applications.  Also included is a REXX program, LISTIDS.CMD by
+Bernd Schemmer, author of REXX Tips & Tricks, that will list all
+objectids on a system.)
+
+   When the variable 'switch' is set to "YES", settings for NODELETE, 
+NOCOPY, NOMOVE, NORENAME, NOSETTINGS, NOSHADOW will be set to YES, 
+which will remove the options for DELETE, COPY, MOVE, RENAME, SETTING 
+and SHADOW, respectively, from the icon's popup window. 
+
+   Changing the variable 'switch' to "NO" will do just the opposite, 
+returning these options to icons from which they are missing.  At
+this point, LOCKDOWN.CMD does NOT do a lot of error checking and
+expects a reasonably knowledgeable user.
+
+   To test LOCKDOWN.CMD, run LOCKTEST.CMD to create a folder on the
+desktop called "LOCKDOWN.CMD Test Folder".  Notice that the popup
+menu for this folder allows all of the aforementioned actions to be
+performed upon it.  Then, make sure <WP_LOCKDOWN> is the only entry
+in LOCKDOWN.DAT and run LOCKDOWN.CMD (with switch set to "YES").
+Notice now that the folder can no longer be deleted, copied, moved,
+renamed or shadowed, nor can its settings be opened.  (You may also
+note that dragging the icon to copy or delete via the shredder, etc.
+also no longer works.)  Setting switch to "NO" and running
+LOCKDOWN.CMD again will allow you to delete that pesky icon.
+
+

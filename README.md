@@ -29,6 +29,8 @@ AUTHORS
 * Hermann Mahr
 * C. Morrison
 * John Merryweather Cooper
+* Santoni Pierre
+* Kathleen L. Long
 
 LINKS
 ===============

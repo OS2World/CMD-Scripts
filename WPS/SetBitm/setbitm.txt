@@ -1,0 +1,13 @@
+Simple Rexx program to change the background of desktop
+It is freeware. You can use it, and the source, for any purposes.
+As for the biggest operating system there are no warranties!
+installation: unzip the zip in a directory
+required: OS/2,PM & Rexx (tryed only under WARP 4)
+use: type setbitm in OS2/window
+my use: a copy in the the startup folder
+modifications: i put samples in the code to modify
+- the directory where the bitmap are placed
+- the type of representation (normal,sized, tiled)
+- the order of apparition
+
+
