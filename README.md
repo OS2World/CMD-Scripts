@@ -24,6 +24,10 @@ AUTHORS
 * Leonardo Pino
 * Paul Gallagher
 * John LeMay
+* Nick Morrow
+* Andrey Vasilkin
+* Hermann Mahr
+* C. Morrison
 
 LINKS
 ===============

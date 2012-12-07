@@ -1,0 +1,141 @@
+ 2003 Mar 17
+
+ TEDIT vs EDIT
+
+ Note: The purpose of this document is to compare the supported
+       functions in TEDIT and EDIT.
+
+ "+" denotes that TEDIT and EDIT support the function
+     exactly alike.  If you find this to not be the case
+     then report a bug.
+
+ "-" denotes that EDIT does not support the function 
+     and no support is planned.  
+
+ "*" denotes that EDIT supports the function
+     but not like TEDIT.  
+
+ "?" denotes that I'd like your opinion on this issue.  
+
+
+ Cursor Movement
+
+             (TEDIT)                          (EDIT)
+*Esc         Data/command line toggle         Quits EDIT (same as F3 - Quit)
++Up Arrow    Moves cursor up one line         Moves cursor one line up
++Down Arrow  Moves cursor down one line       Moves cursor one line down
++Left Arrow  Moves cursor left one character  Moves cursor left one character
++Right Arrow Moves cursor right one character Moves cursor right one character
+
+       (TEDIT)                        (EDIT)
++Home  Move cursor to start of line   Moves cursor to beginning of current line
++End   Move cursor to end of line     Moves cursor to end of current line
++PgUp  Moves view up one screen       Shifts view to page above current page
++PgDn  Moves view down one screen     Shifts view to page below current page
+?Enter "Insert" - insert blank line   Splits the current line at the cursor
+       "Replace" - move to next line
+
+            (TEDIT)                           (EDIT)
++Tab        Move cursor to next tab stop      Moves cursor to next tab location
+-Shift-Tab  Move cursor to previous tab stop  Not supported
+-Ctrl-Left  Move cursor to previous word      Not supported
+-Ctrl-Right Move cursor to next word          Not supported
+
+            (TEDIT)                    (EDIT)
++Ctrl-Home  Move to top of document    Shifts view to beginning of document
+                                       (minor differences vs TEdit)
++Ctrl-End   Move to end of document    Shifts view to end of document
+                                       (minor differences vs TEdit)
+-Ctrl-PgUp  Move to top of screen      Not supported
+-Ctrl-PgDn  Move to bottom of screen   Not supported
++Ctrl-Enter Insert blank line          Insert blank line
+            (on line below cursor)     (on line cursor is on)
+
+                (TEDIT)               (EDIT)
++Ctrl-Backspace Delete current line   Delete current line
+
+
+ F-key Functions
+
+       (TEDIT)                           (EDIT)
++F1  = Display HELP                      Display HELP
++F2  = Save the current document         Save the current document
++F3  = Quit without saving changes       Quit with or without saving changes
+-F4  = Save if changed then quit         Not supported
+-F5  = DOS (type EXIT to return)         Not supported
+?F7  = Rename the current document       Rename the current document
+-F8  = Edit a new document               Not supported
+*F9  = Undo changes to current line      Display program and file info
+-F10 = Switch to next document           Not supported
+-F11 = Switch to previous document       Not supported
+-F12 = Focus to the current line         Not supported
+
+        (TEDIT)                          (EDIT)
+-s-F1 = Scroll screen left               Not supported
+-s-F2 = Scroll screen right              Not supported
+-s-F3 = Scroll screen up                 Not supported
+-s-F4 = Scroll screen down               Not supported
+-s-F7 = Move marked lines left           Not supported
+-s-F8 = Move marked lines right          Not supported
+
+ Alt-key Functions
+
+       (TEDIT)
+-a-A = Adjust current line to margin     Not supported
+?a-C = Copy the marked lines             ?
+?a-D = Delete the marked lines           ?
+-a-E = Move to end of marked lines       Not supported
+-a-F = Repeat last LOCATE command        Not supported
+-a-J = Join current and next lines       Not supported
+?a-L = Mark one or more lines            ?
+-a-M = Move the marked lines             Not supported
+-a-R = Repeat the current line           Not supported
+-a-S = Split the current line            Not supported
+-a-T = Truncate the current line         Not supported
+?a-U = Un-mark any marked lines          ?
+-a-X = Allow entry of any character      Not supported
+-a-Y = Move to top of marked lines       Not supported
+
+
+ Ctrl-key Functions
+
+Ctrl-Arrow Keys Not supported   Mark text? (future)
+
+
+ File commands
+
+Note:  File commands are not part of the plan with EDIT.
+
+
+ Character Set
+
+      0  1  2  3  4  5  6  7  8  9 
+  30           !  "  #  $  %  &  '
+  40  (  )  *  +  ,  -  .  /  0  1
+  50  2  3  4  5  6  7  8  9  :  ;
+  60  <  =  >  ?  @  A  B  C  D  E
+  70  F  G  H  I  J  K  L  M  N  O
+  80  P  Q  R  S  T  U  V  W  X  Y
+  90  Z  [  \  ]  ^  _  `  a  b  c
+ 100  d  e  f  g  h  i  j  k  l  m
+ 110  n  o  p  q  r  s  t  u  v  w
+ 120  x  y  z  {  |  }  ~  
+
+                              Ä  Å
+ 130  Ç  É  Ñ  Ö  Ü  á  à  â  ä  ã
+ 140  å  ç  é  è  ê  ë  í  ì  î  ï
+ 150  ñ  ó  ò  ô  ö  õ  ú  ù  û  ü
+ 160  †  °  ¢  £  §  •  ¶  ß  ®  ©
+ 170  ™  ´  ¨  ≠  Æ  Ø  ∞  ±  ≤  ≥
+ 180  ¥  µ  ∂  ∑  ∏  π  ∫  ª  º  Ω
+ 190  æ  ø  ¿  ¡  ¬  √  ƒ  ≈  ∆  «
+ 200  »  …     À  Ã  Õ  Œ  œ  –  —
+ 210  “  ”  ‘  ’  ÷  ◊  ÿ  Ÿ  ⁄  €
+ 220  ‹  ›  ﬁ  ﬂ  ‡  ·  ‚  „  ‰  Â
+ 230  Ê  Á  Ë  È  Í  Î  Ï  Ì  Ó  Ô
+ 240    Ò  Ú  Û  Ù  ı  ˆ  ˜  ¯  ˘
+ 250  ˙  ˚  ¸  ˝  ˛
+
+
+I think it would be good to add a F key 
+that would display a char set.  Opinion?
