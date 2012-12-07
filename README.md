@@ -31,6 +31,7 @@ AUTHORS
 * John Merryweather Cooper
 * Santoni Pierre
 * Kathleen L. Long
+* Rick Curry
 
 LINKS
 ===============
