@@ -28,6 +28,7 @@ AUTHORS
 * Andrey Vasilkin
 * Hermann Mahr
 * C. Morrison
+* John Merryweather Cooper
 
 LINKS
 ===============

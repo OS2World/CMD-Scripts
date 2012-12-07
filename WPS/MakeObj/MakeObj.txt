@@ -1,0 +1,105 @@
+				 MAKEOBJ
+				 =======
+
+MakeObj.CMD (C) 1999 John Merryweather Cooper, College Place,
+WA, USA, e-mail jmcoopr@webmail.bmi.net
+
+Inspired by:  Ingo Pflanz's version (I like the icon . . . :-)
+			  M. Kimes's version included with FM/2 Utilities
+	       (I just wanted a little more . . .)
+
+
+License: GNU GPL
+			       Installation
+			       ------------
+
+This Rexx script is intended to create all sorts of common WPS program
+objects.  In particular, I wanted to save some time applying titles to
+INF and HLP OS/2 files.
+
+To install, copy "makeobj.cmd" and "makeobj.ico" into a directory in
+your PATH. On my system, they reside in D:\FM2 (a great file
+management system for OS/2), but anywhere else in the PATH will be fine
+so long as it is ahead of any other "makeobj.cmd" in the PATH.  Once you
+have copied these files to a suitable directory, open an OS/2 Command
+Prompt Window and type:
+
+	[D:\fm2] makeobj makeobj.cmd [ENTER]
+
+The MAKEOBJ Icon should appear on your desktop.
+
+You can now either drag appropriate program objects to MAKEOBJ for
+creation on your desktop, or run MAKEOBJ from the command line.
+
+The command line syntax for MAKEOBJ is:
+
+	MAKEOBJ [] [-?] [--help] filespec
+
+"[]" represents no arguments, which will present you with a Usage
+message.  A usage message will also result with parameters "-?" and
+"--help".  The "filespec" may consist of a drive:\path\filename argument
+in the usual OS/2 manner.  Wildcard characters "*" and "?" are
+recognized--and will be expanded--in filenames.  You may also provide a
+subdirectory argument (called a folder in WPS-speak) which will create a
+shadow folder on the desktop of that subdirectory.
+
+The default behavior of MAKEOBJ is to create a shadow-object if it
+cannot determine any other special processing needed for the program
+object.
+
+For files marked with the OS/2 EA "Executable", "OS/2 Command File",
+"DOS Command File", or the traditional executable extensions, a program
+object will be created on the desktop.
+
+For files marked with the OS/2 EA "HTML" or "text/html", a URL object
+with the title coded in the HTML file between <TITLE> and </TITLE> will
+be created on the desktop.  By default, MAKEOBJ supplies the "-k"
+parameter to the your system's default browser.  If your system is like
+mine and the default browser is Netscape (2.x or 4.x), the window will
+be opened in "Kiosk" mode.  If your default browser is NOT Netscape or
+you don't like "Kiosk" mode, you'll need to edit
+
+	browser_option = '-k'
+
+in makeobj.cmd to an appropriate string or to '' (null string).
+
+In a similar manner, you may alter the browser used for Adobe
+Acrobat(tm), postscript, INF, and HLP files by modifying
+
+	browser =
+
+to point to an appropriate string.  Unless your directory structure is
+identical to mine, you'll probably have to modify the "browser"
+variables for Adobe Acrobat(tm) and postscript files to point to a
+viewer present on your system with an absolute pathname unless the
+browser is in the PATH on your system.
+
+INF and HLP files will also have the title extracted, if it exists.
+This isn't perfect yet because some undocumented "escaping" appears to
+be necessary for certain characters.  Since I haven't divined what the
+"escaping" method is yet, my solution is to translate certain characters
+to more mundane ones that won't cause REXXUTIL to truncate the titles.
+
+This is also somewhat of a problem with HTML titles.  I've also made
+some attempt to filter out "&html-code" sequences in a somewhat sane
+manner.  I've attempted to make this fairly comprehensive, but I've left
+out the hex and decimal coded variants.  I think this is a minor
+"feature", but I haven't run into titles with this variant of
+"&html-code" and so I'll give my fingers a rest from beating in all
+those codes!  :-)  In return, this version of MAKEOBJ deals with program
+documentation written in HTML format in a sane and consistent manner
+readily accessible from your favorite folder(s).
+
+It is my intent to save all you OS/2 programmer's, enthusiasts, and
+user's wear-and-tear on your fingers.  I tried to test this script
+pretty thoroughly (the path-completion logic and HTML title processing
+proved to be somewhat picky :-), but I make no WARRANTies, express or
+implied, for any purpose.
+
+In return, this script is subject to the GNU General Public License
+which is incorporated in the script.  You may distribute and use this
+script freely in accordance with that license.
+
+jmc
+jmcoopr@webmail.bmi.net
+
