@@ -23,6 +23,7 @@ AUTHORS
 * Jason R Stefanovich
 * Leonardo Pino
 * Paul Gallagher
+* John LeMay
 
 LINKS
 ===============

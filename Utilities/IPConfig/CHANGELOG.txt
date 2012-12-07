@@ -1,0 +1,31 @@
+[ipconfig.cmd]
+
+Change Log
+Version 1.3 
+
+4 April 2001
+
+* Additional code cleanup
+
+* Change Cleanup to subroutine called regardless if display is called or not.	
+
+
+3 April 2001
+
+* Disable defaulting to all interfaces if interface is not specified on command line
+
+
+28 March 2001
+
+* Output of ifconfig changed relative to how the netmask is presented.
+   To maintain compatibility, the netmask is now "chopped" by removing
+   all but the last eight chars returned by ifconfig.
+
+* Fixed return of default gateway on lan0. Was returning
+
+* IP address of lan0 instead of "default". The section for PPP0 was not
+   changed as a PPP interface was not	 available for testing.
+
+* Additional code cleanup
+
+
