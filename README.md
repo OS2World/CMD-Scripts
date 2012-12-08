@@ -32,6 +32,7 @@ AUTHORS
 * Santoni Pierre
 * Kathleen L. Long
 * Rick Curry
+* Wolfgang Reinken
 
 LINKS
 ===============
