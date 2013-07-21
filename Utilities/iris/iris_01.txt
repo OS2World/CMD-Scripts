@@ -1,0 +1,25 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: iris_01.zip
+       Short Description: Backup your eCS or OS/2 bootdrive 
+        Long Description: REXX-Script to Backup your eCS or OS/2 bootdrive.
+                          Use it from the desktop or with a scheduler. 
+			  
+      Proposed directory
+           for placement: /pub/os2/util/backup
+               Your name: taki
+           Email address: info at bogiatzoules de
+    Program contact name: 
+   Program contact email: 
+             Program URL: http://www.bogiatzoules.de/os2/ 
+
+      Would you like the
+   contact email address
+    included in listings? no
+
+Operating System/Version: eCs, OS/2
+ Additional requirements: infozip's zip.exe 
+
+                Replaces: 
+

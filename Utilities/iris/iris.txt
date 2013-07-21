@@ -1,0 +1,41 @@
+Iris V0.1 15.08.2003
+-----------------------
+
+Requirements:
+Infozip's zip.exe
+eCS or OS/2 with REXX
+
+Installation:
+1) Unzip the files in a directory of your choice
+2) Change the settings in iris.cmd
+3) If you want a WPS object, execute wps.cmd.
+
+
+Use:
+1) Simply start it either by a scheduler or with a doubleclick
+2) Have a look into the logfiles
+
+
+What it does:
+1) It finds your bootdrive out. This may sometimes fail (when the OS2.INI ain't
+   placed on the bootdrive), but you have still the possibility to enter a value.
+2) Then it looks where the swapper.dat is save and excludes it if nessesary.
+3) An at last it creates the backup file. It's name has the format :
+   backup_YYYY_MM_DD.zip
+4) If a file with that name already exists, then the execution is interrupted,
+   to prevent overwriting backup files.
+
+Known bugs:
+I hope non, but please let me know if you find one!
+Please send me any kind of feedback to improve it or do it yourself: 
+it's GNU software...
+
+Licence:
+This Program is released under the Gnu Public Licence (GPL).
+See the file COPYING for further information.
+
+--------------------------------------
+
+(C) Dimitrios Bogiatzoules 2003
+
+info at bogiatzoules dot de
