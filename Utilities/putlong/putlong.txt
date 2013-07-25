@@ -1,5 +1,8 @@
 A little REXX script to assign a LONGNAME Extended Attribute to a file, without changing its real name. 
 
+==License==
+GNU GPL V2
+
 ==Author==
 * Cristiano Guadagnino
 
