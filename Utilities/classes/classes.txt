@@ -1,5 +1,7 @@
 A little REXX script to show all the registered classes on your system.
 
+==License==
+GNU GPL V2
 
 ==Author==
 * Cristiano Guadagnino 
