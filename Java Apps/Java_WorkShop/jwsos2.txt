@@ -90,6 +90,10 @@ BTW, we must live with this bug, at least until SUN continues
 to ignore OS/2. :(
 
 
+License:
+------------
+GNU GPL V2.
+
 Final word:
 -----------
 Hope this file is much more clear than the previous one.
