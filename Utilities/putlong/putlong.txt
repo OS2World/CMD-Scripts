@@ -1,0 +1,5 @@
+A little REXX script to assign a LONGNAME Extended Attribute to a file, without changing its real name. 
+
+==Author==
+* Cristiano Guadagnino
+
