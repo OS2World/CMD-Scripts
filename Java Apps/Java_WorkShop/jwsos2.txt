@@ -1,0 +1,124 @@
+Author: Cristiano Guadagnino (herbie@elettrodata.it)
+_______________________________
+NOTICE THE ADDRESS IS CHANGED!!
+-------------------------------
+
+Description:
+------------
+Java WorkShop startup script
+This file was created by Cristiano Guadagnino
+
+
+Installation notes:
+-------------------
+I have used the intel-solaris package to install JWS on OS/2.
+Note that you only need the \JWS directory from that archive.
+After extracting the JWS directory, you will have the following tree
+on disk (only first level deep is shown):
+
+\jws--+
+      |
+      +--classes
+      |
+      +--examples
+      |
+      +--intel-S2
+      |
+      +--lib
+      |
+      +--solaris
+      |
+      \--src
+
+Now add an OS2 subdirectory, and a bin subdirectory under that,
+so that you have:
+
+\jws--+
+      |
+      +--classes--+(etc)
+      |
+      .
+      .
+      .
+      |
+      +--src--+(etc)
+      |
+      +--OS2--+
+              |
+              +--bin
+
+Now, copy jws.cmd and jws.ico in the newly created 'bin' directory.
+You're done!
+Change to the \jws\OS2\bin directory and type jws (enter)...
+Java WorkShop will come up!
+
+
+Additional notes:
+-----------------
+1)This script works well if you're using 4OS2 or a (ported) unix shell.
+  If you're using plain cmd.exe, you'll get the following error:
+
+  SYS1079: >& was unexpected at this time.
+
+  To correct this, edit the jws.cmd file and search for '>& \dev\null'
+  (without quotes). Then correct it into '2> NUL'. You shouldn't have
+  any more errors.
+
+2)This script assumes that JAVA_HOME environment variable is already set
+  and that the script is run from \JWS\OS2\BIN.
+
+3)Note that jws.ut.platform is hardcoded. If you don't know what this means,
+  don't worry: it's not important.
+
+4)Be sure to use JDK 1.0.2 GA release. You can find it on the IBM sites.
+  If you don't find it, go to http://www.cincyteamos2.org and look in the
+  'Master OS/2 Warp Update List'. You'll find a pointer to the JDK.
+                       DO NOT USE THE ALPHA JDK 1.1!!
+
+
+Known bugs:
+-----------
+Whenever you try to build a project, jws reports the following error:
+
+"javac: invalid flag: -jws"
+
+I've not been able to track down what is causing this behaviour.
+One user reported that the -jws flag is automatically added from JWS.
+I can't understand why: no java compiler can't understand it. :-?
+Perhaps SUN has delivered a skightly modified JDK with JWS.
+BTW, we must live with this bug, at least until SUN continues
+to ignore OS/2. :(
+
+
+Final word:
+-----------
+Hope this file is much more clear than the previous one.
+So many people wrote me because they didn't understand how to install JWS,
+and even more wrote me about the problem with SYS1079.
+This should be fixed now.
+Anyway, feel free to write me if you have problems;
+I'm glad to hear your comments.
+
+Oh, and if you want to modify the script or this file AND spread it over the
+net, please state clearly what YOU have done.
+A good practice would be to add a description file separated from this one,
+with your name and electronic address. In the script you can highlight the
+changed code with some comment lines.
+Whatever you do, ALWAYS include all of my files in the distribution.
+I'm saying this because some time ago I found on hobbes a modified copy of
+this archive, and people were asking me about things I NEVER WROTE.
+OK, you're warned :-)
+
+
+Cristiano Guadagnino
+TeamOS/2 ITALY
+herbie@elettrodata.it
+
+
+
+
+
+Trademarks:
+-----------
+Java WorkShop is a visual development environment for Java.
+Java WorkShop is a trademark of Sun Microsystems, Inc.
