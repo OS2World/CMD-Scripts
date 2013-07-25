@@ -1,0 +1,5 @@
+A little REXX script to show all the registered classes on your system.
+
+
+==Author==
+* Cristiano Guadagnino 
