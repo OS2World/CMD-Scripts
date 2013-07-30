@@ -1,0 +1,184 @@
+/* Data for ParamBSpline2, a REXX program by Doug Rickman, GHCC/MSFC/NASA
+
+/* Example input file. 
+/* This test data set provided by Ross Inman
+/*    Institute for Molecular Virology
+/*    University of Wisconsin-Madison
+/*  Used with permission.
+
+/* Compute a smoothing bspline with a smooth factor of 1.  The range 
+/*    given by the variable MyU.  Input points are weighted using the variable
+/*    W.  1 new point is interpolated between each input point.
+
+/* Anything after the first "/*" on a line is ignored.  
+/* Thus a line starting with "/* is a comment.
+/* There is no variable typing, i.e. 1 = 1.0 = 1e+0
+
+/* Blank lines are ignored.
+
+
+/* Input Data    - - - - - - - - - - - - - - - - - - - - - -  - - - -
+
+All Variables = X Y Length
+             /* List all variable names, space delimited and CASE SENSITIVE.  
+             /* Example, if using 3 variables and weight factors you could  
+             /* enter "height width depth w".  There must be one column in the
+             /* data table for each variable name.  There is no practical limit
+             /* to the number of variables, i.e. columns.
+             
+Use Variables = X Y
+             /* List in order the names of variables to use.  The maximum
+             /*   number of variables, i.e. dimensions, must be less than 11.
+             /*   It must also be no more than the total number of all variables.
+             /*   The order listed need not match the order of appearance in the 
+             /*   All Variables list.
+
+
+
+/* BSpline Controls  - - - - - - - - - - - - - - - - - - - -  - - - -
+
+Mode    = 0   
+             /* -1  - weighted least squares spline (Knots must be specified).
+             /*  0  - smoothing spline.
+
+Knots   = 7
+             /* Number of internal knots to use.  This is used when Mode = -1.
+             /* Knots will be evenly spaced between start and stop of data. 
+             /* Knots <= (Number of data points) - Degree - 1
+
+Degree  = 3
+             /* degree of spline.  1<= Degree <=5. 
+             /* "It is recommended to use cubic splines (Degree=3).  
+             /* The user is strongly dissuaded from choosing Degree even, together
+             /* with a small s-value."
+
+Smooth  =  1
+             /* Smoothing.  Smooth>=0.  Start "big" and work your way down.  If 
+             /* blank Smooth will be set to the number of points. 
+             /* A value of 0 will create an interpolating spline, i.e. it will
+             /* go through the input data points in all cases.  
+
+uParam  =    
+             /* The name of the variable to use as the "u" parameter.  If this
+             /* means nothing to you perhaps you should read the documentation.
+             /* As a hint, this is why this program is called Parametric BSpline.
+             /* If no value is provided the scaled distance in n dimensions 
+             /* between subsequent points will be used with the total distance
+             /* scaled to 1.  
+             /* A variable used as the uParam can not also be present in Use Variables
+             /* 
+             /* WARNING - The numeric values of this variable MUST INCREASE 
+             /* each subsequent point.  In other words  u(i-1) < u(i) < u(i+1).
+
+Weights =   
+             /* The name of the variable to use as the weighting factor. 
+             /* If left blank a default weight of 1 is assigned to each point.
+             /* Weights must be greater than 0.
+
+
+/* Output Data   - - - - - - - - - - - - - - - - - - - - - -  - - - -
+
+OutputMode    = Interpolate 1
+             /* Must be of the form
+             /*     Interpolate  n,
+             /*     Resample     n,
+             /*     Fixed        n,
+             /*     Specified    n1 n2 n3 n4 n5 ...,
+             /*     DoLoop i = n to m by p
+             /*  
+             /*  "Interpolate n" will output values for each input point and 
+             /*    create an additional n points in between each pair of 
+             /*     adjacent input points.  
+             /*  "Resample n"  will create n points between the first 
+             /*    and last data points.
+             /*  "Fixed n" will output points at uniform sample spacing.  
+             /*     Points will be at integer multiple of n.  The units for
+             /*     this are the same as the units of the DistanceParam. Points
+             /*     for the start and stop of the data will also be output.
+             /*  "Specified n1 n2 n3 n4 n5 ..." will output estimates for each
+             /*     point, n1, n2, n3 ....  specified.
+             /*  "DoLoop i = m to n by p" will output values starting with m and 
+             /*     going toward n in p sized steps.  You MUST replace m, n AND
+             /*     p with values appropriate for your needs. Warning, this option 
+             /*     allows you to obtain output outside the range of input data!
+
+OutputFile    = DataB.out
+             /* If this file already exists it will be appended.
+
+
+/* Data          - - - - - - - - - - - - - - - - - - - - - -  - - - -
+Data  =      /* Flag which indicates the data table follows. Do not change this line. 
+
+/* Data follows in filled columns, i.e. no missing values.  1 row per point
+/* in n dimensional space.  1 column per dimension.  Columns are space or tab 
+/* delimited.  Currently precision is set to 9 significant digits.  The number
+/* of columns must match the number of variables in the list of All Variables.
+
+
+  2.80309   2.77978   0.00000
+  2.84497   2.77967   0.04188
+  2.93921   2.77942   0.13612
+  2.99171   2.83247   0.21075
+  2.98149   2.92824   0.30706
+  2.92924   2.97093   0.37453
+  2.83509   3.00310   0.47403
+  2.80381   3.05637   0.53581
+  2.81442   3.10954   0.59003
+  2.85636   3.13070   0.63701
+  2.94016   3.14112   0.72145
+  2.99252   3.14098   0.77381
+  3.04490   3.15148   0.82723
+  3.08695   3.21519   0.90357
+  3.05579   3.31102   1.00434
+  3.02449   3.35366   1.05724
+  2.94083   3.39643   1.15120
+  2.88858   3.43913   1.21867
+  2.88878   3.51359   1.29313
+  2.93094   3.61986   1.40746
+  3.01477   3.64092   1.49389
+  3.09842   3.59814   1.58785
+  3.12962   3.51295   1.67857
+  3.20266   3.41701   1.79915
+  3.27590   3.39554   1.87548
+  3.34920   3.39535   1.94878
+  3.39117   3.42715   2.00144
+  3.43314   3.45895   2.05410
+  3.51699   3.49065   2.14374
+  3.57993   3.53303   2.21962
+  3.66370   3.53281   2.30339
+  3.73680   3.45815   2.40788
+  3.76799   3.37296   2.49860
+  3.72588   3.28796   2.59345
+  3.69433   3.23486   2.65522
+  3.63142   3.20311   2.72569
+  3.56859   3.20328   2.78852
+  3.49527   3.19283   2.86258
+  3.43250   3.21428   2.92891
+  3.34867   3.19322   3.01534
+  3.29618   3.14017   3.08997
+  3.28554   3.07637   3.15465
+  3.31681   3.02309   3.21643
+  3.40058   3.02287   3.30020
+  3.46344   3.03334   3.36392
+  3.53679   3.05442   3.44024
+  3.61009   3.05423   3.51354
+  3.67272   2.97959   3.61097
+  3.67250   2.89449   3.69607
+  3.63047   2.84141   3.76377
+  3.59892   2.78830   3.82554
+  3.53604   2.76719   3.89187
+  3.47310   2.72481   3.96775
+  3.42069   2.70367   4.02426
+  3.36833   2.70381   4.07662
+  3.32656   2.74647   4.13632
+  3.32678   2.83158   4.22143
+  3.37925   2.87399   4.28890
+  3.44213   2.89510   4.35523
+  3.50485   2.85238   4.43112
+  3.52562   2.78850   4.49830
+  3.55684   2.71394   4.57913
+  3.56720   2.67136   4.62295
+  3.56701   2.59690   4.69741
+  3.58784   2.55429   4.74484
+  3.59828   2.54362   4.75977
+
