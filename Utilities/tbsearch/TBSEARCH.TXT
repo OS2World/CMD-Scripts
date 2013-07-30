@@ -1,0 +1,27 @@
+
+TBSEARCH.CMD                                      (c) Torus Brokers 1997
+                                                      Postbus 356
+                                                      1270 AJ  Huizen
+                                                      Netherlands
+
+                                                      E-mail : adoff@ibm.net
+
+TBSEARCH.CMD search for files, which match the given specification, in all
+available directories on all available local and remote drives.
+
+Start TBSEARCH.CMD without parameters, or with parameter /? or -?, to get
+some usage information.
+
+The syntax of TBSEARCH is :
+
+   TBSEARCH <file>
+
+Examples are :
+
+   TBSEARCH "A HPFS file"
+   TBSEARCH AUTOEXEC.BAT
+   TBSEARCH *.SYS
+   TBSEARCH CON*
+   TBSEARCH /?
+   TBSEARCH ?
+
