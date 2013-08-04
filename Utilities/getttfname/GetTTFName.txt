@@ -1,0 +1,139 @@
+                     GetTTFName
+                    Version 1.00
+
+                readme / doc / manual
+
+
+Contents of this file:
+======================
+1.  What is it?
+2.  Installation
+3.  Usage
+4.  What the heck does it actually do?
+5.  Links & references
+6.  Copyright / Disclaimer
+7.  Where are new versions?
+8.  Contacting author
+
+--- 1. What is it? -----------------------------------------------------------
+ 
+ GetTTFName is a rexx script that displays the "friendly name" for a TTF file.
+ If you ever forgot that "51253___.TTF" actually is the TTF file that the font
+ "Victorian LET Plain:1.0" is taken from, then GetTTFName might help you. ;)
+
+ GetTTFName is pure VIO mode. This means, it does not load any fancy GUI.
+ It does not "temporary install" a font to determine the font name but rather
+ retrieves the name right out of the TTF file.
+ If you're interested in HOW this works, see item "4." ...
+
+--- 2. Installation ----------------------------------------------------------
+
+ Just drop the .cmd file into a directory of your choice. That's it.
+ Feel free to create a program object on your desktop for it but remember that
+ this is just a VIO program: You need to keep the window open after it has run
+ or you won't be able to see the result.
+ When processing a list of TTF files, you might prefer to save its output into
+ a file, because you might be unable to "scroll back" in a VIO window.
+ (See next item for details)
+
+--- 3. Usage -----------------------------------------------------------------
+
+ Quite simple: The script requires you to specify the TTF file you want to get
+ the name of. GetTTFName also is able to process wildcards. Optionally you can
+ put a "/s" (without the quotes) after the filespec to make it scan within
+ subdirectories as well.
+
+  GetTTFName <file> [/s]
+
+ In other words: Just think of it as some kind of DIR command...
+
+ Examples:
+
+  a. scan specific TTF file in current dirctory:
+
+        GetTTFName 51253___.TTF
+
+  b. scan specific TTF file "somewhere else":
+
+        GetTTFName D:\Fonts\TrueType\51253___.TTF
+
+  c. scan all TTF files in current dirctory and subdirectories:
+
+        GetTTFName *.TTF /s
+
+  d. scan entire drive c: for all TTF files:
+
+        GetTTFName C:\*.TTF /s
+
+ Note that GetTTFName can be invoked to redirect its ouput into a file by
+ simply using the standard OS/2 mechanisms of...
+
+   GetTTFName <file(s)> [/s] > <listfile>
+
+ like
+
+   GetTTFName c:\*.ttf /s > d:\var\logs\ttf.lst
+
+ to retrieve the names for all TrueType fonts on entire drive C: into a file
+ named "ttf.lst" which is contained in directory "\var\logs" of drive d:
+ Phew. That was a long one.
+
+--- 4. What the heck does it actually do? ------------------------------------
+
+ Nothing magic! ;) TrueType Font files contain various data about the font.
+ These items are stored in "tables" which are simply defined "areas" that
+ start in a specific part of the file and have a certain structure.
+ Besides tables for typographic information, there is also a table that holds
+ "names". Amongst them there is the "friendly name" entry - the "real" font
+ name you might call it.
+
+ GetTTFName simply analyses the TTF file contents based upon the tables
+ structure that each TTF file uses and tries to find out if there is a name
+ entry suitable.
+
+--- 5. Links & references ----------------------------------------------------
+
+  http://developer.apple.com/fonts/TTRefMan/RM06/Chap6.html
+  http://www.codeproject.com/gdi/fontnamefromfile.asp
+
+ I know that M$ has some predefined headers lying around somewhere, but I
+ didn't want to fire up my VB under Windoze, just to get the byte offsets and
+ string length for the stuff.
+ The above links actually contain all the information needed to get yourself
+ a program done on your own, as long as you have a basic understanding of
+ data types (e.g. "uShort" is a two-byte value, "uLong" is 4 bytes, etc.) and
+ you know how to deal with binary values and a hex editor for checking. ;)
+
+--- 6. Copyright / Disclaimer ------------------------------------------------
+
+ This code was written by Thomas Klein. Although being released to the public
+ for FREE, I still hold the copyright for this stuff. So feel free to use it
+ in your own programs. You are not required to give any credits for the use
+ of the algorithms contained in it, but I would appreciate if you do so.
+
+ The author (see 8. ) shall not be reliable for any damage that results from
+ the use of this program - whether direct or implied or anything else.
+ This is noting more but a code snippet to show how specific information is
+ stored in a specific type of files. Actually nobody told you, that this is
+ a bug-free program which is used to perform a specific task. So let me put
+ it this way:
+ - If it works and is great for you: It was me, who did it: Praise my name!
+ - If it fails, destroys your data, machine, car, airplane or make your home,
+   family or pets go up in flames: It wasn't me! It's just YOU to blame!
+
+--- 7. Where are new versions? ----------------------------------------------
+
+ First, it depends on YOU if there EVER will be a new version except for
+ bug-fixing reasons. (Again, finding and reporting bugs is up to you).
+ Anyway, new versions will be available from hobbes (hobbes.nmsu.edu) and
+ will be announced via VOICE (and/or other news services).
+
+--- 8. Contacting the author ------------------------------------------------
+
+ If you have questions, suggestions or found a bug, let me know via e-mail:
+ <warpcafe{at}yahoo{dot}de>
+
+ I can't promise to provide great support, but I'll try to do my best.
+ Remember: This is free stuff. ;)
+
+=============================================================================
