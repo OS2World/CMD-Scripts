@@ -1,0 +1,74 @@
+SRT.TXT:
+
+System requirements:
+	Any system capable of running classic REXX
+
+Usage:
+	SRT drive rem_level
+	
+	drive is the drive drive that contains the CONFIG.SYS file you want processed.
+	  This input is mandatory.
+
+	rem_level is the level of remarks you want left in the new config.sys file.
+	ALL - Leaves all remark statements in and add remark statements in 
+	   between the sections
+	SOME - Adds remark statements in between the sections but deletes
+	   any existing remarks.
+
+Legal stuff and credits:
+  This program is FREE and it is highly recommended you back up your CONFIG.SYS file 
+  before using it.  I have used it on my machine without any problems but of course YMMV.
+  The REXX procedure is based on information provided by Aaron Tiensivu, Phil, Jim and
+  suggestions made in OS/2 Warp Uncensored and feedback from users like you.
+
+General Info:
+
+  Basically the procedure will parse your CONFIG.SYS file and arrange the lines in the 
+  following order:
+
+basedev
+libpath
+set
+codepage
+country
+devinfo
+device (OS/2 drivers)
+ifs
+swappath
+break
+device (DOS drivers}
+dos
+fcbs
+files
+lastdrive
+protectonly
+rmsize
+shell
+run/call
+protshell
+{all the rest goes here}
+
+In addition it will handle remarks depending upon the switch used (See Usage:)
+
+It will NOT change your CONFIG.SYS file.  The output of the sort procedure will be 
+stored in a file called CONFIG.NEW in the current directory.  After you have reviewed the 
+file, just change the name and reboot.
+
+History:
+  This program was originally written in response to a thread on comp.os.os2.misc in which
+a person wanted help with a 6 minute boot time.  At the time, the only thing on hobbes 
+was a text file (CNFGSORT.ZIP) that explained config.sys file sorting.  Thus
+was SORTBOOT formed.  Me being basically lazy, the name was later shortened to SRT.
+  It should be noted that sorting your config.sys file may or may not help you.  On my
+system (no LAN, 2 CDs and other normal stuff), my boot time without sorting is about 2 
+minutes.  With sorting it's about 1 and a half minutes.  (That's timed from when the
+boot blob appears until the HD stops thrashing.)  For others, I'm told it knocks off a couple 
+of minutes.  YMMV.
+
+This version streamlines the sorting quite a bit by using stems.  This method 
+should also stop the problem that previous versions had of putting a line in twice.
+Due to popular demand, it will also handle remark statements a little better.
+  Another bug that hopefully is fixed is with networking.  Previously, I had put all
+the CALL statements first, then all the RUN statements.  This knocked some networks
+off-line.  Reversing the order did the same for other networks.  Now, CALL and RUN 
+statements are kept in whatever order they were originally in.

@@ -1,0 +1,70 @@
+DOSBoot v 0.1
+-------------
+
+What is DOSBoot?
+----------------
+
+DOSBoot is an answer to the "Single Applications Mode" found in
+Windows95.  It extends the OS/2 Dual Boot feature slightly to
+automate the running of DOS programs that don't like OS/2.
+
+DOSBoot consists of two files:
+
+   DOSBOOT.CMD       -     an OS/2 batch file which does the
+                           work on the OS/2 side of things.
+   OS2BOOT.BAT       -     a DOS batch file which does the
+                           work on the DOS side of things. 
+
+Using DOSBoot
+-------------
+
+In addition, you'll need to create AUTOEXEC.BAT/CONFIG.SYS pairs
+in \OS2\SYSTEM for each program you want to run with DOSBoot. 
+The filename extensions should be unique to each pair.  For
+example, for Panzer General I have CONFIG.PZG and AUTOEXEC.PZG.
+
+Your AUTOEXEC file should run the application, then run
+OS2BOOT.BAT when it's finished to clean up and reboot OS/2.
+
+To run a DOS app with DOSBoot, create a program object on your
+desktop which runs DOSBOOT.CMD, passing the unique 3-character
+identifier of the app you want as a parameter.  For example, to
+run Panzer General, I have an object with the following
+settings:
+
+   File and Path Name:  C:\BIN\DOSBOOT.CMD
+   Parameters: PZG
+
+Here are my CONFIG.PZG and AUTOEXEC.PZG:
+
+---CONFIG.PZG---
+shell=c:\dos\command.com /P
+device=c:\dosbin\himem.sys
+device=c:\dosbin\mtmcdas.sys /D:MCD001
+
+---AUTOEXEC.PZG---
+@echo off
+path=c:\dos;c:\dosbin
+mscdex /D:MCD001
+mouse
+vmode 72HZ
+cd\games\pg
+call pg
+\dosbin\os2boot
+
+How it Works
+------------
+
+Take a look at the batch files.  It's pretty simple.  DOSBOOT
+copies CONFIG.DOS and AUTOEXEC.DOS to CONFIG.NML and
+AUTOEXEC.NML, then copies the appropriate CONFIG/AUTOEXEC pair
+to CONFIG.DOS/AUTOEXEC.DOS.  Then it does a "BOOT /DOS".
+
+OS2BOOT copies CONFIG.NML/AUTOEXEC.NML to \CONFIG.SYS and
+\AUTOEXEC.BAT, then does a "BOOT /OS2".
+
+It isn't a perfect solution, but it will do quite nicely till
+Warp 2 next year.
+
+Matt McLeod
+<matt@toaster.hna.com.au>
