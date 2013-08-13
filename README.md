@@ -11,6 +11,7 @@ Depends on the Script
 - LGPL
 - Sun Public License
 - Public Domain
+- Read the documentation of each one.
 
 COMPILE TOOLS
 ===============
@@ -33,6 +34,7 @@ AUTHORS
 * Kathleen L. Long
 * Rick Curry
 * Wolfgang Reinken
+* Radim Kolar
 
 LINKS
 ===============
