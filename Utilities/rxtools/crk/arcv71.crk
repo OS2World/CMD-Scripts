@@ -1,0 +1,6 @@
+Arcview 7.1, (x)1996 by MeteO
+
+Work properly on TVFS
+ARCVIEW.EXE
+0000A192: CD B1
+00011B38: CD B1

@@ -1,0 +1,28 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: ids2devs103.zip
+       Short Description: converts pci.ids to pcidevs.txt
+        Long Description: for a fresh database of device ids,
+                          this converts pci.ids to pcidevs.txt
+
+      Proposed directory
+           for placement: /pub/os2/util/misc
+
+               Your name: Greg Jarvis
+           Email address: gjarvis@ieee.org
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://pci-ids.ucw.cz/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: any version
+ Additional requirements: curl recommend
+
+                Replaces: ids2devs102.zip
+
+
+

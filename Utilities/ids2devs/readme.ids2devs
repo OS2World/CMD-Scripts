@@ -1,0 +1,74 @@
+ABOUT
+
+For a fresh database of device ids, this converts "pci.ids" to "pcidevs.txt".
+
+
+INSTALL
+
+Unzip package to pci directory. On eComstation 2.1 this is "C:\ecs\install\DETECTEI".
+
+RUN
+
+There are two methods.
+
+1)  If you have any version of "curl" installed, just run "getids.cmd".
+
+2)  Or download "http://pci-ids.ucw.cz/v2.2/pci.ids" to your pci directory
+    and then run "ids2devs > nul".
+
+LICENSE
+
+Copyright (C) 2012   Greg Jarvis
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+HISTORY
+
+1.00    2012-06-16 GJ  initial version
+1.01    2012-06-18 SHL Strip spurious spaces
+1.02    2012-06-20 GJ  corrected pcidevs.txt first line
+1.03    2012-16-04 GJ  works both on Cassic and Object REXX, version is Craig Hart format
+
+NOTES ABOUT PCI
+
+OEM
+
+
+OEM is a string in the hardware. Craig Hart reassined them to correct
+early PCI hardware mistakes. Todays hardware the OEM string Craig Hart's
+correction can mess things up. For my Lenvo Thinkpad T20 shows 17 PCI
+devices with the folling OEMs: using IDS 16 Lenvo and 1 Intel; using CH
+16 Legend and 1 Intel. Note that pci.ids does not have any OEM strings.
+
+System ID
+
+The System Id identifies the board/card of system. For my T520 the all
+16 Lenvo have the exact same ID. Less than 1% of all IDs are in manually
+added, which to me is a nwaist of human resources. Furthermore, pci.exe
+requiers OEM to decode ID which meses up a otherwise correct and more
+useful imformation.
+
+Classes and Types
+
+There are several Types unknown and a questionable Class pci.exe. IDS
+have them encoded in the database in which I included as an extended CH
+format.
+
+Future Plans
+
+I have limited time to work on this.
+I looked into modifying pci.exe which is writen in
+Virtual Pascal Compilier 2.1 in which to get a full version you need Borland
+license. With limited version makes it difficult to rewrite code.
+Also looked into writing a program that uses ACPI but current ACPI toolkit is broken.

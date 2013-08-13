@@ -1,0 +1,7 @@
+Volkov commander 4.99 aplha 7 patch for win95
+
+Fix for free space in Info panel
+VC.OVL
+000148AD: 00 53
+000148AE: 73 00
+000148AF: 74 75

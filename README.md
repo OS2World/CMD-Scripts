@@ -36,6 +36,7 @@ AUTHORS
 * Wolfgang Reinken
 * Radim Kolar
 * Olexander Lebid'
+* Greg Jarvis
 
 LINKS
 ===============

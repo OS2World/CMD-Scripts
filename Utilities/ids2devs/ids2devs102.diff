@@ -1,0 +1,53 @@
+diff ./file_id.diz ../ids2devs102/file_id.diz
+1c1
+< (V103) IDS2DEVS
+---
+> (V102) IDS2DEVS
+Only in ../ids2devs102: ids2dev101.diff
+diff ./ids2devs.cmd ../ids2devs102/ids2devs.cmd
+20d19
+<  * 2012-16-04 GJ  works both on Cassic and Object REXX, version is Craig Hart format
+22c21
+< ver = '1.03'
+---
+> ver = '1.01'
+28,32c27
+< call RxFuncAdd "SysLoadFuncs", "RexxUtil", "SysLoadFuncs"
+< call SysLoadFuncs
+< 
+< if stream( out,'c','query exist')<>'' then
+<    call SysFileDelete out
+---
+> '@echo off'
+34c29
+< call stream out,'c','open write'
+---
+> call stream out,'c','open write replace'
+46,51c41,42
+<          if left(line,10)='#'||tab||"Version:" then do
+<             verids = word(line,2)
+<             line = '; This is version' verids 'of pci.ids using ids2devs version' ver
+<             end
+<          else
+<             line = ';'line
+---
+>          line = ';'line
+>          if left(line,10)='#'||tab||"Version:" then verids = word(line,3)
+74a66
+> '@echo on'
+Only in ../ids2devs102: ids2devs101.diff
+Only in .: ids2devs102.diff
+Only in ../ids2devs102: ids2devs102.txt
+Only in ../ids2devs102: ids2devs102.zip
+Only in .: ids2devs103.txt
+diff ./readme.ids2devs ../ids2devs102/readme.ids2devs
+41c41
+< 1.03    2012-16-04 GJ  works both on Cassic and Object REXX, version is Craig Hart format
+---
+> On Wed, 11 Jul 2012 14:21:03 -0700, Steven Levine wrote:
+71d70
+< I looked into modifying pci.exe which is writen in
+74c73
+< Also looked into writing a program that uses ACPI but current ACPI toolkit is broken.
+---
+> 
