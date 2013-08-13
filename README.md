@@ -35,6 +35,7 @@ AUTHORS
 * Rick Curry
 * Wolfgang Reinken
 * Radim Kolar
+* Olexander Lebid'
 
 LINKS
 ===============
