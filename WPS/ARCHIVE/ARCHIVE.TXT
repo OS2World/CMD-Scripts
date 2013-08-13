@@ -1,0 +1,35 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: archive.zip
+       Short Description: Free OS/2 archiver tool (archive every 'x' days)
+        Long Description: After an OS/2 archive has occurred automatically
+                          turns archiving off.  If you wish it will ensure
+                          that archiving occurs every 'x' days.  You can
+                          also easily turn archive on.  Handles Warp 3
+                          & 4 differences.  Never again lose all your 'good'
+                          archives due to a boot problem (or forget to
+                          generate an up to date archive).
+
+      Proposed directory
+           for placement: /pub/os2/util/wps
+
+               Your name: Dennis Bareis
+           Email address: db0@anz.com
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.labyrinth.net.au/~dbareis/index.htm
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 3.0+
+ Additional requirements:
+
+                Replaces: /pub/os2/util/wps/archive.zip
+
+
+
+
+

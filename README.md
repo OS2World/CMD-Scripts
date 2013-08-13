@@ -37,6 +37,8 @@ AUTHORS
 * Radim Kolar
 * Olexander Lebid'
 * Greg Jarvis
+* Leshek Fiedorowicz
+*  Dennis Bareis
 
 LINKS
 ===============
