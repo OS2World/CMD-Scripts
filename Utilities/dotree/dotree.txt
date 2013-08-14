@@ -1,0 +1,150 @@
+(Version 1.0, 10-September-2004)
+
+================
+Content / Inhalt
+================
+
+1. English description
+2. Deutsche Beschreibung
+
+*************************************************************************
+
+1. English
+==========
+
+This program provides a feature that I've missed all the time as
+being part of the standard CMD.EXE and most other shells available.
+
+dotree.cmd executes any shell command on all files and directories
+of a specified path. Files/directories can be specified by the placeholder %.
+
+English (dotree_en.cmd) and German (dotree_de.cmd) versions are included.
+
+I hope you find it useful too.
+
+
+Installation
+------------
+
+No further installation necessary. Just use it :) .
+
+Of course you can copy the file dotree_en.cmd to a any directory
+your PATH. I also recommend renaming it to dotree.cmd for easier usage ;) .
+
+
+Usage
+-----
+(You get the same when calling the script without parameters.)
+
+This program executes any shell command on files/directories of the
+defined working directory. An optional file mask can be specified.
+As placeholder for the file/directory name % is used.
+If white spaces are part of the file/directory names, "%" can be used.
+
+Usage: dotree.cmd [/s] [/f] [/d] [/r] /c 'command ["]%["]' <directory\mask>
+
+  /s - show the fully expanded command that is executed
+  /c - defines the command to be executed
+  /f - operate on files only
+  /d - operate on directories only
+  /r - include subdirectories (recursive)
+
+  If /f and /d are not specified, all files and directories are analyzed.
+  The options /f and /d are mutual exclusive.
+
+  Examples:
+    dotree /f /r /c 'type % | more' x:\doc\*.txt
+    dotree /d /c 'dir %' x:\
+    dotree /f /c 'copy "%" "%.bak"' x:\*.jpg
+
+
+The script hasn't been deeply tested. So I'm not responsible for
+loss of any of your files if haven't backed up them before using
+this tool. You should always do this before running this script !
+
+
+Known issues
+------------
+
+If another REXX script is specified as command, "call " must be
+inserted in front of the script name. This is a restriction of CMD.EXE.
+
+
+Heiko Nitzsche (E-Mail: h7n2@gmx.net)
+
+*************************************************************************
+
+2. Deutsch
+==========
+
+Dieses Programm stellt FunktionalitÑt zur VerfÅgung, die ich seither
+beim CMD.EXE Kommandointerpreter sowie vielen Anderen vermisst habe.
+
+dotree.cmd fÅhrt jedes beliebige Shell-Kommando auf allen Dateien/Verzeichnissen
+des angegebenen Pfades aus. Als Platzhalter fÅr den Dateinamen wird % verwendet.
+
+Ich hoffe, sie finden es ebenfalls nÅtzlich.
+
+
+Installation
+------------
+
+Es ist keine weitere Installation notwendig. Sie kînnen das Programm
+sofort verwenden :) .
+
+NatÅrlich kînnen Sie die Datei del_ea_de.cmd auch in ein Verzeichnis
+kopieren, das von in der Systemvariablen PATH definiert ist.
+Ausserdem empfehle ich Ihnen zur einfacheren Benutzung das Script in
+del_ea.cmd umzubenennen.
+
+
+Aufrufsyntax
+------------
+(Sie erhalten dieselbe Beschreibung beim Aufruf des Scripts ohne Argumente.)
+
+Dieses Programm fÅhrt ein beliebiges Shell-Kommando auf allen
+Dateien/Verzeichnissen eines anzugebenden Verzeichnisses aus. Eine
+Dateisuchmaske kann zusÑtzlich angegeben werden. Als Platzhalter fÅr
+den Datei-/Verzeichnisnamen wird % verwendet. Falls diese Namen
+Leerzeichen enthalten, kann "%" verwendet werden.
+
+Syntax: dotree.cmd [/s] [/f] [/d] [/r] /c 'Kommando ["]%["]' <Verzeichnis\Maske>
+
+  /s - voll expandiertes Kommando wÑhrend der AusfÅhrung anzeigen
+  /c - definiert das auszufÅhrende Kommando
+  /f - nur auf Dateien arbeiten
+  /d - nur auf Verzeichnisse arbeiten
+  /r - Ebenfalls auf Unterverzeichnisse anwenden (rekursiv)
+
+  Wird weder /f noch /d angegeben wird auf Dateien und Verzeichnissen
+  zugleich gearbeitet. /f und /d kînnen nicht gleichzeitig verwendet werden.
+
+  Beispiele:
+    dotree /f /r /c 'type % | more' x:\doc\*.txt
+    dotree /d /c 'dir %' x:\
+    dotree /f /c 'copy "%" "%.bak"' x:\*.jpg
+
+
+Ich Åbernehme keinerlei Garantie fÅr gelîschte Dateien. Deshalb
+empfehle ich Ihnen stets vor Verwendung des Programms, ein Backup
+Ihrer Dateien zu erstellen.
+
+
+Bekannte Probleme
+-----------------
+
+Wenn ein anderes REXX-Skript als Kommando verwendet werden soll,
+dann muss diesem "call " vorangestellt werden.
+Dies ist eine EinschrÑnkung von CMD.EXE.
+
+
+Heiko Nitzsche (E-Mail: h7n2@gmx.net)
+
+
+History
+=======
+
+10-September-2004: (Version 1.0)
+                Initial release
+
+
