@@ -1,0 +1,7 @@
+Author: Ward Kaatz 
+Freeware.
+Kills ARTCHRON.EXE the Warp 4 Registration Daemon
+
+/*  Brings down the useless, artchron register program     */
+/*  Place in STARTUP folder or call from startup.cmd       */
+/*  Note: requires grep and kill, and Warp 4 (Merlin)      */
