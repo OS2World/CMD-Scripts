@@ -1,0 +1,141 @@
+Infos on ATRGF.CMD
+==================
+
+ATRGF.CMD was modelled after OS/2s AT-command which is available with the 
+LAN-manager/server software, but not part of the base-package.  Additionally, a 
+function for specifying intervals, e.g.  every 6 hours, and one which would 
+execute a command if it can be scheduled between midnight and the time 
+ATRGF.CMD was invocated, were added.
+
+ATRGF.CMD allows for executing full-screen-programs as each program will be 
+started in its own session, whereas AT (to my knowledge) does not allow any 
+end-user interaction with the started programs.
+
+
+ATRGF:   execute command at specified time
+
+
+usage:   ATRGF [/B] [/M] [/W] [/T] time command
+         ATRGF [/B] [/W] [/M] [/T] time /NE:dayordate command
+         ATRGF [/B] [/W] [/M] [/T] time /E:dayordate command
+         ATRGF [/B] [/W] [/M] [/T] [time] /I:time command
+
+         see enclosed Tutorial "RGFSHOW.CMD" and syntax below
+
+syntax:
+   COMMAND ..... any command as entered thru the keyboard to start
+                 a program
+   TIME ........ on input 24hour- (military) or 12hour-format allowed,
+                 output will be allways in 24hour-format (military, computer)
+   DAYORDATE ... DAY[-DAY]|DATE[-DATE][,...]
+                 DAY .... 2 letter digit (MO, TU, WE, TH, FR, SA,SU)
+                 DATE ... 1-2 digits (1-31)
+                 more than one day or date must be delimited by a comma
+
+   flags:
+   /B  ......... show output in black/white (no ANSI-colors)
+   /M  ......... execute command immediately, if scheduling between midnight
+                 and the time of first invocation of ATRGF itself is possible
+   /W  ......... execute ATRGF.CMD in a separate Window
+   /T  ......... Test mode
+   /NE: ........ next dayordate
+   /E:  ........ every dayordate
+   /I:  ........ every time-interval
+
+examples:
+
+
+*** EXECUTE A COMMAND ONCE AT THE SPECIFIED TIME:
+
+    ATRGF 00:00 copy *.* a:
+          ... copy all files at midnight to drive A:
+
+    ATRGF 17:00 "beep & @echo Hey, time to go home! & PAUSE"
+          ... at 5:00pm beep, show message and wait for keystroke
+
+
+
+*** EXECUTE A COMMAND ONCE AT THE SPECIFIED DAY OR DATE:
+
+    ATRGF 20:30 /NE:FR back_it_up
+          ... call "BACK_IT_UP" at 8:30pm on next friday
+
+    ATRGF 20:30 /NE:31 back_it_up
+          ... call "BACK_IT_UP" at 8:30pm on the next last day of month
+
+
+
+*** EXECUTE A COMMAND REPEATEDLY (EVERY) AT THE SPECIFIED DAYS OR DATES:
+
+    ATRGF 20:30 /E:1-31 back_it_up
+          ... call "BACK_IT_UP" at 8:30pm on every day
+
+    ATRGF 20:30 /E:FR,1,15,31 back_it_up
+          ... call "BACK_IT_UP" at 8:30pm on every friday, on every
+              first, 15th and last day in a month
+
+    ATRGF 17:00 /E:MO-FR "beep & @echo Hey, time to go home! & PAUSE"
+          ... at 5:00pm beep, show message and wait for keystroke mondays
+              thru fridays (executing command forever on given DAYORDATE)
+
+
+
+*** EXECUTE A COMMAND REPEATEDLY AT THE SPECIFIED TIME INTERVAL, OPTIONALLY YOU
+    CAN STATE A STARTING TIME:
+
+    ATRGF 00:00 /I:00:05 MOVE_IT.CMD -v
+          ... starting at midnight, execute every 5 minutes (interval)
+              "move_it.cmd" with the parameter "-v"
+
+    ATRGF /I:00:05 MOVE_IT.CMD -v
+          ... call every 5 minutes (interval) "move_it.cmd" with
+              the parameter "-v"
+
+    ATRGF /T 20:30 /E:FR-MO,15,31-1 back_it_up
+          ... testing of command; show invocation dates
+
+
+
+*** EXECUTE A COMMAND IN ITS OWN WINDOW (SESSION):
+
+    ATRGF /W 20:30 /E:FR-MO,15,31-1 back_it_up
+          ... call "BACK_IT_UP" at 8:30pm on every friday, saturday,
+              sunday, monday, on every, first, 15th and last day in a month,
+              execute in a separate window
+
+    ATRGF /W /T 20:30 /E:FR-MO,15,31-1 back_it_up
+          ... testing of command; show invocation dates; use a separate
+              window for it
+
+
+*** DON'T USE ANSI-COLORS FOR OUTPUT:
+
+    ATRGF /B
+          ... show usage of ATRGF in black and white (no colors on output)
+
+
+*** EXECUTE COMMAND, IF IT CAN BE SCHEDULED BETWEEN MIDNIGHT AND START OF THE
+    FIRST INVOCATION OF ATRGF ITSELF:
+
+    ATRGF /M /W 8:00 /E:MO back_it_up
+          ... call "BACK_IT_UP" at 8:00am on every monday, execute in a
+              separate window; if ATRGF was started on monday at 9am
+              (in fact after 8am), the command will still (!) be executed,
+              because of the /M-switch !!!
+
+
+
+
+ATTENTION: If you specify a day of month larger than the last day within 
+           that month and the month has fewer days, the last day of that month
+           will be taken instead of the 31st (e.g. 31 for Feburary, than the
+           next execution will be on either the 28th or 29th of February unless 
+           you specified that day too).
+
+
+Rony G. Flatscher,
+Vienna/Austria/Europe,
+Wirtschaftsuniversitaet Wien
+1993-11-08
+
+

@@ -1,0 +1,113 @@
+Simple but efficient and functional UNIX Cron clone for OS/2
+============================================================
+
+This program got written in a hurry since the available Cron clones for
+OS/2 didn't do what I needed: dispatch jobs in the background while running
+*invisibly* on my system.
+
+What is Cron?
+-------------
+Cron (the name is a UNIX relic) is a process that gets started when your
+machine boots and never stops until you shutdown. During its life, it
+checks the contents of a certain disk file every minute (you can easily
+change the timing granularity e.g. to 5 minutes). If it finds that the
+current time and date are matched by an entry in the file, Cron starts up
+the process also named in the file.
+
+This sounds boring but in practice, Cron is the most handy tool for
+repetitive background scheduling I ever encountered.
+
+Controlling Cron: the CRONTAB file
+----------------------------------
+The CRONTAB file (UNIX relic again) contains the control lines for Cron.
+Each line contains six elements:
+
+m h d m w command
+
+The first five elements are time and date patterns. A star '*' here means
+"always fits". So, if you want to run a certain program each day at noon,
+you enter
+
+0 12 * * * command
+
+in the CRONTAB file. This line means: "if Cron detects that the current
+time and date equal zero minutes, 12 hours, any day-of-the-month, any
+month-of-the-year, and any day-of-the-week, it starts 'command'".
+
+In the same way, you can specify e.g. a backup program that runs on
+Mondays at 01:00 hours:
+
+0 1 * * 1 command
+
+(1 = Monday, 7 = Sunday etc.).
+
+To be more flexible, Cron also accepts multiple values. A simple driver
+for a cuckoo clock program might contain:
+
+0,30 * * * * command
+
+to fire up 'command' at each full and half hour. Ranges are also possible;
+to have the cuckoo keep its mouth shut during the night, you enter:
+
+0,30 8-20 * * * command
+
+and you can combine both individual values and ranges as in
+
+0,30 0,8-20 * * 1-5 command
+
+Comments can also be entered into the CRONTAB file; just start them with a
+# (in fact, Cron treats everything as a comment if it does not start with a
+number).
+
+Starting Cron
+-------------
+Here the difficulty starts. The available Crons for OS/2 had to be started
+in a session of their own, because of the way in which they started the
+processes in the CRONTAB file. Running a program in a session however:
+
+A) Gives you an icon and an entry in the Window List
+B) Asks you to close the window at system shutdown
+C) Costs you more (memory) resources
+
+A) and B) especially troubled me. I wanted Cron to run completely
+invisibly, and to die without making trouble. This is only possible if you
+detach a program under OS/2 instead of start it. Unfortunately, detached
+programs cannot 'start' other programs (DosStartSession) and the available
+Crons did exactly this.
+
+To start CRON, type "detach cron". That's it. You get the PID of Cron back
+and could use that for a KILL command later on. Running Cron directly from
+a command prompt by just typing "cron" works as well and now you can follow
+Cron's output messages. Ctrl-C ends Cron. The CRONTAB file is located in
+the same directory as CRON.CMD
+
+If you want Cron to start up at each boot (the way it is intended to be
+run), be careful. You cannot just put Cron into your CONFIG.SYS file (with
+a "RUN=" command), since Cron uses some REXX functions that cannot be used
+if PM is not running. Don't ask me why; it just happened to be this way. So
+you either have to run Cron from your STARTUP.CMD file or from your Startup
+folder. In STARTUP.CMD, just add "detach cron".
+In your Startup folder, create a Program Object or shadow CRON.CMD to do
+the same. Personally I prefer the STARTUP.CMD file.
+
+You can log Cron activities and errors by making use of the OS/2 stdout and
+stderr redirection capabilities. Do something like:
+
+detach cron > cron.log 2> cron.err
+
+and you get two files usually with meaningful output.
+
+General
+-------
+Cron was written in surprisingly few lines of REXX, OS/2's command script
+interpreter/compiler. Therefore the program is the source. You can modify
+everything you like. On my system, Cron's activities are barely noticeable
+(one flick of the disk, no CPU spike on PULSE).
+Instead of using SysSleep (a RexxUtil function) I could have used my
+self-written SLEEP program (five lines of C code) that would have enabled
+Cron to be started from the CONFIG.SYS. I didn't because SLEEP is not part
+of any standard distribution and I wanted to be as general as possible.
+
+Jeroen Hoppenbrouwers (hoppie@kub.nl)
+Infolab, Tilburg University
+The Netherlands
