@@ -1,0 +1,249 @@
+ PROGRAM  : cfgSort.cmd
+ AUTHOR   : N. Morrow - morrownr@netscape.net
+ LANGUAGE : REXX
+ OS       : eCS v1.2
+ SYNOPSIS : command line config.sys sort utility
+ USAGE    : cfgsort <input filename> <output filename>
+          :   Allows user to specify filenames
+ USAGE    : cfgsort /v
+          :   Input and output filenames set to:
+          :   <boot volume>:\CONFIG.SYS
+          :   Verbose mode, command line output displayed
+ USAGE    : cfgsort /r
+          :   Input and output filenames set to:
+          :   <boot volume>:\CONFIG.SYS
+          :   Restrained mode, no command line output
+ USAGE    : cfgsort /h
+          :   Displays help
+ CREATED  : 2003 May 12
+ UPDATED  : 2004 Mar 21
+ STATUS   : Public Domain
+ NOTES    :
+
+ It is desirable from reviewer, user and tech support
+ perspectives to have an eCS config.sys that is orderly.
+
+ cfgSort is designed to meet that goal.  cfgSort may be used
+ as often as necessary to maintain the organization of the
+ config.sys file.
+
+ Basic concept of operation:
+
+ cfgSort will sort statements into *sections* as follows:
+
+    [0] REMARK STATEMENTS - "REM" statements that do not
+    contain keywords will be placed in this section in the
+    order encountered in the input config.sys.
+
+    [1] KERNEL DIRECTIVE STATEMENTS will be alphabetically
+    sorted.  REMed kernel directive statements will be
+    alphabetically sorted as if there is no "REM " at the
+    beginning of the statement.  REMed comment statements
+    must contain one of the keywords for this section to be
+    retained in the section.  REMed comment statements will
+    be sorted in alphabetically order.
+
+      Keywords:
+
+      KERNEL
+      AUTOFAIL
+      BREAK 
+      BUFFERS
+      CLOCKSCALE
+      CODEPAGE
+      COUNTRY
+      DEVICEHIGH
+      DISKCACHE
+      DLLBASING
+      DOS
+      DUMPPROCESS
+      EARLYMEMINIT
+      FCBS
+      FAKEISS
+      FILES
+      I13PAGES
+      IOPL
+      LASTDRIVE
+      MAXWAIT
+      MEMMAN
+      NWDTIMER
+      PAUSEONERROR
+      PRINTMONBUFSIZE
+      PRIORITY
+      PRIORITY_DISK_IO
+      PROTECTONLY
+      PROTSHELL
+      RASKDATA
+      REIPL
+      RESERVEDRIVELETTER
+      RMSIZE
+      SHELL
+      STRACE
+      SUPPRESSPOPUPS
+      SXFAKEHWFPU
+      THREADS
+      TIMESLICE
+      TRACE
+      TRACEBUF
+      TRAPDUMP
+      VIRTUALADDRESSLIMIT
+      VME
+
+    [2] SET STATEMENTS - "SET" statements will be
+    alphabetically sorted.  REMed SET statements will be
+    alphabetically sorted as if there is no "REM " at the
+    beginning of the statement.   REMed comment statements
+    must contain the keyword for this section to be
+    retained in the section.  REMed comment statements will
+    be sorted in alphabetically order.
+
+      Keyword:  SET
+
+
+    [3] PATH STATEMENTS - "PATH" statements, REMed PATH
+    statements and comments will be placed in the output
+    config.sys in the order encountered in the input
+    config.sys.
+
+      Keyword:  PATH
+
+
+    [4] DEVICE INFORMATION - "DEVINFO" statements, REMed
+    DEVINFO statements and comments will be placed in the
+    output config.sys in the order encountered in the input
+    config.sys.
+
+      Keyword:  DEVINFO
+
+
+    [5] PLATFORM SPECIFIC DRIVERS - "PSD" statements, REMed
+    PSD statements and comments will be placed in the output
+    config.sys in the order encountered in the input config.sys.
+
+      Keyword:  PSD
+
+
+    [6] BASE DEVICE DRIVERS - "BASEDEV" statements, REMed
+    BASEDEV statements and comments will be sorted by category
+    but individual statements within each category will not be
+    sorted.
+
+    The category order will be as follows:
+
+    SYS
+    BID
+    VSD
+    TSD
+    ADD
+    I13
+    FLT
+    DMD
+
+      Keyword:  BASEDEV
+
+
+    [7] DEVICE DRIVERS - "IFS" statements and "DEVICE"
+    statements, REMed IFS and DEVICE statements and comments
+    will be placed in the output config.sys in the order
+    encountered in the input config.sys.
+
+      Keywords:  IFS, DEVICE
+
+
+    [8] EXECUTABLE STATEMENTS - "RUN" and "CALL" statements,
+    REMed RUN and CALL statements and comments will be placed
+    in the output config.sys in the order encountered in the
+    input config.sys.
+
+      Keywords:  RUN, CALL
+
+
+    -----
+
+    Files included in the distribution:
+
+    cfgsort.cmd - executable.
+    cfgsort.doc - documentation in text format.
+    cfgsort.en - English language support file (compiled).
+    cfgsort.de - German language support file (compiled).
+    cfgsort.es - Spanish language support file (compiled).
+    cfgsort.fr - French language support file (compiled).
+    en.mkm - English language support file source code.
+    de.mkm - German language support file source code.
+    es.mkm - Spanish language support file source code.
+    fr.mkm - French language support file source code.
+        
+    Installation: Place cfgsort.cmd in the directory of
+    your choice.  Typing "cfgsort /h" or "cfgsort" with
+    no parameters at a command line interface will display
+    help.
+
+    Language support:  English is supported by default.  To
+    enable another language it is necessary to place a file
+    named cfgsort.msg in the same directory as cfgsort.cmd
+    or, alternatively, in any directory in the DPATH.
+
+    Example:  To enable German language support, copy or
+    rename the file "cfgsort.de" to "cfgsort.msg" and then
+    place cfgsort.msg in the same directory as cfgsort.cmd
+    or, alternatively, in any directory in the DPATH.
+
+    Language support source code files:
+
+    I am including the language support source files (*.mkm)
+    in an effort to make it easy for folks to add support
+    for additional languages.  Open the files with a text editor
+    for more information.
+
+    -----
+
+    cfgSort has been tested with Classic REXX and Object REXX.
+
+    -----
+
+    Change log:
+
+    v4:  Changed the order of the sections.  UI cleanup.
+
+    v4.2: Added support for PSDs.  Code cleanup.
+          Moved language support into cfgsort.msg.
+
+    v4.3:  Code cleanup and optimization.
+           Spanish language support.
+
+    v4.4.5:  Added section numbers.
+             French language support.
+             German language support.
+             Section sorting routines improved.
+             The SET section is now alphabetically sorted.
+             Improved docs (I hope).
+             Kernel directive section now retains REMed statements
+               and comments.
+
+    v4.6.0   Added KERNEL keyword to kernel directive section
+             Changed section roman numerals to regular numbers
+             Fixed minor cosmetic bugs
+
+    -----
+
+    Bug reports, new language files and recommendations go to:
+
+    morrownr@netscape.net
+
+    -----
+
+ DISCLAIMER:
+
+ THIS SOFTWARE IS PROVIDED BY THE CONTRIBUTORS "AS IS" AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+

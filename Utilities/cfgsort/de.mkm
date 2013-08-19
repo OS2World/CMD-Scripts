@@ -1,0 +1,24 @@
+; 2004 Feb 09
+; cfgsort.cmd - German language support file source code
+; Translation by Veit
+; compile de.mkm with mkmsgf.exe:
+; mkmsgf de.mkm cfgsort.de /V /P 850
+; Rename or copy cfgsort.de to cfgsort.msg
+; Place cfgsort.msg in directory with cfgsort.cmd or in DPATH
+; H Help, I Information
+; Note:  Do not change MSG0100.  It must be cfgSort.
+MSG
+MSG0100I: cfgSort
+MSG0101H: Verwendung: Sortieren der Datei CONFIG.SYS in Abschnitte
+MSG0102H: Benutzung: cfgSort <Quelldatei> <Zieldatei>
+MSG0103H: Benutzung: cfgSort /v
+MSG0104H:          : Quell- und Zeildatei:
+MSG0105H: Warnung: cfgSort fragt nicht vor dem šberschreiben
+MSG0106H:          einer bestehenden Zieldatei.
+MSG0107H: Warnung: Erstellen Sie eine Sicherheitskopie der CONFIG.SYS
+MSG0108H:          vor Benutzung dieses Werkzeugs.
+MSG0109I: Fehler: Datei kann nicht gefunden werden:
+MSG0110I: Quelldatei :
+MSG0111I: Zieldatei  :
+MSG0112I: Ergfolgreich beendet.
+

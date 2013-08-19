@@ -1,0 +1,24 @@
+; 2003 Dec 10
+; cfgsort.cmd - Spanish language support file source code
+; Translation by Salvador Parra Camacho
+; cfgsort.cmd uses cfgsort.msg for language support
+; compile es.mkm with mkmsgf.exe:
+; mkmsgf es.mkm cfgsort.es /V /P 850
+; Rename or copy cfgsort.en to cfgsort.msg
+; Place cfgsort.msg in directory with cfgsort.cmd or in DPATH
+; H Help, I Information
+; Note:  Do not change MSG0100.  It must be cfgSort.
+MSG
+MSG0100I: cfgSort
+MSG0101H: PROP‡SITO: Organizar el fichero CONFIG.SYS en secciones ordenadas.
+MSG0102H: USO: cfgSort <fichero de entrada> <fichero de salida>
+MSG0103H: USO: cfgSort /v
+MSG0104H:    : Entrada y salida establecidos al fichero
+MSG0105H: PRECAUCI‡N: cfgSort no pregunta antes de sobreescribir
+MSG0106H:             los ficheros existentes con el fichero de salida.
+MSG0107H: PRECAUCI‡N: Por favor, haga una copia de seguridad de su CONFIG.SYS actual
+MSG0108H:             antes de usar esta utilidad.
+MSG0109I: ERROR: No se puede encontrar el fichero: 
+MSG0110I: Fichero de entrada:
+MSG0111I: Fichero de salida :
+MSG0112I: Con Çxito

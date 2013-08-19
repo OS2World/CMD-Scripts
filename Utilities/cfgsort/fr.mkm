@@ -1,0 +1,24 @@
+; 2004 Feb 08
+; cfgsort.cmd - French language support file source code
+; Translation by Guillaume Gay <guillaume.gay@bigfoot.com>
+; cfgsort.cmd uses cfgsort.msg for language support
+; compile fr.mkm with mkmsgf.exe:
+; mkmsgf fr.mkm cfgsort.fr /V /P 850
+; Rename or copy cfgsort.en to cfgsort.msg
+; Place cfgsort.msg in directory with cfgsort.cmd or in DPATH
+; H Help, I Information
+; Note:  Do not change MSG0100.  It must be cfgSort.
+MSG
+MSG0100I: cfgSort
+MSG0101H: BUT : tri du fichier CONFIG.SYS sous forme de sections. 
+MSG0102H: SYNTAXE: cfgSort <fichier source> <fichier cible>
+MSG0103H: SYNTAXE: cfgSort /v
+MSG0104H:        : source et cible utilis‚s
+MSG0105H: AVERTISSEMENT: cfgSort NE pr‚vient PAS avant d'‚craser
+MSG0106H:                un fichier existant par le fichier cible. 
+MSG0107H: AVERTISSEMENT: veuillez faire une sauvegarde du fichier CONFIG.SYS
+MSG0108H:                en cours avant d'utiliser cet utilitaire. 
+MSG0109I: ERREUR - fichier introuvable : 
+MSG0110I: Fichier source : 
+MSG0111I: Fichier cible : 
+MSG0112I: Tri r‚alis‚ avec succŠs

@@ -1,0 +1,27 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: BA2KCMD_v3.zip
+       Short Description: REXX interface to Clback.exe executable from Computer Data Strategies, Incorporated
+        Long Description: (none)
+
+      Proposed directory
+           for placement: /pub/os2/util/system
+
+               Your name: H. C. Motin
+           Email address: hmotin@attglobal.net
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: 
+ Additional requirements: Back Again/2000 backup software, Object REXX and a color monitor
+
+                Replaces: BA2KCMD_v1.zip and BA2KCMD_v2.zip
+
+
+

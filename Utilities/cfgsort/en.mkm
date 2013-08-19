@@ -1,0 +1,24 @@
+; 2003 Dec 05
+; cfgsort.cmd - English language support file source code
+; Translation by Nicky Morrow
+; cfgsort.cmd uses cfgsort.msg for language support
+; compile en.mkm with mkmsgf.exe:
+; mkmsgf en.mkm cfgsort.en /V /P 850
+; Rename or copy cfgsort.en to cfgsort.msg
+; Place cfgsort.msg in directory with cfgsort.cmd or in DPATH
+; H Help, I Information
+; Note:  Do not change MSG0100.  It must be cfgSort.
+MSG
+MSG0100I: cfgSort
+MSG0101H: PURPOSE: Sort CONFIG.SYS file into orderly sections.
+MSG0102H: USAGE: cfgSort <input filename> <output filename>
+MSG0103H: USAGE: cfgSort /v
+MSG0104H:      : Input and output set to
+MSG0105H: WARNING: cfgSort does not prompt before overwriting
+MSG0106H:          existing files with the output file.
+MSG0107H: WARNING: Please make a backup of your current CONFIG.SYS
+MSG0108H:          before using this utility.
+MSG0109I: ERROR: Cannot find file: 
+MSG0110I: Input file :
+MSG0111I: Output file:
+MSG0112I: Successful

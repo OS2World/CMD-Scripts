@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>BA2KCmd Installation and User Manual</title>
+<meta name="keywords" contents=">BackAgain/2000 commandline utility, REXX interface for" />
+<meta name="" />
+<meta name="author" contents="H. C. Motin, hmotin@attglobal.net." />
+<style type="text/css">
+ul.level1 {margin-left:0.25in; margin-right:0.5in; text-align:left;
+	font-family:Helvetica, Arial; font-size:16pt; font-weight:bold; color:black}
+ul.level2 {margin-left:0.25in; text-align:left;
+	list-style-type:circle; font-family:Helvetica, Arial; font-size:12pt; font-weight:normal; color:black}
+ul.level3 {margin-left:0.25in; text-align:left;
+	list-style-type:circle; font-family:Helvetica, Arial; font-size:11pt; color:black}
+ul.level4 {margin-left:0.25in; text-align:left;
+	list-style-type:circle; font-family:Helvetica, Arial; font-size:10pt; color:black}
+ul.level5 {margin-left:0.25in;text-align:left;
+	font-family:Helvetica, Arial; font-size:10pt; font-style:italic; color:black}
+caption.figures {font-family:Helvetica, Arial; font-size:12pt; font-weight:bold; color:black}
+table.description1 {text-align:left}
+a:link{blue}
+a:visited{color:blue}
+a:hover{color:yellow}
+</style>
+</head>
+<body>
+<P align="center"><FONT FACE="Helvetica, Arial" SIZE="6"><B> BA2KCMD Installation and User Manual</B></FONT></p>
+<ul class="level1">
+Table of Contents:
+	<ul class="level2">
+	<a NAME="TOC"></a>
+	<li><a href="ReadMe.htm#INTRO">Introduction and System Requirements</a></li>
+	<li><a href="ReadMe.htm#CONTENTS">Contents of the BA2KCMD.zip archive</a></li>
+	<li><a href="ReadMe.htm#INSTALLING">Installation (Setup) Notes</a></li>
+	<li><a href="ReadMe.htm#USING">Using BA2KCMD (BA2KCMD up and running)</a></li>
+	<li><a href="ReadMe.htm#REVIEWING">Reviewing the selected command options</a></li>
+	<li><a href="ReadMe.htm#CUSTOMIZING">Customizing the Commandline Backups: Changing the Commandline Options </a></li>
+	<li><a href="ReadMe.htm#ISSUES">Known Issues and Problems </a></li>
+	<li><a href="ReadMe.htm#HELP">I need your help: Thank you for responding </a></li>
+	<li><a href="ReadMe.htm#DISCLAIMERS">The Usual Disclaimers and Other Legalities (Sorry About That!)</a></li>
+	<li><a href="ReadMe.htm#VERSIONS">Version Change History </a></li>
+	</ul></br></br>
+
+<a NAME="INTRO"></a>Introduction and System Requirements:
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>This document uses several words and acronyms such as: "Back Again/2000", "BA2K", "CDS", "CLBACK.EXE", "CLBACK", "BA2KCMD", 
+	"backup" and "options". 
+	To avoid confusion please note the following definitions:</li>
+		<ul class="level3">
+		<li><u>Back Again/2000:</u> The OS/2 backup and restore software, marketed and distributed by Computer 
+		Data Strategies, Incorporated</li>
+		<li><u>BA2K:</u> An acronym for Back Again/2000</li>
+		<li><u>CDS:</u> An acronym for Computer Data Strategies, Incorporated</li>
+		<li><u>CLBACK.EXE:</u> The utility, included in the BA2K package, that provides a commandline interface to the BA2K 
+		backup process. BA2K has a fully functional graphical user interface and many people use it. However, some prefer 
+		a commandline</li>
+		<li><u>CLBACK:</u> The same as CLBACK.EXE</li>
+		<li><u>BA2KCMD:</u> The (freeware) REXX program, given here and described in this document. BA2KCMD provides 
+		a text-based user interface to the CLBACK commandline utility</li>
+		<li><u>backup:</u> Most often the term, "backup", is used here to refer to a set of options, created and stored under the 
+		BA2KCMD program (sometimes the term, "commandline backup", is used). When this backup is selected, result is that 
+		BA2KCMD calls CLBACK.EXE, which in turn performs that backup according to the specified options.</li>
+		<li><u>options:</u> Options is equivalent to the term, "parameters", in the <i>Back Again/2000 User Guide</i> description of the
+		CLBACK commandline utility. By selecting one or more options (parameters) the user specifies a commandline backup for CLBACK 
+		to perform</li></ul></br>
+	<li>To use BA2KCMD you must have the complete BA2K software package, including CLBACK, Object REXX and a color monitor installed on your system:
+		<ul class="level3">
+		<li>Object REXX is necessary because BA2KCMD contains several functions that are in Object REXX and not Classical REXX. You can 
+		switch over to Object REXX by running the REXX program, SWITCHRX.CMD, located in the "OS2" directory on the boot drive of your 
+		system. Your existing REXX programs will probably run just fine and without modification in Object REXX. And Object REXX gives 
+		you much more capability. You can always switch back, using SWITCHRX.CMD, if you do not like it!</li>
+		<li>The color monitor is required, because the user responds to a set of instructions and prompts by pressing and entering a key 
+		corresponding to a number or a letter. The choice of selectable numbers or letters is always shown in the specific instructions. 
+		The ones that can be selected are indicated as <font color="#FF0000" weight="bold">Red</font> characters. For this very reason 
+		please run this REXX program from a commandline, and not from PMREXX.</li></ul></br>
+	<li>CLBACK provides a set of 24 commandline options (parameters) for making a backup. The user can select any or all of them, but he or 
+	she has to remember, or look up, the syntax for each one. Therefore, mistakes are easy to make, especially if one is entering the path to
+	a file, or a <a href="ReadMe.htm#FILESPEC">file specification</a>. The commandline entry can quickly become very long, requiring several lines to complete. One can easily 
+	tire of the process, especially if he or she uses several and/or different options on different occasions</li></br></br>
+	<li>BA2KCMD significantly lessens these difficulties, because it provides the user with a set of one or more commandline backups, each with 
+	a set of specified options, created and saved from previous use. BA2KCMD will create (and the user can save) as many backups as the number 
+	of non-removable partitions on his or her system (both local and network partitions). BA2KCMD then provides the user with a text-based set 
+	of instructions and prompts to perform the following tasks:</li>
+		<ul class="level3">
+		<li>Select a backup for execution (alternatively, the user can select a specific set of two (2) or more backups for execution 
+		in one operation)</li>
+		<li>Review the selected options within any backup</li>
+		<li>Change the selected options within any backup</li>
+		<li>Delete one (1) or more backups</li>
+		<li>Create one (1) or more new backups (under certain conditions)</li>
+		<li>Exit from the program</li></ul></br>
+
+	<li>BA2KCMD is fairly "bulletproof" to use. For example, if the user inputs a file path, BA2KCMD performs a check to verify that the file, 
+	or in some cases the directory path to that file, actually exists. If a recognized input error occurs, BA2KCMD informs the user and rejects
+	the input. Similarly, BA2KCMD attempts to insulate the user from the idiosyncrasies and syntax of CLBACK. Less syntax and CLBACK parameter  
+	knowledge is needed. Consequently, fewer input mistakes are likely. Nevertheless, BA2KCMD cannot guard against all possible errors</li></br></br>
+	<li>BA2KCMD uses two (2) REXX scripts to implement the user interface. The first one, BA2KCMD.CMD, contains most of the REXX code for 
+	program operation. The second one, BA2KCMD_CONFIG.CMD, stores and saves the selected options for all of the commandline backups. It 
+	provides that information to BA2KCMD.CMD upon its opening</li></br></br>
+	<li>Please note the following references for BA2K technical support and customer service:</li>
+		<ul class="level3">
+		<li>Computer Data Strategies, Incorporated, Post Office Box 25123, Woodbury, Minnesota 55125</li>
+		<li>(651) 730-4156, telephone and technical support, Monday through Friday, 8:00 AM to 5:00 PM, CST</li>
+		<li>(651) 730-4161, facsimile</li>
+		<li>www.cds-inc.com</li>
+		</ul>
+	</ul></br></br>
+
+
+<a NAME="CONTENTS"></a>Contents of the BA2KCMD_v3.zip archive
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>BA2KCMD.CMD, the first and primary REXX file (REXX script)</li>
+	<li>ReadMe.htm (the file that you are presently reading)</li>
+	<li>ProgObj.gif and REXXWin1.gif through REXXWin18.gif (twenty (20) graphical images for this htm file, ReadMe.htm)</li>
+	<li>HELP.CMD, a small REXX program, that you can use to help me improve BA2KCMD</li>
+	</ul></br></br>
+
+
+<a NAME="INSTALLING"></a>Installation (Setup) Notes:
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>There is no installation program, per se. However, the installation, or setup, is simple. It involves three (3) 
+	steps, delineated below:</li>
+		<ul class="level3">
+		<li>First, unzip the BA2KCMD.zip archive. It was created using WarpZip, which uses compression code from the Info-ZIP 
+		group. Info-ZIP compression and decompression executable files and dll's are freely available from the following
+		Internet sources:</li>
+			<ul class="level4">
+			<li>http://www.cdrom.com/pub/infozip/</li>
+			<li> ftp://ftp.cdrom.com/pub/infozip/</li>
+			</ul>
+		<li>Next, place the BA2KCMD.CMD script file in the SAME directory as CLBACK.EXE. <font color="#FF0000" weight="bold">IMPORTANT: BA2KCMD.CMD and 
+		CLBACK.EXE MUST reside in the same directory, otherwise BA2KCMD will not work!!</font></li>
+		<li>Finally, create a program object for BA2KCMD and place it on the desktop, or some other favorite place. 
+		Complete the "Program" tab in the properties notebook of the program object (see the example, in Figure 1, below). The "Path 
+		and file name" entry is the full path to the BA2KCMD.CMD REXX file on your system. Complete the "Icon" tab of the program object (in the 
+		example the "Icon" tab has the entry, "BA2KCMD"</li>
+		</ul></br>
+	<li>That's all there is to it!</li>
+	<p><img src="ProgObj.gif" alt="BA2KCMD program object example" /></p>
+	<caption class="figures">Figure 1: Properties notebook from example BA2KCMD program object</caption>
+	</ul></br></br>
+
+
+<a NAME="USING"></a>Using BA2KCMD (BA2KCMD up and running)
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>Figure 2, below, shows the first possible opening text window for BA2KCMD. It occurs only if you attempt to run BA2KCMD from a directory different 
+	than the one that contains CLBACK.EXE</li>
+	<p><img src="REXXWin1.gif" alt="BA2KCMD Cannot Find CLBACK.EXE Window" height="75%"/></p>
+	<caption class="figures">Figure 2: BA2KCMD opening window when the program cannot find CLBACK.EXE</caption></br></br>
+	
+	<li>Figures 3, 4 and 5 show the windows that successively occur after correctly installing BA2KCMD and opening it for 
+	the first time. The first window introduces the REXX program (BA2KCMD) and describes what it does. It also provides references for 
+	Back Again/2000 technical support. No action is required from the user. The program pauses for 10 seconds and then proceeds</li>
+	<p><img src="REXXWin2.gif" alt="BA2KCMD Correct Installation Opening Text Window 1 of 3" height="75%"/></p>
+	<caption class="figures">Figure 3: BA2KCMD opening windows after a correct installation (window 1 of 3)</caption></br></br>
+
+	<li>The next window tells the user that the program will create the user configuration file, BA2KCMD_CONFIG.CMD, that contains the 
+	option selections for the commandline backups. It creates a set of commandline backups with "default" options selected. The user can 
+	later change any or all defaults to the values he or she desires for any backup</li>
+	<p><img src="REXXWin3.gif" alt="BA2KCMD Correct Installation Opening Text Window 2 of 3" height="75%"/></p>
+	<caption class="figures">Figure 4: BA2KCMD opening windows after a correct installation (window 2 of 3)</caption></br></br>
+	<li>The last window tells the user that the program successfully created the BA2KCMD_CONFIG.CMD file. It gives the complete and full 
+	path to that file and tells the user how many commandline backups it contains (the maximum number). Finally, the window gives instructions 
+	on how to use BA2KCMD</li></br></br>
+	<li>In the example shown below, the full and complete path to BA2KCMD_CONFIG.CMD is: C:\MAINTENANCE\BACKAGAIN200SERVER\BA2KCMD_CONFIG.CMD. 
+	The program created four (4) commandline backups with default settings (the same as the number of non-removable partitions on my system)</li>
+	<p><img src="REXXWin4.gif" alt="BA2KCMD Correct Installation Opening Text Window 3 of 3" height="75%"/></p>
+	<caption class="figures">Figure 5: BA2KCMD opening windows after a correct installation (window 3 of 3)</caption></br></br>
+
+	<li>After pressing the ENTER key the "MAIN MENU" window appears (see the example in Figure 6, below). Alternatively, the MAIN MENU is 
+	always the first window, whenever the program opens and finds a viable and non-corrupt BA2KCMD_CONFIG.CMD file (the usual situation). 
+	From the MAIN MENU the user can perform the following tasks:</li>
+		<ul class="level3">
+		<li>Select a specific backup for execution</li>
+		<li>Select a set of two (2) or more backups for execution (Multiple Sequential Backups)</li>
+		<li>Review the selected options within any backup</li>
+		<li>Change the options within any backup</li>
+		<li>Delete one (1) or more backups</li>
+		<li>Create one (1) or more new backups (under certain conditions)</li>
+		<li>Exit from the program</li></ul>
+	<p><img src="REXXWin5.gif" alt="BA2KCMD MAIN MENU Window Example 1" height="75%"/></p>
+	<caption class="figures">Figure 6: Example of the "MAIN MENU" window with default option values</caption></br></br>
+	<li>The "Multiple Sequential Backups" and "Create one (1) or more new backups" selections are not available in the MAIN MENU example shown in Figure 6. 
+	They are not there, because the corresponding BA2KCMD_CONFIG.CMD file has default values.  The user can select multiple sequential backups 
+	only after he or she selects two (2) or more backups for the multiple sequential backup option (option 27). Similarly, the user can create 1 or more new 
+	backups, when he or she has fewer than the maximum allowable number. To get to that situation he or she must first delete one or more backups 
+	under that selection choice in the MAIN MENU (because the default BA2KCMD_CONFIG.CMD file has the maximum allowable number of commandline backups)</li></br></br>
+	<li>Figure 7, below, shows the MAIN MENU after the "multiple sequence backups" option has been enabled for the first two (2) commandline backups, "Full_Backup_
+	of_C:\*.*" and "Full_Backup_of_D:\*.*"</li>
+	<p><img src="REXXWin6.gif" alt="BA2KCMD MAIN MENU Window Example 2" height="75%"/></p>
+	<caption class="figures">Figure 7: Example of the "MAIN MENU" window after enabling the multiple sequential backups option</caption></br></br>
+	<li>Figure 8 shows the MAIN MENU after deleting the last two (2) commandline backups, "Full_Backup_of_E:\*.*" and "Full_Backup_of_F:\*.*" (twice using the "Delete one 
+	of the commandline backups" selection in the MAIN MENU). Therefore, the selection for creating up to two (2) new commandline backups now appears in the MAIN MENU</li>
+	<p><img src="REXXWin7.gif" alt="BA2KCMD MAIN MENU Window Example 3" height="75%"/></p>
+	<caption class="figures">Figure 8: Example of the "MAIN MENU" window after deleting two (2) commandline backups</caption></br></br>
+	<li>If you make any changes to the backup options, BA2KCMD folds those changes into the BA2KCMD_CONFIG.CMD file. Upon exiting the program erases the old BA2KCMD_CONFIG.CMD file 
+	and replaces it with an updated one (in the same directory where BA2KCMD resides). BA2KCMD informs you that it is doing so. The erasure and rewrite occurs only if option changes 
+	have been made</li></br></br>
+	<li><font color="#FF0000" weight="bold">IMPORTANT! IMPORTANT! Please</font></li> use BA2KCMD's facilities, when making changes to your selected options (and therefore updating 
+	the BA2KCMD_CONFIG.CMD file). Never update the file manually, on your own. You could corrupt it. If BA2KCMD opens and finds a corrupted file, it will not attempt to 
+	fix it. Instead, it will will inform you of the problem and then create a new BA2KCMD_CONFIG.CMD file with default option values. Finally, it will save the corrupted 
+	file as BA2KCMD_CONFIG.ERR and place it in the same directory containing BA2KCMD. The program may place some diagnostic error messages in the BA2KCMD_CONFIG.ERR file. Later, 
+	you can use the corrupted file as an aid, reviewing it separately in a text file editor, as you change the new BA2KCMD_CONFIG.CMD file to now have the correct option values 
+	that you desire <font color="#FF0000" weight="bold">(using the facilities of BA2KCMD)</font>
+	</ul></br></br>
+
+<a NAME="REVIEWING"></a>Reviewing the selected command options
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>From the MAIN MENU you can choose to review the options selected in a given backup.  Press and ENTER the letter <font color="#FF0000" 
+	weight="bold">R</font> (you do not have to capitalize it!). Alternatively, press and ENTER the number corresponding to the
+	"Review the selected options ...," choice (the number <font color="#FF0000" weight="bold">4</font> in the last MAIN MENU example shown above)</li></br></br>
+	<li>Then, using the "LIST OF USER COMMANDLINE BACKUPS" window, which appears next, select a commandline backup for review</li>
+	<p><img src="REXXWin8.gif" alt="BA2KCMD LIST OF USER COMMANDLINE BACKUPS Window" height="75%"/></p>
+	<caption class="figures">Figure 9: Example of the "LIST OF USER COMMANDLINE BACKUPS" window (to review the options in a given backup)</caption></br></br>
+
+	<li>Figures 10 and 11, below, show the default options for the "Full Backup of C:\*.*" commandline backup. There are 27 options for each backup 
+	and it takes two windows to show all 27. The first window shows options 1 through 16. The second shows options 17 through 27. Press the ENTER 
+	key to go from 	the first window to the second</li></br></br>
+	<li>The first 24 options are identical, in order, to the 24 commandline parameters (options) listed for CLBACK on pages 38 through 40 of the 
+	<i>Back Again/2000 User Guide</i> (ba2000.pdf). Options 25, 26 and 27 are new (added by BA2KCMD). They provide enhanced backup capabilities for the user</li>
+	<p><img src="REXXWin9A.gif" alt="BA2KCMD Options 1 through 16 Window" height="75%"/></p>
+	<caption class="figures">Figure 10: The options 1 through 16 for the "Full Backup of C:\*.*" commandline backup with default values</caption></br></br>
+	<p><img src="REXXWin9B.gif" alt="BA2KCMD Options 17 through 27 Window" height="75%"/></p>
+	<caption class="figures">Figure 11: The options 17 through 27 for the "Full Backup of C:\*.*" commandline backup with default values</caption></br></br>
+	<li>The following table describes the backup options. In the table the single asterisk (*) after the option # indicates a CLBACK option. A double 
+	asterisk (**) indicates one of the three (3) BA2KCMD options. Please consult the <i>Back Again/2000 User Guide</i>, and/or CDS technical support, for 
+	additional information, as needed, on the use of their 24 commandline options (parameters):</li>
+		<table border="1">
+		<tr><th style="font-family:helvetica; font-size:14pt" colspan="2"> CLBACK and BA2KCMD Commandline Options
+		<tr><th style="font-family:helvetica; font-size:12pt">Option #
+		<th style="font-family:helvetica; font-size:12pt">Option Description
+		<tr><td style="font-family:helvetica; font-size:12pt">1*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the path to a text file, that lists the files to back up
+		<tr><td style="font-family:helvetica; font-size:12pt">2*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the path to a text file, that lists the file patterns for recursive backup
+		<tr><td style="font-family:helvetica; font-size:12pt">3*
+		<td style="font-family:helvetica; font-size:12pt"> Appends this backup to an existing backup file
+		<tr><td style="font-family:helvetica; font-size:12pt">4*
+		<td style="font-family:helvetica; font-size:12pt"> Backs up changed files, only
+		<tr><td style="font-family:helvetica; font-size:12pt">5*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the software compression method for the backup (none, fast, small or balanced)
+		<tr><td style="font-family:helvetica; font-size:12pt">6*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies a comparison pass after the backup has been completed
+		<tr><td style="font-family:helvetica; font-size:12pt">7*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the device to be used for the backup (SCSI tape, EIDE tape or logical device)
+		<tr><td style="font-family:helvetica; font-size:12pt">8*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies a description string for the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">9*
+		<td style="font-family:helvetica; font-size:12pt"> Ejects the media after completing the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">10*
+		<td style="font-family:helvetica; font-size:12pt"> Erases the media before starting the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">11*
+		<td style="font-family:helvetica; font-size:12pt"> Prevents files matching a <a href="ReadMe.htm#FILESPEC">file specification</a> from being backed up (does not 
+		include subdirectories)
+		<tr><td style="font-family:helvetica; font-size:12pt">12*
+		<td style="font-family:helvetica; font-size:12pt"> Prevents files matching a <a href="ReadMe.htm#FILESPEC">file specification</a> from being backed up (includes subdirectories)
+		<tr><td style="font-family:helvetica; font-size:12pt">13*
+		<td style="font-family:helvetica; font-size:12pt"> Backs up files matching a <a href="ReadMe.htm#FILESPEC">file specification</a> (does not include subdirectories)
+		<tr><td style="font-family:helvetica; font-size:12pt">14*
+		<td style="font-family:helvetica; font-size:12pt"> Backs up files matching a <a href="ReadMe.htm#FILESPEC">file specification</a> (includes subdirectories)
+		<tr><td style="font-family:helvetica; font-size:12pt">15*
+		<td style="font-family:helvetica; font-size:12pt"> Moves the files to the back up (erases them from their location on your system)
+		<tr><td style="font-family:helvetica; font-size:12pt">16*
+		<td style="font-family:helvetica; font-size:12pt"> Provides a name for the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">17*
+		<td style="font-family:helvetica; font-size:12pt"> Prevents hidden files from being backed up
+		<tr><td style="font-family:helvetica; font-size:12pt">18*
+		<td style="font-family:helvetica; font-size:12pt"> Prevents system files from being backed up
+		<tr><td style="font-family:helvetica; font-size:12pt">19*
+		<td style="font-family:helvetica; font-size:12pt"> Prevents empty files from being backed up
+		<tr><td style="font-family:helvetica; font-size:12pt">20*
+		<td style="font-family:helvetica; font-size:12pt"> Retensions the media before starting the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">21*
+		<td style="font-family:helvetica; font-size:12pt"> Saves the backup set as a specified filename
+		<tr><td style="font-family:helvetica; font-size:12pt">22*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the path to a BA2K backup set, which provides the parameters defining the backup
+		<tr><td style="font-family:helvetica; font-size:12pt">23*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the type of backup to be made (full, copy, differential or incremental)
+		<tr><td style="font-family:helvetica; font-size:12pt">24*
+		<td style="font-family:helvetica; font-size:12pt"> Specifies the backup to be made in unattended mode 
+		<font color="#FF0000" weight="bold">(DO NOT USE; DOES NOT WORK!)</font>
+		<tr><td style="font-family:helvetica; font-size:12pt">25**
+		<td style="font-family:helvetica; font-size:12pt"> Monitors the size of the backup file to warn of a possible file size overflow on subsequent backups
+		<tr><td style="font-family:helvetica; font-size:12pt">26**
+		<td style="font-family:helvetica; font-size:12pt"> Includes an updated date (today's date) at the end of the backup filename
+		<tr><td style="font-family:helvetica; font-size:12pt">27**
+		<td style="font-family:helvetica; font-size:12pt"> Provides for the execution of two or more sequential backups, using one BA2KCMD selection
+		</table>
+	</ul></br></br>
+
+
+<a NAME="CUSTOMIZING"></a>Customizing the Commandline Backups: Changing the Commandline Options
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>From the MAIN MENU you can choose to change the options selected in a given backup.  Press and ENTER the letter <font color="#FF0000" 
+	weight="bold">O</font> (you do not have to capitalize it!). Alternatively, press and ENTER the number corresponding to the
+	"Change the backup options ...," selection (the number <font color="#FF0000" weight="bold">5</font> in the MAIN MENU example shown in Figure 8)</li></br></br>
+	<li>Then, using the "LIST OF USER COMMANDLINE BACKUPS" window, which appears next, select a commandline backup to change its options</li>
+	<p><img src="REXXWin10.gif" alt="BA2KCMD LIST OF USER COMMANDLINE BACKUPS Window" height="75%"/></p>
+	<caption class="figures">Figure 12: Example of the "LIST OF USER COMMANDLINE BACKUPS" window (to change the options in a given backup)</caption></br></br>
+	<li>After selecting the backup you are presented with the first "CHANGE OPTIONS FOR BACKUP # ...," window (see the example, below).</li>
+	<p><img src="REXXWin11.gif" alt="BA2KCMD CHANGE OPTIONS FOR BACKUP # 1 Window Example 1" height="75%"/></p>
+	<caption class="figures">Figure 13: Example 1 of the "CHANGE OPTIONS FOR BACKUP # 1: Full_Backup_of_C:\*.*" window</caption></br></br>
+	<li>There are 27 such windows, one for each of the commandline options. All of them are organized the same way as follows:</li>
+		<ul class="level2">
+		<li>The first one or more selections are to enable or disable the option. If the option is presently disabled, that selection choice will not be available. 
+		Instead, only, the one or more enabling selections will be there. In a similar fashion, if an option is presently enabled, that particular enable choice 
+		will not be available</li>
+		<li>Figure 13 shows an example of option 1, which is presently disabled. Therefore, only 
+		the (single) enable choice shows up in the window</li>
+		<li>Note that an option may have more than one choice for being enabled. For example, the compression option can be enabled with the none, fast, small or balanced 
+		choices. It can also be disabled (that is, not present on the commandline). Figure 14 shows an example of the compression option, enabled with the "none" choice. 
+		Therefore, the choices of "Disable", "Use 'Fast'", "Use 'Small'" and "Use 'Balanced'" are available in the window</li>
+	<p><img src="REXXWin12.gif" alt="BA2KCMD CHANGE OPTIONS FOR BACKUP # 1 Window Example 2" height="75%"/></p>
+	<caption class="figures">Figure 14: Example 2 of the "CHANGE OPTIONS FOR BACKUP # 1: Full_Backup_of_C:\*.*" window</caption></br></br>
+		<li>The selection for skipping ahead or skipping back to a specific option always comes next, after the available enable and disable choices. If you want to 
+		skip ahead or back, you must know the number of the option that you want</li>
+		<li>The selection for reviewing the selected options for the commandline backup comes next. If you select this choice, you are temporarily taken to the two (2) 
+		windows that list the option values that you have selected (please see <a href="ReadMe.htm#REVIEWING">Reviewing the selected command options</a>). After completing 
+		the review you automatically return to the same "Change Options" window that you left</li>
+		<li>Next, you can select to end (terminate) changing the options (selection choice <font color="#FF0000" weight="bold">7</font> in Figure 14, for example). 
+		If so, you return to the MAIN MENU</li>
+		<li>Finally, you can select to leave the option unchanged and proceed to the next option (selection choice <font color="#FF0000" weight="bold">8</font> in 
+		Figure 14)</li>
+		</ul></br>
+	<li>After you change an option (by disabling or fully enabling it), the program automatically takes you to the next option window. If you are at the last option window, 
+	you return to the MAIN MENU</li></br></br>
+	<li>For some options you have to supply additional information, such as the path to a file, after you select an "enable" choice (options 1, 2, 7, 8, 11, 12, 13, 
+	14, 16, 21 and 22). For any one of these, if it is already enabled and you only wish to change or update the additional information, a three (3) step process is necessary:</li>
+		<ul class="level2">
+		<li>First, disable the option. Doing so automatically takes you to the next option window</li>
+		<li>In that next window select the choice to "skip ahead or skip back to another option". Go back to the previous option</li>
+		<li>Finally, re-enable the option and supply the changed or updated additional information</li>
+		</ul></br>
+	<li>For those options that require additional information (options 1, 2, 7, 8, 11, 12, 13, 14, 16, 21 and 22), the data string that you provide must not contain any spaces 
+	in it. CLBACK will not work if the data contains spaces. That is true whether you are supplying a backup description string under option 8, or a file path under option 1 
+	(for example). In OS/2 it is true that you can have a file path that contains spaces (excluding files stored on a FAT file system). You just cannot supply that path to 
+	CLBACK on the commandline. If you forget and inadvertently include spaces, BA2KCMD rejects your input, disables the option and moves you to the next option window. BA2KCMD 
+	does not inform you of the rejected input. You have to go back and correctly enable the option</li></br></br>
+	<li>The following information may be helpful in understanding how BA2KCMD works, when making choices for changing the selected options:</li>
+		<ul class="level2">
+		<li>Options 1 through 4, 6, 8 through 10, 15 through 22, 24 and 25 through 27 each have only a single enable choice. Therefore, if one of these options is presently 
+		disabled, you will see only one "enable" selection. Similarly, if one of these options is enabled, the "disable" selection is available, but no "enable" selection:</li>
+			<ul class="level3">
+			<li>To enable option 3, 4, 6, 9, 10, 15, 17, 18, 19, 20, 24 or 25 you have to select the "enable" choice. Nothing else is required (NOTE: for option 3 you 
+			should also later verify that option 7 is enabled; option 3 will not function unless option 7 has been enabled)</li>
+			<li>To enable option 1 or 2 you have to: 1.) select the "enable" choice; and 2.) provide the complete path, including the filename, to the desired 
+			text file list. The file has to exist before you specify it for use. BA2KCMD checks for the file and gives you an error message, if it cannot find it</li>
+			<li>To enable option 8 or 16 you have to: 1.) select the "enable" choice; and then 2.) write a text string for the "description" of the backup, 
+			or the "name" of the backup. Note that BA2KCMD uses your backup description string (under option 8) to describe the selected backup in various windows. For example, in 
+			Figure 14 the description for Backup # 1 appears at the top of the window. If you disable option 8, or if you have your description provided in a backup set file (under 
+			option 22), then BA2KCMD states that as the case in place of a description</li>
+			<li>To enable option 21 or 22 you have to: 1.) select the "enable" choice; and then 2.) provide the complete path, including the filename, to the desired 
+			backup set file. For option 21 the backup set does not have to exist, when you specify it (CLBACK will create and save it as part of its commandline process). However, 
+			the directory path to the file must exist and BA2KCMD checks for it (see <a href="ReadMe.htm#DIRECTORY_PATHS">BA2KCMD verification of directory paths</a> for additional 
+			information) </li>
+			<li>For option 22 the backup set obviously has to exist before you specify it for use. BA2KCMD checks 
+			for the file and gives you an error message, if it cannot find it</li>
+			<li>If you enable a backup set file for use (option 22), BA2KCMD then disables all 26 of the other options. That has to be done, because the details of the selected 
+			backup options are now contained in the specified backup set and are therefore hidden to BA2KCMD</li>
+			</ul></br>
+		<li>Option 7 has three (3) enable choices:</li>
+			<ul class="level3">
+			 <li>If you want a "SCSI tape device", or an "EIDE tape device", select that choice and provide the tape device number. For additional flexibility, if you desire, 
+			 you can also select the same tape device for all the other backups (all in one (1) operation)</li>
+			 <li>If you want a "drive, or logical, 	backup device", select that choice and provide the complete path, including the filename, to the backup file. The backup file 
+			 does not have to exist before you specify it. If it does not exist, CLBACK will create it, as a result of the back up process. The directory path to the backup file 
+			 must exist, however. BA2KCMD checks and provides an error message, if it cannot find the directory path (see <a href="ReadMe.htm#DIRECTORY_PATHS">BA2KCMD 
+			 verification of directory paths</a> for additional information)</li></br></br>
+			</ul>
+
+		<li><a NAME="FILESPEC"></a>Options 11 through 14 require additional elaboration (the file specification discusion):</li>
+			<ul class="level3">
+			<li>In the discussion, below, we give some examples of the syntax for, and the usage of, the four (4) options. We want to be thorough, but we cannot anticipate every issue. We encourage you to 
+			consult the <i>Back Again/2000 User Guide</i> and/or CDS for specific and detailed information not provided here (for example, using wildcard symbols to specify groups of files)</li>
+			<li>Options 11 through 14 allow you to specify groups of files for inclusion in a backup and/or groups of files for exclusion from a backup. A group of files share in common one or more portions 
+			of their individuals paths</li>
+			<li>You specify such files by fully writing out the common portions of their paths and using wildcards for the portions that are not common. Wildcards include the usual and well-known asterisks 
+			(*) and question marks (?) and perhaps other symbols. For example, if you want to exclude all files in the directory, "C:\ARES\", that contain the date string, "_09072002", in their paths, use 
+			option 11. Write "<font color="#FF0000" weight="bold">-e C:\ARES\*_09072002*</font>" on the commandline as part of the option string for CLBACK (an example for manual execution of CLBACK, only)</li>
+			<li>The CLBACK and BA2KCMD terminology here is that the user provides a "file specification". It is equivalent to saying that the user specifies a group of files</li>
+			<li>Use options 11 and 12 to exclude groups of files from the backup. Option 11 excludes the specified file groups that are in the specified directory. Option 12 excludes the specified file 
+			groups that are in the specified directory and all subdirectories under it</li>
+			<li>Similarly, use options 13 and 14 to include groups of files in the backup. Option 13 includes the specified file groups that are in the specified directory. Option 14 includes the 
+			specified file groups that are in the specified directory and all subdirectories under it</li>
+			<li>If option 11, 12, 13 or 14 is disabled in BA2KCMD, you only see one (1) "enable" selection in the window for that option (see Figure 15 for an example involving option 14)</li>
+			<p><img src="REXXWin13.gif" alt="Option 14 disabled example" height="75%"/></p>
+			<caption class="figures">Figure 15: Example of option 14 disabled for backup # 1: "Full_Backup_of_C:\*.*" window</caption></br></br>
+			<li>After you enable the option you still see an enable selection (Figure 16). Enabling must remain available, because CLBACK allows you to use more than one (1) file group with each option</li>
+			<p><img src="REXXWin14.gif" alt="Option 14 enabled example, part 1 of 3" height="75%"/></p>
+			<caption class="figures">Figure 16: Example 1 of option 14 enabled for backup # 1: "Full_Backup_of_C:\*.*" window</caption></br></br>
+			<li>Therefore, you can continue to select the option and include other file groups. For example, as shown in Figure 16, the user has chosen to back up all files in "C:\ACROBAT3\" and its various 
+			subdirectories. Suppose he or she also wants to back up all files in "C:\ARES" and its subdirectories. If so select item <font color="#FF0000" weight="bold">2</font> in the option 14 
+			window (Figure 16) and then write "<font color="#FF0000" weight="bold">C:\ARES\*</font>" in the window that follows (Figure 17)</li>
+			<p><img src="REXXWin15.gif" alt="Option 14 enabled example, part 2 of 3" height="75%"/></p>
+			<caption class="figures">Figure 17: Example of the option 14 file specification input window for backup # 1</caption></br></br>
+			<li>The end result is that option 14 is enabled with all files in "C:\ACROBAT3" and in "C:\ARES" recursively backed up (Figure 18). That is, the CLBACK backup will include the files in 
+			those two (2) directories as well as their subdirectories</li>
+			<p><img src="REXXWin16.gif" alt="Option 14 enabled example, part 3 of 3" height="75%"/></p>
+			<caption class="figures">Figure 18: Example 2 of option 14 enabled for backup # 1: "Full_Backup_of_C:\*.*" window</caption></br></br>
+			<li>Note that you only supply <a href="ReadMe.htm#FILESPEC">file specification</a> for the group of files that you want (Figure 17). You do not write the CLBACK option parameters, such as "-ir". Also, you do not have 
+			to be concerned about the spacing between multiple <a href="ReadMe.htm#FILESPEC">file specifications</a>, or anything else. BA2KCMD takes care of all that for you</li>
+			<li>However, you do have to know the correct and full <a href="ReadMe.htm#FILESPEC">file specification</a> for every file group. BA2KCMD checks the directory path in every <a href="ReadMe.htm#FILESPEC">file specification</a> you supply. If a valid directory 
+			path does not exist, BA2KCMD rejects your input and gives you an error message (see <a href="ReadMe.htm#DIRECTORY_PATHS">BA2KCMD verification of directory paths</a> for additional information)</li>
+			</ul></br>
+		<li>Option 25 is from BA2KCMD. It allows the program to automatically monitor the size of your backup file and provide a warning, if CLBACK is likely to violate the file size limit 
+		during the backup process. That could happen on any given backup, especially if you save multiple backups to one backup file. Option 25 is available only for backups stored on a 
+		drive, or logical device, under option 7. It is not available (cannot be enabled) for backups stored on tape devices. When enabled, the file size overflow warning works as follows:</li>
+			<ul class="level3">
+			<li>If needed, BA2KCMD provides a warning for a potential file size overflow before CLBACK begins the backup. If a warning is given, BA2KCMD gives you the choice of continuing 
+			with the backup, or not doing so</li>
+			<li>After you first enable it BA2KCMD will not provide a warning for the very next backup. Instead, it provides a warning, when needed, for all backups after that. Obviously, 
+			therefore, you must be careful for your first backup to a particular file. You must ensure that the first backup will not exceed the file size limit. The file size 
+			limit is 2GB (= 2,147,483,648 bytes) for HPFS, JFS, FAT and FAT32 drives</li>
+			<li>At the completion of a each backup BA2KCMD stores the data on the increase in size of the backup file, caused by that backup operation</li>
+			<li>BA2KCMD uses that information before the start of the next backup to provide a warning, if it is likely that a file size overflow will occur during the backup process. BA2KCMD uses 
+			the file size increase information from the previous backup and adds 10% to it for a safety factor. It then adds that result to the present size of your backup file to obtain an estimate 
+			of the size of the file that will result from this next backup. If that result is larger than the file size limit, BA2KCMD issues a warning</li>
+			<li>If you significantly change the size of your backup between any two (2) operations, the overflow warning may not be effective. That is, if the size of your next backup significantly 
+			increases, relative to the last one, an overflow warning may not be issued, but an overflow may in fact occur. Similarly, if you significantly decrease the size of your next backup, 
+			relative to the last one, an overflow warning may be issued, but an actual overflow might not occur during the backup</li>
+			<li>If you disable option 7, or switch to a tape device, BA2KCMD automatically disables the file size monitoring under option 25</li>
+			<li>If option 25 is enabled and you change the backup file path under option 7, you then have to go back and re-enable option 25. The program disables option 25, when you change the 
+			backup file path. That is true, because you had to first disable option 7 and then re-enable it with a different path</li>
+			<li>If option 25 is enabled and BA2KCMD updates the date in the backup filename under option 26, the program then resets the stored overflow data. That is, the program acts as if you have just enabled 
+			the file size monitoring. Therefore, it will not provide a warning on the very next backup, because the filename has changed. Instead, the program provides a warning, 
+			if needed, on all the backups after that (as long as the filename does not change again because of a date update!)</li>
+			</ul></br>
+		<li>Option 26 is from BA2KCMD. It allows the program to (automatically) include today's date at the end of the backup filename. This option is available only for backups stored on a 
+		drive, or logical device under option 7. It is not available (cannot be enabled) for backups stored on tape devices. When enabled, option 26 works as follows:</li>
+			<ul class="level3">
+			<li>At the initial enabling BA2KCMD checks for a date at the end of the currently specified filename in option 7</li>
+			<li>If there is a date at the end of the filename and it is the same as today's date, BA2KCMD does nothing. NOTE: the date has to be in the "MMDDYYYY" format and at the end of the 
+			filename, but before the filename ".DAT" extension (the BA2K filename extension for backup files). It has to be separated from the filename portion before it with a "_"</li>
+			<li>If there is no date, or if it is not today's date, BA2KCMD creates a new backup filename with today's date in it. It uses the existing filename as the base and adds the date to the 
+			end, separated by a "_". The date is in the "MMDDYYYY" format and is added before the ".DAT" filename extension</li>
+			<li>BA2KCMD checks for the updated date just before CLBACK begins the backup process. If an update is needed, it specifies a new backup filename with today's date at end and in the manner explained above</li>
+			<li>If you disable option 7, or switch to a tape device, BA2KCMD automatically disables option 26 (disables updating the date in the filename)</li>
+			</ul></br>
+		<li>Option 27 is from BA2KCMD. It allows you to execute two (2) or more commandline backups, using only one selection on the MAIN MENU. To enable this feature do the following:</li>
+			<ul class="level3">
+			<li>On the MAIN MENU choose the "Change the backup options ...," selection (number <font color="#FF0000" weight="bold">5</font> in the MAIN MENU example shown in Figure 8)</li>
+			<li>Using the "LIST OF USER COMMANDLINE BACKUPS" window, which appears next, select a commandline backup to change its options</li>
+			<li>Go to the "CHANGE OPTIONS FOR BACKUP # ...," window for option 27. Shown below is an example of that window for backup # 1: "Full_Backup_of_C:\*.*"</li>
+			<p><img src="REXXWin17.gif" alt="Option 27 window example, part 1 of 2" height="75%"/></p>
+			<caption class="figures">Figure 19: Multiple sequential backups enabling example, part 1 of 2</caption></br></br>
+			<li>After you select the "enable" choice for this particular backup, another window appears. Here you can select another backup, if you like, to include under the multiple sequential backups 
+			(see the Figure 20 example). All of the remaining commandline backups that have not been selected under option 27 appear here. The window explains that you must have at least two (2) backups selected 
+			under option 27 to enable the multiple sequential backups (have that selection appear on the MAIN MENU)</li>
+			<p><img src="REXXWin18.gif" alt="Option 27 window example, part 2 of 2" height="75%"/></p>
+			<caption class="figures">Figure 20: Multiple sequential backups enabling example, part 2 of 32</caption></br></br>
+			<li>If you select another backup, the window will reappear, showing you any remaining backups that have not been selected for option 27. You can continue selecting other backups, one after the other, 
+			until all of them are selected. You automatically return to the MAIN MENU</li>
+			<li>Alternatively, at some point you can stop and automatically return to the MAIN MENU</li>
+			<li>The "multiple backups" selection will now appear on the MAIN MENU, if you selected 2 or more backups for option 27</li>
+			</ul>
+	</ul></br></br>
+</ul>
+
+
+<a NAME="ISSUES"></a>Known Issues and Problems:
+<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>Unattended CLBACK operation:</li>
+		<ul class="level3">
+		<li>The "unattended" parameter does not work. At least it does not work with BA2KCMD!</li>
+		<li>Therefore, <font color="#FF0000" weight="bold">DO NOT</font> use this parameter. In fact, we have temporarily disabled its use in BA2KCMD, so 
+		there should not be any mistakes or problems!!</li>
+		<li>CDS suggested that I use the "-u" parameter, instead of the "-unattended" parameter, but that does not work either</li>
+		<li>Apparently, there is an unresolved problem at CDS with the unattended parameter (because of their suggestion to try "-u")</li>
+		<li>I informed CDS that the unattended operation still does not work. They may fix it in an upcoming update to CLBACK (now in beta testing)</li>
+		</ul></br>
+	<li><a NAME="DIRECTORY_PATHS"></a> BA2KCMD verification of directory paths:</li>
+		<ul class="level3">
+		<li>When you specify the path to a file that MUST already exist, BA2KCMD performs a path search to verify existence (options 1, 2 and 22)</li>
+		<li>When you specify the path to file that may not yet exist, or to a <a href="ReadMe.htm#FILESPEC">file specification</a>, BA2KCMD verifies the directory path. For a file path 
+		that means BA2KCMD verifies the path up to, but not including, the filename (options 7 and 21). For a <a href="ReadMe.htm#FILESPEC">file specification</a> BA2KCMD verifies up to, but not including, 
+		the very last portion of the <a href="ReadMe.htm#FILESPEC">file specification</a> (options 11, 12, 13 and 14)</li>
+		<li>The verification of a directory path can lead to an error. Under some circumstances BA2KCMD will accept your input, even though you did not 
+		correctly write the file path or <a href="ReadMe.htm#FILESPEC">file specification</a></li>
+		<li>For example, suppose you want to exclude from the backup all files in the directory, "C:\ACROBAT3\READ95". If so, under option 11 you 
+		should provide the string, "C:\ACROBAT3\READ95\*", as the <a href="ReadMe.htm#FILESPEC">file specification</a></li>
+		<li>Instead, however, you write "C:\ACROBAT3\READ95", forgetting the "\*" part at the end</li>
+		<li>BA2KCMD accepts your input, because it (incorrectly) assumes that the file group you want to exclude is the single file, "READ95", and 
+		that it resides in the directory, "C:\ACROBAT3"</li>
+		<li>Continuing with this example, assume that the directory, "C:\ACROBAT3", exists on your system. Therefore, that part of your input is OK. 
+		A file named "READ95" could possibly exist in that directory, now or sometime in the future. BA2KCMD has no way of knowing. It does not know 
+		what group of files you REALLY wanted to exclude</li>
+		<li>Therefore, you input "appears" to be OK and BA2KCMD accepts it</li>
+		<li>Similarly, there may be other types of input errors that BA2KCMD will accept, because it does not have complete knowledge of your intentions</li>
+		</ul>
+	</ul></br></br>
+
+
+<a NAME="HELP"></a>I need your help: Thank you for responding
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>If you have  any of the following on your computer system, you can help me:</li>
+		<ul class="level3">
+		<li>Remote disk partititons</li>
+		<li>The FAT32 file system </li>
+		<li>The NTFS file system</li></br></br>
+		</ul>
+	<li>I do not have any of these. As a result, I cannot fully test and debug out several aspects of the BA2KCMD program</li></br></br>
+	<li>If you have any of the above, please run the REXX program, "HELP.CMD" (included in the BA2KCMD_v3.zip archive)</li></br></br>
+	<li>HELP.CMD will find all of the local and remote partitions on your system and determine what file system is installed on each one. 
+	It uses the REXX "SYSDRIVEMAP()" and "SYSFILESYSTEMTYPE()" functions</li></br></br>
+	<li>Then, it creates an ASCII text file, "HELP.TXT", and writes the file system information to it. After you run HELP.CMD you will 
+	find HELP.TXT in the same directory where you saved HELP.CMD</li></br></br>
+	<li>Please E-mail the HELP.TXT file back to me. E-mail it to: hmotin@attglobal.net</li></br></br>
+	<li>Alternatively, HELP.CMD tells you what it found. Just write it down and E-mail it to me</li></br></br>
+	<li>Thank you so much</li>
+	</ul></br></br>
+
+
+<a NAME="DISCLAIMERS"></a>The Usual Disclaimers and Other Legalities (Sorry About That!)
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>BA2KCMD is freeware:</li>
+		<ul class="level3">
+		<li>You are free to modify it to your heart's content for your own use</li>
+		<li>You are free to distribute the original, unmodified version to anyone else (and please do so!)</li>
+		<li>You may not distribute this program, in whole or in part, to others and charge a fee for it</li>
+		</ul></br></br>
+	<li>USE THIS PROGRAM AT YOUR OWN RISK! I am not responsible for any damages, problems, etc. 
+	resulting from your use of BA2KCMD. You assume all the risks, costs, aggravation, etc. 
+	should ANYTHING GO WRONG!</li></br></br>
+	<li>Hopefully, BA2KCMD is bug free, but I cannot (and do not) guarantee it!</li></br></br>
+	<li>In summary, BA2KCMD is provided AS IS and without any warranties</li></br></br>
+	<li>If you have any problems, I will try to help! Please E-mail me at: hmotin@attglobal.net</li></br></br>
+	</ul></br></br>
+
+<a NAME="VERSIONS"></a>Version Change History:
+	<ul class="level2">
+	Return to the <a href="ReadMe.htm#TOC">Table of Contents</a>
+	<li>Please use the BA2KCMD program contained in the third zip archive (the program contained in BA2KCMD_v3.zip). Remove all previous versions 
+	of BA2KCMD from your system. Thank you!</li></br></br>
+
+	<li>Version 3: </li>
+		<ul class="level3">
+		<li>Corrected REXX coding so that BA2KCMD correctly accepts valid tape unit drive numbers (non-negative integer values, starting from zero (0))</li>
+		<li>Added an additional feature to option 7. Now, after you fully select a SCSI or EIDE tape device (including the device number) you have the 
+		choice of also selecting that same device for all your backups</li>
+		<li>Changed the default values in option 11. Added the exclusion of BA2K backup files (*.DAT files) from the back up. Under default settings each backup is 
+		stored in the top directory of the partition that is being backed up. Unless these files are manually deleted, moved from the partition, or excluded under 
+		option 11, CLBACK will needlessly back up them up on the next backup for that partition</li>
+		<li>Added REXX coding to check for adherence to the 8.3 filenaming convention for files, or <a href="ReadMe.htm#FILESPEC">file specification</a>s, on FAT partitions (options 7, 11, 
+		12, 13, 14 and 21)</li></ul></br>
+
+	<li>Version 2:</li>
+		<ul class="level3">
+		<li>Changed the parameters used in the SYSDRIVEMAP() REXX function. BA2KCMD will now correctly recognize remote non-removable (fixed) partitions</li>
+		<li>Included "NTFS" and "LAN" as allowable return codes for the SYSFILESYSTEMTYPE() REXX function. BA2KCMD will now recognize 
+		these as legitimate file systems for fixed partitions</li>
+		</ul></br>
+
+	<li>Version 1: The initial release</li></br></br>
+	</ul></br>
+</body>
+</html>
+
