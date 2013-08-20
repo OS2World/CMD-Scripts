@@ -1,0 +1,55 @@
+This OS/2 REXX program will generate a REXX program that can be
+used to build objects defined in an .RC file. The .RC files reside
+in the ?:\OS2 directory.
+
+Its primary function is to recreate standard OS/2 system objects
+deleted inadvertently. However, the programs it generates can also
+serve as a learning guide for creating your own WPS objects.
+
+Output will be created in a file named FIXOBJnn.CMD in the
+directory pointed to by the TEMP environment variable. "nn" will be
+the next sequential number following any existing files created by
+this program. The file name created will be shown on the console at
+completion of this program.
+
+The generated program may be moved to any convenient location or
+left in the \TEMP directory at the user's discretion.
+
+This program requires either one or two parameters. The first, and
+required, parameter is the object ID of the object to be created.
+An object ID is the unique string preceded with a '<' and
+terminated with a '>' assigned to the object when it was created
+(e.g. <WP_DESKTOP>).
+
+The leading "<" and trailing ">" will be assumed and may optionally
+be omitted. Furthermore, the object ID may be entered case
+insensitively as the program will translate it to upper case since
+all standard system object IDs are uppercase.
+
+The second, and optional, parameter is the name of a valid .RC
+file. If none is specified, INI.RC in the ?:\OS2 directory will be
+used.
+
+The objects that will be generated include the object whose object
+ID is specified along with any other objects whose location is
+given as the specified object ID. For example, if the object ID of
+<WP_PROMPTS> is specified, the generated program will create the
+"Command Prompts" folder along with the following objects in the
+folder:
+
+     "DOS from Drive A:"
+     "DOS Full Screen"
+     "DOS Window"
+     "Dual Boot"
+     "OS/2 Full Screen"
+     "OS/2 Window"
+     "WIN-OS/2 Full Screen"
+
+A complete list of the standard system object IDs can be found in
+the REXX Reference Summary Handbook (IBM PUBORDER & SRL #
+S246-0078-00 / ISBN 0-9639854-1-8). The handbook is also available
+from Indelible Blue or may be ordered directly from
+C F S Nevada, Inc. at 800-REXX-OS2 (800-736-9672).
+
+This program is provided "as is" by C F S Nevada, Inc. and its
+author, Dick Goran (71154.2002@compuserve.com).

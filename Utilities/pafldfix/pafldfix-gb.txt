@@ -1,0 +1,34 @@
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+ README file for PAFLDFIX
+ Dokument Nr. 0035-3455842011
+ Date of creation: 06.01.2006
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+CHECK OF PAF RELEVANT ENTRIES IN OS2.INI
+The instruction in os2.ini to load the PAF Kernel is not fixed on some PAF
+Preliminary Edition 1 systems, even after Fixpack 2 has been installed. This
+skript checks the current configuration of the system DLL load entries in 
+your os2.ini and corrects them if necessary. Otherwise, this skript only 
+checks the os2.ini entries relevant for PAF. Use it this way:
+
+1) Open a windowed OS/2 session.
+2) Change into the directory in which you placed PAFLDFIX.CMD
+3) Type in PAFLDFIX  and press Enter. The program checks the os2.ini file
+   and corrects the relevant entries if necessary.
+4) You must shutdown and restart your system, if the script has changed
+   the appropriate entries.
+
+Systems with correct load instructions in os2.ini are not changed, the 
+script is just for your information in these cases. 
+
+ADDITIONAL NOTES
+This scirpt is relevant for PAF Preliminary Edition 1 only. All higher 
+versions do not need any check of os2.ini.
+
+
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+ End of Document - (c) 2006 cef-IT, Clemens-E. Fischer.
+ -- Homepage of PAF: www.cef-it.de  
+ -- Free support   : support@cef-it.de
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+

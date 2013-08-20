@@ -1,0 +1,38 @@
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+ README Datei fr PAFLDFIX
+ Dokument Nr. 0015-3455842011
+ Erstellungsdatum: 06.01.2006
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+BERPRFUNG PAF RELEVANTER EINTRGE IN DER DATEI OS2.INI
+Auf einigen Systemen wird auch nach Installation von Fixpack 2 fr PAF
+Preliminary Edition 1 die Anweisung in der Datei os2.ini, die zum Laden des
+PAF Kernels fhrt, nicht korrigiert. Dieses Skript berprft die derzeitig
+auf Ihrem System aktuelle Konfiguration und nimmt entsprechende Korrekturen
+vor, sofern das erforderlich sein sollte. Ansonsten dient das Skript nur zur 
+berprfung der os2.ini-Eintrge, die fr das PAF relevant sind. So wird das
+Skript benutzt:
+
+1) ffnen Sie ein OS/2-Fenster.
+2) Wechseln Sie in das Verzeichnis, in das Sie das PAFLDFIX.CMD Modul
+   abgelegt haben.
+3) Geben Sie PAFLDFIX ein. Das Programm berprft dann Ihre os2.ini Datei  
+   nach PAF relevanten Eintrgen und korrigiert, sofern erforderlich, die
+   Ladeanweisung fr den PAF Kernel.
+3) Fhren Sie einen Systemabschluแ aus und starten Sie Ihr System neu,
+   wenn das Skript die Ladeintrge in der os2.ini Datei gendert hat.
+
+Auf Systemen, auf denen keine Korrektur der Dateieintrge erforderlich ist,
+unternimmt das Skript nichts und dient nur Ihrer Information. 
+
+ZUSTZLICHE BEMERKUNGEN
+Dieses Skript ist nur fr PAF Preliminary Edition 1 interessant. Alle dieser
+Edition folgende Versionen ben”tigen keine berprfung der os2.ini. 
+
+
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+ End of Document - (c) 2006 cef-IT, Clemens-E. Fischer.
+ -- Homepage of PAF: www.cef-it.de  
+ -- Free support   : support@cef-it.de
+อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+

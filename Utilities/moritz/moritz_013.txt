@@ -1,0 +1,26 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: moritz_013.zip
+       Short Description: Install testcase kernels with undo support
+        Long Description: REXX-Script to install testcase kernels easy.
+                          Makes a backup off all replaced files and works                          
+			  with drag and drop. Now with undo support!
+      Proposed directory
+           for placement: /pub/os2/util/system
+               Your name: warpwe
+           Email address: kontakt at ibe-gmbh net
+    Program contact name: 
+   Program contact email: 
+             Program URL: 
+
+      Would you like the
+   contact email address
+    included in listings? no
+
+Operating System/Version: eCs, OS/2
+ Additional requirements: UNZIP.EXE anywhere in PATH, optional Lxlite 
+
+                Replaces: /pub/os2/util/system/moritz_12.zip
+
+

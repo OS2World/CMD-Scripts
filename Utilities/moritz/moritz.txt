@@ -1,0 +1,73 @@
+Moritz V0.13 18.06.2008
+-----------------------
+
+Bugfix:
+- Update from W4 Kernel 14.086 to 14.104a recognized 14.086 as Kernel type '4'
+  resulting in message ' This seems to be a wrong kernel! Please apply this kernel only if you'
+- Update did not work because some '\' are missing in building correct path names
+
+Authoring:
+  The orignal program url is dead. So I did not try to contact the author and publish directly to hobbes.
+
+Moritz V0.12 28.06.2002
+-----------------------
+
+Requirements:
+To apply a new kernel: eCS or OS/2 with REXX, UNZIP.EXE somewhere in PATH
+and optionaly LxLite
+To restore the old kernel: only a functionaly command line.
+
+Installation:
+Unzip the files in a directory and then start the script wps.cmd.
+
+
+Use:
+1) Download the kernel update (W4xxxx.zip, SMPxxxx.zip oder UNIxxxx.zip) from 
+   testcase.
+2) Drag and drop it on the WPS-Object called Moritz
+3) Follow the instruktions (mostly: just read the information on screen;-)
+4) Reboot!
+
+NEW! If you want do undo the apply of the kernel files, start moritz_undo.cmd
+at your bootdrive root directory.
+
+What it does:
+1) It compares the given kernel file with the installed
+2) If the user decides to proceed, it...
+3) ... makes copies of the kernel and the loader in a directory created at 
+   BOOTDRIVE:\OS2\ARCHIVES\Kernel_Backup\OLD_KERNEL
+4) It unpacks the kernel file in the working directory (where moritz.cmd
+   is installed) and from there it moves the kernel and the loader to the
+   root of the bootdrive. All other files are left here, because only
+   kernel gurus may need then (for tracing) or they are information files
+   or drivers. Please have a look here!
+5) After all, it creates a batch file called moritz_undo.cmd, which will
+   restore the last kernel.
+
+
+Known bugs:
+None ;-) But as I have only a one processor maschine with eCS and Warp 4,
+I could verify the functionality only for W4-kernels. Please send me
+any kind of feedback to improve it or do it yourself: it's GNU software...
+
+Licence:
+This Program is released under the Gnu Public Licence (GPL).
+See the file COPYING for further information.
+
+Thanks for feedbacks to:
+Michel Goyette
+Jim L
+
+Thanks for the kind words in the kernel README:
+Scott Garfinkle
+
+(....
+Also, there are some REXX scripts written by third parties that might make
+installation/archiving of your kernels easier. Go to http://hobbes.nmsu.edu
+and search for "moritz", for example. This is unsupported by IBM!
+....)
+--------------------------------------
+
+(C) Dimitrios Bogiatzoules 2000-2002
+
+info at bogiatzoules dot de

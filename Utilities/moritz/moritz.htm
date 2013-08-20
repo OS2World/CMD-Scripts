@@ -1,0 +1,122 @@
+<base href="http://www.your-domain.com/">
+<html>
+<head>
+  <meta name="generator" content="Enhanced E Editor">
+  <meta name="author" content="Your Name - your@email.com">
+  <meta name="description" content="Your description">
+  <meta name="keywords" content="Keyword1,Keyword2">
+  <meta name="robots" content="all">
+  <title>Your Title</title>
+</head>
+<body bgcolor="#ffffff">
+<br>
+Moritz V0.13 18.06.2008<br>
+-----------------------<br>
+<br>
+Bugfix:<br>
+- Update from W4 Kernel 14.086 to 14.104a recognized 14.086 as Kernel type '4'<br>
+  resulting in message ' This seems to be a wrong kernel! Please apply this kernel only if you'<br>
+- Update did not work because some '\' are missing in building correct path names<br>
+<br>
+Authoring:<br>
+  The orignal program url is dead. So I did not try to contact the author and publish directly to hobbes.<br>
+<br>
+Moritz V0.12 28.06.2002
+<br>
+-----------------------
+<p>
+Requirements:
+<br>
+To apply a new kernel: eCS or OS/2 with REXX, UNZIP.EXE somewhere in PATH
+<br>
+and optionaly LxLite
+<br>
+To restore the old kernel: only a functionaly command line.
+<p>
+Installation:
+<br>
+Unzip the files in a directory and then start the script wps.cmd.
+<p>
+<p>
+Use:
+<br>
+1) Download the kernel update (W4xxxx.zip, SMPxxxx.zip oder UNIxxxx.zip) from
+<br>
+testcase.
+<br>
+2) Drag and drop it on the WPS-Object called Moritz
+<br>
+3) Follow the instruktions (mostly: just read the information on screen;-)
+<br>
+4) Reboot!
+<p>
+NEW! If you want do undo the apply of the kernel files, start moritz_undo.cmd
+<br>
+at your bootdrive root directory.
+<p>
+What it does:
+<br>
+1) It compares the given kernel file with the installed
+<br>
+2) If the user decides to proceed, it...
+<br>
+3) ... makes copies of the kernel and the loader in a directory created at
+<br>
+BOOTDRIVE:\OS2\ARCHIVES\Kernel_Backup\OLD_KERNEL
+<br>
+4) It unpacks the kernel file in the working directory (where moritz.cmd
+<br>
+is installed) and from there it moves the kernel and the loader to the
+<br>
+root of the bootdrive. All other files are left here, because only
+<br>
+kernel gurus may need then (for tracing) or they are information files
+<br>
+or drivers. Please have a look here!
+<br>
+5) After all, it creates a batch file called moritz_undo.cmd, which will
+<br>
+restore the last kernel.
+<p>
+<p>
+Known bugs:
+<br>
+None ;-) But as I have only a one processor maschine with eCS and Warp 4,
+<br>
+I could verify the functionality only for W4-kernels. Please send me
+<br>
+any kind of feedback to improve it or do it yourself: it's GNU software...
+<p>
+Licence:
+<br>
+This Program is released under the Gnu Public Licence (GPL).
+<br>
+See the file COPYING for further information.
+<p>
+Thanks for feedbacks to:
+<br>
+Michel Goyette
+<br>
+Jim L
+<p>
+Thanks for the kind words in the kernel README:
+<br>
+Scott Garfinkle
+<p>
+(....
+<br>
+Also, there are some REXX scripts written by third parties that might make
+<br>
+installation/archiving of your kernels easier. Go to http://hobbes.nmsu.edu
+<br>
+and search for "moritz", for example. This is unsupported by IBM!
+<br>
+....)
+<br>
+--------------------------------------
+<p>
+(C) Dimitrios Bogiatzoules 2000-2002
+<p>
+info at bogiatzoules dot de
+</body>
+</html>

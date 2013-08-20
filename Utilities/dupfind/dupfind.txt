@@ -1,0 +1,45 @@
+   PROGRAM  : dupfind.cmd
+   AUTHOR   : N. Morrow
+   LANGUAGE : REXX
+   OS       : eCS v1.2.x
+   SYNOPSIS : duplicate filename find utility
+
+   USAGE    : dupfind <volume letter>
+
+   EXAMPLE  : > dupfind x
+                or
+            : > dupfind x:
+
+   USAGE    : dupfind /h or dupfind -h
+            : displays help
+
+   CREATED  : 2005 Apr 22
+   UPDATED  : 2005 Sep 11 - v1.0.7
+   STATUS   : Public Domain
+   NOTES    : 
+
+   Dupfind checks for files with duplicate filenames on the selected
+   volume.  Dupfind is useful for system troubleshooting and for
+   locating redundant files.
+
+   The results are logged to a text file called dupfind.log.  After
+   processing is finished the location of dupfind.log will be
+   displayed.  If the environment variable LOGFILES is set, as it
+   is by default in current versions of eCS, then dupfind will
+   respect this setting and place dupfind.log in the location
+   specified by LOGFILES.
+
+   Dupfind is a processor intensive utility.  On older systems
+   with large volumes the time to process may be lengthy.
+
+   ---
+
+   Installation: Place dupfind.cmd in the directory of
+   your choice.  Typing "dupfind /h" at a command line interface
+   will display help.
+
+   Future enhancements:
+
+   - nls support.
+   - ability to check an entire system instead of only one volume.
+
