@@ -1,0 +1,16 @@
+                           Upload Information Template for Hobbes.nmsu.edu
+                           ===============================================
+
+            Archive Name:  whichd_11.zip  
+     Archive Description:  Which DLL comes first in LIBPATH?
+Operating System/Version:  OS/2
+          Program Source:  (n.a.)
+                Replaces:  (n.a.)
+
+               Your name:  Rolf Lochbuehler
+      Your email address:  rolobue@ibm.net
+
+      Proposed directory
+           for placement:  /pub/os2/util/diskutil
+
+

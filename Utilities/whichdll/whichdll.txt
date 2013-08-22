@@ -1,0 +1,33 @@
+-------
+Warning
+-------
+WHICHDLL is freeware. Either use WHICHDLL at your own risk or don't use it at all.
+
+---------------------
+Files in this package
+---------------------
+WHICHDLL.TXT - This file
+WHICHDLL.CMD - The Rexx script
+WHICHDLL-.TXT - Readme file for Hobbes
+
+------------------
+What WHICHDLL does
+------------------
+Enter 'WHICHDLL -H' for more infos.
+
+WHICHDLL is a Rexx script that searches the LIBPATH variable for the specified DLL file to determine which DLL is actually found first. WHICHDLL works like the WHICH utility (available for OS/2 as Gnuware) that searches the PATH variable for an executable file.
+
+Since LIBPATH is not a true environment variable, there is a small problem to read it from a Classic Rexx program. WHICHDLL instead reads your CONFIG.SYS to find LIBPATH. If C is not your boot drive, you will need to specify the boot drive using the "-B" command line option. See "WHICHDLL -H" for further infos.
+
+-------------
+Miscellaneous
+-------------
+Enter "WHICHDLL -H" to get my email address.
+
+WHICHDLL.SIG contains my PGP signature for WHICHDLL.CMD. To get my PGP public key, send me an email with "send pgpkey" in the subject line.
+
+
+--
+Rolf Lochbuehler
+Vermont, USA
+
