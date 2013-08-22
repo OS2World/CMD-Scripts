@@ -1,0 +1,10 @@
+SYSLEVEL.OS2;OS/2 Base Operating System 
+SYSLEVEL.MPM; . Multimedia Presentation Manager (MMPM/2)
+SYSLEVEL.BDD;Base Device Drivers
+SYSLEVEL.TRP;Base Networking (MPTS)
+SYSLEVEL.TCP;Internet Applications (TCP/IP)
+SYSLEVEL.PER;File and Printer Sharing (Peer)
+SYSLEVEL.SRV;LAN Server
+SYSLEVEL.REQ; . LAN Requester
+SYSLEVEL.MUG; . User Profile Management
+SYSLEVEL.HFS; . LAN Server Advanced (HPFS386)

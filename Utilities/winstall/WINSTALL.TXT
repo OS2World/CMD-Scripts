@@ -1,0 +1,80 @@
+------------------------------------------------------------------------------
+WINSTALL --- WIN-OS/2 Installation Utility for OS/2 Warp v3 (TM)
+------------------------------------------------------------------------------
+
+This utility is distributed free into the public domain.  No warranty is made
+as the performance or suitability of this code for user purposes, and no
+liability for damage to data, equipment, loss of revenue or impairment of
+physical or emotional health due to use of this program is assumed.  Use at
+your own risk.  THIS PROCEDURE IS NOT SUPPORTED BY IBM AND YOU SHOULD NOT
+EXPECT SUPPORT FOR YOUR OS/2 WARP V 3 SYSTEM IF YOU HAVE USED THIS UTILITY
+TO INSTALL WIN-OS/2 SUPPORT ON THE CURRENT VERSION OF OS/2 3.0 WHICH IS 
+DESIGNED SPECIFICALLY FOR USE WITH MICROSOFT WINDOWS(TM) 3.11.
+                                                          
+This program should only be used by those holding valid IBM OS/2 2.10 or 2.11
+AND OS/2 Warp v3 licenses.  Note that 'UPGRADE' licenses may exclude
+concurrent use of code on different systems.
+
+This utility requires you to have OS/2 v 2.10 full version (with WIN-OS/2) and
+OS/2 2.11 CSD full version diskettes or a backup of \os2\mdos\winos2 and 
+\os2\mdos\winos2\system directories to build a fully functional WIN-OS/2.  If
+you do not 2.11 level WIN-OS/2 files,  you will probably not find seamless
+WIN-OS/2 support satisfactory.  Though seamless programs will load and run on
+the desktop, they can only be maximized and restored, but not resized, moved,
+or minimized, and can sometimes hang the system.  In addition, to run seam-
+less WIN-OS/2 you will need a video card with Warp supported drivers for SVGA,
+XGA, or 8514 mode --- at least I have not found it possible to run seamless in
+VGA using drivers for my TVGA8900CL card.  If you have a backup of the winos2
+and winos2\system directories after 2.11 CSD application, you may wish to skip
+the 2.11 disks and restore your 2.11 winos2 directory and subdirectories after
+running WINSTALL.  Be aware that many programs enter data and replace
+Windows(TM) drivers,and that restoring may not lead to a successful install of
+WIN-OS/2.
+
+You will also need OS/2 Warp v3 on diskette or CD-ROM, and may wish to use
+Inimaint (Carey Associates) or a similar utility to backup your desktop.
+Backup your system before attempting to install WIN-OS/2 support.  WINSTALL
+also requires you to use ED or TEDIT to change path information in the
+config.sys file, and autoexec.bat files, as well as system.ini file, and
+progman.ini files.
+
+Use selective install to put your system into standard VGA configuration
+before using WINSTALL unless you are running default XGA configurations on
+hardware that uses the OS/2 standard XGA drivers (XGA default not tested by
+author). For the ATI Graphics Ultra Pro and other unsupported cards, if not
+running in 8514 mode you may be restricted to full screen WIN-OS/2, and will 
+have to manually install the drivers. 
+
+After running WINSTALL you will have a little more work to do (which I hope 
+to automate in the next update):
+
+1. Add C:\os2\mdos\winos2\system; to the config.sys LIBPATH line.
+2. Add C:\os2\mdos\winos2; to the config.sys PATH line.
+3. Add C:\os2\mdos\winos2\system; to the config.sys DPATH line.
+4. Add DEVICE=C:\OS2\MDOS\VWIN.SYS to the end of CONFIG.SYS
+5. Add DEVICE=C:\OS2\MDOS\VW32S.SYS to the end of CONFIG.SYS 
+   (Still tinkering to see if WIN-OS/2 can be made compatible)
+   (with win32s. VW32S.SYS probably not needed otherwise.    )
+6. Add C:\os2\mdos\winos2 & C:\os2\mdos\winos2\system to
+   your autoexec.bat PATH statement (very important since its
+   hard to figure out why it's still not working.)
+      And if not using default XGA setup ....
+7. Following reboot BEFORE running WIN-OS/2 run selective install to 
+   change your system video to an SVGA resolution supported by your  
+   equipment, AFTER making the following changes to WIN-OS/2 files:  
+8. Edit C:\os2\mdos\winos2\system.ini and change all references 
+   to 'xga' to 'vga'.
+9. Edit C:\os2\mdos\winos2\progman.ini and change all references
+   to 'xga' to 'vga'.
+
+I have also included a separate utility to recreate the WIN-OS/2 objects if
+you find it necessary to so (mkwinobj.cmd), or that is all you need.
+
+After rebooting from selective install, WIN-OS/2 should run in both Seamless
+& Full-Screen. As I have just discovered, however, even using Windows 3.1, 
+selectively uninstalling and then selective installing WIN-OS/2 support can
+fail under OS/2 Warp v3 using the IBM installation utilities.
+
+Please send suggestions & comments to DJLOON@DELPHI.COM, CIS 75246.3364.
+
+------------------------------------------------------------------------------

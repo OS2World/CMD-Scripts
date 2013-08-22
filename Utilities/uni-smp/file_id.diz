@@ -1,0 +1,9 @@
+SMP-UNI Switcher Package v1.0
+Switch Aurora's (Warp Server for
+e-Business) kernel from uni-processor
+to SMP and vice-versa in a single
+operation from OS/2's command-line.
+
+Simple rexx script hacked in a few
+mins by Fernando Cassia (fcassia@csi.com).
+

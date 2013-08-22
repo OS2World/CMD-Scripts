@@ -1,0 +1,209 @@
+| VERSION.CMD
+| Release 1.21 - July 2005
+
+  VERSION (previously SYSVER) is a REXX program to display OS/2 SYSLEVEL
+  information in a simple and readable format.  It is intended as a useful
+  alternative to both the VER and SYSLEVEL commands: more informative than
+  the former, much faster and easier to parse than the latter.
+
+
+USAGE
+
+  Place VERSION.CMD somewhere on your PATH.
+
+  The invocation syntax is:
+
+      version [ <option> | <SYSLEVEL file> ]
+
+  You can specify either the name of a specific SYSLEVEL file, or one of these
+  parameters:
+
+     /V   Verbose output
+     /?   Show version and usage information
+
+  If you specify a SYSLEVEL file (any such file will do, as long as the filename
+  starts with 'SYSLEVEL'), VERSION will display the following information, in
+  a multi-line format:
+
+     * The fully-qualified name of the file.
+     * The name of the product which the file describes.
+     * The product's subsystem ID.
+     * The product's component ID.
+     * The product's component type.
+     * The product's full version number.
+     * The product's current CSD (service) level.
+     * The product's previous CSD (service) level.
+
+  When run without parameters, VERSION prints a summary (the product's name,
+  version number, current service level, and the drive on which the product is
+  installed, in a single-line format) of the SYSLEVEL information for whichever
+  of the OS/2 products listed below are detected.
+
+  If you specify the /V option, VERSION prints the information in the same
+  multi-line format used for a displaying a single file's information, pausing
+  between screens (in a manner similar to the OS/2 SYSLEVEL command).
+
+  VERSION attempts to detect and display the following products.  Unlike the
+  OS/2 SYSLEVEL command (which actually searches your entire system for all
+  SYSLEVEL files), it uses simple logic to look for these products' SYSLEVEL
+  files in the predefined locations listed.  This makes VERSION a great deal
+  faster the SYSLEVEL command.
+
+  Product                              Location where SYSLEVEL file is looked for
+  -------------------------------------------------------------------------------
+  eComStation product information      <bootdrive>\OS2\INSTALL\SYSLEVEL.ECS
+  OS/2 base operating system           <bootdrive>\OS2\INSTALL\SYSLEVEL.OS2
+  OS/2 base device drivers             <bootdrive>\OS2\INSTALL\SYSLEVEL.BDD
+  Multimedia PM2 (OS/2 Warp 3 only)    <mmpath>\INSTALL\SYSLEVEL.MPM
+  MPTS adapter and protocol support    <ibmcom>\SYSLEVEL.TRP
+  TCP/IP applications                  <tcpip>\BIN\SYSLEVEL.TCP
+  IBM LAN Server                       <ibmlan>\SYSLEVEL.SRV
+  File and Print Client (Peer)         <ibmlan>\SYSLEVEL.PER
+  IBM LAN Requester                    <ibmlan>\SYSLEVEL.REQ
+  User Profile Management              <muglib>\SYSLEVEL.MUG
+  LAN Server Advanced (HPFS386)        <bootdrive>\IBM386FS\SYSLEVEL.HFS
+
+  VERSION determines the boot drive either using the REXX SysBootDrive function
+  if it is available, or else by parsing the OS2_SHELL environment variable.
+  The MMPATH is determined by checking the environment variable of the same
+  name.  The paths to IBMCOM and IBMLAN are both read from the networking
+  product initialization file, <bootdrive>\IBMLVL.INI.  Finally, the TCPIP
+  directory is located by searcing the PATH for INETD.EXE.
+
+
+| PRODUCT NAME TABLE
+|
+| As of version 1.2, a new optional feature known as the "product name table"
+| has been added.
+|
+| Normally, VERSION will display the product names as they are read from the
+| various SYSLEVEL files.  However, if a file named VERSION.TBL exists in the
+| same directory as VERSION.CMD, VERSION will attempt to read the product names
+| from that file.  This file should have a format like the following example:
+|
+|     SYSLEVEL.ECS;Serenity Systems eComStation
+|     SYSLEVEL.OS2;IBM Base Operating System Files
+|     SYSLEVEL.BDD;IBM Base Device Drivers
+|     SYSLEVEL.MPM;IBM Multimedia Presentation Manager/2
+|     SYSLEVEL.TRP;IBM Base Networking - MPTS Adapters & Protocols
+|     SYSLEVEL.TCP;IBM TCP/IP Services - Internet Applications
+|     SYSLEVEL.PER;IBM File and Printer Sharing - Peer
+|     SYSLEVEL.SRV;IBM OS/2 LAN Server
+|     SYSLEVEL.REQ;IBM LAN Requester Service
+|     SYSLEVEL.MUG;IBM User Profile Management
+|     SYSLEVEL.HFS;IBM LAN Server Advanced - HPFS386
+|
+| The format should be fairly self-evident.  Each line refers to a different
+| product (order is unimportant), and consists of the name of the product's
+| SYSLEVEL file, followed by a semi-colon, then the string that should be
+| displayed as the product name in "summary" mode.  A sample of the resulting
+| output is shown under the Examples section, below.
+|
+| The purpose of this feature is to allow administrators to customize this
+| command's output to better suit their environment.  A product name like
+| "Convenience Package - OS/2 Warp 4 Base Operating System" may not mean much
+| to your users, whereas "OS/2 Base Operating System" might be preferable.
+| Rather than force you to use my own arbitrary names for each product, I
+| decided to let you choose your own.
+|
+| NOTE: This applies to the default VERSION output (summary mode) only.  In the
+| details display mode, the actual product name from the SYSLEVEL file is always
+| used.
+|
+| Three sample table files are included in this package as SAMPLE1.TBL,
+| SAMPLE2.TBL, and SAMPLE3.TBL.  To install one, simply copy it to VERSION.TBL
+| in the same directory where VERSION.CMD is located.
+
+
+EXAMPLES
+
+| Default (summary) output:
+
+      [C:\]version
+
+      Installed Component Name                          Version  Service Level  Drive
+      -------------------------------------------------------------------------------
+      eComStation Operating System 1.1                  1.1      XR0C004        C:
+      Convenience Package - OS/2 Warp 4 Base Operati... 4.52     XR0C004        C:
+      IBM OS/2 Base Device Drivers                      4.52     XR04503        C:
+      IBM OS/2 LAN Adapter and Protocol Support         6.01     WR08708        C:
+      IBM TCP/IP for Warp                               4.32     UN02206        C:
+      IBM Peer for OS/2                                 5.2      IP08605        C:
+      IBM OS/2 LAN Requester                            5.2      IP08605        C:
+      IBM OS/2 User Profile Management - Client         5.2      WR08605        C:
+
+
+| Default output (same system) with the VERSION.TBL product name table given
+| in the previous section:
+|
+|     [C:\]version
+|
+|     Installed Component Name                          Version  Service Level  Drive
+|     -------------------------------------------------------------------------------
+|     Serenity Systems eComStation                      1.1      XR0C004        C:
+|     IBM Base Operating System Files                   4.52     XR0C004        C:
+|     IBM Base Device Drivers                           4.52     XR04503        C:
+|     IBM Base Networking - MPTS Adapters & Protocols   6.01     WR08708        C:
+|     IBM TCP/IP Services - Internet Applications       4.32     UN02206        C:
+|     IBM File and Printer Sharing - Peer               5.2      IP08605        C:
+|     IBM LAN Requester Service                         5.2      IP08605        C:
+|     IBM User Profile Management                       5.2      WR08605        C:
+
+
+| Single-file "details" display:
+
+      [E:\JAVA131\BIN]version syslevel.jtk
+
+        E:\JAVA131\BIN\SYSLEVEL.JTK
+        JDK Toolkit
+
+        Subsystem ID.......:  1000
+        Component ID.......:  5648C9805
+        Type...............:  0C
+
+        Version............:  1.31
+        Current CSD Level..:  XR05000
+        Prior CSD Level....:  XR05000
+
+
+| CHANGES
+|
+| 1.21
+|   * Slight change in product output order (MPM is now shown before BDD).
+|   * Added sample .TBL files to package.
+|
+| 1.2 (private release)
+|   * Added "product name table" feature.
+|   * Improved display of truncated names in summary output.
+|   * Improved "details" output (thanks to Guillaume Gay for the suggestion).
+|
+|
+| 1.1
+|   * First public release.  Integrated functions of unreleased v1.0 with
+|     previous SYSVER.CMD program.
+
+
+NOTICES
+
+  VERSION.CMD is (C) 2005 Alex Taylor.  You are free to use, distribute, and
+  modify this program, without restriction except that modified versions should
+  retain this and the following copyright notice.
+
+  The ReadSysLevel() function was taken from an installation script included with
+  the IBM OS/2 Java SDK, and is presumably (C) IBM Corporation.  Since this same
+  code is available with various products, both free and protected, and is not
+  always distributed with a license agreement, I am working under the assumption
+  that my use of the code in this way is not improper.  If IBM or its lawyers
+  wish to take issue with this assumption, they should contact me via the email
+  address below.
+
+| (Lines prefixed with '|' indicate changes made to this file since the last
+| release.)
+
+
+AUTHOR
+
+  Alex Taylor
+  WWW:    http://www.cs-club.org/~alex
+  E-Mail: alextaylor41[at]rogers[dot]com
+

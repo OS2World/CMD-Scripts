@@ -1,0 +1,11 @@
+SYSLEVEL.ECS;Serenity Systems eComStation
+SYSLEVEL.OS2; . Base Operating System 
+SYSLEVEL.BDD; . Base Device Drivers
+SYSLEVEL.MPM;    . Multimedia Presentation Manager (MMPM/2)
+SYSLEVEL.TRP; . Base Networking (MPTS)
+SYSLEVEL.TCP; . Internet Applications (TCP/IP)
+SYSLEVEL.PER; . File and Printer Sharing (Peer)
+SYSLEVEL.SRV; . LAN Server
+SYSLEVEL.REQ;    . LAN Requester
+SYSLEVEL.MUG;    . User Profile Management
+SYSLEVEL.HFS;    . LAN Server Advanced (HPFS386)

@@ -1,0 +1,14 @@
+PROGRAM : WINSTALL.CMD
+TYPE    : System utility.
+ARCHIVE : WINSTALL.ZIP
+CONTENTS: Winstall.cmd, Winstall.doc, Mkwinobjs.cmd
+PURPOSE : Utility to facilitate installation of 2.10/2.11 WIN-OS/2
+          Under OS/2 Warp V3 (TM-IBM), including creation of all
+          command prompts and configuration objects, and modification
+          of the OS/2 INI files to enable video driver selective install.
+          Mkwinobjs.cmd is a separate utility just to create WIN-OS/2 
+          objects.
+REQUIRES: Backup of 2.1x \os2\mdos\winos2 and \os2\mdos\winos2\system
+          directories OR 2.1x diskettes, and Warp v3 diskettes or CDROM.
+LICENSE : Released into the public domain by the author, David J. Looney.
+
