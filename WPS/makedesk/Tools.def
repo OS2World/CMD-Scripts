@@ -1,0 +1,73 @@
+*Sample Tools Folder Definition File.
+*  Do not create these objects unless you have modified
+*  the Tools.def file to match your system.  This includes
+*  all define statements, icon filenames, etc.  This file
+*  is provided as a sample only.
+
+Define ~ICONS~ D:\Icons
+Define ~CMDS~ D:\Cmds
+Define ~MISC~ D:\PMApps\Misc
+Define ~TOOLSFLD~ WP_DESKTOP
+
+Title     Tools
+Class     WPFolder
+Location  <~TOOLSFLD~>
+ObjectID  <WF_TOOLS>
+Setup     Fail
+
+*Shadow of file ItsNow.exe
+Title     ItsNow.exe
+Class     WPShadow
+Location  <WF_TOOLS>
+ObjectID  ~MISC~\ItsNow.exe
+Setup     Fail
+
+Title     Clipboard Viewer
+Class     WPShadow
+Location  <WF_TOOLS>
+ObjectID  <WP_CLIPV>
+Setup     Fail
+
+Title     Font Palette
+Class     WPShadow
+Location  <WF_TOOLS>
+ObjectID  <WP_FNTPAL>
+Setup     Fail
+
+Title     Enhanced Editor
+Class     WPShadow
+Location  <WF_TOOLS>
+ObjectID  <WP_EPM>
+Setup     Fail
+
+Title     Pulse
+Class     WPShadow
+Location  <WF_TOOLS>
+ObjectID  <WP_PULSE>
+Setup     Fail
+
+Title     Shez
+Class     WPProgram
+Location  <WF_TOOLS>
+ObjectID  <WF_SHEZ>
+Setup     Update
+EXENAME=~CMDS~\SHEZ.BAT
+PROGTYPE=WINDOWEDVDM
+SET DOS_BACKGROUND_EXECUTION=0
+SET DPMI_DOS_API=DISABLED
+SET DPMI_MEMORY_LIMIT=0
+SET HW_ROM_TO_RAM=1
+ICONFILE=~ICONS~\SHEZ.ICO
+ASSOCFILTER=*.ZIP,*.ARC,*.ARJ,*.ZOO,*.PAK,*.LZH,,
+
+Title     List
+Class     WPProgram
+Location  <WF_TOOLS>
+ObjectID  <WF_LIST>
+Setup     Update
+EXENAME=~MISC~\LIST.EXE
+PROGTYPE=WINDOWABLEVIO
+ICONFILE=~ICONS~\LIST.ICO
+ASSOCTYPE=Plain Text,,
+
+

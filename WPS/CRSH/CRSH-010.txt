@@ -1,0 +1,27 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: CRSH-010.zip
+       Short Description: Create Shadows of the Most Recently Used Files
+        Long Description: Create Shadows of the Most Recently Used Files, 
+                          a mimic of Windows 95 Start/Documents menu. 
+                          Consists of a generic MakeShadow Rexx script 
+                          and a set of sample application batch files 
+                          (Most Recently Used Files and Files Used Today). 
+
+      Proposed directory
+           for placement: /pub/os2/util/wps
+
+               Your name: Jan Stozek
+           Email address: jasio@polbox.pl
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none)
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 
+ Additional requirements: Rexx, optionally 4OS2. 
+

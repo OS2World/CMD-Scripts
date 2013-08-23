@@ -1,0 +1,23 @@
+ExtDesk.CMD tries to call EXTINST.EXE or EXTREMOV.EXE depending on the class
+"ExtendedDesktop" already being loaded (EXTREMOV), or not (EXTINST).
+
+If you want to have Extended Desktop on your desktop, this allows you to use
+one (ExtDesk.CMD) program object instead of two (both EXTINST and EXTREMOV).
+There's really no need to remove Extended Desktop, but in an ideal world I'm
+using its icon arranging capabilities just once or twice. ExtDesk.CMD has no
+use if you're using Extended Desktop and you always want Extended Desktop to
+be ready-to-use without a reboot.
+
+To install: save ExtDesk.CMD anywhere if EXTINST.EXE and EXTREMOV.EXE can be
+found in your PATH, or save ExtDesk.CMD in the same directory as the *.EXEs.
+
+ExtDesk assumes all needed files can be found. It doesn't perform any checks
+nor does it ask if you're sure (just like the underlying *.EXEs). The output
+regarding reboots may be wrong if ExtDesk.CMD is executed more than once and
+the systeem isn't rebooted since. ExtDesk.CMD itself doesn't cause a reboot.
+
+I've added - and removed - a PM version with a question, because that looked
+bad due to a few "undocumented features" of OS/2's PMRexx v2.0. A PM version
+is the first thing to add back again, as soon as those bugs are fixed.
+
+Remove the line with "PULL ." if you want to run ExtDesk.CMD minimized.

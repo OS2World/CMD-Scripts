@@ -1,0 +1,349 @@
+MakeDesk v1.30 - Copyright 1993, Matthew Palcic
+All rights reserved.  Distributed as Freeware.
+------------------------------------------------------------------------
+
+Welcome to MakeDesk.  This product grew out of the need to provide a
+means to consistently create desktop configurations.
+
+After making several OS/2 installations, each desktop was just a little
+bit different. It wasn't worth the hassle to make them all identical by
+changing the settings of each object.  Questions ran through my mind.
+What happens when we have 100 OS/2 machines and each configuration is
+just a little bit different?  What happens when we realize we need to
+make a change to the settings for Paradox 4.0 on every machine that runs
+it?  Who's going to run around and change them?  Who will accurately
+adjust the settings for objects on a new OS/2 installation?  Have fun
+pulling your hair out as you play a lot of sneaker net or just say
+"forget it" altogether.
+
+If you are using a machine at home those questions might not bother you.
+But what happens when technical support tells you to do a Ctrl-Alt-F1 to
+"restore" your default CONFIG.SYS, OS2.INI, OS2SYS.INI?  You lose all of
+your customizations made to your desktop since installation.  What
+happens if your system bombs so bad you have to reinstall?  What happens
+if you are running a beta copy of OS/2 and have to reformat to apply the
+beta?  Have fun recreating your desktop each time.
+
+MakeDesk allows you to easily manipulate desktop objects through the use
+of object definition (.DEF) files.  This includes creating, replacing
+and updating objects such as programs, folders, shadows, etc.  With
+MakeDesk you can easily associate the correct icons with your program
+objects every time and adjust DOS Settings for each DOS box using simple
+SET commands. You can also consistently create object definitions for
+all major applications used throughout your corporation.  Additionally,
+you'll save yourself hours of fiddling with settings each time you lose
+your desktop.
+
+As much as I like the Workplace Shell, it's not perfect.  If I install
+OS/2 and spend a fair amount of time customizing it, what guarantee do I
+have that it will not get corrupted?  Unfortunately, I have none. After
+losing too many customizations, I wrote MakeDesk.
+
+MakeDesk is a powerful REXX script that provides a simple definition
+language for creating objects for the Workplace Shell.  The REXX
+component of OS/2 2.0 must be installed for this script to operate.
+
+Create a .DEF file with the object definitions you require.  Then run
+MakeDesk, passing your .DEF file as a parameter.
+
+
+Program command line parameters:
+------------------------------------------------------------------------
+
+  Syntax:
+    MakeDesk [/a,/d] deffile
+
+  Parameters:
+    /a        process all objects in definition file without prompts
+    /d        disable ANSI colorization of display
+    deffile   Definition (.DEF) file to process
+
+Parameters in brackets are optional.  Parameters separated by commas can
+be combined.  Parameters separated by a '|' are mutually exclusive.
+Example: MakeDesk /a /d mydesk.def
+
+Running MakeDesk without any arguments will display a list of parameters
+so you won't have to refer to the documentation if you forget what your
+options are.
+
+
+
+
+Structure of a .DEF file:
+------------------------------------------------------------------------
+
+.DEF files consist of the following three commands and five subcommands:
+
+  Commands:
+    '*'        - Comment
+    'Title'    - Declare an object block
+    'Define'   - Create a user-defined variable
+
+  Subcommands:
+    '*'        - Comment
+    'Class'    - Declare the object class (i.e. WPFolder)
+    'Location' - Specifies where the object will live
+    'ObjectID' - Creates a handle for the object
+    'Setup'    - Set processing mode for the object
+
+  All text after a 'Title' declaration and up to the next blank line
+  (and not considered a subcommand) is processed as a Setup String.
+
+
+
+
+  * (Comment)
+  ----------------------------------------------------------------------
+  Comments outside 'Title' blocks (command form) are displayed as they
+  are read from the .DEF file.  Comments inside 'Title' blocks
+  (subcommand form) are not displayed and are simply ignored.
+
+  Examples:
+
+    *Win-OS/2 object
+    *Required to run Quattro Pro
+
+  This command/subcommand is not required.
+
+
+
+
+  Title
+  ----------------------------------------------------------------------
+  The title of the object is the name that will appear on the desktop.
+  To force a title to span multiple lines, use the '^' symbol before
+  each word that should be placed on the next line.  For instance,
+  'Windows^Apps' would use two lines.  If you use more than two lines,
+  you must separate the lines with a line-feed character.  See the
+  Define command for information on the ~LF~ variable.  The Title
+  command starts an object 'Title' block, which processes only
+  subcommands until the next blank line or the end of the file is
+  reached.
+
+  Examples:
+
+    Title Win-OS/2 3.1^Full Screen
+    Title Win-OS/2 3.1~LF~Full Screen~LF~256 Colors
+
+  This command is required.
+
+
+
+
+  Define
+  ----------------------------------------------------------------------
+  'Define' is a slick way to create variables that you'll use throughout
+  an object definition file.  Typical use is for a directory name that
+  may change later, or for a folder ID you might reference in several
+  object definitions. The format is flexible, but you should try to
+  adopt a convention and stick with it.  Use symbols you won't be using
+  as title text or setup strings.  I use the '~' character on both ends
+  of my define names.  You can use any characters, or none at all as
+  long as you use a unique identifier. For example:
+
+      Define ~MYVAR~ Something
+      Define $MYVAR Something else
+      Define MYVAR Something different
+
+  Just be sure you use variable names you won't have to use as actual
+  text in your .DEF file.  A variable like STARTUP should be something
+  like $STARTUP$ instead.  In the first example above, anywhere in my
+  .DEF file that I use the variable ~MYVAR~, MakeDesk will substitute
+  the value 'Something' in its place.  Just think of it as a flexible
+  substitution feature that can save you from having to change the name
+  of a directory that you use in four or five object definitions.  I
+  list my 'Define' statements at the top of the file so that I can find
+  them easily.
+
+  Define variables can not contain other symbols.
+
+      Define ~OtherVAR~ SomeText~MYVAR~SomeText     <-- INVALID!
+
+  The above example is invalid because the ~MYVAR~ symbol won't be
+  substituted.  In other words, variables are only substituted one level
+  deep.
+
+  Example:
+
+    Define ~CMDS~ D:\Cmds
+
+  Note:  MakeDesk provides one predefined variable: ~LF~.  This variable
+         is used as a line-feed character to separate lines in a Title
+         declaration.  ~LF~ is also used to separate device driver lines
+         in the "SET DOS_DEVICE=..." DOS setting.  Example:
+
+           SET DOS_DEVICE=DRIVER1.SYS~LF~DRIVER2.SYS
+
+  This command is not required.
+
+
+
+
+  Class
+  ----------------------------------------------------------------------
+  Workplace Shell uses classes to determine the type of object you are
+  creating.  Folders, shadows, etc. are all examples of different kinds
+  of classes.  Folders use the WPFolder class.  Other applications may
+  add new class types to your system.  MakeDesk should be fully capable
+  of creating objects using new class types.  The method used to create
+  the objects shouldn't be dependent on building only 'stock' Workplace
+  objects.  MakeDesk also supports any object classes installed. For a
+  complete list of 'stock' object classes supported by OS/2 and their
+  associated setup strings, see the CrtObj.txt file.
+
+  Example:
+
+    Class WPShadow
+
+  This subcommand is required.
+
+
+
+
+  Location
+  ----------------------------------------------------------------------
+  Objects have to live in a folder.  That folder can be the desktop, a
+  folder off the desktop, or some other directory on your system.
+  Locations are built one of two ways.  The first is simple; you use the
+  name of the directory in which you want to place the object:
+
+      Location C:\OS2\MDOS
+
+  The other method uses a "handle" to a folder.  You must know this
+  "handle" name ahead of time and already have it assigned.  You use the
+  name inside a pair of '< >' brackets:
+
+      Location <WP_DESKTOP>
+
+  For a list of 'stock' folder handles provided by the Workplace Shell
+  consult the CrtObj.txt file.  You can create your own handles, such as
+  <WORK_FOLDER>.  These handles can be used later to modify the settings
+  of the object.  See the description of ObjectID for more information
+  on handles.  You can't use a <OBJ_HANDLE> type of location unless the
+  folder was created using that handle.  Creating a folder using a
+  folder template will result in no handle name.
+
+  Example:
+
+    Location <WP_OS2SYS>
+
+  This subcommand is required.
+
+
+
+
+  ObjectID
+  ----------------------------------------------------------------------
+  Although you don't need to use handles for folders, you should use
+  handles for program objects or any other objects you create.  If you
+  create a Win-OS/2 3.1 object called <WF_WIN31> you can later update
+  the settings for that object by referring to <WF_WIN31>.  These
+  ObjectID handles must be unique for each object.
+
+  Suppose you create your <WF_WIN31> object with a location of
+  <WP_DESKTOP>. You later drag it into your Command Prompts folder.
+  Will MakeDesk get confused if you try to update the object?  No.  The
+  Workplace Shell is aware of every object's location change. This
+  allows you to make changes to an object without having to remember
+  where you moved it.  This is particularly useful since locations
+  referencing the desktop can result in pathnames like
+  "C:\OS!2 2.0 Desktop\System\Command Prompts".
+  Using a handle allows you to refer to the Command Prompts folder as
+  <WP_PROMPTS>.  Obviously the latter method is easier, and is
+  independent of where you move an object or folder.
+
+  I recommend assigning a handle to every object you define, including
+  folders.  This makes it easier to access folders and any other objects
+  even if they've been moved.  Otherwise, an object's location (i.e.,
+  C:\OS2\MDOS) must be updated in your .DEF file each time you change
+  its folder's location.  With a handle, you don't need to be concerned
+  with whether or not objects have been moved.  Use folder handles as
+  locations rather than directory names.  Assign unique handles to
+  everything.
+
+  Example:
+
+    ObjectID <WF_NOTES>
+
+  This subcommand is not required.
+
+
+
+
+  Setup
+  ----------------------------------------------------------------------
+  The Setup command declares the type of object creation method.  The
+  parameters are:
+
+    Fail      - If an object exists with this handle, do nothing.
+    Replace   - If an object exists with this handle, replace it.
+    Update    - If an object exists with this handle, change it.
+
+  Example:
+
+    Setup Replace
+
+  This subcommand is not required.
+
+
+
+
+  Setup String
+  ----------------------------------------------------------------------
+  Setup Strings are documented in the CrtObj.txt file. These strings
+  customize the settings of an object including the "DOS settings" for a
+  DOS program object.  MakeDesk supports more than one setup string per
+  line by using a ';' between each string.  Breaking up the lines makes
+  the settings more readable.
+
+  Example:
+
+    EXENAME=C:\UTILS\TEST.EXE;STARTUPDIR=C:\TEMP
+    SET DOS_BACKGROUND=1
+
+  Setup strings are not required.
+
+
+
+
+Complete Example: PKUNZIP.DEF
+------------------------------------------------------------------------
+
+Define ~CMDS~ C:\Cmds
+Define ~ICONS~ C:\Icons
+
+Title     PKUnzip
+Class     WPProgram
+Location  <WP_DESKTOP>
+ObjectID  <PKUNZIP>
+Setup     Update
+EXENAME=~CMDS~\PKUNZIP.BAT
+PARAMETERS=-d -n %* [Extract to which directory?]
+PROGTYPE=WINDOWEDVDM
+ICONFILE=~ICONS~\UNZIP.ICO
+NOAUTOCLOSE=YES
+SET DOS_BACKGROUND_EXECUTION=0
+
+------------------------------------------------------------------------
+
+User assumes all risk by using this product.  Matthew Palcic holds no
+warranty or guarantee that this program will not cause side effects or
+crashes.  Use it at your own risk. MakeDesk only uses documented system
+calls to process desktop objects.  If your system gets corrupted, don't
+blame me.  Chances are that OS/2 bugs caused it.
+
+**
+
+I have developed a process for installing OS/2, the service pack, the
+NetWare requester, and desktop setups from a Novell NetWare file server
+requiring only a few diskettes at each station. Inquiries regarding this
+process can be directed to:
+
+  Personal Computer Systems
+  5450 Olive Road
+  Dayton, OH  45426
+
+  513-837-8486, 9am-8pm M-F
+  513-837-8286, Fax
+
+

@@ -1,0 +1,32 @@
+NEWDLG v1.1a (update)
+---------------------
+
+This is an update to the newdlg11.zip package, and replaces the PATCH.CMD
+with a new, better working version...
+
+The previous script didn't work with CMD.EXE (I use 4OS2, and it worked
+with that one, so I assume it worked with any shell... but no..)
+
+The reason why it didn't work is that CMD.EXE couldn't use environment
+variables as %variable  but reqired %variable%  (an % in the end too).
+
+There were also another error, but i don't think it did too much, really..
+(As the matter fact, the thing that one made wrong, wasn't needed at all...)
+
+Just replace the PATCH.CMD with the one supplied in this zip...
+
+
+Author:
+-------
+Address:
+  Tomas ™gren
+  Snipgr„nd 69
+  906 24 Ume†
+  Sweden
+
+e-mail:
+  stric@freenet.hut.fi (having some trouble with stric@arbornet.org, don't
+  send any mail there right now...)
+
+IRC:
+  Stric (probably in #OS/2 or something..)

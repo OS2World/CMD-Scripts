@@ -1,0 +1,38 @@
+If you're like me, you sometimes "miss" an icon when you double click.
+If you're a lot like me, you probably have cursed a time or two at the
+new LaunchPad in Warp when it popped up to say, "You missed the
+icon, you dolt!"
+
+Well, now you can have a LaunchPad that works just like the original,
+but won't pop up each time you double click MB1 on the Desktop (or
+on other open space).
+
+New-lnch will remove the original LaunchPad and replace it with one
+which can be placed anywhere in a folder or on the Desktop, but will
+only pop up when you deliberately double click on it.
+
+Use the command line arguments 'e', 'm', or 'r' to either eliminate the
+LaunchPad altogether, install a modified version (as described in the
+previous paragraph), or restore the original LaunchPad that was on
+your system immediately after you first installed Warp.
+
+You will have to remove "LAUNCHPAD" from the "AUTOSTART" line
+in your config.sys file if you want to have no LaunchPad, or the
+modified version only. If you do not remove it, OS/2 will recreate the
+original LaunchPad when you reboot, and ADD IT to the modified version,
+if you created a modified version.
+
+You may install and run this program on as many machines as you want.
+You can distribute it freely, however, I request that you include this text
+file with the REXX program in any distribution. You may not charge a fee
+from anyone for the use of this program
+
+If this program trashes/ruins/destroys your system, your data, or your
+salsa, I will not be responsible. You use it at your own risk. I don't think
+it will, but that's my humble opinion, and is explicitly not a guarantee.
+
+Joe Gilvary CIS 71773,2213
+seosamh@delphi.com
+Team OS/2
+November 1994
+

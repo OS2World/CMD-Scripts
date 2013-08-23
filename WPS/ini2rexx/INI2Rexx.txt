@@ -1,0 +1,25 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: INI2Rexx.zip v0.1.2
+       Short Description: Converts OS/2 INI files to human editable Rexx scripts
+        Long Description: (none)
+
+      Proposed directory
+           for placement: /pub/os2/util/wps
+
+               Your name: Alfredo Fern ndez D¡az
+           Email address: alfredo at netropolis-si dot com
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 Warp, any version
+ Additional requirements: Rexx support
+
+                Replaces: /pub/os2/util/wps/ini2rexx.zip
+

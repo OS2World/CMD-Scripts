@@ -1,0 +1,98 @@
+These scripts are designed to make working with IBM's
+java13 and Innokek's Java14 a bit easier.  (I'll try to
+add Golden Code's release when it is available)...
+
+This is a generic script for starting java13 and 
+java14 apps in OS/2-eCS.  (there are two separate
+scripts:  java_13 first checks for java131, then it
+looks for java13, java_14 first looks for the java14
+runtime then it looks for the java_14 SDK)
+
+[quick version... unzip this archive into a directory
+   e.g. unzip run_java__20030225.zip -d run_java
+ Run install_os2.cmd -- this will create a "Create Java
+ Object" program object on your desktop.  Just drop a
+ jar file on the object to create a program object for
+ the .jar file. It will also create a "Run Jars" object
+ -- this will allow you to start most modern java apps
+ by just double clicking on the jar file.]
+
+
+Long version:
+You can just run java_1x.cmd without any aguments to get the general
+structure of the parameters that it will accept.
+
+Just place all of the files in this zip file in a directory.
+Run "install_os2.cmd" to create a program object on your
+desktop.  Now, if you drop a .jar file on this program object
+it will create a new program object that will run the .jar
+file.  It initially assigns a generic icon to the new program
+object but you can change it to whatever you want.
+Some java apps require some options in additon to the .jar file --
+just add these options after the .jar file entry in in the
+"Parameters" field of the new program object.
+Alternatively, you can also just start most modern java apps
+by just double clicking on the .jar file -- the "Run Jars"
+object handles this.
+All you need to do is create a shadow of your .jar file and
+use it to start your app from your desktop or folder.
+   Good examples of programs that will work with double clicking
+   the .jar file:
+   Phex:
+           http://phex.sourceforge.net/
+      or   http://www.ktb.net/~crenquis/phex2.html
+   Jphotobrush:
+           http://www.tanveer.freeservers.com/programming/JPhotoBrush.htm
+   joggplayer:
+           http://Aurora1.webarts.bc.ca:81/jOggPlayer/
+
+
+e.g.
+A java program located in c:\tcpip\spambot
+The directions for spambot state that one only
+needs to pass spambot.jar to the java program.
+Then just open up the spambot directory (folder) and
+drop "spambot.jar" onto the "Create Java Object"
+This will create a new program object called "spambot"
+with an object id of "jv13_spambot"
+
+Double clicking on the program object should get
+you up-n-running.
+
+Now, perhaps spambot has a "-v" option.
+Just put "-v" (without the quotes)
+into the "Parameters" field after the spambot.jar
+ e.g.
+ Parameters:
+   c:\tcpip\spambot\spambot.jar -v
+
+or, perhaps it requires a "start" command or
+has a "help" option... just enter the appropriate
+"jarfile option" in the "Parameters" field e.g.
+Parameters
+...path...\spambot.jar -v start
+ or
+...path...\spambot.jar help
+
+The latest version allows you to add options for java.exe...
+  e.g. perhaps spambot.jar requires a large initial heap
+    then the "Parameters" can be editted to add a 
+    -Xms80M flag to set the initial heap to 80 MB
+      e.g. 
+          Parameters
+	     -Xms80M -jar c:\tcpip\spambot\spambot.jar -v
+
+
+Enjoy,
+Cary
+
+if you have any problems/questions/suggestions, email me at:
+   crenquis@pacbell.net
+
+PS:  these scripts are released under the "do as thou wilt license"  -- do whatever you
+      want with them... 
+      Remember I am a tinker not a programmer...
+      tinker:   
+         To make unskilled or experimental efforts at repair; fiddle
+         To manipulate unskillfully or experimentally.
+         A clumsy repairer or worker; a meddler

@@ -1,0 +1,132 @@
+                           ULTIMATE
+                           12/20/92
+
+                  Created by Shawn McAlhany
+
+To install Ultimate to the C Drive, type A:InstallC with
+Ultimate in the A Drive.  To Install Ultimate to the D
+Drive, type A:InstallD with Ultimate in the A Drive.
+
+The purpose of this utility is to allow the user to recreate the
+necessary icons or folders without having to recreate the
+desktop.  Unlike makeini or ALT-F1, customized icons will
+not be erased from the desktop while the lost icons are
+recreated.    The F1 key on icons is implemented, so the
+help text is available for the OS/2 Icons.
+
+Ultimate will not create duplicates of icons or folders.
+Attempts at creating duplicates will result in an error
+message that tells the user that the icon already exists.
+Duplicates can be created within OS/2 by using the Ctrl-Rt.
+Mouse Button to drag the duplicate to the desktop.
+
+If an icon within a folder is being created and the folder
+currently exists on the desktop, ignore the error message
+that it was already created and continue until you get to
+the icon to be installed.  As long as the icon to be installed
+does not exist, it will still be created in its respected folder.
+
+Ultimate will ask you where the .ico files are located.  These
+files are necessary to create the proper icons and folders.  
+Locate these files in the correct directory before running
+Ultimate.  If the proper directory is not given for the .ico files,
+Ultimate will create the icons, though they may not appear like
+the correct icons (ie> a folder could be created for the OS/2
+System Icon).  You may correct this problem by running Ultimate
+again with the appropriate Ico Directory to get the correct icons.
+After the directory is entered, some files will be copied to your
+root directory.  Ignore this process since they are removed
+during completion of the utility.
+
+Ultimate is written as a menu driven utility which recreates
+icons and folders of your choice.  Make note of the icons which
+Ultimate attempts to create that you do not actually want on
+the desktop (or within their respected folders).  A confirmation
+is requested before the utility recreates nondeletable icons.
+
+Any Nondeletable Icons which you create on the desktop that you
+do not want at the time, or later decide are useless, can be
+removed, but in a recommended procedure:
+
+        1.  Drag a folder to the open desktop.
+        2.  Open the folder.
+        3.  Drag any icons to the folder that you decide are
+            unnecessary.
+        4.  Get to an OS/2 Window or OS/2 Full Screen prompt.
+        5.  Go into the appropriate subdirectory of the desktop.
+
+        How :  Do a dir/w to locate the subdirectory of the desktop.
+               Example Names:
+               FAT Partitions >> OS!2_2.0_D
+               HPFS Partitions >> OS!2 2.0 Desktop
+               If multiple desktop subdirectories are listed, normally
+               the higher numbered one is used.
+               Use cd OS!2_2.0_D for FAT Partitions and
+               cd "OS!2 2.0 Desktop" for HPFS Partitions.
+
+        6.  Verify that you are in the correct subdirectory for the
+            desktop by doing a dir/w and make sure folder is
+            listed as a subdirectory.  If you are not, then do a cd\
+            and repeat step number 5.
+        7.  Type: rename folder junk 
+            to rename the folder to a junk subdirectory name.
+        8.  Then Type: rd junk
+            to remove the junk subdirectory.
+
+This method should keep you from having any problems with
+recurring, improperly deleted icons.
+
+If you have any problems with installing some of the icons or
+folders on the desktop using Ultimate, make sure the icons
+were not created in another folder.  The easiest method of
+locating icons is to search each and every folder, while the
+easiest method of locating folders would be to type:
+
+                dir info*. /s
+
+as an example to search for the information folder across
+all subdirectories (Use the Table at the bottom of this
+document for specific folder names).
+
+NOTE:  I HAVE WORKED WITH SYSTEMS THAT THE FILES
+ARE NOT SHOWN AS BEING PRESENT, BUT SOME TESTING
+LATER PROVED THAT THEY WERE HIDDEN ON THE HARD
+DRIVE.
+
+If you experience problems with the recreation of the Extended
+Services and Lan Services folders, make sure the DPath, LibPath,
+and Path Statements, located in your Config.Sys, contain the
+appropriate subdirectories for the Extended Services and Lan
+Services.
+
+   LIBPATH=C:\IBMLAN\NETLIB;C:\MUGLIB\DLL;.;C:\OS2\DLL;C:\OS2\MDOS;C:\CMLIB\DLL;
+      C:\;C:\OS2\APPS\DLL;C:\IBMCOM\DLL;
+   SET PATH=C:\IBMLAN\NETPROG;C:\OS2;C:\MUGLIB;C:\OS2\SYSTEM;C:\OS2\MDOS\WINOS2;
+      C:\CMLIB;C:\CMLIB\APPN;C:\OS2\INSTALL;C:\;C:\OS2\MDOS;C:\OS2\APPS;
+   SET DPATH=C:\IBMLAN\NETPROG;C:\IBMLAN;C:\OS2;C:\MUGLIB\DLL;C:\CMLIB;
+      C:\CMLIB\APPN;C:\OS2\SYSTEM;C:\OS2\MDOS\WINOS2;C:\OS2\INSTALL;C:\;
+      C:\OS2\BITMAP;C:\OS2\MDOS;C:\OS2\APPS;C:\IBMCOM;
+
+If you experience any other problems of icons not creating
+properly, you may need to reboot the system and run Ultimate
+a second time.
+
+NOTE: WHEN ATTEMPTING TO REMOVE THE COMMAND PROMPTS FOLDER,
+IT IS RECOMMENDED THAT A DUPLICATE OS/2 WINDOW IS CREATED
+ON THE DESKTOP FOR EASY ACCESS TO ULTIMATE IF NECESSARY.
+
+                           --- TABLE ---
+ICON NAME               FAT NAME                HPFS NAME
+---------               --------                ---------
+OS/2 System             OS!2_Sys                OS!2 System
+Drives                  Drives                  Drives
+Command Prompts         Command_                Command Prompts
+Startup                 Startup                 Startup
+Games                   Games                   Games
+Productivity            Producti                Productivity
+System Setup            System_s                System Setup
+Information             Informat                Information
+Templates               Template                Templates
+Min Win Viewer          Minimize                Minimized!Window Viewer
+
+

@@ -1,0 +1,36 @@
+Background BMP Randomiser v1.00
+~~~~~~~~~~~~~~~~~~~~~~~~~
+This REXX script will randomise your background bitmap.  To use CHNGBCKG.CMD you need to have yout bitmaps zipped.  This is sensible anyhow, as it makes your bitmaps take up less hard disk space.  Follow the instructions below on how to use it.  As far as I know, it will work with any version of OS/2, but i've only tested it with the Warp red box.
+
+It is based on a REXX script by Jonathan Czerwinski, which randomises the OS/2 Warp startup logo, and is included with his excellent program PREPLOGO, which converts an OS/2 BMP into a format suitable for use as an OS/2 Warp startup logo.  Look out for plogo100.zip on hobbes.
+
+Instructions
+~~~~~~~~
+1.  Zip up each of the .BMP files that you wish to use.  Store each BMP in a separate ZIP file.
+
+2.  Modify the chngbckg.cmd file to reflect the directory where the zipped BMP's are stored.  They should be in a directory by themselves.
+
+3.  Modify the BOOTDRIVE in chngbckg.cmd
+
+4.  Run the program once, and then from the desktop settings, change the default bitmap to BOOTDRIVE\os2\bitmap\os2backg.bmp, where BOOTDRIVE is the driver where OS/2 is installed.  You will need to ensure that there is enough free space on your boot drive to store your largest bitmap.
+
+5.  Place chngbckg.cmd in your Startup Folder.
+
+6.  Make sure UNZIP.EXE is in your path.
+
+That's It!
+
+When I have a chance, I'll have a better play with REXX and see if I can automate the zipping up of the Bitmaps, and generally make it a bit more friendly!!  It's a bit of a pain having to do all of the above, but it works better than anything else i've seen.
+
+Any suggestions, modifications or comments can be sent via internet to pauls@xanax.apana.org.au 
+
+This is Freeware, but if you find this script useful, feel free to send a donation or postcard
+to:
+
+Paul Smedley
+15 Whittaker Drive
+Modbury SA 5092
+AUSTRALIA
+
+DISCLAIMER:
+If this program screws up your system (I'm satisfied there's no way it can!!), then don't come crying to me.  You use this program at your own risk!

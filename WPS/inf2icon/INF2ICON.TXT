@@ -1,0 +1,27 @@
+INF2ICON - Makes WPS icons for INF files
+
+INF files are OS/2 online help files.  They are viewed with the
+VIEW.EXE utility, which comes with OS/2.
+
+INF2ICON is used to make an icon on the desktop for an INF file.
+It is a command-line utility.
+
+Usage:
+INF2ICON inf_file [folder_name]
+
+inf_file is the name of the INF file for which you want an icon
+folder_name is the a folder on the desktop where you want the ICONS to go
+
+If folder_name is not specified, then the default name of "Online Help"
+is used.  The folder is always created on the desktop, unless it already
+exists somewhere else.
+
+INF2ICON scans the INF itself for the descriptive name.  This is the
+name that appears in the title bar when you view the help file.  This
+same name is used as the name of the icon.  In this manner, you get
+description icon titles instead of cryptic ones.
+
+To process all the files in a directory, use something like:
+
+        C:\OS2\BOOK> for %d in (*.inf) do inf2icon %d OS/2 Warp Online Information
+

@@ -1,0 +1,314 @@
+
+                  MonitorDaemon v0.1
+                  by Nenad Milenkovic
+
+
+What is this?
+
+   This is simple and effective resource monitoring add-on for
+   excelent monitoring utility called Pipe Monitor (part of
+   SysBar/2 package). It uses practicaly no CPU power (it sits
+   idle most of the time) and uses as much of RAM as it's needed
+   to open CMD.EXE shell to start the script (about 500k in
+   total, but most of it is idle and swaped away as soon as other
+   application requires RAM).
+
+   It's implemented as a backgound process (daemon) written in
+   Rexx that works as a supplement to monitoring utility from
+   SysBar/2 package. It uses Rexx interfaces provided by IBM's
+   Theseus/2 memory analysis program and Stefan Milcke's StHWMon
+   motherboard monitoring application.
+
+   It can be used as a template for adding more Rexx based
+   real-time reporting to SysBar/2's Pipe monitor.
+
+
+What is SysBar/2?
+
+   SysBar/2 is a great set of small but powerfill utilites made
+   by Dmitry I. Platonoff with some help and cooperation from
+   others. Aside from "nothing but the look" digital clock and
+   nifty (and soon to be very powerfull) CD player it contains
+   two really usefull components: "Task Switcher" and "Pipe
+   Monitor".
+
+   The first one alows you one-click task switching, minimizing
+   and restoring windows and closing applications, but also
+   filtering of task-list and it's own content. It allows you to
+   directly access "system" menus of every application from it's
+   icon and it's very customizable in it's look and behaviour.
+
+   The second one (Pipe Monitor) is the one you need for Monitor
+   Daemon to work. It started as pipe listener (it would listen
+   for OS/2 named pipes, used for inter-process communication,
+   and displaying that traffic), but during the time author(s)
+   added more and more functionality, tranforming it into very
+   usefull monitoring application. It now has "integrated" CPU
+   load meter, free RAM monitor, IP traffic measures, etc. It can
+   also show free space on HDs, number and size of specified
+   files, battery status, number of new mails (POP3), system
+   uptime, number of processes, threads, etc.
+
+   However, one of it's most interesting features remains named
+   pipe listener. Writing to named pipe under OS/2 is very easy,
+   doing it from your own application or even command shell (OS/2
+   treats pipes like files in \PIPE direcectory). Authors of
+   web/ftp server could easily add monitoring and status
+   reporting with simple writing to pre-defined pipes in
+   SysBar/2's Pipe Monitor. By providing Rexx interfaces to their
+   programs they'll allow others to do the same.
+
+   That is exactly what Monitor Daemon does.
+
+
+Do I need Monitor Daemon?
+
+   No. It's main purpose is to show you how easily you can bring
+   monitoring capabilities to your OS/2 Desktop for those
+   functions SysBar/2 has no native support and/or are not
+   supported (exposed) by OS/2 by default.
+
+   However, if you need excatly what it does, you can use it
+   "out-of-the-zip". It will (with the help of DLLs from other
+   programs) show current temperature of CPU (provided you have
+   supported motherboard) and _actual_ usage of swap file (how
+   much of prealocated swap space is _actually_ used). It can
+   help you prevent "burning" of your CPU or motherboard because
+   of fan mailfunction or OS/2 dying because of overflowed swap
+   space. It can also help you determine the optimal prealocated
+   swap size, the one that will be mostly used and rarely grow.
+
+   I use it in it's current form and works OK for me, but you can
+   add more functions to it, simmilar ones or something
+   completely different. It's good idea to add functions to it
+   rather than implementing your own monitoring services in order
+   to avoid overhead of starting multiple processes.
+
+
+What do I need to run Monitor Daemon?
+
+    You will need one of two programs (or both of them) it uses
+    to see any benefit from Monitor Daemon. Those are:
+
+    Theseus/2 from IBM
+
+         Theseus/2 is OS/2 memory analisys program from IBM. It's
+         not supported ("for internal use unly"), but it
+         reportedly works OK and it's widely used (mostly by
+         programmers and system administrators) to determine
+         memory usage, memory leaks, RAM requirements for
+         system's typical usage patterns, etc. In order to access
+         low-level informations about other running processes it
+         requires support device driver to be installed (OS/2
+         protects it's processes one from each other). Once that
+         device driver (THESEUS2.SYS, which runs in privileged
+         mode) is active, you can use it's GUI to access all it's
+         functions. However, it has rather clumsy and
+         non-intiutive user interface, which is not sutable for
+         real-time monitoring of limited number of interesting
+         data. Good thing is that Theseus/2 (named after Greek
+         mythology hero who killed Minotaur and found his way out
+         of Labyrinth) is flexible and "open" - you can access
+         it's features from your own programs. In addition to
+         programmers library intended for compiled languages, it
+         offers Rexx interface, which I used from Monitor Daemon
+         in order to get information about how much swap space is
+         _really_ used in alocated swap file.
+
+         Theseus/2 v2.01m is available from Hobbes at the moment
+         of this writing, and should work with both Warp 3 and
+         Warp 4. I expect that IBM will provide simmilar utility
+         for upcoming Warp 5 (Aurora), but from what I heard,
+         this version doesn't work with it (Aurora has some
+         serious changes in kernel). Maybe it will work with GA
+         version.
+
+         Please reffer to instructions included with Theseus/2
+         for full installation, but note that you will only need
+         THESEUS2.SYS installed and THESEUS0.DLL available
+         somewhere in the LIBPATH in order to use Monitor Daemon.
+
+    StHWMon from Stefan Milcke
+
+         StHWMon is a monitoring utility that gathers data from
+         on-board chips that provide information about hardware
+         "health" and status. Most modern motherboards include
+         that functionality, and most of them include only
+         Windows versions of monitoring tools.
+
+         StHWMon is a PM (GUI) program that brings that functions
+         to OS/2 Desktop. It displays current temperatures of CPU
+         and motherboard, rotating speed of CPU and power supply
+         fans, current voltage of CPU (core and external),
+         motherboard and devices power supply.
+
+         StHWMon allows configuring of "correction values" for
+         all those data, althogh this is really needed only for
+         temperature monitors. This is required because StHWMon
+         is intended for "generic" use and not for any specific
+         motherboard or system. Utilities shipped with those
+         equipment usually have presetted those correction
+         values, so you must compare data shown by StHWMon (which
+         is actual data read from monitoring HW logic) with data
+         shown by those supplied utilities or shown by BIOS setup
+         utility. When you determine those correction values,
+         simply enter them into StHWMon configuration and it will
+         provide the for both PM (GUI) version and Rexx interface
+         (through INI).
+
+         You can run StHWMon all the time, but I beleive that CPU
+         temperature is the only one that really needs constant
+         attention. Therefore, I implemented only that in my
+         Daemon.
+
+
+How to install it?
+
+         Simply: unzip and run. However, it will require some
+         additional work in order to achieve intended
+         functionality.
+
+         0. Prerequisites
+
+         Have SysBar/2, Theseus/2 and StHWMon properly installed.
+         Make sure you have rebooted in order for THESEUS2.SYS
+         device driver to be loaded.
+
+         1. Making Monitor Daemon work
+
+         The main issue is that Monitro Daemon needs access to
+         Rexx "support" DLLs from aforementioned applications in
+         order to work. Those DLLs must reside somewhere in
+         LIBPATH (settable in CONFIG.SYS). There are few ways of
+         doing that, like:
+
+             - adding Theseus and StHWMon directories to LIBPAH
+             - coping required DLLs to \MYDLLs directroy, or any
+               other place you keep those frequently needed
+               libraries (like EMX, VROBJ, etc.)
+
+         Personally, I copied THESEUS0.DLL to c:\MYDLLs, but run
+         MonitorD.CMD from the directory where I installed
+         StHWMon. This is because STHEALTH.DLL is not the only
+         DLL needed for StHWMon's Rexx interface -- that one
+         needs and accesses some others for itself. Since StHWMon
+         is updated rather frequently, it was bad idea to keep
+         those DLLs in two different places, resulting in
+         conflicts and problems. Theseus is not so frequently
+         updated, and has only one DLL for it's Rexx interface.
+
+         2. Configuring SysBar/2
+
+         You must configure SysBar/2's Pipe Monitor to expect,
+         accept and display data it receives from Monitor Daemon.
+
+         Configuring "CPU Temperature" cell:
+
+             - right-click with your mouse on Pipe Monitor and
+               select "Properties"
+             - go to "Cells" page of "Properties" notebook
+
+             - click on "New" button
+             - from "Type" drop-box select "pipe listener"
+             - make sure that "Enable cell" check-box is
+               activated
+             - in the "Name" entry-field enter: "CPU Temperature"
+             - select color for this cell from "Color" drop-box
+             - in "Prefix" entry-field enter: " t="
+             - in "Empty" entry-field enter: "ERROR"
+             - select "Expire timeout" check-box and enter 100 in
+               "seconds" number field
+             - in "Pipe" entry-field enter: "\PIPE\tempmon"
+
+             - go to "Programs" page of cell's "Properties"
+               notebook
+             - in "On mouse double-click" entry-field enter full
+               path of your StHWMon application, for example:
+               "D:\util\StHWMon\StHWMon.exe"
+             - make sure that "Enable" check-box is activated
+
+             - select "OK" button
+             - close "Properties" notebook
+
+
+         Configuring "Swap file size" cell:
+
+             - right-click with your mouse on Pipe Monitor and
+               select "Properties"
+             - go to "Cells" page of "Properties" notebook
+
+             - click on "New" button
+             - from "Type" drop-box select "pipe listener"
+             - make sure that "Enable cell" check-box is
+               activated
+             - in the "Name" entry-field enter: "Swap file size
+               (used)"
+             - select color for this cell from "Color" drop-box
+             - in "Prefix" entry-field enter: " Swp: "
+             - in "Empty" entry-field enter: "ERROR"
+             - select "Expire timeout" check-box and enter 100 in
+               "seconds" number field
+             - in "Pipe" entry-field enter: "\PIPE\swapmon"
+
+             - go to "Programs" page of cell's "Properties"
+               notebook
+             - in "On mouse double-click" entry-field enter full
+               path of your StHWMon application, for example:
+               "D:\util\theseus\THESEUS2.exe"
+             - make sure that "Enable" check-box is activated
+
+             - select "OK" button
+             - close "Properties" notebook
+
+         3. Making sure Monitor Daemon is started on system
+            startup
+
+         You can start Monitor Daemon from any startup folder or
+         STARTUP.CMD file. I have made "Program Object" for it
+         and put that object into XFolder's "Enhanced Startup"
+         folder. Once you are sure that Monitor Daemon works OK,
+         you can detach it and forget about it's existence.
+
+         4. Stopping Monitor Daemon
+
+         To stop Monitor Daemon just press Ctrl-C in it's window
+         or close the window itself. If you use some enhanced
+         shoutdown procedure, you can mark Monitor Daemon's task
+         as safe to kill without prompting first.
+
+
+Conclusion
+
+         If this program or any other that it requires ruins your
+         computer, house or fammily, it's your own fault. Next
+         time don't use non-MS software on non-MS operating
+         system, especially not on dead operating systems such as
+         OS/2. Don't mess with zombies, daemons or any other
+         creature out of this world and practice safe hex.
+
+         But don't forget why are you using OS/2 at the first
+         place: because it works the way you want it to work.
+
+
+Price
+
+         It's free, off course, but if you use it or like it, I
+         would appreciate if you let me know and tell me where
+         have you downloaded it from. My e-mail address is below.
+
+
+Contact
+
+         If you have any questions, suggestions, donations or
+         marriage offerings you can reach me via e-mail:
+
+         nenad@fon.fon.bg.ac.yu.
+
+         Please use "Monitor Daemon" inside your subject line so
+         your message can be properly processed by my mail
+         filters and redirectors.
+
+         Good luck.
+
+
+                                              Nenad Milenkovic

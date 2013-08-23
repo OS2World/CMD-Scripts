@@ -1,0 +1,113 @@
+*Miscellaneous system object definitions
+
+Define ~ICONS~ D:\Icons
+
+*
+*旼컴컴컴컴컴컴컴커
+*� System Objects �
+*읕컴컴컴컴컴컴컴켸
+*
+
+Title     DOS Window
+Class     WPProgram
+Location  <WP_PROMPTS>
+ObjectID  <WP_DOSWIN>
+Setup     Update
+EXENAME=*
+PROGTYPE=WINDOWEDVDM
+SET DOS_BACKGROUND_EXECUTION=0
+SET HW_ROM_TO_RAM=1
+ICONFILE=DOSWIN.ICO
+*ICONFILE=~ICONS~\DOSWIN.ICO
+
+Title     DOS Full Screen
+Class     WPProgram
+Location  <WP_PROMPTS>
+ObjectID  <WP_DOSFS>
+Setup     Update
+EXENAME=*
+PROGTYPE=VDM
+SET DOS_BACKGROUND_EXECUTION=0
+SET HW_ROM_TO_RAM=1
+ICONFILE=DOSFS.ICO
+
+Title     OS/2 Window
+Class     WPProgram
+Location  <WP_PROMPTS>
+ObjectID  <WP_OS2WIN>
+Setup     Update
+EXENAME=*
+PROGTYPE=WINDOWABLEVIO
+ICONFILE=OS2WIN.ICO
+
+Title     OS/2 Full Screen
+Class     WPProgram
+Location  <WP_PROMPTS>
+ObjectID  <WP_OS2FS>
+Setup     Update
+EXENAME=*
+PROGTYPE=FULLSCREEN
+ICONFILE=OS2FS.ICO
+
+*Remove Command Reference from *.INF association
+Title     Command Reference
+Class     WPProgram
+Location  <WP_INFO>
+ObjectID  <WP_CMDREF>
+Setup     Replace
+EXENAME=VIEW.EXE
+PARAMETERS=CMDREF.INF
+HELPPANEL=9301
+
+* Be sure to add "." to the BOOKSHELF variable in CONFIG.SYS
+*  i.e. SET BOOKSHELF=C:\OS2\BOOK;.;
+Title     Book View
+Class     WPProgram
+Location  <WP_INFO>
+ObjectID  <WF_BKVIEW>
+Setup     Update
+EXENAME=VIEW.EXE
+PROGTYPE=PM
+ASSOCFILTER=*.INF,,
+HELPPANEL=9301
+
+*Remove System Editor from plain text associations
+Title     System Editor
+Class     WPProgram
+Location  <WP_TOOLS>
+ObjectID  <WP_SYSED>
+Setup     Replace
+EXENAME=E.EXE
+PROGTYPE=PM
+HELPPANEL=9289
+
+*Add Enhanced Editor plain text associations
+Title     Enhanced Editor
+Class     WPProgram
+Location  <WP_TOOLS>
+ObjectID  <WP_EPM>
+Setup     Update
+ASSOCTYPE=Plain Text,OS/2 Command File,DOS Command File,,
+ASSOCFILTER=*.DOC,*.TXT,,
+
+Title     WIN-OS/2 Full Screen
+Class     WPProgram
+Location  <WP_PROMPTS>
+ObjectID  <WP_WINFS>
+Setup     Update
+EXENAME=WINOS2.COM
+PROGTYPE=VDM
+ICONFILE=WINOS2.ICO
+SET DOS_BACKGROUND_EXECUTION=0
+SET DOS_FILES=40
+SET DOS_HIGH=0
+SET DOS_UMB=0
+SET DPMI_MEMORY_LIMIT=4
+SET EMS_FRAME_LOCATION=NONE
+SET EMS_HIGH_OS_MAP_REGION=0
+SET EMS_LOW_OS_MAP_REGION=0
+SET EMS_MEMORY_LIMIT=0
+SET XMS_HANDLES=0
+SET XMS_MEMORY_LIMIT=0
+
+

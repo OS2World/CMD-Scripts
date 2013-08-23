@@ -1,0 +1,9 @@
+(v1.01) REBOOT/2 - FREEWARE
+This package creates a WPS folder, from
+which you can directly reboot to all bootable
+partitions directly, without invoking the
+Bootmanager Menu.
+OS/2 Bootmanager/SETBOOT.EXE do the real
+work, thus no application shutdown is made,
+but only file-system shutdown !
+Author: C.Langanke@TeamOS2.de

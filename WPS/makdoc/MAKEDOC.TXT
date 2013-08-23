@@ -1,0 +1,149 @@
+------ DOCUMENTATION OF MakeDoc v.1.0 by XmbSoft (CIS ID 100031,2136) ------
+
+
+
+With MakeDoc, the creation of Book objects (hipertext documentation)
+from an .INF file is easy. Once MakeDoc has been installed, drag
+the icon of the *.INF file that contains the documentation of the
+new program onto the MakeDoc v.1.0 Object Program: MakeDoc will 
+automatically create the Book object. So, no need to use the Program 
+template.
+
+
+* Contents of MAKDOC.Zip *
+
+MakeDoc.DOC	This documentation
+Install.CMD	Installation Programa
+MakeDoc.CMD	Main program
+DOC.EA	Extended Attributes of MakeDoc.DOC
+CMD.EA	Extended Attributes of MakeDoc.CMD
+
+
+* Files after installation *
+
+MakeDoc.DOC
+MakeDoc.CMD
+
+
+* Installing MakeDoc *
+
+Doble-click onto the Install.CMD icon. The program will ask you to 
+pick one of the following options:
+
+   1 - Create the Book object in the Desktop.                    [/D]
+   2 - Create the Book object in the folder of the *.INF file.   [/F]
+   3 - Create the Book object in the Information folder of OS/2. [/I]
+
+I recommend to pick option 1. If you're used to intall all the Docs of 
+your programs in the Information folder, pick 3. Depending on your 
+selection, the Install program will create an object program with the
+parameter /D, /F or /I. You can change later your selection: just open 
+the Values window of MakeDoc v.1.0 object program and change what it is
+typed in the Paramaters field (the program will display an error message
+if the Parameters field is void or fill with an option different than 
+/D, /F or /I).
+
+Of course, choosing 1 does NOT mean that the Book object will be place 
+permamently in the Desktop. You can move it wherever you want once it is
+created.
+
+The Install program will ask you then to type the drive and full path of
+the directory where you want to install MakeDoc. If the directory does not
+exist, it will be created.
+
+The Install program will create three objects in your Desktop:
+
+   1 - The MakeDoc v.1.0 by XmbSoft Program Object
+   2 - The MakeDoc.DOC Shadow Object (documentation)
+   3 - The REXX.INF Shadow Object (*.INF to use as example)
+
+If you doble-click onto the MakeDoc.DOC shadow, you will view this 
+documentation. If you drag the REXX.INF shadow onto the MakeDoc program
+icon, an Object Book will be created (double-click the Object Book and
+you will get the hipertext documentation of Rexx).
+
+After installing and trying you can send to the Shreder the REXX.INF 
+shadow (the original file will remain in your disk) and place the MakeDoc
+program object and the MakeDoc.DOC shadow wherever you want (for example, 
+in a Tools folder).
+
+
+* Name of the Object Book *
+
+If NAME.INF is the filename of the *.INF archive, the name of the new 
+Object Book will be 'NAME Guide' (NAME will be written in uppercase).
+
+
+* Checking your file is a real INFormation file *
+
+MakeDoc will process the file especified only if:
+
+   1 - the name of the file contents the substring ".INF";
+   2 - the first five character of the file are "HSP›".
+
+The second condition is controlled by the variables CompStr and CompNum
+at the beginning of MakeDoc.CMD.
+
+
+* Command Line Execution *
+
+You can execute MakeDoc from an OS/2 Command Line Session. From the 
+directory where MakeDoc is installed or elsewhere if that directory is
+included in the PATH variable, type:
+
+   MAKEDOC /X FULLPATH_FILENAME
+
+where /X can be:
+   /D   Place Book Object in the Desktop
+   /I   Place Book Object in the Information folder
+   /F   Place Book Object in the folder of the INF file
+
+For example,
+
+   MAKEDOC /D C:\OS2\BOOK\CMDREF.INF
+
+will create the Command Reference Book in your Desktop.
+
+
+* Errors *
+
+If a Book Object is not immediatley created, an error has ocurred. Open 
+the Task List Window (pressing at the same time both buttons of your mouse)
+and select MakeDoc. An OS/2 Window session will be open and the error will 
+be reported. Two kind of errors are supported:
+
+   A - Syntax error.
+       A Help message is displayed. This error occurs when no file is 
+       provided or an incorrect option has been typed in the parameters
+       field. If you doble-click onto MakeDoc v.1.0 instead of dragging 
+       a file, you'll get this error.
+
+   B - Bad file format.
+       If you drag a file that is not a true INF file, the OS/2 Window
+       Session will report that the file is not a Documentation file.
+
+
+* Disclaimer *
+
+THIS IS A FREEWARE PROGRAM AND AS SUCH YOU ARE PERMITTED TO 
+DISTRIBUTE IT WITHOUT CHARGE PROVIDED THAT ALL FILES ARE DISTRIBUTED
+TOGETHER. THIS PROGRAM IS PROVIDED AS IS WITHOUT ANY WARRANTY, 
+EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO FITNESS FOR A
+PARTICULAR PURPOSE. THAT IS, YOU MAY USE AND DISTRIBUTE THIS 
+PROGRAM BUT AT YOUR OWN RISK.
+
+
+* The Author *
+
+You can contact the author at:
+
+CompuServe as:          100031,2136
+Internet as:            100031.2136@compuserve.com
+LaConexi¢n BBS 
+(Barcelona, Spain 
+8/N/1 34-3-3516180) as: Xavier Martin
+
+
+
+Barcelona, 14/02/93
+

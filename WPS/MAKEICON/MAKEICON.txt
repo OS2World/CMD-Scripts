@@ -1,0 +1,13 @@
+
+Hi !
+
+This is a Preview of an Add-On Script for OS/2 Warp.
+It exchanges most standard icons to extra elegant Hi-Res Hi-Color icons.
+
+Just run MAKEICON.cmd, but be warned: Backup the contents of your WPS, because
+ returning you to original state is only possible by restoring it, reinstalling
+ or setting the original icons manually.
+
+Feedback appreciated.
+
+E-Mail: martin@kiewitz.de

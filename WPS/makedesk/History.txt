@@ -1,0 +1,19 @@
+
+MakeDesk Changes
+-------------------------------------------------------------
+v1.30  05 Feb 93   Original release version.
+
+v1.40  10 Feb 93   Added PutEAs.cmd to set extended attributes.
+                   Changed ZIP file from Info-ZIP format to the
+                   older PKZip 1.x format.  Other minor comment
+                   changes in MakeDesk.
+
+
+DefGen Changes
+-------------------------------------------------------------
+v1.20  05 Feb 93   Original release version.
+
+v1.21  10 Feb 93   Fixed problem with generating ObjectID codes
+                   when an object definition should't get one.
+
+

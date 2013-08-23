@@ -1,0 +1,1165 @@
+Subject: REXXUTIL Information and Samples
+ 
+The following attempts to better explain some of the powerful features
+provided by OS/2 V2's dynamic link library; REXXUTIL.DLL (Rexx utility
+functions). REXXUTIL functions are described in the online 'REXX Information'
+reference and the 'OS/2 2.0 Technical Library Procedures Language/2 REXX
+Reference' publication (order number S10G-6268). The information following is
+intended to provide a more detailed description of some of the functions.
+ 
+One should realize that many of the functions provided by REXXUTIL have
+origins with Presentation Manager WinXXX calls. The 'OS/2 Technical
+Library Presentation Manager Programming Reference Vol2' publication
+(order number S10G-6265) can be reviewed for more information.
+ 
+Some of the functions used/explained:
+ 
+SysIni:
+Using REXXUTIL's SysIni function one can modify many settings of the WorkPlace
+Shell as well as change other applications settings that make use of *.INI
+files such as the system OS2.INI and OS2SYS.INI.
+ 
+SysCreateObject: (PM WinCreateObject - Create Workplace Object)
+Using REXXUTIL's SysCreateObject function one can create various objects;
+like folders, programs, and shadow objects using Rexx. This section for the
+most part includes parameter information which was gathered together from
+various sources of information.
+ 
+SysSetObjectData: (PM WinSetObjectData - Set Object Data)
+Using REXXUTIL's SysSetObjectData function one can change an objects
+characteristics (of an already created object, if you know its objectid).
+ 
+SysDestroyObject: (PM WinDestroyObject - Destroy Workplace Object)
+Using REXXUTIL's SysDestroyObject one can delete an object created if you
+know its objectid.
+ 
+Misc Notes:
+If one views the *.RC files located in your bootdrive:\OS2 directory you
+can learn a lot about the various INI settings and folder structure.
+Review INI.RC and INISYS.RC files, they are used to create your OS2.INI
+and OS2SYS.INI files.
+ 
+Some of REXXUTIL's functions are only available when using the very latest
+REXX20 PACKAGE which consists of the very latest REXX fixes and enhancements
+for OS/2 V2. So should you have problems running any of the sample programs
+you should make sure your system has the vary latest REXX20 updates.
+ 
+Change Log:
+  04/30/92 - Added information about DuplicateFlag parm
+           - Added more setup string information from manuals
+  06/02/92 - Added information about breaking Title line character "^"
+           - Added information about adding multiple DOS_DEVICE statements
+           - Added code to SHADOW.CMD to make shadow object of a file
+  !!NOTE!! - The REXXOS2 fixes are required to make some of
+             the newer samples work properly.
+  06/30/92 - Added information regarding two new REXXUTIL functions:
+             SysSetObjectData and SysDestroyObject, also two new
+             samples STARTDOS, BOOTDOS (Thanks to Rick McGuire)
+  07/13/92 - Reorganized the way the material is presented. Also added more
+             sample Rexx routines REBUILD, OBJCLASS and LPTADD, descriptions
+             follow. Also changed parm CONCURRENTVIEW to CCVIEW (Thanks
+             Dan Kehn, Felix Sawicki)
+  07/15/92 - Updated entire document as I mistakenly truncated it at 80
+             characters. Rewrote some sample Rexx routines so they do not
+             extend beyond 80 characters. Also updated the SysSetObjectData
+             description to show how can open an object (Thanks Rick). Added
+             information about creating multi-line titles, carat works for
+             two line titles but not more than 2.
+             New samples, OBJECTID and FONTS included, descriptions follow.
+  07/29/92 - Corrected an error I made when I broke the setup lines into
+             multiple lines. I needed to add ||'s to make sure they
+             concatenated without spaces (Thanks Rick). Also added
+             information regarding changing some System Settings (added
+             new section after sample Rexx code). Also added warning
+             in REBUILD.CMD sample about replacing Folder objects. Also
+             added new sample ICONRES.CMD which builds a folder containing
+             many of the OS/2 V2 installed icons using system DLL files.
+ 
+This append consists of multiple pieces of information:
+ 
+1) Large block of text containing information that pertains to the subject.
+   (TEXT INFORMATION)
+2) Sample Rexx code, some complete programs, others code fragments:
+ - (FOLDER.CMD)
+   Creates a folder and program objects in the folder
+ - (SHADOW.CMD)
+   Creates shadows of objects
+ - (FLDSHAD.CMD)
+   Creates a folder, then program object in the folder, then place a shadow
+   of the program object on the desktop.
+ - (STARTDOS.CMD)
+   Starts a DOS program using specific DOS VDM settings.
+ - (BOOTDOS.CMD)
+   Starts a DOS session, booting from a specific DOS image with
+   specific DOS VDM settings.
+ - (REBUILD.CMD)
+   Allows one to rebuild OS/2 system objects, like MAKEINI does.
+ - (LPTADD.CMD)
+   Code using SysIni to add LPT4-9 ports.
+ - (OBJECTID.CMD)
+   Code using SysIni to list OBJECTIDs known to the WorkPlace Shell
+ - (FONTS.CMD)
+   Code using SysIni to list installed fonts.
+ - ICONRES.CMD
+   Code building a folder containing many of the various icons found in
+   installed DLL files for OS/2 V2. Demonstrates use of setup string
+   parameter ICONRESOURCE.
+3) Code Fragments
+ - (SYSSET)
+   Shows using SysIni to toggle various System Settings
+ 
+((BEGIN TEXT INFORMATION))
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+-- Help information regarding the SysCreateObject function of REXXUTIL --
+ 
+Function: SysCreateObject
+Syntax:
+result=SysCreateObject(classname, title, location <,setup>, <,duplicateflag>)
+ 
+ classname:The name of the object class.
+ 
+ title:    The object title.
+ 
+ location: The object location.  This can be specified as either a
+           descriptive path (for example, OS/2 System Folder\System
+           Configuration) or a file system path (for example,
+           C:\bin\mytools).
+ 
+ setup:    A WinCreateObject setup string.
+ 
+ duplicateflag: This parameter indicates what action should be taken
+           when the Setup string specifies an object ID, and an object with
+           that object ID already exists. If the setup string does not give
+           an object ID, a duplicate object will be created.
+ 
+ result    The return code from WinCreateObject. This returns 1 (TRUE) if the
+           object was created and 0 (FALSE) if the object was not created.
+ 
+ Purpose:  Create a new instance of an object class.
+ 
+-- Help information regarding the SysSetObjectData function of REXXUTIL --
+ 
+Function: SysSetObjectData
+Syntax:
+result=SysSetObjectData(name, setup)
+ 
+ name:     The object name.  This can be specified as an object id (for
+           example <WP_DESKTOP>) or as a fully specified file name.
+ 
+ setup:    A WinCreateObject setup string.
+ 
+ Purpose:  Alter the settings of an existing object. Can also be used to
+           open an instance of an object:
+                                 /* open up the system folder */
+           call SysSetObjectData '<WP_OS2SYS>', 'OPEN=DEFAULT;'
+ 
+See the description of the SysCreateObject location and setup strings
+following for an explanation of the parameters.
+ 
+-- Help information regarding the SysDestroyObject function of REXXUTIL --
+ 
+Function: SysDestroyObject
+Syntax:
+result=SysDestroyObject(name)
+ 
+ name:     The object name.  This can be specified as an object id (for
+           example <WP_DESKTOP>) or as a fully specified file name.
+ 
+ Purpose:  Destroys an existing object.
+ 
+See the description of the SysCreateObject location parameter
+following for an explanation of the object name.
+ 
+--SysCreateObject Parms------------------------------------------------------
+ 
+The SysCreateObject parameters are now explained in more detail.
+ 
+Remember syntax is...
+result=SysCreateObject(classname, title, location <,setup>, <,duplicateflag>)
+ 
+classname:
+  A registered object class defined to the system. Of particular interest are
+  the WPFolder/WPProgram/WPShadow classes. Note using the sample Rexx code
+  included in the SysQueryClassList function help screen one can list all
+  of the registered classes:
+ 
+  call SysQueryClassList "list."
+  do i = 1 to list.0
+     say 'Class' i 'is' list.i
+  end
+ 
+title:
+  Easy one, the objects title you want to use. If you wish to break the title
+  line use the carat "^" symbol in the title. Ex. 'First line^Second Line'
+  This works to break a title into two lines. However to break a title into
+  more than two lines you need to separate the title lines with a hex 0A
+  (line-feed) character.
+  Rexx example:
+  h0A='0A'X
+  title='First'h0A'Second'h0A'Third'
+ 
+location:
+  The objects location can be specified as either a descriptive path (for
+  example, OS/2 System Folder\System Configuration) or a file system path
+  (for example, C:\bin\mytools). However by looking at the INI.RC file one
+  can see a use of other "locations", such as <WP_DESKTOP>. If this is used
+  as a location then your object will reside on the WorkPlace Shell desktop.
+  If you are creating a folder or program object you should make sure you use
+  the setup string option and give that folder a unique OBJECTID. We'll see
+  how this works later.
+ 
+  HINTS: Here are some predefined object ids of system folders. Also if you
+         are thinking of placing an object in the Startup Folder <WP_START>,
+         make it a shadow of an object.
+         <WP_DESKTOP>   The Desktop.
+         <WP_START>     The Startup folder.
+         <WP_OS2SYS>    The System folder.
+         <WP_TEMPS>     The Templates folder.
+         <WP_CONFIG>    The System Setup folder.
+         <WP_INFO>      The Information folder.
+         <WP_DRIVES>    The Drives folder.
+         <WP_NOWHERE>   The hidden folder.
+ 
+setup:
+  This field needs the most explaining, a larger section following details
+  many of the available setupstring parameters. The setupstring field contains
+  a series of "keyname=value" pairs separated by semi-colons that change the
+  behavior of an object. Each object class documents its keynames and the
+  parameters it expects to see.
+ 
+duplicateflag:
+  There are three possible values for this parameter:
+  FailIfExists - No object should be created if an object with the
+      given object already exists. This is the default and maps to the
+      PM creation flag, CO_FAILIFEXISTS
+  ReplaceIfExists - If an object with the given object ID already exists,
+      the existing object should be replaced. Maps to the PM creation
+      flag, CO_REPLACEIFEXISTS.
+  UpdateIfExists - If an object with the given object ID already exists,
+      the existing object should be updated with the new information.
+      Maps to the creation flag, CO_UPDATEIFEXISTS.
+  (Only the first character is required/examined, i.e. F, R, or U)
+ 
+ALL parameters have safe defaults, so it is never necessary to pass
+unnecessary parameters to an object.
+ 
+--Setup Strings--------------------------------------------------------------
+ 
+  What follows are both WPFolder and WPProgram setup string parameters.
+  Their various key names, values and a short description follow
+  each item. The <<xxx>> item is there to give you an idea of what
+  Workplace Shell settings "page" you would find this information on.
+ 
+*********************************
+***WPFolder setup string parms***
+*********************************
+KEYNAME      VALUE           Description
+-----------------------------------------------------------------------------
+<<View>>
+OPEN         ICON            Open icon view when object is created.
+             TREE            Open tree view when object is created.
+             DETAILS         Open details view when object is created.
+ICONVIEW     s1[,s2,...sn]   Set icon view to specified style(s).
+TREEVIEW     s1[,s2,...sn]   Set tree view to specified style(s).
+DETAILSVIEW  s1[,s2,...sn]   Set details view to specified style(s).
+(styles)     FLOWED          flowed list items
+             NONFLOWED       non-flowed list items
+             NONGRID         non-gridded icon view
+             NORMAL          normal size icons
+             MINI            small icons
+             INVISIBLE       no icons
+             LINES           lines in tree view
+             NOLINES         no lines in tree view
+<<Background>>
+BACKGROUND   filename        Sets the folder background. filename is the
+                             name of a file in the \OS2\BITMAP directory
+                             of the boot drive.
+<<File>>
+WORKAREA     YES             Make the folder a Workarea folder
+<<Window>>
+MINWIN       HIDE            Views of this object will hide when their
+                             minimize button is selected.
+             VIEWER          Views of this object will minimize to the
+                             minimized window viewer when their minimize
+                             button is selected.
+             DESKTOP         Views of this object will minimize to the
+                             Desktop when their minimize button is selected.
+VIEWBUTTON   HIDE            Views of this object will have a hide button
+                             as opposed to a minimize button.
+             MINIMIZE        Views of this object will have a minimize button
+                             as opposed to a hide button.
+CCVIEW       YES             New views of this object will be created every
+                             time the user selects open.
+             NO              Open views of this object will resurface when
+                             the user selects open.
+<<General>>
+ICONFILE     filename        This sets the object's icon.
+ICONRESOURCE id,module       This sets the object's icon. 'id' is the
+                             identity of an icon resource in the 'module'
+                             dynamic link library (DLL).
+ICONPOS      x,y             This sets the object's initial icon position.
+                             The x and y values represent the position in
+                             the object's folder in percentage coordinates.
+TEMPLATE     YES             Creates object as a template.
+             NO              Resets objects template property.
+-----------------------------------------------------------------------------
+ 
+**********************************
+***WPProgram setup string parms***
+**********************************
+KEYNAME      VALUE           Description
+-----------------------------------------------------------------------------
+<<Program>>
+EXENAME      filename        Sets the name of the program
+PARAMETERS   params          Sets the parameters list, which may
+                             include substitution characters
+STARTUPDIR   pathname        Sets the working directory
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<<Sessions>>
+PROGTYPE     FULLSCREEN      Sets the session type to OS/2 full screen
+             PM              Sets the session type to PM
+             SEPARATEWIN     Sets the session type to WIN-OS2 window
+                             running in a separate VDM.
+             VDM             Sets the session type to DOS full screen
+             WIN             Sets the session type to WIN-OS2 full screen
+             WINDOWABLEVIO   Sets the session type to OS/2 windowed
+             WINDOWEDVDM     Sets the session type to DOS windowed
+             WINDOWEDWIN     Sets the session type to WIN-OS2 windowed
+MINIMIZED    YES             Start program minimized
+MAXIMIZED    YES             Start program maximized
+NOAUTOCLOSE  YES             Leaves the window open upon program termination.
+             NO              Closes the window when the program terminates.
+-DOS Settings-
+NOTES:
+- To change these values you use SET keyname=
+  Example:   SET DOS_FILES=45;SET DOS_HIGH=1
+  Also for some use values of 1 for ON, 0 for off
+  Example:   SET COM_HOLD=1;     (on, default is off)
+  To add more than one DOS_DEVICE you need to separate with hex 0A (line-feed)
+  Rexx example:
+  h0A='0A'X
+  setup='...;SET DOS_DEVICE=C:\OS2\MDOS\ANSI.SYS'h0A'C:\OS2\MDOS\EGA.SYS...'
+ 
+List of DOS Setting fields
+COM_HOLD
+DOS_BACKGROUND_EXECUTION
+DOS_BREAK
+DOS_DEVICE
+DOS_FCBS
+DOS_FCBS_KEEP
+DOS_FILES
+DOS_HIGH
+DOS_LASTDRIVE
+DOS_RMSIZE
+DOS_SHELL
+DOS_STARTUP_DRIVE
+DOS_UMB
+DOS_VERSION
+DPMI_DOS_API
+DPMI_MEMORY_LIMIT
+DPMI_NETWORK_BUFF_SIZE
+DPMI_DOS_API
+EMS_FRAME_LOCATION
+EMS_HIGH_OS_MAP_REGION
+EMS_LOW_OS_MAP_REGION
+EMS_MEMORY_LIMIT
+HW_NOSOUND
+HW_ROM_TO_RAM
+HW_TIMER
+IDLE_SECONDS
+IDLE_SENSITIVITY
+KBD_ALTHOME_BYPASS
+KBD_BUFFER_EXTEND
+KBD_RATE_LOCK
+MEM_INCLUDE_REGIONS
+MEM_EXCLUDE_REGIONS
+MOUSE_EXCLUSIVE_ACCESS
+PRINT_TIMEOUT
+VIDEO_FASTPASTE
+VIDEO_MODE_RESTRICTION
+VIDEO_ONDEMAND_MEMORY
+VIDEO_RETRACE_EMULATION
+VIDEO_ROM_EMULATION
+VIDEO_SWITCH_NOTIFICATION
+VIDEO_WINDOW_REFRESH
+VIDEO_8514A_XGA_IOTRAP
+XMS_HANDLES
+XMS_MEMORY_LIMIT
+XMS_MINIMUM_HMA
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<<Association>>
+ASSOCFILTER  filters         Sets the filename filter for files
+                             associated to this program.
+                             Multiple filters are separated by commas.
+ASSOCTYPE    type            Sets the type of files associated to this
+                             program. Multiple filters are separated
+                             by commas.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<<Window>>
+MINWIN       HIDE            Views of this object will hide when their
+                             minimize button is selected.
+             VIEWER          Views of this object will minimize to the
+                             minimized window viewer when their minimize
+                             button is selected.
+             DESKTOP         Views of this object will minimize to the
+                             Desktop when their minimize button is selected.
+VIEWBUTTON   HIDE            Views of this object will have a hide button
+                             as opposed to a minimize button.
+             MINIMIZE        Views of this object will have a minimize button
+                             as opposed to a hide button.
+CCVIEW       YES             New views of this object will be created every
+                             time the user selects open.
+             NO              Open views of this object will resurface when
+                             the user selects open.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<<General>>
+ICONFILE     filename        This sets the object's icon.
+ICONRESOURCE id,module       This sets the object's icon. 'id' is the
+                             identity of an icon resource in the 'module'
+                             dynamic link library (DLL).
+ICONPOS      x,y             This sets the object's initial icon position.
+                             The x and y values represent the position in
+                             the object's folder in percentage coordinates.
+TEMPLATE     YES             Creates object as a template.
+             NO              Resets objects template property.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<<Misc>>
+OBJECTID     <name>          This sets the object's identity. The object
+                             id will stay with the object even if it is
+                             moved or renamed. An object id is any unique
+                             string preceded with a '<' and terminated
+                             with a '>'. This may also be a real name
+                             specified as a fully qualified path name.
+HELPPANEL    id              This sets the object's default help panel.
+HELPLIBRARY  filename        This sets the help library.
+OPEN         SETTINGS        Open settings view when object is created.
+             DEFAULT         Open default view when object is created.
+NODELETE     YES             Will not allow you to delete the object.
+NOCOPY       YES             Will not allow you to make a copy.
+NOMOVE       YES             Will not allow you to move the object to another
+                             folder, will create shadow on a move.
+NODRAG       YES             Will not allow you to drag the object.
+NOLINK       YES             Will not allow you to create a shadow link.
+NOSHADOW     YES             Will not allow you to create a shadow link.
+NORENAME     YES             Will not allow you to rename the object.
+NOPRINT      YES             Will not allow you to print it.
+NOTVISIBLE   YES             Will not display the object.
+-----------------------------------------------------------------------------
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+((END TEXT INFORMATION))
+ 
+((BEGIN REXX CMD SAMPLES))
+ 
+- (FOLDER.CMD)  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* FOLDER.CMD: Sample code using REXXUTIL's SysCreateObject function    */
+/* Builds a folder on the DeskTop and places some program objects in it.*/
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/*The basic call is listed next.                                           */
+/*rc=SysCreateObject(classname, title, location <,setup>, <,duplicateflag>)*/
+ 
+call SysCls
+Say '';Say 'Using REXXUTILs to Add a Folder and Program Objects...'
+ 
+Say '';Say 'Press Y to add Test Folder to Desktop...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key<>'Y' Then Exit
+ 
+/* All of the routines pass parameters to a subroutine to perform the call */
+classname='WPFolder'
+title='Test Folder'
+location='<WP_DESKTOP>'
+setup='OBJECTID=<TEST_FOLDER>'
+Call BldObj
+ 
+Say '';Say 'Now go and open up the folder, currently no items are there.'
+Say 'Press ENTER and we will add a few program objects...'
+key=SysGetKey()
+ 
+Say 'Place a program object into the folder...';Say '';
+classname='WPProgram'
+title='SYSLEVEL-FULLSCR'
+location='<TEST_FOLDER>'
+setup='OBJECTID=<TEST_SYSL>;'||,
+      'EXENAME=\OS2\SYSLEVEL.EXE;'||,
+      'PROGTYPE=FULLSCREEN;'
+Call BldObj
+ 
+classname='WPProgram'
+title='CHKDSK-PM'
+location='<TEST_FOLDER>'
+setup='OBJECTID=<TEST_PMCK>;'||,
+      'EXENAME=\OS2\PMCHKDSK.EXE;'||,
+      'MINIMIZED=YES;'||,
+      'PROGTYPE=PM;'
+Call BldObj
+ 
+classname='WPProgram'
+title='SYSLEVEL-VIO'
+location='<TEST_FOLDER>'
+setup='OBJECTID=<TEST_SYSLVIO>;'||,
+      'EXENAME=\OS2\SYSLEVEL.EXE;'||,
+      'PROGTYPE=WINDOWABLEVIO;'
+Call BldObj
+ 
+classname='WPProgram'
+title='MEM-Fullscreen'
+location='<TEST_FOLDER>'
+setup='OBJECTID=<TEST_MEMFUL>;'||,
+      'EXENAME=\OS2\MDOS\MEM.EXE;'||,
+      'PROGTYPE=VDM;'||,
+      'PARAMETERS=/?;'||,
+      'NOAUTOCLOSE=YES;'
+Call BldObj
+ 
+classname='WPProgram'
+title='MEM-WindowVDM'
+location='<TEST_FOLDER>'
+setup='OBJECTID=<TEST_MEMWIN>;'||,
+      'EXENAME=\OS2\MDOS\MEM.EXE;'||,
+      'PROGTYPE=WINDOWEDVDM;'||,
+      'PARAMETERS=/?;'||,
+      'NOAUTOCLOSE=YES;'
+Call BldObj
+Say '';Say 'All done, to remove objects drag to shredder...'
+ 
+Exit
+ 
+/* Build Object */
+BldObj:
+call charout ,'Building: 'title
+ 
+/* Build object using REPLACE as duplicateflag */
+result = SysCreateObject(classname, title, location, setup, 'R')
+ 
+If result=1 Then call charout ,'...   Object created!'
+Else             call charout ,'...   Not created! Return code='result
+ 
+Say '';
+Return
+ 
+- (SHADOW.CMD)  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* SHADOW.CMD: Sample code using REXXUTIL's SysCreateObject function    */
+/* Builds shadows on the DeskTop and Startup Folder                     */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+Call SysCls
+Say '';Say 'Using REXXUTILs to Add Shadow Objects...'
+ 
+/* The titles and objectid's are found from the \OS2\INI.RC file */
+ 
+Say '';Say 'First lets place some items on the Desktop...'
+title='Enhanced Editor'; objid='<WP_EPM>'   ; loc='<WP_DESKTOP>'; call AddShad
+title='OS/2 Window'    ; objid='<WP_OS2WIN>'; loc='<WP_DESKTOP>'; call AddShad
+title='System Clock'   ; objid='<WP_CLOCK>' ; loc='<WP_DESKTOP>'; call AddShad
+ 
+Say '';Say 'You can even make shadow objects of files...'
+title='CONFIG.SYS'; objid='C:\CONFIG.SYS' ; loc='<WP_DESKTOP>'; call AddShad
+ 
+Say '';Say 'Now lets place an item in the Startup Folder...'
+title='System Clock'   ; objid='<WP_CLOCK>' ; loc='<WP_START>'  ; call AddShad
+ 
+Say '';Say 'All done, to remove objects drag to shredder...'
+ 
+Exit
+ 
+AddShad:
+Say '';Say 'Press Y to add shadow object: 'title' to 'loc
+parse upper value SysGetKey('NOECHO') with key
+If key='Y' Then Do
+ 
+   /* Build object using FAIL as duplicateflag */
+   result=SysCreateObject('WPShadow', title, loc, 'SHADOWID='objid, 'F')
+ 
+   If result=1 Then Say 'Object created'
+   Else             Say 'Not created, return code='result
+End
+Return
+ 
+- (FLDSHAD.CMD)  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* FLDSHAD.CMD: Sample code using REXXUTIL's SysCreateObject function   */
+/* Builds a folder on the DeskTop places a program object in it then    */
+/* places a shadow of the program object on the DeskTop.                */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/*The basic call is listed next.                                           */
+/*rc=SysCreateObject(classname, title, location <,setup>, <,duplicateflag>)*/
+ 
+call SysCls
+Say '';Say 'Using REXXUTILs to Add Folder/Program/Shadow Objects...'
+ 
+Say '';Say 'Press Y to add Test Folder to Desktop...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key<>'Y' Then Exit
+ 
+classname='WPFolder'
+title='Test Folder'
+location='<WP_DESKTOP>'
+setup='OBJECTID=<TEST2_FOLDER>'
+Call BldObj
+ 
+Say '';Say 'Press Y to place a program object into the folder...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key<>'Y' Then Exit
+ 
+classname='WPProgram'
+title='SYSLEVEL-VIO'
+location='<TEST2_FOLDER>'
+setup='OBJECTID=<TEST2_SYSLVIO>;'||,
+      'EXENAME=\OS2\SYSLEVEL.EXE;'||,
+      'PROGTYPE=WINDOWABLEVIO;'
+Call BldObj
+ 
+Say '';
+Say 'Press Y to place a shadow of the program object on the Desktop...';
+Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key<>'Y' Then Exit
+ 
+classname='WPShadow'
+title='SYSLEVEL-VIO'
+location='<WP_DESKTOP>'
+setup='SHADOWID=<TEST2_SYSLVIO>'
+Call BldObj
+ 
+Say '';Say 'All done, to remove objects drag to shredder...'
+ 
+Exit
+ 
+/* Build Object */
+BldObj:
+call charout ,'Building: 'title
+ 
+/* Build object using REPLACE as duplicateflag */
+result = SysCreateObject(classname, title, location, setup, 'R')
+ 
+If result=1 Then call charout ,'...   Object created!'
+Else             call charout ,'...   Not created! Return code='result
+ 
+Say '';
+Return
+ 
+- (STARTDOS.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* STARTDOS.CMD: Sample code using REXXUTIL's SysCreateObject function  */
+/* Starts a DOS program using specific DOS VDM settings.  This is       */
+/* particularly useful for LAN execution that requires NET USE commands.*/
+/* The example invokes the PKZIP.EXE program using files setting of 45  */
+/* Rick McGuire:  MCGUIRE/GDLVM7                                        */
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/* The basic call is listed next.                                          */
+/* result = SysCreateObject(classname, title, location, setup)             */
+ 
+classname='WPProgram'
+title='My DOS Program'
+location='<WP_NOWHERE>'                  /* place in invisible folder      */
+program='EXENAME=C:\PKZIP.EXE;'          /* DOS program name               */
+type='PROGTYPE=WINDOWEDVDM;'             /* type of DOS session (windowed) */
+startup='STARTUPDIR=C:\;'                /* startup directory              */
+settings='SET DOS_FILES=45;'             /* required DOS settings          */
+open='OPEN=DEFAULT;'                     /* open now                       */
+ 
+call SysCreateObject classname, title, location,,
+    program||type||startup||settings||open, 'REPLACE'
+Return
+ 
+- (BOOTDOS.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* BOOTDOS.CMD: Sample code using REXXUTIL's SysCreateObject function   */
+/* Starts a DOS session, booting from a specific DOS image with         */
+/* specific DOS VDM settings.                                           */
+/* Rick McGuire:  MCGUIRE/GDLVM7                                        */
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/* The basic call is listed next.                                          */
+/* result = SysCreateObject(classname, title, location, setup)             */
+ 
+classname='WPProgram'
+title='Booted DR DOS'
+location='<WP_NOWHERE>'                  /* place in invisible folder      */
+program='EXENAME=*;'                     /* DOS program name (use shell)   */
+type='PROGTYPE=WINDOWEDVDM;'             /* type of DOS session (windowed) */
+image='C:\DRDOS.VM;'                     /* DOS image file                 */
+                                         /* required DOS settings          */
+settings='SET DOS_BACKGROUND_EXECUTION=ON;'
+open='OPEN=DEFAULT;'                     /* open now                       */
+ 
+call SysCreateObject classname, title, location,,
+    program||type||image||settings||open, 'REPLACE'
+Return
+ 
+- (REBUILD.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* REBUILD.CMD: Sample code using REXXUTIL's SysCreateObject function   */
+/* Can be used to rebuild objects created during the installation of    */
+/* your OS/2 system. The \OS2\INSTALL\INI.RC file contains information  */
+/* that can be used by the SysCreateObject function.                    */
+/* The INI.RC file is used by MAKEINI.EXE to create your OS2.INI file   */
+/* Syntax:  Enter  "REBUILD ?" for complete syntax                      */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+'@ECHO OFF'
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+Arg parms
+cmdparms=parms /* Save command line parms for later processing */
+ 
+/* Until REXXUTIL offers a function call to retrieve the OS2 boot drive   */
+/* we assume the environment variable COMSPEC has location of boot drive. */
+BtDrv=filespec('drive',value('COMSPEC',,'OS2ENVIRONMENT'))
+ 
+parse upper var cmdparms type '(' inifile .
+/* If user does not enter location of *.RC file then try to find it */
+If inifile='' Then inifile=BtDrv||'\OS2\INI.RC'
+rcx=stream(inifile,'C','Q EXISTS')
+If rcx='' Then Do
+   Say '';Say '';Say inifile 'not found'
+   Return
+End
+type=left(type,1)
+If verify(type,'FPOA') Then Signal Helper
+ 
+/* Initialize tables and table counters */
+iniftab.=''; iniptab.='' iniotab.=''; /*Folders, Programs, Others */
+iniflns=0;   iniplns=0;  iniolns=0;
+initab.='';  inilns=0;
+Call stream inifile,'C','CLOSE'
+Do while lines(inifile)>0  /* Read RC file into tables */
+   lne=linein(inifile)
+   parse var lne '"PM_InstallObject"' lne
+   If lne\='' Then Do
+      parse var lne '"'rest1'" 'lne
+      parse var lne '"'setup'"'
+      parse var rest1 title';'object';'location
+      If object='WPFolder' Then Do
+         iniflns=iniflns+1
+         iniftab.1.iniflns=object;   iniftab.2.iniflns=title;
+         iniftab.3.iniflns=location; iniftab.4.iniflns=setup;
+      End
+      Else If object='WPProgram' Then Do
+         iniplns=iniplns+1
+         iniptab.1.iniplns=object;   iniptab.2.iniplns=title;
+         iniptab.3.iniplns=location; iniptab.4.iniplns=setup;
+      End
+      Else Do
+         iniolns=iniolns+1
+         iniotab.1.iniolns=object;   iniotab.2.iniolns=title;
+         iniotab.3.iniolns=location; iniotab.4.iniolns=setup;
+      End
+   End
+End
+Call stream inifile,'C','CLOSE'
+ 
+/* Calculation for screen loop */
+parse value SysTextScreenSize() with row col
+scrsz=row-12
+ 
+If type='F' | type='A' Then Do; /* Folder routine */
+   objt='Folder'; inilns=iniflns;
+   Do i=1 to inilns; Do j=1 to 4;
+      initab.j.i=iniftab.j.i
+   End; End;
+   Call DispSel
+End;
+If type='P' | type='A' Then Do; /* Program routine */
+   objt='Program'; inilns=iniplns;
+   Do i=1 to inilns; Do j=1 to 4;
+      initab.j.i=iniptab.j.i
+   End; End;
+   Call DispSel
+End;
+If type='O' | type='A' Then Do; /* Other routine */
+   objt='Other'; inilns=iniolns;
+   Do i=1 to inilns; Do j=1 to 4;
+      initab.j.i=iniotab.j.i
+   End; End;
+   Call DispSel
+End;
+Return; /* When get here done with processing */
+ 
+/* Routine to display objects and allow selection */
+DispSel:
+key=''
+Do while key\='Q'
+   Call SysCls; Say '';Say objt' objects found in: 'inifile;Say '';
+   Do i=1 to inilns
+      If trunc(i/scrsz)==i/scrsz Then Call Promptx 1
+      If key='Q' Then leave
+      n=right('  '||i,3)||') '||left(initab.2.i||copies(' ',30),30)
+      n=n||left(initab.3.i||copies(' ',20),20)
+      Say n
+   End
+   If key\='Q' Then Call Promptx 0
+End
+Return
+ 
+/* Screen loop routine also calls object build routine */
+Promptx: Arg scr
+Say '';Say 'To attempt to rebuild an object enter the number of the object'
+If scr=0 Then Say 'or enter Q to quit...'
+Else Say 'or press enter to show next screen...  Or enter Q to Quit...'
+pull key .
+If (key>=1) & (key <=inilns) then,
+    rcx=BldIt(initab.1.key,initab.2.key,initab.3.key,initab.4.key)
+If scr=1 Then Do;
+   Call SysCls;Say '';Say objt' objects found in: 'inifile;Say '';
+End;
+Return
+ 
+/* Routine to build object */
+BldIt: Parse Arg object,title,location,setup
+If object='WPFolder' Then Do
+   call SysCls
+   Say '';Say '';
+   Say 'WARNING: Any attempt to rebuild a folder object will first'
+   Say '         delete each and every object in that folder!!!!'
+   Say ''
+   Say 'If you really do want to rebuild: 'title
+   Say 'Press Y, any other key will not rebuild.'
+   parse upper value SysGetKey('NOECHO') with key
+   If key<>'Y' Then Return ''
+End
+Say 'SysCreateObject('object', 'title', 'location', 'setup', R)'
+/* Build object using REPLACE as duplicateflag */
+result = SysCreateObject(object, title, location, setup, 'R')
+If result=1 Then Say '...   Object created!'
+Else             Say '...   Not created! Return code='result
+Say '';Say 'Press ENTER to continue...'
+Pull ans
+Return result
+ 
+/* Syntax help */
+Helper:
+call SysCls
+Say '';Say ''; Say 'REBUILD:'
+Say 'Routine to rebuild system installed objects listed in *.RC files.'
+Say 'Can be used as an alternative to using the MAKEINI command.'
+Say 'Your INI.RC file is used by MAKEINI.EXE during installation to'
+Say 'create your OS2.INI file.'
+Say '';
+Say 'Any attempt to rebuild an object first deletes any object that'
+Say 'is using that same <objectid>. This can be useful if you want to'
+Say 'restore an object back to its original installed state. This can'
+Say 'also be bad since if you rebuild a folder it first deletes all'
+Say 'objects in it since that is its initial install state.'
+Say ''; Say 'Syntax:';Say '';
+Say 'REBUILD object [(filespec]'
+Say '';Say 'Valid objects A(ll), F(olders), P(rograms), O(ther)'
+Say 'Can also can use (filespec for name of *.RC file, default is \OS2\INI.RC'
+Exit
+ 
+- (LPTADD.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* LPTADD.CMD: Sample code using REXXUTIL's SysIni function.            */
+/* Routine will expand the number of LPT ports the WorkPlace Shell      */
+/* recognizes from LPT1-3 to LPT1-9. Also a routine to add LPT3-9 to    */
+/* the WIN-OS2 WIN.INI file.                                            */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+'@ECHO OFF'
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/* The basic call for setting a single key value is listed next.        */
+/* result = SysIni([inifile], app, key, val)                            */
+ 
+call SysCls; Say '';
+Say 'Using REXXUTILs SysIni call to add LPT4-9 to the WorkPlace Shell'
+Say '';Say 'Press Y to add/initialize LPT4-9 ports...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key='Y' Then Do
+   Say 'LPT Ports: setting up for LPT4-9 ports...'
+   Do n=4 to 9
+      Say ' Setting up PM_LPT'n'...'
+      rx=SysIni('SYSTEM', 'PM_SPOOLER_PORT', 'LPT'n, ';'||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+      rx=SysIni('SYSTEM', 'PM_LPT'n,         'DESCRIPTION', 'LPT'||n||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+      rx=SysIni('SYSTEM', 'PM_LPT'n,         'INITIALIZATION', ';'||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+      rx=SysIni('SYSTEM', 'PM_LPT'n,         'PORTDRIVER', 'PARALLEL;'||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+      rx=SysIni('SYSTEM', 'PM_LPT'n,         'TERMINATION', ';'||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+      rx=SysIni('SYSTEM', 'PM_LPT'n,         'TIMEOUT', '45;'||'00'x)
+      If rx\='' Then Say 'LPT'n' Bad result='result
+   End
+   Say 'LPT4-9 added... Press any key to continue...'
+   SysGetKey('NOECHO')
+End
+ 
+call SysCls; Say '';
+Say 'Can now attempt to add LPT3-9 to your WIN-OS2 WIN.INI file.'
+Say '';Say 'Press Y to attempt to add LPT3-9 ports to WIN-OS2...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key='Y' Then Do
+  /* Change \OS2\MDOS\WINOS2\WIN.INI to add more ports LPT3-LPT9 */
+  win.='';winnew.='';
+  /* Until REXXUTIL offers a function call to retrieve the OS2 boot drive  */
+  /* we assume the enviroment variable COMSPEC has location of boot drive. */
+  BtDrv=filespec('drive',value('COMSPEC',,'OS2ENVIRONMENT'))
+  fn=BtDrv'\OS2\MDOS\WINOS2\WIN.INI';
+  fnx=stream(fn,'C','QUERY EXISTS')
+  fn=fnx;
+  If fn\='' Then Do /* If file exists then process adding extra ports */
+     Call stream fn,'C','CLOSE'
+     Do i=1 to 10000 while LINES(fn)>0
+        parse value linein(fn) with win.i
+     End
+     Call stream fn,'C','CLOSE'
+     i=i-1; k=0;
+     Do j=1 to i /* Look for FILE:= then if line before = LPT2.OS2= add 3-9 */
+        If win.j='FILE:=' Then Do
+           m=j-1; winchg=no;
+           If win.m='LPT2.OS2=' Then Do
+              Say 'LPT Ports: setting up for Windows LPT3-9 ports...'
+              winchg=yes;
+              Do n=3 to 9
+                 Say ' Setting up: LPT'n'.OS2='
+                 k=k+1; winnew.k='LPT'n'.OS2='
+              End;
+           End;
+        End;
+        k=k+1;
+        winnew.k=win.j;
+     End;
+     If winchg=yes Then Do;
+        parse var fnx fnx'.' .
+        ifn=fnx||'.???';
+        ifn=SysTempFileName(ifn)
+        '@COPY' fn ifn '1>NUL 2>NUL' /* Copy original to backup name */
+        Say 'Copy of' fn 'saved as' ifn
+        Say 'Writing' fn 'with added lines.'
+        call lineout fn,,1 /* Start writing at first character */
+        Do i=1 to k /* write file back out */
+           call lineout fn,winnew.i
+        End
+        Call stream fn,'C','CLOSE'
+     End;
+     Else Say 'Lines not added, either already done or not what we expect.'
+  End;
+  Else Say 'Could not locate' fn 'program ending...'
+End;
+Say 'LPTADD ending...'
+Exit
+ 
+- (OBJECTID.CMD) - - --  - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* OBJECTID.CMD: Sample code using REXXUTIL's SysIni function.          */
+/* Routine will display the OBJECTIDs known to the WorkPlace Shell      */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+'@ECHO OFF'
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/* List ObjectIds */
+App='PM_Workplace:Location'
+call SysIni 'USER', App, 'All:', 'Keys'
+if Result \= 'ERROR:' then do
+   Call SysCls
+   Say '';Say '';Say 'Listing ObjectId information';Say '';
+   parse value SysTextScreenSize() with row col
+   j=row-10
+   Do i=1 to Keys.0
+      If trunc(i/j)==i/j Then Do
+         Say '';Say 'Press any key to show next screen...'
+         key=SysGetKey()
+         Call SysCls
+         Say '';Say '';Say 'Listing ObjectId information';Say '';
+      End
+      Say Keys.i
+   End
+End
+Else Say 'Error querying for' App
+Return
+ 
+- (FONTS.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* FONTS.CMD: Sample code using REXXUTIL's SysIni function.             */
+/* Routine will display the FONTS known to the WorkPlace Shell          */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+'@ECHO OFF'
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+/* List installed Fonts */
+App='PM_Fonts'
+call SysIni 'USER', App, 'All:', 'Keys'
+If Result \= 'ERROR:' then do
+   Do j=1 to Keys.0
+      Keys.j=Keys.j 'Installed as:' SysIni('USER', App, Keys.j)
+   End
+   Call SysCls
+   Say '';Say '';Say 'Listing Installed Fonts';Say '';
+   parse value SysTextScreenSize() with row col
+   j=row-10
+   Do i=1 to Keys.0
+      If trunc(i/j)==i/j Then Do
+         Say '';Say 'Press any key to show next screen...'
+         key=SysGetKey()
+         Call SysCls
+         Say '';Say '';Say 'Listing Installed Fonts';Say '';
+      End
+      Say Keys.i
+   End
+End
+Else Say 'Error querying for' App
+Return
+ 
+- (ICONRES.CMD) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+/* ICONRES.CMD: Sample code using REXXUTIL's SysCreateObject function   */
+/* Routine will create a folder containing many icons available in      */
+/* installed DLLs on an OS/2 V2 system. Shows how to use the setup      */
+/* string parm: ICONRESOURCE                                            */
+/* Mike Lamb: MIKELAMB/KGNVMC                                           */
+'@ECHO OFF'
+/* Load REXXUTIL */
+call rxfuncadd sysloadfuncs, rexxutil, sysloadfuncs
+call sysloadfuncs
+ 
+call SysCls
+Say '';
+Say 'Using REXXUTILs to demonstrate use of the ICONRESOURCE parameter.'
+Say 'A folder will be created and populated with various icons found'
+Say 'in some installed DLL files.'
+Say '';
+Say 'ICONRESOURCE is a SysCreateObject setup string parameter, has syntax:'
+Say '';
+Say '  ICONRESOURCE=id module       Ex:  ICONRESOURCE=3 PMWP;'
+Say '  id=number of the icon resource, module=filename of the DLL'
+Say ''; Say 'NOTE: Over 70 icons, program will run for a minute or two.'
+Say '      After program ends the WPS will continue to resolve objects, also'
+Say '      the building of the objects adds approx 100K to your OS2.INI.'
+Say '';Say 'Press Y to add the folder to Desktop and populate...';Say '';
+parse upper value SysGetKey('NOECHO') with key
+If key<>'Y' Then Exit
+ 
+/* Build folder for icons */
+call charout ,'Building: ICONRESOURCE Icon Folder'
+result = SysCreateObject('WPFolder', 'ICONRESOURCE^Icon Folder',,
+        '<WP_DESKTOP>', 'OBJECTID=<ICN_FOLDER>;', 'R')
+If result=1 Then call charout ,'...   Object created!'
+Else             call charout ,'...   Not created! Return code='result
+Say '';
+classname='WPAbstract'
+location='<ICN_FOLDER>'
+/* WPCONFIG 1-13 WPPRTMRI 3-16 19-23 */
+fn='PMWP'
+Do i=1 to 75
+   If i<5 | i=13 | (i>15 & i<21) | i=22 | (i>23 & i<30) | i=32 | i=33,
+    | i=44 | i=46 | i=48 | i=52 | i=53 | (i>55 & i<73) Then Call BldObj
+End
+fn='WPCONFIG'
+Do i=1 to 13
+   Call BldObj
+End
+fn='WPPRTMRI'
+Do i=3 to 23
+   If (i<17 | i>18) Then Call BldObj
+End
+Say '';Say 'All done, to remove drag folder to shredder...'
+Exit
+ 
+/* Build Object */
+BldObj:
+if i<10 then j='0'||i
+else j=i
+title=fn'-'||j
+setup='ICONRESOURCE='||j||' 'fn';OBJECTID=<ICN-'fn'-'||j||'>'
+call charout ,'Building: 'title
+result = SysCreateObject(classname, title, location, setup, 'R')
+If result=1 Then call charout ,'...   Object created!'
+Else             call charout ,'...   Not created! Return code='result
+Say '';
+Return
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+((END REXX CMD SAMPLES))
+ 
+((BEGIN CODE FRAGMENTS))
+- (SYSSET)  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+System Settings
+===============
+During our attempts at customizing the shell using REXXUTILs for newly created
+workstations we discovered many items can be controlled. Our first attempt was
+to turn off the default setting for Workplace Shell Print Screen. We wanted it
+disabled instead of enabled (saves our customers from accidentally printing
+the workplace shell screen contents :-)
+From there we learned other items could be changed:
+ 
+Remember the basic SysIni call is:
+  result = SysIni([inifile], app, key, val)
+ 
+Note: Some items if changed did not seem to take effect until the next reboot.
+ 
+To see the menu items that can be changed go to:
+ OS/2 System / System Setup / System, Window tab
+ 
+Button appearance for windows
+-----------------------------
+/* Hide button = 1 plus hex 0 */
+result = SysIni('USER', 'PM_ControlPanel', 'MinButtonType', '1'||'00'x)
+/* Minimize button = 2 plus hex 0 */
+result = SysIni('USER', 'PM_ControlPanel', 'MinButtonType', '2'||'00'x)
+ 
+Animation
+---------
+/* Enabled = hex 01 00 00 00 */
+result = SysIni('USER', 'PM_ControlPanel', 'Animation', '01000000'x)
+/* Disabled = hex 00 00 00 00 */
+result = SysIni('USER', 'PM_ControlPanel', 'Animation', '00000000'x)
+ 
+Minimize button behavior
+------------------------
+/* Hide Window = 1 plus hex 0 */
+result = SysIni('USER', 'PM_ControlPanel', 'HiddenMinWindows', '1'||'00'x)
+/* Minimize window to viewer = 2 plus hex 0 */
+result = SysIni('USER', 'PM_ControlPanel', 'HiddenMinWindows', '2'||'00'x)
+/* Minimize window to desktop = 3 plus hex 0 */
+result = SysIni('USER', 'PM_ControlPanel', 'HiddenMinWindows', '3'||'00'x)
+ 
+Object Open Behavior
+--------------------
+/* Display existing window; delete CCVIEW key */
+result = SysIni('USER', 'PM_Workplace', 'CCVIEW', 'DELETE:')
+/* Create new window; CCVIEW key set to 'ON' */
+result = SysIni('USER', 'PM_Workplace', 'CCVIEW', 'ON'||'00'x)
+ 
+To see the menu items that can be changed go to:
+ OS/2 System / System Setup / System, Print Screen tab
+ 
+Print Screen
+------------
+/* Disable print screen */
+result = SysIni('USER', 'PM_ControlPanel', 'PrintScreen', '0'||'00'x)
+/* Enable print screen */
+result = SysIni('USER', 'PM_ControlPanel', 'PrintScreen', '1'||'00'x)
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+((END CODE FRAGMENTS))
+ 
+END: REXXUTIL Information and Samples

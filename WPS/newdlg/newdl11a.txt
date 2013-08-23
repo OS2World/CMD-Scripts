@@ -1,0 +1,17 @@
+Upload Information Template for CDROM
+=====================================
+
+Archive Name:             newdl11a.zip
+Program Description:      An update/fix to the newdlg11.zip
+Operating System/Version: OS/2 Warp 3.0 and above (maybe 2.1, don't know)
+Program Source:           Included.
+Replaces:                 None, but updates newdlg11.zip
+
+Note:                     The old PATCH.CMD didn't work with CMD.EXE...
+                          This one does.
+
+Your name:                Tomas Ogren
+Your email address:       stric@freenet.hut.fi
+
+Proposed directory for placement:
+                          /os2/patches (or /os2/wpsutil)
