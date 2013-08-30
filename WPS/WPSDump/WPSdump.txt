@@ -1,0 +1,61 @@
+WPSDump 0.1, a backup tool for your WPS desktop.
+================================================
+19/Oct/2005 - Yuri Dario <mc6530@mclink.it>
+
+This code is released under the GPL license, see COPYING for details.
+This software is provided AS IS, use it at your own risk.
+
+
+System requirements:
+--------------------
+- eComStation 1.0,1.1,1.2.
+- OS/2 Warp.
+- file system with long file name support.
+- recent kernels if you have older wptools.dll in your LIBPATH.
+
+
+WPSDump
+-------
+Use this rexx script to make a backup of your desktop or part of your desktop.
+A file named backup.log is used to save backup progress and errors.
+
+
+WPSRestore
+----------
+This rexx script should have been copied to your dump directory. Run from there.
+A file named restore.log is saved in current folder: it will record restore
+progress and possible errors.
+For example, shadows are likely to be skipped if the real object is still not
+present (forward reference); the same happens for objects of unregistered classes.
+Objects with empty titles will be replaced with ?.
+If you are about to restore a full desktop, check first lines in folder.obj:
+these are references to folder desktop, check setup string carefully for possible
+differences, or remove all the record if the desktop is already existing (well,
+I think it is not possible to restore the desktop folder, you need at least a
+running WPS to execute this script).
+
+
+Known bugs
+----------
+- does not register classes
+- I suspect it will fail to restore some kind of object classes or with
+  incomplete setup data.
+- shadows not always created.
+
+
+Support
+-------
+Since this is a OpenSource freeware product there are no
+formal support options available.
+
+
+Donations
+---------
+Since this software is developed for free, donations are welcome! you can use PayPal
+to donate me and support OS/2 developement. See my homepage for details, or ask :-)
+At least, a post card is welcome!
+
+===============================================================================
+Yuri Dario <mc6530@mclink.it>
+http://www.os2power.com/yuri
+

@@ -1,0 +1,965 @@
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³                                                                         ³
+³                    SCSI TAPE BACKUP for OS/2 2.0                        ³
+³                    ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ                        ³
+³                                                                         ³
+³                             Version 2.12                                ³
+³                                                                         ³
+³       Author: Andreas Kaiser                                            ³
+³               Danziger Str. 4                                           ³
+³               D-7000 Stuttgart 70                                       ³
+³               Germany                                                   ³
+³                                                                         ³
+³               Fidonet:  2:241/7220.9                                    ³
+³               Internet: ak@ananke.stgt.sub.org                          ³
+³               Voice:    49-711-766116                                   ³
+³                                                                         ³
+³        IF YOU CAN USE ELECTRONIC MAIL, PLEASE DO SO. DON'T CALL         ³
+³        BY VOICE UNLESS ABSOLUTELY UNAVOIDABLE.                          ³
+³                                                                         ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+$Id: readme.os2,v 1.27 1993/02/22 12:08:32 ak Exp $
+
+Legal notices:
+--------------
+
+     BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO
+WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. 
+EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
+OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS
+WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF
+ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+     IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
+AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU
+FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
+
+Der alternative Device-Driver SCSITAPE.SYS unterliegt nicht dem GNU
+Copyleft. Der Quellcode dieses Treiber ist nicht erh„ltlich. Sie k”nnen
+SCSITAPE.SYS in kommerzieller Umgebung nutzen, Sie drfen ihn jedoch
+nicht verkaufen oder auf andere Art Geld oder andere Gegenleistungen
+dafr erhalten. Sie drfen diesen Treiber nicht als Basis eines
+kommerziellen Produktes einsetzen, auch nicht als Beigabe.
+
+English translation of the sentences about SCSITAPE.SYS (the german
+version has priority):
+
+The alternate device driver SCSITAPE.SYS is not governed by the GNU
+Copyleft. It's source code is not available. You can use SCSITAPE.SYS
+within a commercial environment, but you may not sell it or make profit
+in other ways. You may not use it as a base for a commercial product or
+as an add-on to a product.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+Thanks to Kai Uwe Rommel for beta test, several fixes and enhancements
+and to Eberhard Mattes for his great OS/2 development environment.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Contents:
+---------
+
+	Binaries:
+	.........
+
+TAR.EXE		Modified GNU-TAR 1.10 for OS/2 2.0 and tape driver.
+		32-bit version using EMX 0.8f. No EMX.DLL required.
+
+TAPE.EXE	Tape control utility.
+
+COMPRESS.EXE	A file compression program for OS/2, invoked by the
+		"-z" tar option. The compression rate is not as good
+		as LHARCs and it is not as fast as PKZIP -es, but
+		COMPRESS can be used with pipes on both ends. It is
+		an OS/2 port of the well known Unix compress program.
+		It supports 16-bit compression mode, of course.
+
+BUFFER.EXE	Pipe buffer & reblock program for OS/2. Invoked by
+		the "-z" option when operating on character devices.
+
+SCSITAPE.DMD	Tape device driver for OS/2 2.0, based on an ADD SCSI
+		base device driver (such as AHA154X.ADD).
+
+SCSITAPE.SYS	Alternate device driver, based on OS2SCSI.DMD.
+
+ASPITAPE.SYS	Alternate device driver, based on ASPI (OS2ASPI.DMD).
+
+README.ABS	An overview description.
+README.OS2	This file.
+1.10/TAR.TEX	TeXinfo documentation of original TAR.
+
+	Sources:
+	........
+
+1.10/*		GNU tar 1.10.
+TAPE/*:		Tape control program.
+UTIL/*: 	compress.d, buffer.c
+LIBX/*:		Some OS/2 utility functions and library replacements.
+OS2-ADD/*:	Tape device driver based on the ADD interface.
+OS2-ASPI/*:	Tape device driver based on the ASPI interface.
+OS2-DD/*:	OS/2 device driver support library .
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+The drivers:
+------------
+
+There are three alternate versions of the device driver. SCSITAPE.DMD
+is based on the ADD driver, SCSITAPE.SYS is based on OS2SCSI.DMD and
+ASPITAPE.SYS is based on Adaptecs ASPI interface definition which is
+implemented by OS2ASPI.DMD.
+
+Prerequisites:
+
+    SCSITAPE.DMD:
+	- SCSI ADD driver like AHA154X.ADD.
+
+    SCSITAPE.SYS
+	- SCSI ADD driver like AHA154X.ADD.
+	- Installed OS2SCSI.DMD.
+	- SCB support built into the SCSI adapter (IBM PS/2) or driver.
+	  OS2SCSI.DMD emulates the required SCB commands starting with
+	  syslevel 2.00.1, but nevertheless it crashed with an AHA1542.
+
+    ASPITAPE.SYS
+	- SCSI ADD driver like AHA154X.ADD.
+	- Installed OS2ASPI.DMD.
+	- Syslevel >= 2.00.1 (service pack).
+
+If you run a SCSI adapter not listed below, you may try all versions in
+the order SCSITAPE.DMD -> ASPITAPE.SYS -> SCSITAPE.SYS. But be prepared
+for immediate or delayed system crashes. Note that a SCSI driver fault
+can damage filesystems, so backup your filesystems before.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Tested:
+-------
+
+Host adapters, tested with SCSITAPE.DMD:
+
+    Good:
+	AHA1542B, AHA1742
+	DPT2011			(Mark Leidecker - 2:241/5111.3@fidonet)
+	Future Domain TMC-885	OS/2 SYSLEVEL >= 2.00.1 (Service Pack)
+				(Rob Prikanowski - rpr@oce.nl)
+	Future Domain TMC-1650	The tape's SCSI ID must be set to 7
+				(toy@alydar.crd.ge.com)
+	Future Domain TMC-1670	Service Pack required
+				(manne@minsk.docs.uu.se)
+				
+
+    Bad:
+	IBM PS/2 SCSI
+	AHA1522			(Wolfgang Franke - wfranke@blabel.ppp\
+						.informatik.uni-muenchen.de)
+
+Host adapters, tested with ASPITAPE.SYS:
+
+    Good:
+	AHA1542B		OS/2 SYSLEVEL >= 2.00.1 (Service Pack)
+	Future Domain TMC-1670	Service Pack required
+				(manne@minsk.docs.uu.se)
+
+Host adapters, tested with SCSITAPE.SYS:
+
+    Good:
+	IBM PS/2 SCSI 32-bit version
+
+    Bad:
+	AHA1542B
+
+Tape devices:
+
+    With QFA (Quick File Access) using SCSI-2 commands:
+	Tandberg TDC4200 SCSI-2
+	Tandberg TDC4120 SCSI-2
+	Tandberg TDC3820 SCSI-2	(Manfred Huber - 100021.3416@compuserve.com)
+	HP DAT 35470A/80A	(Martin Vorlaender - 2:241/3420.1@fidonet)
+
+    With QFA (Quick File Access) using the Tandberg SCSI-1 commands:
+	Tandberg TDC4120 SCSI-1
+	Tandberg TDC3820 SCSI-1
+	Tandberg TDC3660 SCSI-1
+    	Wangtek 5150ES, depending on the firmware revision
+	Archive Viper 2150S	(Clemens.Beckstein@informatik.uni-erlangen.de)
+	Sankyo CP150		(manne@minsk.docs.uu.se)
+    	Archive Python DAT SCSI-2 - uses SCSI-1 QFA even though it claims
+				to be a SCSI-2 device (mark@mystic.ucdavis.edu)
+    				
+
+    No QFA:
+    	Wangtek 5150ES, depending on the firmware revision
+
+    No information about QFA:
+    	Sankyo, equivalent to
+	Wangtec 5525ES		(Mark Leidecker - 2:241/5111.3@fidonet)
+
+If you are successful and your SCSI adapter or tape device is not
+listed above, please send a note to one of my email addresses.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Installation:
+-------------
+
+    SCSITAPE.DMD:
+    -------------
+
+Copy SCSITAPE.DMD into the root or \OS2 directory (preferably) of your
+OS/2 boot partition (the only places where a BASEDEV driver is
+recognized). Add the following lines to CONFIG.SYS:
+
+	set TAPE=+++TAPE$<id>
+	BASEDEV=SCSITAPE.DMD TAPE$<id> A<ano> <id> S<mode>
+
+    SCSITAPE.SYS:
+    -------------
+
+SCSITAPE.SYS can be placed anywhere on your disks, as long as you
+specify its full path in CONFIG.SYS.
+
+	set TAPE=+++TAPE$<id>
+	DEVICE=your_path\SCSITAPE.SYS TAPE$<id> <unit> S<mode>
+
+Note that this driver installs successfully, even if there is no tape
+present in the system and no tape configured in the system setup
+(PS/2). This is a bug.
+
+    ASPITAPE.SYS:
+    -------------
+
+ASPITAPE.SYS can be placed anywhere on your disks, as long as you
+specify its full path in CONFIG.SYS.
+
+	set TAPE=+++TAPE$<id>
+	DEVICE=your_path\ASPITAPE.SYS TAPE$<id> A<ano> <id> S<mode>
+
+    all:
+    ----
+
+<mode>	2  for SCSI-2 devices, like TDC 3820 and TDC 4120
+	1  for Tandberg SCSI-1 devices (TDC 3660, TDC 3820, TDC 4120)
+	0  for other SCSI-1 devices
+
+	Note that there are both SCSI-1 and SCSI-2 versions of Tandberg
+	TDC 3820 and TDC 4120 available, with no visible difference.
+
+	Run "tape inq" and look for "ANSI 1" or "ANSI 2" to know what
+	SCSI level your device supports. Use a <mode> of 0 for this
+	purpose.
+
+<ano>	Adapter number, starting with 0. Only required if you have
+	multiple SCSI adapters with the same (!) ADD driver. If you have
+	several tape devices connected to different host adapters, use
+	different SCSI ID's to reduce the chance of confusion.
+
+<id>	SCSI ID
+
+<unit>	1 for the first sequential device, 2 for the second and so on.
+
+The driver's <mode> argument determines the way, how both the driver
+and the tape interface interpret and print SCSI error codes.
+
+If your device supports the QFA commands of Tandberg SCSI-1 (some
+Wangtek and Archive 150MB models) and the extended sense data conforms
+to SCSI-1 (Tandberg's does not), you should set <mode> to 0.
+
+Example:
+
+	set TAPE=+++TAPE$4
+	BASEDEV=SCSITAPE.DMD TAPE$4 4 S2
+
+The leading "+" characters in the file/device name signal TAR to use
+the tape device interface instead of the standard file interface.
+
+If you like to sort your CONFIG.SYS: The environment variable can be
+specified anywhere, only the programs TAPE and TAR use it to
+determine the default tape device name.
+
+The tape device must be present and powered on when OS/2 boots. This is
+enforced by the ADD interface. A device driver on top of an ADD driver
+can only access SCSI devices which are known at the time when the ADD
+driver is initialized.
+
+If you have more than one tape device, install the driver once for each
+device, using different SCSI IDs and different device names (TAPE$x).
+
+Hint: You may be tempted to use TAPE$0 for the first and TAPE$1 for a
+possible second tape device, but this way you are unable to specify the
+TAR tape device in short form as -4 or -5, since the options -0 and -1
+are reserved for floppy access.
+
+Add C<x>, where <x> is the device type code, to the driver command line
+if you want to use the driver and the TAPE program to access non-tape
+devices. This way you can run any arbitrary SCSI command on the device,
+unless it is locked by another driver. If the device is locked by
+OS2DASD.DMD (disks are), add /!DM:<id> to the SCSI ADD line - note that
+you will have to boot from floppy if this is your boot disk.
+
+ASPITAPE.SYS does not care about device types, the option C<id> is
+ignored in ASPITAPE.SYS.
+
+	SCSITAPE.DMD:
+
+If you have a seperate monochrome video card in your machine, you may
+want to add the option D3 to the BASEDEV=SCSITAPE.DMD line. The driver
+will display all available BASEDEV device driver info on the monochrome
+screen at system boot time. Remove this option after getting this info
+once because it will seriously slow down operation. As a side effect,
+you will definitely know which of your device drivers supports more
+than 16MB of memory.
+
+Do *not* add /!SM:<id> to the SCSI driver's command line as this option
+disables the tape driver too.
+
+If the device is locked by OS2SCSI.DMD (e.g. CDROM), comment out
+OS2SCSI.DMD.
+
+	ASPITAPE.SYS:
+
+If the device is locked by OS2SCSI.DMD, add /SM:<id> to the ADD driver
+command line.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Add SCSI tape support to your OS/2 boot disk:
+---------------------------------------------
+
+You may want to create a boot diskette with SCSI tape support, to be
+able to restore your files in case of a damaged hard disk. Make a boot
+diskette using the REXX program MAKEBOOT or IBMs SE20BOOT (available on
+many FTP servers and BBSs).
+
+Copy the device driver and its prerequisites (see above) to the
+diskette and replace the line BASEDEV=IBMINT13.I13 by
+BASEDEV=AHA154X.ADD (or whatever you are using). Add the configration
+statements as shown above.
+
+Caution: an unmodified MAKEBOOT disk as well as the standard OS/2 boot
+disks will probably not allow any SCSI device access except for the
+first two BIOS disks, since there is no SCSI driver installed. When
+booting non-IBM machines from unmodified diskettes, OS/2 runs the INT13
+driver instead of the SCSI driver. The INT13 driver does not allow SCSI
+device access except for the two BIOS mapped harddisks.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+GNU TAR:
+--------
+
+This is not an introduction into TAR. Look into the TeX file or a good
+Unix book to learn more about the usage of TAR.
+
+If TAR is invoked without explicit archive specification or with a
+archive filename beginning with "+", it always positions to end-of-tape
+before data is written to the tape and it automatically appends a
+filemark after writing all data. This way TAR never erases existing
+tape contents when you accidentally forget the -f switch on the command
+line (or if you pressed the wrong key - remember that "c" is close to
+"x"). If you want to rewrite the tape from the beginning, either erase
+the tape (TAPE ERASE, see below) or write an empty filemark at the
+beginning of the tape (TAPE REWIND MARK). If you write an empty
+filemark, you have to skip the first tape file (TAPE FILE) when reading
+the tape.
+
+Multi-volume archives will probably not work when the tape reaches its
+limit - it takes too long to test it. If you need multi-volume
+archives, use the option -L (--tape-length) to split the data in chunks
+of a size somewhat less than the maximum tape capacity.
+
+TAR uses whatever block size is preset in the tape device. If the block
+size is set to variable, the actual block size is the TAR block size
+(usually 10K). Use TAPE BLOCKSIZE to set the tape's blocksize.
+
+
+Get help with
+	tar --help
+
+New/changed options:
+
+	-0 -1		Alias for "-f a:" and "-f b:"
+
+			Writing diskettes in this way wipes out the DOS
+			format. You have to reformat such a diskette
+			before reuse with DOS/OS2 files.
+
+			Such diskette archives can be used to exchange
+			files with most Unix systems.
+
+			Not recommended for 360/720KB diskettes in
+			1.2MB/1.44MB drives.
+
+	-2 .. -7	Alias for "-f +++TAPE$2" .. "-f +++TAPE$7"
+
+	-E		Similar to "-v", but prints directory names
+			only as they (and the files within them) are
+			processed.
+
+	-D --tape-dir filename 
+			Use and maintain a tape directory. New data is
+			appended to the (text) file if it already
+			exists.
+
+			This option allows fast random access to single
+			files (QFA, Quick File Access), provided the
+			device supports the random access commands of
+			SCSI-2 or Tandberg TDC3600/3800 SCSI-1 series.
+			Many 60-150MB streamers do not support these
+			commands, so there is no way for a fast random
+			access on these models. This is a deficiency of
+			the SCSI command set prior to the SCSI-2
+			specification.
+
+			This option is not usable with compression mode.
+
+			NOTE: The format of the tape directory has changed.
+			Version 1 tape directories should not be used.
+
+	-g --incremental filename
+			The backups will be done incremental. Implies
+			--all-timestamps and --all-files. If --generation
+			is not specified, it defaults to "incremental".
+
+			Directories archived with -g contain info about
+			all files located in this directory. On restore,
+			all files, which exist in the directory on disk
+			but not in the directory on the archive, are
+			removed from the disk, since they are left over
+			from previous incremental restores. Standard
+			tar programs will complain about or ignore such
+			directories on the archive.
+
+			The specified file is the dumpfile.
+
+			The dumpfile is not used on restore. Nevertheless
+			it has to be specified on the commandline, for
+			syntactic reasons.
+
+	-G --generation O
+			Specifies the state and the strategy of incremental
+			backups.
+
+		When O is "f[irst]"
+
+			The first generation of incremental backups. The
+			dumpfile is overwritten, all files are archived.
+			Directories are archived in special GNU dump
+			format.
+
+		When O is "s[econd]"
+
+			All files and directories, which were changed
+			since the last update of the dumpfile, are
+			archived. Directories are archived in special GNU
+			dump format.
+
+			The dumpfile is *not* updated. If only first and
+			second generation incremental backups are used,
+			each second generation backup archives all files
+			changed since the last first generation backup.
+			You no longer need previous second generation
+			backup media, once a new one is written.
+
+		When O is "i[ncremental]"
+ 
+			All files and directories, which were changed
+			since the last update of the dumpfile, are
+			archived. Directories are archived in special GNU
+			dump format.
+
+			The dumpfile is updated to reflect the current
+			state of the archived filesystems. All future
+			second and incremental generation backups are
+			based on latest run.
+
+	-L <n>[B|K|M]	You can append B or K or M now, for B=blocksize
+			(TAR block size, not tape block size), K=KB, M=MB.
+
+		Example:
+			-L 145M	    Split archive into chunks of 145 MB.
+
+			Note that TAR does not account for the current
+			tape position. If there is less space on the
+			remaining tape than specified in -L, TAR will run
+			until it hits the physical end of the tape.
+
+	-p --all-files	Include extended attributes, SYSTEM and HIDDEN
+			files on backup. Account for extended attributes,
+			SYSTEM and HIDDEN file attributes on list and
+			restore. The SYSTEM and HIDDEN attributes are
+			encoded in the group and world execute bits
+			of the Unix style file mode. 
+
+			NOTE: The format of archived extended attributes
+			has changed. Version 2 does not restore (ignores)
+			EAs saved with version 1.
+
+	-pp --all-timestamps
+			Archive and restores all time stamps, including
+			access and creation time stamps of HPFS files.
+			This is the default for GNU dumps.
+
+	-Y --no-recursion
+			Save only the files specified on the command line.
+			Do not save contents of directories.
+
+	--fat		Convert long (i.e OS/2 HPFS or Unix) filenames
+			to FAT 8.3 filenames if required. Use this
+			option if you extract archives with filenames
+			that exceed the 8.3 FAT restrictions onto HPFS
+			file systems but want to convert to 8.3 names
+			unconditionally. If you extract onto FAT file
+			systems, names which do not fit into 8.3 are
+			converted in any case, if --fat is used or
+			not.
+
+	-Z		Was alias for -z. Now forces buffered pipe
+			compression mode. This is automatically done
+			when the archive is a character device (tape
+			or floppy).
+
+	--archive	Archive only those files, where the "archive"
+			bit is set. This bit is reset afterwards.
+
+			If you create a new file or modifiy a file in
+			DOS or OS/2, this bit is automatically set, so
+			this is OS/2's "official" way of running
+			incremental backups.
+
+	--reset-archive	Reset the "archive" bit for every file archived.
+			Use this option in a full backup, if you intend
+			to later use incemental backups via --archive.
+
+This is software designed for (and ported from) Unix systems, so don't
+expect all options and features to work. And don't be too much confused
+by some warnings, which may occur when TAR tries to set attributes
+or filetimes at times when this is not allowed under OS/2.
+
+This TAR automatically saves and restores Extended Attributes when -p
+is given. Path and filename specifications are sensitive to upper/lower
+case and forward/backward slash convention.
+
+Since the TAR format is standardized and available on every UNIX
+system, you can use TAR to exchange data with UNIX systems. Even
+compressed data is compatible with 32-bit Unix systems. If you intend
+to exchange tapes or diskettes with standard Unix tar programs, avoid
+the GNU TAR specific options -V, -g and the OS/2 specific option -p.
+
+Paths and filenames should be specified with forward slashes as path
+separators. On extract, paths and filenames must be specified exactly
+as shown by "TAR t" except for the trailing "/" of directories, which
+should be omitted.
+
+Hint: GNU TAR removes leading absolute path indicators such as drive
+letters and leading slashes (verbose) on create and extract, unless -P
+or --absolute-paths is specified. If put save several partitions into
+the same archive, you may not be able to distinguish files with the
+same path and filename on restore. Use separate archives (run TAR
+seperately) for each logical disk or specify --absolute-paths. You can
+still extract files to a relative path even when it was written with an
+absolute path.
+
+Hint: Although the output of the -v option looks nice, it may be wise
+not to use it for large backups. When a large number of small files is
+written to tape, the big amount of screen output may slow down the tape
+output, forcing the tape into inefficient stop-and-go mode. Use the -E
+option instead, if you like to get feedback about the progress of
+backups.
+
+Examples:
+
+	tar cp .		Backup the current directory and
+				all subdirectories including extended
+				attributes, hidden and system files.
+
+	tar tpv			List all files on the archive.
+
+	tar xpv			Restore whole archive. Restore extended
+				attributes and set attributes of hidden
+				and system files.
+
+	tar x path/file		Restore a single file or a directory
+				tree. Filenames are case sensitive.
+				Always use forward slashes.
+
+	tar -c -v -D c:/tar_maps/tape.dir c:/
+				Backup logical disk c: and append a
+				tape directory to the specified file.
+
+	tar -x -v -D c:/tar_maps/tape.dir this/is/a/single/file
+				Restore "this/is/a/single/file" using
+				the random access commands of SCSI-2
+				or Tandberg SCSI-1 models.
+
+OS/2 compressed backup performance: A 486 33MHz equipped with a 5MB/min
+streamer provides a compression rate of about 1.5 on a whole disk with
+90MB binaries and an effective disk data throughput of about 85 KB/sec
+and a tape data throughput of about 55 KB/sec. When storing the backup
+on a diskette (a way to exchange HPFS files), compressed and buffered
+(-Z, default if raw diskette) data throughput is faster than the
+diskette data throughput. Therefore compressed mode can be considerably
+faster than uncompressed mode, depending on the machine's speed and the
+data throughput of the backup device.
+
+WARNING: If a compressed archive contains a bad block, all data of the
+archive starting with the bad block is lost. Uncompressed archives are
+recoverable by manually skipping beyond the bad block, compressed
+archives are not recoverable. COMPRESS was not written with tape
+backups in mind.
+
+
+		- - -
+
+        Once again, due to some complaints - PLEASE READ:
+
+If used with the dedicated tape interface, this version of TAR always
+appends to all existing data on the tape, it skips existing tape data
+before new data is written to the tape. It does not erase existing tape
+contents. If there already was some data on the tape before (even if
+cpio, Sytos, ...), this is what you get when reading the tape from the
+beginning. If this data does not have the same archive format
+(compressed archive or another backup program), you'll get an error
+message like "doesn't look like a tar archive".
+
+If you want to rewrite the tape from the beginning, either erase the
+tape ("tape erase", see below, which is slow but recommended since it
+also retensions the tape in the case of a QIC tape device), or write an
+empty filemark at the beginning of the tape ("tape rewind mark").
+
+If you write an empty filemark to erase the tape, you have to skip the
+first tape file ("tape file") when reading the tape, else you get an
+error message.
+
+You may consider this stuff irritating, but the letters "c" for "create
+a tape archive" and "x" for "extract" are too close to each other. If
+you accidentally hit "c" instead of "x", you won't kill previous tape
+contents since the new data appends to logical EOT instead of killing
+your data.
+
+If you don't know if you tape drive supports QFA, run
+	tape tell
+	tape seek 1
+If both commands are accepted, you can be pretty sure it supports QFA.
+If you get something like "Illegal request", the device doesn't know
+about the QFA commands used in the mode you've choosen by the S<x>
+option (S0 and S1 use Tandberg's SCSI-1 commands, S2 uses the standard
+SCSI-2 commands).
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Tape utility - TAPE:
+--------------------
+
+Just run it without any arguments to get usage information. You can
+specify multiple verbs in a single call, unless the -Nowait option is
+given. Mostly case-insensitive, except for some dangerous commands
+which have to be specified in upper case.
+
+Examples:
+	-0 .. -7	Device TAPE$0 .. TAPE$7
+	rew		Rewind tape.
+	ret		Retension tape.
+	file		Skip until next filemark.
+	end		Position to end of written data.
+	mark		Write filemark.
+	erase		Erase tape.
+
+	read <file>	Read tape to file, write to stdout if <file> is "-".
+	write <file>	Write file to tape, read from stdin if <file> is "-".
+
+	speed <n>	TDC4120: <n>=1: slow (200KB/sec)
+				 <n>=2: fast (300KB/sec)
+				 (recognized at beginning of tape only)
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+A few words on blocks and sizes:
+--------------------------------
+
+Most tape devices with a capacity of at least 525MB can be used with
+different blocksizes. Both with fixed length blocks of 512 and 1024
+bytes as well as with variable length blocks. The default setting
+varies. The default setting of TAR is 512 bytes. If the default tape
+blocksize differs, you have to set the blocksize before running TAR,
+using
+	tape blocksize 512
+or	tape blocksize 1024
+or	tape blocksize 0	-- for variable length blocks
+
+You can get the current setting of the tape device with "tape mode 0".
+But note that there are devices, which do not show a valid value until
+the tape is read. Additionally, this value may depend on the type of
+the inserted tape.
+
+Tapes for QIC-24 (DC600A 60MB), QIC-120 (DC600XTD 120MB) and QIC-150
+(DC6150 150MB, DC6250 250MB) must be used with a blocksize of 512
+bytes. If DC6150/6250 tapes work and DC6320 or higher do not work, the
+tape device is probably set to a blocksize of 1024 bytes and switches
+down to 512 bytes when it recognizes a DC6150/6250 tape (Wangtec
+525MB).
+
+TAR works with block sizes of 512 and 1024 bytes (it should work with
+any reasonable fixed block size if it is a multiple of 512) as well as
+with variable block sizes.
+
+Don't confuse the TAR block size ("tar -b<n>") with the tape block size
+("tape blocksize <n>"). Unless variable length tape blocks are used,
+the TAR blocksize can be any value which is an exact multiple of the
+tape blocksize (default: 10KB). If variable length blocks are used, a
+tape block equals a TAR block. Note that TAR also knows about a "record
+size" which is the TAR file header and file alignment size and is fixed
+to 512 bytes by the TAR archive format.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Pipe buffer - BUFFER:
+---------------------
+
+Command line options:
+
+	-s <number>	Buffer size, 64K..4096K.
+	-b <number>	Reblock to a multiple of <number> bytes
+			per output block. Pad output with 0 if
+			necessary (<number> <= 32768).
+	-i <number>	Refill buffer when <number> % empty.
+	-o <number>	Flush buffer when <number> % filled.
+			Default for -i and -o is 100.
+
+When called with "-/" (or any other invalid option) as argument, BUFFER
+prints a small usage info. This usage shows the default buffer size as
+second number in the line corresponding to "-s".
+
+BUFFER is multi-threaded. If the buffer fill ratio permits according to
+the input and output tresholds, it will be active on both ends at the
+same time.
+
+If the buffer size is not specified on the command line, the default
+size can be specified with the environment variable BUFFER in KB. If
+not specified, the default buffer size depends on the version of the
+operating system:
+ 1.3: The size of the largest contiguous area (DosMemAvail) minus 1MB.
+ 2.0: 2MB.
+
+When copying a large file from one partition to another, BUFFER can
+considerably reduce the effects of disk positioning times by using:
+	buffer < input-file > output-file
+	
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Incremental backups:
+--------------------
+
+There are 3 alternatives:
+
+(1) To make incremental backups, where every increment is based on the
+previous increment:
+
+    full backup:
+	tar --create --incremental=dumpfile --generation=first ...
+    increment:
+	tar --create --incremental=dumpfile --generation=incr ...
+
+    To restore such backups, you have to restore the full backup first,
+    then all increments in the order they were created. The info saved
+    with each directory ensures, that no files will be left over which
+    have been erased before the last increment was created.
+
+(2) To make incremental backups, where the increments are based on the last
+full backup (this is an extension to original GNU tar 1.10, where the
+option -G is outdated and next to unusable):
+
+    full backup:
+	tar --create --incremental=dumpfile --generation=first ...
+    increment:
+	tar --create --incremental=dumpfile --generation=second ...
+
+    To restore such backups, you have to restore the full backup first,
+    then the last increment. You do not have to restore other increments.
+
+(3) To make incremental backups using the filesystem's "archive" bit:
+
+    full backup:
+	tar --create --reset-archive ...
+    increment:
+	tar --create --archive ...
+
+You can combine both (1) and (2). In this case, second or incremental
+generation backups will archive all files which were changed since the
+last first or incremental generation backup. You have to restore the
+full backup first, then all incremental generation backups in the order
+they were created, then the last second generation backup if it is
+newer than the last incremental generation backup.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Known bugs:
+-----------
+
+When there are multiple archives on the same tape and you read them
+sequentially using tar, you may get an error message like "I/O error"
+on every second run. Ignore this error message and continue.
+
+The reason for this message is TAR's own end-of-file mark which causes
+TAR to stop reading before having encountered the tape's filemark. The
+next run of TAR gets nothing but this filemark which results in the
+mentioned error message.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+--tape-length doesn't know about the current tape head position. If you
+append to a tape with existing contents, specifying the full tape
+length in --tape-length will not save you from a tape overrun.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+The device driver r/w interface (file access to TAPE$<id>) will not
+always correctly sense the current device block size, so run "tape
+blocksize <n>" before, to synchronize driver and device.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+The driver SCSITAPE.SYS installs successfully, even if there is no tape
+drive connected or configured. Reason: I have not found out how to call
+OS2SCSI.DMD in init phase, the corresponding DosDevIOCtl calls never
+return.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+There is no support for the "quick erase" option supported by some
+drives (HP 35480A) in this release. Although the changes are trivial,
+the current state of my source-code management votes against it. Use
+	tape CMD cdb=19,0,0,0,0,0
+instead (don't mistype or your system may hang!). If your drive accepts
+this command, you can erase a tape in a few seconds instead of an hour.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+When a tape is inserted, the very first TAPE command fails with "Unit
+Attention" or alike. This is no a bug but a feature of SCSI tape
+drives. TAR itself ignores it using a dummy command but TAPE is
+intended as a direct device interface, so it does not make attempts to
+hide informations from the user.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+When writing to a Wangtek or equivalent (Sankyo) drive, you may get
+"Seek to end of tape failed", when the tape is empty or the head is
+already positioned to end-of-tape at the time TAR is started. This is a
+bug/feature of Wangtek tape drives, you can ignore this message.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+TAR commands, which have to backspace or have to overwrite previous
+archive contents, are not supported when operating on tapes. Such as
+--append, --update, --delete, --verify.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+When you backup a FAT partition, TAR loudly complains about not being
+able to backup the file "ea data. sf". This is perfectly ok, since
+extended attributes are saved with each file individually. It makes no
+sense to save it, since the sole reason of this file is to cover the
+disk space used by extended attributes so that DOS CHKDSK doesn't
+complain about wasted disk space.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+TAR does not archive files starting with the character '#'. This is a
+bug in OS/2, not in TAR.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+After change of media, TAPE displays a message like "Unit attention".
+This is not a bug but a feature of SCSI devices. TAPE could skip this
+message just as TAR does, but TAPE is intended as a transparent
+low-level utility.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Changes since 2.01:
+-------------------
+
+	2.02:
+
+SCSITAPE.DMD: Debug mode was accidentally enabled by default.
+
+	2.03:
+
+TAR: Fixed a GNU tar bug. If access/creation times were not written to
+the archive ("-g" but not "-p"), tar nevertheless extracted dates from
+the header fields where the dates were expected. The result were funny
+dates such as xx.xx.2098 or xx.xx.1970, depending on your timezone. If
+you have such files on your disk, archive them and restore them using
+TAR (but avoid --all-timestamps). The access and creation dates will
+show the current date afterwards.
+
+Archiving access and creation dates when -p was given, wasn't the
+brightest idea anyway. If you want to make a system backup with all
+dates, use --all-timestamps or twice -p. Gnu dumps enable it by
+default.
+
+Specify --all-timestamps or twice -p to archive/extract access and
+creation timestamps (implicitly enabled for gnu dumps). Except in the
+case of a system backup/restore, restoring the creation timestamp isn't
+a very good idea as it disturbs future incremental backups.
+
+TAR: On extract, tar now correctly creates all required subdirectories
+in the path of a file. Previously only the trailing component was
+created (the corresponding code in tar relies on getting a specific
+error code from mkdir, but every system or library seems to behave
+differently in this respect).
+
+Removed -G aka --incremental. Renamed --listed-incremental to
+--incremental. Added a new -G aka --generation. The functionality of a
+plain -g hasn't changed though.
+
+OS/2 only: Added --all-files as an additional long option name for -p:
+
+-g aka --incremental now implies --all-files and --all-timestamps.
+
+	2.10:
+
+Added SCSITAPE.SYS, since SCSITAPE.DMD doesn't run on IBM PS/2
+machines. Note that this driver has a different license statement as
+all other programs and drivers distributed in this package.
+
+The Service Pack (2.00.1) contains a valid ASPI driver, so you now have
+to choose between 3 different tape device drivers :-).
+
+Due to a bug in OS/2 syslevel 2.00.1, earlier version of TAR may fail
+to backup extended attributes or may even crash.
+
+You can use the filesystem's archive bit for incremental backups now
+(thanks to Kai Uwe Rommel). See --archive and --reset-archive.
+
+QFA now works with a variable blocksize.
+
+	2.11
+
+Bugfix release. 2.10 didn't accept EAs when reading an archive. 2.11
+now creates correct archives and is able to read archives creates with
+2.10.
+
+	2.12
+
+TAR: Had to fix the very same bug again since the library function
+mkdir() changed in EMX 0.8f. It returns the unix-like error code now,
+when the dir already exists, so TAR once again failed to create the
+proper directories on extract.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+Notes:
+------
+
+I've got questions of the kind "I'm desperately seeking the command to
+format the tape.". Well, neither QIC (DC6xxx) nor DAT not Video8 tapes
+have to be formatted before use. Only floppy tapes have to be formatted
+because of a limitation of the used floppy controller.
+
+Although this version is compiled using EMX 0.8f, it's extended
+attribute support is not yet used. The EA representaion in the archive
+is still an aligned image of what OS/2 returns in its API. Things might
+change in future releases though.
+
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ

@@ -1,0 +1,98 @@
+
+WPSsafe(1)                     LOCAL                        WPSsafe(1)
+
+
+NAME
+     WPSsafe - A WorkPlace Shell backup/restore program
+
+SYNOPSIS
+     wpssafe {backup_name} [!]
+
+DESCRIPTION
+     WPSsafe is the easiest way to backup your current WorkPlace Shell
+     desktop, user, and system INI files.
+
+PREREQUISITES AND LIMITATIONS
+     WPSsafe requires GTAK, currently the best GNU TAR port to OS/2. It
+     is used to store the current desktop directory as-is.  At the
+     moment GTAK seems to be the only free program to do it properly.
+     To my experience Info-ZIP is a no-go solution.
+
+     For GTAK you need only the tar.exe, no settings are required for
+     WPSsafe.
+
+     WPSsafe requires the backup target directory (SafeDir) to be on a
+     HPFS volume.
+
+     Before restoring the desktop you do NOT have to erase the current
+     desktop.  Instead you have to reboot and do it before launching
+     WordPlace Shell.  One tedious way is to boot from floppies.  A lot
+     easier way is to use an excellent IBM EWS ShiftRun (or similar) to
+     launch CMD.EXE just before WPS (first example below).  Another
+     workable solution is the second example below.
+
+        1: CALL=...\ShiftRun.exe 5 \OS2\Cmd.exe
+        2: CALL=\OS2\CMD.EXE
+
+     You should customize WPSsafe to suit your own environment.
+     See later under LOCALIZATION.
+
+     This program has only been tested with OS/2 2.1 GA at the moment.
+
+OPTIONS
+     backup_name    This should preferably be current date in the form
+                    YYMMDD so that you can easily track older desktops
+                    if needed.  Naming conventions are up to the user,
+                    not author.
+
+     !              Initiates the restoration of desktop and inis.
+                    See PREREQUISITES AND LIMITATIONS!
+
+                    Please reboot immediately after restoration.
+
+FILES
+     Desktop.#.tar  Desktop directory tree tar with all directories,
+                    files, and extended attributes.
+     OS2.INI.#      Current user ini file from boot volume's \OS2
+                    directory.
+     OS2SYS.INI.#   Current systen ini file from boot volume's \OS2
+                    directory.
+
+     '#'  Stands for the program option 'backup_name'.
+
+LOCALIZATION
+     You'll have to localize WPSsafe.cmd to suit your own environment.
+     This consists of redefining the environment variables DESKTOP,
+     BOOTVOL, and SAFEDIR.  Be careful with all the slashes and
+     backslashes.
+
+     For OS/2 v2.0 DESKTOP you propably have to use quotes around the
+     directory name because of the spaces in it.
+
+     SAFEDIR has to be on a HPSF volume.
+
+IMPROVEMENT IDEAS
+     Change this to a REXX program and pass the backup name
+     automatically to the tar and copy statements. Personally I don't
+     think this is much of an improvement to the current version.
+
+     REXX version: I recommend naming the backups with statement
+     "Backup_name = Date('Sorted')".
+
+BUGS
+     Shouldn't be any... but you never know.
+
+HISTORY OF RELEASES
+     0   (4-Aug-93)  First release for personal usage only.
+     1  (17-Sep-93)  First public release.
+
+CREDITS
+     Andreas Kaiser for his excellent GNU TAR port to OS/2.
+
+AUTHOR
+     Kari Mattsson  (karmat@utu.fi)
+
+     If you have questions and/or problems, please Email to me.  Other
+     than that you are on your own here.  I'm not responsible to any
+     loss of data.
+
