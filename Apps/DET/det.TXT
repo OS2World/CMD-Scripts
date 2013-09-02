@@ -1,0 +1,211 @@
+               Anleitung zur Verwendung der Routine DET_E_A.CMD
+               ================================================
+                           (Datei: Anleitng.TXT)
+
+
+Die Routine DET_E_A.CMD dient der Eingabe von Zahlenwerten fÅr die verschiede-
+nen Matrixelemente mit Hilfe eines Texteditors. Daher darf diese Routine nicht
+das Attribut R (read only) haben. Als Kommandozeilen-Parameter wird der Routine
+DET_E_A.CMD die Ordnung (2 bis 20) der zu berechnenden Determinante Åbergeben.
+Die Routine DET.CMD enthÑlt den Gauss-Jordan-Algorithmus zur Berechnung von
+Determinanten. Sie hat das Attribut R (read only). DET_E_A.CMD und DET.CMD
+mÅssen sich im selben Verzeichnis befinden.
+
+Es wÑre keine Problem, die Routinen DET_E_A.CMD uns DET.CMD zu einer Routine
+zu vereinigen. Dies ist jedoch absichtlich nicht geschehen, weil bei der
+Eingabe von Zahlenwerten fÅr die verschiedenen Matrixelemente mit Hilfe eines
+Texteditors, wie es bei der Routine DET_E_A.CMD erforderlich ist, versehent-
+lich der Quelltext des Gauss-Jordan-Algorithmus beschÑdigt werden kînnte, der
+bei der hier gegebenen Aufteilung in zwei getrennte Routinen in DET.CMD sicher
+vor einer versehentlichen BeschÑdigung ist.
+
+In der Routine DET_E_A.CMD sind in deren "Urzustand" 400 Elementen, nÑmlich
+den 20 mal 20 Elementen einer quadratischen Matrix bereits Zahlenwerte zuge-
+wiesen worden. Hierbei ist es gleichgÅltig, ob diese Zahlenwerte zum Beispiel
+in der Form 3.4501, in der Form 34501E-4 oder in der Form .34501E+1 geschrie-
+ben worden sind. Es  m Å s s e n  immer 400 Zahlenwerte eingetragen bleiben,
+da sonst eine Fehlermeldung ausgegeben wird. Da aber diesen 400 Elementen ihre
+Zahlenwerte bereits im Urzustand der Routine DET_E_A.CMD zugewiesen worden
+sind, bedeutet diese -- fÅr das Zusammenwirken der Routinen DET_E_A.CMD und
+DET.CMD zwingende -- Bedingung fÅr den Anwender der Routine DET_E_A.CMD
+keinerlei Arbeit.
+
+Unter anderem werden diese 400 Zahlenwerte bei jedem Aufruf der Routine
+DET_E_A.CMD an die Routine DET.CMD Åbergeben.
+
+Aus dieser (20 mal 20)-Matrix kann man 19 in deren linken oberen Ecke begin-
+nende Unterdeterminanten der Ordnungen 2 bis 20 berechnen, die im weiteren
+Verlauf dieses Textes als "linksoben-bÅndige" (Unter)Determinanten bezeichnet
+werden. In Bezug auf die (20 mal 20)-Matrix sind diese 19 linksoben-bÅndigen
+(Unter)Determinanten natÅrlich spezielle Unterdeterminanten, fÅr den Anwender
+der Routine DET_E_A.CMD sind sie aber einfach nur Determinanten, die berechnet
+werden sollen. Welche von den bei der (20 mal 20)-Matrix mîglichen 19 links-
+oben-bÅndigen (Unter)Determinanten berechnet werden soll, mu· beim Aufruf der
+Routine DET_E_A.CMD als Parameter Åbergegeben werden.
+Zwei Anwendungsbeispiele erlÑutern die diesbezÅglichen Einzelheiten.
+
+Wem die in den folgenden zwei Anwendungsbeispielen beschriebene Verfahrensweise
+zur Berechnung einer Determinante zu umstÑndlich erscheint, der kann sich damit
+trîsten, da· auch in so vorzÅglichen kommerziellen wissenschaftlichen Program-
+men wie MATHEMATICA oder MATLAB die Eingabe der Elemente einer Matrix, deren
+Determinante berechnet werden soll, relativ umstÑndlich ist. Ein Vorteil von
+DET_E_A.CMD ist, da· die Zuweisung von Zahlenwerten an die Variablen  n0101
+bis  n2020  fÅr jede der 20 Zeilen in 20 Einzellisten am Anfang von
+DET_E_A.CMD geschehen kann. Da· man bei der Zuweisung von bis zu 400 Zahlen-
+werten an die Variablen  n0101  bis  n2020  einen Text-Editor benîtigt, dÅrfte
+in den meisten FÑllen kein Hindernis sein. Die Eingabe von bis zu 400 Zahlen-
+werten fÅr die Variablen  n0101  bis  n2020  beim Aufruf von DET_E_A.CMD als
+Kommandozeilen-Parameter wÑre um vieles umstÑndlicher und zudem mit einer
+grî·eren Anzahl von Mîglichkeiten, Eingabefehler zu machen, verbunden.
+                                                                    Seite 2
+
+Die Datei DETERG.DAT enthÑlt fÅr die im Urzustand der Routine DET_E_A.CMD
+eingestellten Zahlenwerte  n0101  bis  n2020  die Ergebnisse fÅr Det2 bis
+Det20, die sowohl mit DET_E_A.CMD mit DET.CMD berechnet worden sind als auch
+Vergleichsergebnisse, die mit MATHEMATICA berechnet worden sind.
+Die Ergebnisse von DET_E_A.CMD mit DET.CMD bestehen fÅr Ordnungen >10 aus
+mehr Dezimalstellen als die von MATHEMATICA ausgegebenen Ergebnisse. (Mir ist
+es jedenfalls nicht gelungen, bei der Berechnung von Determinanten MATHEMATICA
+zur Ausgabe von mehr als 16 Dezimalstellen zu veranlassen; mîglicherweise weis
+ich aber nur nicht, wie das gemacht werden mu·.) MATHEMATICA bringt die Ergeb-
+nisse, wie sie in DETERG.DAT zu finden sind, fast augenblicklich, wÑhrend
+DET_E_A.CMD mit DET.CMD einen mit steigender Ordnung der zu berechnenden
+Determinanten ansteigenden Zeitbedarf (bis zu einigen Sekunden).
+
+******************************************************************************
+
+Anwendungsbeispiel:
+===================
+
+Mit der Anweisung  Det_E_A 4  wird aus der quadratischen (20 mal 20)-Matrix
+die linksoben-bÅndige (4 mal 4)-Determinante berechnet.
+Diese (4 mal 4)-Determinante ist eine Determinante, die aus 4 Zeilen und
+4 Spalten mit den 16 Elementen
+                                     n0101 n0102 n0103 n0104
+                                     n0201 n0202 n0203 n0204
+                                     n0301 n0302 n0303 n0304
+                                     n0401 n0402 n0403 n0404
+
+besteht. Bei dem Aufruf Det_E_A 4 werden von der Routine DET_E_A.CMD zwei
+Parameter an die Routine DET.CMD Åbergeben, nÑmlich die an die Routine
+DET_E_A.CMD als Kommandozeilen-Parameter Åbergebene Zahl 4 und, fÅr den Anwen-
+der unsichtbar, alle 400 Zahlenwerte der 20 mal 20 Matrixelemente, und zwar in
+einer aus DET_E_A.CMD ersichtlichen geordneten Form. Der Parameter 4 bedeutet,
+da· von der Routine DET.CMD nur die 16 linksoben-bÅndigen Matrixelemente
+
+                                     n0101 n0102 n0103 n0104
+                                     n0201 n0202 n0203 n0204
+                                     n0301 n0302 n0303 n0304
+                                     n0401 n0402 n0403 n0404
+
+ausgewertet werden. Soll also die linksoben-bÅndige (4 Mal 4)-Determinante
+der (20 mal 20)-Matrix, deren Zahlenwerte noch die im Urzustand von
+DET_E_A.CMD voreingestellten Zahlenwerte sind, berechnet werden, so braucht
+der Anwender nur auf der Kommandozeile aus die Anweisung  Det_E_A 4
+einzugeben.
+
+Im Falle der in der Routine DET_E_A.CMD im Urzustand vorhandenen Zahlenwerte
+
+                                     1    2   3   4
+                                     4   -2  21  -5
+                                     5    2   7  19
+                                     1    2   0   9
+
+ist der Wert der daraus berechneten Determinante gleich 286 (siehe DETERG.DAT).
+                                                                    Seite 3
+
+Mîchte man, was der Normalfall der Anwendung der Routine DET_E_A.CMD ist,
+die Determinante einer (4 mal 4)-Matrix mit bestimmten, von den in der Routine
+DET_E_A.CMD im Urzustand voreingestellten Zahlenwerten abweichenden Zahlen-
+werten berechnen, so braucht man auch nur 16 neue Zahlenwerte
+
+                     n0101 n0102 n0103 n0104
+                     n0201 n0202 n0203 n0204
+                     n0301 n0302 n0303 n0304
+                     n0401 n0402 n0403 n0404
+
+mit einem Texteditor in die Routine DET_E_A.CMD einzugeben.
+
+Wichtig:
+
+Alle Åbrigen 400-16=384 Zahlenwerte in der Routine DET_E_A.CMD sind fÅr die
+Berechnung dieser linksoben-bÅndigen (4 Mal 4)-Determinante ohne Bedeutung;
+man kann sie also so belassen, wie sie gerade sind. Es sei aber daran erinnert
+(Seite 1), da· in der Variablenliste von DET_E_A.CMD allen 400 Variablen ein
+Zahlenwert zugewiesen sein mu·.
+
+
+Die Kommandozeilen-Anweisung  Det_E_A 4  bringt das gewÅnscht neue Ergebnis.
+
+
+
+
+Weiteres Anwendungsbeispiel:
+============================
+
+Mit der Anweisung  Det_E_A 6  wird aus der quadratischen (20 mal 20)-Matrix
+die linksoben-bÅndige (6 mal 6)-Determinante berechnet.
+Diese (6 mal 6)-Determinante bedeutet eine Determinante, die aus 6 Zeilen und
+6 Spalten mit 36 Elementen besteht.
+
+Ihre 36 Elemente
+                           n0101 n0102 n0103 n0104 n0105 n0106
+                           n0201 n0202 n0203 n0204 n0205 n0206
+                           n0301 n0302 n0303 n0304 n0305 n0306
+                           n0401 n0402 n0403 n0404 n0405 n0406
+                           n0501 n0502 n0503 n0504 n0505 n0506
+                           n0601 n0602 n0603 n0604 n0605 n0606
+
+sind im Falle der in der Routine DET_E_A.CMD im Urzustand vorhandenen
+Zahlenwerte
+
+                           1    2   3   4   5   6
+                           4   -2  21  -5  45  31
+                           5    2   7  19   8  -4
+                           1    2   0   9   8  24
+                           3    0   2  -8   5  18
+                           1    2   0  -9   4   4
+
+und der Wert der daraus berechneten Determinante ist gleich -740564
+(siehe DETERG.dat).
+                                                                    Seite 4
+
+Mîchte man, was der Normalfall der Anwendung der Routine DET_E_A.CMD ist,
+die Determinante einer (6 mal 6)-Matrix mit bestimmten, von den in der Routine
+DET_E_A.CMD im Urzustand voreingestellten Zahlenwerten abweichenden Zahlen-
+werten berechnen, so braucht man auch nur 36 neue Zahlenwerte
+
+                          n0101 n0102 n0103 n0104 n0105 n0106
+                          n0201 n0202 n0203 n0204 n0205 n0206
+                          n0301 n0302 n0303 n0304 n0305 n0306
+                          n0401 n0402 n0403 n0404 n0405 n0406
+                          n0501 n0502 n0503 n0504 n0505 n0506
+                          n0601 n0602 n0603 n0604 n0605 n0606
+
+mit einem Texteditor in die Routine DET_E_A.CMD einzugeben, sie deswegen
+auch nicht schreibgeschÅtzt sein darf.
+
+Am besten macht man sich eine Kopie 
+
+        DET_E_A.RES
+        
+als Reserve, falls man sich bei der Eingabe neuer Werte fÅr
+eine Determinante so ausgiebig vertippt hat, da· die Datei zerstîrt ist.
+(Ansonsten ist sie ja auch noch in DET0798.ZIP enthalten. 
+                                                         
+Wichtig:
+
+Alle Åbrigen 400-36=364 Zahlenwerte in der Routine DET_E_A.CMD sind fÅr die
+Berechnung dieser linksoben-bÅndigen (6 Mal 6)-Determinante ohne Bedeutung;
+man kann sie also so belassen, wie sie gerade sind. Es sei aber daran erinnert
+(Seite 1), da· in der Variablenliste von DET_E_A.CMD allen 400 Variablen ein
+Zahlenwert zugewiesen sein mu·.
+
+Die Kommandozeilen-Anweisung  Det_E_A 6  bringt das gewÅnscht neue Ergebnis.
+
+******************************************************************************
+
+Hermann Mahr, 04.07.98 
+Tel: 49 6151 373802 
+Fax: 49 6151 373805 
+e-mail: Hermann.Mahr@t-online.de

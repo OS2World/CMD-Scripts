@@ -1,0 +1,20 @@
+Description:
+REXX command line calculator few minor bugs eliminated
+
+Long Description:
+please see kzr.inf (included in kzr0807.zip)
+
+Program Contact:
+Hermann Mahr (h_mahr@t-online.de)
+Upload Date: 	
+
+  2007-08-22
+Archive Date: 	
+
+  N/A
+
+Runs on:
+eCS or Warp 4.52
+
+Requires:
+Object REXX or Classic REXX

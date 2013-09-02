@@ -1,0 +1,28 @@
+                          Kurzinformation
+                          ===============
+
+            Archive Name: dm2euro.ZIP
+       Short Description: REXX Umrechnung DM <--> Euro und umgekehrt
+        Long Description: Das Archiv dm2euro.zip enthÑlt
+			  dm2euro.cmd  und  euro2dm.cmd
+
+      Proposed directory  
+           for placement: Ein Åber den Pfad eirreichbares Verzeichnis
+
+                    Name: Hermann Mahr 
+          Email-Addresse: h_mahr@hrzpub.tu-darmstadt.de
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: Warp
+ Additional requirements: Classic REXX oder Object REXX
+
+                Replaces: keines
+
+
+

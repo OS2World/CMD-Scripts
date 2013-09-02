@@ -1,0 +1,26 @@
+                          Upload Information Template
+                          ===========================
+
+            Archive Name: KMPL210107.ZIP
+       Short Description: REXX-Program for complex numbers
+        Long Description: Minor Bugfixes of an older version
+      Proposed directory  
+           for placement: /pub/os2/apps/calc (Mitteilung v.05.06.98)
+
+               Your name: Hermann Mahr 
+           Email address: h_mahr@t-online.de
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: eCS or OS/2 Warp
+Additional requirements: Classic REXX or Object REXX
+
+                Replaces: (kmpl0704.zip)
+
+
+

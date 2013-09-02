@@ -1,0 +1,459 @@
+                             Datei ORIWERTE.DAT
+
+
+Diese Wertezuweisungen gelten nur fÅr den Urzustand der Routine DET_E_A.CMD.
+Hat man bereits nur eine Determinante mit einigen anderen Werten fÅr die
+Variablen  n****  berechnet, so sind die verÑnderten Variablen natÅrlich nicht
+geeignet, anhand der Datei DETERG.DAT die Routinen DET_E_A.CMD und DET.CMD zu
+ÅberprÅfen, ob sie noch (oder wieder) fehlerfreie Ergebnisse liefern.
+
+Wenn man die Routinen DET_E_A.CMD und DET.CMD anhand der Datei DETERG.DAT
+ÅberprÅfen mîchte, ob sie noch (oder wieder) fehlerfreie Ergebnisse liefern,
+so ist die VerfÅgbarkeit dieser Wertezuweisung fÅr die Variablen  n0101  bis
+n1020, wie sie die Routine DET_E_A.CMD im Urzustand hatte, erforderlich.
+
+Zu diesem Zweck lîscht man die gegenwÑrtigen Wertezuweisungen in der Routine
+DET_E_A.CMD und bringt die hier anschlie·end festgelegten Wertezuweisungen
+(Urzustand) in die Routine DET_E_A.CMD anstelle der gegenwÑrtigen Werte-
+zuweisungen. (Jeder Editor hat hierfÅr seine speziellen Anweisungen.)
+
+
+/* Zeile 01, Spalten 01 bis 20 */
+n0101 = 1
+n0102 = 2
+n0103 = 3
+n0104 = 4
+n0105 = 5
+n0106 = 6
+n0107 = 7
+n0108 = 8
+n0109 = 9
+n0110 =10
+n0111 = 1
+n0112 =-9
+n0113 = 0
+n0114 = 4
+n0115 =-3
+n0116 = 6
+n0117 = 7
+n0118 = 8
+n0119 = 9
+n0120 = 0
+
+/* Zeile 02, Spalten 01 bis 20 */
+n0201 = 4
+n0202 =-2
+n0203 =21
+n0204 =-5
+n0205 =45
+n0206 =31
+n0207 =-6
+n0208 =12
+n0209 =-4
+n0210 =-3
+n0211 = 3
+n0212 =-2
+n0213 = 0
+n0214 =-5
+n0215 =45
+n0216 =-31
+n0217 =-6
+n0218 = 0
+n0219 =-4
+n0220 =-3
+
+/* Zeile 03, Spalten 01 bis 20 */
+n0301 = 5
+n0302 = 2
+n0303 = 7
+n0304 =19
+n0305 = 8
+n0306 =-4
+n0307 =3.5
+n0308 =17
+n0309 =13.1
+n0310 =11
+n0311 = 5
+n0312 = 2
+n0313 = 7
+n0314 =19
+n0315 = 8
+n0316 =-4
+n0317 =3.5
+n0318 =17
+n0319 =13.1
+n0320 =11
+
+/* Zeile 04, Spalten 01 bis 20 */
+n0401 = 1
+n0402 = 2
+n0403 = 0
+n0404 = 9
+n0405 = 8
+n0406 = 24
+n0407 = 0
+n0408 = 13
+n0409 = -5
+n0410 = 4
+n0411 = 1
+n0412 =-2
+n0413 = 0
+n0414 = 91
+n0415 = 8
+n0416 = 24
+n0417 = 0
+n0418 = 13
+n0419 = 15
+n0420 = 82
+
+/* Zeile 05, Spalten 01 bis 20 */
+n0501 = 3
+n0502 = 0
+n0503 = 2
+n0504 =-8
+n0505 = 5
+n0506 =18
+n0507 =-3
+n0508 = 4
+n0509 = 13
+n0510 = 3
+n0511 = 3
+n0512 = 0
+n0513 =-2
+n0514 =18
+n0515 = 5
+n0516 = 0
+n0517 =-3
+n0518 = 4
+n0519 = 1
+n0520 = 3
+
+/* Zeile 06, Spalten 01 bis 20 */
+n0601 = 1
+n0602 = 2
+n0603 = 0
+n0604 = -9
+n0605 = 4
+n0606 = 4
+n0607 = 34
+n0608 = 6.23
+n0609 = -7
+n0610 = 12.7
+n0611 = 0
+n0612 = 2
+n0613 = 0
+n0614 = 9
+n0615 = 4
+n0616 = 3
+n0617 = 34
+n0618 = -1.3
+n0619 = -7
+n0620 = 2.7
+
+/* Zeile 07, Spalten 01 bis 20 */
+n0701 = 1
+n0702 = 2
+n0703 = 3
+n0704 = 9
+n0705 =12
+n0706 = 2
+n0707 =74
+n0708 =13.2
+n0709 =-6
+n0710 =3.2
+n0711 = 3
+n0712 = 2
+n0713 = 2
+n0714 = 9
+n0715 =-2
+n0716 = 2
+n0717 =74
+n0718 =-3.2
+n0719 =16
+n0720 =4.2
+
+/* Zeile 08, Spalten 01 bis 20 */
+n0801 = 3
+n0802 = 0
+n0803 =23
+n0804 = 9
+n0805 =11
+n0806 = 3
+n0807 =44
+n0808 =19
+n0809 =-34
+n0810 = 3.67
+n0811 = 0
+n0812 = 2
+n0813 =-3
+n0814 = 9
+n0815 =-1
+n0816 = 3
+n0817 =-4
+n0818 = 9
+n0819 = 64
+n0820 = 3.67
+
+/* Zeile 09, Spalten 01 bis 20 */
+n0901 = 2
+n0902 = 1
+n0903 =23
+n0904 =4
+n0905 =51
+n0906 = 6
+n0907 =34
+n0908 =29
+n0909 =-5
+n0910 =9.02
+n0911 = 2
+n0912 = 1
+n0913 =23
+n0914 =4
+n0915 =51
+n0916 = 6
+n0917 =34
+n0918 =29
+n0919 =-5
+n0920 =9.02
+
+/* Zeile 10, Spalten 01 bis 20 */
+n1001 = 14
+n1002 = 4
+n1003 = 1.67
+n1004 =-3
+n1005 = 4
+n1006 = 67
+n1007 = 1
+n1008 = 0
+n1009 = 1.4
+n1010 = 7
+n1011 = 14
+n1012 = 2
+n1013 = 1.67
+n1014 = 3
+n1015 = 4
+n1016 = 67
+n1017 =-1
+n1018 = 2
+n1019 =-0.4
+n1020 = 7
+
+/* Zeile 11, Spalten 01 bis 20 */
+n1101 = 34
+n1102 = 4
+n1103 = 1.67
+n1104 =-3
+n1105 = 6
+n1106 = 67
+n1107 =-1
+n1108 = 0
+n1109 = 0.4
+n1110 = 7
+n1111 = 14
+n1112 = 2
+n1113 = 4.67
+n1114 = 6
+n1115 = 4
+n1116 = 67
+n1117 =-1
+n1118 = 28
+n1119 =-4.4
+n1120 = 7
+
+/* Zeile 12, Spalten 01 bis 20 */
+n1201 = 14
+n1202 = 9
+n1203 = 1.67
+n1204 =-3
+n1205 = 9
+n1206 = 7
+n1207 =-1
+n1208 = 6
+n1209 = 0.4
+n1210 = 0
+n1211 = 14
+n1212 = 0
+n1213 = 4.67
+n1214 = 3
+n1215 = 7
+n1216 = 8
+n1217 =-1
+n1218 = 2
+n1219 =-4.3
+n1220 = 2
+
+/* Zeile 13, Spalten 01 bis 20 */
+n1301 = 94
+n1302 = 1
+n1303 = 1.67
+n1304 =-1
+n1305 = 2
+n1306 = 1
+n1307 =-1
+n1308 = 3
+n1309 = 0.4
+n1310 = 3
+n1311 = 4
+n1312 = 0
+n1313 = 1.67
+n1314 = 3
+n1315 = 2
+n1316 = 8
+n1317 =-2
+n1318 = 1
+n1319 =-1.3
+n1320 = 1
+
+/* Zeile 14, Spalten 01 bis 20 */
+n1401 = 4
+n1402 = 2
+n1403 = 1.67
+n1404 =-1
+n1405 = 4
+n1406 = 5
+n1407 =-1
+n1408 = 3
+n1409 = 2.4
+n1410 =-3
+n1411 = 2
+n1412 = 0
+n1413 = 3.67
+n1414 = 2
+n1415 = 4
+n1416 = 1
+n1417 =-2
+n1418 = 2
+n1419 =-3.3
+n1420 = 2
+
+/* Zeile 15, Spalten 01 bis 20 */
+n1501 = 1
+n1502 = 1
+n1503 = 2.67
+n1504 =-3
+n1505 = 2
+n1506 = 3
+n1507 =-2
+n1508 = 1
+n1509 = 1.4
+n1510 =-2
+n1511 = 3
+n1512 = 4
+n1513 = 0.67
+n1514 = 8
+n1515 = 0
+n1516 = 1
+n1517 =-2
+n1518 = 3
+n1519 =-6.3
+n1520 = 3
+
+/* Zeile 16, Spalten 01 bis 20 */
+n1601 =-1
+n1602 = 2
+n1603 = 1.67
+n1604 =-1
+n1605 = 1
+n1606 = 2
+n1607 =-1
+n1608 = 0
+n1609 = 1.4
+n1610 =-3
+n1611 = 3
+n1612 = 1
+n1613 = 0.67
+n1614 = 2
+n1615 = 0
+n1616 = 1
+n1617 =-1
+n1618 = 2
+n1619 =-2.3
+n1620 = 1
+
+/* Zeile 17, Spalten 01 bis 20 */
+n1701 =-2
+n1702 = 1
+n1703 = 0.67
+n1704 =-1
+n1705 = 2
+n1706 = 1
+n1707 =-2
+n1708 = 0
+n1709 = 2.4
+n1710 =-1
+n1711 = 2
+n1712 = 3
+n1713 = 0.67
+n1714 = 1
+n1715 = 0
+n1716 = 0
+n1717 =-1
+n1718 = 1
+n1719 =-1.3
+n1720 = 2
+
+/* Zeile 18, Spalten 01 bis 20 */
+n1801 = 2
+n1802 =-1
+n1803 = 1.67
+n1804 =-2
+n1805 = 1
+n1806 = 0
+n1807 = 3
+n1808 = 0
+n1809 = 1.4
+n1810 =-2
+n1811 = 2
+n1812 = 0
+n1813 = 0.67
+n1814 = 1
+n1815 = 3
+n1816 = 0
+n1817 =-4
+n1818 = 2
+n1819 =-2.3
+n1820 = 1
+
+/* Zeile 19, Spalten 01 bis 20 */
+n1901 = 7
+n1902 =-4
+n1903 = 2.67
+n1904 =-1
+n1905 = 2
+n1906 = 3
+n1907 = 3
+n1908 = 4
+n1909 = 0.4
+n1910 =-5
+n1911 = 2
+n1912 = 1
+n1913 = 1.27
+n1914 = 1
+n1915 = 2
+n1916 = 1
+n1917 =-3
+n1918 = 1
+n1919 =-1.3
+n1920 = 3
+
+/* Zeile 20, Spalten 01 bis 20 */
+n2001 = 1
+n2002 =-2
+n2003 = 1.67
+n2004 =-3
+n2005 = 0
+n2006 = 2
+n2007 = 3
+n2008 = 1
+n2009 = 5.4
+n2010 =-4
+n2011 = 3
+n2012 = 1
+n2013 = 2.27
+n2014 = 0
+n2015 = 1
+n2016 = 5
+n2017 =-2
+n2018 = 3
+n2019 =-5.3
+n2020 = 2.3
