@@ -1,0 +1,44 @@
+World Clock Gadgets for WPS-Wizard
+**********************************
+
+Requirements:
+-------------
+World Clock, Fix 4; WPS-Wizard 0.5.0
+
+Installation:
+-------------
+Unzip wclockgadgets.zip to World Clock 1.4.0 directory.
+Run InstWcGadget.cmd to create Folder and Program objects for gadgets.
+Shadow of Gadgets folder will be created in WPS-Wizard Gadgets.
+
+Description and usage:
+----------------------
+World Clock gadgets display current date and time for selected cities
+in various views (list, minimized, banner) and list of upcoming events.
+To select cities, date/time display, etc. use Settings in World Clock.
+
+Before you use gadgets, run World Clock to write values used by gadgets
+to WCLOCK.INI. Then you can exit World Clock if you want. Gadgets will
+refresh date and time display. Once in a minute gadgets will check if
+there are changes in WCLOCK.INI and update display if necessary. To
+force checking of WCLOCK.INI select 'Refresh' item in gadget PopUp menu.
+
+World Clock Main Gadget (wcmainGadget.cmd):
+- displays time and date similar to List View in World Clock
+
+World Clock Mini Gadget (wcminiGadget.cmd):
+- displays time and date similar to Minimized View in World Clock
+
+World Clock Banner Gadget (wcbannerGadget.cmd):
+- displays time similar to Banner View in World Clock
+
+World Clock Event Gadget (wceventGadget.cmd):
+- displays list of upcoming events in next 24 hours
+Options in PopUp menu:
+Active - on event time, message will be displayed and object will be opened.
+Warning: do not select this option if World Clock is running,
+         or message and object will be opened 2x !
+Title - display number of upcoming events in next 24 hours.
+
+
+

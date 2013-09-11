@@ -1,0 +1,166 @@
+ VoiceClock REXX Program v0.02      Chris Boyd
+                                    email: cboyd@ksu.ksu.edu                
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ 
+ VoiceClock/REXX v0.02 by Chris Boyd  August 26, 1996   OS/2 freeware 
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  
+
+Please, if you use this program, let me know that you use it, and
+if you could, what you think about it.  Since it's freeware, I 
+hope I'm not asking too much.  email Chris Boyd <cboyd@ksu.ksu.edu>
+or catch me on IRC at #os/2, look for Soma0.
+
+---------------------
+WHAT IS THIS PROGRAM?
+---------------------
+
+VoiceClock/REXX is a OS/2 REXX program that will announce the current
+time and date on your WAVEAUDIO device, such as a SoundBlaster, etc. 
+You can type "VoiceClock" at the command line to hear just time time and
+day once, or you can add command line switches to keep VoiceClock 
+running in the background constantly and remind you of the time at
+whatever intervals you choose.  Since this program is a REXX program, 
+flexibility comes naturally, and you can include a hook to this 
+program in many other places in OS/2.
+
+----------------------------------------------
+WHAT DO I NEED TO RUN VOICECLOCK SUCCESSFULLY?
+----------------------------------------------
+
+* A computer running OS/2 with REXX support installed
+* Free space on an HPFS drive
+* A WAVEAUDIO device, such as a Soundblaster, PAS16, etc
+
+---------------------------------
+HOW DO I INSTALL VOICECLOCK/REXX?
+---------------------------------
+
+Create a directory on any HPFS disk you want, call it 
+anything you want.  I suggest something like "D:\VoiceClock".  
+Unzip the ZIP file.  It will extract all the needed
+files.  After that, you are ready.  
+
+(If you are reading this, you're probably done already)
+
+-----------------
+WHAT DO I DO NOW?
+-----------------
+
+You can interact with VoiceClock, of course, from the
+command line.  Type in "VoiceClock" and it will run
+in SINGLE announce mode.  You will hear the time
+and date, and it will quit.  To find out what else
+you can do, type in "VoiceClock -?" and you will
+see a list of command line switches.  You can
+use up to 3 switches at once.
+
+Switches:
+
+ /Cx = CONTINUOUS announce mode
+
+       This places VoiceClock in CONTINUOUS mode, which is
+       where VoiceClock announces the time/date once and
+       keeps running, waits for x minutes, and announces again.
+
+       x = minutes between announcements
+      
+       set x = 0 to announce on the half hour and hour
+       set x = Q to announce on quarter, half hour, and hour
+
+       If you just put "/C", it will default to announcing
+       on the half hour and hour.
+
+       You must press CTRL-C to quit CONTINUOUS mode.
+
+   /T = Announce TIME only
+  
+       Obviously, it only announces the TIME, leaving out
+       the DATE.
+
+   /D = Announce DATE only
+
+       Same as above, but vice versa.
+
+   /N = Disables screen output
+
+       For those times you can't have VoiceClock making
+       a bunch of screen noise.  :)
+
+   /? = Displays help screen
+
+       Duh.  :)
+
+---------
+NOW WHAT?
+---------
+
+Now you implement VoiceClock where ever you need it.
+Look at the code.  Learn REXX.  Place hooks to VoiceClock
+in places where it is handy and/or practical.  It's
+freeware, have fun.
+
+Oh, BTW, you can replace the WAV files included with
+your own.  Just make sure the WAV files you make
+are the same name as the ones you see now:
+
+ 01.WAV through 59.WAV   -  Used for minutes of the hour, and days
+                            of the week
+
+ O01.WAV through O09.WAV -  Used for minutes 01 through 09 "Oh-one" etc.
+
+ The01 through The31.WAV -  Days of the month "The first" etc.
+
+ Sunday.WAV through Saturday.WAV - Days of the week.
+
+ January.WAV through December.WAV - The months.
+
+ TheTimeIs.WAV -  Starts the time announcement ("The Time Is:")
+
+ TodayDate.WAV -  Starts the date announcement ("The Date Is:")
+
+ am.wav and pm.wav - as in "3 am" and "9 pm"
+
+-----------------------------
+WHAT'LL BE IN LATER VERSIONS?
+-----------------------------
+
+Well, I once was going to use rsynth, a text to speech
+digitizer, but I found out rsynth is just too huge and
+sounds too nasty to justify including in VoiceClock.  
+Maybe some other time.  
+
+Future versions will include the features UNIX people
+find in cron.  You will be able to schedule
+VoiceClock/REXX to automatically run any command/program
+at a certain time.
+
+Naturally, I'm open to suggestions.  :)
+
+-------
+HISTORY 
+-------
+
+ 0.02   (Aug 26 1996) 
+
+          * Decreased the size of ALL the default WAV files
+            in VoiceClock/REXX.  This made the size of 
+            the whole program shrink from 3.6 megs to
+            about 600k at once!
+
+          * Fixed the annoying "garble" after pressing
+            CTRL-C to quit CONTINUOUS mode.
+
+ 0.01á  (Aug 24 1996)
+
+          * First public beta test, quick and short too.
+
+
+-----------------------------------------------------------
+COMMENTS, QUESTIONS, MOANS, WHINING, COMPLAINTS, THANK YOUS
+-----------------------------------------------------------
+
+Send 'em all to:  cboyd@ksu.ksu.edu
+
+BTW, please write, I'd like to hear from you if you
+actually use this program.
+
+(hris Boyd   August 26, 1996
