@@ -1,0 +1,31 @@
+/* 
+      Author:     Dennis Peterson, Sysop, OS/2 Northwest BBS
+      FidoNet:    1:343/179
+      Internet:   dpeterso@os2nw.ces.wa.com
+      Date:       Feb. 3, 1995
+      Version:    3.5
+      Warranty:   Guaranteed to occupy space on your disk
+
+      History:
+         3.1 - first release
+         3.5 - added abilty to return only messages that contain a pattern
+               provided on command line.
+             - added defaults for commandline args
+
+      Purpose:
+      This utility reads QWK-format messages.dat files as found in a QWK
+      download and converts the messages to ASCII text. If a pattern is
+      included it will extract only messages that contain that pattern. The
+      pattern match is case sensitive.
+
+      Usage:
+      1) Unpack a .QWK message packet
+      2) Look for a file called messages.dat. It's there.
+      3) Run this REXX program. Use the > character to redirect the output
+         to a file. That's it! The file will be coverted to a text file.
+
+         qwk2text [messages.dat] [pattern] (defaults: messages.dat ---)      
+
+      If no args are provided messages.dat is assumed and all messages
+      will be extracted using --- for pattern.
+*/

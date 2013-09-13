@@ -1,0 +1,215 @@
+FxClassObject v.01 (Alpha)
+
+
+This is my first effort at writing in Object REXX.  (Inside my Class
+and Method definitions there is still too much TREXX procedural
+programming and my next step is to redo it.)
+
+What I have tried to do is to model a real world Fax Department in
+software.  There are three classes defined:
+
+A .FxMachine -- This accepts FaxJobs and performs Methods on them. 
+The methods are from the FaxWorks Pro API and some others. It returns
+the information to both the FaxJob and to the calling object.
+
+A .FxOperator -- The Fax operator takes jobs from the user (through 
+the 'submit' method) and processes it. It determines what job is to 
+be done and checks to make sure that all the necessary information 
+has been submitted. It also checks to make sure that any submitted 
+data files really exist. It then creates a FaxJob from the .FxJob 
+class  and sends it to the FaxMachine.
+
+A .FxJob -- I was playing around with this one. The FxJob is 
+basically a collection class, like an array but with a string and not
+numeric index. But I actually made it a 'directory' class. This array
+type class has another feature: you can specify a method to be run if
+an item does not really exist in the array. So I had this idea of
+doing file type conversions right in the FaxJob itself. If you submit
+a TIFF file, for example, when the FaxMachine asks for the Fax file
+name, the FaxJob first creates a Faxfile and then passes the name to
+the FaxMachine. If you submit a PCL or PostScript name, it creates a
+TIFF file and then processes it further to create a fax file.
+
+At the moment, the user is expected to just deal with the operator.
+
+The only method the operator understands is SUBMIT.  So you create
+programs using the FxClass by writing
+
+FaxOperator = .FxOperator~new ResultCode =
+FaxOperator~Submit(SomeCommand SomeArguments) SAY ResultCode
+ 
+The Commands and Arguments are separated by a space.  Arguments are
+separated by a semicolon.
+
+SEND or QUEUE -------------
+
+filename;TO=name,company,fax#;From=name,company,voice,fax;
+INFO=comment,heading,note,bitmap,size,coversheet;AT=time,date
+
+Filename and TO are required.  Others are optional.  (The program
+will use any Faxworks defaults for parameters not specified.  Only
+the Fax# is required.  But you must use the commas even if you do not
+specify the name or company.
+
+The filename can be a TIF, PCL or DCX file.  If you put an index
+number with INDEX as the extension (1243.INDEX), The program will
+strip off the extension and process the job using the old fax file
+with that index.
+
+d:\faxworks\test.pcl;TO=,,1 603 253 4730 1243.INDEX;TO=,,1 603 253
+4730
+
+See the FaxWorks Pro docs for complete descriptions of the values.
+Order IS important to FxClass.  If you want to include INFO but not
+FROM, use a null entry -- TO,,1 603 253 4730;;INFO=....
+
+The return string is the job TAG number.  It is used by commands.
+
+IMPORT ------
+
+filename
+
+Imports a job into FaxWorks.  Under the right conditions, DCX, PCL,
+PS and TIF formats will work if they have these extensions.
+
+Returns Tag and Index of the new fax job
+
+STATUS ------
+
+Tag
+
+Returns the status and whether or not it is Final.
+
+COPY or EXPORT -------------- source#;targetfilename
+
+Source is a TAG number or -Index number (the index is proceeded by a
+minus).
+
+Exports or copies the source to the specified filename.
+
+Returns OK or NOTOK
+
+PRINT ----- source;target
+
+Prints the existing fax to a printer.
+
+Source is the index number of the fax to print.  Target is optional.
+If not specified, it prints to the default printer for FaxWorks.  Or
+you enter the print queue to print to.
+
+TEXTTOFAX ---------
+
+testfilename;faxfilename
+
+Creates fax using the FxPrinter object.
+
+DELETE ------ filename
+
+Deletes the log entry.
+
+REPORT ------ Index
+
+Displays the 'activity.rpt' entry for the index number.
+
+There are some intermediate methods that I will not document at this
+time.  A couple that might be interesting, though:
+
+CONVERT ------- sourcefile;targetfile;sourcetype;targettype
+
+File Types are:  TIF,PCL or DCX
+
+If the target extension is different from the specified type, the
+program will use your extension in the name but the type in the
+processing.
+
+You must have the PCL Enhanced version of FaxWorks Pro for this to
+work.  The drivers for this must be in the subdirectory LASERFAX
+under your FaxWorks directory.  This is where Faxworks puts it.  All
+routines that rely on this internal routine require that you have the
+PCL enhancement.  (It is well worth the money in any case!)
+
+CONVERTPS --------- source;target;GS_String
+
+Source is a postscript file with PS extension.  Target is the target
+file name.  GS_String is the string you want to use for the
+conversion.  You must have GSOS2 in your PATH and properly set up.
+The following command line parameters are hard coded in:
+
+-q -dNOPAUSE -sOutputFile='target' 'source' -c quit
+
+Target and Source are, of course variables set by the program based
+on your input.
+
+I have included several little applications that rely on the FxClass.
+
+FxShell.  Allows interactive, command line manipulation.  Enter the
+command and the Arguments.  It is intended to run as the shell for
+telnetd or to me run from CMD.  One can then manipulate the Faxworks
+on a server over the internet.
+
+FxImport, FxSend, FxStatus all send the necessary command to the Fax
+Operator, You need only supply the Arguments.
+
+GSImport uses the included program, 'printmon.exe', to allow direct
+PS printing to Faxworks.
+
+I found printmon on the internet and use it myself.  I hope the
+author does not mind my inclusion of it.  I do not have the
+documentation any longer.  But I can tell you this:
+
+Install a PS driver to an unused printer port, let's say LPT2.  Run
+PRINTMON as follows;
+
+printmon lpt2 "GSImport.cmd"
+
+You must change GSImport.cmd to reflect the proper information for
+your installation.  The 'filename' you enter is a dummy name.  The
+extension 'PSPIPE' must reads exactly like this!  It is never used as
+a real file name, so HPFS is not required.  The rest of the path and
+file name is used to create a temporary file during processing.
+
+In theory, printing ps to lpt2 will now automatically add a fax job
+to your log as an EDIT job.
+
+REQUIREMENTS
+
+Object REXX must be set up on your system.  RexxUtils is also used.
+
+You must have a full retail version of Faxworks Pro with the PCL
+option.
+
+You must have Ghostscript for OS2 set up.  The executive must be
+GSOS2.exe in your PATH.
+
+INSTALLATION
+
+The file FxMObj.cls contains the class and method definitions.  It
+must be installed by that name in a directory in your path.  I use
+C:\OS2\SYSTEM.
+
+Put the other programs wherever you want.
+
+You must have the PCL enhanced FaxWorks version with a LASERFAX
+subdirectory.  And you must install Ghostscript for OS/2.  The
+executive GSOS2.EXE must be in your path.
+
+WARNING AND NOTICE!
+
+This is an alpha version!  I make no guarantees as to its suitability
+for any purpose.  I present it only for evaluation and comment.  I
+will not be responsible for damage that might result from its use.  I
+am such a novice at all this that I compiled the class file with
+REXXC rather than expose myself to ridicule.
+
+ 
+
+
+
+
+ 
+
+ 
+
+
+
+

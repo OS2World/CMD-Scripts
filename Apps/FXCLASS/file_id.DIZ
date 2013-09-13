@@ -1,0 +1,10 @@
+FAXCLASS - Object REXX classes
+for direct access to FaxWorks Pro 
+features from command line of batch files.
+
+Also allows faxing PS documents and
+PCL and DCX documents.
+
+Includes OREXX applets using the classes.
+One is a 'shell' to use via telnet to control
+a remote Fax server.
