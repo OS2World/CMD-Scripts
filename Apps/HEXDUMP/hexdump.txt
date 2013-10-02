@@ -1,0 +1,47 @@
+----------------------------------------------------------------------------
+What HexDump does
+----------------------------------------------------------------------------
+
+HexDump prints a hex dump to standard output. This hex dump contains no characters below ASCII code 32, i.e. in particular no control characters that could cause, say, a line break.
+
+----------------------------------------------------------------------------
+How to use HexDump
+----------------------------------------------------------------------------
+
+See hexdump /h
+
+----------------------------------------------------------------------------
+Files in this distribution
+----------------------------------------------------------------------------
+
+In the hexdump directory:
+
+hexdump.cmd - The excutable file
+readme      - This file
+
+In the hexdump\pgp directory:
+
+hexdump.sig - My PGP signature for hexdump.cmd
+readme.sig  - My PGP signature for readme
+
+----------------------------------------------------------------------------
+New revisions of HexDump
+----------------------------------------------------------------------------
+
+In case there will be any new revisions, I'll put them on Hobbes <http://hobbes.nmsu.edu/>
+
+----------------------------------------------------------------------------
+Miscellaneous
+----------------------------------------------------------------------------
+
+To get my PGP public key, send me an empty email with 'send pgp key' in the subject line.
+
+
+
+
+
+Rolf Lochbuehler <rolf@together.net>
+http://homepages.together.net/~rolf
+--
+$Id: readme,v 1.2 1999-08-13 10:05:39-04 rl Exp $
+

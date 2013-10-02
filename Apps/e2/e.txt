@@ -1,0 +1,25 @@
+	The System Editor E.EXE has the habit of forcing you to set the filetype of files without one. I found in Hobbes int_e.cmd (Intelligent E) by Carsten Wimmer (1993). It assigned the filetype based on the file extension before calling E.
+
+	Alas, it had a bug. I noticed it (after one year of frequent use, ehem) and solved it (I hope). I added some enhancements like more filetypes and a more descriptive title for the Window List.
+
+	To install, either:
+-	create a program object for Int_e.cmd as usual (remember to set "Start minimized", "Close window on exit", "Create new window if already open" and associate to files you usually open with E)
+-	Put int_e.cmd somewher in your path. Copy the program object for the System Editor as a backup and substitute E.EXE by INT_E.CMD (I think it can now substitute every call to E.).
+
+	I have tried to contact Carsten Wimmer to inquire about the copyright status of int_e but every address tried either bounced or didn't answer. So the copyright status is not very clear. But I don't think it's a big problem. Rexx scripts are not a good idea to hide source code.
+
+	David Mediavilla, 2002 <wcien001@sneakemail.com>
+
+HISTORY
+
+2002-04-10
+	Corrected an error when dealing with filenames with spaces.
+
+2002-04-03
+	Syntax error after setting the EA corrected.
+
+2002-04-02
+	David Mediavilla publishes a new version correcting the "Plai" error. More filetypes, better window title.
+
+1993
+	Carsten Wimmer publishes the first version.
