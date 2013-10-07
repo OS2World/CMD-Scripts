@@ -1,0 +1,22 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: CGproCMD.zip
+       Short Description: Two rexx scripts for CGpro mailer virus/spam scanners
+        Long Description: REXX scripts that can be used by Communigate Pro Email (V4.09b/4.0) for OS/2
+                          to invoke NORMAN Virus scanner and Spamassassin spam scanner. Can be freely
+                          distributed, copied or modified. See comments in code for requirements and
+                          caveats for use.
+
+      Proposed directory
+           for placement: /pub/os2/apps/internet/mail/util/
+
+               Your name: Steve Richards
+           Email address: steve@aducredit.com
+
+      Would you like the
+   contact email address
+    included in listings? no
+
+Operating System/Version: OS/2 all
+

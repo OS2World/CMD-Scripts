@@ -1,0 +1,2630 @@
+/* ------------------------------------------------------------------ */
+/* LoadMac.CMD - REXX program to work with the macro space            */
+/*                                                                    */
+/* (c) Copyright Bernd Schemmer 1994 - 1997                           */
+/*                                                                    */
+/*-Author:                                                            */
+/*   Bernd Schemmer                                                   */
+/*   Stalburgstr. 14                                                  */
+/*   D-60318 Frankfurt am Main                                        */
+/*   Germany                                                          */
+/*   Bernd.Schemmer@gmx.de                                            */
+/*                                                                    */
+/*-History:                                                           */
+/*   27.09.1994 /bs v1.00                                             */
+/*     - initial release                                              */
+/*                                                                    */
+/*   07.09.1997 /bs v2.00                                             */
+/*     - first public release for RXT&T                               */
+/*                                                                    */
+/*-Distribution:                                                      */
+/*   This code may be distributed freely and used in other programs.  */
+/*   Please give credit where credit is due.                          */
+/*   If you need further help, feel free to contact me at the address */
+/*   noted above.                                                     */
+/*                                                                    */
+/*-Description:                                                       */
+/*   LOADMAC is a program to work with the REXX macro space.          */
+/*   Using this program you may load programs into or drop programs   */
+/*   from the macro space.                                            */
+/*                                                                    */
+/*-Usage:                                                             */
+/*   LoadMac {CLEAR}                                                  */
+/*           {ADD:macroCMD{,B|A}} {DROP:macroName}                    */
+/*           {SAVE:macroImage} {LOAD:macroImage}                      */
+/*           {QUERY:macroName}                                        */
+/*           {REORDER:macroName{,B|A}}                                */
+/*           {/L:logfile} {/H} {/Silent} {/NoSound} {/NoAnsi}         */
+/*           {/Trace}                                                 */
+/*                                                                    */
+/*-where:                                                             */
+/*   CLEAR                                                            */
+/*     clear the macro space                                          */
+/*                                                                    */
+/*   ADD:macroCMD{,B|A}                                               */
+/*     add the macro from the file 'macroCMD' to the macro space      */
+/*     'macroCMD' must be the name of a file with a REXX program.     */
+/*     You can set the name for the macro using the string            */
+/*                                                                    */
+/*         /# MACRONAME: myName #/                                    */
+/*     or                                                             */
+/*         /# MACRONAME: "m y n a m e " #/                            */
+/*                                                                    */
+/*     as first line of the file. If this line is missing, the macro  */
+/*     is created with the name of the file (without the extension).  */
+/*     If you omit the extension of the file, LOADMAC adds .CMD to    */
+/*     the name.                                                      */
+/*     To overwrite an existing macro add a leading exclamation mark  */
+/*     (!) to the macro filename.                                     */
+/*     Use B (before) or A (after) for the position of the macro in   */
+/*     the search order of the interpreter.                           */
+/*     The default is 'B' (before).                                   */
+/*                                                                    */
+/*   DROP:macroName                                                   */
+/*     drop the macro 'macroName' from the macro space                */
+/*     LOADMAC first tries to read a CMD file called 'macroName' with */
+/*     the macro to get the real name of the macro (according to the  */
+/*     ADD parameter). If this fails, it uses the macro name          */
+/*     'macroName'. To force the use of the macro name 'macroName'    */
+/*     add a leading exclamation mark '!' to 'macroName'.             */
+/*                                                                    */
+/*   QUERY:macroName                                                  */
+/*     Check if the macro 'macroName' exists in the macro space       */
+/*     (returns 1 - macro exist with option 'B', 2 - macro exists     */
+/*      with options 'A' or 0 - macro does not exist if it            */
+/*      is the last parameter)                                        */
+/*     LOADMAC first tries to read a CMD file called 'macroName' with */
+/*     the macro to get the real name of the macro (according to the  */
+/*     ADD parameter). If this fails, it uses the macro name          */
+/*     'macroName'. To force the use of the macro name 'macroName'    */
+/*     add a leading exclamation mark '!' to 'macroName'.             */
+/*                                                                    */
+/*   REORDER:macroName{,A|B}                                          */
+/*     Reorder the macro 'macroName' in the macro space. The new      */
+/*     order can either be A (after) or B (before). The default is    */
+/*     B (before).                                                    */
+/*     LOADMAC first tries to read a CMD file called 'macroName' with */
+/*     the macro to get the real name of the macro (according to the  */
+/*     ADD parameter). If this fails, it uses the macro name          */
+/*     'macroName'. To force the use of the macro name 'macroName'    */
+/*     add a leading exclamation mark '!' to 'macroName'.             */
+/*                                                                    */
+/*   SAVE:macroImage                                                  */
+/*     Save the complete macro space into the file 'macroImage'       */
+/*     If you omit the extension of the file, LOADMAC adds .MAC to    */
+/*     the name.                                                      */
+/*     To overwrite an existing file add a leading exclamation mark   */
+/*     (!) to the file name.                                          */
+/*                                                                    */
+/*   LOAD:macroImage                                                  */
+/*     Load the file 'macroImage' (created with SAVE:macroImage)      */
+/*     into the macro space.                                          */
+/*     If you omit the extension of the file, LOADMAC adds .MAC to    */
+/*     the name.                                                      */
+/*     Note that you can only use this call, if the macro space is    */
+/*     empty!                                                         */
+/*                                                                    */
+/*                                                                    */
+/*   /L:logFile - logfile is the name of the logfile :-)              */
+/*                This parameter is case-sensitive!                   */
+/*                def.: do not use a logfile                          */
+/*                                                                    */
+/*   /H         - show usage, you may also use                        */
+/*                /h, /?, /HELP, -h, -H, -HELP or -?                  */
+/*                (MAIN is not called!)                               */
+/*                                                                    */
+/*   /Silent    - suppress all messages (except error messages)       */
+/*                You should also use the parameter /L:logfile if you */
+/*                use this parameter!                                 */
+/*                You may also set the environment variable SILENT to */
+/*                "1" to suppress all messages.                       */
+/*                                                                    */
+/*   /NoSound   - suppress all sounds. You may also set the           */
+/*                environment variable SOUND to "0" to suppress the   */
+/*                sounds.                                             */
+/*                                                                    */
+/*   /NoAnsi    - do not use ANSI codes. You may also set the         */
+/*                environment variable ANSI to "0" to suppress the    */
+/*                use of ANSI codes.                                  */
+/*                                                                    */
+/*   /Trace     - turn TRACE on before calling MAIN. You may also     */
+/*                set the environment variable RXTTRACE to ON to      */
+/*                turn the TRACE mode for MAIN on.                    */
+/*                                                                    */
+/*-note:                                                              */
+/*   You must use at least one blank to separate the parameters.      */
+/*   All parameters are processed in sequential order.                */
+/*   You can use all parameters as often as you like.                 */
+/*                                                                    */
+/*   Use leading and trailing ' for filenames containing blanks:      */
+/*                                                                    */
+/*     LOADMAC SAVE:'My File.SAV'                                     */
+/*                                                                    */
+/*   or                                                               */
+/*                                                                    */
+/*     LOADMAC 'SAVE:My File.SAV'                                     */
+/*                                                                    */
+/*   LOADMAC searches all existing files in the current directory and */
+/*   in the directories listed in the PATH variable.                  */
+/*   To suppress this search use an absolute or relative path for     */
+/*   the filename.                                                    */
+/*                                                                    */
+/*   To add a macro you may omit the keyword 'ADD:':                  */
+/*                                                                    */
+/*     LOADMAC myMacro                                                */
+/*                                                                    */
+/*   is equal to                                                      */
+/*                                                                    */
+/*     LOADMAC ADD:myMacro                                            */
+/*                                                                    */
+/*   (Exception: To load a macro called CLEAR you must use the        */
+/*               keyword ADD)                                         */
+/*   Be aware that the macro spaces saved with the parameter SAVE     */
+/*   contains tokenized REXX code. Thus you can't use a saved macro   */
+/*   space created with Object REXX under Classic REXX and vice       */
+/*   versa.                                                           */
+/*                                                                    */
+/*-returncodes:                                                       */
+/*      0 - execution okay                                            */
+/*                                                                    */
+/*    240 ... 252                                                     */
+/*          reserved for the runtime system                           */
+/*    253 - syntax help called (parameter /h)                         */
+/*    254 - user break (CTRL-C)                                       */
+/*    255 - internal runtime system error                             */
+/*   else - program specific errors                                   */
+/*   (see also the description for the parameter QUERY:macroname      */
+/*    above)                                                          */
+/*                                                                    */
+/*-Notes:                                                             */
+/*                                                                    */
+/* This program requires the REXXUTIL DLL supplied with Object REXX - */
+/* but you don't need to install Object REXX as the default REXX      */
+/* interpreter to use that DLL. You can use the Object Rexx REXXUTIL  */
+/* DLL also with Classic REXX. To do this copy the new REXXUTIL.DLL   */
+/* and the DLL REXXCRT.DLL into the directory C:\OS2\DLL (assuming C: */
+/* is your OS/2 boot drive).                                          */
+/*                                                                    */
+/* If you don't want to use the new REXXUTIL DLL as default DLL you   */
+/* can copy it to another directory (def.: C:\OREXX).                 */
+/* You must change the variable global.__RexxUtilDLL below if you use */
+/* another directory. Note that you cannot change the name of the     */
+/* DLL!                                                               */
+/*                                                                    */
+/* Further note: You can also use the functions for macro space       */
+/* handling from Dave Boll's DLL RXU - but you have to change the     */
+/* source code of LOADMAC to reflect use of RXU.                      */
+/*                                                                    */
+/* LOADMAC also needs the function SysSearchPath from the REXXUTIL    */
+/* DLL.                                                               */
+/*                                                                    */
+/* Environment variables used while running the program               */
+/*                                                                    */
+/* þ ANSI                                                             */
+/*   - Set the environment variable 'ANSI' to "0" or "OFF" if you     */
+/*     don't want colors.                                             */
+/*                                                                    */
+/* þ PATCHDRIVE                                                       */
+/*   - Set the environment variable 'PATCHDRIVE' to the drive with    */
+/*     a patched version of your program (if any exist, see the       */
+/*     routine 'I!.__CheckPatch' for the algorithm used ).            */
+/*                                                                    */
+/* þ SILENT                                                           */
+/*   - Set the environment variable 'SILENT' to "1" or "ON" to        */
+/*     suppress all messages.                                         */
+/*                                                                    */
+/* þ SOUND                                                            */
+/*   - Set the environment variable 'SOUND' to "0" or "OFF" if you    */
+/*     don't want sounds.                                             */
+/*                                                                    */
+/* þ RXTTRACE                                                         */
+/*   - Set the environment variable 'RXTTRACE' to "MAIN" to turn the  */
+/*     trace mode for the function MAIN on.                           */
+/*                                                                    */
+/* þ VERBOSE                                                          */
+/*   - Set the environment variable 'VERBOSE' to any value not equal  */
+/*     to '' if you want debug information. If the value of the       */
+/*     variable is 'DEBUG', the error handler turns interactive trace */
+/*     on if an error occured.                                        */
+/*     Note that the error handler also turns interactive trace on if */
+/*     the environment variable RXTTRACE is set to 'MAIN' or if the   */
+/*     parameter '/TRACE' is specified.                               */
+/*                                                                    */
+/*                                                                    */
+/* Based on TEMPLATE.CMD v3.06, TEMPLATE is (c) 1996 Bernd Schemmer,  */
+/* Stalburgstr 14, 60318 Frankfurt, Germany, Bernd.Schemmer@gmx.de    */
+/* ------------------------------------------------------------------ */
+
+  call trace 'off'      /* turn interactive trace off                 */
+                        /* use this statement as the first statement  */
+                        /* in your program, to ignore the value of    */
+                        /* the environment variable RXTRACE.          */
+
+                  global. = ''  /* init the stem global. with ''      */
+
+/*** change the following values to your need                       ***/
+
+                        /* additional parameter                 v3.06 */
+                        /* (string for the usage routine)       v3.06 */
+  global.__userUsage  = ,                                    /* v3.06 */
+    '{CLEAR} {ADD:macroCMD{,B|A}} {DROP:macroName}' ,
+    '{QUERY:macroName} {REORDER:macroName{,B|A}}',
+    '{SAVE:macroImage} {LOAD:macroImage}'
+
+                                /* name & path of the REXXUTIL DLL    */
+                                /* from Object REXX if it is not the  */
+                                /* default REXXUTIL DLL               */
+         global.__RexxUtilDLL = 'C:\OREXX\REXXUTIL.DLL'
+
+         global.__Version = 2.00         /* Version of YOUR program   */
+
+       global.__SignOnMsg = 1   /* set to 0 if you do not want the    */
+                                /* program start and end messages     */
+
+         global.__NeedCID = 1   /* set to 1 if you need CID support   */
+
+      global.__NeedColors = 1   /* set to 1 if you want colored msgs  */
+
+  global.__NeedPatchCheck = 1   /* set to 1 if you want the program   */
+                                /* to search for a patched version of */
+                                /* this program                       */
+
+              /* set default values for EXPOSELIST if necessary       */
+/*             exposeList = ''                                        */
+
+              /* name of the routine for the message handling         */
+              /*-note: Use '' for hardcoded messages                  */
+/*          global.__GetMsg = 'GETMSG'                                */
+
+             /* base number for the message numbers (def.: 1000)      */
+/*          global.__BaseMsgNo = 1000                                 */
+
+             /*-note: set the variable prog.__STDOUT to "STDERR:"     */
+             /*       or "NUL" if your program is a filter program!   */
+
+  prog.__STDOUT = 'STDOUT'        /* necessary for Object REXX        */
+  prog.__STDERR = 'STDOUT'        /* necessary for Object REXX        */
+                                                                   /*!*/
+/***                End of variables to change                      ***/
+/*      HINT: The further program code is in the function MAIN        */
+
+/***        End of Part 1 of the source code of TEMPLATE.CMD        ***/
+
+/***       Start of Part 2 of the source code of TEMPLATE.CMD       ***/
+
+/*************** DO NOT CHANGE THE FOLLOWING LINES ********************/
+
+                        /* names of the global variables, which all   */
+                        /* procedures must know                       */
+  exposeList = 'prog. screen. I!. global. exposeList ' exposeList
+
+                        /* check the type of the base message number  */
+  if datatype( global.__BaseMsgNo, 'W' ) <> 1 then
+    global.__BaseMsgNo = 1000
+
+                        /* init internal variables                    */
+  I!. = ''
+                        /* save default STDOUT and STDERR             */
+  if symbol( 'prog.__STDOUT' ) = 'VAR' then
+    I!.__2 = prog.__STDOUT
+  if symbol( 'prog.__STDERR' ) = 'VAR' then
+    I!.__3 = prog.__STDERR
+
+                        /* init the stems prog. & screen.             */
+  parse value '' with prog. screen.
+
+                        /* reset the timer                            */
+  call time 'R'
+
+                        /* restore default STDOUT and STDERR          */
+  prog.__STDOUT = I!.__2;    prog.__STDERR = I!.__3
+
+                        /* get the number of the first line with      */
+                        /* user code                                  */
+  call I!.__GetUserCode
+
+/* ------------------------------------------------------------------ */
+/* install the error handler                                          */
+
+                        /* break errors (CTRL-C)                      */
+  CALL ON HALT        NAME I!.__UserAbort
+                        /* syntax errors                              */
+  SIGNAL ON SYNTAX    NAME I!.__ErrorAbort
+                        /* using of not initialisized variables       */
+  SIGNAL ON NOVALUE   NAME I!.__ErrorAbort
+                        /* failure condition                          */
+  SIGNAL ON FAILURE   NAME I!.__ErrorAbort
+                        /* error condition                            */
+  SIGNAL ON ERROR     NAME I!.__ErrorAbort
+                        /* disk not ready condition                   */
+  SIGNAL ON NOTREADY  NAME I!.__ErrorAbort
+
+/* ------------------------------------------------------------------ */
+/* init the variables                                                 */
+
+                        /* get & save the parameter                   */
+  parse arg I!.__RealParam 1 prog.__Param
+
+                        /* init the variables                         */
+
+                        /* define exit code values                    */
+  global.__ErrorExitCode = 255
+     global.__OKExitCode = 0
+
+                        /* init the compound variable prog.           */
+  call I!.__InitProgStem
+
+                        /* define the variables for CID programs      */
+  call I!.__InitCIDVars
+
+                        /* init the program exit code                 */
+  prog.__ExitCode = global.__OKExitCode
+
+                        /* check the parameter and env. variables     */
+                        /* This must run before I!.__InitColorVars!   */
+  call I!.__chkPandE
+
+                        /* define the color variables                 */
+  call I!.__InitColorVars
+
+                        /* check if there is a logfile parameter      */
+  call I!.__SetLogVars
+
+/* ------------------------------------------------------------------ */
+/* show program start message                                         */
+
+  call I!.__SignMsg
+
+/* ------------------------------------------------------------------ */
+/* check if there is a patched version of this program                */
+
+  call I!.__CheckPatch
+
+/* ------------------------------------------------------------------ */
+
+                        /* check for a help parameter                 */
+  if pos( translate( word( prog.__Param,1 ) ), ,
+          '/?/H/HELP-?-H-HELP' ) <> 0 then
+  do
+    prog.__exitCode = 253
+
+    call I!.__CallUserProc 1, 'ShowUsage'
+
+    SIGNAL I!.__programEnd
+
+  end /* pos( translate( ... */
+
+/* ------------------------------------------------------------------ */
+
+                        /* call the main procedure                    */
+  call I!.__CallUserProc 2, 'main' strip( prog.__Param )
+
+                        /* use the return code of 'main' as exitcode  */
+                        /* if a returncode was returned               */
+  if symbol( 'I!.__UserProcRC' ) == 'VAR' then
+    prog.__ExitCode = I!.__UserProcRC
+
+/* ------------------------------------------------------------------ */
+/* house keeping                                                      */
+
+I!.__ProgramEnd:
+
+                                /* call the exit routines             */
+  do while prog.__exitRoutines <> ''
+
+                        /* delete the name of the routine from the    */
+                        /* list to avoid endless loops!               */
+    parse var prog.__ExitRoutines I!.__cer prog.__ExitRoutines
+
+    call I!.__CallUserProc 1, I!.__cer
+
+  end /* do while prog.__ExitRoutines <> '' */
+
+                                /* restore the current directory      */
+  if symbol( 'prog.__CurDir' ) == 'VAR' then
+    call directory prog.__CurDir
+
+                                /* show sign off message              */
+  call I!.__SignMsg 'E'
+
+EXIT prog.__ExitCode
+
+/* ------------------------------------------------------------------ */
+/*-function: show the sign on or sign off message                     */
+/*                                                                    */
+/*-call:     I!.__SignMsg which                                       */
+/*                                                                    */
+/*-where:    which - 'E' - show the sign off message                  */
+/*                         else show the sign on message              */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+I!.__SignMsg: PROCEDURE expose (exposeList)
+  if global.__SignOnMsg <> 1 then
+    RETURN
+
+                        /* default: program start message             */
+  i = 12
+
+  if arg(1) = 'E' then
+  do
+    i = 13
+                        /* program end message                        */
+    i!.__rc1 = prog.__ExitCode
+
+                                /* check if the exit code is decimal  */
+                                /* and convert it to hexadecimal if   */
+                                /* possible                           */
+    if dataType( prog.__ExitCode, 'W' ) then
+    do
+      if prog.__ExitCode < 0 then
+        prog.__ExitCode = 65536 + prog.__ExitCode
+      i!.__rc2 = D2X( prog.__ExitCode )
+    end /* if .. */
+
+  end /* if arg(1) = 'E' then */
+
+  screen.__CurColor = screen.__SignOnColor
+  call Log I!.__GetMsg( i, prog.__Name, global.__Version, date(),,
+                        time(), i!.__rc1, i!.__rc2 )
+  screen.__CurColor = screen.__NormalColor
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: call a user defined routine                              */
+/*           (avoid errors if the routine is not defined)             */
+/*                                                                    */
+/*-call:     I!.__CallUserProc errorAction, procName {procParameter}  */
+/*                                                                    */
+/*-where:    errorAction - action, if procName is not defined         */
+/*                         0: do nothing (only set the RC)            */
+/*                         1: show a warning and set the RC           */
+/*                         2: abort the program                       */
+/*           procName - name of the procedure                         */
+/*           procParameter - parameter for the procedure              */
+/*                                                                    */
+/*-returns:  1 - ok                                                   */
+/*           0 - procname not found                                   */
+/*                                                                    */
+/*-output:   I!.__UserProcRC - Returncode of the called procedure     */
+/*                             (dropped if the proedure don't         */
+/*                             return a value)                        */
+/*                                                                    */
+I!.__CallUserProc: PROCEDURE expose (exposeList) result rc sigl
+  parse arg I!.__ErrorAction , I!.__ProcN I!.__ProcP
+
+  I!.__thisRC = 0
+  drop I!.__UserProcRC
+
+  iLine = 'call ' I!.__ProcN
+  if prog.__Trace = 1 & I!.__ProcN = 'main' then
+    iLine = 'trace ?a;'|| iLine
+
+/** DO NOT CHANGE, ADD OR DELETE ONE OF THE FOLLOWING SEVEN LINES!!! **/
+  I!.__ICmdLine = GetLineNo()+2+(I!.__ProcP <> '')*2               /*!*/
+  if I!.__ProcP = '' then                                          /*!*/
+    interpret iLine                                                /*!*/
+  else                                                             /*!*/
+    interpret iLine "I!.__ProcP"                                   /*!*/
+/** DO NOT CHANGE, ADD OR DELETE ONE OF THE PRECEEDING SEVEN LINES!! **/
+
+/* Caution: The CALL statement changes the variable RESULT!           */
+  I!.__0 = trace( 'off' )
+
+  I!.__thisRC = 1
+  if symbol( 'RESULT' ) == 'VAR' then
+    I!.__UserProcRC = value( 'RESULT' )
+    
+                    /* this label is used if the interpret command    */
+                    /* ends with an error                             */
+I!.__CallUserProc2:
+
+  if I!.__ThisRC = 0 then
+  do
+    if I!.__ErrorAction = 2 then
+      call ShowError global.__ErrorExitCode , ,
+                   I!.__GetMsg( 1, I!.__ProcN )
+
+    if I!.__ErrorAction = 1 then
+      call ShowWarning I!.__GetMsg( 1 , I!.__ProcN )
+  end /* if I!.__thisRC = 0 then */
+
+RETURN I!.__thisRC
+
+/* ------------------------------------------------------------------ */
+/*-function: set the variables for the logfile handling               */
+/*                                                                    */
+/*-call:     I!.__SetLogVars                                          */
+/*                                                                    */
+/*-input:    prog.__Param - parameter for the program                 */
+/*                                                                    */
+/*-output:   prog.__LogFile     - name of the logfile (or NUL)        */
+/*           prog.__LogSTDERR   - string to direct STDERR into the    */
+/*                                logfile                             */
+/*           prog.__LogSTDOUT   - string to direct STDOUT into the    */
+/*                                logfile                             */
+/*           prog.__LogAll      - string to direct STDOUT and STDERR  */
+/*                                into the logfile                    */
+/*           prog.__LogFileParm - string to inherit the logfile       */
+/*                                parameter to a child CMD            */
+/*           prog.__Param       - program parameter without the       */
+/*                                logfile parameter                   */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+I!.__SetLogVars: PROCEDURE expose (exposeList)
+
+  parse var prog.__Param prog.__param '/L:' logFileName ' ' rest
+  if left( logFileName,1 ) = '"' then                        /* v3.07 */
+    parse value logFileName rest with '"' logFilename '"' rest
+
+  prog.__param = prog.__Param rest
+
+                        /* avoid an error if the drive is not ready   */
+  SIGNAL OFF NOTREADY
+
+                        /* default log device is the NUL device       */
+  prog.__LogFile = 'NUL'
+
+  if logFileName <> '' then
+  do
+                        /* check if we can write to the logfile       */
+    logStatus = stream( logFileName, 'c', 'OPEN WRITE')
+    if logStatus <> 'READY:' then
+    do
+      prog.__LogFileParm = ''
+
+      call ShowWarning I!.__GetMsg( 2, logFileName, logStatus )
+
+    end /* if logStatus <> 'READY:' then */
+    else
+    do
+                        /* close the logfile                          */
+      call stream logFileName, 'c', 'CLOSE'
+
+                        /* get the fully qualified name of the        */
+                        /* logfile                                    */
+                        /*                                      v3.04 */
+      parse upper value stream( logFileName, 'c', 'QUERY EXIST' ) WITH prog.__LogFile
+    
+      prog.__LogFileParm = '/L:"' || prog.__LogFile || '"'
+
+    end /* else */
+  end /* if prog.__LogFile <> '' then */
+
+  fn = ConvertNameToOS( prog.__LogFile )
+
+                        /* variable to direct STDOUT of an OS/2       */
+                        /* program into the logfile                   */
+  prog.__LogSTDOUT = ' 1>>' || fn
+
+                        /* variable to direct STDERR of an OS/2       */
+                        /* program into the logfile                   */
+  prog.__LogSTDERR = ' 2>>' || fn 
+
+                        /* variable to direct STDOUT and STDERR of    */
+                        /* an OS/2 program into the log file          */
+  prog.__LogALL = prog.__LogSTDERR '1>>&2'
+
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: check the parameter and the environment variables for    */
+/*           the runtime system                                       */
+/*                                                                    */
+/*-call:     I!.__chkPandE                                            */
+/*                                                                    */
+/*-input:    prog.__Param - parameter for the program                 */
+/*           prog.__env - name of the environment                     */
+/*                                                                    */
+/*-output:   prog.__QuietMode - 1 if parameter '/Silent' found        */
+/*                              or environment variable SILENT set    */
+/*           prog.__NoSound   - 1 if parameter '/NoSound' found       */
+/*                              or environment variable SOUND set     */
+/*           screen.          - "" if parameter '/NoANSI' found       */
+/*                              or environment variable ANSI set      */
+/*           prog.__Param     - remaining parameter for the procedure */
+/*                              MAIN.                                 */
+/*           prog.__Trace     - 1 if parameter '/Trace' found         */
+/*                              or if the environment variable        */
+/*                              RXTTRACE is set to MAIN               */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+I!.__chkPandE: PROCEDURE expose (exposeList)
+
+  global.__verbose = value( 'VERBOSE' ,, prog.__env )
+
+  o!.0 = 4                              /* no. of known parameters    */
+                                        /* and environment variables  */
+
+  o!.1.parm = '/SILENT'                 /* parameter name             */
+  o!.1.env  = 'SILENT'                  /* name of the env. var       */
+  o!.1.vals = 'ON 1'                    /* possible values for the    */
+                                        /* environment variable       */
+  o!.1.stmt = 'prog.__QuietMode=1'      /* statement to execute       */
+                                        /* if this parameter was      */
+                                        /* entered or the environment */
+                                        /* variable is set            */
+
+  o!.2.parm = '/NOSOUND'                /* turn sound off             */
+  o!.2.env  = 'SOUND'
+  o!.2.vals = 'OFF 0'
+  o!.2.stmt = 'prog.__NoSound=1'
+
+  o!.3.parm = '/NOANSI'                 /* turn ANSI support off      */
+  o!.3.env  = 'ANSI'
+  o!.3.vals = 'OFF 0'
+  o!.3.stmt = 'global.__NeedColors=0'
+
+  o!.4.parm = '/TRACE'          /* exeucte MAIN in single step mode   */
+  o!.4.env  = 'RXTTRACE'
+  o!.4.vals = 'MAIN'
+  o!.4.stmt = 'prog.__Trace=1'
+
+  do i = 1 to o!.0
+                        /* check the parameter                        */
+    j = wordPos( o!.i.parm, translate( prog.__Param ) )
+    if j = 0 then       /* no parameter found, check the env. var     */
+      j = wordPos( translate( value( o!.i.env ,, prog.__env ) ) ,,
+                    o!.i.vals )
+    else                /* parameter found, delete the parameter      */
+      prog.__Param = strip( delWord( prog.__Param, j,1 ) )
+
+                        /* if j is not zero either the parameter was  */
+                        /* found or the environment variable is set   */
+    if j <> 0 then
+      interpret o!.i.stmt
+  end /* do i = 1 to o!.0 */
+
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function:  convert a file or directory name to OS conventions      */
+/*            by adding a leading and trailing double quote           */
+/*                                                                    */
+/*-call:      convertNameToOS dir_or_file_name                        */
+/*                                                                    */
+/*-where:     dir_or_file_name = name to convert                      */
+/*                                                                    */
+/*-returns:   converted file or directory name                        */
+/*                                                                    */
+ConvertNameToOS: PROCEDURE expose (exposeList)
+  parse arg fn
+
+  if left( fn,1 ) = '-' then                                 /* v3.07 */
+    fn = '.\' || fn                                          /* v3.07 */
+
+RETURN '"' || fn || '"'                                      /* v3.06 */
+
+/* ------------------------------------------------------------------ */
+/*-function: flush the default REXX queue                             */
+/*                                                                    */
+/*-call:     FlushQueue                                               */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+FlushQueue: /* PROCEDURE expose (exposeList) */
+  do while QUEUED() <> 0
+    parse pull
+  end /* do while QUEUED() <> 0 */
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/*-function: include a file if it exists                              */
+/*                                                                    */
+/*-call:     TryInclude( IncludeFile )                                */
+/*                                                                    */
+/*-where:    IncludeFile = name of the file to include                */
+/*                                                                    */
+/*-output:   prog.__rc = 0 - include file executed                    */
+/*           else: file not found                                     */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+TryInclude:
+  parse upper arg I!.__IncFileName
+  prog.__rc = 1
+
+  if I!.__IncFileName = '' then
+    RETURN ' '                                               /* v3.03 */
+
+  if stream( I!.__IncFileName,'c','QUERY EXIST' ) = '' then
+    RETURN ' '                                               /* v3.03 */
+
+  prog.__rc = 0
+
+  /* execute INCLUDE */
+
+/* ------------------------------------------------------------------ */
+/*-function: include a file                                           */
+/*                                                                    */
+/*-call:     Include( IncludeFile )                                   */
+/*                                                                    */
+/*-where:    IncludeFile = name of the file to include                */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+Include:
+  parse upper arg I!.__IncFileName
+
+                        /* check if the include file exists           */
+  if stream( I!.__IncFileName, 'c', 'QUERY EXIST' ) == '' then
+    call ShowError global.__ErrorExitCode, ,
+                   I!.__GetMsg( 3, I!.__IncFileName )
+
+                        /* read and interpret the include file        */
+  do I!.__IncLineNO = 1 while lines( I!.__IncFileName ) <> 0
+    I!.__IncCurLine = ''
+                        /* save the absolute position of the start of */
+                        /* this line for the error handler            */
+    I!.__IncCurLinePos = stream(I!.__IncFileName,'c','SEEK +0')
+
+                        /* handle multi line statements               */
+    do forever
+      I!.__IncCurLine = I!.__IncCurLine ,
+                        strip( lineIn( I!.__IncFileName ) )
+
+      if right( I!.__IncCurLine,1 ) <> ',' then
+        leave
+
+                        /* statement continues on the next line       */
+      if lines( I!.__IncFileName ) == 0 then
+        call ShowError global.__ErrorExitCode ,,
+             I!.__GetMsg( 4, I!.__IncFileName )
+
+                        /* the next lines is only executed if the IF */
+                        /* statement above is FALSE                  */
+      I!.__IncCurLine = substr( I!.__IncCurLine,1, ,
+                                length( I!.__IncCurLine )-1 )
+
+    end /* do forever */
+
+    I!.__IncActive = 1
+    interpret I!.__IncCurLine
+    I!.__IncActive = 0
+
+  end /* do I!.__IncLineNO = 1 while lines( I!.__IncFileName ) <> 0 ) */
+
+                        /* close the include file!                    */
+  call stream I!.__IncFileName, 'c', 'CLOSE'
+
+                    /* do NOT return a NULL string ('')!        v3.03 */
+                    /* Due to a bug in the CMD.EXE this will    v3.03 */
+                    /* cause the error SYS0008 after the 32nd   v3.03 */
+                    /* call of this function!                   v3.03 */
+RETURN ' '
+
+/* ------------------------------------------------------------------ */
+/*-function: init color variables                                     */
+/*                                                                    */
+/*-call:     I!.__InitColorVars                                       */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+I!.__InitColorVars: /* PROCEDURE expose (exposeList) */
+
+  if 1 == global.__NeedColors then
+  do
+    escC = '1B'x || '['                                      /* v3.04 */
+
+    t1 = 'SAVEPOS RESTPOS ATTROFF' ,                         /* v3.05 */
+         'HIGHLIGHT NORMAL BLINK INVERS INVISIBLE'           /* v3.05 */
+
+    t2 = 's u 0;m 1;m 2;m 5;m 7;m 8;m'                       /* v3.05 */
+
+    screen.__DELEOL = escC || 'K'                            /* v3.05 */
+
+    do i = 1 to 8                                            /* v3.05 */
+
+      call value 'SCREEN.__' || word( t1, i ) ,,             /* v3.05 */
+                 escC || word( t2,i )                        /* v3.05 */
+
+                                                             /* v3.05 */
+      s = word( 'BLACK RED GREEN YELLOW BLUE MAGNENTA CYAN WHITE', i )
+      call value 'SCREEN.__FG' || s,,                        /* v3.05 */
+                 escC || 29+i || ';m'                        /* v3.05 */
+      call value 'SCREEN.__BG' || s,,                        /* v3.05 */
+                 escC || 39+i || ';m'                        /* v3.05 */
+    end /* do i = 1 to 8 */                                  /* v3.05 */
+
+    drop t1 t2 s i                                           /* v3.05 */
+
+/* --------------------------- */
+                        /* define color variables                     */
+    screen.__ErrorColor  = screen.__AttrOff || screen.__Highlight || ,
+                           screen.__FGYellow || screen.__bgRed
+
+    screen.__NormalColor = screen.__AttrOff ||                       ,
+                           screen.__fgWhite || screen.__bgBlack
+
+    screen.__DebugColor  = screen.__AttrOff || screen.__Highlight || ,
+                           screen.__fgBlue || screen.__bgWhite
+
+    screen.__PromptColor = screen.__AttrOff || screen.__Highlight || ,
+                           screen.__fgYellow || screen.__bgMagnenta
+
+/* +++++++++++++++ DO NOT USE THE FOLLOWING COLORS! +++++++++++++++++ */
+    screen.__SignOnColor = screen.__AttrOff || screen.__Highlight || ,
+                           screen.__fggreen || screen.__bgBlack
+
+    screen.__PatchColor  = screen.__AttrOff || screen.__Highlight || ,
+                           screen.__fgcyan || screen.__bgRed
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+                            /* set the default color                  */
+    screen.__CurColor    = screen.__NormalColor
+
+                            /* turn ANSI word wrapping on             */
+    if prog.__QuietMode <> 1 then
+      call CharOut prog.__STDOUT, '1B'x || '[7h'
+
+  end /* if 1 == global.__NeedColors then */
+
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: init the stem prog.                                      */
+/*                                                                    */
+/*-call:     I!.__InitProgStem                                        */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     DO NOT ADD ANY CODE TO THIS ROUTINE!                     */
+/*                                                                    */
+I!.__InitProgStem: /* PROCEDURE expose (exposeList) */
+  prog.__Defparms = ' {/L:logfile} {/H} {/Silent} {/NoAnsi} {/NoSound} {/Trace}'
+
+                        /* get drive, path and name of this program   */
+  parse upper source . . prog.__FullName
+        prog.__Drive = filespec( 'D', prog.__FullName )
+         prog.__Path = filespec( 'P',  prog.__FullName )
+         prog.__Name = filespec( 'N',  prog.__FullName )
+      prog.__progDir = prog.__Drive || prog.__Path           /* v3.08 */
+
+                                                             /* v3.05 */
+ parse upper value 'V3.08 1 80 25 OS2ENVIRONMENT' directory() with ,
+             prog.__Version ,         /* version of template    v3.05 */
+             prog.__UserAbort ,       /* allow useraborts       v3.05 */
+             prog.__ScreenCols ,      /* def. screen cols       v3.05 */
+             prog.__ScreenRows ,      /* def. screen rows       v3.05 */
+             prog.__env ,             /* def. environment       v3.05 */
+             prog.__CurDir            /* current directory      v3.05 */
+
+                                /* install a local error handler      */
+  SIGNAL ON SYNTAX Name I!.__InitProgStem1
+                                /* try to call SysTextScreenSize()    */
+  parse value SysTextScreenSize() with prog.__ScreenRows prog.__ScreenCols
+
+I!.__InitProgStem1:
+
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: init the variables for CID programs (only if the value   */
+/*           of the variable global.__NeedCID is 1)                   */
+/*                                                                    */
+/*-call:     I!.__InitCIDVars                                         */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     DO NOT ADD ANY CODE TO THIS ROUTINE!                     */
+/*           Returncodes as defined by LCU 2.0                        */
+/*                                                                    */
+I!.__InitCIDVars: /* PROCEDURE expose (exposeList) exposeList CIDRC. */
+
+  if 1 == global.__NeedCID then
+  do
+
+    I!.__cidRCValues = ,                                     /* v3.05 */
+      '0000'x 'SUCCESSFUL_PROGRAM_TERMINATION',              /* v3.05 */
+      '0004'x 'SUCCESSFUL_LOG_WARNING_MESSAGE',              /* v3.05 */
+      '0008'x 'SUCCESSFUL_LOG_ERROR_MESSAGE',                /* v3.05 */
+      '0012'x 'SUCCESSFUL_LOG_SEVERE_ERROR',                 /* v3.05 */
+      '0800'x 'DATA_RESOURCE_NOT_FOUND',                     /* v3.05 */
+      '0804'x 'DATA_RESOURCE_ALREADY_IN_USE',                /* v3.05 */
+      '0808'x 'DATA_RESOURCE_NOAUTHORIZATION',               /* v3.05 */
+      '0812'x 'DATA_PATH_NOT_FOUND',                         /* v3.05 */
+      '0816'x 'PRODUCT_NOT_CONFIGURED',                      /* v3.05 */
+      '1200'x 'STORAGE_MEDIUM_EXCEPTION',                    /* v3.05 */
+      '1204'x 'DEVICE_NOT_READY',                            /* v3.05 */
+      '1208'x 'NOT_ENOUGH_DISKSPACE',                        /* v3.05 */
+      '1600'x 'INCORRECT_PROGRAM_INVOCATION',                /* v3.05 */
+      '1604'x 'UNEXPECTED_CONDITION',                        /* v3.05 */
+      'FE00'x 'SUCCESSFULL_REBOOT',                          /* v3.05 */
+      'FE04'x 'SUCCESSFULL_REBOOT_WITH_WARNING',             /* v3.05 */
+      'FE08'x 'SUCCESSFULL_REBOOT_WITH_ERRMSG',              /* v3.05 */
+      'FE12'x 'SUCCESSFULL_REBOOT_WITH_SERVER_ERRMSG',       /* v3.05 */
+                                                             /* v3.05 */
+    do i = 1 to words( I!.__cidRCValues ) by 2               /* v3.05 */
+      call value 'CIDRC.__' || word( I!.__cidRCValues,i+1 ),,
+                 c2d( word( I!.__cidRCValues,i ),2 )         /* v3.05 */
+                                                             /* v3.05 */
+    end /* do i = 1 to words( I!.__cidRCValues ) by 2 */     /* v3.05 */
+                                                             /* v3.05 */
+    drop I!.__cidRCValues                                    /* v3.05 */
+
+
+                        /* xx = next state of the program             */
+/*    CIDRC.__successfull_reboot_with_callback = C2D('FFxx'x, 2);     */
+
+                        /* define exit code values                    */
+    global.__ErrorExitCode = CIDRC.__unexpected_condition
+       global.__OKExitCode = CIDRC.__successful_program_termination
+
+                        /* add the stem CIDRC. to the exposeList      */
+    exposeList = exposeList 'CIDRC. '
+  end /* if 1 == global.__NeedCID then */
+
+RETURN
+
+
+/***        End of Part 2 of the source code of TEMPLATE.CMD        ***/
+
+/***       Start of Part 3 of the source code of TEMPLATE.CMD       ***/
+
+/* ------------------------------------------------------------------ */
+/*-function:  load a dll                                              */
+/*                                                                    */
+/*-call:                                                              */
+/*   thisRC = LoadDll( registerFunction, dllName, entryPoint,         */
+/*                     ,{deRegisterFunction},{checkFunction}          */
+/*                     ,{IgnoreRxFuncAddRC},{RegisterErrorRC}         */
+/*                     ,{errorAction}                                 */
+/*                                                                    */
+/*-where:                                                             */
+/*         registerFunc = name of the dll init function               */
+/*                        (e.g. "SysLoadFuncs")                       */
+/*              dllName = name of the dll                             */
+/*                        (e.g. "REXXUTIL")                           */
+/*           entryPoint = entryPoint for the dll init function        */
+/*                        (e.g. "SysLoadFuncs")                       */
+/*       deRegisterFunc = name of the dll exit function               */
+/*                        (e.g. "SysDropFuncs")                       */
+/*                        If this parameter is entered, the           */
+/*                        deRegisterFunction is automaticly called    */
+/*                        at program end if the loading of the dll    */
+/*                        was successfull.                            */
+/*            checkFunc = function which must be loaded if the dll is */
+/*                        loaded (def.: none -> always load the dll)  */
+/*                        Note:                                       */
+/*                        Do not use the registerFunction for this    */
+/*                        parameter! A good candidate for this        */
+/*                        parameter is the deRegisterFunction.        */
+/*    IgnoreRxFuncAddRC = 1: ignore the rc from rxFuncAdd             */
+/*                        0: do not ignore the rc from rxFuncAdd      */
+/*                        (def.: 0)                                   */
+/*                        Note: Always set this parameter to 1 if     */
+/*                              using the program under WARP.         */
+/*       RegisterErroRC = returncode of the dll init function         */
+/*                        indicating a load error                     */
+/*                        (def. none, -> ignore the returncode of the */
+/*                         dll init function)                         */
+/*           actionCode = 1: abort program if loading failed          */
+/*                        0: do not abort program if loading failed   */
+/*                        (def.: 1)                                   */
+/*                                                                    */
+/*-returns:                                                           */
+/*   0 - loading failed                                               */
+/*   1 - dll loaded                                                   */
+/*   2 - dll already loaded                                           */
+/*                                                                    */
+/*-Note:                                                              */
+/*   See the routine MAIN for some examples for using LoadDLL.        */
+/*   LoadDLL can only handle dlls with an init function to register   */
+/*   the further routines in the dll (like the function SysLoadFuncs  */
+/*   in the dll REXXUTIL).                                            */
+/*                                                                    */
+LoadDll:  PROCEDURE expose (exposeList)
+  parse arg regFunc , ,
+            dllName , ,
+            entryPoint , ,
+            deregFunc , ,
+            checkFunc , ,
+            ignoreRXFuncAddRC, ,
+            registerErrorRC, ,
+            errorAction
+
+                        /* check the necessary parameters             */
+  if '' == entryPoint | '' == dllName | '' == regFunc then
+    call ShowError global.__ErrorExitCode, I!.__GetMsg( 6 )
+
+  if '' == ignoreRXFuncAddRC then
+    ignoreRXFuncAddRc = 0
+
+  if '' == errorAction then
+    errorAction = 1
+
+  I!.__LoadDLLRc = 0
+                        /* if the 'checkFunc' is missing, we          */
+                        /* assume that the dll is not loaded          */
+  dllNotLoaded = 1
+  if ( checkFunc <> '' ) then
+    dllNotLoaded = rxFuncQuery( checkFunc )
+
+  if dllNotLoaded then
+  do
+                        /* first deRegister the function        v3.01 */
+    call rxFuncDrop regFunc                                  /* v3.01 */
+
+                        /* load the dll and register the init         */
+                        /* function of the dll                        */
+    rxFuncAddRC = rxFuncAdd( regFunc, dllName, entryPoint )
+
+    if \ rxFuncAddRC | ignoreRxFuncAddRC then
+    do
+
+      I!.__DllInitRC = 0
+      if I!.__CallUserProc( 0, regFunc ) == 0 then
+        I!.__DllInitRC = 'ERROR'
+
+      if ( registerErrorRC <> '' & I!.__DLLInitRC == registerErrorRC ) | ,
+         ( I!.__DllInitRC == 'ERROR' ) then
+        nop
+      else
+      do
+                        /* add the dll deregister function to the     */
+                        /* program exit routine list                  */
+        if DeregFunc <> '' then
+          if \ rxFuncQuery( DeregFunc ) then
+            prog.__ExitRoutines = prog.__ExitRoutines || ' ' || ,
+                                  DeregFunc
+
+        I!.__LoadDLLRc = 1
+      end /* else */
+    end /* if \ rxFuncAddRC | ignoreRxFuncAddRC then */
+  end /* if dllNotLoaded then */
+  else
+    I!.__LoadDLLRc = 2  /* dll is already loaded                      */
+
+  if 1 == errorAction & 0 == I!.__LoadDLLRC then
+    call ShowError global.__ErrorExitCode,,
+                   I!.__GetMsg( 5, dllName )
+
+RETURN I!.__LoadDLLRc
+
+/* ------------------------------------------------------------------ */
+/*-function: show a string with word wrapping                         */
+/*                                                                    */
+/*-call:     showString Prefix, thisString                            */
+/*                                                                    */
+/*-where:                                                             */
+/*           Prefix = prefix for the first line (e.g. "*-*" or "#" to */
+/*                    use # leading blanks, # = 1 ... n )             */
+/*           thisString - string to print                             */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+ShowString: PROCEDURE EXPOSE (exposeList)
+  parse arg Prefix, thisStr
+
+  maxLineL = prog.__ScreenCols-4
+
+  if datatype( prefix, 'W' ) == 1 then
+    prefix = copies( ' ' , prefix )
+
+  maxWordL = maxLineL - length( prefix )
+
+  thisRC = 0
+  curStr = ''
+
+  do i = 1 to words( thisStr)
+    pStr = 0
+
+    curStr = curStr || word( thisStr, i ) || ' '
+
+    if length( curStr || prefix ||  word( thisStr, i+1 ) ) > maxLineL then
+      pStr = 1
+
+    if 1 == pStr | i == words( thisStr ) then
+    do
+      if length( prefix || curStr ) > prog.__ScreenCols then
+      do until curStr = ''
+        parse var curStr curStr1 =(maxWordL) ,
+                                  curStr
+        call log left( prefix || curStr1, prog.__ScreenCols )
+        prefix = copies( ' ', length( prefix ) )
+      end /* if length( ... then do until */
+      else
+        call Log left( prefix || curStr, prog.__ScreenCols )
+
+      curStr = ''
+      prefix = copies( ' ', length( prefix ) )
+    end /* if 1 == pStr | ... */
+
+  end /* do i = 1 to words( thisStr */
+
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/*-function: show a warning message                                   */
+/*                                                                    */
+/*-call:     showWarning message                                      */
+/*                                                                    */
+/*-where:    warningMessage - warning Message                         */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+ShowWarning: PROCEDURE expose (exposeList)
+  parse arg wMsg
+
+  screen.__CurColor = screen.__ErrorColor
+
+  call I!.__LogStart
+
+  call ShowString I!.__GetMsg( 7 ) || ' ', wMsg || '!'
+  call I!.__LogSeparator
+
+  screen.__CurColor = screen.__NormalColor
+  call Log
+
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/*-function: show an error message and end the program                */
+/*                                                                    */
+/*-call:     ShowError exitCode, errorMessage                         */
+/*                                                                    */
+/*-where:    ExitCode - no of the error (= program exit code)         */
+/*           errorMessage - error Message                             */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     THIS ROUTINE WILL NOT COME BACK!!!                       */
+/*                                                                    */
+ShowError: PROCEDURE expose (exposeList)
+  parse arg prog.__ExitCode, I!.__errMsg
+
+  I!.__QM = prog.__QuietMode
+                        /* turn quiet mode off                        */
+  prog.__QuietMode = ''
+
+  screen.__CurColor = screen.__ErrorColor
+
+  call I!.__LogStart
+
+  call Log left( I!.__GetMsg( 8, prog.__Name , prog.__ExitCode ) ,,
+                 prog.__ScreenCols )
+  call ShowString 1, I!.__errMsg || '!'
+
+  call I!.__LogSeparator
+  call Log
+                        /* restore quiet mode status                  */
+  prog.__QuietMode = I!.__QM
+
+  if prog.__NoSound <> 1 then
+  do
+    call beep 537,300
+    call beep 237,300
+    call beep 537,300
+  end /* if prog.__NoSound <> 1 then */
+
+  screen.__CurColor = screen.__NormalColor                   /* v3.08 */
+
+SIGNAL I!.__ProgramEnd
+
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: log a debug message and clear the rest of the line       */
+/*                                                                    */
+/*-call:     logDebugMsg message                                      */
+/*                                                                    */
+/*-where:    message - message to show                                */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+/*-Note:     You do not need the 'call' keyword to use this routine.  */
+/*                                                                    */
+LogDebugMsg: PROCEDURE expose (exposeList)
+  if global.__verbose <> '' then
+  do
+    parse arg dMsg
+    screen.__CurColor = screen.__DebugColor
+    call Log '+++' dMsg
+    screen.__CurColor = screen.__NormalColor
+  end /* if global.__verbose <> '' then */
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/*-function: write a CR/LF and a separator line to the screen and to  */
+/*           the logfile                                              */
+/*                                                                    */
+/*-call:     I!.__LogStart                                            */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+
+/* ------------------------------------------------------------------ */
+/*-function: write a separator line to the screen and to the logfile  */
+/*                                                                    */
+/*-call:     I!.__LogSeparator                                        */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+I!.__LogStart:
+  call log
+I!.__LogSeparator:
+  call Log ' ' || left('-', prog.__ScreenCols-2, '-' ) || ' '
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: log a message and clear the rest of the line             */
+/*                                                                    */
+/*-call:     log message                                              */
+/*                                                                    */
+/*-where:    message - message to show                                */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+/*-Note:     You do not need the 'call' keyword to use this routine.  */
+/*                                                                    */
+Log: PROCEDURE expose (exposeList)
+  parse arg msg
+
+  logmsg = msg
+  do i = 1 to words( prog.__LogExcludeWords )
+    curWord = word( prog.__LogExcludeWords, i )
+   
+    do until j = 0
+      j = Pos( curWord, logmsg )
+      if j <> 0 then
+        logmsg = delstr( logmsg, j, length( curWord ) )
+    end /* do until j = 0 */
+  end /* do i = 1 to words( prog.__LogExcludeWords ) */
+
+  if prog.__QuietMode <> 1 then
+  do
+
+    if length( logmsg ) == prog.__ScreenCols  then
+      call charout prog.__STDOUT, screen.__CurColor || ,
+                                  msg || screen.__AttrOff
+    else
+      call lineOut prog.__STDOUT, screen.__CurColor || ,
+                                  msg || screen.__AttrOff ||,
+                                  screen.__DelEOL
+
+  end /* if prog.__Quietmode <> 1 then */
+
+  if symbol( 'prog.__LogFile' ) == 'VAR' then
+    if prog.__LogFile <> '' then
+    do
+      call lineout prog.__LogFile, logmsg
+
+                                /* close the logfile                  */
+      call stream prog.__LogFile, 'c', 'CLOSE'
+    end /* if prog.__LogFile <> '' then */
+
+RETURN ' '                                                   /* v3.03 */
+
+/* ------------------------------------------------------------------ */
+/*-function: check if there is a patched version of this program      */
+/*                                                                    */
+/*-call:     I!.__CheckPatch                                          */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     I!.__RealParam must contain the parameters for           */
+/*           this program.                                            */
+/*           The variables prog.__Path and prog.__Name must be set!   */
+/*           This procedure ends the program with an EXIT command!    */
+/*                                                                    */
+I!.__CheckPatch: PROCEDURE expose (exposeList)
+
+                        /* get the drive with patch cmd files         */
+                        /*                                      v3.04 */
+  parse upper value value( 'PATCHDRIVE',, prog.__env ) with pLW
+
+  if global.__NeedPatchCheck <> 0 & ( pLW <> '' & pLW <> prog.__Drive ) then
+  do
+
+    pVer = pLW || prog.__Path || prog.__Name
+
+                        /* check if a patched program version exists  */
+    if stream( pVer, 'c', 'QUERY EXIST' ) <> '' then
+    do
+      pCmd = pVer || ' ' || I!.__RealParam
+
+      screen.__CurColor = screen.__PatchColor
+      call Log left( I!.__GetMsg( 9, pver ), prog.__ScreenCols )
+      screen.__CurColor = screen.__AttrOff
+      call I!.__LogSeparator
+
+      '@cmd /c ' pCmd
+
+      screen.__CurColor = screen.__AttrOff
+      call I!.__LogSeparator
+      screen.__CurColor = screen.__PatchColor
+      call Log left( I!.__GetMsg( 10, rc ), prog.__ScreenCols )
+
+      exit rc
+    end /* if stream( ... */
+  end /* if pLW <> '' */
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: error handler for unexpected errors                      */
+/*                                                                    */
+/*-call:     DO NOT CALL THIS ROUTINE BY HAND!!!                      */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-input:    I!.__IncActive:                                          */
+/*             if 1 the error occured while executing an include file */
+/*             statement. In this case the following variables are    */
+/*             also used (Note that this variables are automaticly    */
+/*             set by the routine INCLUDE()):                         */
+/*               I!.__IncLineNo                                       */
+/*                 Line no. of the include file                       */
+/*               I!.__IncFileName:                                    */
+/*                 Name of the include file                           */
+/*               I!.__IncCurLinePos:                                  */
+/*                 Fileposition of the first char of the line causing */
+/*                 the error                                          */
+/*                                                                    */
+/*-Note:     THIS FUNCTION ABORTS THE PROGRAM WITH A JUMP TO THE      */
+/*           LABEL I!.__PROGRAMEND!!!                                 */
+/*                                                                    */
+I!.__ErrorAbort:
+
+                            /* turn ANSI word wrap on                 */   
+  if screen.__CurColor <> '' then
+    call CharOut prog.__STDOUT, '1B'x || '[7h'
+
+                        /* check if the error occured in the error    */
+                        /* handler                                    */
+  if I!.__errorLineNo == sigl then
+  do
+    call charout 'STDERR:',,
+                                                            '0D0A'x  ,
+       'Fatal Error: Error in the error handler detected!'  '0D0A'x  ,
+                                                            '0D0A'x  ,
+       'Linenumber:       ' || sigl                         '0D0A'x  ,
+       'Errorname:        ' || condition('C')               '0D0A'x  ,
+       'Errordescription: ' || condition('D')               '0D0A'x  ,
+                                                            '0D0A'x  ,
+       'The program exit routines were not called!'         '0D0A'x  ,
+       'Check if "(EXPOSELIST)" is included in the ' || ,
+       'expose lists of all procedures!'                    '0D0A'x
+
+    call beep 637,300 ; call beep 437,300 ; call beep 637,300
+    exit 255
+
+  end /* if I!.__errorLineNo == sigl then */
+
+                        /* get the number of the line causing the     */
+                        /* error                                      */
+  I!.__errorLineNo = sigl
+
+                        /* get the name of this error                 */
+  I!.__ErrorName = condition('C')
+
+                        /* get further information for this error     */
+                        /* if available                               */
+  I!.__ErrorCondition = condition('D')
+  if I!.__ErrorCondition <> '' then
+    I!.__ErrorCondition = ' (Desc.: "' || I!.__ErrorCondition || '")'
+
+  if datatype( prog.__ScreenCols, 'W' ) <> 1 then
+    prog.__ScreenCols = 80
+
+  if SYMBOL( 'prog.__Name' ) <> 'VAR' | value( 'prog.__Name' ) == '' then
+    if I!.__errorLineNO < I!.__FirstUserCodeLine then
+      I!.__pName = '**Runtime**'
+    else
+      I!.__pName = '***???***'
+  else
+    i!.__pName = prog.__Name
+
+                        /* reInstall the error handler                */
+  INTERPRET  'SIGNAL ON ' value(condition('C')) ' NAME I!.__ErrorAbort'
+
+                        /* check, if we should ignore the error       */
+  if value( 'sigl' ) == value( 'I!.__ICmdLine' ) then
+  do
+    I!.__errorLineNo = 0
+    SIGNAL I!.__CallUserProc2
+  end /* if value( ... */
+
+  screen.__CurColor = screen.__ErrorColor
+
+  I!.__QM = prog.__QuietMode
+                        /* turn quiet mode off                        */
+  prog.__QuietMode = ''
+
+                        /* init variables for printing the line       */
+                        /* causing the error to the screen            */
+  I!.__ThisSRCLine = ''
+  I!.__ThisPrefix = ' *-* '
+
+  call I!.__LogStart
+
+  call ShowString ' ' || I!.__pName || ' - ', I!.__ErrorName || ,
+                  I!.__ErrorCondition || ' error detected!'
+
+                        /* check, if the RC is meaningfull for this   */
+                        /* error                                      */
+  if pos( I!.__ErrorName, 'ERROR FAILURE SYNTAX' ) <> 0 then
+  do
+    if datatype(rc, 'W' ) == 1 then
+      if 'SYNTAX' == I!.__ErrorName then
+         if rc > 0 & rc < 100 then
+            call Log left( ' The error code is ' || rc || ,
+                           ', the REXX error message is: ' || ,
+                           errorText( rc ), ,
+                           prog.__ScreenCols )
+         else
+           call log left( ' The error code is ' || rc || ,
+                          ', this error code is unknown.',,
+                          prog.__ScreenCols )
+      else
+        call Log left( ' The RC is ' || rc || '.', prog.__ScreenCols )
+  end /* if pos( ... */
+
+  if value( 'I!.__IncActive' ) == 1 then
+  do
+                /* error occured while interpreting an include file   */
+    call ShowString 1, 'The error occured while executing the line ' || ,
+                       I!.__IncLineNo || ' of the include file "' || ,
+                       I!.__IncFileName || '".'
+
+                        /* reset the file pointer of the include file */
+                        /* to the start of the line causing the error */
+    call stream I!.__IncFileName, 'c', 'SEEK =' || ,
+                                                   I!.__IncCurLinePos
+
+    I!.__SrcAvailable = stream( I!.__IncFileName, ,
+                                   'c', 'QUERY EXIST' ) <> ''
+  end
+  else
+  do
+    call ShowString 1, 'The error occured in line ' ||,
+                       I!.__errorLineNo || '.'
+
+    I!.__thisLineNo = I!.__errorLineNo
+
+                /* error occured in this file                         */
+                /* check if the sourcecode is available               */
+    SIGNAL ON SYNTAX   NAME I!.__NoSourceCode
+    I!.__inMacroSpace = 1
+    I!.__SrcAvailable = 0
+    if sourceLine( I!.__errorLineNo ) <> '' then
+      I!.__SrcAvailable = 1
+
+    SIGNAL ON SYNTAX NAME I!.__ErrorAbort
+    I!.__inMacroSpace = 0
+
+  end /* else */
+
+                        /* print the statement causing the error to   */
+                        /* the screen                                 */
+  if 1 == I!.__SrcAvailable then
+  do
+    call Log left( ' The line reads: ', prog.__ScreenCols )
+    I!.__InterpretVar = 0
+
+                /* read the line causing the error                    */
+    call I!.__GetSourceLine
+
+    I!.__FirstToken = strip(word( I!.__ThisSRCLine,1))
+    if translate( I!.__FirstToken ) == 'INTERPRET' then
+    do
+      parse var I!.__ThisSRCLine (I!.__FirstToken) ,
+                I!.__interpretValue
+      I!.__InterpretVar = 1
+    end /* if I!.__thisLineNo = I!.__errorLineNo */
+
+                        /* handle multi line statements               */
+    do forever
+      call ShowString I!.__ThisPrefix, I!.__ThisSRCLine
+
+      if right( strip( I!.__ThisSRCLine),1 ) <> ',' then
+        leave
+
+      I!.__ThisPrefix = 5
+
+      call I!.__GetSourceLine
+    end /* do forever */
+
+    if 1 == I!.__InterpretVar then
+    do
+      I!.__interpretValue = strip( word(I!.__interpretValue,1) )
+
+      if symbol( I!.__interpretValue ) == 'VAR' then
+      do
+        call Log left( '', prog.__ScreenCols )
+        call Log left( ' The value of "' || I!.__interpretValue || ,
+                       '" is:', prog.__ScreenCols )
+        call ShowString ' >V> ', value( I!.__interpretValue )
+      end /* if symbol( I!.__interpretValue ) = 'VAR' then */
+
+    end /* if 1 == I!.__InterpretVar */
+
+  end /* if 1 == I!.__SrcAvailable  then do */
+  else
+    call Log left( ' The sourcecode for this line is not available',,
+                   prog.__ScreenCols )
+
+I!.__NoSourceCode:
+  SIGNAL ON SYNTAX NAME I!.__ErrorAbort
+
+  if 1 == I!.__inMacroSpace then
+  do
+    parse source . . I!.__thisProgName
+
+    if fileSpec( 'D', I!.__thisProgName ) == '' then
+      call ShowString 1, ' The sourcecode for this line is not' || ,
+                         ' available because the program is in' || ,
+                         ' the macro space.'
+    else
+      call ShowString 1, ' The sourcecode for this line is not' || ,
+                         ' available because the program is unreadable.'
+  end /* if 1 == I!.__inMacroSpace then */
+
+  call I!.__LogSeparator
+  call Log
+
+  prog.__ExitCode = global.__ErrorExitCode
+
+  if prog.__NoSound <> 1 then
+  do
+    call beep 137,300;  call beep 337,300;  call beep 137,300
+  end /* if prog.__NoSound <> 1 then */
+
+  if 'DEBUG' == global.__verbose | prog.__Trace = 1 then
+  do
+                        /* enter interactive debug mode               */
+    trace ?a
+    nop
+  end /* if 'DEBUG' == global.__verbose | ... */
+
+                        /* restore quiet mode status                  */
+  prog.__QuietMode = I!.__QM
+                        /* restore current color                      */
+  screen.__CurColor = screen.__NormalColor                   /* v3.08 */
+
+SIGNAL I!.__programEnd
+
+/* ------------------------------------------------------------------ */
+/*-function: get the sourceline causing an error (subroutine of       */
+/*           I!.__ErrorAbort)                                         */
+/*                                                                    */
+/*-call:     DO NOT CALL THIS IN YOUR CODE!!!                         */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     -                                                        */
+/*                                                                    */
+I!.__GetSourceLine:
+  if 1 == I!.__IncActive then
+    I!.__ThisSRCLine = lineIn( I!.__IncFileName )
+  else
+  do
+    I!.__ThisSRCLine = sourceLine( I!.__ThisLineNo )
+    I!.__ThisLineNo = I!.__ThisLineNo + 1
+  end /* else */
+RETURN
+
+/* ------------------------------------------------------------------ */
+/*-function: error handler for user breaks                            */
+/*                                                                    */
+/*-call:     DO NOT CALL THIS ROUTINE BY HAND!!!                      */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-Note:     THIS FUNCTION ABORTS THE PROGRAM WITH A JUMP TO THE      */
+/*           LABEL I!.__PROGRAMEND IF prog.__UserAbort IS NOT 0!!!    */
+/*                                                                    */
+/*           In exit routines you may test if the variable            */
+/*           prog.__ExitCode is 254 to check if the program           */
+/*           was aborted by the user.                                 */
+/*                                                                    */
+I!.__UserAbort:
+  I!.__sSigl = sigl
+
+                        /* reinstall the error handler                */
+  CALL ON HALT NAME I!.__UserAbort
+
+                        /* check if user aborts are allowed           */
+  if 0 == prog.__UserAbort then
+    RETURN              /* CTRL-BREAK not allowed                     */
+
+  I!.__QM = prog.__QuietMode
+
+                        /* turn quiet mode off                        */
+  prog.__QuietMode = ''
+
+  call Log
+
+  screen.__CurColor = screen.__ErrorColor
+  call I!.__LogSeparator
+  call Log left( I!.__GetMsg( 11, I!.__sSigl ), prog.__ScreenCols )
+  call I!.__LogSeparator
+  screen.__CurColor = screen.__NormalColor
+
+  prog.__ExitCode = 254
+
+                        /* restore quiet mode status                  */
+  prog.__QuietMode = I!.__QM
+
+SIGNAL I!.__ProgramEnd
+
+/* ------------------------------------------------------------------ */
+/*-function: get a message                                            */
+/*                                                                    */
+/*-call:     I!.__GetMsg msgNo {,msgP1} {...,msgP9}                   */
+/*                                                                    */
+/*-returns:  the message or an empty string                           */
+/*                                                                    */
+/*-note:     This routines calls the external routine which name is   */
+/*           saved in the variable 'global.__GetMsg' if this variable */
+/*           is not equal ''.                                         */
+/*                                                                    */
+/*           I!.__GetMsg adds global.__BaseMsgNo to the msgNo.        */
+/*                                                                    */
+I!.__GetMsg: PROCEDURE expose (exposeList)
+  parse arg msgNo, mP1 , mP2 , mP3, mP4, mP5, mP6, mP7, mP8, mP9
+
+  f = 0
+  t = ''
+
+  if symbol( 'global.__GetMsg' ) = 'VAR' then
+    if global.__GetMsg <> '' then
+    do
+            /* first check if there's a user defined GetMsg routine   */
+
+                        /* install a local error handler              */
+      SIGNAL ON SYNTAX Name I!.__GetMsg1
+
+                    /* try to call the user defined GetMsg routine    */
+      interpret 'call ' global.__GetMsg ' msgNo+global.__BaseMsgNo,,' ,
+                ' mP1, mP2, mP3, mP4, mP5, mP6, mP7, mP8, mP9 '
+      f = 1
+    end /* if global.__GetMsg <> '' then */
+
+I!.__GetMsg1:
+
+  if f = 1 then
+  do
+                        /* user defined GetMsg routine found -- use   */
+                        /* the result                                 */
+    if symbol( 'RESULT' ) == 'VAR' then
+      t = result
+  end /* if result = 0 then */
+  else
+  do
+                        /* user defined GetMsg routine not found --   */
+                        /* use the hardcoded message strings          */
+      msgString =  ,
+/* 1001 */      'Routine_"@1"_not_found',
+/* 1002 */      'Can_not_write_to_the_logfile_"@1",_the_status_of_the_logfile_is_"@2"._Now_using_the_NUL_device_for_logging',
+/* 1003 */      'Include_file_"@1"_not_found' ,
+/* 1004 */      'Unexpected_EOF_detected_while_reading_the_include_file_"@1"' ,
+/* 1005 */      'Error_loading_the_DLL_"@1"' ,
+/* 1006 */      'Invalid_call_to_LOADDLL' ,
+/* 1007 */      '_Warning:' ,
+/* 1008 */      '_@1_-_Error_@2_detected!_The_error_message_is_',
+/* 1009 */      '_Calling_the_patched_version_@1_...' ,
+/* 1010 */      '_..._the_patched_version_endet_with_RC_=_@1' ,
+/* 1011 */      '_Program_aborted_by_the_user_(sigl=@1)' ,
+/* 1012 */      '@1_@2_started_on_@3_at_@4_...' ,
+/* 1013 */      '@1_@2_ended_on_@3_at_@4_with_RC_=_@5_(=''@6''x)' ,
+/* 1014 */      '_Usage:'
+
+                    /* get the message and translate all underscores  */
+                    /* to blanks                                      */
+    t = translate( word( msgString, msgNo ), ' ', '_'  )
+
+                    /* replace place holder                           */
+    i = 1
+    do until i > 9
+     j = pos( '@' || i, t )
+     if j <> 0 then
+       t = insert( arg( i+1 ), delStr(t, j, 2) , j-1 )
+     else
+       i = i +1
+    end /* do until i > 9 */
+  end /* else */
+return t
+
+/* ------------------------------------------------------------------ */
+/*-function: get the line no of the call statement of this routine    */
+/*                                                                    */
+/*-call:     GetLineNo                                                */
+/*                                                                    */
+/*-returns:  the line number                                          */
+/*                                                                    */
+/*                                                                    */
+GetLineNo:
+  RETURN sigl
+
+/* ------------------------------------------------------------------ */
+/*-function: get the no. of the first line with the user code         */
+/*                                                                    */
+/*-call:     DO NOT CALL THIS ROUTINE BY HAND!!!                      */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*                                                                    */
+I!.__GetUserCode:
+  I!.__FirstUserCodeLine = GetLineNo()+2
+RETURN
+
+/********************** End of Runtime Routines ***********************/
+/**********************************************************************/
+
+/***        End of Part 3 of the source code of TEMPLATE.CMD        ***/
+/***       Start of Part 4 of the source code of TEMPLATE.CMD       ***/
+                                                                   /*!*/
+
+/* ------------------------------------------------------------------ */
+/*-function: main procedure of the program                            */
+/*                                                                    */
+/*-call:     called by the runtime system with:                       */
+/*           => call main parameter_of_the_program <=                 */
+/*                                                                    */
+/*-returns:  program return code                                      */
+/*           If no return code is returned, the value of the variable */
+/*           prog.__ExitCode is returned to the calling program.      */
+/*                                                                    */
+/*-Note:     YOU MUST FILL THIS ROUTINE WITH CODE.                    */
+/*           If you want to add further global variables you SHOULD   */
+/*           add them to the expose list of the procedure MAIN!       */
+/*                                                                    */
+Main: PROCEDURE expose (exposeList)
+
+                    /* load the necessary function from REXXUTIL      */
+  call rxFuncAdd 'SysSearchPath', 'REXXUTIL', 'SysSearchPath'
+
+                    /* strings which should not be written into       */
+                    /* the log file                                   */
+  prog.__LogExcludeWords = screen.__fgYellow screen.__highlight ,
+                           screen.__AttrOff
+
+                    /* get and split the parameter of the program     */
+  call SplitParameter arg(1), ':'
+
+                    /* load the DLL functions to work on the macro    */
+                    /* space                                          */
+  if LoadMacroSpaceFunctions() <> 0 then
+    call ShowError CIDRC.__unexpected_condition,,
+           'Cannot load the DLL functions to work with' ,
+           'the macrospace functions'
+
+                    /* process the parameter                          */
+  do i = 1 to argv.0
+
+    curKeyWord = argv.i.__keyWord
+    curKeyValue = argv.i.__keyValue
+
+    if wordPos( curKeyWord, ' LOAD SAVE QUERY ADD DROP ' ) <> 0 then
+    do
+                    /* The parameter LOAD, SAVE, QUERY, ADD and DROP  */
+                    /* need a keyvalue                                */
+      if curKeyValue = '' then
+            call ShowError CIDRC.__unexpected_condition ,,
+                        'Error: Keyvalue missing for parameter "' || ,
+                        curKeyWord || '"'
+    end /* if */
+
+    select
+
+      when curkeyword = 'CLEAR' then
+      do
+        call log ' Clearing the macro space ...'
+
+        curClearRC = SysClearREXXMacroSpace()
+
+        select
+
+          when curClearRC = 0 then
+            nop
+
+                    /* RC = 2 -> no macros in the macro space         */
+          when curClearRC = 2 then
+            call ShowWarning,
+                   GetMacroDllErrorMessage( curClearRC )
+
+          otherwise
+            call ShowError CIDRC.__unexpected_condition ,,
+                        'Error ' || curClearRc || ' (' || ,
+                         GetMacroDllErrorMessage( curClearRC ) || ,
+                         ') clearing the macro space'
+
+        end /* select */
+
+      end /* when */
+
+      when curkeyword = 'LOAD' then
+      do
+                    /* load the macro space from a file               */
+        parse value GetMacroImageFile( curKeyValue ) WITH ,
+              thisRC curMacroImageFile
+
+        if thisRC > 1 then
+          call ShowError CIDRC.__data_resource_not_found ,,
+                 'Cannot find the file "' || curMacroImageFile || '"'
+
+        call log ' Loading the macro space from the file ' || ,
+                   AddColor1( '"', curMacroImageFile ) || ' ...'
+
+        curLoadFileRC = SysLoadRexxMacroSpace( curMacroImageFile )
+        if curLoadFileRC <> 0 then
+          call ShowError CIDRC.__unexpected_condition ,,
+                        'Error ' || curLoadFileRC || ' (' || ,
+                        GetMacroDllErrorMessage( curLoadFileRC ) || ,
+                        ') loading the file'
+      end /* when */
+
+      when curkeyword = 'SAVE' then
+      do
+                    /* save the macro space to a file                 */
+        curMacroImageFile = curKeyValue
+
+                    /* add the extension if necessary                 */
+        if lastPos( '.', curMacroImageFile ) = 0 then
+          curMacroImageFile = curMacroImageFile || '.MAC'
+
+        parse var curMacroImageFile firstChar +1 curName
+        if firstChar = '!' then
+        do
+                    /* delete an existing target file                 */
+          curMacroImageFile = curName
+          if stream( curMacroImageFile, 'c', 'QUERY EXIST' ) <> '' then
+            '@del ' curMacroImageFile prog.__LogALL
+        end /* if firstChar = '!' then */
+
+        call log ' Saving the macro space in the file ' || ,
+                   AddColor1( '"', curMacroImageFile ) || ' ...'
+
+        curSaveFileRC = SysSaveRexxMacroSpace( curMacroImageFile )
+
+        select
+
+          when curSaveFileRC = 0 then
+            nop
+
+                    /* RC = 2 -> no macros in the macro space         */
+          when curSaveFileRC = 2 then
+            call ShowWarning,
+                   GetMacroDllErrorMessage( curSaveFileRC )
+
+          otherwise
+            call ShowError CIDRC.__unexpected_condition ,,
+                        'Error ' || curSaveFileRC || ' (' || ,
+                        GetMacroDllErrorMessage( curSaveFileRC ) || ,
+                        ') saving the file'
+
+        end /* select */
+
+      end /* when */
+
+      when curkeyword = 'QUERY' then
+      do
+                    /* query if a macro exists                        */
+
+        parse var curKeyValue firstChar +1 curMacroName
+        if firstChar <> '!' then
+        do
+                    /* try to read the source file with the macro     */
+          curMacroName = GetMacroName( curKeyValue )
+          if curMacroName = '' then
+            curMacroName = curKeyValue
+        end /* if */
+
+        call log ' Querying the macro ' || ,
+                 AddColor1( '"', curMacroName ) || ' ...'
+
+        curQueryRC = SysQueryRexxMacro( curMacroName )
+
+                    /* set the program exit code according to the     */
+                    /* result of SysQueryRexxMacro                    */
+        prog.__ExitCode = 0
+        if curQueryRC = 'A' then
+          prog.__ExitCode = 2
+        if curQueryRC = 'B' then
+          prog.__ExitCode = 1
+
+        if prog.__ExitCode <> 0 then
+          call log ' --> The macro exists (Option is: ' ||,
+                   AddColor1( '"', curQueryRC ) || ').'
+        else
+          call log ' --> The macro does not exist.'
+
+      end /* when */
+
+      when curkeyword = 'REORDER' then
+      do
+                    /* reorder a macro                                */
+
+                    /* split the value into the macro name and the    */
+                    /* new option                                     */
+        parse var curKeyValue curMacroCMDFile ',' newOption
+        if newOption <> '' then
+        do
+                    /* check the option                               */
+          if pos( newOption, 'AaBb' ) = 0 then
+            call ShowError CIDRC.__unexpected_condition ,,
+                         'Invalid option "' || newOption || ,
+                         '" for the REORDER command'
+        end /* if */
+        else
+          newOption = 'B'
+
+        parse var curMacroCMDFile firstChar +1 curMacroName
+        if firstChar <> '!' then
+        do
+                    /* try to read the source file with the macro     */
+          curMacroName = GetMacroName( curMacroCMDFile )
+          if curMacroName = '' then
+            curMacroName = curMacroCmdFile
+        end /* if */
+
+        call log ' Reordering the macro ' || ,
+                 AddColor1( '"', curMacroName ) ||,
+                 'the new option is ' || ,
+                 AddColor1( '"', newOption ) || ' ...'
+
+        curReorderRC = SysReorderRexxMacro( curMacroName, newOption )
+
+        select
+
+          when curReorderRC = 0 then
+            nop
+
+                    /* RC = 2 -> macro not found                      */
+          when curReorderRC = 2 then
+            call ShowWarning,
+                   GetMacroDllErrorMessage( curReorderRC )
+
+          otherwise
+            call ShowError CIDRC.__unexpected_condition ,,
+                        'Error ' || curReorderRc || ' (' || ,
+                         GetMacroDllErrorMessage( curReorderRC ) || ,
+                         ') reordering the macro'
+
+        end /* select */
+
+      end /* when */
+
+      when curkeyword = 'DROP' then
+      do
+                    /* drop a macro from the macro space              */
+        parse var curKeyValue firstChar +1 curMacroName
+        if firstChar <> '!' then
+        do
+                    /* try to read the source file with the macro     */
+          curMacroName = GetMacroName( curKeyValue )
+          if curMacroName = '' then
+            curMacroName = curKeyValue
+        end /* if */
+
+        call Log ' Dropping the macro ' || ,
+                 AddColor1( '"', curMacroName ) || '...'
+
+        curDropRC = SysDropRexxMacro( curMacroName )
+
+        select
+
+          when curDropRC = 0 then
+            nop
+
+                    /* RC = 2 -> macro not found                      */
+          when curDropRC = 2 then
+            call ShowWarning,
+                   GetMacroDllErrorMessage( curDropRC )
+
+          otherwise
+            call ShowError CIDRC.__unexpected_condition ,,
+                        'Error ' || curDropRc || ' (' || ,
+                         GetMacroDllErrorMessage( curDropRC ) || ,
+                         ') dropping the macro'
+
+        end /* select */
+
+      end /* when */
+
+      when curkeyword = 'ADD' then
+      do
+                    /* add a macro to the macro space                 */
+
+                    /* split the value into the macro name and the    */
+                    /* new option                                     */
+        parse var curKeyValue curMacroCMDFile ',' curOption
+        if curOption <> '' then
+        do
+                    /* check the option                               */
+          if pos( curOption, 'AaBb' ) = 0 then
+            call ShowError CIDRC.__unexpected_condition ,,
+                         'Invalid option "' || curOption || ,
+                         '" for the ADD command'
+        end /* if */
+        else
+          curOption = 'B'
+
+        parse var curMacroCMDFile firstChar +1 curName
+        if firstChar = '!' then
+        do
+                    /* we should overwrite an existing macro          */
+          curMacroCMDFile = curName
+          overwrite = 'Y'
+        end /* if */
+        else
+          overwrite = 'N'
+
+        parse value GetMacroCMDFileName( curMacroCMDFile ) WITH ,
+              thisRC macroCmdFile
+
+        if thisRC > 1 then
+          call ShowError CIDRC.__data_resource_not_found ,,
+                     'Cannot find the file "' || MacroCMDFile || '"'
+        else
+          curMacroCMDFile = macroCmdFile
+
+        call log ' Loading a macro from the file ' || ,
+                 AddColor1( '"', curMacroCMDFile ) || ' ...'
+
+        curMacroName = GetMacroName( curMacroCMDFile )
+
+        if curMacroName = '' then
+           call ShowError CIDRC.__unexpected_condition ,,
+                  'Cannot read the file "' || curMacroCMDFile || '"'
+
+        call Log '  The name of the macro is ' || ,
+                 AddColor1( '"', curMacroName ) || ,
+                 ', the option is ' || AddColor1( '"', curOption ) || '.'
+
+        if SysQueryRexxMacro( curMacroName ) <> '' & overWrite = 'N' then
+        do
+          call ShowError CIDRC.__unexpected_condition ,,
+                 'The macro "' || curMacroName || '" already exists'
+        end /* if */
+
+        curLoadRC = SysAddRexxMacro( curMacroName,,
+                                     curMacroCMDFile , curOption )
+
+        select
+
+          when curLoadRC = 0 then
+            nop
+
+                    /* RC = 4 -> macro already exist                  */
+          when curLoadRC = 4 then
+            call ShowWarning  ,
+                   curLoadRc || ' (' || ,
+                   GetMacroDllErrorMessage( curLoadRC ) || ,
+                   ') loading the file.'
+
+          otherwise
+            call ShowError CIDRC.__unexpected_condition ,,
+                          'Error ' || curLoadRc || ' (' || ,
+                           GetMacroDllErrorMessage( curLoadRC ) || ,
+                           ') loading the file'
+        end /* select */
+
+      end /* when */
+
+      otherwise
+      do
+                    /* invalid parameter found                        */
+        call ShowError CIDRC.__unexpected_condition ,,
+               'Invalid parameter found: "' || curKeyWord || '"'
+
+      end /* otherwise */
+
+    end /* select */
+
+  end /* do i = 1 argv.0 */
+
+
+/* ------------------------------ */
+
+                        /* exit the program                           */
+RETURN
+
+/* ------------------------------------------------------------------ */
+
+/*** INSERT FURTHER SUBROUTINES HERE ***/
+
+/*** Note: Do not forget the string 'EXPOSELIST' in the exposeList  ***/
+/***       of ALL procedures!                                       ***/
+
+/* ------------------------------------------------------------------ */
+/*-function: get the fully qualified name of a macro cmd file         */
+/*                                                                    */
+/*-call:     fullname = GetMacroCMDFileName( curName )                */
+/*                                                                    */
+/*-where:    curName - name of the file with the macro                */
+/*                                                                    */
+/*-returns:  n x                                                      */
+/*           where n is the return code (0 okay, else error) and      */
+/*           x is the searched file name                              */
+/*                                                                    */
+GetMacroCmdFileName: PROCEDURE expose (exposeList)
+
+return SearchFile( arg( 1 ), '.CMD' )
+
+/* ------------------------------------------------------------------ */
+/*-function: get the fully qualified name of a macro image file       */
+/*                                                                    */
+/*-call:     fullName = GetMacroImageFileName( curName )              */
+/*                                                                    */
+/*-where:    curName - name of the file with the macro image          */
+/*                                                                    */
+/*-returns:  n x                                                      */
+/*           where n is the return code (0 okay, else error) and      */
+/*           x is the searched file name                              */
+/*                                                                    */
+GetMacroImageFile: PROCEDURE expose (exposeList)
+
+return SearchFile( arg( 1 ), '.MAC' )
+
+/* ------------------------------------------------------------------ */
+/*-function: Search a file in the PATH directories                    */
+/*                                                                    */
+/*-call:     fullName = SearchFile( filename, extension )             */
+/*                                                                    */
+/*-where:    filename - name of the file                              */
+/*           extension - extension to use if 'filename' contains no   */
+/*                       extension                                    */
+/*                                                                    */
+/*-returns:  n x                                                      */
+/*           where n is the return code (0 okay, else error) and      */
+/*           x is the searched file name                              */
+/*                                                                    */
+SearchFile: PROCEDURE expose (exposeList)
+  parse arg filename, extension
+
+  thisRC_No = 2
+  thisRC_Name = fileName
+
+  signal on syntax name SearchFileEnd
+
+                    /* add the extension if necessary                 */
+  if left( extension, 1 ) <> '.' then
+    extension = '.' || extension
+
+  if lastPos( '.', filename ) = 0 then
+  do
+    filename = fileName || extension
+    thisRC_Name = fileName
+  end /* if */
+
+  if pos( '\', fileName ) = 0 then
+  do
+    fileName = SysSearchPath( 'PATH', fileName )
+    if fileName <> '' then
+    do
+      thisRC_Name = fileName
+      thisRC_No = 0
+    end /* if */
+  end /* if */
+  else
+    thisRC_No = 1
+
+SearchFileEnd:
+
+return thisRC_No thisRC_Name
+
+/* ------------------------------------------------------------------ */
+/*-function: get the name for a macro                                 */
+/*                                                                    */
+/*-call:     curMacroName = GetMacroName( curMacroCMDFile )           */
+/*                                                                    */
+/*-where:    curMacroCMDFile - name of the file with the macro        */
+/*                                                                    */
+/*-returns:  the name of the macro or ''                              */
+/*                                                                    */
+/*-notes:    GetMacroName first tries to get the macro name from the  */
+/*           first line of the file. Is this fails, it uses the name  */
+/*           of the file without the extension as macro name.         */
+/*                                                                    */
+GetMacroName: PROCEDURE expose (exposeList)
+  parse arg CurMacroCMDFile
+
+                    /* init the return code                           */
+  curMacroName = ''
+
+  parse value GetMacroCMDFileName( curMacroCMDFile ) WITH ,
+        thisRC curMacroCmdFile
+
+  if thisRC <= 1 then
+  do
+                    /* check the filetype                             */
+    if stream( curMacroCMDFile, 'c', 'QUERY EXISTS' ) <> '' then
+    do
+      curMacroSignatur = charIn( curMacroCMDFile, 1,2 )
+
+                    /* close the file                                 */
+      call stream curMacroCMDFile, 'c', 'CLOSE'
+
+      if length( curMacroSignatur ) = 2 then
+      do
+        if curMacroSignatur = '/' || '*' then
+        do
+                    /* get the name for the macro                     */
+          firstMacroLine = lineIn( curMacroCMDFile )
+
+                    /* close the macro file                           */
+          call stream curMacroCmdFile, 'c', 'CLOSE'
+
+          parse upper var firstMacroLine . 'MACRONAME:' curMacroName .
+          curMacroName = strip( curMacroName )
+          parse var curMacroName tc +1 .
+          if tc = '"' | tc = "'" then
+            parse var firstMacroLine . 'MACRONAME:' (tc) curMacroName (tc)
+          else
+            curMacroName = strip( word( curMacroName, 1 ) )
+        end /* if */
+
+        if curMacroName = '' then
+        do
+          curMacroName = fileSpec( "name", curMacroCMDFile )
+          if lastPos( '.', curMacroName ) <> 0 then
+            curMacroName = substr( curMacroName, 1,,
+                           lastPos( '.', curMacroName )-1 )
+        end /* if curMacroName = '' then */
+      end /* if length( curMacroSignatur ) = 2 then */
+    end /* if stream( curMacroCMDFile, 'c', 'QUERY EXISTS' ) <> '' then */
+  end /* if curMacroCMDFile <> '' then */
+
+return curMacroName
+
+/* ------------------------------------------------------------------ */
+/*-function: split a string into separate arguments                   */
+/*                                                                    */
+/*-call:     call SplitParameter Parameter_string, separator          */
+/*                                                                    */
+/*-where:    parameter_string - string to split                       */
+/*           separator - separator character to split a parameter     */
+/*                       into keyword and keyvalue                    */
+/*                                                                    */
+/*-returns:  the number of arguments                                  */
+/*           The arguments are returned in the stem argv.:            */
+/*             argv.0 = number of arguments                           */
+/*             argv.n.__keyword = keyword                             */
+/*             argv.n.__keyValue = keyValue                           */
+/*                                                                    */
+/*-note:     handles arguments in quotes and double quotes also       */
+/*                                                                    */
+/*                                                                    */
+SplitParameter: PROCEDURE EXPOSE (exposeList) argv.
+
+                    /* get the parameter                              */
+  parse arg thisArgs, thisSeparator
+
+                    /* init the result stem                           */
+  argv.0 = 0
+
+  do while thisargs <> ''
+
+    parse value strip( thisArgs, "B" ) with curArg thisArgs
+
+    parse var curArg tc +1 .
+    if tc = '"' | tc = "'" then
+      parse value curArg thisArgs with (tc) curArg (tc) ThisArgs
+
+    parse var curArg '' -1 lastChar 1 argType (thisSeparator) argValue
+
+    parse var argValue tc +1 .
+    if tc = '"' | tc = "'" then
+      parse value argValue thisArgs with (tc) argValue (tc) ThisArgs
+
+    argtype  = strip( argType  )
+    argValue = strip( argValue )
+
+    i = argv.0 + 1
+
+    if translate( argType ) <> 'CLEAR' & ,
+       argValue = '' & lastChar <> thisSeparator then
+    do
+      argv.i.__keyWord = 'ADD'
+      argv.i.__KeyValue = argType
+    end /* if */
+    else
+    do
+      argv.i.__keyword = translate( argType )
+      argv.i.__KeyValue = argValue
+    end /* else */
+
+    argv.0 = i
+
+  end /* do while thisArgs <> '' */
+
+RETURN argv.0
+
+/* ------------------------------------------------------------------ */
+/*-function: get the message for an error number from the macro       */
+/*           functions                                                */
+/*                                                                    */
+/*-call:     GetMacroDLLErrorMessage errorNo                          */
+/*                                                                    */
+/*-where:    errorNo - error number                                   */
+/*                                                                    */
+/*-returns:  error message                                            */
+/*                                                                    */
+GetMacroDllErrorMessage: PROCEDURE expose (exposeList)
+  parse arg thisErrorNo .
+
+  select
+
+    when thisErrorNo = 1 then
+      thisErrorMessage =  'Not enough memory'
+
+    when thisErrorNo = 2 then
+      thisErrorMessage =  'Macro not found'
+
+    when thisErrorNo = 3 then
+      thisErrorMessage =  'Extension required'
+
+    when thisErrorNo = 4 then
+      thisErrorMessage =  'Macro already exist'
+
+    when thisErrorNo = 5 then
+      thisErrorMessage =  'File error'
+
+    when thisErrorNo = 6 then
+      thisErrorMessage =  'Signatur error'
+
+    when thisErrorNo = 7 then
+      thisErrorMessage =  'Sourcefile not found'
+
+    when thisErrorNo = 8 then
+      thisErrorMessage =  'Invalid position'
+
+    otherwise
+      thisErrorMessage = 'Unknwon error'
+
+  end /* select */
+
+RETURN thisErrorMessage
+
+/* ------------------------------------------------------------------ */
+/*-function: load the functions to process the macro space            */
+/*                                                                    */
+/*-call:     thisRC = LoadMacroSpaceFunctions()                       */
+/*                                                                    */
+/*-where:    -                                                        */
+/*                                                                    */
+/*-returns:  0 =  okay                                                */
+/*           else error                                               */
+/*                                                                    */
+/*                                                                    */
+LoadMacroSpaceFunctions: PROCEDURE expose (exposeList)
+                    /* init the stem with the macro function names    */
+
+                    /*-functions from the new REXXUTIL DLL            */
+  i = 0; newFunctions.0 = i;
+  i=i+1; newFunctions.i = 'SysQueryRexxMacro'
+  i=i+1; newFunctions.i = 'SysAddRexxMacro'
+  i=i+1; newFunctions.i = 'SysClearRexxMacroSpace'
+  i=i+1; newFunctions.i = 'SysdropRexxMacro'
+  i=i+1; newFunctions.i = 'SysLoadRexxMacroSpace'
+  i=i+1; newFunctions.i = 'SysSaveRexxMacroSpace'
+         newFunctions.0 = i
+
+                    /* name of the DLL with the functions             */
+  DLLtoUse = ''
+
+                    /* possible names of the DLL to use               */
+  possibleDLLS = 'REXXUTIL' global.__RexxUtilDLL
+
+  do i = 1 to words( possibleDLLs ) while DLLToUse = ''
+    curDLLName = word( possibleDLLs, i )
+
+                    /* try to load the first function                 */
+    call rxFuncAdd newFunctions.1, curDLLName, newFunctions.1
+
+                    /* check if the call was successfull              */
+    if FunctionLoaded( newFunctions.1, '"dummy"' ) = 0 then
+      DLLToUse = curDLLName
+    else
+      call rxFuncDrop newFunctions.1
+  end /* do i = 1 to ... */
+
+  if DLLToUse <> '' then
+  do
+    thisRC = 0
+                    /* load the other functions                       */
+    do i = 2 to newFunctions.0
+      call rxFuncAdd newFunctions.i, DLLToUse, newFunctions.i
+    end /* do i = 2 to newFunctions.0 */
+  end /* if */
+  else
+    thisRC = 1
+
+RETURN thisRC
+
+/* ------------------------------------------------------------------ */
+/*-function: Check if a function is loaded                            */
+/*                                                                    */
+/*-call:     thisRC = FunctionLoaded( Name {,parm1} {...} {,parm#}    */
+/*                                                                    */
+/*-where:    name - name of the function                              */
+/*           parm1 ... parm#                                          */
+/*              parameter for the function                            */
+/*                                                                    */
+/*-returns:  0 - okay, function is loaded                             */
+/*           else error: either the function is not loaded or the     */
+/*                       parameter are invalid                        */
+/*                                                                    */
+FunctionLoaded: PROCEDURE expose (exposeList)
+
+                    /* init the return code                           */
+  thisRC = 1
+                    /* install a local error handler                  */
+  signal on syntax name functionLoadedEnd
+
+                    /* create the statement to call the function      */
+  stmt = 'functionRC = ' || arg(1) || '('
+
+  do i = 2 to arg()
+    stmt = stmt arg( i )
+  end /* do i = 1 to arg() */
+
+  stmt = stmt || ')'
+
+                    /* execute the statement                          */
+  interpret stmt
+
+                    /* the next statement is only executed if there's */
+                    /* no error                                       */
+  thisRC = 0
+
+FunctionLoadedEnd:
+
+return thisRC
+
+/* ------------------------------------------------------------------ */
+/*-function: Show the invocation syntax                               */
+/*                                                                    */
+/*-call:     called by the runtime system with                        */
+/*           => call ShowUsage <=                                     */
+/*                                                                    */
+/*-where:    -                                                        */
+/*                                                                    */
+/*-returns:  ''                                                       */
+/*                                                                    */
+/*-Note:     YOU SHOULD FILL THIS ROUTINE WITH CODE.                  */
+/*           You may change the return code for your program in this  */
+/*           routine. The default for the return code is 253.         */
+/*           (The variable for the return code is prog.__ExitCode)    */
+/*                                                                    */
+/*                                                                    */
+ShowUsage: PROCEDURE expose (exposeList)
+  call ShowString I!.__GetMsg( 14 ) || ' ' ,,                /* v3.06 */
+                  prog.__name ,                              /* v3.06 */
+                  global.__userUsage prog.__DefParms         /* v3.06 */
+
+RETURN ' '                                                   /* v3.03 */
+
+
+/* ------------------------------------------------------------------ */
+/*-function: add quote chars and color codes to a string              */
+/*                                                                    */
+/*-call:     AddColor1( quoteChar ,myString )                         */
+/*                                                                    */
+/*-where:    quoteChar - leading and trailing character for the       */
+/*                       converted string (may be omitted)            */
+/*           myString - string to convert                             */
+/*                                                                    */
+/*-returns:  converted string                                         */
+/*                                                                    */
+/*-note:     Add the color codes used in this routine to the          */
+/*           variable 'prog.__LogExcludeWords' if you don't want      */
+/*           them in the logfile. Example:                            */
+/*                                                                    */
+/*               prog.__LogExcludeWords = screen.__fgYellow ,         */
+/*                                        screen.__highlight ,        */
+/*                                        screen.__AttrOff            */
+/*                                                                    */
+/*           This should be one of the first statements in the        */
+/*           routine main.                                            */
+/*                                                                    */
+AddColor1: PROCEDURE expose (exposeList)
+  parse arg quoteChar, myString
+
+return quoteChar || screen.__fgYellow || screen.__highlight || ,
+       myString || ,
+      screen.__AttrOff || quoteChar
+
+/* ------------------------------------------------------------------ */
+/*-note: You must uncomment these routines before using them!!!       */
+
+/*** DEBUGGING SUBROUTINES ***/
+
+/**DEBUG** Delete this line before using the debugging routines!!! */
+
+
+/* ------------------------------------------------------------------ */
+/*-function: show all variables defined for the routine calling       */
+/*           this routine.                                            */
+/*                                                                    */
+/*-call:     ShowDefinedVariables {N}, {varMask}                      */
+/*                                                                    */
+/*-where:    N - no pause if the screen is full                       */
+/*           varMask - mask for the variables                         */
+/*                                                                    */
+/*-returns:  nothing                                                  */
+/*                                                                    */
+/*-note:     This routine needs Dave Boll's DLL RXU.DLL!              */
+/*           Be aware that the special REXX variables SIGL, RC and    */
+/*           RESULT are changed if you call this routine!             */
+/*                                                                    */
+/*                                                                    */
+ShowDefinedVariables:
+  parse upper arg SDV.__pauseMode, SDV.__varMask
+
+
+                                /* install a local error handler      */
+  signal on syntax name SDV.__RXUNotFound
+
+                                /* load the necessary DLL function    */
+  call rxFuncDrop 'RxVLIst'
+  call rxFuncAdd 'RxVlist', 'RXU', 'RxVList'
+
+  call rxFuncDrop 'RxPullQueue'
+  call rxFuncAdd 'RxPullQueue', 'RXU', 'RxPullQueue'
+
+                                /* create a queue for the variables   */
+  SDV.__newQueue = rxqueue( 'create' )
+
+                                /* the 'D' parameter of the RxVList   */
+                                /*-functions won't pause if the       */
+                                /* screen is full                     */
+  SDV.__thisRC = RxVList( SDV.__varMask, 'V' , SDV.__newQueue )
+
+                                /* ignore local variables of this     */
+                                /* routine                            */
+  SDV.__thisRC = SDV.__thisRC
+
+  say '  ' || copies( 'Ä',76 )
+
+  if SDV.__thisRC <> 0 then
+  do
+
+    say '  Defined variable(s) and their values:'
+    SDV.__i = 0
+
+    do SDV.__n = 1 to SDV.__ThisRC
+      if SDV.__i >= 23 & ,
+         SDV.__pauseMode <> 'N' then
+      do
+        ADDRESS 'CMD' 'PAUSE'
+        SDV.__i = 0
+      end /* if */
+      SDV.__varName = RxPullQueue( SDV.__newQueue, 'Nowait', 'SDV.__dummy' )
+      SDV.__varValue = RxPullQueue( SDV.__newQueue, 'Nowait', 'SDV.__dummy' )
+
+                                /* ignore local variables of this     */
+                                /* routine                            */
+      if left( SDV.__varName, 6 ) <> 'SDV.__' then
+      do
+        say '     ' || SDV.__varName || ' = "' || SDV.__varValue || '"'
+        SDV.__i = SDV.__i+1
+      end /* if right( ... */
+
+    end /* do */
+
+                        /* delete the queue for the variables         */
+    call rxqueue 'Delete', SDV.__newQueue
+  end
+  else
+    say '  No variables defined.'
+
+  say '  ' || copies( 'Ä',76 )
+
+                        /* delete local variables                     */
+  drop SDV.
+RETURN ' '                                                   /* v3.03 */
+
+                        /* error exit for ShowDefinedVariables        */
+SDV.__RXUNotFound:
+  say 'ShowDefinedVariables: RXU.DLL not found'
+RETURN 255
+
+/*   Delete this line before using the debugging routines!!!    **DEBUG**/
+
+/***        End of Part 4 of the source code of TEMPLATE.CMD        ***/
+/**********************************************************************/
+   

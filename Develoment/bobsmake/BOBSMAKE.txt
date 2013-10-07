@@ -1,0 +1,220 @@
+             Instructions for Using BobsMake.CMD
+
+Hi,
+
+Thank you for using BobsMake.CMD, the first reasonable and architected 
+replacement for the archaic NMAKE program.
+
+Now that I have satisfactorily demonstrated my bigotry, let's get down 
+to business.
+
+BobsMake.CMD is a shareware product. You are authorized to use it on as 
+many machines as you like and give it to as many others as you like 
+with only three restrictions. First, you must not remove the 
+"unregistered" copy notice unless you have registered with me, the 
+author. Second, you may not include this in a commercial product without 
+both registering your copy and negotiating a usage contract for 
+commercial distribution with me, the author. Third, if you make any 
+neat or function enhancing changes to BobsMake.CMD or any derivitive 
+work of it, you agree you will forward those changes, and the rights to 
+use, distribute, and sell those changes, to me, the author, in a
+timely fashion.
+
+            How to Use BobsMake.CMD
+
+BobsMake.CMD is invoked by executing any one of the following commands 
+from either a command line, a WPS Program object, or from within a REXX 
+or Batch file:
+
+BobsMake makefilename
+
+BobsMake.cmd makefilename
+
+BobsMake
+
+BobsMake.CMD
+
+The command entries are case insensitive. If no makefilename is provided
+BobsMake.cmd will look for a file named MAKEFILE in the current directory 
+and execute that file.
+
+The make file executed by BobsMake.CMD uses the following constructs.
+
+1.	SETDIR
+
+SETDIR instructs BobsMake to change to a different directory and drive. 
+The format of the command is :
+
+     SETDIR = driveandpathname
+
+Driveandpathname have the following format DriveLetter:PathName. An 
+example of an actual SETDIR command is:
+
+	SETDIR = d:\ibmcobol\cb2cob85
+
+2.	SETLIST
+
+SETLIST is used to indentify a list of dataset names by a single name. 
+This allows the IFCOND construct, described below, to be parsed easily 
+and to remain simple in structure. The format of the command is:
+
+	SETLIST ListName = (name1, Name2, Name3, ..., NameN)
+
+ListName is a case insensitive name following the same rules for 
+construction as any REXX variable Name. Namex are dataset names, 
+either fully qualified, or containing wildcards. The equal sign 
+and the parenthesis are required. The commas are optional. Two 
+examples of the use of SETLIST are:
+
+	SETLIST CopyBooks = (cob2main.exe *.h *.obj makefile)
+	SETLIST CopyBooks = (cob2main.exe, cob2main.lst, makefile)
+
+3.	IFCOND
+
+IFCOND is used to specify a conditional execution construct. IFCOND 
+will compare creation dates of a target and a source and execute a 
+DOCOND construct if the target is older then the source. The target 
+and source are files. The format of IFCOND is:
+
+	IFCOND Target < Source then DOCOND
+
+Target and Source are either individual file names such as program.exe 
+and program.source, or ListNames which have been identified by a 
+preceeding SETLIST construct. The IFCOND, less then sign, "then", and 
+DOCOND are all required. At this time Target and Source cannot be 
+explicitly specified as lists of objects in the IFCOND command itself. 
+For example the following command format is not supported:
+
+	IFCOND Target.exe < (*.c *.obj *.h) then DOCOND
+
+Instead the following sequence must be entered.
+
+	SETLIST SourceFiles = (*.c, *.obj, *.h)
+	IFCOND Target.exe < SourceFiles then DOCOND
+
+4.	DOCOND
+
+DOCOND is used to identify a sequence of REXX commands to be executed 
+once for each target file which satisfies the condition specified in 
+the IFCOND construct. Each DOCOND construct must be paired with an 
+ENDCOND construct.
+
+The REXX commands within the DOCOND/ENDCOND construct have access to 
+the following REXX variables:
+
+	TargetFile
+	TargetFullName
+	TargetName
+	TargetDrive
+	TargetPath
+	TargetSuffix
+
+	TargetFile contains the fully qualified target name.
+	TargetFullName contains the full dataset name.
+	TargetName contains the dataset name only.
+	TargetDrive contains the drive on which the target exists.
+	TargetPath contains the path to the dataset name.
+	TargetSuffix contains the suffix of the dataset name.
+
+5.	ENDCOND
+
+ENDCOND is used to identify the end of a sequence of REXX commands 
+that are to be executed once for each target file which satisfies the 
+condition specified in the IFCOND construct.
+
+6.	Any other REXX command or Batch file command can be placed between 
+a DOCOND and a ENDCOND pair.
+
+7.	Any other single REXX command or Batch file command can be placed 
+anywhere within the make file with the following exceptions:
+
+	CD
+	Drive:
+	DO ... END
+
+These commands will not execute correctly.
+
+               Example of a Working Make File
+
+	SETDIR = d:\ibmcobol\cb2cob85
+	"@echo ' Compile::COBOL Compiler '"
+	SETLIST CopyBooks = (cob2main.exe cob2main.lst makefile)
+
+	IFCOND *.lst < CopyBooks then DOCOND
+	    SAY 'Target = ' Target ' TargetName = ' TargetName '
+              TargetSuffix = ' TargetSuffix
+	    iwzvcomp.cmd -q"NOCURRENCY NOLIB QUOTE NONUMBER
+              PGMNAME(UPPER) SEQUENCE NOTYPECHK NOWORD
+              LINECOUNT(60) NOLIST NOMAP SOURCE SPACE(1) 
+              TERMINAL NOVBREF NOXREF NOEXIT NOADATA 
+              NOCOMPILE(S) NOIDLGEN SEPOBJ SIZE(2097152) 
+              BINARY(NATIVE) COLLSEQ(NATIVE) NOTHREAD TRUNC(STD)
+              ZWB CALLINT(SYSTEM) ENTRYINT(SYSTEM) PROBE FLAG(I)
+              NOFLAGSTD NOPROFILE NOTEST NOSSRANGE"
+              d:\IBMCOBOL\CB2COB85\cob2main.cbl
+	    ENDCOND
+
+Notes: The SAY and iwzvcomp commands are actually contained on one line. 
+The have been split and indented here only for readability.
+
+This make file will change the working directory to d:\ibmcobol\cb2cob85, 
+display on the terminal 'Compile::COBOL Compiler', establish a listname 
+of CopyBooks, compare the creation date of all Lst files in the current 
+subdirectory against the file names identified in the list name, and 
+execute the SAY and iwzvcomp commands for each of the files.
+
+YOU CAN PLACE AS MANY IFCOND/DOCOND/ENDCOND constructs in the make file
+as you need.
+
+You can cause BobsMake.CMD to iterate through the make file until no 
+conditions are satisfied, thus allowing you to place the
+IFCOND/DOCOND/ENDCOND constructs in any order you want, and still be 
+assured that all conditions will be satisified. This is accomplished
+by adding the line:
+
+IterateUntilDone = 'Yes'
+
+at the start of your make file.
+
+You can cause BobsMake.CMD to display the interim results of all its
+checking by adding the line:
+
+Verbose = 'Yes'
+
+at the start of your make file.
+
+
+			Known Problem Areas
+
+Currently the age comparison routine uses the date and time returned 
+from the directory command. This has a resolution of only 1 minute. 
+I will be changing this to support a resolution of at least 1 second 
+in a later release. In the meantime it is possible that if you do a 
+compile and then make a source change within the same minute the age 
+comparison will fail.
+
+If the target file does not exist the condition will not be satisfied.
+I assume that I will have this resolved before the first user registers
+their copy. But one never knows.
+
+
+            How to Register BobsMake.CMD
+
+Send $5.00 in cash or check to:
+
+	Robert Chapman
+	11 Mareblu
+	Suite 130
+	Aliso Viejo, CA 92656
+
+	re: BobsMake.cmd
+
+You can correspond with the author on Compuserve at 73173,1616, on the
+Internet at bobchap@ibm.net, on the telephone at 714.448.9578, or by
+fax at 714.831.4432.
+
+Upon receipt of the $5.00 I will send you a letter authorizing you to 
+remove the line displaying the "unregistered" copy message.
+
+Thank you.
+
