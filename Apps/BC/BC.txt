@@ -1,0 +1,53 @@
+BC - Background Carousel v1.00 (C) 1995 Tony Bearman
+
+This program will change your desktop background randomly from a collection
+of bitmaps in a directory that you specify.
+
+If the program is invoked with no options, it will check to see if its
+configuration has been set. If this is the first time it is run, or the
+configuration is invalid, it will prompt for the missing items.
+
+The configuration items that you can select are:
+
+   Bitmap display   - scaled, normal or tiled
+   Bitmap location  - a valid path containing OS/2 .BMP files
+   Background delay - the number of seconds that you want between changes
+                    - this item may be set to "Random", in which case you may
+                      select a range for the randomizer
+
+Command line options may be viewed by typing "BC /?".
+
+The program was written in REXX, and compiled using REXXCC (c) by Bernd 
+Schemmer. You must have installed REXX, with the RexxUtil.Dll in your libpath,
+for it to work. If it fails to execute, you probably have damaged the Extended
+Attributes of the program, and need to unarchive a fresh copy. If you still 
+have trouble with it, make sure you are using LH v2.22, type "lh l -v bc", and
+compare the CRCs for the following files:
+
+Original  Packed    Rat Date     Time     Attr   Type  CRC   Name
+--------  --------  --- -------  -------- ------ ----  ---   ------------------
+    8023      3139  40% 95-10-08 14:43:24 ...... -lh5- DFEA +BC.CMD
+    1947       483  25% 95-10-08 14:40:24 ...... -lh5- 3959  BC.CMD
+
+...if your files differ, obtain a fresh archive. Make sure you do not use the
+"/i" option when decompressing.  :-)
+
+The program should work with screen savers. It should even work with other
+background changers, although I don't think that makes much sense.
+
+Background Carousel has been tested on a variety of machines, and makes no 
+exotic calls, so it should be safe for your equipment and data. However, it
+carries no guarantees other than occupying disk space. It is supplied "as-is"
+and at no charge for personal use, but I reserve all rights.
+
+Enjoy.
+
+Tony Bearman
+October 9, 1995.
+
+             Fidonet    1:153/920           
+             Internet   tony@ship.net       
+             Paper      Box 34128           
+                        5790 - 175th Street 
+                        Surrey BC, Canada   
+                        V3S 8C4             
