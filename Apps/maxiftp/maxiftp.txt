@@ -1,0 +1,716 @@
+ NAME
+      MaxiFTP - Internet file transfer program
+
+      VisFTP - Visual FTP tool for OS/2.
+
+ VERSION
+      Version 3 beta
+
+ CAVEAT
+      I had a version of this document that suplied information on more
+      of the features new to version 3, but accidentally deleted.  Please
+      be patient as this one gets recreated...
+
+ SYNOPSIS
+      maxiftp [options] [[user@]hostname[:pathname] [user] [passwd]]
+
+ DESCRIPTION
+      MaxiFTP is an alternative user interface to the Internet standard File
+      Transfer Protocol.  The program allows a user to transfer files to and
+      from a remote network site.  This program offers additional features
+      that are not found in the standard interface, ftp.
+
+ FEATURES
+      +    All of MaxiFTP's features are now available in a VISUAL
+           environment,  This makes it an excellent replacement for the IBM
+           supplied FTPPM.  See the section "VISUAL MODE" below for details.
+           VISUAL mode allows you to "point and click" to transfer files
+           to and from the remote host.
+
+      +    MaxiFTP's command line now has all the features of the OS/2
+           command line when KEYS=ON is in effect, including command
+           history and editing.
+
+      +    By default, an anonymous login is attempted when you open a site.
+           No need to enter ``anonymous'' and your email address every time
+           you open a site.  MaxiFTP can determine your hostname, or you can
+           specify an anonymous password in the NETRC file or MAXIFTP
+           environment variable.
+
+      *    MaxiFTP attempts to save you from having to remember whether you
+           need to transfer a file in BINARY or ASCII mode.  As well as having
+           a default transfer mode, MaxiFTP will choose the transfer mode
+           based on the file's extension.  You can control which extensions
+           are automatically transfered in ASCII and BINARY modes.
+
+      +    The output of the dir and ls commands can be redirected and piped.
+           The output of the new ``type'' command can also be redirected or
+           piped.  The results of the last directory command can be redisplayed
+           with the redir and predir commands.
+
+      +    You can save some keystrokes by putting commonly used sites in
+           the netrc file, and then just type abbreviations when you open
+           them on the command line.  For example, if you had
+           wuarchive.wustl.edu in your netrc you would only need to type
+           ``open wuar'' (or any abbreviation that will separate it from the
+           rest of the sites in your netrc).
+
+      +    maxiftp has ``implicit cd'' where you can just type the name of a
+           directory (when connected) instead of typing ``cd <directory>''.
+
+      +    MaxiFTP will create a FAT compliant name on FAT partitions that
+           will always try preserve the file extension (FTP does not).
+           MaxiFTP will place the full filename in the .LONGNAME extended
+           attribute.
+
+      +    maxiftp has a ``touch'' mode where it will attempt to use the
+           remote system's date and timestamp on the local file.  This requires
+           a TOUCH command comparable to that included with the GNU File
+           Utilities for OS/2.
+
+      +    A page command lets you use your pager to read remote files.
+           There is also the commands pdir which lets you read directory
+           listings with your pager.
+
+      +    You don't need to close sites; maxiftp closes an open site when you
+           try to open a different one.
+
+      +    You can save some typing by using a wildcard to specify one file.
+           For example, you can type ``get R*'' to fetch a file called
+           README.
+
+      +    You can invoke maxiftp with ``colon mode'' where you can type
+           ``maxiftp cse.unl.edu:/pub/foo'' and it will fetch ``foo'' for you
+           then exit.  If the name you specify includes a wildcard, all files
+           matching the specification will be transferred.
+
+      +    There is a create command which is useful for creating messages
+           on a remote site.
+
+      +    The prompt can be customized to include things like the date,
+           time, current remote working directory, boldface, colors, etc.
+
+      +    The behavior of maxiftp can be customized with set, unset and
+           command line options.  Command line options can be stored in an
+           environment variable.  Additionally, _any_ MaxiFTP command can be
+           placed as a comment at the beginning of the NETRC file and it will
+           be executed each time MaxiFTP begins.
+
+      *    MaxiFTP will read commands from a MaxiFTP.INI file that is stored
+           in the same directory as the executeable.  This makes it ideal for
+           installation on a LAN server where many people may be using
+           MaxiFTP.  The ADDHOST command allows aliases and abbreviations for
+           hosts to be added by the maintainer of the MAXIFTP.INI file without
+           each user needing to create or maintain a NETRC file.
+
+|     +    MaxiFTP will optionally remember the last directory accessed on
+|          each host you connect to and return to that directory when a new
+|          connection is established.
+|
+|     +    MaxiFTP allows you to specify a list of "executable extensions"
+|          that specify commands to be executed by OS/2 when you transfer a
+|          file with that extension.
+
+ VISUAL MODE
+      MaxiFTP's VISUAL mode makes it an excellent FTP client for OS/2's PM.
+
+      VISUAL mode uses IBM's VRexx/2 product to display lists of hosts that
+      you can choose from when establishing connections, and files and
+      directories that you can choose from when transferring files to and
+      from remote hosts.
+
+      You can switch to visual mode from command mode at any time by issueing
+      the command VISUAL or SET VISUAL=ON.
+
+      MaxiFTP's VISUAL mode uses the text window where MaxiFTP was invoked
+      as a console.  It is strongly recommended that this be a windowed OS/2
+      prompt.  A number of messages, and the output of commands such as TYPE
+      will be displayed in this window.  Long directory information about a
+      host can be displayed in the console window.
+
+   Starting VISUAL mode
+      MaxiFTP can be started in VISUAL mode by specifying /V on the command
+      line, by issuing the VISUAL command at the MaxiFTP prompt, or by
+      placing the command SET VISUAL=ON in the NETRC or MaxiFTP.INI file.
+      Additionally, if you rename the MaxiFTP command file as VisFTP, visual
+      mode will be the default.
+
+   The VISUAL mode Host Selection list
+      If you enter visual mode when you are not connected to a host, MaxiFTP
+      will present you with a list of hosts that you can select.  The hosts
+      may be listed by either their domain name, IP address, or by an ALIAS.
+
+      To establish a connection to a listed host, simply double click on it's
+      entry in the list.  A connection will be established with the remote
+      host, either anonymously, or with the login and password specified in
+      the NETRC file.
+
+      If the host you desire is not in the list, choose the first entry,
+      <Enter a different host>.  A dialog box will be presented allowing you
+      to enter the name of the host, and the desired username and password.
+      You will also be asked if you would like to add this host to your NETRC
+      file.
+
+      The hosts presented in the Host Selection list are taken from your
+      NETRC file, and may contain additional hosts added by the ADDHOST
+      command.  Host aliases can be specified in the NETRC file or as an
+      option on the ADDHOST command.
+
+   The VISUAL mode Directory Listing
+      The Directory Listing window in VISUAL mode is where you will normally
+      interact with MaxiFTP in visual mode.  This window lists several
+      MaxiFTP commands that you can issue, and the files and directories in
+      the current directory on the remote host.
+
+      In the listing, commands are enclosed by angle brackets, and followed
+      by a default value or comment.  File and directory entries follow the
+      commands, and are shown in the format given by the ls -F command on
+      Unix.
+
+      When you double-click on a command, it wil be executed.  When you
+      double-click on a file or directory, MaxiFTP will first try to change
+      to it as a directory, and then issue the VISUAL COMMAND (normally GET)
+      against the filename.
+
+   The VISUAL mode Console Window
+      MaxiFTP treats the window where MaxiFTP was invoked as a console in
+      VISUAL mode.  Messages about MaxiFTP's progress and current status
+      will be displayed in this window.
+
+      If you issue a PAGE or paged directory command, the output will be
+      displayed in the console window, and MaxiFTP will pause until you
+      answer any prompts that may appear in the console window.  VRexx/2 is
+      not able to transfer focus back to the console window when this
+      happens, so it will be necessary to move the cursor to the window
+      and manually change the focus.  No visual windows will appear while
+      the console is waiting for a user response.
+
+   The VISUAL mode <CMD> line
+      From the VISUAL mode command line, any MaxiFTP command can be issued.
+      Output from the commands will be displayed in the Console Window.  The
+      only restriction is that you cannot issue the command SET VISUAL=OFF
+      to exit visual mode.
+
+   Variables and Commands Affecting VISUAL mode
+      There are several MaxiFTP commands aimed specifically at VISUAL mode.
+      these are:
+          VISUAL
+               Enter visual mode.  You cannot exit VISUAL mode without
+               exiting MaxiFTP.
+          SET VISCMD=cmd
+               Specifies the command to be issued against files in VISUAL
+               mode.  This is useful if you desire to TYPE or PAGE through
+               a group of ASCII files on a remote server.
+          SET ASK=ON|OFF
+               Determines if MaxiFTP will display the dialog box for username
+               and password before connecting rather than assuming anonymous
+               or the values in the NETRC file.
+          ADDHOST hostname alias
+               Adds a host name and an alias to an internal MaxiFTP table.
+               The hostname is used for abbreviated searches, and the alias
+               is displayed in the Visual Host Selection.
+          SET DIRCMD=cmd
+               Specifies the command to be issued for the MaxiFTP DIR command,
+               including the Visual <DIR> command.  I usually set this to
+               "dir -altr" so that files are displayed in reverse order by
+               date.  This *does not* effect the order of files in the
+               Directory Listing window.
+
+ OPTIONS
+      Command line options:  The command line options are a '-' or '/'
+      followed by a single letter; case is not significant.  Specifying a
+      binary option turns that option on.  Following an option by a '-' turns
+      it off. (NOTE:  there is a bug in the OS/2 command interpreter that
+      removes /q from any parameter list.  Use -q instead.)
+
+      Examples:
+
+         maxiftp -q
+            starts maxiftp in quiet mode
+         maxiftp /p-
+            starts maxiftp in noprompt mode
+         maxiftp /h colon-mode
+            displays the on-line help for colon-mode
+
+ -I        sets CLOBBER=OFF and MPROMPT=OFF so that there will be less
+           interaction during file transfers.  Matches the flag on FTP.
+
+ -Q[-]     forces maxiftp to show all responses from the remote server, as
+           well as report on data transfer statistics.
+
+ -C[-]     sets CLOBBER mode; you will be prompted before files are
+           overwritten.
+
+ -P[-]     sets PROMPT mode; you will be prompted during MGET and MPUT.
+
+ -T[-]     sets TOUCH mode; MaxiFTP will attempt to adjust the date of files
+           received with the GET command to match the remote host.
+
+ -U[-]     sets UNIQUE mode;
+
+ -B        makes BINARY mode the default rather than ASCII.  (Usually
+           unnecessary - see "Automatic Transfer Mode Detetcion" below.)
+
+ -N[-]     Instructs maxiftp from to read the netrc (see below) file in the
+           ETC directory.  /N- will instruct maxiftp to ignore the netrc file.
+
+ -D[-]     Displays a status banner on top of screen.
+
+ -X[-]     Use/Don't use rxSock to determine the full hostname to use when
+           when creating the anonymous ftp password.
+
+ -H[str]   prints help.  -H can be followed by any of the help topics to
+           display help for that topic; i.e. -h append.
+
+ -A[str]   sets the anonymous password.  It should be followed immeadiately
+           (with no intervening blanks) by the new anonymous password.
+
+ -L[str]   sets the local directory.
+
+ -Rn:s     tells MaxiFTP to retry establishing a connection N times with a
+           s second pause between each retru.
+
+      The host with which maxiftp is to communicate may be specified on
+      the command line.  If this is done, maxiftp will immediately attempt to
+      establish a connection to an FTP server on that host; otherwise, maxiftp
+      will enter its command interpreter and await instructions from the
+      user.  maxiftp uses many of the commands provided by ftp.  All of the
+      commands supported appear in the main help screen.
+
+ COMMANDS
+      Explanations of commands specific to maxiftp follow.  Please refer to
+      the ftp documentation for descriptions of the standard commands.
+
+      !    Issue an operating system command or start a secondary shell.
+|          Uses the CALL command of OS/2 so that REXX scripts may be started.
+
+      append
+           Recieve a remote file in ASCII mode and append it to an existing
+           file.
+
+      create
+           Use this to create an empty file on the remote site.  Sometimes
+           it is necessary to leave a note if you can't get in touch with
+           the remote site's administrator.  For example if a file is
+           corrupted, you could type ``create Foo.tar_is_corrupt'' so the
+           uploader will replace it.
+
+      echo Use this command to display information on the console.  This
+           command is most useful from a NETRC MACRO.  See below.
+
+      more see page.
+
+      open This command has been extended to accept flags to specify its
+           behavior.  By default, ``open sitename'' tries to login to a site
+           with ``anonymous'' and your email address as the password.
+
+           You can specify the host name and user name in the ``finger''
+           format username@hostname.  MaxiFTP will prompt you for a password.
+
+      page You can read a remote file with your pager.  OS/2's ftp command
+           doesn't allow ``get myfile.txt |more'', but this client does.  The
+           page and more commands are shortcuts.
+
+      pdir This command lets you view a dir command with your pager.
+
+      predir
+           This lets you view the contents of the last ls or dir command
+           with your pager.  maxiftp stores the output of the previous command
+           in memory, so you can quickly relist the last command without
+           going over the network.  This is handy for slow connections.
+
+      query
+           Display the value of a MaxiFTP variable
+
+      redir
+           This dumps the contents of the last ls or dir command to
+           standard-out.
+
+      user Reestablishes the connection to the current host with a new
+           username.
+
+      version
+           This prints the version number of MaxiFTP.
+
+      show This command shows the values of the various runtime options of
+           MaxiFTP.
+
+
+ VARIABLES
+      set
+           maxiftp has a number of variables that can be set at run time in
+           the netrc, MAXIFTP.INI file, or interactively in the shell.  You
+           can also use the command set to undefine a variable.  Use
+           ``set var=value'' to define a value or ``set var'' to undefine
+            it.
+
+           In the netrc, you must use ``#set var=value''.  OS/2's ftp
+           command will treat these commands as comments.
+
+           ON or OFF can also be used to set the values for binary (0 and 1)
+           variables.  Most of the ON/OFF commands can be toggled with the
+           TOGGLE command.
+
+|          The SET command is also used to specify the executable extensions.
+|          See the section "EXECUTABLE EXTENSIONS" below for details.
+
+           anonpass (string)
+                is set to your email address, and used as the password when
+                you login anonymously.
+
+           asciis (string)
+                specifies extensions to always transfer in text mode.
+
+           ask (1 or 0)
+                determines if MaxiFTP will prompt to confirm the username in
+                non-VISUAL mode.  SET ASK=ON is closest to FTP's behaviour.
+
+           bell (1 or 0)
+                when ON, MaxiFTP sounds a bell at connection to a host and
+                succesfull transfer of a file.  ON by default.
+
+           binaries (string)
+                specifies extensions to always transfer in binary mode.
+
+           clobber (1 or 0)
+                specifies (1) that new files will replace existing files
+                without prompting.
+
+           dircmd (string)
+                defines the command issued to the server when the DIR command
+                is issued.  The default is "DIR".  An alternative to list
+                files in reverse order by date is SET DIRCMD="dir -altr".
+                [NOTE: dir -altr will not work against all hosts, including
+                IBM TCP/IP for OS/2 ftp servers.]
+
+
+           display (1 or 0)
+                determines if MaxiFTP will display information about the
+                current connection at the top of the screen, like miniftp.
+
+           comment (1 or 0)
+                determines if MaxiFTP stores information about when
+                incoming files were transferred and their origin in the
+                .COMMENT extended attribute for the file.  ON by default.
+
+           ldir (string)
+                is set to the local current directory.  This is mostly
+                useful to set in the netrc, where you may want to always
+                download into a certain directory.
+
+           longname (1 or 0)
+                determines if the .LONGNAME extended attribute is used to
+                store the original filename on a FAT partition.  ON by
+                default.
+
+           macros (1 or 0)
+                when ON (1), all #comments in the NETRC file between the
+                MACHINE entry for the current host and the next MACHINE
+                entry are treated as MAXIFTP commands.
+
+           mode (ASCII or BINARY)
+                is set to the default file transfer mode
+
+           mprompt (1 or 0)
+                specifies whether you want the mget, mput, etc., commands
+                ask what to do with each file. Default: 1, ask for
+                confirmation.
+
+           netrc (1 or 0)
+                when ON (1), the NETRC file specified by the variable
+                netrcfile is searched for the host specified on an OPEN or
+                CONNECT command.  ON by default.
+
+           netrcfile (filename)
+                specifies a new netrc file to be used.  The default is the
+                NETRC file in the current directory (if it exists), then
+                the TCPIP ETC directory.
+
+           pager (string)
+                is the program used to page remote files.  If you don't set
+                it, it defaults to the value of the PAGER environment
+                variable, or MORE if neither is set.
+
+           prompt (string)
+                is the command line prompt, which may use several @ flags
+                (see "PROMPTS" below).
+
+           quiet (1 or 0)
+                when 0 (OFF), most MaxiFTP messages are suppressed.  Default
+                is 1 (ON).
+
+           remember (1 or 0)
+                when ON (1), the current directory on the current host is
+                remembered for the next connection to the host.  ON by
+                default in the current beta, may be OFF in the release.
+
+           touch (1 or 0)
+                specifies whether MaxiFTP will attempt to make the timestamp
+                on files transferred to the local machine match the timestamp
+                on the remote host.  Requires a TOUCH command compatible with
+                the GNU file utilitie's TOUCH, and may require information
+                about the remote host.
+
+           unique (1 or 0)
+                 specifies if UNIQUE filenames will be created on the remote
+                 host.
+
+           viscmd (string)
+                is the command issued against the current selection in
+                VISUAL mode when the selection is not a directory.  The
+                default is "get".
+
+ PROMPTS
+      The following flags insert special values into the prompt:
+
+      @D   Inserts the current remote directory.
+
+      @L   Inserts the current local directory.
+
+|     @Hn  Inserts the name of the remote host. @H by itself inserts the
+|          part of the name before the first period.  @H* specifies the
+|          rightmost part of the name.  @H1-@H9 specify the first through
+|          ninth part of the domain name.
+
+      @0   Inserts the name of the calling program.
+
+      @B   Turns on boldface mode.
+
+      @Cfb Set color to foreground f on background b; where f and b
+           are numbers between 0 and 7.  0 is black; 1 is red; 2 is green; 3
+           is yellow; 4 is blue; 5 is magenta; 6 is cyan; 7 is white.
+
+      @I or @R
+           Turns on inverse (reverse) video mode.
+
+      @N   Inserts a newline character.
+
+      @P   Turns off any video modes you might have set with @B, @I, or @R
+
+      @T   Inserts the current time.
+
+      @S   Inserts the current connection status as "Connected to user@host"
+           or "Not connected to a host"
+
+      @_   Inserts a blank (use if you want a blank at the end of your prompt)
+
+      @@   Inserts an at sign.
+
+|     @E   Displays the most recent error code returned by FTP.
+|
+|     @%   Displays the number of commands in the history buffer.
+
+      The default prompt is  set prompt=@0 [@B@H:@D@P]@_
+
+ NETRC
+      Many users of ftp leave the power of the netrc untapped.
+
+      The NETRC file may begin with #command where command is any MaxiFTP
+      command which maxiftp runs at startup before any connection is made,
+      followed by machine entries.
+
+      When maxiftp runs, looks for a file named netrc in the current
+      directory, then the directory in the ETC environment variable.
+
+      MaxiFTP will only use the MACHINE, LOGIN, and PASSWORD fields from a
+      NETRC file.  You can add entries with only the MACHINE field to be
+      able to use abbreviated host names.
+
+      MaxiFTP also treats comments following a machine entry as a macro
+      for that host.  See the section NETRC MACROS below for more
+      information.
+
+      To place a comment in the NETRC file that MaxiFTP will ignore, begin it
+      with two # symbols.
+
+ NETRC MACROS
+      MaxiFTP does not implement macros the same way as FTP does - however
+      it is possible to have a series of commands executed when you connect
+      to a host.  In your NETRC file, follow the MACHINE entry with a series
+      of comments that contain MaxiFTP commands.
+
+      NETRC macros _are_not_ processed before colon-mode fetch operations.
+
+
+ SAMPLE NETRC & COMMENTS
+       ##This is a sample NETRC file for use with MaxiFTP
+       ##First, set touch mode on
+       #set touch=1
+       ##Set the prompt to display status in blue on cyan on the first line,
+       ##with the current remote directory in bold followed by a green arrow
+       ##on black on the second line. (And restor video to normal)
+       #set prompt=@C46@S@P@N@B@D@P@C20=>@P
+       ##set the anonymous ftp password
+       #set anonpass=acrosby@uafhp.uark.edu
+       ##Display a message
+       #echo Loaded NETRC file
+
+       ##Note:  the first non-comment line ends the startup comments.
+       ##       Any machine #macros must follow the machine entry.
+       ##       All machine #macros will be processed until the next
+       ##       machine entry.
+
+       ##The NETRC file should be shareable by OS/2's FTP and MaxiFTP.
+
+       ##The next entry is here just for abbreviated name searching.
+       machine wuarchive.wustl.edu
+
+       ##This entry has a macro that will change to the /pub/msdos directory
+       ##after connecting.
+       machine oak.oakland.edu
+       #cd /pub/msdos
+       ##Place any files transferred in the incoming/dos directory
+       #set ldir=d:\incoming\dos
+
+       ##Supplies the three machine fields...
+       machine zurich.ai.mit.edu login anonymous password os2user@advlab05.uark.edu
+
+       ##My entry for ftp-os2.
+       machine ftp-os2.cdrom.com
+       ##Always list the new files in the incoming directory...
+       #!cls
+       #echo Connected to ftp-os2.cdrom.com...
+       #cd /pub/os2/incoming
+       #dir -altr
+       ##Place any files transferred in the incoming/os2 directory
+       #set ldir=d:\incoming\os2
+
+       ##An entry with a login id and password.  Of course, this entry
+       ##isn't real...
+       machine your.host.dom login myself pass password
+       #set prompt=Now connected to your.host.dom in the @D directory.@N[@L]
+
+
+ ENVIRONMENT
+      maxiftp uses the following environment variables:
+
+      PAGER     for the default filter used by the page command;
+
+      MAXIFTP   for the command line options to control behaviour;
+
+      BINARIES  for a list of filetypes to always transfer in binary mode;
+
+      ASCIIS    for a list of filetypes to always transfer in ASCII mode;
+
+      HOSTNAME  for the name of the host if rxSock is unavailable;
+
+      ETC       for the name of the TCPIP ETC directory;
+
+
+ DISPLAY
+      In addition to the MaxiFTP prompt, MaxiFTP can display information
+      about the current session of the screen in a status bar across the top
+      of the display.  This status bar is off by default, but can be turned
+      on with the -D command line option or TOGGLE DISPLAY.
+
+
+ TOUCH
+      MaxiFTP implements a new command that appears to be rather unique among
+      FTP clients, though often sought after: an interface to touch.  Using
+      this mode, you can transfer files from a remote host and keep the
+      date/time stamp intact.
+
+      Programming this feature requires a knowledge of the format that remote
+      hosts use when returning a directory; the system currently knows about
+      Unix, OS/2, Windows NT, Netware, and VM hosts.
+
+      Touch requires a touch command compatible with the one from the GNU
+      file utilities for OS/2.
+
+
+|MAXIFTP INITIALIZATION FILE
+|     MaxiFTP attempts to read a file named 'maxiftp.ini' from the directory
+|     where MaxiFTP is stored upon program invocation.
+|
+|     This file can be used to store default parameters for all of your
+|     MaxiFTP sessions.  It is also ideal for storing global options that
+|     should be in effect for all users on a LAN.
+|
+|     The format of this file is an ASCII file consisting of MaxiFTP
+|     commands.  Lines starting with "#" or ";" will be treated as comments
+|     and ignored.
+|
+|     The ADDHOST command is designed especially for the INI file so that
+|     you can have a list of hosts that appear to be available for all of
+|     your users maintained centrally.
+|
+|     #Commands in the NETRC file will override any options set in the
+|     MAXIFTP.INI file.
+
+
+|EXECUTABLE EXTENSIONS
+|     Executable Extensions is a concept whereby MaxiFTP allows you to
+|     specify a command (or commands) that should be executed when a file
+|     with a specified extension is transferred.
+|
+|     One important note:  case is _ignored_ in checking for executable
+|     extensions.  If you need to check for case, write a REXX command that
+|     does it.
+|
+|     There are three special environment variables set before the command
+|     is issued: %fn% for the filename (including extension), %ext% for the
+|     extension alone, and %rn% for the full name of the file on the remote
+|     host.
+|
+|     The format of the command is:
+|
+|         SET .EXT=COMMAND
+|
+|     COMMAND can be any valid OS/2 command, REXX script, or series of
+|     commands seperated by "&".
+|
+|     You _must_ have %fn% in the command if you wish to refer to the file
+|     just transferred.
+|
+|  Sample Executable Extensions
+|      set .txt=type %fn% & erase %fn%
+|              would type and then erase any file transferred with the .TXT
+|              extension.
+|      set .zip=unzip -v %fn%
+|              would display the contents of any zip file transferred.
+|      set .exe=%fn%
+|              would execute any file with the extension .EXE transferred.
+
+
+ AUTHOR
+      maxiftp was written by Albert Crosby <acrosby@comp.uark.edu>
+      and based on code by the authors of the miniftp client from the IBM
+      rxFTP distribution.  maxiftp borrows concepts from Mike Gleason's
+      NcFTP.
+
+      The format of this manual and some of the material was borrowed from
+      the NcFTP distribution and modified to be appropriate for MaxiFTP.
+      Used by permission.
+
+
+ ADDITIONAL REQUIREMENTS
+      MaxiFTP will work with OS/2 2.x and IBM's TCP/IP 1.2.1 or later.
+
+      MaxiFTP requires the rxFTP package from the IBM Employee Written
+      Software (EWS) program.  The rxSock package is needed to determine the
+      actual local hostname, without it the value of the HOSTNAME environment
+      variable will be used.  Additionally, the TOUCH option requires a
+      TOUCH command compatible with that provided in the GNU File Utilities
+      for OS/2.
+
+
+ BUGS
+      Correct execution of many commands depends upon proper behavior by the
+      remote server.
+
+      The remote server may drop the connection if you take a long time when
+      you page remote files.
+
+      Occasionally timeouts will cause MaxiFTP to not recognize when a remote
+      host has closed a session until a command is issued.
+
+      Touch requires knowledge of the format of remote directory information.
+      If the format of a directory changes or the syntax of the TOUCH command
+      changes, MaxiFTP may break.
+
+      Create seems to create 1 byte files on an OS/2 host using FAT and
+      doesn't seem to create any file on a host using HPFS.
+
+ SEE ALSO
+      ftp, touch, more
+

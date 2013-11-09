@@ -1,0 +1,242 @@
+Configuring the programs
+========================
+
+Here are all the files that need configuring, with notes on each. If you go
+through the configuration in the order the files are listed, you can get
+parts of the package working and test them separately.
+
+All files are Rexx except the SLIP configuration files. I've put all the
+data that needs to be configured at the start of the Rexx files. Below is a
+list of all files that need configuration and the settings that must be made.
+
+Some data has to be entered in several files. Ideally, there should be a
+file called \TCPIP\ETC\SLIPHW.INI which contains all the key data. Then I
+could make this package read all the data from there and you wouln't have
+to change the files. Maybe in a future version.
+
+Required information for each PC
+--------------------------------
+
+Get all this information before you start. You'll need it for both PCs.
+
+COM port, speed
+Modem init string, reset string, hangup string,
+      strings to go into answer mode, and out of answer mode
+      string to hang up
+      string received on CONNECT
+Phone numbers of home and work PCs
+IP addresses of both PC's at each end of the slip interface. Note that a
+   PC on Ethernet must have two IP addresses, one for the Ethernet
+   interface and one for the slip interface. We only need the slip IP.
+Net mask (probably 255.255.255.0)
+Name of Ethernet interface of PC we connect to. (Machine name on the Internet)
+   Note that a PC with an Ethernet card will have two interfaces with two
+   machine names. We don't care about slip interfaces here, just Ethernet
+   interfaces.
+Ethernet card hardware (MAC) addresses for all Ethernet cards present
+User name for logging in remote PC
+Password for logging in remote PC
+If you want sounds, choose wav files to play on connect
+
+===========================================================================
+Configuring the HOME machine to dial out
+========================================
+
+HOMECLI.CFG
+-----------
+Near the end of this file the port is specified. Change it if necessary.
+device	     = COM2
+
+HOMECLI.CMD
+-----------
+/* Serial Port Configuration and modem strings */
+modeminit    ='AT&F2'	      /* reset modem */
+modemsetparms='ATL1M'	      /* set speaker volume for SupraFaxmodem */
+modemreset   ='ATZ'	      /* modem reset string */
+phonenumber  ='4991111'       /* number of work SLIP server */
+
+/* Internet addresses, machine names */
+ipaddress    = '199.99.99.99'	  /* Home PC's IP address for sl0 interface */
+gateway      = '199.99.99.88'	  /* Work PC's IP address for sl0 interfae  */
+netmask      = '255.255.255.0'
+/* The parms below are only used if the Home machine is on a Home Ethernet  */
+desthostname ='workmachine' 	  /* Work PC's name. */
+macaddress   ='00:00:c0:11:22:33:44' /* Home PC's hardware address */
+
+/* Users */
+username     = 'yourname'		  /* ID for logging into Work machine */
+password     = 'secret'	  /* PW for logging into Work machine */
+
+/* If have Home Ethernet, change to Ethercard='T'.*/
+Ethercard    = 'F'		  /* NO Home Ethernet */
+
+/* Sounds play when connect */
+playsounds   = '1'		    /* set to '0' if no sound card  */
+wavdir	     = 'k:\mm\wav\'         /* where *.WAV files are kept */
+wavconnect   = wavdir'wild4.wav'    /* wave file to play when connected */
+wavinit      = wavdir'drumroll.wav' /* wave file to play when starting */
+
+
+===========================================================================
+Configuring the HOME machine as a SLIP server
+=============================================
+
+HOMESERV.CMD
+------------
+This file contains "start" command for other Rexx files and programs that
+start daemons. You should add or delete daemons according to what you have
+running and want to run.
+
+HOMESRVD.CMD
+------------
+modemspeed  = '115200'	  /* Set the com port speed */
+modemhangup = 'ATH0S0=0'  /* Modem hangup command. Exit Answer mode */
+
+HOMESRV.CFG
+-----------
+Near the end it sets the com port.
+device = COM2
+
+HOMESRV.CMD
+-----------
+/* Serial Port Configuration and modem strings */
+comport       = 'COM2'
+comparms      = '115200,n,8,1' /* com port mode command parameters   */
+initcmd       = 'ATZ'	       /* modem reset string		     */
+anscmd	      = 'ATS0=1'       /* set modem into autoanswer mode     */
+connectstring = 'CONNECT'      /* Adjust this to your brand of modem.*/
+
+/* Internet addresses, machine names */
+ipaddress     = '199.99.99.99'   /* Home PC's IP address for sl0 interface */
+ipdest	      = '199.99.99.88'   /* Work PC's IP address                       */
+netmask       = '255.255.255.0'
+/* The parms below are only used if you have a Home Ethernet		  */
+desthostname  = 'workmachine'	   /* Work PC's name. Must be known to DNS */
+macaddress    = '00:00:c0:55:66:77:88'/* Home PC's hardware address           */
+
+/* Users */
+username      = 'yourname' 	   /* ID for logging into work machine */
+password      = 'secret'	   /* Password for logging into work machine */
+
+/* If you have a home Ethernet, change to Ethercard='T'.*/
+Ethercard     = 'F'
+
+
+===========================================================================
+Configuring the WORK machine to dial out
+========================================
+
+WORKCLI.CFG
+-----------
+Near the end of this file the port is specified. Change it if necessary.
+device	      = COM1
+
+WORKCLI.CMD
+-----------
+/* Serial Port Configuration and modem strings		      */
+modeminit     = 'AT&F2' 	/* was AT&F1		      */
+modemsetparms = 'ATL1M' 	/* was ATM		      */
+modemreset    = 'ATZ'		/* modem reset string	      */
+phonenumber   = '9,4992222'	/* number of home SLIP server */
+
+/* Internet addresses, machine names */
+ipaddress     = '199.99.99.88' /* Work PC's IP address for sl0 interface */
+gateway       = '199.99.99.99' /* Home PC's IP address for sl0 interface */
+netmask       = '255.255.255.0'
+/* The parms below are only used if the Work machine is on Ethernet	*/
+desthostname  = 'homemachine'		/* Home PC's name. Must be known to DNS */
+macaddress    = '00:00:c0:55:66:77:88' /* Work PC's hardware address       */
+
+/* Users */
+username      = 'yourname' 	/* ID for logging into home machine	  */
+password      = 'secret'	/* Password for logging into home machine */
+
+/* If Work machine is not on Ethernet, change Ethercard='T' to Ethercard='F'.*/
+Ethercard     = 'T'		/* Ethernet at work */
+
+/* Sounds play when connect */
+playsounds    = '0'		    /* set to '0' if no sound card	*/
+wavdir	      = 'k:\mm\wav\'        /* where *.WAV files are kept       */
+wavconnect    = wavdir'wild4.wav'   /* wave file to play when connected */
+wavinit       = wavdir'drumroll.wav'/* wave file to play when starting	*/
+
+
+===========================================================================
+Configuring the WORK machine as a SLIP server
+=============================================
+
+WORKSERV.CMD
+------------
+No configuration is necessary unless some daemons are to be started when
+the slip server starts. Lines in the file that start daemons are commented
+out. Remove the comments.
+
+WORKSRVD.CMD
+------------
+modemspeed    = '57600'
+modemhangup   = 'ATH0S0=0'
+
+
+WORKSRV.CFG
+-----------
+Near the end of this file the port is specified. Change it if necessary.
+device	      = COM1
+
+WORKSRV.CMD
+-----------
+comport       = 'COM1'
+comparms      = '57600,n,8,1'  /* com port mode command parameters    */
+initcmd       = 'ATZ'	       /* modem reset string		      */
+anscmd	      = 'ATS0=1'       /* set modem into autoanswer mode      */
+connectstring = 'CONNECT'      /* Adjust this to your brand of modem. */
+
+/* Internet addresses, machine names */
+ipaddress     = '199.99.99.88' /* Work PC's IP address for sl0 interface */
+ipdest	      = '199.99.99.99' /* Home PC's IP address for the sl0 interface */
+netmask       = '255.255.255.0'
+/* The parms below are only used if the Work machine is on Ethernet	  */
+desthostname  = 'homemachine'		    /* Home PC's name. Must be known to DNS */
+macaddress    = '00:00:c0:55:66:77:88' /* Work PC's hardware address */
+
+/* Users */
+username      = 'yourname' 	   /* ID for logging into home machine */
+password      = 'secret'	   /* Password for logging into home machine */
+
+/* If the Work machine is not on Ethernet, change Ethercard='T' to Ethercard='F'.*/
+Ethercard     = 'T'
+
+
+
+===========================================================================
+Configuring the COM port
+========================
+
+
+MODE115.CMD
+-----------
+This comes set up for COM2. This locks the serial port speed.
+
+
+MODE576.CMD
+-----------
+This comes set up for COM1. This doesn't lock the speed.
+
+===========================================================================
+Starting Daemons
+================
+
+
+STAFTPD.CMD
+-----------
+The ftp daemon may have to be started from the drive and directory where it
+resides. I happen to have a copy of Warp Connect on drive L: so this file
+switches to the \TCPIP\BIN directory for Warp Connect and runs the FTP daemon
+that came with Warp Connect. If you don't use Warp Connect you might try
+the Penquin FTP daemon. This file must run whatever daemon you get.
+
+
+STAGOSRV.CMD
+------------
+
+I've got GoServ installed on drive K:. This switches to that drive and
+GoServ's home directory and runs it.

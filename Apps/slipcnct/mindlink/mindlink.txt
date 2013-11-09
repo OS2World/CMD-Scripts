@@ -1,0 +1,56 @@
+Step 1:
+
+Place mindlink.cmd in the \tcpip\bin subdirectory
+
+Step 2:
+
+Add a provider using the 'Dial Other Internet Providers' program.
+Use the following inputs:
+
+Page 1:
+
+Provider Name: Mindlink
+Login ID: <login id>
+Password: <password>
+Nickname: Mindlink
+Phone Number: 668-5001 <or whatever phone number you've been given>
+Login Script: mindlink.cmd atdt<phone number> <login id> <password>
+
+Example Login Script line: mindlink.cmd atdt6685001 userid password
+
+Type: SLIP
+
+
+Page 2:
+
+MTU Size: 1006
+VJ Compression: On <checked>
+Domain Nameserver: 204.174.16.4
+Your Host Name: <leave blank>
+Your Domain Name: mindlink.bc.ca
+
+Page 3:
+
+News Server: news.mindlink.net
+Gopher Server: <leave blank>
+WWW server: <leave blank>
+
+POP Mail Server: mindlink.bc.ca
+Reply Domain: mindlink.bc.ca
+Reply (Mail) ID: <login id>
+POP Login ID: <login id>
+POP Password: <POP password>
+
+Page 4:
+
+<configure com port and speed, I've been using 38400 or 57600>
+<if you have problems (ie. scripts stops after CONNECT, try dropping down to 19200>
+<you will not be able to choose Modem Type, Dial Prefix, or Initialization String>
+
+Data Bits: 8
+Parity: NONE
+
+
+Step 3:
+
+Dial!

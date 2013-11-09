@@ -1,0 +1,56 @@
+Step 1:
+
+Place uniserve.cmd in the \tcpip\bin subdirectory
+
+Step 2:
+
+Add a provider using the 'Dial Other Internet Providers' program.
+Use the following inputs:
+
+Page 1:
+
+Provider Name: Uniserve
+Login ID: <login id>
+Password: <password>
+Nickname: Uniserve
+Phone Number: 856-8008 <or whatever phone number you've been given>
+Login Script: uniserve.cmd atdt<phone number> <login id> <password>
+
+Example Login Script line: uniserve.cmd atdt8568008 userid password
+
+Type: SLIP
+
+
+Page 2:
+
+MTU Size: 1006
+VJ Compression: On <checked>
+Domain Nameserver: 198.53.215.120
+Your Host Name: <leave blank>
+Your Domain Name: uniserve.com
+
+Page 3:
+
+News Server: news.uniserve.com
+Gopher Server: <leave blank>
+WWW server: <leave blank>
+
+POP Mail Server: haven.uniserve.com
+Reply Domain: haven.uniserve.com
+Reply (Mail) ID: <Mail id>
+POP Login ID: <Mail id>
+POP Password: <POP password>
+
+Page 4:
+
+<configure com port and speed, I've been using 38400 or 57600>
+<if you have problems (ie. scripts stops after CONNECT, try dropping down to 19200>
+<you will not be able to choose Modem Type, Dial Prefix, or Initialization String>
+
+Data Bits: 8
+Parity: NONE
+
+
+Step 3:
+
+Dial!

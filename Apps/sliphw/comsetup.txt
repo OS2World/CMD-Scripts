@@ -1,0 +1,164 @@
+COMSETUP.TXT
+
+Notes on Configuring COM ports for OS/2 Warp
+--------------------------------------
+
+Some people have reported problems setting up COM ports, so here is some
+general advice and ideas on how to detect problems.
+
+RMVIEW.EXE
+----------
+
+RMVIEW should be in the \OS2 directory. It is an excellent debugging tool that
+will tell you a great deal of information about your OS/2 system. Run rmview
+from an OS/2 command prompt. Type "rmview /?" to get a list of options. Some
+useful commands are:
+
+rmview /hw		 displays a list of all the hardware.
+			 It should list "SERIAL_0 Serial port controller"
+
+rmview /irq		 displays all IRQ's.
+			 It should list IRQs 4 and 3 as belonging to COM1 and COM2
+
+System Information Tool
+-----------------------
+
+This is a very powerful graphical system analyzer that comes with the OS/2
+Bonus Pack. If you have installed it, it should be in the System Setup Folder.
+The file is called SYSIGUI.EXE and it is usually located in \OS2\APPS.
+
+If you don't have it, look on the Bonus Pack CD-ROM in the directory
+\US\SYSINFO. Run SYSI.CMD in that directory to install it.
+
+When you get it installed, just double click the icon. After it gathers data
+it will display an icon "Parallel and Serial Port Information". Double click
+that to learn about your serial ports.
+
+Your Serial Card
+-------------
+
+PC serial ports use a chip called a "Universal Asycronous Receiver
+Transmitter" or UART. This is the chip that transfers all the data between the
+modem cable and your PC.
+
+The original PC used a UART chip called the "8250". This chip does not have a
+buffer. When the chip receives a byte from your modem, the PC must get the
+byte from the chip before the next byte arrives from the modem. If the PC
+isn't fast enough, the next byte arrives and overwrites the previous byte, which is lost. The important questions are
+
+(1) how often does your PC have to get a byte from the UART?
+(2) can your PC get them this fast?
+
+Recent v34 modems send data at 28,800 bits per seconds. However, this data may
+have been compressed 4:1 by the LAP compression that is part of the standard.
+When your modem gets data at 28800 bps and decompresses it, the resulting data
+stream from the modem to your serial port transfers 115200 bits per second.
+Your PC has to get bytes from the UART at this rate to keep up.
+
+A byte is normally 8 bits. But when a byte is received there is also a stop
+bit, making 9 bits of data received per byte. Divide 115200 by 9 to get 12800.
+That's how many times each second your PC must stop what it is doing and get a
+byte from an 8250 UART to avoid losing data.
+
+When your PC interupts what it is doing and gets a byte, it is called a
+HARDWARE INTERRUPT. PC's are not capable of executing more than a few 1000 per
+second.
+
+The solution is to get a UART with a buffer. The 16550 UART was introduced
+several years ago. It has a 16 byte buffer. Hence, the required number of
+interrupts to operate at 115200 bps is 12800/16 or 800 interrupts per second.
+
+Unfortunately, the new PC's you buy today often have the old 8250 UART's. I am
+amazed that people buy these machines when a 16550 UART would only have cost a
+few cents more. I STRONGLY RECOMMEND that you spend $30 and buy a new serial
+card with a 16550 UART.
+
+OS/2 COM Drivers and Ray Gwinn's SIO drivers
+----------------------------------------
+
+Your config.sys has the following lines:
+
+DEVICE=H:\OS2\BOOT\COM.SYS
+DEVICE=H:\OS2\MDOS\VCOM.SYS
+
+COM.SYS is IBM's serial port driver. VCOM.SYS is a driver for virtual DOS
+machines (DOS and Windows). VCOM.SYS makes DOS programs think there is a
+serial port. However, all the data they transfer to VCOM.SYS is transferred to
+to COM.SYS, which controls the real serial port.
+
+IBM's COM drivers were written for compatility and not speed. Ray Gwinn wrote
+much better  designed drivers, which can run much faster. Some DOS and Windows
+programs may have trouble with the SIO drivers because they are not as
+compatible as COM.SYS. You can find the file SIOxxx.ZIP on various BBS's and
+Internet sites. The latest version is SIO152.ZIP. After you install it, your
+config.sys will look something like this:
+
+REM DEVICE=H:\OS2\BOOT\COM.SYS
+REM DEVICE=H:\OS2\MDOS\VCOM.SYS
+DEVICE=H:\SIO\SIO.SYS
+DEVICE=H:\SIO\VSIO.SYS
+
+Notice that I can switch back to COM.SYS by removing the REM in front of these
+drivers and putting a REM in front of the SIO drivers.
+
+The SIO drivers run at much higher priority than normal software. Even with an
+8250 UART they can do interrupts much faster than normal software and make the
+8250 UART operate under conditions where it wouldn't normally function.
+
+Example
+------
+
+I recently set up an office PC as a SLIP server and to which I connect from
+home. I forgot the old PC had an 8250 UART and tried to communicate at 57600
+bps. I got a lot of data errors transferring large ZIP and GIF files.
+
+When I switched this PC to the SIO drivers all data errors disappeared. Here
+is the technical explanation.
+
+At 57600 bps, an 8250 UART would require 6400 interrupts per second. This is
+too many for even OS/2 software, but not to many for a device driver like SIO.
+SIO gets the bytes from the 8250 UART at this rate and stores them. Then it
+pretends to be a 16550 UART from the point of view of DOS and OS/2 software.
+The actual OS/2 program that is running (SLIP.EXE in my example) can get 16
+bytes at a time. Hence, SLIP.EXE only needs to process interrupts at the rate
+of 400 per second.
+
+Before I installed SIO, SLIP.EXE had to talk to COM.SYS which is designed for
+compatibility with DOS and Windows programs. It is too poorly designed to
+function at 57600 bps.
+
+If you use SIO and you have a 16550 UART, your PC can communicate at 115200 in
+the background easily without a noticable slowdown of your other software.
+
+Checking out Hardware
+------------------
+
+My favorite hardware checkout program is NDIAGS.EXE, which is part of the
+Norton Untilities. DOS programs can get access to the hardware in ways that
+OS/2 programs cannot. Norton comes with loopback plugs for the serial and
+parallel ports. Use these and run NDIAGS to make sure your hardware can handle
+various speeds without errors.
+
+If you encounter a hardware problem, just buy a multiI/O cards with 16550
+UARTS and check it out. Take it back right away if it doesn't perform.
+
+Serial Cables
+----------
+
+There are a lot of old cables around which do not have all the wires
+connected. To use high speeds, you need to use "hardware flow control". Buy a
+good quality cable with all of the 9 wires that are used with a 9 pin
+connector. The cable with 24 pins don't need more than these 9 wires.
+
+My Setup
+-------
+
+I have 16550 UARTS and use COM2. When I boot OS/2 my com ports are initialized
+and locked at 115200 bps. Here is how I do it.
+
+I created a program object by dragging a program template to the StartUp
+folder. The program reference object runs MODE115.CMD, which is in the \CMD
+directory (on my path) where I keep OS/2 CMD files. MODE115.CMD has these two lines:
+
+@mode com2 115200,n,8,1,DTR=ON
+@su 2 lock 115200

@@ -1,0 +1,219 @@
+SLIP-HOME-WORK (SLIPHW or SHW) Version 1.0 beta
+------------------------------
+
+Bruce L. Clarke (Dept of Chemistry, U of Alberta)
+(Bruce.Clarke@UAlberta.CA)
+Sept 30, 1995
+
+Overview
+========
+
+SHW is a collection of Rexx scripts which will do the following:
+
+(1) HOMESRVD.CMD: Runs your PC as a SLIP server so a remote machine can log
+in. It isn't much use unless your PC is already running daemons like ftpd.
+You must run daemons. These programs talk to other machines on the Internet. If
+you don't run daemons, other machines cannot interact with your PC, even if you're
+on the Internet.
+
+(2) HOMESERV.CMD: Runs HOMESRVD to make your home PC as a SLIP server, and
+then starts various daemons. HOMESERV.CMD starts an FTP daemon, and the Web
+Server GoServe. You should modify HOMESERV.CMD so it runs your favorite
+daemons.
+
+(3) WORKSRVD.CMD: Runs your work PC as a SLIP server. The package assumes as a
+default that the work machine is on the Internet with an Ethernet card. When
+another machine connects to the work PC, routing is set up so the other PC can
+access the Internet.
+
+(4) HOME2WRK.CMD: Connects to your work PC from home. Logs in with password.
+
+(5) WORK2HOM.CMD: Connects to your home PC from work. Logs in with password.
+
+(6) AUTONETH.CMD: Automates everything on a home PC. Give AUTONETH a list of
+jobs to do on the Internet and AUTONETH will connect from home using HOME2WRK,
+run each of the jobs, and disconnect from the Internet.
+
+(7) AUTONETW.CMD: Same as AUTONETH, but for the machine at work. Runs WORK2HOM.
+
+(8) CRONTAB.HW:  This will log onto the Internet every 10 minutes, set your
+PC's  clock, and disconnect from the Internet. This will repeat forever. It
+requires the Rexx version of CRON, called CRONRGF. (Available as CRONRGF2.ZIP
+on most FTP sites) and the time setting program NISTIME.EXE (NISTIME.ZIP).
+CRON is a scheduling program that runs jobs at specific times. CRONRFG
+consists of 4 Rexx files which must be on your path. Run "cronrgf crontab.hw"
+to set your clock every 10 minutes. Modify CRONTAB.HW to do whatever you want
+at whatever times you want.
+
+The Rexx scripts also have some code that should work if you have a home
+Ethernet. The variable "Ethercard" in these scripts is set to 'T' or 'F'
+according to whether or not the machine has an Ethernet card. By default the
+work machine is assumed to have a card, but the home machine isn't. If you
+have a home ethernet, try changing "Ethercard" to T. It may work, but it
+probably need some tuning. I haven't tested this. My son took the other
+machine on our home Ethernet off to UVic. My home Ethernet isn't functioning
+anymore.
+
+
+Programs that make up this package
+==================================
+
+There are two sets of programs -- those for work and those for home. The
+filenames and number of programs are symmetrical. In the file listings below,
+I've listed the HOME versions first, and the WORK versions second. The home PC
+only needs the home versions. The WORK PC only needs the WORK versions.
+
+If you have a Laptop, the HOME PC files will connect to the work machine, but
+not the home machine. The WORK PC files will connect to your home machine but
+not the work machine. Put the client files for both home and work on the
+laptop. Don't bother with the server files.
+
+Many files contain Rexx variables at the start which have to be assigned the
+values appropriate for your situation. The files which have to be configured
+are noted below. I suggest you start with all the files in one directory and
+do the configuration. Then copy the configured files to their destinations.
+
+HOME PC destinations: All CMD and EXE files can go in \TCPIP\BIN
+		      Files required: HOMESERV.CMD (home server + daemons)
+				      HOME2WRK.CMD (dial work)
+				      AUTONETH.CMD (dial work, auto jobs)
+				      HOMESRVD.CMD
+				      HOMESRV.CMD
+				      HOMECLI.CMD
+		      Optional files (start various daemons)
+				      STAFTPD.CMD  (starts FTP daemon)
+				      STAGOSRV.CMD (starts GoServ)
+		      The two *.CFG files go in \TCPIP\ETC
+		      Files required: HOMESRV.CFG
+				      HOMECLI.CFG
+
+WORK PC destinations: All CMD and EXE files can go in \TCPIP\BIN
+		      Files required: WORKSERV.CMD (work server)
+				      WORK2HOM.CMD (dial home)
+				      AUTONETW.CMD (dial home, auto jobs)
+				      WORKSRVD.CMD
+				      WORKSRV.CMD
+				      WORKCLI.CMD
+		      The two *.CFG files go in \TCPIP\ETC
+		      Files required: WORKSRV.CFG
+				      WORKCLI.CFG
+
+Laptop PC destinations: All CMD and EE files can go in \TCPIP\BIN
+		      Files required: WORK2HOM.CMD (to dial home)
+				      WORKCLI.CMD
+				      HOME2WRK.CMD (to dial work)
+				      HOMECLI.CMD
+		      The two *.CFG files go in \TCPIP\ETC
+		      Files required: HOMECLI.CFG
+				      WORKCLI.CFG
+
+
+Both the home and work PC's need the following in \TCPIP\BIN or somewhere
+else on the path:
+				      MODE115.CMD or MODE576.CMD (set speed)
+				      SC.CMD			 (set color)
+				      COLOR.EXE
+
+
+Top Level Programs. You run these. This first listing tells you what each does.
+-------------------------------------------------------------------------------
+HOMESERV CMD	 Starts home PC as SLIP server. Starts various daemons.
+HOME2WRK CMD	 Connects home PC to work PC.
+AUTONETH CMD	 Connects home PC, runs list of jobs, disconnects.
+
+WORKSERV CMD	 Starts work PC as SLIP server. Daemons are assumed running
+WORK2HOM CMD	 Connects work PC to home PC
+AUTONETW CMD	 Connects work PC, runs list of jobs, disconnects.
+
+
+Files that to the real work
+---------------------------
+HOMESRVD CMD	Starts home PC as SLIP server. Restarts after connection broken
+HOMESRV  CMD	Called by HOMESERV and SLIP.EXE. Handles login and routing.
+HOMECLI  CMD	Called by HOME2WRK and SLIP.EXE. Handles login and routing.
+
+WORKSRVD CMD	Starts work PC as SLIP server. Restarts after connection broken
+WORKSRV  CMD	Called by WORKSERV and SLIP.EXE. Handles login and routing.
+WORKCLI  CMD	Called by WORK2HOM and SLIP.EXE. Handles login and routing.
+
+
+SLIP configuration files
+------------------------
+HOMESRV  CFG	Called by HOMESERV when it runs SLIP
+HOMECLI  CFG	Called by HOME2WRK when it runs SLIP
+
+WORKSRV  CFG	Called by WORKSERV when it runs SLIP
+WORKCLI  CFG	Called by WORK2HOM when it runs SLIP
+
+
+Files for initializing the serial port. Put one of these in Start Folder
+------------------------------------------------------------------------
+MODE115  CMD	Sets COMx at 115200 and locks (Requires SIO)
+MODE576  CMD	Sets COMx at 57600. (Requires SIO)
+
+
+Files that start daemons
+------------------------
+STAFTPD  CMD	Starts an FTP daemon.
+STAGOSRV CMD	Starts a web server.
+
+
+Files that manipulate screen colors
+-----------------------------------
+SC	 CMD	 1509  12-20-92  10:17p  SC.CMD sets the screen colors.
+					 "sc bw"  gives blue on white.
+					 SC.CMD must be put on your path. It
+					 is used by most Rexx programs in
+					 this package.
+
+COLOR	 ZIP	 5951	9-29-95   6:54p  COLOR.EXE (PC Mag freeware) must be
+					 put on your path. Used by SC.CMD.
+
+===========================================================================
+
+Here are the top level programs again with file sizes and notes on
+which ones need configuration. If it says "Requires configuration" below,
+look at the file CONFIG.TXT to see what has to be done to configure it.
+
+
+Top Level Programs. These are the ones you run. Some need to be configured.
+---------------------------------------------------------------------------
+HOMESERV CMD	 1120	9-30-95   3:47p   Runs daemons. Configure daemons.
+HOME2WRK CMD	  168	9-30-95   4:29p   No changes required
+AUTONETH CMD	 5152	9-30-95   5:31p   No changes required
+
+WORKSERV CMD	 1256	9-30-95   5:52p   Starts server. Adjust daemons.
+WORK2HOM CMD	  168	9-30-95   4:32p   No changes required
+AUTONETW CMD	 5095	9-30-95   5:32p   Requires configuration.
+
+
+Files that to the real work
+---------------------------
+HOMESRVD CMD	  914	9-29-95  11:23p   Requires configuration
+HOMESRV  CMD	10645	9-30-95   2:48a   Requires configuration
+HOMECLI  CMD	 9613	9-30-95   3:12a   Requires configuration
+
+WORKSRVD CMD	  914	9-30-95  12:28a   Requires configuration
+WORKSRV  CMD	10633	9-30-95   2:42a   Requires configuration
+WORKCLI  CMD	 9611	9-30-95   3:20a   Requires configuration
+
+
+SLIP configuration files
+------------------------
+HOMESRV  CFG	 4941	9-30-95  12:20a   Requires configuration
+HOMECLI  CFG	 4941	9-30-95  12:20a   Requires configuration
+
+WORKSRV  CFG	 4941	9-30-95  12:17a   Requires configuration
+WORKCLI  CFG	 4941	9-30-95  12:15a   Requires configuration
+
+
+Files for initializing the serial port. Put one of these in Start Folder
+------------------------------------------------------------------------
+MODE115  CMD	   52	5-14-95   6:01p   Requires configuration
+MODE576  CMD	   31	9-17-95  12:10p   Requires configuration
+
+
+Files that start daemons
+------------------------
+STAFTPD  CMD	  169	9-30-95   3:37p  Requires configuration
+STAGOSRV CMD	 1019	9-29-95   6:13p  Requires configuration

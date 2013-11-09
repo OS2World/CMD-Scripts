@@ -1,0 +1,14 @@
+Intelligent Rexx base64 en/decoder.
+Uses BASE64 API from MD5RX.DLL.
+** FREEWARE **  Author:
+Teet Kõnnussaar (teet@aetec.estnet.ee)
+Encoding notes:
+  writes 3-line MIME-compliant header
+Decoding notes:
+  auto-detects encoded data position
+    in file (should have at 3 lines of
+    encoded data to detect correctly)
+  if outfile not given, guesses
+    filename to decode, or writes to
+    b64out.$$?. Does not overwrite
+    out-files, never.

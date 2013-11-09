@@ -1,0 +1,76 @@
+OS/2 Upload Information Template for ftp-os2.nmsu.edu
+
+Archive Name: injoycl1.zip
+Program Description: Monthly time calculator for use with In-joy internet dialer (REXX)
+Operating System Versions: OS/2 
+Program Source: idiot@mindless.com
+Replaces: nil
+
+Author: Neville Brabet
+Email address: idiot@mindless.com
+
+Proposed directory for placement: 
+\os2\comm
+
+
+
+DISCLAIMER *** I upload this under these conditions.
+This is my own work and it works for me and does not 
+(to the best of my knowledge) cause any harm.  
+Running the REXX cmd file is your acceptance of user onus.
+If your motherboard melts or your dog gets run down by a 
+bus or your spouse leaves you I accept absolutely NO 
+responsibility.  
+I am in no way connected to the makers of In-joy internet dialer.
+I am merely a user of it with too much spare time on my hands.
+*** DISCLAIMER
+
+----------------
+
+If you're like me and your ISP only gives you a set number of hours per 
+calender month online time, and you use in-joy, it can be easy to lose 
+track of how many hours you've used.  I've written this with that in mind.
+You may also find it useful as a monitoring tool.
+
+Until in-joy internet dialer incorporates a time online/month calculator 
+this will do it for you.
+
+A simple rexx script that interrogates your log files to calculate your 
+monthly online time.  Place the .cmd file in your in-joy directory and
+run it from a command line.  it will display a list of *.log files you have
+and a number corresponding to each one. 
+eg
+----------
+1 E:\in-joy\Conn3656.log                      /* the first 4 letters are the     */
+2 E:\in-joy\default.log                         /* first 4 letters of the provider */
+3 E:\in-joy\dial1156.log			 /* name...default is the default.  */
+4 E:\in-joy\Subu8218.log			 /* provider from in-joy           */
+CHOOSE THE LOG TO ANALYSE
+----------
+^ enter the number from the left column
+
+next you'll be asked to choose which month.  it MUST be 2 digit (ie 01-12)
+
+----------
+what month ? jan=01 feb=02...dec=12
+----------
+
+enter a two digit month number and you'll be shown your online
+time usage for that provider for the month shown eg.
+
+----------
+total time online for month 12 = 876 minutes for this ISP
+
+total time online for month 12 = 14.6 hours for this ISP
+----------
+
+It does not incorporate the year yet.  But I'll add that if I get requests.  I may even 
+try to automate it further if there's demand for it. eg defaulting to the current month.
+
+I hope someone finds this useful.  Email me with any comments / flames.
+idiot@mindless.com
+
+The rexx is only pretty basic.  It's only my second attempt at using Rexx and 
+I'm only learning as I go, with only the online REXX manuals as my guide.
+Feel free to hack it to customise it to your needs, though I would appreciate 
+if you could send me a copy of your hack.

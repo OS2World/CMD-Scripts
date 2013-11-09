@@ -1,0 +1,38 @@
+/*************************************************************************
+* DOCUMENTATION for B64.CMD
+*
+* Intelligent Base64 encoder/decoder.
+* Requires BASE64 API from MD5RX.DLL
+*
+* Created by Teet Kõnnussaar (teet@aetec.estnet.ee)
+*
+* This program is *freeware*, which means that you don't have to pay
+* for it and you may use/modify it whatever way you want.
+* But: This program is distributed AS IS, and with NO warranties,
+*   neither implied or expressed.
+*
+* Usage:
+*    B64 ( e | d ) [infile [outfile]]
+*        e - for encoding (file -> base64)
+*        d - for decoding (mail -> file)
+*
+* Encoding notes:
+*     writes 3-line MIME-compliant header
+*     if in-file not specified, reads standard input for data to encode
+*     if outfile not specified, writes to standard output
+*
+* Decoding notes:
+*     if in-file not specified, reads from standard input
+*     auto-detects encoded data postition in file (should have at 
+*        least 3 lines of encoded data to detect correctly)
+*     if outfile not given, guesses filename to decode or writes to
+*        b64out.$$?. Does not overwrite out-files, never.
+*
+* Contents:
+*   B64.CMD   - program
+*   B64.DOC   - documentation (this file)
+*   MD5RX.DLL - Dynamic link library with auxiliary functions, used
+*               by B64.CMD (also created by me, and also freeware)
+*
+*************************************************************************/
+

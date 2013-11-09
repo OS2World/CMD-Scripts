@@ -1,0 +1,16 @@
+                           Upload Information Template for Hobbes.nmsu.edu
+                           ===============================================
+
+            Archive Name:  rxdyndns.zip
+     Archive Description:  A complete, free REXX tool to register your
+                           dynamic host name with ml.org. See more at
+                           www.ml.org
+Operating System/Version:  OS/2 v2.x and up
+          Program Source:  Author
+                Replaces:  other non-free stuff
+
+               Your name:  Dennis Peterson
+      Your email address:  dpeterso@halcyon.com
+
+      Proposed directory
+           for placement:  /pub/os2/apps/internet

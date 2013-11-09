@@ -1,0 +1,56 @@
+Step 1:
+
+Place ice.cmd in the \tcpip\bin subdirectory
+
+Step 2:
+
+Add a provider using the 'Dial Other Internet Providers' program.
+Use the following inputs:
+
+Page 1:
+
+Provider Name: ICE
+Login ID: <login id>
+Password: <password>
+Nickname: ICE
+Phone Number: 482-7547 <or whatever phone number you've been given>
+Login Script: ice.cmd atdt<phone number> <login id> <password>
+
+Example Login Script line: ice.cmd atdt4827547 userid password
+
+Type: SLIP
+
+
+Page 2:
+
+MTU Size: 1500
+VJ Compression: Off <unchecked>
+Domain Nameserver: 198.231.65.3
+Your Host Name: <leave blank>
+Your Domain Name: iceonline.com
+
+Page 3:
+
+News Server: news.iceonline.com
+Gopher Server: <leave blank>
+WWW server: <leave blank>
+
+POP Mail Server: mail.iceonline.com
+Reply Domain: iceonline.com
+Reply (Mail) ID: <Mail login id>
+POP Login ID: <Mail login id>
+POP Password: <POP password>
+
+Page 4:
+
+<configure com port and speed, I've been using 38400 or 57600>
+<if you have problems (ie. scripts stops after CONNECT, try dropping down to 19200>
+<you will not be able to choose Modem Type, Dial Prefix, or Initialization String>
+
+Data Bits: 8
+Parity: NONE
+
+
+Step 3:
+
+Dial!

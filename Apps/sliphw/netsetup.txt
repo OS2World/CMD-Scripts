@@ -1,0 +1,527 @@
+Notes on Setting up Ethernet and Routing
+----------------------------------------
+
+It is much simpler than you think. It only looks complicated because IBM has
+created scripts that run the basic programs, and other scripts to run those.
+Then IBM has setup SLIPPM to make it even more complicated.
+
+Let's cut through all the complexity and discuss the rock bottom level where
+only a few programs are needed. All the complexity IBM created is just a way
+of running three basic programs: IFCONFIG, ROUTE and ARP.
+
+			      IFCONFIG
+			      --------
+
+IFCONFIG.EXE  sets up an "interface" to the internet. An "interface" can be a
+slip interface, which means a com port and modem. Slip interfaces have names
+like sl0, sl1, sl2,...
+
+An interface can also be a networking card, such as an Ethernet card. These
+interfaces have names like lan0, lan1, lan2,...
+
+Finally, there is the "loopback" interface, which doesn't connect to anything.
+It is a mirror. Everything that goes out bounces right back. It allows the
+machine to talk to itself. The loopback interface is called lo.
+
+What do we need to do when we configure an interface? As an analogy,
+interfaces are like the COM1 and LPT1 ports on your PC. Configuring an
+interface with IFCONFIG is like setting the COM port parameters with a MODE
+command. However, no serial parameters are involved. The configuration
+really only has to specify the IP address. That is analogous to being able
+to specify the phone number that is connected to COM1.
+
+To configure an interface, you just run IFCONFIG followed by the name of the
+interface, the IP address of the interface, and any other required parameters.
+
+For example, to configure the loopback interface with IP address 127.0.0.1
+the command is:
+
+ifconfig lo 127.0.0.1
+
+Configuring the SLIP interface sl0 is done like this:
+
+ifconfig sl0 199.99.99.99  199.99.99.88 netmask 255.255.255.0
+
+Two IP addresses are given. They are the addresses at each end of the
+slip line. The command above configures the sl0 interface with IP address
+199.99.99.99 such that the other end of the serial connection is another
+SLIP interface whose IP address is 199.99.99.88. The machine at the other
+end may also have an Ethernet card. It has a different IP address than its sl0
+interface. The "netmask" specifies that the sl0 interface is on a network
+where all the IP addresses start with 199.99.99 and only the last pair of
+digits change from machine to machine.
+
+To configure an Ethernet card, with the IP address 199.99.99.77 the
+command is
+
+ifconfig lan0 199.99.99.77 netmask 255.255.255.0.
+
+Testing if IFCONFIG worked
+--------------------------
+
+If you have a working interface, you can ping it. If your machine isn't
+connected to anything, the only working interface will be the loopback
+interface. Let's say you've given it the IP address 127.0.0.1. Then do this:
+
+ping 127.0.0.1
+
+If the IFCONFIG command that configured the loopback interface worked, you'll
+get a series of echos coming back from the ping command.
+
+If your slip interface goes from 199.99.99.99 (your machine) to 199.99.99.88
+the remote machine, you won't be able to ping 199.99.99.99 unless you
+are connected by SLIP. Ping will report that there is no route. This may
+be puzzling because 199.99.99.99 is actually on your machine. It makes sense
+if you think of it like this. The sl0 interface is an interface to your phone
+line. Anything send to this interface will cause the lights on you modem to
+flicker. If your modem isn't connected, then 199.99.99.99 isn't working
+either.
+
+Associating names with IP addresses
+-----------------------------------
+
+People typically use the name "localhost" instead of 127.0.0.1 for the
+loopback interface. Try this:
+
+ping localhost
+
+It won't work unless you have a file called HOSTS in \TCPIP\ETC which
+associates the IP address 127.0.0.1 with the name "localhost". Setting up
+a HOSTS file is important. Just make a file called HOSTS and put in it
+the following line:
+
+127.0.0.1   localhost
+
+Now "ping localhost" should work.
+
+Suppose you are setting up a connection between two machine called "home" and
+"work". Lets say the IP addreses are 199.99.99.99 and 199.99.99.88
+respectively. Then, it would be a good idea to associate the machine names and
+the IP addresses by putting these lines in the hosts file:
+
+199.99.99.99 home
+199.99.99.88 work
+
+
+How TCP/IP finds machines: the RESOLV file and the DNS
+------------------------------------------------------
+
+Lets say you do this:
+
+ping somebody
+
+The networking software has to locate a machine called "somebody". First it
+will look in your HOSTS file. If you haven't associated it with an IP
+address, it will try to find out by asking another machine.
+
+The machine it asks is called the DNS (Domain Name Server). It is really
+just "Directory Assistance".
+
+Lets say you set up an interface sl0 as 199.99.99.99 and give it the name
+"home". Other machines will only be able to find you if the Directory
+Assistance (DNS) has a listing which says "home" is 199.99.99.99.
+
+It's a little more complicated. The name "home" is the name on your subnetwork.
+The subnetwork is the part of the IP address that matches the 0's in the
+netmask. Since the netmask is 255.255.255.0, only the last number 99 in the
+IP address is associated with "home".
+
+The part of the IP address that matches the 255's in the netmask is 199.99.99.
+This part is called the "subnet". Your subnet also needs a name. How does it
+get one?
+
+The subnet name is the first line in a file called RESOLV that should exist
+in \TCPIP\ETC. If you want to call your subnet "my.private.net", then
+the RESOLV file has one line that looks like this:
+
+domain my.private.net
+
+The actual name of your machine is the combination of the name "home" and
+the subnet name.  That is, your machine is "home.my.private.net".
+
+There is a command called HOSTNAME.EXE that tells you the name of the
+machine you are using.
+
+If you've configured the loopback interface and associated the name 'localhost'
+with 127.0.0.1 in the hosts file, then the HOSTNAME command will respond with
+"localhost".
+
+If you set up a slip interface and set up the routing (as explained below)
+then the HOSTNAME command will return your machine name "home" combined with
+the name of your subnet "my.private.net". That is, it gives
+"home.my.private.net".
+
+You can give your machine any name you want, and put any subnet name you want
+in your RESOLV file, but if you want anyone else to find you, you'll have to
+use the names that Directory Assistance (the DNS) has in its listings.
+
+The DNS
+-------
+
+A DNS is a machine that you can contact to convert names into IP addresses.
+You've got to know the IP address of the DNS. If you only had its name, you'd
+have to find it first and ask it the IP address of its name in order to find
+it. A Catch-22. So your machine has to have the IP addresses of a DNS, and
+(better yet) several DNS machines. These are also put in the resolv file. My
+resolv file is:
+
+domain chem.ualberta.ca
+nameserver 129.128.5.233
+nameserver 129.128.76.233
+nameserver 129.128.4.241
+
+
+Let's say you've configured the slip interface and have a working slip
+connection between your machine and the Internet. Ping will then work with the
+IP address of your sl0 interface. Try using ping with the IP address to
+confirm its working.
+
+If you've put a name for your machine in your HOSTS file. Ping will work with
+the name of your PC's sl0 interface. Try using ping with a name to make sure
+your hosts file is set up correctly.
+
+At this point, your work and home machines have found each other and are
+talking.
+
+The next problem is: how can you talk to other machines? In other words, you
+are at home and you're connected to your machine at work via its sl0
+interface. You want to ping another machine at work called "otherwork". Let's
+say you try this:
+
+ping otherwork.my.private.net
+
+The firt thing that happens when you give this command is that your home
+machine tries to determine the IP address of "otherwork.my.private.net". If
+it finds this IP in your HOSTS file, it will go on to the next step. If it
+doesn't find it in the HOSTS file, it will try to contact the DNS to ask it.
+Since we haven't get got things working, it won't be able to get the name from
+the DNS, so to get any farther, we have to put the IP in the hosts file. Add
+the following line to HOSTS:
+
+199.99.99.55 otherwork.my.private.net
+
+Now your ping command works exactly the same as if you had typed:
+
+ping 199.99.99.55
+
+Will this work? Well, not quite. There are actually two problems.
+
+Problem 1. Lets say your TCP/IP software has lo and sl0 interfaces. Out which
+interface should it send the ping in order to reach 199.99.99.55? That
+problem is solved by setting up a "default route". The default will be to
+send all packets for machines whose location is uncertain to the machine
+at the other end of the slip connection.
+
+This is done with ROUTE.EXE as follows:
+
+route add default 199.99.99.88 1
+
+The only IP addresses your machine really knows about are the ones you've
+specified in the IFCONFIG commands. Those are 127.0.0.1, the loopback
+interface, and the two IP addresses that make up the SLIP connection, which
+are 199.99.99.99 and 199.99.99.88. Packets for these IP addreses can be
+handled by your PC. All other packets are sent out the default route. That is,
+they are sent to your work machine.
+
+TCP/IP networking works on the principle that packets are passed from machine
+to machine until they eventually reach their destination. TCP/IP automatically
+forwards packets to IP addresses it knows how to reach. If a machine doesn't
+know how to reach an IP address, it passes the packet along its default route.
+
+Your "ping 199.99.99.55" command is therefore passed to your work machine,
+which (presumably) is working properly and can pass the packet to
+199.99.99.55.
+
+Let's look at how "work" sends the packet to "otherwork". An understanding of
+this is very important. "Work" and "otherwork" are both on the same Ethernet.
+They can find this out by comparing their IP addresses and the netmask. Since
+the netmask is 255.255.255.0, all IP addresses with the first three numbers in
+common are on this subnet. Since "work" has IP 199.99.99.88 and "otherwork"
+has IP 199.99.99.55, the first three numbers are 199.99.99 for both. Hence,
+they are on the same subnet.
+
+If the packet were intended for a destination outside the subnet, "work" would
+send the packet to its default route, which is a router that forwards the
+packet to the rest of the Internet. But because the packet is for a machine
+inside the subnet, the packet has to be handled by the machines inside that
+subnet. This means that "work" and "otherwork" have to transmit the packet
+between them without any outside help.
+
+Machines on Ethernet always communicate using MAC addresses. A MAC address is
+a number such as 00:00:00:0c:11:22:33:44 that is built permanently into every
+Ethernet card. This number assigned at the factory. Every Ethernet card ever
+manufactured has a unique MAC address.
+
+To send the packet to "otherwork", "work" needs to know its MAC address. It
+broadcasts a request on the Ethernet which says "Who has IP address
+199.99.99.55?". "Otherwork" responds and broadcasts its MAC address, which
+"work" hears and remembers. Then "work" puts this MAC address on the front of
+the ping packet and broadcasts it on the Ethernet. "Otherwork" sees a packet
+with its MAC address and says "that's for me". That's how it gets the ping
+packet. "Otherwork" ignores all packets on the Ethernet except packets
+addressed to it.
+
+I had to explain that because this method doesn't work when "otherwork"
+tries to respond to the ping packet. "Otherwork" follows the same steps I
+just outlined when "work" talks to "otherwork". First it looks at the
+IP addresses of itself and "home". It determines that "home" is on the
+same subnet, so "otherwork" knows that it must pass the packet directly to
+"home" itself using MAC addresses, instead of sending the packet over the
+default route to the rest of the Internet.
+
+"Otherwork" needs to get the MAC address of "home" so it sends out a broadcast
+asking "Who has IP address 199.99.99" and waits for a responce. These
+broadcasts are not echoed over the slip connection between "work" and "home"
+If such broadcasts were echoed, your modem would be so busy that data
+communication would be slow. Hence, the broadcast doesn't reach the home
+machine. Since no machine responds, "Otherwork" cannot obtain a MAC address to
+use and must give up trying to return the ping packet.
+
+The solution to this problem is the most complicated thing I had to do to
+get this package working. Here is the solution.
+
+"Otherwork" has to send the ping packet to "work" so that "work" can forward
+it over the slip line to "home". To make this happend, when "otherwork"
+broadcasts a message asking "Who has IP 199.99.99.99", the machine "work" has
+to respond and give its MAC address.
+
+This is called "proxy arp". The term means that the machine "work" is acting
+as a proxy for your home machine. The command to set this up is the following.
+This command has to be executed on "work":
+
+arp -s 199.99.99.99 00:00:00:c0:11:22:33:44  pub
+
+Arp stands for "Address Resolution Protocol". This is how TCP/IP "resolves"
+which MAC address matches a given IP address. The "pub" at the end means
+"publish". It makes "work" respond with its own MAC address
+00:00:00:c0:11:22:33:44 whenever it hears a broadcast message asking for the
+MAC address of the machine with IP address 199.99.99.99.
+
+That's it. Once the arp command has been given on the "work" PC, the ping
+packets from "otherwork" will be sent to "work", which will relay them
+over the slip line to "home".
+
+
+The Larger Picture. Why You Mustn't use a Private Network
+---------------------------------------------------------
+
+A little knowledge is a dangerous thing. Now you have a little knowledge. It's
+my responsibilty to caution you about what would happen if you start messing
+around with IP addresses that aren't assigned to you.
+
+The fundamental rule for SLIP is this. The IP address for sl0 for your home PC
+must be on the same subnet as the sl0 you are connecting to. That is, both
+ends of the slip line must be on the same subnet.
+
+In principle, the office PC could have different subnets for SLIP and Ethernet.
+That makes it compilicated but it can work. To make it work, the following
+problem has to be solved.
+
+How could packets from elsewhere in the Internet find your home PC? That
+would only be possible if the existence of the subnet on your slip connection
+were known, so that packets would be routed there. Getting that net known
+is complicated and won't be convered here.
+
+The only easy way to set up your SLIP link is to have the sl0 and lan0
+interfaces of your work machine on the same subnet. That way all packets for
+your home machine will be sent to the subnet of your work machine. Then your
+work machine will be able to pass those packets to your home machine.
+
+Since both ends of the slip line have to be on the same subnet, the
+SLIPHW package requires that you have TWO additional IP addresses on the
+same subnet as your work machine. One of these is for the sl0 interface of
+that machine. The other is for your home machine.
+
+Since other machines will know your home machine by name, the DNS has to know
+the name and IP of your home machine. The other IP you use (for the sl0
+interface of the work machine) doesn't need a name. No machine will ever send
+a packet there directly. All the packets for the work machine can be sent to
+the Ethernet interface of "work".
+
+Hence, the second sl0 IP address of your work machine doesn't have to be
+registered with the DNS. However, it is very important that no other machine
+on your subnet is using that IP address. Ask your network administrator if
+there are any IP addresses he hasn't assigned and have him give you one to
+use.
+
+
+Connecting a Private Network
+----------------------------
+
+Let's say you set up a home Ethernet and you install the SLIPHW software
+on one machine to provide a link to the Internet. There are two possible
+situations.
+
+(1) Your home Ethernet is on the same subnet as "work".
+
+(2) Your home Ethernet is a different subnetwork.
+
+In case (1) you can probably get your entire home network working, but not in
+case (2). Let's see what goes wrong with case (2).
+
+Suppose your home net is 199.11.11 and the Ethernet card on "home" is IP
+address 199.11.11.11. This card must have a different name than "home" because
+"home" is the slip interface 199.99.99.99. Lets call the interface with the
+Ethernet card "etherhome". Suppose you have a machine "otherhome" with IP
+address 199.11.11.22.
+
+Here's how to set it your home network so that it works as long as you
+aren't connected to the rest of the Internet by SLIP:
+
+On both home machines put HOSTS files like this:
+
+199.11.11.11 etherhome
+199.11.11.22 otherhome
+
+On each machine, make the default route the other machine. On "etherhome"
+the route command is
+
+route add default 199.11.11.22 1
+
+On "otherhome" use
+
+route add default 199.11.11.11 1
+
+Now the two machines can talk to each other and all packets are sent to the
+other machine by default. No DNS is defined because none is reachable, (but
+none is needed). You can give your home net a subnet name with a RESOLV file
+like this:
+
+domain my.private.net
+
+Now lets look at what happens when the SLIPHW package is used to connect
+"home" to the Internet via the work machine.
+
+When the connection is made, the default route is changed to the work
+machine:
+
+route add default 199.99.99.88 1
+
+That won't affect the ability of the two home machines to continue talking to
+each other. They know about each other anyway, and the default route is only
+used for packets that are destined to unknown machines.
+
+The "home" machine should work OK on the Internet. When you run Web Explorer
+on this machine and use a URL outside your home network, TCP/IP will use
+the default route out its sl0 interface to machines on the Internet.
+
+The problem occurs when "otherhome" tries to operate on the Internet.
+
+Lets suppose "otherhome" tries to ping "otherwork". Lets assume that the
+IP of "otherwork" has been put in the HOSTS file so that "otherhome" knows
+the IP of "otherwork". The ping packet is sent out the default route of
+otherhome, which is to "etherhome", the lan0 interface of the home PC.
+
+When the "home" PC sees a packet for otherwork arriving on its lan0 interface,
+it forwards it to "work". The packet goes out its sl0 interface to the sl0
+interface of "work", which sends it out its lan0 interface to "otherwork".
+Hence the packet from "otherhome" arrives at "otherwork" OK.
+
+The problem is the return trip. "Otherwork" has to respond, but it has a
+packet that comes from a machine on an unknown network. It cannot respond.
+
+There are ways to handle this situation, but further discussion is beyond the
+level of this simple introduction to TCP/IP networking. Even sophisticated
+tricks don't really help much. Suppose instead of "otherwork" the machine that
+had to respond were far away on the Internet. The only way packets could get
+back to "otherhome" would be if the routing throughout the Internet sends the
+packets from far away to your local network. If you use some arbitrary subnet
+numbers for your home network, the routing will foul up completely and the
+packets from far away will be routed to the actual subnetwork whose subnet IP
+you have stolen.
+
+How to make Case (1) work
+-------------------------
+
+In case (1), your home net is the same subnet as your office. That means
+your network administrator has to assign you IP's for each home machine, plus
+one unused one for sl0 on the work machine.
+
+For two home machines, you need quite a file IP's. Here is a list of
+hypothetical ones:
+
+work machine lan0 199.99.99.77 (must be registered with DNS)
+work machine sl0  199.99.99.88 (some unused IP. Doesn't need registration)
+home machine sl0  199.99.99.99 (must be registered with DNS)
+etherhome    lan0 199.99.99.11 (doesn't need to be registered. Must be unused)
+otherhome    lan0 199.99.99.22 (must be registered with DNS)
+
+Let's go through the situation I've just discussed once more, but this time
+the home net is a subnet of the work net. As I outlined, when "otherhome"
+pings "otherwork", the ping packet follows this route. First it goes to
+"etherhome" (otherhome's default route), which relays it over the slip line to
+"work" (homes default route), which passes it to "otherwork" (because it knows
+how to talk to other machines on the same subnet using MAC addresses).
+
+This time "otherwork" sees that the IP of the home machine is on its own
+subnet. So it broadcasts "Who has IP 199.99.99.22". There won't be a response,
+UNLESS your work machine also does proxy arp for the second home machine. To
+make this happen, you need to give the following
+proxy arp command  on "work":
+
+arp -s 199.99.99.22 00:00:00:c0:11:22:33:44  pub
+
+A big home network
+------------------
+
+Let's say you have a bunch of work machines that are on the work subnet, and
+you want to bring them all home and tie them into the Internet from home. To
+do that, you're going to need two additional unused IP addresses. One for the
+sl0 interface of the work machine. The other is for the Ethernet interface of
+your home machine.
+
+You can probably get this to work by listing all the machines with their
+IP's and names in a HOSTS file that you put on every home machine. That will
+work when you aren't connected.
+
+To make it all work when you are connected, you'll have to make the work
+machine give proxy arp commnds for each home machine. The default route for
+all the home machines will have to be the machine with the SLIP connection,
+and the default route for that machine will have to be the work machine.
+
+
+
+Debugging Tools
+---------------
+
+I've mentioned PING.EXE as the most useful tool. Anther very useful tool
+is NETSTAT.EXE which is used like this:
+
+netstat -r
+
+This reports all the routes. YOu can see the IP for each interface and the
+default route. To see the arp tables use:
+
+netstat -a
+
+Conclusions
+-----------
+
+The SLIPHW package is set up for the very simple situation where you connect
+one home machine to your office machine. You need an IP on the office subnet
+for the home machine (sl0) and one ununsed IP for the work machines sl0.
+
+When I first got into this, it seemed incredibly complex and I was
+overwhelmed. If you are feeling overwhelmed, don't worry. It is quite logical.
+Just think about it carefully.
+
+I've had a home network working with Warp Connect for about 6 months. But
+that isn't functional any more because my son took his PC with him when he
+left for college.
+
+If I'd had the SLIPHW package working when I had the home network, I could
+have tested out the ideas I've discussed. But I cannot. So the details on
+tying in the home net are untested.
+
+If you get a home net working and you make modifcations of the scripts to
+automate the process, please send me a copy.
+
+Sometimes what is possible in theory doesn't work because of software bugs.
+If someone tries to get a home net working and runs into problems with IBM's
+TCP/IP not working as it should, I'd also like to hear about it.
+
+Good luck.
+
+
+Bruce Clarke
+Oct 1, 1995

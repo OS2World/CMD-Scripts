@@ -1,0 +1,13 @@
+Upload Information Template for Hobbes
+======================================
+
+Archive Name: cdipf.zip
+Program Description: Cheap and Dirty IP Finder. Displays dial-up IP
+Operating System/Version: OS/2 Warp with TCP/IP or IAK
+Program Source: Author
+Replaces:
+
+Your name: Dennis Peterson
+Your email address: dpeterso@halcyon.com
+
+Proposed directory for placement: /os2/network/tcpip

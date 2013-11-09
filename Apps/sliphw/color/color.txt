@@ -1,0 +1,29 @@
+®BB¯®PT2¯®AL0¯®LM20¯®RM50.5¯®LS2¯®TS23¯
+®LM0¯®RM55¯®IP0,12¯®TS12,15,35,42C,47C¯®PT4¯®NJ¯
+®MDRV¯®MDNM¯®FR¯COLOR.EXE
+OS/2 Command
+®FL¯®LD_¯
+Jeff Prosise®LD ¯1989 No. 11 (Utilities)
+®LD_¯
+
+®MDBO¯®LS2¯Purpose:®MDNM¯	A protected-mode utility for setting foreground and background screen colors from the full screen (text) command line in OS/2 Versions 1.0 and 1.1.®LS1¯
+
+®MDBO¯Format:®MDNM¯®PT3¯	COLOR ®MDRV¯fb®MDNM¯
+	
+®MDBO¯®LS2¯®PT4¯®MDBO¯Remarks:®MDNM¯	The ®MDRV¯f®MDNM¯ and ®MDRV¯b®MDNM¯ command line parameters are letters designating the foreground and background screen colors, as shown in the table below.  Capital letters are used to specify an "intense" or "bright" color (foreground only); lowercase letters indicate normal intensity colors (foreground and background).  Colors are designated by the first letter of their names, with the exception of black, which is represented by x (or X).
+®PT1¯®TS17,32,36,53¯®LS1¯
+	Black	x	Intense Black	X
+	Blue	b	Intense Blue	B
+	Green	g	Intense Green	G
+	Cyan	c	Intense Cyan	C
+	Red	r	Intense Red	R
+	Magenta	m	Intense Magenta	M
+	Yellow (Brown)	y	Intense Yellow	Y
+	White	w	Intense White	W
+	ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄĞÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ 
+	Background		Foreground
+®PT4¯®TS12,15,35¯®LS2¯
+	The default white-on-black colors can be restored either by entering ®PT3¯COLOR wx®PT4¯ or by issuing the command ®PT3¯ANSI OFF®PT4¯ and clearing the screen.  If ®PT3¯ANSI ON®PT4¯ is then issued, the last-selected color scheme will return.  The default ANSI drivers in OS/2 support 43- and 50-line as well as 25-line text modes.
+
+	®MDBO¯Note: ®MDNM¯If the Presentation Manager is used, windowed applications provide their own color information.  COLOR.EXE is used only for full-screen command line operation.
+®MDNM¯

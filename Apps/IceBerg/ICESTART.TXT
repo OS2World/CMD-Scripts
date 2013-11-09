@@ -1,0 +1,11 @@
+/nukealert
+/iceberg autolog off
+/iceberg msglog off
+/iceberg walling off
+/iceberg walloping off
+/iceberg srvrget off
+/iceberg getcurr off
+/iceberg cstating off
+/iceberg autoop on
+/awaymsg But leave a msg, IceBerg will log it.
+

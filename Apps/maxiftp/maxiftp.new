@@ -1,0 +1,108 @@
+This is a beta release of Version 3 of MaxiFTP.
+
+Revision 191
+============
+A new feature:  Executable extensions.  These extensions work
+similiar to the concept in 4OS2/4DOS.  The syntax is:
+       SET .EXT=command
+
+There are three special environment variables available for this command:
+       %fn% %ext% %rn%
+
+       %fn% is the local file name for the file just transferred (inc. ext.)
+       %ext% is the extension of the local file
+       %rn% is the name of the remote file that was transferred
+
+The command is issued with the CALL command, so you _can_ specify a REXX
+script as the target.  A possible command would be:
+
+       SET .ZIP=UNZIP -V %FN% | more
+
+to automatically view all .ZIP files when they are downloaded
+
+A bug having to do with quoted parameters is fixed in this edit.  If you
+had a parameter in quotes that did not contain blanks, strange things
+used to happen.  
+
+The ! command now uses the call command to avoid problems with chaining
+REXX commands.
+
+A change was made to parsing so that commands such as:
+       get 00index.txt |grep -snetwork
+now work correctly.  The old get fn "|command parms" still works.
+
+A bug in MTYPE/MPAGE is now fixed.
+
+More suggestions from Mike Teper:
+
+The "abbreviated" search is now the ncFTP style substring search.
+The @H parameter in a prompt now can be followed by an optional number to
+show the nth part of the period delimited domain name.
+
+Revision 189
+============
+Thanks to Michael Teper for pointing out that I had broken the NETRC macro
+facility when I added the command line history.  This is now repaired.
+
+This edit also adds a pair of new commands: MTYPE and MPAGE.  They are
+essentially the same as TYPE and PAGE, except they work on multiple files
+in the same manner as MGET does.
+
+Revision 187
+============
+This edit fixes a couple of bugs with visual mode.  Most noticeable is that
+if you choose <HOST>, and cancel out, you'll remain in your current
+session.
+
+I've also hacked together a "shim" so that MaxiFTP can become MaxiFSP with
+Lowrey's new FSP/2 Suite for OS/2.  The suite has some limitations which
+makes me hesitant to release the changes for public consumption.  If
+you'd like them, drop me a note at acrosby@comp.uark.edu.
+
+Revision 185
+============
+The biggest change is in the command line mode - MaxiFTP now uses my
+recently released CmdLine() code to implement a full clone of the
+OS/2 command line prompt.  All of the keys that are in effect when
+KEYS=ON in OS/2 now work in MaxiFTP, including command history. 
+Unfortunately, this does dramatically increase the size of the program.
+MaxiFTP is now over 2500 lines of REXX code, over 400 of which belong to
+the CmdLine() function.
+
+A new prompt symbol "@%" is added to display the number of commands
+stored in the history list. (This may not be the same as the number of
+commands that have been issued since the history list will not be updated
+if the most recent command is reissued with no changes.)
+
+In VISUAL mode, the current Visual Selection Action (VISCMD) is now 
+displayed in the directory list.  Selecting the entry toggles between
+GET and TYPE.
+
+Revision 180
+============
+More bugs fixed...
+   MaxiFTP now works correctly if there is no NETRC file.
+   Remember mode now keeps up with *all* hosts as expected rather than
+   just the last host.
+
+Enabled VISUAL mode to connect to VM hosts - still only the initial
+minidisk - CD won't do anything on a VM host.
+
+Adds the -i command line option to disable most interactive prompting by 
+setting CLOBBER=ON and MPROMPT=OFF.  
+
+A new command "USER" is added to allow easy reconnection to the
+current host.
+
+A new SET ASK=ON|OFF is added to force MaxiFTP to always ask for the 
+USER name on a new connection, so its action can be more transparent
+to users of FTP.  SET ASK will display the username dialog in VISUAL 
+mode.
+
+Thanks to John-Marc Chandonia for the suggestions in revision 164.
+
+Also, some badly needed additions to the MAXIFTP.MAN file have been
+made.  New additions are marked with "|".  All of the SET options should
+now be documented, and there is a new section describing VISUAL mode.
+
+The SHOW command can now display the contents of a single variable.
