@@ -1,0 +1,15 @@
+d:\gtirc\icbrg110.zip IceBerg Version 1.10 for GTirc.
+d:\gtirc\rfc1459.zip Request For Comments file on IRC, lots of info about how IRC works.
+
+
+File List for icbrg200.zip
+-------------------------------------------------------------------------
+FILE_ID.DIZ  	- Description file for BBS's
+ibergcmd.cmd 	- Main output command script
+ibergmsg.cmd 	- Main input command script
+readme.txt   	- Readme file for IceBerg
+icestart.txt 	- startup commands
+servers.lst  	- list of known servers (not complete, but it's a start)
+autoop.lst   	- example Auto-Op file
+filelist.txt 	- example XDCC offered file listing
+filelist.doc 	- this file
