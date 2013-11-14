@@ -1,0 +1,21 @@
+; sample input file for BlendGIF. Uses the hello.gif and goodbye.gif
+; files that are package with blendgif.
+infile.0=3
+infile.1=hello
+infile.2=goodbye
+; you can upload a file that's been base64 packed -- signal the end
+; of the file with a blank line
+upfile.3= forever1.gif
+R0lGODlhZAAyAIAAAP7byhI0ViH5BAEAAAAALAAAAABkADIAAAL+hI+py+0Po5y02ouz3rz7D4bi
+SJbmGQWbihrBu7wsAyvy/czuXdv6xesdeIngz1gEzGTDYNGZQT6ZCGkTuqv2jDorEHul7ohT8Xjc
+JYfNFq8S7Aaf31v1Wti2o83cqeup5adUhoNReAQnV+jDwsd291OB57fItJhFU8M2eUUXOfHYhNa5
+uWUjqrVEyQnKSlW5hKeJ2ChbCzj3pWIb20snODkLTPsbZSlY/PuoOEtbussqwVxbBx05nbtHHNp6
+mSwGsyynLBRnvaIHXu3tObjKuEsYnZJeDQn/aXnN7iZ5nNpJ275wjN7Ac3fPGEGAufpx+2MQmbxP
+3TL5EliwQbiygRbZUeCmzpe3eQaDUSRH0gFIe2dGxnqHK2LLhxBWXkS5jZdMUuU2ptQYrdnFUqhS
+mSxajGaOoD6H8uIH1c6rn0CBSm02MYa4q9Q02LykLutBsQ1P1vzqqKvRUFHBYjVm1aW1NHpGkZ1J
+NWNHnTs9nWTrcapXs1GHHOTUdie4wUwRC1ur0iTgW3BVdoy8lKIrpaBWWD5Lo2aL0aRLmz6NOrXq
+1axbu34NO7bs2bRr20ZRAAA7
+
+anim_type=balloon
+balloon_push=push
+balloon_type=circle

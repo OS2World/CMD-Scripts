@@ -1,0 +1,895 @@
+24 May 1999. Daniel Hellerstein (danielh@econ.ag.gov) 
+
+     BlendGif ver 1.15 -- A  WWW-aware utility for building animated GIFS.
+
+Abstract:
+  BlendGif is a WWW-aware OS/2 utility that will create animated GIFS.  
+  At it's simplest, BlendGif will combine several single-frame
+  GIF files into a new, animated GIF file.  But this is just the
+  beginning -- BlendGif's real strength is it's ability to create
+  "intermediate" images to be used as frames in the animated GIF.  
+  These intermediate images allow one to easily create fade, pan,
+  dissolve, rotation, and other interesting effects.
+
+  BlendGIF can be run from an OS/2 command prompt, as a CGI-BIN script,
+  or as an addon for the SRE-http web server. 
+
+
+                ------------------------------------------------------------
+Contents:
+
+I.      Installation and usage
+I.a.        Installing BlendGIF
+I.b.        Some Installation Reminders and Notes
+I.c.        Using BlendGIF
+II.     Parameters
+II.a.      Global parameters
+II.b.      Image-pair "default" parameters
+II.c       Image-pair "specific" parameters
+II.d       Image-specific transformation parameters
+III.    Using BlendGIF input files.
+III.a      A list of parameters and their permissible values
+IV.     Disclaimer
+
+                ------------------------------------------------------------
+
+I. Installation and Usage
+
+To use BlendGif, you MUST have several libraries, including:
+RXGDUTIL.DLL and REXXLIB.DLL. If you don't have these libraries,
+please see  the READ.ME file (that comes with BLENDGIF.ZIP) for
+details on how to obtain them for free.
+
+Given the above.... installation of BLENDGIF is fairly simple
+(simple enough that I didn't bother writing an INSTALL.CMD program).
+
+I.a: Installing BlendGIF
+
+First, you should  create a directory for BlendGIF, say:
+   D:\SERVER\BLENDGIF.
+Then, unzip BLENDGIF.ZIP into this directory.
+
+The next steps depend on how you intend to use BlendGIF.
+
+ A) as a cgi-bin script:
+    i.  copy BLENDGIF.CMD to your CGI-BIN directory
+   ii.  copy the varions BLEND*.HTM files, and BLNDLOGO.GIF, to a 
+        web accessible directory.
+        You'll have to edit BLENDGIF.HTM (see the comments in BLENDGIF.HTM)
+  iii. Modify parameters set at the top of BLENDGIF.CMD.
+       In particular, you MUST set the BLENDGIF_ROOT parameter -- 
+          say, set it equal to D:\SERVER\BLENDGIF
+
+ B) as an SRE-http addon
+    i.  copy BLENDGIF.CMD to your \GOSERVE\ADDON directory
+   ii.  copy BLENDGIF.HTM and BLNDLOGO.GIF to your GoServe data directory
+        (or to some other web accessible directory)
+  iii. Optional: modify parameters set at the top of BLENDGIF.CMD --
+       especially the BLENDGIF_ROOT parameter; say, to D:\SERVER\BLENDGIF.
+       If you don't set it,  your TEMPFILE_DIR directory (typically, the 
+       \TEMP subdirectory of your GoServe data directory) will be used.
+   iv. Optional: enable the "Blendgif/ShowDIR" option.
+       This requires that you:
+         iv.1.  Create an IMGLIB directory under your BLENDGIF_ROOT directory
+         iv.2.  Set a "javascript" parameter in  BLENDGIF.HTM (see note below)
+
+  C) from the command line
+    i. Optional: modify parameters set at the top of BLENDGIF.CMD --
+       especially the BLENDGIF_ROOT parameter.
+     
+You are now ready to use BLENDGIF!
+
+
+CAUTION:
+    If you run BLENDGIF from the command line and  get an error with a code 
+    of "43", you might need to:
+      a) make sure you have the latest version of RXGDUTIL.DLL
+      b) make sure RXGDUTIL.DLL and REXXLIB.DLL are in your LIBPATH,
+         or in the same directory as BLENDGIF
+      c) reboot your machine
+
+
+I.b. Some Installation Reminders and Notes
+
+*  Reminder: 
+     Before trying BlendGIF, you should set the BLENDGIF_ROOT parameter
+     in BLENDGIF.CMD -- it should point to a directory where BLENDGIF
+     can place temporary files.
+
+*  A caution on timeouts:
+      Since BlendGIF may take a minute or more to generate
+      output, there is a chance that your server will "inactive
+      timeout" the request (while BlendGIF is still working).
+      When run as a an SRE-http addon, SRE-http use "multi-part" sends to
+      send intermediate (status) messages, followed by the GIF image.
+      Not only does this strategy prevent "inactive timeouts",
+      it also assures the client that something is happening.
+      Unfortunately, cgi-bin does not support (at least plain vanilla
+      CGI-BIN does not support) "multi-part" sends, so this trick can
+      not be used.
+
+*  Special note for SRE-http users: Enabling Blendgif's ShowDIR option.
+      When run as an SRE-http addon, BlendGIF can be told to display
+      a set of links to .GIF files in subdirectories of the 
+      BLENDGIF_ROOT directory. When clicked, the GIF file will then be
+      displayed. Note that this ONLY works with subdirectories of the
+      BLENDGIF_ROOT directory -- it does not subvert site security.
+
+     BLENDGIF.HTM can provide a front-end to this option (when it open's it's 
+     VIEWER window).  To enable this front-end, you should
+        a) Make sure you specify the BLENDGIF_ROOT option in BLENDGIF.CMD
+        b) Create an IMGLIB/ directory under this BLENDGIF_ROOT directory.
+          Thus, if BLENDGIF_ROOT='D:\GOSERVE\BLENDGIF', then
+                you should create D:\GOSERVE\BLENDGIF\IMGLIB
+       c) Copy GIF files to this directory. These should be GIF files
+          you'd like to make  available as "files on this server".  
+       d) Edit BLENDGIF.HTM, and set the do_imglib parameter (the details
+          of how to do this are in BLENDGIF.HTM).
+
+I.c. Using BlendGIF
+
+To actually use BlendGIF, you can:
+
+ * run BLENDGIF from a command prompt, just enter 
+       BLENDGIF outfile
+   where outfile is the name of the output file you want to create
+  (if you do not enter outfile, BLENDGIF.GIF will be created).
+  You will then be asked the values of several parameters.
+
+ * invoke it thorough your browser, by pointing your browser at 
+   BLENDGIF.HTM, and filling out the form (it's got lots of options,
+   all of which can be ignored by beginners).
+
+ * If you are using a browser that supports maintained connections
+   (NetScape 2.0 and above), you can "immediately" display
+   the animated GIF. If not, or if you want to save the GIF to a 
+   file, you should check the "Do NOT immediately upload image?"
+   checkbox.
+
+If you are ambitious, you can create your own HTML form to use as
+a front-end for BlendGIF.  To do that, you'll need to work with the 
+parameters. 
+
+Perhaps more importantly, BlendGIF can read a special BlendGIF
+input file, which will set the values of the various BlendGIF parameters.
+This allows the savvy user to readily specify the desired effects (which
+may be quite complicated, especially if you are using more then a few
+images)
+
+So without further adieu, consider the BlendGIF parameters ....
+
+Woah, one more thing.  Even if you aren't going to run BlendGIF as a script,
+you might want to peruse BLENDGIF.HTM  with your favorite javascript enabled
+browser -- it starts where this "technical" manual leaves off, and provides a 
+good overview of what BlendGIF is capable of.
+
+                ------------------------------------------------------------
+
+
+II. The BlendGIF parameters
+
+Before starting, how about a few definitions:
+
+  Image-File
+     A GIF file used in creating the animated GIF. You can specify
+     2 to a zillion image-files.
+  Frame:
+    In the context of BlendGIF, "frame" refers to one image in a 
+    multiple-image animated GIF. This image may be directly from an image-
+    file, it might be a transformation of one of these image-file images,
+    files, or it might be a "blending" of two image-file images.
+  Intermediate Frames: 
+     Frames derived by "blending" two image files.
+  Image-Pair: 
+     A pair of image-files, from which a set of intermediate frames
+     will be created. If one specifies N image files, there
+     will be N-1 image pairs:  image 1 and image 2,...,Image N-1 and Image N
+  Image-specific:
+     Parameters that apply just to this image. This is in contrast to "image-pair"
+     specific, which refers actions taken on a pair of images.
+  Global Image, or the "screen"
+     The "global image" refers to the animated GIF you wish.  It will have
+     a fixed size (the "screen" size), and will contain the various
+     frames of the animated GIF>
+  .n
+    A "tail" used in "stem" variables. Can refer to the "nth" image,
+    or to the "nth" image-pair.
+    to create; we can think of it's size as being the "screen size".
+    The size of this "global image" is set by the RESIZE_MODE parameter.
+    Image "n" refers to the image specified by INFILE.n.
+
+
+There are four types of BlendGIF parameters:
+
+  a) global parameters -- these apply to all images. 
+  b) defaults -- these are used for each image-pair when "image-pair
+     specific" parameters aren't defined.
+  c) image-pair specific -- these define parameters that are used in 
+     blending two images.
+  d) image-specific -- these define transformations (scaling, rotating,
+     and translation) of images.
+
+ To define image-pair specific parameters, you should use the 
+ xxx.n notation; where xxx is the parameter name, and n is
+ an integer which defines the image pair. Thus, 
+    frames.2=5
+ sets the "number of frames" for the second image-pair (5 frames
+ will be added between the second and third GIF file).
+
+ Similarly, the default parameters are specified without a .n;
+ for example, frames=4 means "unless a image-pair value for
+ frames is specified, use 4 frames between images".
+
+ Note that there are a few parameters which have a xxx.m structure --
+ for these parameters, image-pair specific parameters are defined
+ by specifying xxx.m.n (for example, mask.1.!thresh and
+ mask.1.!thresh.2)
+
+                               ------------
+
+II.a. Global Parameters, in more or less alphabetical order.
+
+BLENDGIF_ROOT: default directory for input files
+   You can set the default directory for input files by
+   setting BLENDGIF_ROOT (when BLENDGIF_ROOT='', then the
+   default directory is the "current" directory).
+   This is especially useful when running BLENDGIF as a
+   web script (since what BLENDGIF sees as the "current"
+   directory may be somewhat unpredictable).
+
+
+R_BACK          Color values use for the 0 pixel. These are not often,
+G_BACK          displayed; their major purpose is for use as a background
+B_BACK          color for transformed images.
+
+CT_NEWLEN -- length of "global" color table
+   This must be a value between 16 and 256 (inclusive).
+   BlendGif will create a combined color table using all the
+   images you specify. This "global" color table is used
+   to display the intermediate images. 
+
+       Example: ct_newlen=200  
+
+   Note that the original images (defined using the INFILE. parameters)
+   will be displayed with their own "local" color table.
+
+CT_MAKE_SPEC: how to create the  global color table
+  Since it's quite possible that the combined number of colors is 
+  greater then 256 (256 is the maximum number of colors a GIF can
+  use), BlendGif may need to pick and choose which colors to use.
+  CT_MAKE_SPEC is used to select from three different methods:
+      0 = use the most frequent colors
+      1 = use the most frequent colors, but also use some "average"
+          colors (these are chosen to minimize the "distance" of
+          all colors in all images to the closest color in the global color
+          table.
+      2 = similar to 1, but create more of the "average" colors.
+
+     Method 0 is fastest, but may do a bad job of displaying infrequently
+     used colors.  Methods 1 and 2 provide some insurance against this
+     problem, but are slower.
+
+   Example: ct_make_spec=0     
+
+CYCLE: Cycle images back to first image
+    You can create a "cyclical" animated GIF, with the display of
+    intermediate images reversed.  This is a nice way of smoothing
+    repeated displays, you avoid discontinuous jumps between the last
+    and first image.   Alternatively, one could specify a sequence of
+    images that start with a first image, have the "last" image in
+    the middle, and end with the first image -- but that doubles
+    the processing time required.
+
+    A value of 1 means "create a cycle of images", 0 means "do not
+    create a cycle of images".
+
+        Example: CYCLE=1
+
+
+DISPOSAL: Image disposal
+   How to "dispose" of images.  You can use a number between 0 and 4,
+   we recommend 1.
+
+FADE_REGIONS: Controls how to process "fades"
+   Processing fades requires matching colors determined on the fly to
+   a color in the global color table. To expedite this process, a 3
+   dimensional index is created.  FADE_REGIONS sets the size of this
+   index -- larger values tend to yield smoother fades, but can  greatly
+   increase processing time.
+
+       Example: FADE_REGIONS=16
+
+   This value (16) seems to be a reasonable compromise between speed and
+   quality.
+
+
+HEIGHT1:  Height of image (in pixels)
+        This is only used when RESIZE_MODE=2
+
+
+ITERATIONS: Number of times to display the set of images
+     Iterations should be an integer greater then 0.
+        Example: iterations=4
+
+INFILE. : the list of GIF images to "blend"
+    You can specify as many images to "blend" as you want by
+    creating a sequence of INFILE.j and INFILE.j.!nth parameters, 
+    where:
+        INFILE.0 - the number of images (must be at least 2)
+        INFILE.j - the jth GIF file (n=1...INFILE.0)
+        INFILE.j.!nth - the nth frame in the jth GIF file.
+                If you don't specify this, the first "frame"
+                in the file will be used.
+                Note: animated GIFs consist of several "frames",
+                      non-animated GIFs contain only 1 "frame".
+
+    Examples:
+
+      infile.0=2
+      infile.1='hello.gif'
+      infile.2='goodbye.gif'
+
+      infile.0=3
+      infile.1='good.gif'
+      infile.2='better.gif'
+      infile.3='best.gif'
+
+      infile.0=2
+      infile.1='help.gif'
+      infile.2='morehelp.gif'
+      infile.2.!Nth=2
+
+    Notes:
+       *  infile.n can be a relative file name, a fully qualified
+          file name, or a fully qualified URL (that starts
+          with http://).
+       *   BLENDGIF will use socket calls to retrieve URLS.
+           The content returned from the server must have a
+           content-type response header of image/gif.
+       *  in any case, the file must be a GIF file (BMP, JPEG,
+          etc. will not be read).
+       *  the size of the animated gif will be the size of the 
+          first (j=1) image -- if necessary, all other images will be 
+          shrunken (or expanded) to be this size.
+
+INPUT_FILE_UPLOAD: the contents of BlendGIF input file.
+
+    INPUT_FILE_UPLOAD can contain the contents of a BlendGIF input file.
+
+     Note that INPUT_FILE_UPLOAD should ONLY be specified in an INPUT 
+     element, within a multi-part FORM, that contains a type="file" attribute. 
+     See BLENDGIF.HTM for an example of such a FORM.    
+     
+NO_TRANSPARENT: suppress transparency
+   If NO_TRANSPARENT=1, then none of the images in the animated gif
+   will be "transparent", otherwise transparency is based on
+   whether the specified images were transparent.
+
+   Transparency seems to cause odd problems, hence we recommend using
+   NO_TRANSPARENT=1
+
+
+OUTFILE: The output file
+    The output file to be created -- any preexisting file of this name
+    will be overwritten.
+       Example: outfile='anim.gif'     
+
+RESIZE_MODE
+    Use this to determine the size of the image.
+     0 = Resize everything to the size of the first image
+     1 = Resize everything to be max(width) x max(height) (max determined
+         over all images)
+     2 = Use WIDTH1 and HEIGHT1 parameters.
+
+STOP_AFTER: Stop after this many frames
+     Instead of creating all the frames, stop after you've drawn
+     this many frames. This can create some interesting 
+     partial replacements, especially when combined with
+     the cycle-back option.
+      
+     Note: if STOP_AFTER=0, or is greater then the number of images,
+           it is ignored.
+
+     Examples:
+           STOP_AFTER=0
+           STOP_AFTER=3
+
+
+SAVE_TEMPFILE
+    When SAVE_TEMPFILE=1, BlendGIF will save the animated GIF to
+    a temporary file (in the BLENDGIF_ROOT directory).  
+    Furthermore, BlendGIF will return a link (using the SHOWFILE
+    option) to this file. Thus, the client will not immediately
+    see his animated GIF -- he has to click on the link to 
+    this temporary file.
+
+    This option must be used by clients with older browsers that
+    do not support "maintained connections".  In addition, clients
+    who want to save their animated GIF to a file should also use
+    this option.
+
+
+SHRINK_IMAGE
+    BlendGIF is somewhat inefficient about creating animated gifs --
+    it always creates "full sized frames". To save some space, BlendGIF
+    can examine a complete GIF file and try to retain only the
+    portion of "intermediate" frames that have changed.
+         SHRINK_IMAGE = 1 -- try to shrink image
+         SHRINK_IMAGE = 0 -- do not try
+
+   WARNING: some browsers do not like the "disposal" method used to 
+            "shrink" images.
+
+
+VERBOSE:   Controls amount of status messages.
+   0 means quiet, 1 means verbose.
+      Example: verbose=1        
+
+
+UPFILE.:  UPFILE.n can contain a GIF image-file uploaded from a client's machine.
+          If present, the contents of an UPFILE.n will override the URL 
+          (or file name) specified in an INFILE.n
+             
+          Note that UPFILE. should ONLY be specified in type="file"
+          element within a multi-part form.
+
+
+WIDTH1:  Width of image (in pixels)
+        This is only used when RESIZE_MODE=2
+
+                               ------------
+
+II.b. Image-pair default parameters.  
+   These are used if no "image-pair" specific parameters are specified. 
+
+ANIM_TYPE: Type of "blending" effect.      
+   The following general types are supported (where first and second
+   image refers to images in an image 
+        ADD:  Add an image -- this is a replacement. It is optimized
+              for use with  "transformed" images; with ADD, you
+              can easily create a moving-series of a particular image.
+     BALLOON: The first image is replaced by an expanding "balloon"
+              of the second image.
+     CURTAIN : The second images is a curtain pulled over the first image
+     DISSOLVE: The first images dissolves into the second image
+     FADE: The first images fades into the second image.
+     MASK : "Mask" files are used to overlay portions of the second image
+            onto the first image.
+
+     Example: anim_type='balloon'
+
+FRAMES: Number of frames between each image pair.
+   Example: frames=4 
+
+FRAME_DELAY:  delay between frames, 1/100th seconds                    
+   Example: frame_delay=50       
+
+The  following parameters are used to fine tune the ANIM_TYPE.
+
+BALLOON_TYPE: Type of "balloon" 
+   Four types are recognized:
+     1 = SQUARE: A square balloon
+     2 = DIAMOND: A diamond balloon
+     3 = OCTAGON: An octagon balloon
+     4 = CIRCLE: A circular balloon.
+
+   Example: balloon_TYPE=4      
+
+BALLOON_PUSH: What to do with the first image.
+  When using a "circular" (balloon_type=4) "BALLOON" ANIM_TYPE, there 
+  are several ways of dealing with the first image:
+    0 = Overwrite -- second image overwrites first image
+    1 = Push -- second images "pushes" first images sideways and down
+    2 = Squoosh -- second images "squooshes" first image sideways and down.
+    10 = Push columns -- similar to 1, but don't push down
+    20 = Squoosh columns -- similar to 2, but don't squoosh down
+
+
+CENTERX and CENTERY: location of the center of the balloon
+    Two fractions (between 0 and 1) that locate the center of the
+    balloon. CENTERX refers to the center column, CENTERY 
+    is the center row.
+
+    Example (balloon center will be in the middle column, 
+             about 1/4 of the height down from the top):
+        centerx=0.50        
+        centery=0.25
+
+CURTAIN_TYPE: Direction of CURTAIN.
+   There are three types:
+     T_B : Top to bottom "dropping curtain"
+     L_R : Let to write "drawn curtain"
+     MIDDLE: Two curtains converging in the middle (from left and right)
+     
+     Example: CURTAIN_TYPE='T_B' 
+
+CURTAIN_OVERWRITE: How to dispose of "first" image
+     There are 3 overwrite options for "overwriting" first
+     image (of an image pair) pixels
+        OVERWRITE -- pixels from the second image overwrite first
+                     image pixels
+        PUSH     -- the first image is "pushed" away
+        SQUOOSH  -- the first image is "squooshed" down
+
+
+DISSOLVE_SPEC: Used to control speed of dissolve.
+   DISSOLVE works by randomly replacing image1 pixels with image2
+   pixels; with latter frames containing a greater proportion of
+   image2 pixels.  You can customize this proportion using the
+   DISSOLVE_SPEC parameter.
+
+   DISSOLVE_SPEC should contain a space delimited list of integers
+   between 0 (0 percent-- use image 1 pixels) to 100 (100 percent --
+   use image2 pixels).  The values in DISSOLVE_SPEC are used to
+   create a graph, with each frames "probability threshold" read
+   from the graph.  That is, if you specify 4 values in DISSOLVE_SPEC,
+   and an 8 frame image, then the "threshold" for the 4th frame
+   will be a linear interpolation of the 2nd 3rd values.     
+
+   Examples:
+     DISSOLVE_SPEC='1'  -- a linear ramp (starting from 0 to 100)
+     DISSOLVE_SPEC=' 1 10 80 90 '   
+
+
+FADE_TYPE: How to generate fades
+    There are several ways of specifying a fade
+   0 - Frequency sorted color table. Fast, but not very pretty
+   1 - Brightness sorted color table. Fast, and can be nice for fairly
+       similar images.
+   2 - Color specific brightness sort. Similar to 1, but several
+       different "sets of colors" are sorted, which can improve
+       the fade.
+   3 - Best match.  Each pixel of each image is assigned a unique
+       color, which is then mapped to the closest matching color
+       in the global color table. This produces very nice fades,
+       but can be very slow to produce (note the use of the FADE_REGIONS
+       parameter to control speed & accuracy of this matching).
+  string - a string containing a REXX math expression that uses
+          the R G and B variables, to specify a  ct sort.
+
+  Examples:
+     fade_type=3 
+     fade_type='2*R + G '
+
+
+MASK.: Mask files to use (with ANIM_TYPE='MASK')
+  You must specify:
+    MASK.0 : the number of mask files
+                Example: mask.0=3              
+    MASK.n, n=1,...,MASK.0 : The mask files
+        Example:
+          mask.1='forever0.GIF'    
+          mask.2='forever1.GIF'
+          mask.3='forever2.GIF'
+    MASK.n.!thresh : The "thresholds" (a pixel value)
+        If the jth row and nth column of MASK.n is > MASK.n.!thresh, then 
+        replace the jth row and nth column of image1 with the corresponding
+        element in image 2.  Note that the mask files are replicated (or 
+        clipped)to assure that their size corresponds to the size of the 
+        images.
+           Example:
+             mask.1.!thresh=0      
+             mask.2.!thresh=0
+             mask.3.!thresh=0
+
+MASK_LIST: An alternative to MASK.
+    MASK_LIST is an alternative to the use of MASK.n method of specifying
+    mask files.  MASK_LIST should contain a spaced delimited list of
+    files (relative to the BLENDGIF_ROOT directory), or fully qualified
+    URLs.  
+       Example: mask_list='mask1.gif  mask23.gif sillyfax.gif '
+
+    Notes:
+      * A threshold of 1 (pixels greater then or equal to 1) is used
+        for all files/urls listed in the mask_list. That is, there is
+        no equivalent to the .!thresh modifier.
+      * A mask_list overrides mask.n entries -- if you specify a mask_list,
+        mask.n and mask.n.!thresh entries are ignored.
+
+
+                               ------------
+
+
+II.c. Image-pair specific parameters
+
+  "Image-pair" specific parameters are optional; if you don't 
+  specify a particular parameter for a particular image pair, the 
+  image-pair default parameter values (described above) will be used.
+
+  To specify a parameter, simply add a ".n" (without the
+  quotes) to the end of the parameter name, where "n" is 
+  the image pair.  Thus, .2 refers to "the animation frames
+  derived from infile.2 and infile.3".
+
+  The following parameter can have "image=pair" specific values:
+        NFRAMES    ANIM_TYPE       BALLOON_TYPE  BALLOON_PUSH
+        MASK.n     MASK.n.!THRESH  MASK_LIST
+        CENTERX    CENTERY         FADE_TYPE
+        CURTAIN_OVERWRITE CURTAIN_TYPE 
+        DISSOLVE_SPEC   DELAY 
+
+  Examples:
+      NFRAMES.1=10 
+      NFRAMES.2=5
+      ANIM_TYPE.1='BALLOON'
+      BALLOON_TYPE.1=4
+      BALLOON_PUS.1=0
+      ANIM_TYPE.2="FADE"
+      FADE_TYPE.2=1
+
+                               ------------
+
+II.d. Image-specific transformations
+
+Instead of resizing all images to the desired "global image"
+size, you can transform each image separately.  There are three 
+types of transformations:  scaling, translating (moving), and 
+rotation.
+
+
+The parameters used to specify image-specific transformations are:
+
+   TRANSFORM.n : Enable image-specific transformations for image n
+   NUWIDTH.n   : Set the width of image n. 
+   NUHEIGHT.n  : Set the height of image n
+   XMOVE.n     : Translate the image to the left or right
+   YMOVE.n     : Translate the image up or down
+   ZROTATE.n    : Rotate image about Z axis (horizontally)
+   YROTATE.n    : Rotate image about Y axis (flip along a vertical line)
+   XROTATE.n    : Rotate image about X axis (flip along a horizontal line)
+   BKG_TRANSPARENT: Control display of background pixels
+where n is the image you wish to transform.
+
+Note that NUHEIGHT.n, NUWIDTH.n, XMOVE.n, YMOVE.n, ZROTATE.n, YROTATE.n
+and XROTATE.n may have:
+  a) no parameters (default values will be used)
+  b) 1 parameter (the same value will be used for all images in a 
+     moving-series of images)
+  c) more then 1 parameter. These multiple parameters define a graph
+     of values; frame (in an "ADD" animation-type moving-series) will be 
+     assigned a value from this graph (as a function of the frame number).
+
+
+TRANSFORM.n 
+   (when set equal to 1) tells BLENDGIF to use the
+   transformation parameters -- if not equal to 1, the other
+   transformation parameters (such as NUHEIGHT.n) are ignored.
+
+NUWIDTH.n and NUHEIGHT.n 
+    can be specified in absolute pixels, or as a fraction of the 
+    image's current size.  To specify absolute pixels, enter an integer.
+    To specify a fraction (of the image's current size), enter a real
+    number (that is, a number with a decimal point).
+  In other words:
+      NUWIDTH.n=4  means "4 pixels wide" (this is NOT a recommended value!)
+      NUWIDTH.n=4.0 means "4 times the current width of the image"
+
+XMOVE.n and YMOVE.n
+     can also be specified as an absolute move
+    (in columns or rows, respectively), or as a fraction of the global
+    image's width and height. Please note that this is the "global image's"
+    width and height, and NOT the width and height of the current image!
+        Examples:
+             YMOVE.2=30
+             XMOVE.3='10 30 70 150'  (accelerating move of image across screen)
+
+ZROTATE., YROTATE.n, XROTATE.n
+     should be in degrees (between -180 and +180).  
+      * The Z-axis "sticks out of the screen" -- rotation about the z-axis is
+         just rotation of a flat image in the usual way.
+       * The Y-axis is the vertical axis
+       * The X-axis is the horizontal axis
+       * Some examples:  XROTATE.1=30
+                        ZROTATE.2=10 40 60 80 90 100 (decelerating spin)
+
+BKG_TRANSPARENT 
+     controls how "background" pixels are displayed. Background
+     pixels are pixels that are not covered by the transformed image.
+
+     BKG_TRANSPARENT values can be 0, 1, or 2:
+       bkg_transparent = 0  
+            Use the R_BACK, G_BACK, and B_BACK colors
+       bkg_transparent =1
+          "background pixels" are never used --  the "first image's" pixels
+          are used instead (that is, background pixels are "transparent"
+       bkg_transparent =2 
+           similar to 1, but also converts "transparent pixels" (specified 
+           in the original image") into "background" pixels.
+                   
+    Note that setting bkg_transparent=0, the "do NOT suppress transparency"
+    option, and "background disposal" can be used as an alternative to
+    bkg_transparent=1
+
+
+The algorithm used for transformation is :
+
+1) A buffer, with the same size as the "global image" is initialized 
+   with the background pixel (with a value of 0), whose color is set using 
+   R_BACK, G_BACK, and B_BACK.
+1) The center of the image is placed at the center of the "buffer"
+2) The image is scaled (about this center)
+3) The image is rotated (in 3 space).
+4) The image is translated (moved)
+5) The "3rd dimension" is removed (it's projected back into 2 space)
+5) Portions of the transformed image that lie outside of the buffer
+   (say, that are less then 0 in row space, or greater then WIDTH1 in
+   column space) are clipped
+6) Note that pixels in the buffer that are not "overwritten" by a pixel
+   from the transformed image will retain the background value
+7) This buffer is then used by BlendGif in the usual fashion --
+   with the exception that (given that bkg_transparent=1),
+   "background" pixels do NOT overwrite pixels from a prior image.
+8) If multiple parameters were specified for any of these (NUHEIGHT.
+   to XROTATE) parameters, and if the # of frames is greater then 0, then 
+   a "moving-series" of images will be created by consecutively
+   repeating steps 1 through 7 with different parameters; and with
+   the transformed image being added to the "original image" (of
+   the image pair) in NON-cumulative fashion.
+
+
+                ------------------------------------------------------------
+
+III. Using BLENDGIF input files
+
+BLENDGIF input files are simple text files that are used to set the various
+BlendGIF parameters.
+The principal advantage of BLENDGIF input files is the ability to specify lots of 
+parameters in an easy to edit fashion.  The disadvantage is the sequential process,
+you have to create the file, run BlendGIF (or hit BLENDGIF.HTM with your browser),
+feed in the input file, and wait for results. However, for complicated images (say,
+images with 10 or so GIFS, each one transformed differently, use of BlendGIF input
+files is almost unavoidable.
+
+Each line of a BLENDGIF input file should have the structure:
+  Parameter_Name =  Parameter_Value
+In addition, lines that begin with a ; are comments.
+
+The following is a simple example of a BlendGIF input file
+      ; sample input file for BlendGIF -- use the hello and goodbye gif files
+      ; that come packaged with BLENDGIF.ZIP
+      infile.0=2
+      infile.1=hello.gif
+      infile.2=goodbye.gif
+      anim_type=balloon
+     balloon_push=squoosh
+     balloon_type=circle
+                               ------------
+
+III.a. A list of parameters and their permissible values
+
+Basically, any parameter discussed above can be used in a BlendGIF input file.
+To make like a bit easier, the following lists these parameters, and lists the
+allowable values.  
+
+Note that:
+  .nrefers to "image n" (the image selected by the INFILE.n parameter).
+  For descriptions of these options, see section II.
+  Unless otherwise noted, the default values are set in BLENDGIF.CMD
+
+Parameter name        Permissible Values
+--------------        ----------------------------------------
+INFILE.0              An integer > 0
+INFILE.n              a filename (relative to the BLENDGIF_ROOT directory)
+                      or fully qualified URL
+R_BACK, G_BACK,       An integer between 0 and 255 (inclusive). These are color 
+B_BACK                   intensities.
+     
+CT_NEWLEN             An integer between 16 and 255 (length of color table)
+CT_MAKE_SPEC          0 (frequency), 1 (some averaging), or 2 (more averaging)   
+CYCLE                 0 or 1 (1 = yes)
+DISPOSAL              0,1,2, or 3
+FADE_REGIONS          An integer (16 is the recommended value)
+HEIGHT1               An integer >0 
+WIDTH1                An integer > 0
+ITERATIONS            An integer > 0
+NO_TRANSPARENT        0 (no suppression), 1 (suppression), 2 (suppression for
+                      intermediate frames)
+RESIZE_MODE           0 (first image), 1 (max width & height), 
+                      2 (use HEIGHT1 and WIDTH1)
+SHRINK_IMAGE          0 (do not shrink), 1 (do shrink)
+
+ANIM_TYPE and         ADD, BALLOON, CURTAIN, DISSOLVE, FADE or MASK
+ANIM_TYPE.n
+FRAMES and FRAMES.n   An integer > 0
+STOP_AFTER and        An integer > 0
+STOP_AFTER.n
+FRAME_DELAY and       An integer >0 (in 100/th seconds)
+FRAME_DELAY.n
+BALLOON_TYPE and      SQUARE, DIAMOND, OCTAGON, or CIRCLE
+BALLOON_TYPE.n
+BALLOON_PUSH and      OVERWRITE, PUSH, SQUOOSH, 10, or 20
+BALLOON_PUSH.n         10 is "push columns only", 20 is "squoosh columns only"
+CENTERX& CENTERX.n    A fraction between 0.0 and 1.0
+CENTERY& CENTERY.n    A fraction between 0.0 and 1.0
+CURTAIN_TYPE          T_B, L_R, and MIDDLE
+CURTAIN_OVERWRITE and OVERWRITE, PUSH, or SQUOOSH
+CURTAIN_OVERWRITE.n
+DISSOLVE_SPEC and     A space delimited list of numbers between 0 and 100
+DISSOLVE_SPEC.n
+FADE_TYPE and         FREQUENCY, BRIGHTNESS, COLOR_BRIGHTNESS, BEST_MATCH, or
+FADE_TYPE.n           an equation in R, G, and B.
+MASK.0 and           Number of mask files to use
+MASK.0.n
+ 
+MASK.m and          A filename (relative to BLENDGIF_ROOT), or a fully 
+MASK.m.n            qualified URL
+MASK.m.!thresh and  Integer value between 0 and 255 (threshold value)
+MASK.m.!thresh.n
+MASK_LIST and       Space delimited list of mask files (or urls)
+MASK_LIST.n
+TRANSFORM.n         0 or 1 (1=enable transformation)
+NUWIDTH.n           An integer >2, or a fraction > 0.0
+NUHEIGHT.n              Default=1.0
+XMOVE.n             An integer > or equal to 0, 
+YMOVE.n                  or a fraction or equal to > 0.0. 
+ZROTATE.n            An angle (in degrees).  O
+YROTATE.n
+XROTATE.n
+BKG_TRANSPARENT.n   0, 1, or 2.
+UPFILE.n            A file name (used for status messages), followed by a base64
+                    encoded GIF file (see the following Notes for details)
+Notes:
+
+  * UPFILE.n has a special syntax. Instead of a   varname = value
+    structure, UPFILE.n entries should have the following structure:
+        A_VARIABLE = my_value
+        UPFILE.n = a file name, or other info, used for status messages
+        lines of base64 encoded stuff
+        ....
+        lines of base64 encoded stuff
+
+        SOME_OTHER_VAR = a_value
+    Where the end of the base64 encoding is signaled by an empty line (or by
+    the end of the file).
+
+    See BLENDGIF.IN for an example of how UPFILE.n is used.
+
+  * To specify a "moving-series" of images (for use with the ADD
+    animation type), enter space delimited list of values in any of 
+    NUHEIGHT., NUWIDTH., XMOVE., YMOVE., ZROTATE., YROTATE. or XROTATE.
+
+  * You can NOT specify INPUT_FILE_UPLOAD, in a BlendGIF  input file.
+  * When uploaded (from a web browser using INPUT_FILE_UPLOAD), the input
+    file parameters are read last -- hence, they override any other parameter
+    setting.
+  * Similarly, when selected from BlendGIF's command line mode, input 
+    parameters in a BLENDGIF input file override any other parameter setting.
+
+    
+                -------------------------------------------------
+
+IV. Disclaimer 
+
+  Copyright 1999 by Daniel Hellerstein. Permission to use this program
+  for any purpose is hereby granted without fee, provided that
+  the author's name not be used in advertising or publicity
+  pertaining to distribution of the software without specific written
+  prior permission.
+
+
+    THIS SOFTWARE PACKAGE IS PROVIDED "AS IS" WITHOUT EXPRESS
+    OR IMPLIED WARRANTY.
+    THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE PACKAGE,
+    INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.
+    IN NO  EVENT SHALL THE AUTHOR (Daniel Hellerstein) OR ANY PERSON OR
+    INSTITUTION ASSOCIATED WITH THIS PRODUCT BE LIABLE FOR ANY
+    SPECIAL,INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+    RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+    OF CONTRACT,NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+    IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE PACKAGE.
+
+
+   BlendGIF and associated files were developed on the personal time of 
+   Daniel Hellerstein, and are not supported, approved, or in any way an 
+   official product of my employer (USDA/ERS).
+
+
+   BlendGIF uses the RXGDUTIL library, and REXXLIB, libraries.  RXGDUTIL
+   is freeware, while REXXLIB is a commercial produce for which the authors own
+   an unlimited distribution license.  If you need these libraries, please  
+   read BlendGIF's READ.ME for details on how to get them.
+
+
+
+
+

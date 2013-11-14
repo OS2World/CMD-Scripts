@@ -1,0 +1,462 @@
+
+<html><head><title>BlendGIF: Description of Options </title></head>
+<html>
+<h2 align="center">BlendGIF Options</h2>
+<blockquote><em>In addition to this help file, you might
+find the 
+<a href="blendgif.doc">BlendGIF manual</a> useful</em></blockquote>
+
+<h3><a name="WHICH_IMGS">Telling BlendGif what images to use</a> </h3>
+There are several ways you can tell BlendGif what GIF images to use:
+<ol>
+<li>Enter a file name. BlendGif will look in it's special <tt>BLENDGIF ROOT</tt>
+directory <em>(which is created by the webmaster)</em> for a file of this name.
+<p>
+&nbsp;&nbsp;&nbsp;<em>Example:</em> <TT>HELLO.GIF</tt>
+<br><br>
+
+
+<li>Enter a fully qualified URL. This should be a URL pointing to GIF file anywhere
+on the net. BlendGIF will use <em>socket calls</em> to retrieve this image (assuming
+it's not password protected).<p>
+&nbsp;&nbsp;&nbsp;<em>Example:</em> <TT>http://www.census.gov/main/www/img/cb_head.gif</tt>
+<br><br>
+<li> A file from your hard drive. If you are using a modern browser (NetScape 2.01 and
+above), you can upload a GIF file from your hard drive.  All you have to do is
+enter it's name (or you can use a BROWSE button) in the <tt>Uploading your own GIF files</tt>
+section.
+<br><br>
+
+<li>Retrieve the URL of an image that is being displayed in the VIEWER window. As a 
+visual aide, you can tell 
+the browser to retrieve the URL-string of a GIF file currently being displayed in the
+VIEWER window.  This is a trick that allows you to preview the image you want
+to "blend", and saves you typing (or cutting and pasting) it's URL.
+<p>However, due to JavaScript security, you can <b>ONLY</b> retrieve a URL-string
+ that points to this server.
+</ol>
+<p> <a href="#TOP">back to top...</a>
+
+
+<!--        ******************* DESCRIPTIONS  ****************  -->
+
+<a name="DESCRIPTIONS">&nbsp;</a><hr width="20%">
+<h3 align="center">Description of options </h3>
+
+<dl>
+<dt><a name="DEF_UPLOAD_OPTIONS"><strong>Uploading a BlendGIF option file</strong></a>
+<dd>There are two ways of specifying your animated GIF:
+<ol compact><li> By using the fields on this form to choose options
+<li>By uploading a special <tt>BlendGIF input file</tt>
+</ol>
+The second option requires that you create an ascii (text) file on your machine,
+and enter it's name in the <TT>Upload load options from a file</tt> field.
+This file should contain a list of option names, and their values.  
+<br>For example:
+<blockquote><code>INFILE.0=2<br>
+INFILE.1=http://www.images.org/image1.gif<br>
+INFILE.2=http://manysites.net/~me/myface.gif<br>
+ANIM_TYPE=BALLOON<br>
+BALLOON_TYPE=CIRCLE<br>
+BALLOON_PUSH=OVERWRITE</code></blockquote>
+For details on parameter names, please see the 
+<a href="blendgif.doc">BlendGIF manual</a><p>
+
+
+<dt><a name="INFILE"><strong>The list of GIF images to "blend" </strong></a>
+ <dd>   You can specify up to 7 images to "blend". You can also
+    select which "frame", in  an animated GIF, to use. <br>
+    <b> Notes:</b>
+     <ul>
+       <li> you can enter a file name  or a URL
+       <li> URLs <b>must</b> start with <tt>http://</tt>
+       <li> Filenames are relative to this server's
+           (<!-- #echo var="SERVER_NAME"  -->)
+           "BlendGif" directory
+       <li> BLENDGIF will use socket calls to retrieve URLS.
+           The content returned from the server must have a
+           content-type response header of image/gif.
+       <li> the file must be a GIF file (BMP, JPEG,
+          etc. will not be read).
+       <li> the size of the animated gif is set by the
+           <a href="#DEF_RESIZE_MODE">Size of image</a> option
+          (with possible modifications via the <a href="#DEF_TRANSFORMATIONS">
+         image-specific transformations</a>)
+       <LI><b>Advanced option: </b> Instead of a server-file or a URL,
+           you can <a href="#UPLOADS">upload your own GIF files</a>
+     </ul>
+
+
+<dt><a name="DEF_IMAGENUM"><strong>Image number </strong></a>
+<dd>This <b>image number</b> refers to a frame within an animated gif -- this
+option allows you to pluck one of the frames from a pre-existing animated GIF .
+If the GIF file you wish to use is not an animated GIF, the image number is
+ignored (since there is only one image to choose from).
+
+<dt><a name="ITERATIONS"> <strong>Number of times to display the set of images </strong></a>
+<dd>     Iterations should be an integer greater then 0.
+    
+<dt><a name="FRAME_DELAY"><strong> Delay between frames</strong></a>                   
+<dd>In  1/100th seconds. Thus, a value of 50 means 1/2 second. 
+
+
+<dt><a name="FRAMES"><strong>Number of frames between each image pair</strong></a>
+<dd>More frames means smoother transitions, but also means larger files
+and longer processing time.
+
+<dt><a name="CYCLE"> <strong>Cycle images back to first image</strong></a>
+<dd>    You can create a "cyclical" animated GIF, with the display of
+    intermediate images reversed.  This is a nice way of smoothing
+    repeated displays, you avoid discontinuous jumps between the last
+    and first image.  
+<p> Alternatively, one could specify a sequence of
+    images that start with a first image, have the "last" image in
+    the middle, and end with the first image -- but that doubles
+    the processing time required.
+
+<dt><a name="DEF_RESIZE_MODE"><strong> Setting the size of the image</strong></a>
+<dd>  There are three choices:
+<menu><LI>Use the size of the first image 
+<li>Use the maximum height, and maximum width -- where the maximum is computed
+over all images
+<li>Specify a width and height
+</menu>
+The <b>Width</b> and <b>height</b> fields are <b>only used</b> when the
+<tt>Specify a width and height</tt> option is chosen (otherwise, they
+are ignored).
+<blockquote> In addition to this <em>automatic size computation</em>, you can
+specify  <a href="#DEF_TRANSFORMATIONS">image-specific transformations</a>.
+</blockquote>
+
+
+<dt><a name="DEF_MINIMIZE"><b>Attempt to minimize the size of the final GIF file</b></a>
+<dd>By default, BlendGIF  uses a fairly inefficient method of storing image
+information: each frame contains a complete image. That is, each frame of
+the animated GIF "covers" the full width and height of the image. Since in
+many cases only a fraction of the pixels change between frames, the size of the
+final image ile can be substantially reduced by using  
+ "retain prior image" features of the GIF standard.
+<p> You can instruct BlendGIF to attempt to shrink the file size (using
+this retain prior image trick).  This requires an additional step, which
+is attempted after all frames have been computed (hence, it requires
+additional processing time).
+<br><em>Caution: the results of this "shrinkage" may  cause some browsers to crash!</em>
+<br>
+
+<dt><a name="DEF_SAVETEMPFILE"><b>Immediately upload image</b></a>
+<dd> After BlendGIF constructs your animated GIF, it can either:
+<ol compact>
+<li>Immediately transfer it to you.
+<br>This requires a browser that suports <tt>maintained
+connections</tt>
+<li> Do <b>not</b> immediately transfer the image.<br>
+Instead, save it as a temporary file, which you can then obtain (by 
+clicking on a link).  
+<br><B>If you want to save your results, use this option</b>
+<em>Note that the temporary file will be retained (on this
+server) for a short time period.</em>
+
+</ol>
+<br>
+
+
+
+<dt><a name="STOP_AFTER"><strong> Stop after this many frames</strong></a>
+<dd>  Instead of creating all the frames, stop after you've drawn
+     this many framees. This can create some interesting 
+     partial replacements, especially when combined with
+     the cycle-back option.
+     <p>To suppress this trick (that is, to display all the frames), 
+        leave this field blank.
+
+<dt><a name="DEF_TRANSPARENCY"><strong> Suppress transparency</strong></a>
+<dd> If selected then either:
+<menu> 
+<li>none of the images in the animated gif  will be "transparent".
+<li>The "intermediate" frames will not be transparent
+<li>Any frame may be transparent
+</menu>
+ When not explicitly disabled, transparency is based on
+   whether the specified images were transparent.
+<p>
+   In some cases, transparency seems to cause odd problems, which can
+   be solved by enabling this option.<br>
+   In other cases, enabling transparency can improve the image (as when
+   trying to add images to pre-existing images).
+<p>
+
+
+<dt><a name="FADE_REGIONS"><strong>Set the accuracy of "best fades" </strong></a>
+<dd> 
+   Processing fades requires matching colors determined on the fly to
+   a color in the global color table. To expedite this process, a 3
+   dimensional index is created. You can set the size of this
+   index -- larger values tend to yield smoother fades, but can  greatly
+   increase processing time.
+
+   <blockquote> The default value (16) seems to be a reasonable 
+   compromise between speed and  quality.</blockquote>
+
+
+<dt><a name="DEF_DISPOSAL"><strong> Image disposal</strong></a>
+<dd> How to <em>dispose</em> of images. When using 
+<a href="#DEF_RESIZE_MODE">automatic resizing</a> this parameter 
+may have little effect. However, when using <a href="#DEF_TRANSFORMATIONS">image-specific 
+transformations</a>,
+this can have a major impact (on whether prior images are retained or erased).
+
+<dt> <a name="CT_NEWLEN"><strong>Colors in  merged color table</strong></a>
+<dd>The length of the "global" color table
+   BlendGif will create a combined color table using all the
+   images you specify. This "global" color table is used
+   to display the intermediate images. 
+ <br>
+   Note that the original images will be displayed with 
+  their own "local" color table.
+
+<dt><a name="CT_MAKE_SPEC"><strong>Merge color table by</strong></a>
+<dd>
+ It's quite possible that the combined number of colors 
+(in the merged color table) is 
+  greater then 256 (256 is the maximum number of colors a GIF can
+  use),
+  In such cases, BlendGif will need to pick and choose which colors to use.
+  CT_MAKE_SPEC is used to select from three different methods:
+      <ol><li> use the most frequent colors
+      <li> use the most frequent colors, but also use some "average"
+          colors (these are chosen to minimize the "distance" of
+          all colors in all images to the closest color in the global color
+          table.
+      <li> similar to 2, but create more of the "average" colors.
+      </ol>
+
+     Method 1 is fastest, but may do a bad job of displaying infrequently
+     used colors.  Methods 2 and 3 provide some insurance against this
+     problem, but are slower.
+
+
+<dt><a name="DEF_BKG_COLORS"><strong>Background colors</strong></a>
+<dd>These values are used for <tt>pixel 0</tt>.  This color is 
+used when you've selected <tt>no resizing</tt> of images, and an image
+is smaller then a <tt>user specified height and width</tt>.
+Note that  Pixel 0 is displayed when transparency is turned off.
+<p>
+You should enter a value between 0 and 255 (inclusive) -- where 0 is "no color"
+and 255 is "maxiumum brightness".
+
+
+</dl>
+
+<p> <a href="#TOP">back to top...</a>
+
+<!--        ******************* DESCRIPTIONS  ****************  -->
+
+<a name="ANIMS">&nbsp;</a><hr width="20%">
+<h3 align="center">Description of  animation-types </h3>
+
+<a name="DEF_ANIM_TYPE">    
+   Several types of <em>blending</em> (animation types) </a>
+   are supported, each of which can be further modified
+   using one or several parameters.
+   
+
+   <blockquote>In the following descriptions, <tt>first</tt> and <code>second</code> 
+   <tt>image</tt> refers to images in an <strong>image-pair</strong> </blockquote>
+
+<table>
+<tr bgcolor="#cccc55">
+   <td  bgcolor="#eeee33"><strong>ADD </strong></td>
+   <td> The second image is added on top of the first image.<br>
+    Intermediate frames are <b>not</b> created --
+     the second image simply is placed on top of the first image.
+    <td colspan=2> If you want to retain portions of the first image, so as to
+        "sequentially build" a final image, you can:
+        <ol>
+        <li>Use <a href="#DEF_TRANSFORMATIONS">transformed </a> images
+        <li> use images that have a lot of transparent pixels, in connjunction
+     with the <tt>do not suppress transparency</tt>
+     and the <tt>retain disposal</tt>  options.
+  <li><b>Special Note:</b>
+       You can create a <a href="#MOVING_SERIES">moving-series of images</a>
+        (across a constant
+        background) by using <em>a series of values</em> for
+        when specifying image-specific transformations 
+
+       </ol>
+
+<tr bgcolor="#cccc55">
+   <td  bgcolor="#eeee33"><strong>BALLOON </strong></td>
+   <td> The first image is replaced by an expanding "balloon"
+              of the second image.
+   </td>
+   <td>   Four <b>balloon types</b> are recognized:
+        <ol>
+          <li> SQUARE: A square balloon
+          <li>  DIAMOND: A diamond balloon
+          <li>  OCTAGON: An octagon balloon
+          <li>  CIRCLE: A circular balloon.
+        </ol>
+    </td>
+    <td> Three overwrite modes are available:
+        <ol>
+          <li>OVERWRITE: second image overwrites first image
+          <LI> PUSH: second image "pushes" first image "off the screen". 
+          <LI> SQUOOSH: second image "squooshes" the first image "into oblivion".
+        </ol>
+     </td>        
+
+<tr bgcolor="#cccc55">
+ <td  bgcolor="#eeee33"><strong>CURTAIN </strong></td> 
+ <td>The second image is a curtain pulled over the first image </td>
+ <td>
+   <ul>
+    <li> Two fractions (between 0 and 1) are used locate the center of the
+         balloon.
+     <li>   There are three choices for which direction to draw the curtain:
+        <ul>
+           <li> Top to bottom 
+           <li> Left to right 
+           <LI> Two curtains converging in the middle (from left and right)  
+        </ul>
+   </ul>
+  </td>
+  <td>
+ Three overwrite modes are available:
+        <ol>
+          <li>OVERWRITE: second image overwrites first image
+          <LI> PUSH: second image "pushes" first image "off the screen"
+          <LI> SQUOOSH: second image "squooshes" first image "into oblivion"
+        </ol>
+     </td>        
+  
+
+
+<tr bgcolor="#cccc55">
+     <td  bgcolor="#eeee33"><strong>DISSOLVE </strong> </td>
+     <td>The first image dissolves into the second image<p>
+     </td>
+    <td colspan=2>
+   DISSOLVE works by randomly replacing image1 pixels with image2
+   pixels; with latter frames containing a greater proportion of
+   image2 pixels. <p>
+
+   You can customize the speed of the dissolve by modifying the <em>dissolve speed</em>.
+   This parameter should contain a space delimited list of integers
+   between 0 (0 percent-- use image 1 pixels) to 100 (100 percent --
+   use image 2 pixels).  These values are used to
+   create a graph, with each frames "dissolve threshold" read
+   from the graph.     
+ <p>
+   Examples:<ul compact>
+  <li><tt>1 </tt> = a linear ramp (starting from 0 to 100)
+   <li><tt> 1 10 80 90 </tt> = start with a slow change, a quick jump, ending with a slow change 
+  </ul>
+
+<tr bgcolor="#cccc55">
+      <td  bgcolor="#eeee33"><strong>FADE </strong> </td>
+      <td>The first image fades into the second image.</td>
+      <td colspan=2>
+    There are several ways of specifying a fade:
+   <ul>
+   <li> Frequency sorted color table. Fast, but not very pretty
+   <li> Brightness sorted color table. Fast, and can be nice for fairly
+       similar images.
+   <li> Color specific brightness sort. Similar to above, but several
+       different "sets of colors" are sorted, which can improve
+       the smoothness of the fade.
+   <li> Best match.  Each pixel of each image is assigned a unique
+       color, which is then mapped to the closest matching color
+       in the global color table. This usually produces nicest fades,
+       but can be slow to compute.
+  <li> string. A string containing a math expression that uses
+          the R G and B variables, to specify a  color table sort.
+        <p> For example: <code>2*R + G  </code> would create
+            fades from the darkest red to brightest red, with green counting
+            somewhat (and blue not considered).
+  </Ul>
+
+      </td>
+
+<tr bgcolor="#cccc55">
+   <td  bgcolor="#eeee33"><strong><a name="DEF_MASK">MASK</a>  </strong> </td>
+   <td>
+    "Mask" files are used to overlay portions of the second image
+            onto the first image. 
+   </td>
+   <td colspan=2>
+      If a pixel value in a mask file pixel value is greater then
+   0, then the corresponding pixel in image 1 (the one at the same row 
+   and column position) is replaced with the corresponding image 2 pixel.
+<p>   Note that the mask files are either  replicated or
+   clipped to assure that their size corresponds to the size of the first
+   image.
+   </td>
+
+</table>
+
+<p> <a href="#TOP">back to top...</a>
+
+<!-- **************** Advanced (image specific) options ************ -->
+<a name="DEF_ADVANCED">&nbsp;</a> <hr width="95%">
+<h2 align="CENTER">Advanced options</h2>
+
+<a href="#DEF_GRABURL">URL from VIEWER</a> || 
+<a href="#DEF_LAYERING">Layering images </a>||
+<a href="#IMAGE_PAIR">Image-pair options</a>  ||
+<a href="#UPLOADS">Uploading images</a> ||
+<a href="#DEF_TRANSFORMATIONS">Image-specific transformations</a> ||
+<a href="#TOP">back to top...</a>
+
+<br>
+
+<!-- **************** Grab URL from VIEWER ************ -->
+
+<a name="DEF_GRABURL">&nbsp;</a> <hr width="45%">
+
+<h3>Advanced options: Grabbing a URL from the VIEWER window</h3>
+As an aid to us lazy folks, you can use the VIEWER window to
+search for images, and then tell BlendGif to use them.
+With one <font size="+2">large</font> exception, this is easily done by:
+<ol>
+<li>Opening up a 
+<a href="javascript:open_viewer()"
+    onMouseover="window.status='Open a Viewer window, for previewing GIF images' ;
+                 return true">VIEWER window</a>
+<li>Using everyday browser features (such as right-mouse-button on an embedded GIF image),
+ view a GIF in this VIEWER window (not the document in which the GIF is
+embedded -- you must view the GIF itself)
+<li> Click the appropriate <em>grab from viewer window</em> button. 
+</ol>
+But there  is that <font size="+2">crucial</font> caution: the images you <em>grab</em>
+must be on this server (<!-- #echo var="SERVER_NAME"  -->).
+If not, JavaSript security may kick in, and shutdown your browser.
+
+<p> <a href="#TOP">back to top...</a>
+
+
+<!-- **************** Layrering images ************ -->
+
+<a name="DEF_LAYERING"> &nbsp;</a><hr width="45%">
+
+<h3>Advanced options: Layering images (on top of prior images)</h3>
+
+When BlendGIF creates an animated GIF, it's usual mode of operation
+is to completely replace one image with a new image; where this 
+new image is either an "intermediate" frame, or the next image you
+specified. In cases where one wants to "layer" images (that is, to paste
+new images on top of previous images), BlendGIF's <em>usual </em> mode is inappropriate.
+
+<p>There are several tricks you can use to achieve a layering effect:
+<ul>
+<li>
+The best way  method is to use the  ADD <em>animation type</em> in combination with
+<a href="#DEF_TRANSFORMATIONS">image-specific transformations</a>.
+<li>Or,set <tt>stop-after</tt> and the 
+<tt># of frames</tt> parameter equal to 1, and use image-specific transformations.
+<li>It's a bit of a hack, but if your images have a lot of "transparent" pixels, you can select
+<tt>Do NOT suppress transparency</tt> and select the <tt>retain</tt>
+disposal option
+</ul>
+
+</body></html>
+

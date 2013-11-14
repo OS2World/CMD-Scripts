@@ -1,0 +1,31 @@
+            Archive Name: BLENDGIF.ZIP
+       Short Description: BlendGif: Create a multi-framed animated GIF (beta)
+         Long Description:
+    BlendGIF (ver 1.15) is a free, REXX application that will create a multi-frame
+    animated GIF file from several single image GIF files. In addition to
+    merely appending images together, BlendGif will create intermediate
+    images --  thereby supporting a variety of fade, pan, and dissolve
+    effects.
+    BlendGIF can be run from an OS/2 command prompt,as a CGI-Bin script,
+   or an an addon for the SRE-http web server
+
+      Proposed directory
+           for placement:  /pub/os2/apps/graphics/animate
+
+               Your name:  Daniel Hellerstein   
+           Email address:  danielh@econ.ag.gov
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.srehttp.org/apps/blendgif/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 3.0
+ Additional requirements: RXGDUTIL.DLL and REXXLIB.DLL (available seperately)
+                Replaces: BLENDGIF.ZIP (this is an upgrade)
+
+
+
+
