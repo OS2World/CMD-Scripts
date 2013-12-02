@@ -1,0 +1,84 @@
+DNSAlias-NET
+Version: 3
+Author: Vinicius Beltrao
+Support Contact: Bruce Dudley - os2box@transit.homeip.net
+Website: http://hobbes.nmsu.edu/pub/os2/apps/internet/dynip/DNSAlias-NET.zip
+Operating System: OS/2(tested on warp4 & Wseb, probably works on warp3 too)
+Requires: rxsock.dll
+
+Features:
+
+ Both enables/disables your current IP number on any domain belonging to the
+ dyndns.org free services family. Easy to use. If you registered on more than
+ one domain just use: update yourhostname.domain.ext yourlogin yourpasswd online
+ or update yourhostname.domain.ext yourlogin yourpasswd suspend (this one
+ disables your current IP making it show as being 255.255.255.255).
+
+ i.e.: add the DNS-?? programs to your ILINK/2 (or INJOY/2) dialer so it will
+ update your ip as soon as the connection to the net has been established. This
+ client is offered AS-IS, it's a freeware client. Since it's a simple REXX
+ based program no bug has been found at all but still use it at your own risk,
+ the only guarantee I give you is that you are reading this text now and that
+ the program works nicely for me and for the other users who have tried it so
+ far.
+
+
+Latest changes:
+
+  25thJanuary 2004  Bruce Dudley   os2box@transit.homeip.net
+
+* Allow upto a total of 5 host names to be updated. See the hostname.# in the
+  USER config area.
+
+* Command line switches used by the program. Both optional.
+
+  DnsAlias.Cmd offline
+                        Updates the dyndns IP to 255.255.255.255
+                        which indicates that your offline.
+
+  DnsAlias.Cmd change
+                        Forces a IP update.
+
+  29th August 2002  Bruce Dudley
+
+* Incorporated the USER setting into dyndns.cmd file. See the section where
+  it says:
+           --------------- START of USER config area ------------
+
+* Added additional options from the command line to alter the defaults
+* Fixed:  Error reporting. Was badly broken.
+* Cleaned the code up a bit.
+
+Modified by Bruce Dudley on 05-12-2001
+Adapted to suit the new DYNDNS update format
+Changed the method in obtaining the local ppp0 IP number
+Added return code reporting from the DYNDNS server
+Only the update.cmd file required, no need for suspend.cmd any longer
+(see dns-on.cmd/dns-off.cmd) for details.
+
+--------------------------------------------------------------------------------------------------
+
+            Archive Name:  DnsAlias-NET.zip
+       Short Description:  OS/2 updater for dyndns.org domains.
+        Long Description:  An improved version of Dennis Peterson's
+                           rxdyndns.zip. This version both updates and
+                           disables your current IP at dyndns.org domains.
+
+      Proposed directory
+           for placement:  /pub/os2/apps/internet/dynip
+
+               Your name:  Bruce Dudley
+           Email address:  os2box@transit.homeip.net
+    Program contact name:  Bruce Dudley
+   Program contact email:  os2box@transit.homeip.net
+             Program URL:  http://hobbes.nmsu.edu/pub/os2/apps/internet/dynip/DNSAlias-NET.zip
+
+      Would you like the
+     contact information
+                included?  yes
+
+Operating System/Version:  OS/2 v4.x, Wseb (probably other versions too)
+ Additional requirements:  (none)
+
+                Replaces:  previous version
+
