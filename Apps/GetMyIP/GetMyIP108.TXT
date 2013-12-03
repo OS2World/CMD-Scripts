@@ -1,0 +1,32 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: GetMyIP108.ZIP
+       Short Description: Get your external IP address. 
+        Long Description: This Program will retrieve your IP address assigned to a host either
+                          through an external server. The address is an external IP address which 
+                          may be dynamically assigned by an ISP.
+                          Now with GetMyIP GUI
+ 
+
+      Proposed directory
+           for placement: /pub/os2/apps/internet/dynip
+
+               Your name: Peter Lueersen 
+           Email address: Peter@warp-ecs-owl.de
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: www.warp-ecs-owl.de
+                          www.warp-ecs-owl.de/Peter_GetMyIP.html   
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: eComstation, OS/2 Warp 4 (FP13), OS/2 Warp Server for eBusiness
+ Additional requirements: 
+
+                Replaces: GetMyIP107.ZIP
+
+
+

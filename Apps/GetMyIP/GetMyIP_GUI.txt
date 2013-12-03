@@ -1,0 +1,55 @@
+GetMyIP_GUI ReadMe - Version 1.0.8
+==================================
+
+GetMyIP_GUI is a GetMyIP Client which downloads your IP and displays it on your desktop
+with automatic update every 5 minutes.
+
+NAME
+   GetMyIP_GUI.EXE
+
+DESCRIPTION
+   The program GetMyIP_GUI is once started. An InterNet connection must exist.  
+   The IP is on the GUI and will be updated and then every 5 minutes. 
+   
+   GetMyIp_GUI will use default /E:ipid.shat.net /S:/iponly/ /A:body 
+
+INSTALLATION
+   Simply copy GetMyIp_GUI.* to the "GetMyIP.EXE" directory.
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   ! If you update from Version < 1.0.8 !
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    delete GetMyIP.INI if you have and 
+    then copy the new files.
+
+FILES
+   GetMyIp_GUI.EXE - The Runtimefile
+   GetMyIp.EXE     - Helperfile
+   GetMyIp_GUI.doc - The file you are reading, documentation
+   
+COPYRIGHT
+   GetMyIp_GUI - Copyright (c) 2006 Peter Lueersen. All rights reserved.
+
+STATUS OF PROGRAM
+   GetMyIp_GUI is freeware, send me an email or a card, or just say "Hi..."!
+     
+AUTHOR
+   Peter Lueersen
+   Internet: Peter@warp-ecs-owl.de
+
+HISTORY
+   V1.0.8     12.03.2007    Peter Lueersen
+        New setting Refresh IP all XXX s
+   V1.0.7     04.08.2006    Peter Lueersen
+        New version number only
+   V1.0.6     15.06.2006    Peter Lueersen
+        Version
+   V1.0.6á3   25.05.2006    Peter Lueersen
+   	New call Program by new IP
+   V1.0.6á2   25.05.2006    Peter Lueersen
+   	New setting small size Stan's style 
+   V1.0.6á1   25.05.2006    Peter Lueersen
+   	New setting Font                  
+   	New setting small size            
+   	New setting Show only IP          
+    V1.0.5      19.05.2006      Peter Lueersen
+      New First version of the code.

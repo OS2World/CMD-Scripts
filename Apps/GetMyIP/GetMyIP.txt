@@ -1,0 +1,130 @@
+GetMyIP ReadMe - Release 1.0.8
+==============================
+
+NAME
+   GetMyIP.EXE
+
+SYNOPSIS
+   This short program will retrieve the Internet IP address assigned to the 
+   host PC. The information is retrieved from an external ECHO SERVER.
+   
+DESCRIPTION
+   A little background first. There are (as far as the scope of this program is 
+   concerned) 2 separate Internet IP address types assigned to a host PC, they 
+   are either static or	dynamic IP addresses. Typically hosts with a static 
+   Internet IP address never change and are directly reachable through internet. 
+   This means that there are no other devices between this host PC and it's 
+   Internet connection. The other situation is where a host PC sits behind a NAT
+   router/firewall where on a LAN it may have a dynamic or a static IP address 
+   assigned, but externally the Internet IP address assigned to the router is 
+   really how this host PC is known to the outside world. This script is meant 
+   to retrieve that external Internet IP address by which the host PC is known 
+   to the outside world. This is typically the case when dealing with the 
+   standard dial-up, DSL, Cable modem ISP accounts.
+
+   In additon, if the external IP address assigned to the user's connection 
+   (through the router or directly the PC itself) changes dynamically the script
+   can be re-run to show the new resulting IP address. This is actually the 
+   reason why I developed the code. I have a DSL connection to my ISP, it does 
+   not change frequently, in fact it only seems to change if I specifically 
+   disconnect and re-connect. I wanted an easy and reliable way of retrieving 
+   my ISP assigned IP address. On my LAN I have several PCs which all have a 
+   static IP address assigned to them. If I issue one of the standard TCP/IP 
+   commands to retrieve the host PC IP address I would get the following:
+
+   command: hostid
+   result: 192.168.1.10
+
+   As you can tell the IP address returned is my LAN static IP address, not the 
+   external Internet IP address which has been assigned to my DSL connection by 
+   my ISP. Since I wanted to run some Internet services on one of my machines I 
+   needed a way to retrieve that external address.
+   
+PROGRAM LOGIC
+   The program use a publicly available echo server which will return
+   your Internet IP address.
+
+COMMAND LINE PARAMETERS
+   The program accepts this parameters:   
+   /?             --> This Help
+   /A:STRING      --> Find IP after this STRING in the next 160 bytes 
+                      do not use '<' , '>' or '/' in STRING
+   /D:            --> Debug on
+   /E:SERVER      --> Echo-SERVER to use
+   /l:LOGFILE     --> Feed all IPs and Timestamps to LOGFILE, default 'GetMyIP.LOG'
+   /L:LOGFILE     --> Feed last IP and Timestamp to LOGFILE, default 'GetMyIP.LOG'
+   /O:PROGRAM     --> Feed output to PROGRAM, default 'host.exe'"
+   /S:SIDE        --> SIDE on Echoserver
+   /V:            --> Show version only
+
+   Syntax         GetMyIP [/E:SERVER [/S:SIDE] /A:STRING] [/D:] [/V:]  [/?]
+                          [/O:[PROGRAM]] [[/l:[LOGFILE]]|[/L:[LOGFILE]]]
+
+   GetMyIP will use default /E:ipid.shat.net /S:/iponly/ /A:body 
+
+ECHO SERVER
+   SERVER		PARAMETER					SIZE per call    
+   ==================   ============================================    =============
+   ipid.shat.net	/E:ipid.shat.net /S:/iponly/ /A:body		   85 Bytes
+   GetMyIP.US 		/E:www.getmyip.us /A:Your IP Address is		1.908 Bytes
+   getmyip.co.uk	/E:getmyip.co.uk /A:Your IP Address             3.534 Bytes
+
+OUTPUT
+   Your Internet IP address.
+   
+INSTALLATION
+   Simply GetMyIP.EXE to any directory you want. The file only needs the
+   rxsock.dll DLL to be present in your system and be accessible through 
+   LIBPATH. 
+
+FILES
+   GetMyIP.EXE - The Runtimefile
+   GetMyIP.doc - The file you are reading, documentation
+   
+   
+   
+COPYRIGHT
+   GetMyIP - Copyright (c) 2006 Peter Lueersen. All rights reserved.
+
+STATUS OF PROGRAM
+   GetMyIP is freeware, send me an email or a card, or just say "Hi..."!
+     
+AUTHOR
+   Peter Lueersen
+   Internet: Peter@warp-ecs-owl.de
+
+HISTORY
+    V1.0.8     19.11.2006    Peter Lueersen
+      New version number only
+    V1.0.7      26.08.2006      Peter Lueersen
+      Fix 99% CPU with no end
+    V1.0.6      26.05.2006      Peter Lueersen 
+      New version number only
+    V1.0.5      19.05.2006      Peter Lueersen
+      Fix error /L: File will not delete
+    V1.0.4      14.05.2006      Peter Lueersen  
+      Now only one line in Logfile
+      Fix Help
+      New show "ERROR NO IP" if the IP could not be determined. 
+    V1.0.4·1    07.05.2006      Peter Lueersen                                                   
+      New Logfile /l: or /L:                                                                      
+      Now uniform version number for all programs                                                 
+    V1.0.3      28.04.2006                                                                         
+                                Marcus von Cube                                                    
+      New /O:PROGRAM     --> Feed output to PROGRAM, default 'host.exe'                            
+                                Peter LÅersen                                                      
+      New /V:            --> Show version only                                                     
+    V1.0.3·1    16.04.2006      Peter LÅersen                                                      
+      Fix this:                                                                                    
+      RXSOCK 2.0 - REXX FUNCTION PACKAGE FOR TCP/IP SOCKETS @ 19:12:48 10 Apr 2006                 
+      (C) COPYRIGHT INTERNATIONAL BUSINESS MACHINES CORPORATION 1993, 94 @ 19:17:54 10 Apr 2006    
+      ALL RIGHTS RESERVED. @ 19:23:02 10 Apr 2006                                                  
+       @ 19:28:10 10 Apr 2006                                                                      
+    V1.0.2      08.04.2006      Peter LÅersen                                                      
+      New Commanline                                                                               
+      New Bugreport                                                                                
+      New Help /?  	                                                                             
+    V1.0.1      02.04.2006      Peter Lueersen                                                     
+    	Fix error in line 32 :-(                                                                     
+    V1.0.0      01.04.2006      Peter Lueersen                                                     
+    	First version of the code.                                                                   

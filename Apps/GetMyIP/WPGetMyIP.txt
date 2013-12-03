@@ -1,0 +1,66 @@
+WorkPlaceGetMyIP ReadMe - Version 1.0.8
+=======================================
+
+WorkPlaceGetMyIP is a GetMyIP object which downloads your IP and displays it on your desktop.
+
+NAME
+   WPGetMyIP.EXE
+
+DESCRIPTION
+   The program WorkPlaceGetMyIP  is once started.It provides automatically an object on the
+   Desktop with the current IP at the first start. An InterNet connection must exist.  
+   The IP knows simply by doubleclick on the object to be updated. The object can be put 
+   at the eCenter / xCenter. The IP appears then in the Bubblehelp. 
+
+INSTALLATION
+   Simply copy WPGetMyIP.* to the "GetMyIP.EXE / GetMyIP.ICO" directory.
+
+FILES
+   WPGetMyIP.EXE - The Runtimefile
+   WPGetMyIP.doc - The file you are reading, documentation
+   
+COMMAND LINE PARAMETERS
+   The program accepts this parameters: 
+   /A:STRING      --> Find IP after this STRING in the next 160 bytes 
+                      do not use '<' , '>' or '/' in STRING
+   /E:SERVER      --> Echo-SERVER to use
+   /l:LOGFILE     --> Feed all IPs and Timestamps to LOGFILE, default 'GetMyIP.LOG'
+   /L:LOGFILE     --> Feed last IP and Timestamp to LOGFILE, default 'GetMyIP.LOG'
+   /O:PROGRAM     --> Feed output to PROGRAM, default 'host.exe'"
+   /S:SIDE        --> SIDE on Echoserver
+
+   Syntax         WPGetMyIP [/E:SERVER [/S:SIDE] /A:STRING] 
+                            [/O:[PROGRAM]] [[/l:[LOGFILE]] or [/L:[LOGFILE]]]
+
+   WPGetMyIP will use default /E:ipid.shat.net /S:/iponly/ /A:body 
+   
+   
+COPYRIGHT
+   WPGetMyIP - Copyright (c) 2006 Peter Lueersen. All rights reserved.
+
+STATUS OF PROGRAM
+   WPGetMyIP is freeware, send me an email or a card, or just say "Hi..."!
+     
+AUTHOR
+   Peter Lueersen
+   Internet: Peter@warp-ecs-owl.de
+
+HISTORY
+   V1.0.8     19.11.2006    Peter Lueersen
+     New version number only
+   V1.0.7     04.08.2006       Peter Lueersen
+     New version number only
+   V1.0.6     04.06.2006       Peter Lueersen
+     New version number only
+   V1.0.5      19.05.2006      Peter Lueersen
+     New Version
+   V1.0.4        09.05.2006    Peter Lueersen  
+     Fix Queue, clear queue and linein("QUEUE:") 
+   V1.0.4á1      07.05.2006    Peter Lueersen                                                    
+     Now uniform version number for all programs                                                 
+     New give commandline / options to GetMyIP                                                   
+   V1.0.1        19.04.2006    Peter Lueersen                                                    
+     New Bugreport                                                                               
+     New Show GetMyIP-Version                                                                    
+   V1.0.0        08.04.2006    Peter Lueersen
+     First version of the code.

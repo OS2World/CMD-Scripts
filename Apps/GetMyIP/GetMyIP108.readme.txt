@@ -1,0 +1,36 @@
+GetMyIP 1.0.8
+
+Get your external IP address. 
+
+This Program will retrieve your IP address assigned to a host either
+through an external server. The address is an external IP address which
+may be dynamically assigned by an ISP.
+
+
+WEB SITE: http://www.warp-ecs-owl.de/Peter_GetMyIP.html
+HOBBES:   http://hobbes.nmsu.edu/cgi-bin/h-search?key=getmyip108
+
+GetMyIP Enhancement:
+IpSendMail GetMyIp SMTP Mail Send enhancement by Ehlertronic-Soft http://www.ehlertronic.de
+
+Changes:
+
+GetMyIP_GUI
+      New setting Refresh IP all XXX s
+  
+GetMyIP
+      New version number only
+
+WPGetMyIP
+      New version number only
+
+WPGetMyIP_all5m
+      New version number only
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If you update from any Version     !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+delete GetMyIP.INI if you have and 
+then copy the new files.
