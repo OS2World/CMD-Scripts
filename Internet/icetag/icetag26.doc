@@ -1,0 +1,224 @@
+DISCLAIMER:
+----------
+IceTag/2 is  supplied as is without any warranties, expressed or implied.
+The author assumes no liability for damages which may result from the use
+of IceTag/2.
+
+Package Contents:
+----------------
+
+	icetag25.cmd    The main IceTag/2 (v2.5) REXX script.
+	iceidx25.cmd	Indexing utility required for producing index file.
+	pqf4.quo	This is the Pratchett Quotes file with several additions 
+			by me.
+	icetag25.doc	This is the file you're reading now.
+
+Description:
+------------
+
+	IceTag/2 is a REXX script that gives you the ability of adding random
+	tags or quotes to the end of any e-mail you send using PMMail. This ability
+	is enhanced further by giving you the freedom of adding quotes of
+	any length (you're not limited to a certain number of lines).
+
+
+Requirements:
+------------
+
+	This program requires the following:
+	
+		1. OS/2 Warp 4.0 (Version 3.0 can also be used).
+		2. REXX must be installed (comes included with OS/2 Warp).
+		3. SouthSoft's PMMail 1.5 or above.
+                                                   
+
+New Features in this Release:
+----------------------------
+
+	- Improved Speed: this release is almost 50% faster than the previous releases.
+	- You can see the quote before it gets added to the e-mail and if you don't like
+	  it, you ask IceTag/2 to pull another one from the quote file.
+	- Can remove the X-Mailer line or replace it with any string.
+	- More control over the way the quote is added at the end.
+		
+
+Installation:
+------------
+
+1. Unzip the archive containing the program into a temporary directory.
+2. Copy icetag25.cmd, iceidx25.cmd & pqf4.quo to you PMMail directory.
+3. Change to the PMMail directory and edit the iceidx25.cmd file as required
+   if you want to use a different quote file than the one included.
+4. Run iceidx25.cmd to produce an index file (pqf4.idx)
+5. From inside PMMail, pull down the "Account" menu and choose "Utilities
+   Settings".
+6. When the settings window appears, press on the "REXX" tab.
+7. When there, turn on the "Message Send Exit" checkbox and enter the name
+   of the script "icetag2.cmd" in the entry field below it.
+
+Now you're done installing IceTag/2 with the basic configuration.
+
+To test it, send an e-mail to yourself and you'll see that there's a quote
+added at the end of the e-mail (if you want to read the quote, open your
+e-mail in the "Sent Mail" folder).
+
+
+Enabling new Features:
+---------------------
+
+	To enable the new features you have to set some flags inside the script
+	itself (icetag25.cmd). Changes can be performed using your favorite
+	text editor like E or EPM or any other editor.
+
+Here's what the configuration section looks like:
+
+/*               _   _               ___      _                 */
+/*              | | | |___ ___ _ _  / __| ___| |_ _  _ _ __     */
+/*              | |_| (_-</ -_) '_| \__ \/ -_)  _| || | '_ \    */
+/*               \___//__/\___|_|   |___/\___|\__|\_,_| .__/    */
+/*                                                    |_|       */
+
+
+/* 1. Do you want to confirm each quote before it is applied to an
+   outgoing e-mail? (0=NO - 1=Yes)                              */
+
+Confirm=0
+
+/* 2. Do you want a string inserted before each quote?          */
+/* (0=NO - 1=Yes)                                               */
+
+insert_prefix=0
+
+/* 3. If you want a prefix other than the one below, change the
+   value between the quotes.                                    */
+
+prefix="... "
+
+/* 4. Do you want a newline inserted before the quote?          */
+/* (0=NO - 1=Yes)                                               */
+
+insert_newline=0
+
+/* 5. Do you want to replace the X-Mailer line in your header?  */
+/* (0=NO - 1=Yes)                                               */
+
+replace_xmailer=0
+
+/* If answered YES to the above question then you can change the
+   change the value below to something you prefer to replace the
+   X-Mailer line with. Leaving nothing between the quotes removes
+   the X-Mailer line completely.                                */
+
+new_XMailer=""
+
+/*--------------------------------------------------------------*/
+/* End of User Setup section                                    */
+
+
+These are the default values for the flags which will achieve the
+following results:
+
+	1. It's working in Silent Mode (it won't ask for confirmation
+	   for the quote pulled from the file).
+	2. It won't add anything before the quote.
+	3. It won't insert a blank line before the quote starts.
+	4. It won't replace the X-Mailer line.
+
+
+Changing Mode to Interactive:
+----------------------------
+
+	To gain a bit of control over the quotes added, let the value of Confirm
+	equal 1. And in the Account -> Utilities Settings -> REXX dialog, check the box
+	under "Message Send Exit" entry field marked "Execute Script in Foreground".
+
+	Now whenever you send a message a command window will popup and will look something
+	like this:
+
+________________________
+
+"Research is what I'm doing when I don't know what I'm doing."
+        -- Wernher von Braun
+
+Do you feel that this quote is appropriate (Y/N) ?
+________________________
+
+	If you answer with a "y" then the window will disappear and your 
+	message will be processed after the quote gets appended to it. 
+	But if you answer with a "n" a new quote will be pulled from the 
+	file and you will be asked again to confirm adding it to your e-mail.
+
+
+Adding a Prefix before the Quote:
+--------------------------------
+
+	Some people prefer to precede any quote added to their e-mails with 
+	some characters like dots or dashes. To enable this feature, change
+	the value of "insert_quote" to 1 and also change the prefix itself 
+	(by changing the value of the variable "prefix" under the next question) 
+	if you have a specific preference.
+
+
+Inserting a Blank Line Before the Quote:
+---------------------------------------
+
+	If you prefer to have some space between your sig and the quote,
+	change the value of "insert_newline" to 1.
+
+
+Replacing the X-Mailer Line:
+---------------------------
+
+	Many people prefer to maintain their anonymity if their desire it
+	but the X-Mailer line added to the header of every message they send 
+	prevents that. For example, every e-mail I send has the following line 
+	in the header:
+
+	X-Mailer: Ahmad Al-Nusif's Registered PMMail 1.9 For OS/2
+
+	So even if my name doesn't appear anywhere in the message body, all that 
+	someone who wants to know the origin of the e-mail has to do is look at 
+	the header and it won't be a secret anymore.
+
+	So, if you want to remove this line completely, change the value of 
+	"replace_xmailer" to 1. But if you want to replace it with something else 
+	change "replace_xmailer" to 1 AND change "new_XMailer" to a different
+	value. Leaving "new_XMailer" as an empty string	will only remove the 
+	X-Mailer line.
+
+	_NOTE_: I've seen some REXX scripts that do just that, so this is not
+		the only program that can do this.
+
+Adding More Quote to the File:
+-----------------------------
+
+	Adding more quotes to the quote file is simplicity itself. Just open
+	the quote file (pqf4.quo) in E and add whatever quotes you like and 
+	appending a "#" at the end of each one. Save the file and run iceidx25.cmd
+	again to refresh the index file (pqf4.idx). Next time you send an e-mail, 
+	there's a chance that one of your new quotes will get picked from the file.
+
+Status:
+-------
+       This program is E-mailware, i.e. send me an e-mail if you like/use it.
+       But it's copyrighted to Ahmad Al-Nusif (morpheus@moc.kw) so you're
+       not allowed to put your own name to it or use portions of it in your
+       program without consulting me.
+
+
+Note:
+
+      If you have an attachment in your e-mail the quote will be appended
+      after it. So if you send an e-mail with an attachment and then go
+      to the sent mail folder to check the quote, you won't see it unless
+      you press alt-v (which displays the attachment as text).
+
+
+Contact:
+-------
+
+	Please e-mail me if you like this little program or if you have any
+	suggestions at:
+
+	Ahmad Al-Nusif
+	morpheus@moc.kw

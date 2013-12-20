@@ -1,0 +1,25 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: popscape.zip
+       Short Description: A POP client for OS/2 that creates Netscape-compatible mail files
+        Long Description: Because NS4 can't do POP and IMAP at the same time I modified the getPOP code from rxPOP10 (available on hobbes) to handle my POP messages while NS4 does the IMAP side of things.
+
+      Proposed directory
+           for placement: tcpip 
+
+               Your name: Dennis Peterson
+           Email address: dpeterso@halcyon.com
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2
+ Additional requirements: Netscape, rxsock.dll
+
+                Replaces: (none)
+

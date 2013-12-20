@@ -1,0 +1,6 @@
+BSmtp analysiert Dateien im BSmtp
+(Batch-Smtp) Format und "verfÅttert" sie
+an einen Smtp-Server.
+Needs: OS/2 with Rexx, RxU (rxu1a.zip),
+RxTelnet (rxtelnet.zip)
+Version 0.41 (14.03.2000)

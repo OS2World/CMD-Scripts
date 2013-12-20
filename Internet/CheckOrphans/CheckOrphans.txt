@@ -1,0 +1,357 @@
+/*********************************************************************
+
+USAGE:
+-----
+
+  Put this REXX script in a file -- e.g. CheckOrphans.CMD -- in your
+  Southsoft\PMINews directory. (Make sure that the comment line
+  `/* Report/Delete ... */' is the first line of the file.)
+
+  Make sure PMINews isn't running.
+
+  Run this as:
+
+    CHECKORPHANS gldirspec [/DELETE]
+
+  where:
+
+    CHECKORPHANS  substitute whatever you called the .CMD file
+
+    gldirspec     __.GL grouplist directory to process
+                  Wildcard pattern permitted to process multiple dirs.
+                  The `.GL' extension may optionally be omitted.
+
+    /DELETE       Delete the orphan files.
+                  If this parameter is omitted, the program will only
+                  report the orphan files without deleting them.
+
+  Example: To process all grouplist directories and perform deletion:
+
+    CD \SOUTHSOFT\PMINEWS
+    CHECKORPHANS * /DELETE
+
+
+WHAT THIS PROGRAM DOES:
+----------------------
+
+  This inspects the GL.DAT file(s) for one or more grouplists in order
+  to determine what actual article-body files (they have names like
+  `EBMLK50.ART' etc.) are referenced in the grouplist(s). It then
+  reports/deletes any files that are not referenced ("orphans"). It
+  does not modify the GL.DAT(s) or any other PMINews data/information.
+
+  When PMINews crashes, the .ART article files it's created are not
+  recorded in GL.DAT (this may apply to all cases or only some cases;
+  I'm not sure). So every time this occurs you get more and more of
+  them (inaccessible but presumably never to be deleted) cluttering up
+  the __.GL directories. Version 1.01A is more stable, but there are
+  still crashes. Also, even if stable, there may still be junk left
+  around from crashes in earlier versions. This program may be useful
+  for both purposes, and may help some people to avoid sledgehammer
+  cleanup actions (deleting whole grouplist, reinstalling, etc.)
+
+  I think `Article Error' may also cause orphans (?).
+
+  This also reports any .ART files that are referenced by GL.DAT but
+  which do not exist. (I haven't observed any actual errors of this
+  type in practice, however.)
+
+  A more-sophisticated approach would be to fix GL.DAT to include the
+  missing references. This was beyond what I wanted to bother doing.
+  Also, it requires checking that each orphan file isn't a duplicate
+  of another article-body file; such duplicates occur for any articles
+  you download after a crash that it's already downloaded previously
+  but has now forgotten about. (In particular, the sequence "download
+  new article bodies" + crash + re-"download new article bodies" will
+  create numerous duplicate orphans.)
+
+
+DISCLAIMERS:
+-----------
+
+  Use at your own risk! This has been tested on my system with my
+  PMINews database and PMINews 1.01A, and seems to work fine. Your
+  mileage may vary. Before running this on a __.GL directory, first
+  copy all its *.ART files to some temporary save dir, just in case.
+
+  Future changes to the PMINews database organization or GL.DAT file
+  format may render this program incorrect.
+
+  There may also be some crosschecking with GL.LVS that should also be
+  done. I did not examine this aspect. However, the newsgroups seem to
+  look fine in PMINews after running this.
+
+  I'm by no means a PMINews expert -- I just poked around enough to
+  make something that seems to work. If there are any misassumptions
+  or errors in my approach, please let me know and I'll correct them.
+
+
+AUTHOR:
+------
+
+  Ron Poirier <rpoirier@unixg.ubc.ca>
+  1997-07-27
+
+  Permission granted to copy or redistribute for personal use.
+
+*********************************************************************/
+
+
+/* Report/Delete orphaned PMIMail .ART files in _.GL dir(s) */
+
+/*********************************************************************/
+
+/* REXX */
+CALL RxFuncAdd "SysLoadFuncs", "REXXUTIL", "SysLoadFuncs"
+CALL SysLoadFuncs
+
+
+/**** Program parameters ****/
+
+PARSE UPPER ARG glfilespec deleteopt
+
+IF deleteopt = "" THEN DoDelete="N"
+ELSE IF deleteopt = "/DELETE" THEN DoDelete="Y"
+ELSE DO
+    SAY "Invalid parameter: `" || deleteopt || "'"
+    SIGNAL SyntaxError
+    END
+
+IF glfilespec = "" THEN DO
+    SAY "Missing filespec parameter (grouplist directory(s) to process)"
+    SIGNAL SyntaxError
+    END
+ELSE IF left(glfilespec,1) = "/" THEN DO
+    SAY "Invalid parameter: `" || glfilespec || "'"
+    SIGNAL SyntaxError
+    END
+
+IF right(glfilespec,3) \= ".GL" THEN glfilespec = glfilespec || ".GL"
+
+
+ClrLine = "0D1B"X || "[K"
+UpLine = "1B"X || "[1A"
+
+
+/**** Get names of all matching .GL directories ****/
+
+CALL SysFileTree glfilespec, gldirs., 'DO'
+
+IF gldirs.0 = 0 THEN DO
+    SAY "No _.GL grouplist directories found matching `" || glfilespec || "'"
+    /* See if there really aren't any _.GL dirs or if they're not
+    being found because of wrong path: */
+    t = filespec("drive",glfilespec) || filespec("path",glfilespec) ,
+        || "PMINEWS.EXE"
+    IF stream(t,"C","QUERY EXISTS") = "" THEN DO
+        SAY "_.GL subdirectories are in the ...\PMINEWS directory."
+        SAY "CD to ...\PMINEWS directory to run this or specify a full path"
+        END
+    EXIT
+    END
+
+SAY "Grouplist directories to be processed:"
+DO i = 1 TO gldirs.0
+    SAY " " filespec("name",gldirs.i)
+END i
+
+
+DO gldi = 1 to gldirs.0
+
+
+cd = gldirs.gldi;  cdn = filespec("name",cd)
+gldat = cd || "\GL.DAT"
+
+SAY ""
+SAY "Processing grouplist dir" cdn "..."
+
+
+/**** Build list of what .ART files are referenced by GL.DAT file ****/
+
+/* format of each GL.DAT entry line is apparently:
+     ($ = 'FF'X delimiter)
+   seq#  $                  apparently internal PMINews article seq#
+   readstatus(0 or 1)  $    I think
+   <msgid>  $
+   yy-mm-dd  $
+   hh:mm:ss  $
+   subject  $
+   fromID  $
+   fromName  $
+   ????  $                  ?? (seems to always be 'FE'X ???)
+   #lines  $
+   _.GL\ARTICLES\xxxxxxxx.ART  $  article-body filename, or (apparently)
+                                  'FE'X => none (body not stored locally)
+   replytoID/Name (e.g., `me@my.com (Me)')  $
+   Xref:...  $
+   #  $                     ??
+*/
+
+IF stream(gldat, "C", "OPEN READ") \= "READY:" THEN DO
+    SAY "Could not open GL.DAT file" gldat
+    ITERATE gldi
+    END
+
+CALL stream gldat, "C", "SEEK = 1"
+
+/* Read header line (count) just to crosscheck. */
+PARSE VALUE linein(gldat) WITH GLnentries
+CALL linein gldat  /* skip blank line */
+
+CALL charout "con", "Inspecting GL.DAT ..."
+
+nfart = 0     /* build list in fart of referenced .ART files */
+nentries = 0  /* # of article entries found in GL.DAT */
+
+DO WHILE lines(gldat) \= 0
+    text = linein(gldat)
+    text = translate(text, '7F20'X, '20FF'X) /*kludge to make PARSE work*/
+    PARSE VALUE text WITH seq rdstatus msgID dt tm ,
+      subj uid uname somethingorother nlines fn .
+    /*debug
+      SAY "seq="seq "rdstatus="rdstatus "msgID="msgID ,
+      "timestamp="dt","tm "subj=`"subj"'" "fromID="uid ,
+      "fromName="uname "lines="nlines "file="fn
+      PULL dummy
+    */
+    IF fn \== 'FE'X THEN DO
+        nfart = nfart + 1
+        fart.nfart = filespec("name",fn)
+        END
+    nentries = nentries + 1
+END /* DO WHILE */
+
+CALL charout "con", ClrLine
+SAY "..." nfart ".ART files referenced"
+
+IF nentries \= GLnentries THEN DO
+    /* I haven't seen this error in practice */
+    SAY "... OOPS! found" nentries "article entries in GL.DAT"
+    SAY "    but header line in GL.DAT claims" GLnentries
+    END
+
+CALL stream gldat, "C", "CLOSE"
+
+
+/**** Get list of actual .ART files in directory ****/
+
+CALL charout "con", "Inspecting directory ..."
+
+filespec = cd || "\ARTICLES\*.ART"
+
+CALL SysFileTree filespec, art., 'FO'
+
+nart = art.0
+
+CALL charout "con", ClrLine
+SAY "..." nart ".ART files found"
+
+
+n_errs = 0
+
+
+IF nart \= 0 | nfart \= 0 THEN DO
+
+
+    IF nart = nfart THEN SAY "Probably no errors; checking anyway ..."
+
+
+    /**** Identify orphan files not referenced by GL.DAT ****/
+
+    SAY "Crosschecking for reference errors ..."
+
+    DO i = 1 TO nart
+        artmark.i = 0  /* init all to unreferenced */
+    END i
+
+    n_missing = 0
+
+    DO i = 1 TO nfart
+        /* key from list of referenced files; mark each one as
+        referenced in actual-file list */
+        j = binsrch(fart.i)
+        IF j=0 THEN DO
+            SAY ">>>> Aaack! Referenced file" fart.i "was NOT found!"
+            CALL charout "con", "Press RETURN to continue..."
+            dummy = linein("con")
+            n_missing = n_missing + 1
+            ITERATE
+            END
+        artmark.j = 1  /* mark this file as being referenced */
+    END i
+
+    /**** Report/Delete all the unreferenced ones ****/
+
+    n_unref = 0
+    DO i = 1 TO nart
+        /* show/delete each one marked as unreferenced */
+        IF artmark.i=0 THEN DO
+            n_unref = n_unref + 1
+            IF DoDelete="N" THEN DO
+                SAY ">>> Unreferenced file" filespec("name",art.i)
+                END
+            ELSE DO
+                SAY ">>> Deleting unreferenced file" filespec("name",art.i)
+                '@DEL "' || art.i || '"'
+                END
+            END
+    END i
+
+    IF n_unref \= 0 & DoDelete = "Y" THEN dd=" deleted"; ELSE dd=""
+    SAY "..." n_unref "unreferenced orphan .ART files"||dd "in dir" cdn
+
+    SAY "..." n_missing "referenced-but-missing .ART files in dir" cdn
+
+    n_errs = n_unref + n_missing
+
+    IF n_unref \= nart-nfart+n_missing THEN DO
+        SAY "Oops, self-check failure: n_unref \= nart-nfart+n_missing"
+        END
+
+
+END /* DO IF nart\=0 | nfart\=0 */
+
+
+IF n_errs=0 THEN ,
+    SAY "No errors found by this program for dir" cdn
+ELSE SAY n_errs "errors found by this program for dir" cdn
+
+IF gldi < gldirs.0 THEN DO  /* more dirs to process */
+    CALL charout "con", "Press RETURN to continue..."
+    dummy = linein("con")
+    CALL charout "con", UpLine||ClrLine
+    END
+
+
+END gldi /* DO loop through each _.GL grouplist dir */
+
+
+EXIT
+
+
+
+binsrch: PROCEDURE EXPOSE art. nart; ARG f
+
+    lo = 1;  hi = nart;
+    DO WHILE lo <= hi
+        mid = (hi+lo)%2
+        mf = filespec("name",art.mid)
+        IF f>mf THEN lo=mid+1
+        ELSE IF f<mf THEN hi=mid-1
+        ELSE RETURN mid
+    END /* DO WHILE */
+    RETURN 0
+
+
+SyntaxError:
+    SAY "Usage:"
+    PARSE SOURCE . . myname
+    pmyname = filespec("name",myname)
+    pmyname = left(pmyname,length(pmyname)-4) /* remove `.CMD' */
+    SAY " " pmyname "GLdirfilespec [/DELETE]"
+    EXIT
+
+EXIT
+/* All Done */
+
+

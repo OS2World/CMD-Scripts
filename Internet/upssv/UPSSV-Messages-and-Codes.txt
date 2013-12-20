@@ -1,0 +1,178 @@
+    
+
+14. Messages and Code Project UPSSV
+
+    Status: 2008-07-30 20.40
+
+
+14.1 UPSSV-WPS-Object-Creation.cmd
+     -----------------------------
+
+     UPSSV WPSE 000I Information: Creation of UPSSV WPS Objects succesfully done
+
+     UPSSV WPSE 001E Error UPSSV_Inst_Path = "%UPSSV_Inst_Path% does not exist or readme.txt missing
+     
+     UPSSV WPSE 002E Error MOZILLA_DRIVE\MOZILLA_DIR = %MOZILLA_DRIVE%\%MOZILLA_DIR% does not exist 
+  
+     UPSSV WPSE 003E Error User_Profile_Prod_Path = "%User_Profile_Prod_Path% does not exist or places.SQLite are missing
+
+     UPSSV WPSE 004E Error User_Profile_Save_Drive\User_Profile_Save_Dir = %User_Profile_Save_Drive%\%User_Profile_Save_Dir% does not exist 
+
+     UPSSV WPSE 005S Sever Error Return code not 0 : Error in UPSSV-WPS-Object-Creation-REXX.cmd
+
+     UPSSV WPSE 006E Error UPSSV_WPS_Proc = "%UPSSV_WPS_Proc% is not found
+
+     UPSSV WPSE 007E Error UPSSV_Get_Options_Proc = "%UPSSV_Get_Options_Proc% not found!
+                           Do you follow the customizing instructions?
+
+     UPSSV WPSE 008A: Abort with Crtl+ C if you like to correct the values
+
+     UPSSV WPSE 009A Pause: Do you check the above messages? Press any key to end the procedure.
+
+
+14.2 UPSSV-WPS-Object-Creation-REXX.cmd
+     ----------------------------------
+
+    "UPSSV WPSR 001E Error UPSSV_Inst_Path =" """" ||IN_UPSSV_Inst_Path || """" 
+                "is not qual to the source dir of this Rexx Procedure"
+                """" || IN_TheDir || """"  
+                IN_theFilePath "- I am abborting!"
+
+    "UPSSV WPSR 002S Error SysCreateObject " WPS_Prog_Titel.i WPS_Prog_PGM.I
+
+    "UPSSV WPSR 004S Error Create Folder rc=" rc
+
+    "UPSSV WPSR 005E Error Template File" UPSSV_SysModTest_SysID_Template_Abs " does not exists"  
+
+    "UPSSV WPSR 006I Information: The File" UPSSV_SysModProd_SysID_Abs " do  exists" 
+                             "I am deleteing the File"
+
+    "UPSSV WPSR 007I Information: The File" UPSSV_SysModTest_SysID_Abs " do  exists" 
+                             "I will not create a new one"
+
+    "UPSSV WPSR 008I Information: The File" UPSSV_SysModTest_SysID_Abs " do not exists" 
+                             "I will create a new one by copying from the Template File", 
+
+    "UPSSV WPSR 009E Error Template File" UPSSV_FF_Start_SysID_Template_Abs "does not exists" 
+                             "The WPS Objects are not created, you have get the original file from the inst package"
+                             "and rerun the programm"
+
+    "UPSSV WPSR 010I Information: The File" UPSSV_FF_Start_SysID_Abs "do exists" 
+                            "I will not create a new one"
+
+    "UPSSV WPSR 011I Information: The File" UPSSV_FF_Start_SysID_Abs "do not exists" 
+                            "I will create a new one by copying from the Template File", 
+
+
+14.3 UPSSV-Sub3-User-Profile-Disk-Free-Space-Check-REXX.cmd
+     -------------------------------------------------------
+ 
+     "UPSSV Sub3 001E Error: No SQLite Files found in User Profile"
+
+     "UPSSV Sub3 002E Error: Free space on disk of the User Profile is to low"
+     "                       Free space on disk is       ="  RIGHT(Max_SQLite_Drive_FreeSpace            ,15)           
+     "                       Value of add Safty Margin   ="  RIGHT(Max_SQLite_File_Size_add_Safety_Value ,15)  
+     "                       Size of biggest SQLite file ="  RIGHT(Max_SQLite_File_Size                  ,15)
+     "                       Name of biggest SQLite file ="        Max_SQLite_File_Name  
+
+     "UPSSV Sub3 003E Error: I cannot find a Environment Variable "TMP" in your Enviroment"
+
+     "UPSSV Sub3 004E Error: Free space on disk of the TMP Directory is to low"
+     "                       Free space on disk is       ="  RIGHT(Env_TMP_Drive_FreeSpace  ,15)           
+     "                       Sum of all files in your UP ="  RIGHT(Sum_SQLite_File_Size     ,15)  
+
+     "UPSSV Sub3 005E Error: Free space on disk of the User Profile Save Drive to low"
+     "                       Free space on disk is       ="  RIGHT(User_Profile_Save_Drive_FreeSpace  ,15)           
+     "                       Sum of all files in your UP ="  RIGHT(Sum_SQLite_File_Size               ,15) 
+
+     "UPSSV Sub3 006E Error: Free space on disk of the User Profile / TMP / Save drive to low"
+     "                       Free space on disk is       ="  RIGHT(Max_SQLite_Drive_FreeSpace            ,15)           
+     "                       Estimated space requirement ="  RIGHT(Max_Required_Drive_FreeSpace          ,15)
+     "                       Value of add Safty Margin   ="  RIGHT(Max_SQLite_File_Size_add_Safety_Value ,15)  
+     "                       Size of biggest SQLite File ="  RIGHT(Max_SQLite_File_Size                  ,15)
+     "                       Name of biggest SQLite File ="        Max_SQLite_File_Name  
+     "                       Sum of all files in your UP ="  RIGHT(Sum_SQLite_File_Size     
+
+     "UPSSV Sub3 007E Error: Free space on disk of the User Profile /TMP or UP / Save drive to low"
+     "                       Free space on disk is       ="  RIGHT(User_Profile_Save_Drive_FreeSpace ,15)           
+     "                       Estimated space requirement ="  RIGHT(Max_Required_Drive_FreeSpace      ,15)
+     "                       Sum of all files in your UP ="  RIGHT(Sum_SQLite_File_Size              ,15)  
+ 
+     "UPSSV Sub3 008E Error: Free space on disk of the User Profile Save / TMP drive to low"
+     "                       Free space on disk is       ="  RIGHT(User_Profile_Save_Drive_FreeSpace ,15)           
+     "                       Estimated space requirement ="  RIGHT(Max_Required_Drive_FreeSpace      ,15)
+     "                       Sum of all files in your UP ="  RIGHT(Sum_SQLite_File_Size              ,15)  
+
+
+14.4  UPSSV-Main-User-Profile-Save-and-SQLite-Vacuum.cmd 
+      -------------------------------------------------- 
+
+      UPSSV MAIN 001S Error: No sufficent disk space, I am abborting
+  
+      UPSSV MAIN 002A SysModTest: The CMD has stopped with the Lock File created!
+                      -----------------------------------------------------------------
+                      Now you have time to test of your Firefox start - The FF start should be denied!
+                      --- Do an additional check: 
+                             Move the Scroll bar  10 lines up and
+                             check the options - you passed with the WPS
+
+      UPSSV MAIN 003I Lock file exists - File: "%UPSSV_Lock_File_Abs%"     
+                      You just try to Start this CMD while a concurrent CMD is running!
+ 
+14.5  Firefox-3-0-Start-with-Lock-File-Handling-Template.cmd
+      ------------------------------------------------------- 
+
+      UPSSV FFRST 001x N/A
+
+      UPSSV FFSRT 002A SysModTest Stopping for "Start Test of UPSSV Save and Vacuum"
+                                  The UPSSV Start should be denied!
+
+      UPSSV FFSRT 003I Lock file exists - File: "%MoF_Lock_File%"     
+                       You just try to Start this CMD while a concurrent CMD is running!
+
+
+14.6  UPSSV-Sub1-User-Profile-SQLite-Vacuum-the-DB-s.cmd
+      --------------------------------------------------
+
+      no messages
+
+
+14.7  UPSSV-Sub2-User-Profile-Save-to-Generation-Dir.cmd
+      --------------------------------------------------
+
+      no messages
+
+
+14.8  UPSSV-Subx-Create-Append-File-with-Timestamp-as-Contents.cmd
+      -------------------------------------------------------------
+
+      no messages
+
+
+14.9  UPSSV-Caps-Remove-Directroy.cmd
+      -------------------------------
+
+      UPSSV CAPRM 001E Error +++ GEN-3 aka VarAux: Remove DIR Failed!! +++
+
+
+14.10 UPSSV-Caps-SQLite3.cmd
+      ----------------------
+
+      no messages
+
+
+14.11 UPSSV-Lock-File-Delete.cmd
+      --------------------------
+
+      UPSSV DLOK 001A Log File: %MoF_Lock_File%
+                      Really - Do you want to delete the file?
+
+      UPSSP DLOK 002A Are your sure? 
+                      No Firefox session is active
+                   or UPSSV procedure    is running?  
+                      You can stop the process with Cntl + C!
+
+      UPSSP DLOK 003I Lock File deleted!
+
+      UPSSP DLOK 004E There is no Lock File: "%MoF_Lock_File%" to delete!
+                      What are you doing?

@@ -1,0 +1,11 @@
+Turn on word wrap.
+
+The prmaddr.cmd is a tool for converting Post Road Mailer address books to Polarbar Mailer address books.
+
+Installation - Unzip the prmaddr.zip file to your Post Road Mailer directory (usually x:\postroad).
+
+Operation - Change to your Post Road Mailer directory and run the prmaddr.cmd.  You will be prompted for the usage of 8.3 file names.  The adr2asc.cmd utility furnished with Post Road Mailer (and included with prmaddr.zip) will convert the existing address books to tab separated ASCII files.  The converted address book (xxxxxxxx.asc) will be read and each Post Road email address found in a Post Road Mailer entry will be converted into a separate email address.  The converted group data file (xxxxxxxx.grp) is then read to associate each group entry with the proper address book entry.  Polarbar address books named <bookname>.AddressBook.html or <bookname>.ABH (depending upon your selection of 8.8 names) are built.  The Polarbar address books (*.html or *.ABH) that are created are now ready to be copied to x:\polarbar\mailer if they are to be public address books or x:\polarbar\mailer\<account> if they are to be private address books.
+
+The prmaddr.cmd assumes long file names, but provides for 8.3, replaces blank, '.', '/', '\', and '?' in the PM Mail address book name and all nicknames with '_', and produces unique address book names and nicknames.
+
+Chuck McKinnis - mckinnis@attglobal.net

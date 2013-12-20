@@ -1,0 +1,11 @@
+Turn on word wrap.
+
+The pmmaddr.cmd is a tool for converting PM Mail address books to Polarbar Mailer address books.
+
+Installation - Unzip the pmmaddr.zip file to your PM Mail tools directory (usually x:\southsft\tools).
+
+Operation - Change to your PM Mail tools directory and run the pmmaddr.cmd.  You will be prompted for the usage of 8.3 file names.  The PM Mail book database (books.db) will be read to determine the address book names.  The address database (addr.db) will be read to associate address books with addresses, and Polarbar address book named <bookname>.AddressBook.html or <bookname>.ABH (depending upon your selection of 8.8 names) is built.  The Polarbar address books (*.html or *.ABH) that are created are now ready to be copied to x:\polarbar\mailer if they are to be public address books or x:\polarbar\mailer\<account> if they are to be private address books.
+
+The pmmaddr.cmd assumes long file names, but provides for 8.3, replaces blank, '.', '/', '\', and '?' in the PM Mail address book name and all nicknames with "_', produces unique address book names (PM Mail allows duplicate address book names), produces unique nicknames, and does not handle "groups".
+
+Chuck McKinnis - mckinnis@attglobal.net

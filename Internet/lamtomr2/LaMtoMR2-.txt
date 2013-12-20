@@ -1,0 +1,41 @@
+This program is (c) Copyright DynaComp Solutions 1995 - All rights reserved.
+
+LaMtoMR2 - A program to convert LaMail nicknames, folders, and mail
+           into the MR2Ice format.
+
+LaMtoMR2 will migrate your existing LaMail nickname file into the
+MR2Ice address book maintaing nicknames, real names, and addresses.
+It will also migrate any distribution lists you may have in LaMail
+to MR2Ice groups.  Existing LaMail folders, with or without mail
+in them, will be created for MR2Ice.
+
+The program will prompt you for the drive where you have installed
+MR2Ice if you have more than 1 drive (or multiple partions).
+Please enter a single letter when prompted without the semi-colon.
+
+You will also be asked if you want to move your mail from LaMail
+into MR2Ice or if you want your mail copied.  If you choose to
+move your mail make SURE you have a BACKUP in case something
+should go wrong.  If you decide to move your mail, LaMtoMR2 will
+clean up the LaMail folder directory structure and remove the
+LaMail index files if you want it to.
+
+Before LaMtoMR2 does anything it will check and make sure that
+the drive where you have installed MR2Ice has enough room to
+hold all of the mail you have stored in LaMail.
+
+This is a "one time" use program so there is no registration fee.
+
+If you found it helpful and were pleased with the results I would
+appreciate US 5 dollars for the effort and testing I put into it.
+
+If you are so inclined please send 5 dollars to:
+
+DynaComp Solutions
+P.O. Box 98092
+Raleigh, NC  27624-8092
+
+Questions or problems may be directed to djmartin@nando.net or
+posted in the comp.os.os2.utilities news group.
+
+Dave Martin

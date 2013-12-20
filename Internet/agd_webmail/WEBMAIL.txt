@@ -1,0 +1,67 @@
+README for AGD Ltd WEBMAIL reader for PMMail.
+---------------------------------------------
+ver 1.0, May 20, 2002
+
+
+---------------------------------------------
+WHAT IS THIS?
+
+A Rexx script that allow you to read your PM Mail messages from
+a web browser from elsewhere on the internet.  There is no 
+ability to write messages, nor does it decode attachments.
+It is intended to allow you to quickly check your messages
+from a remote location.
+
+In order to use this package you need the following on your system:
+ - PM Mail v.1.96 as your email program
+ - A web server with CGI capability (and connected to the Net)
+
+------------------------------------------------------------------------
+CAUTION!!! if you don't know how to configure the security settings on
+your web server then don't even attempt installing this webmail reader!
+Doing so will likely open up your private email to a global Audience.
+------------------------------------------------------------------------
+
+---installation---
+
+STEP 1:
+
+Place the 'Webmail.cmd' program in your web server's CGI-Bin 
+directory.  Edit the Rexx file and set the following variable:
+ PMMailDir = 'F:\App\SOUTHSDE\PMMAIL\'
+to point to the directory where you have installed PMMail.
+
+note: PM Mail does not need to be running in order for this utility
+to work.  The Rexx file runs rampant through the directory
+structure that PM Mail uses to store messages.
+
+STEP 2:
+
+Set up an access path to point "http://www.yourserver.co/webmail/"
+to the same directory you entered in step 1.  PUT APPROPRIATE SECURITY
+ON THIS ACCESS PATH!  If you don't know how, then stop and don't 
+bother installing this package!
+
+STEP 3:
+
+Put a default file index.html into that same path to connect the CGI 
+program with the accounts you want to access.  Example:
+
+<html>
+<body>
+<a href="/bin/webmail.cmd?folder=ALEXDO0.ACT">INCENTRE.NET</a>
+<p>
+<a href="/bin/webmail.cmd?folder=ALEX_D0.ACT/">TELUS.NET</a>
+</body></html>
+
+STEP 4:
+
+Fire up your browser and try it out.  
+
+------------------------------------------------------------------------
+
+Alex Doll, Edmonton Alberta
+People's Democratic Monarchy of Canada
+
+no warranty, not responsible for your screw ups, you get
+what you paid for, etc etc etc

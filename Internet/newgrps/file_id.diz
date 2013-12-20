@@ -1,0 +1,9 @@
+OS/2 REXX scripts to be used together
+with SOUPER (version 12) and YARN (0.83)
+or SOUPER and SOUP2SQ (1.0)
+to list new newsgroups and make them 
+available as a message in a special 
+newsgroup.
+Documentation can be found in the header
+of the file.
+

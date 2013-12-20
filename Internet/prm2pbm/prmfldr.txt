@@ -1,0 +1,17 @@
+Turn on word wrap.
+
+The prmfldr.cmd is a tool for converting Post Road Mailer folders and messages to Polarbar Mailer folders and messages.
+
+Installation - Unzip the prmfldr.zip file to your Post Road Mailer directory (usually x:\postroad).
+
+Operation - Make sure you have an account set up in Polarbar Mailer for each active Post Road Mailer account.  Change to your Post Road Mailer directory and run the prmfldr.cmd.  You will be prompted for the usage of 8.3 file names, the path to your Polarbar Mailer directory, and, for each Post Road Mailer account, the Polarbar Mailer account that should be used.  The inbasket.inx file in the Post Road Mailer directory will be read to get the Post Road Mailer mailbox information.  The folders in each Post Road Mailer account will be analyzed to get their real names, and a list of Post Road to Polarbar directories will be listed.  The messages (*.pop) in each Post Road Mailer folder will be analyzed to get the necessary information for copying the message to the Polarbar account and building the Polarbar message index.  At completion, your Post Road Mailer messages will be stored in a Polarbar Mailer account folder (x:\polarbar\mailer\maildata\<account>\PostRoad\<folder>).
+
+The folder tree structure found in the Post Road Mailer account will be maintained under the PostRoad folder in Polarbar.  All Post Road Mailer folders is each account will be processed (including trash).  If you use Post Road Mailer again, you can run prmfldr.cmd again to re-create the Polarbar Mailer folders.  The old folders will be deleted.
+
+I do not recommend that you copy Post Road Mailer messages directly from Post Road Mailer to Polarbar.  Post Road Mailer does not store the entire received message information, and Polarbar will be unable to properly index the message.  You can copy messages from the converted Post Road Mailer folders to any other Polarbar folders without a problem.
+
+Because Post Road Mailer detaches and decodes attachments to a message at mail retrieval time and there is no easy way to re-attach them, I have left attachments as is.  The best I can do is to put a "sticky note" on the message that will point you to the attachment.
+
+The conversion routine will only work properly if you are running with code page 850 (to deal with the high ASCII character issues).
+
+Chuck McKinnis - mckinnis@attglobal.net

@@ -1,0 +1,15 @@
+Turn on word wrap.
+
+The pmmfldr.cmd is a tool for converting PM Mail folders and messages to Polarbar Mailer folders and messages.
+
+Installation - Unzip the pmmfldr.zip file to your PM Mail directory (usually x:\southsft\pmmail).
+
+Operation - Make sure you have an account set up in Polarbar Mailer for each active PM Mail account.  Change to your PM Mail directory and run the pmmfldr.cmd.  You will be prompted for the usage of 8.3 file names, the path to your Polarbar Mailer directory, and, for each PM Mail account, the Polarbar Mailer account that should be used.  Each PM Mail account will be scanned for folders (*.FLD), and each folder will be analyzed to get the real name (found in FOLDER.INI), and a list of PM Mail to Polarbar directories will be listed.  The messages in each PM Mail folder will be found using the folder index (FOLDER.BAG), and analyzed to get the necessary information for copying the message to the Polarbar account and building the Polarbar message index.  At completion, your PM Mail messages will be stored in a Polarbar Mailer account folder (x:\polarbar\mailer\maildata\<account>\PM_Mail\<folder>).
+
+The folder tree structure found in the Post Road Mailer account will be maintained under the PostRoad folder in Polarbar.  All Post Road Mailer folders is each account will be processed (including trash).  If you use Post Road Mailer again, you can run prmfldr.cmd again to re-create the Polarbar Mailer folders.  The old folders will be deleted.
+
+I do not recommend that you copy PM Mail Mailer messages directly from PM Mail to Polarbar.  PM Mail does not store the entire received message information, and Polarbar will be unable to properly index the message.  You can copy messages from the converted PM Mail folders to any other Polarbar folders without a problem.
+
+The conversion routine will only work properly if you are running with code page 850 (to deal with the high ASCII character issues).
+
+Chuck McKinnis - mckinnis@attglobal.net

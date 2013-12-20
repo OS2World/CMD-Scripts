@@ -1,0 +1,54 @@
+Alt-Home.CMD, setting the right HOME directory for YARN
+=======================================================
+
+
+eComStation uses a HOME environment setting which name isn't unique, but
+its default setting is wrong for many applications. An example is YARN.
+
+WPS Program objects can have their own HOME=...-setting. Alt-Home.CMD is
+aimed at a WPS Program object for YARN with such a HOME setting. 
+
+Alt-Home.CMD assumes YARN is already installed properly. If not, it will
+fail to complete some basic checks.
+
+
+First it will ask what YARN's HOME environment setting (default: current
+HOME environment setting). Next it will also ask where the file YARN.EXE
+is (default: current YARN environment setting or the current directory).
+And finally it will ask what the working directory for YARN is (default:
+root directory of the first drive in use, typically C:\).
+
+The working directory isn't that important. One fine day you may want to 
+undelete a YARN file, and perhaps you may want to be able to notice some
+file left behind by YARN. It shouldn't do that.
+
+
+As usual any entered setting is adjustable, except the new HOME setting. 
+Optionally delete the file Alt-Home.CMD after the WPS Program object for
+YARN is created. 
+
+Of course you may modify Alt-Home.CMD to install other applications with
+yet another different (HOME) environment setting. The largest part of it 
+is related to general and YARN-specific checks, but SysCreateObject() is
+its most important generic part.
+
+
+You won't need this at all, if you'ld write a YARN.CMD-wrapper like this
+fancy example: 
+
+   @MODE 132,43
+   @HOME=C:\Internet Apps\YARN
+   @C:
+   @CD \
+   @C:\Internet Apps\Bin\YARN.EXE
+
+Alt-Home.CMD also can be modified to create this YARN.CMD-file. But that
+isn't its goal, which is to create an object with a SET xxx=yyy-setting.
+Hence its name. It may also be possible to patch YARN.EXE to use another
+environment variable name.
+
+If it actually would create such a YARN.CMD, I would perhaps like to see
+it in an eCS install-checker. That's causing this "problem" in the first 
+place, with the eCS setting of "HOME=C:\HOME\DEFAULT". This ain't Linux,
+and it is possible to check for the few applications that will be broken
+by such an (extra-) ordinary HOME-setting.

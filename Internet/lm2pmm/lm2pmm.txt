@@ -1,0 +1,25 @@
+This set of Object Rexx programs migrates LaMail-folders, LaMail-messages and 
+LaMail nicknames (addresses) to the PM-Mail 1.9x format.
+
+Files in archive:
+
+   lmrxtool.cmd   ... set of Object Rexx definitions for LaMail structures
+   lm_migr.cmd    ... control program for migration
+   pmmrxtoo.cmd   ... set of Object Rexx definitions for PM-Mail 1.9x structures
+
+
+Needs Object Rexx utilities stored in:
+
+   http://hobbes.nmsu.edu/pub/os2/dev/orexx/orx8.zip
+
+
+To invoke migration merely enter:
+
+  lm_migr
+
+Note: PM-Mail must not be running, else unpredictable errors may occur, hence
+      the migration utility checks whether PM-Mail is running and if so aborts.
+
+Good luck !
+
+97-11-06, Rony G. Flatscher

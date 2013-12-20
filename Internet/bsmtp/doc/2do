@@ -1,0 +1,20 @@
+
+* Arg(1) = Verzeichnis => alle *.Msg in Verzeichnis bearbeiten
+* Eingabedatei nach Bearbeitung l”schen (optional, konfigurierbar)
+* option to CREATE BSmtp-files:
+  * Procedure W2B (Weasel2BSmtp): Arg(1) = MsgFile, Arg(2) = Envelope-File
+  * w2b parst das Envelope-File auf To *@*ToDomain:
+    - Nix gefunden => EL 0, Weasel macht den Rest.
+    - Alle Zieladressen als Treffer: Envelope zusammensetzen, Mail dahinter,
+      Envelope-File anpassen (From postmaster@localdomain, to ToAddress),
+      EL x fr Weasel zum Neu-Einlesen
+    - ein Teil der Adressen als Treffer, ein Teil nicht: den Nicht-Teil
+      mit BSmtp an Weasel verfttern, fr den Rest wie zum zweiten Punkt
+  * Keywords:
+    * BSmtpDomain <Domain> <Address>
+      - Domain: Domain, fr die BSmtp-Files erstellt werden soll. Alle Mail
+        an *@*<Domain> wird dann in BSmtp-File geschrieben und geschickt an
+        <Address>. (wenn <Domain> = '' dann alle Mail, die nicht an
+        LocalDomain gerichtet ist)
+      - Address: Adresse, an die das erstellte BSmtp-File geschickt werden
+        soll

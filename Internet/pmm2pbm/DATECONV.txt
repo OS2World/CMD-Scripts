@@ -1,0 +1,258 @@
++-----------------------------------------------------------------------------+
+| DATECONV HELP  v7.0                                                         |
++-----------------------------------------------------------------------------+
+
+Purpose:
+  Convert a date from one format to another format and optionally offset
+  the date some number of days.  The caller specifies the format of the
+  input date, and optionally the format of the output date.  If not
+  specified, the output will default to the form "dd Mmm yyyy" (like
+  REXX's Date() function).  The input date is validated so Dateconv() can
+  be used to check a date even if date conversion isn't required.
+
+
+  Date_Out = DATECONV( Date_In, Format_In <,Format_Out> <,CC> <,Offset> )
+
+Where:
+  Date_In ...... The date you want to convert to another form,
+                 or just validity check.
+
+  Format_In .... identifies the format of the input date.
+
+  Format_Out ... Optional.  Defaults to "N".
+                 identifies the format(s) wanted for the output.
+
+  CC ........... Optional Century override. Must be 2 digits: 01-99.
+                 Allows user to override the default century assigned to
+                 input date formats with 2 digit years (and Date(C) too.)
+
+  Offset ....... Optional.  Defaults to zero offset.
+                 Causes output date to be shifted this number of days.
+                 Form is +n or -n where "n" is a whole number of days to
+                 shift the output date.
+
+If any Errors are encountered a null string will be returned.
+
+
+                                        "CC" can affect output date
+Allowable Format_In:                    -----
+  B- Basedate ................ dddddd    No
+  C- days this Century ........ ddddd    Yes
+  D- Days this year ............. ddd    No
+  E- European .............. dd/mm/yy    Yes
+  J- Julian ................... yyddd    Yes
+  N- Normal ............. dd Mmm yyyy    No
+  O- Ordered ............... yy/mm/dd    Yes
+  S- Sorted ................ yyyymmdd    No
+  U- USA ................... mm/dd/yy    Yes
+  I- ISO ................. yyyy-mm-dd    No
+note: Month name, Weekday name, LeapYear and "*" are NOT valid *IN* formats.
+
+Allowable Format_Out:
+  B- Basedate ................ dddddd
+  C- days this Century ........ ddddd
+  D- Days this year ............. ddd
+  E- European .............. dd/mm/yy
+  J- Julian ................... yyddd
+  M- Month .......... (name-of-month)
+  N- Normal ............. dd Mmm yyyy   ** Default **
+  O- Ordered ............... yy/mm/dd
+  S- Sorted ................ yyyymmdd
+  U- USA ................... mm/dd/yy
+  W- Weekday ...... (day-of-the-week)
+  I- ISO ................. yyyy-mm-dd
+  L- LeapYear ....... 1(yes) or 0(no)
+  *- Combination .... variable output   default: "NBSMWDJCOEULI"
+
+Arg(3) "Format_Out"
+--------------------
+Normally only the first character of Format_Out matters.  If the first
+character of Format_Out is "*" then the rest of the letters of
+Format_Out are significant.  Date_Out will be ALL the date formats in
+the order specified by the letters in Format_Out.  If only "*" is
+specified it is the same as "*NBSMWDJCOEULI" which is all date formats
+supported.  If additional date formats are added in the future (very
+unlikely) then I expect they will also be added to the string of dates,
+on the end, so that while the string data would change it will still
+parse correctly.  Using Format_Out "*" to get multiple date forms in a
+single call is much quicker than having to call DATECONV once for each
+format wanted.
+
+Default Century
+----------------
+For date formats U, E, O, and J which only have 2 digit years, the
+default century is chosen by using a 100 year sliding window similar
+to Rexx's Date() function.  Date(C) defaults to the current century.
+
+Arg(4) "CC"
+------------
+The (optional) 4th argument is used to override the default century
+assigned date formats U, E, O, J and C.  It must 2 digits, 01-99.
+
+June 1998 v7.0:  For dates with 2 digit years Dateconv now picks a
+suitable default century by using a 100 year sliding window similar to
+Rexx's Date().  Previously the current century was used.
+
+
+Special case:
+--------------
+If Arg(1) Date_In and Arg(2) Format_In are left blank then the input
+will be "TODAY" (which Dateconv doesn't have to validity check).
+This is useful if you need a date offset from today and/or you need
+Format_Out "L" or "I" which are not directly available with REXX's
+Date() function.
+
+
+Dateconv History:
+------------------
+Dateconv() ORIGINALLY duplicated the operation of the Dateconv()
+function that is included with Personal REXX.  Personal REXX is a
+product of Quercus Systems (and was previously sold by Mansfield
+Software).
+
+Since then additional function has been added to 'my' Dateconv() so it
+is no longer identical in operation to the Personal REXX function.  At
+this time Personal REXX code using Dateconv() that is ported to IBM and
+uses my Dateconv() should work ok.  However moving code TO Personal REXX
+could cause problems if it uses any of the function that I have added to
+Dateconv().
+
+The Dateconv() extensions are:  Arg(4), Arg(5), Format_In/Out "I",
+Format_Out "L", Format_Out "*", and allowing the input date to default
+to today.
+
+The internal logic is all mine, only the original command format was
+borrowed from Personal REXX's Dateconv().
+
+Dateconv() is written as a PROCEDURE to be included inside any REXX code
+that needs it.  I supply it as an EXEC which is just the Procedure file
+with a small front end so it can run as an external function.  If you
+need the Procedure then copy it from the exec without the exec front
+end.  The advantage to leaving it external is you won't need to update
+your code if Dateconv() is replaced.  The disadvantage is slower speed
+if you call it repeatedly.
+
++-----------------------------------------------------------------------+
+Examples:
+
+Convert a Date(USA) date to Date(Sorted) form.
+
+  say dateconv('11/15/51',U,S)               /* 19511115 then 20511115 */
+
+Note:  The 100 year sliding window that provides the missing century in
+       the input date will cause the output date to change from 1951 to
+       2051 in the fall of 2001.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Convert a Date(Ordered) date to the default output form.
+
+  say dateconv('51/11/15',O)                            /* 15 Nov 1951 */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+What is the English month name of this date?
+Convert a Date(USA) date to Date(Month) form.
+
+  say dateconv('11/15/51',U,M)                          /*    November */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+What is the English weekday name of this date?
+Convert a Date(Normal) date to Date(Weekday) form.
+
+  say dateconv(15 Nov 1951,N,W)                         /*    Thursday */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+What is the English weekday name two days before this date.
+Convert a Date(Sorted) date to Date(Weekday) form with offset.
+
+  say dateconv(19511115,S,W,,-2)                        /*     Tuesday */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Offset this Date(USA) date two days earlier but don't change format.
+
+  say dateconv('11/15/51',U,U,,-2)                      /*    11/13/51 */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Override the default century selected when input doesn't include century.
+
+  say dateconv('15/11/95',E,S,18)                       /*    18951115 */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Is this Date(Sorted) date within a Leap Year?  1=Yes/0=No
+
+  say dateconv(19511115,S,L)                            /*    0        */
+  say dateconv(20001115,S,L)                            /*    1        */
+
+The following routine is what Dateconv uses to find Leapyear.  If you
+have a 4 digit year you could use it too and avoid the overhead of
+calling Dateconv.
+
+  select
+    when yyyy //   4 > 0 then leap_year = 0
+    when yyyy // 100 > 0 then leap_year = 1
+    when yyyy // 400 = 0 then leap_year = 1
+    otherwise                 leap_year = 0
+  end
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Dateconv() indicates an error condition by returning null.
+You can't convert FROM Date(Weekday) or Date(Month) or Date(Leapyear).
+
+  dx = dateconv(Saturday,W,U)
+  if dx = '' then say 'Error detected'              /* test for (null) */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Dateconv() gives you Date(Iso) format that isn't available from REXX's Date().
+What is the Date(Iso) date?
+
+  say dateconv(,,I)
+
+You could also use the following Translate routines to convert to/from
+ISO date format.
+
+  /* convert Date(Sorted) to ISO date */
+  s2i: Return translate('CcYy-Mm-Dd',arg(1),'CcYyMmDd')
+
+  /* convert ISO date to Date(Sorted) */
+  i2s: Return translate('CcYyMmDd'  ,arg(1),'CcYy-Mm-Dd')
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Does this date look valid?  No conversion is needed.
+
+  if dateconv(date,format) = '' then say 'Invalid date'
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Dateconv() can return multiple date formats.  The letters after the "*"
+specify the output formats wanted and their order.
+
+  parse value dateconv(,,'*ULW',,'+1') with USAdate LeapYear Weekday .
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Dateconv() can return multiple date formats.  If no letter follows "*"
+then return ALL supported date formats.
+Note: the default date format needs to be put back together after parsing.
+
+  parse value dateconv(,,'*',,'-1') with N1 N2 N3 B S M W D J C O E U L I .
+  N = n1 n2 n3
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+How can I test for the day of the week without using the English
+Day of the Week names?
+
+  dow = (date('B')+1)//7                      /* 0:Monday ... 6:Sunday */
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+How many days are there between 2 dates?
+
+First convert both dates to Basedate format and then subtract.
+The following example will calculate the number of days from TODAY
+until New Years Eve.  (Party time!)
+
+ party = dateconv(left(date('S'),4)1231,S,B) - date(B)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Got a good example (or want one) for a situation not covered?
+Send me the details and I'll consider adding it.
+
++-----------------------------------------------------------------------+
+Russel Brooks     rlbrooks@us.ibm.com     (aka: rlbrooks@pobox.com)
+

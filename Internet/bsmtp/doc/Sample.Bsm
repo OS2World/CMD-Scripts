@@ -1,0 +1,45 @@
+Received: by bruessel.Informatik.Uni-Oldenburg.DE (Smail3.1.29.1)
+	id <m12D9bE-0002nSC>; Tue, 25 Jan 2000 18:17 MET
+Message-Id: <m12D9bE-0002nSC@bruessel.Informatik.Uni-Oldenburg.DE>
+Date: Tue, 25 Jan 2000 18:18 MET
+From: "Joerg Peters" <jope@uni.de>
+To: "BSmtp/2" <izzy@telda.net>
+
+
+MAIL FROM:<jope@uni.de>
+RCPT TO:<izzy@qumran.org>
+DATA
+Received: from troja.Informatik.Uni-Oldenburg.DE ([134.106.21.46])
+	by arbi.Informatik.Uni-Oldenburg.DE (Exim 3.03)
+	id 12D9bR-0004IO-00; Tue, 25 Jan 2000 18:18:05 +0100
+Received: by troja.Informatik.Uni-Oldenburg.DE (Smail3.1.29.1)
+	id <m12D9bQ-000U00C>; Tue, 25 Jan 2000 18:18 MET
+Received: by bruessel.Informatik.Uni-Oldenburg.DE (Smail3.1.29.1)
+	id <m12D9bE-0002nSC>; Tue, 25 Jan 2000 18:17 MET
+Message-Id: <m12D9bE-0002nSC@bruessel.Informatik.Uni-Oldenburg.DE>
+Date: Tue, 25 Jan 2000 18:18 MET
+From: "Joerg Peters" <jope@uni.de>
+To: "Itzchak Rehberg" <izzy@qumran.org>
+
+
+Testmail mit einem Adressaten.
+..
+MAIL FROM:<jope@uni.de>
+RCPT TO:<izzy@qumran.org>
+RCPT TO:<postmaster@qumran.org>
+DATA
+Received: from troja.Informatik.Uni-Oldenburg.DE ([134.106.21.46])
+	by arbi.Informatik.Uni-Oldenburg.DE (Exim 3.03)
+	id 12D9bg-0004IU-00; Tue, 25 Jan 2000 18:18:20 +0100
+Received: by troja.Informatik.Uni-Oldenburg.DE (Smail3.1.29.1)
+	id <m12D9bf-000U00C>; Tue, 25 Jan 2000 18:18 MET
+Received: by bruessel.Informatik.Uni-Oldenburg.DE (Smail3.1.29.1)
+	id <m12D9bZ-0002nSC>; Tue, 25 Jan 2000 18:18 MET
+Message-Id: <m12D9bZ-0002nSC@bruessel.Informatik.Uni-Oldenburg.DE>
+Date: Tue, 25 Jan 2000 18:18 MET
+From: "Joerg Peters" <jope@uni.de>
+To: "Itzchak Rehberg" <izzy@qumran.org>, "Postmaster" <postmaster@qumran.org>
+
+
+TestMail mit zwei Adressaten.
+..

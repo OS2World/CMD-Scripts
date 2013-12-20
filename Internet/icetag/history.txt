@@ -1,0 +1,17 @@
+IceTag/2 History of changes
+
+
+Version 2.5: (first public version)
+
+Features:       -Updated indexing method.
+                -Introduced an Interactive mode for choosing quotes.
+                -Speed improvements
+                -Added ability to replace or remove X-Mailer line.
+
+
+Version 2.6:
+
+Bug-fixes:      -I made a mistake when preparing the archive to send to some
+                 FTP sites. I included an older version of the indexing utility
+                 that caused errors on startup. This version should solve this
+                 problem.

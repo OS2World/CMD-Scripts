@@ -1,0 +1,81 @@
+FIXIT.CMD - change your new PMMail v2.10 to use BE-Style icons or others
+
+Notes:
+^^^^^
+I've included all the original BeOS-style icons from PMMail v1.91, and some
+more icons from the original PMMail v2.0. Other icons are brand new, created
+from me in the BeOS-style, to fit in the new PMMail 2.0 buttons.
+Finally, I've added a 3D style to the "+" and "-" icons in the folders tree.
+
+These icons are now included in the .\BEStyle subdirectory. If you want to
+use them, copy PMMAIL.RES from the .\BEStyle directory to the directory where
+FIXIT.CMD is.
+
+In the .\RSelby directory you can find icons created and donated by Robb Selby 
+(robbselby@zianet.com). If you want to use these, copy PMMAIL.RES from the
+.\RSelby directory to the directory where FIXIT.CMD is. Many thanks go to Robb
+for his nice work!
+
+
+Other Thanks:
+^^^^^^^^^^^^
+Many thanks go to the original (unknown) creator of the FIXIT.ZIP package,
+which made the substitutions on PMMail 1.92 (the first version to have the
+ugly SouthSoft's icons).
+
+Many thanks to Martin Lafaix too, for his great (free) resource editor.
+I've included it in this package to facilitate things for the end-user.
+I hope there's no problems with Martin for this.
+
+
+Contact:
+^^^^^^^
+You can contact me at criguada@tin.it. Please don't try to contact me at
+the old address cristiano.guadagnino@usa.net: although this address still
+exists, I read it very seldomly, so you may have to wait for decades <g>.
+
+
+Disclaimer:
+^^^^^^^^^^ -------------------------------------------------------------+
+There is no warranty, expressed or implied, associated with the use     |
+of this product.  Although the product is, to the best of my knowledge, |
+perfectly safe, use is completely at the discretion and risk of the     |
+consumer.  The author is not responsible for any data loss or system    |
+corruption that may occur as a result of running the product.           |
+------------------------------------------------------------------------+
+
+
+Now for some installation instructions:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. make a temporary directory ie. MD C:\BLAH
+
+2. change to your temporary directory ie. CD C:\BLAH
+
+3. unzip the ZIP file into the temporary directory you just created
+   (unzip there the resmgr.zip file too)
+
+4. copy PMMAIL.EXE file from your PMMAIL directory into your newly
+   created temporary directory
+
+5. rename your original \SOUTHSDE\PMMAIL\PMMAIL.EXE file to something
+   like PMMAIL.BAK just incase something screws up during this patch
+   program, or you wish to go back to the old icons
+
+6. copy one of the PMMAIL.RES files into the directory where FIXIT.CMD
+   lives (see "Notes" at the beginning of this file).
+
+7. run the FIXIT.CMD program
+
+8. copy the altered PMMAIL.EXE file into your original PMMail directory
+
+9. delete and then recreate the PMMail desktop icon - this will update the
+   icon used to represent the PMMail program (or just edit the path and
+   wait till the next reboot to see the new icon)
+
+You're done! You can now delete your temporary directory
+
+
+Finally, be patient with my english: I'm not a native english speaker.
+If you're using this package, please drop me an e-mail!
+
+END OF FIXIT.TXT

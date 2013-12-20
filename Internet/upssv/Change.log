@@ -1,0 +1,66 @@
+1.0 RC 3   2008-07-28  Multi System (Firefox systems ) and User Profile  Support
+
+                       New Options in ..INI.CMD files                       
+ 
+                         4  UPSSV_Cus_File_Name_Prefix        MoF-3000-Pre
+
+                            Defines the File Name Prefix of the
+  
+                               Lock File 
+                               Vacuum Generation Log (VLG) Files 
+                               Vacuum Impact History File
+                               UPSSV-Lock-SysMod-Test File
+                               UPSSV-Lock-SysMod-Prod File
+
+                            This name has to be unique over all installed Firefox Systems.
+                            Otherwise the SysMod-Test SysMod-Prod does not work per System!
+  
+                         8  UPSSV_Cus_User_Profile_Name_Xfix    xxxx.default 
+
+                         Defines the "mid-fix" Name for 
+                         the Vacuum Generation Log (VLG) Files 
+                         and the Vacuum Impact History File.
+      
+                         Defines the prefix for the generation directories  
+                         of the User Profile Backup. 
+   
+           2008-07-29   clean up of SysModTest and SysModProd in code and doku 
+                        UPSSV-WPS-Object-Creation-REXX.cmd  will create a File SysModTest from Template 
+  
+           2008-07-30   Run out of space for the TMP dir and the Backup drive 
+                        (  on the same drive on the test installation )
+                        causes traps in SQLite !!
+
+                        A more sophisticated diskspace checking implemented
+
+                        Code  cleanup about Messages and Codes
+  
+           2008-08-03  Make use of the env var  Firefox_UPSSV_Get_Options_Proc
+                       at "Firefox Start via Template"
+                       
+
+1.0 RC 2   2008-07-21  Improvements of the customizing installation process
+                       base on feedback from Uwe Jacobs and Peter Weilbacher
+ 
+                       Add SQL statements  to the SQL Input File
+                           PRAGMA integrity_check; 
+                           ANALYZE;
+ 
+                       Test with SQLite 3.6.0
+
+           2008-07-26  add UPSSV-Sub3-User-Profile-Disk-Free-Space-Check-REXX.cmd
+
+           2008-07-27  WPS Folder - IN_MOZILLADIR as part of the Folder Title 
+
+                       create additional Objects 
+                       "UPSSV Support - Save and Vacuum
+                                        with Ouput Redirection to File
+                                        for debugging" 
+
+                       "UPSSV Support - Save and Vacuum
+                                        Ouput File of the Redirection"  
+
+           2008-07-28  Multi System Support: Feature moved from dev-mode to user-mode   
+ 
+  
+1.0 RC 1   2008-07-18  First general published version ( on Hobbes ) 

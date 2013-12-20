@@ -1,0 +1,14 @@
+Upload Information Template for Hobbes
+======================================
+
+Archive Name: icetag26.zip
+Program Description: IceTag/2: Enhanced random quote generator for PMMail.
+Operating System/Version: OS/2 Warp 3 or greater.
+Program Source: author 
+Replaces: icetag25.zip
+
+Your name: Ahmad Al-Nusif
+Your email address: morpheus@moc.kw
+
+Proposed directory for placement: /os2/network/tcpip
+

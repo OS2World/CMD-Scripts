@@ -1,0 +1,11 @@
+Archive Name: NEWGRP14.ZIP
+Program Description: Retrieve new USENET groupnames in a SOUPER/YARN 
+                     or SOUPER/SOUP2SQ environment
+Operating System Versions: Only tested on WARP
+Program Source: Included
+Replaces: NEWGRPS.ZIP
+
+Your name: Michiel van Loon
+Your email address: mfvl@xs4all.nl
+
+

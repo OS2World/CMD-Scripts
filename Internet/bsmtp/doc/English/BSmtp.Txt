@@ -1,0 +1,238 @@
+*******************************************************************************
+                              BSmtp/2 v0.42
+        Analysis of BSmtp Files and sending of contained mails
+                           (c)2000 by IzzySoft
+*******************************************************************************
+
+This documentation is not complete - but minimal (better than no dox, right?)
+So:
+
+	1.   - Why this program? What's its function?
+	2.   - system requirements
+	3.   - description of files in archive
+	4.   - configuration
+	4.1. - BSmtp.Cmd
+	4.2. - MailList.Cfg
+	5.   - syntax
+	6.   - errorlevel
+	7.   - Known Limitations/Bugs
+	8.   - Where to find the latest version
+	9.   - Disclaimer :-)
+
+
+1. Why this program? What's its function?
+=========================================
+
+  BSmtp analyses files in the BSmtp (Batch-Smtp) format and "feeds" them
+  to an Smtp server. Besides this, it has a simple MajorDomo built in.
+
+  When or what for is this useful?
+
+  If you e.g. run a (sub)domain "offline" and the mx-record points to a machine
+  outside your local network where you have your Smtp-Server up and running
+  (e.g. a small (business) IntraNet), your provider (who runs the machine
+  where your mx-record points to) can collect all mail to your (sub)domain
+  into files using the BSMTP format (see format.txt for details), and put this
+  files into mails in one of your POP3 accounts. This account you fetch at the
+  next dial-up - and process the Bsmtp-File locally using - guess what? -
+  BSmtp/2.
+
+  This way it runs fine here for qumran.org for about two months now :-)
+
+
+2. system requirements
+======================
+
+  * a machine with Rexx support (OS/2 kompatibel; I only tested it with OS/2,
+    maybe it runs under DOS/Win/xxx using Regina or another Rexx interpreter.
+    If someone has tested this, any information is appreciated!)
+  * additionally needed are the libraries RxTelnet (rxtelnet.zip on Hobbes
+    and in GFD) and RXU (rxu1a.zip on Hobbes and in GFD - both to be found
+    in my BBS (Qumran Cave - see the section on "where to get the latest
+    version" for details)
+  * Ah, by the way: a (local) SMTP server to feed the mail to, and some other
+    mail account (e.g. Pop3) to receive the BSMTP files ;)
+
+ 
+3. description of files in archive
+==================================
+
+  * BSmtp.Cmd:           the BSmtp script
+  * BSmtp.Cfg:           configuration file for BSmtp/2 (Main Config)
+  * File_Id.Diz:         short description of the program
+  * File_Id.xxx:         same in the language of the country specified by
+                         country code xxx (001 for US, 049 for Germany...)
+  * MailList.Cfg:        configuration file for MailingLists
+  * Doc\2do:             ToDo-List (not binding ;)
+  * Doc\COPYING:         GNU General Public License
+  * Doc\COPYRIGHT:       Copyright disclaimer
+  * Doc\xx\BSmtp.Txt:    ahem - sorry, I forgot what this is.... #-)
+  * Doc\xx\Format.Txt:   short description of the used BSMTP format
+  * Doc\History:         for historians: history of development of this program
+                         (also to be used as "What's new?")
+  * Doc\Sample.Bsm:      sample input file in BSMTP-format
+
+
+4. configuration
+================
+
+
+4.1. BSmtp.Cfg
+--------------
+
+  In short to the syntax of this configuration file:
+  comment lines start with a ";" or "#". If you want to add an comment to this
+  line, you have to put at least one space in between the ";"/"#" and your
+  comment. A comment in the same line as a configuration statement, e.g.
+
+     Debug # enable DebugLog
+
+  is NOT supported! "Default" values are used, when the according statement
+  is commented out.
+
+  hostname         the Smtp host to deliver the mail to. The here given value
+                   can be overridden on the command line (see section "syntax")
+  port             port to use. Per default this should be port 25 (as set as
+                   default).
+  timeout          normally 1000. If the used SMTP server is somehow a bit
+                   slow (e.g. on bad connections), increase the value to,
+                   say, 5000.
+                   Default: 1000
+  debug            if you need debug information, remove the comment char.
+                   In this case you'll additionally find a file named
+                   "session.log" in the directory you run BSmtp/2 from
+                   containing all activities on the socket (that's all what's
+                   being sent/received).
+                   Default: no debug.
+  LogFile          Humm - a logfile, I guess. If you specify no drive/directory
+                   it will be put in the working directory. Several loglevels
+                   are used (see below).
+                   Default: BSmtp.Log
+  BadMailDir       directory to put "rejected" mails in (for lateron analysis
+                   by the operator). These mails are saved using the BSMTP
+                   format (so they include the envelope information, too).
+                   Differences to the format of the input file:
+                   - it's only one message per file
+                   - end of mail specified by just one '.' (instead of '..')
+                   Default: BadMail (below the working directory)
+  LocalDomain      the local (sub)domain (of your machine/IntraNet)
+  MajorDomo        use internal MajorDomo benutzt werden? => Remove comment char.
+                   Default: MajorDomo not used.
+  ListFile         configuration file for MajorDomo. Format see below (4.2)
+                   for drive/directory see above comment for LogFile
+                   Default: MailList.Cfg
+  LogLevel         What information has to be logged? Possible values are any
+                   combination of:
+                   ! error messages (e.g. undeliverable messages, unexpected
+                     aborts (connection loss etc))
+                   + "Basic" information (e.g. program start, establishing
+                     of connection etc.)
+                   - additional information: recipient(s) of the mail
+                   # file i/o
+                   x more additional information (almost debug info)
+                   $ debug info
+                   Default: all levels activated
+  ScrLevel         same as LogLevel - but for logging to screen
+  DeletePkt        If you want the BSmtp input file to be deleted after
+                   processing, when each contained mail was sent
+                   successfully => remove the comment sign
+                   Default: do not delete input file
+
+
+4.2. MailList.Cfg
+-----------------
+
+  Each line represents one entry. Syntax:
+  <listenname> <User>
+  so each line contains exact 1 listname and 1 user. For more users of the
+  same list - which can happen as I've been told ;) - just use more lines
+  starting with the same listname. The sample maillist.cfg defines two lists:
+  Test1 (with users "TestUser" and "John Doe") and Test2 (with users "Dummy"
+  and "Martin Mustermann").
+
+  For BSmtp itself it's not of any importance what you put for the <User>
+  statement. But if you want to use the internal MajorDomo, you should pay
+  attention to following syntax:
+  "Real Name" <user@kiste.domain>
+  user@kiste.domain (Real Name)
+  Both formats are possible - the way you may know it from your mail client.
+
+
+5. Syntax
+=========
+
+  BSmtp <BSMTP input file> [<HostName> [<Port>]]
+
+  <BSMTP input file> is the file to process (what else?), <HostName>
+  the name of the machine that runs the SMTP server to feed the mail to,
+  <Port> is the port that server reacts on.
+  <HostName> as well as <Port> are optional parameters to (temporarily) replace
+  the defaults set in BSmtp.Cfg.
+
+
+6. ErrorLevel
+=============
+
+  0   normal termination
+  1   no parameter given on command line (or error in config file)
+  2   one file (mostly the LogFile) could not be opened/closed. More detailed
+      information iis to be found in the LogFile.
+  9   unexpected end of data (probably trailing lines in the BSmtp input file;
+      in this case you may ignore this "error")
+ 11   Connection lost
+ 12   Telnet connection failed
+
+
+7. Known Limitations/Bugs
+=========================
+
+  Limitations:
+  ------------
+    - (un)subscribe (not) yet possible per mail - each participant has to
+      be manually added/removed to/from maillist.cfg. You may count this
+      lists as "closed lists" :-)
+
+  Bugs:
+  -----
+    none known (but the one in front of the keyboard ;) Let me know if you
+    find any!
+
+
+8. Where to find the latest version
+===================================
+
+  Depending on the technology you want to use, there are different possibilities
+  (of the same location):
+
+  FidoNet    : 2:2426/2160
+  Online-BBS : +49-441-9570436
+  FTP        : ftp.qumran.org/net/div/izzysoft/
+  
+  For FTP I have to add that the server is not yet permanently connected
+  to the net (at this time I just have a "dial-up" account which is active
+  every hour at xx:30 for several minutes - or longer, if I surf the net
+  myself). This will change as soon as I grant myself a "flatline" (probably
+  starting with April/May 2000).
+
+
+9. Disclaimer
+=============
+
+  Hereby I take the knowledge of the usual disclaimer for granted. for those
+  who think I'm wrong with this, here a short summary:
+  I (the author of this software) guarantee nothing else than that this
+  software will consume some space on your disk. For details see the files
+  named COPYING and COPYRIGHT.
+  
+  Starting with version 0.42 BSmtp/2 is put under GPL (Gnu Public License)
+  version 2 (though I reserve for myself the right to change this in some future
+  version. But even if I do so, code of all released versions until then may
+  be used for other future software projects of anybody according to the GPL).
+
+  A short note that BSmtp/2 is used elsewhere is highly appreciated. I can't
+  guarantee any further developement or bug fixes at all (originally I wrote
+  it just for myself) - but it may help to motivate me :-)
+
+
+Itzchak Rehberg (izzysoft@buntspecht.de)
+24.03.2000

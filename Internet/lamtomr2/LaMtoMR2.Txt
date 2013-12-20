@@ -1,0 +1,22 @@
+Archive Name: LaMtoMR2.zip
+Program Description: LaMail to MR2Ice Migration Aid
+
+Operating System Versions: OS/2
+
+Version 1.2
+
+Converts LaMail nicknames, folders, and mail to
+MR2Ice format to ease moving from LaMail to MR2Ice.
+
+Program Source: Author
+Replaces: LaMtoMR2.zip
+
+Your name: David J. Martin
+Your email address: djmartin@nando.net
+
+Proposed directory for placement: \os\network\tcpip
+
+Although this is a text utility it is designed
+specifically for conversion between 2 TCP/IP
+applications and more applicable to the \os\network\tcpip
+directory.

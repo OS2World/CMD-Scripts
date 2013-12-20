@@ -1,0 +1,3 @@
+OS/2 REXX script (v 0) which reads the .msg and .sav files
+produced by Golden CommPass and converts them to a format that
+can be imported to PMMail/2 (BluePrint Software Works, Inc.).

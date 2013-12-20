@@ -1,0 +1,220 @@
+±±±±±± WHAT'S NEW in CTorrent Monitor Version A:
+
+- Bug fixes: 1) under certain conditions a default tracker in combination with
+finished torrents formed a bad parameter string preventing ACT start. 2)
+.torrent file names have spaces converted to underlines.
+
+± NEW in CTorrent Monitor Version 9:
+
+- UN-KLUDGED tracker setting, individually saved! When starting new torrents
+with <backspace>, it uses ACT extract option to put the torrent's info into a
+text file, which is viewed (then or later) with tedit.
+
+- Auto-renaming of .torrents removes multiple underlines and a leading "The_",
+which only waste space. (Easily disabled by commenting out section.)
+
+±±±±±± INSTALLATION (all same as before, better explained for new users):
+
+- Edit the code to change any drive and directories mentioned below. Comments
+in the code should help if you need to customize.
+
+- Place the .cmd file anywhere convenient, such as \OS2.
+
+- Create an OS/2 Window program object. Torrents will be put into the working
+directory of that program object, which must be same as base_dir in CTMx. (The
+soft-coded default is c:\torrents.)
+
+- Unzip and install ACT.EXE into exec_dir.
+
+- CTMx will create needed directories below base_dir.
+
+- Set Firefox to download .torrents into download_dir; those will be moved to
+current_dir. (Any means which puts .torrents into download_dir OR current_dir
+will work.)
+
+- Edit ulr to limit upload rate to not starve other programs! For cable modem
+of 40KB/S up, I find a 35K limit leaves enough to browse and run other
+downloads. But when uploads total >30K, other traffic can get VERY slow.
+
+±±±±±± OPERATION:
+
+- With a new .torrent in download_dir, hit <backspace> in CTMx. File is moved
+and its info is extracted using ACT.EXE into a .info file. Be patient for a
+few seconds while the file is created.
+
+- Tedit is invoked on the new .info file, *solely* for convenience to look at
+the files and sizes. You can, however, edit the file to select desired tracker
+by placing an '*' in first column by number (or the first byte of file for
+default tracker, which I never find to work of late). Exit from tedit with F4.
+
+If you don't wish to use tedit (you may even want to comment out the call! it
+should be somewhere around line 340), then you'll next be presented with the
+list of trackers: just press 0-9 (but NOT higher than is listed or you get the
+default); that'll be saved into the .info file, and used from then on.
+
+- CTMx then checks whether the .torrent is running -- or *appears* to be:
+names fairly frequently duplicate so many characters that the limited number
+from the window list aren't a unique name. You can edit .torrent names as
+needed; has no effect on operation (kill any running instance, first, though).
+
+- ACT.EXE is started on the torrent with parameters (only tracker # varies).
+Check that it actually finds a tracker; ACT will usually bail out immediately
+with a bad tracker, but sometimes waits forever (apparently if tracker is
+semi-responding).
+
+- To change trackers: hit <tab>, select with up / down arrows, then either:
+<tab> again to invoke tedit and edit the .info manually, OR
+<delete> the file and start over (probably only if badly mangled manually).
+Then <backspace> to re-init (if now set correctly, will start the torrent as
+usual; if not will invoke the setting routine again).
+
+- When a torrent reaches 100%, the .torrent file is moved to finished_dir
+(you'll frequently see this attempted right after start-up, be in cyan text).
+When re-starting from cold, *much* time is saved by skipping the hash check
+that all blocks are complete. -- SO BE SURE that all listed in finished_dir
+are actually complete! The swarm will become angry if not!
+
+- When no longer wish to start a torrent, hit <delete>, select with up / down
+arrows, then hit <delete> again. The .torrent will be moved to deleted_dir;
+should you ever wish to use it again, just move it back to current_dir (for a
+check to be sure that it's *still* complete).
+
+The .info files are deleted when corresponding .torrent is deleted (meaning
+has to have finished), otherwise delete manually after pressing <tab>.
+
+The ACT window will continue running unless manually stopped separately.
+
+-----------------------------------------------------------------------------
+
+There are still old commands to Stop and Finish torrents, but I haven't found
+them near as useful as expected, always just use ctrl-esc for the window list.
+Consider them disparaged. And the (a)ll command is a bit hazardous. The key
+handlers for those can simply be deleted if you choose.
+
+Below is probably of use only to me. But just a couple more notes. 1) Setting
+I use for ACT cache is 1M, which seems to be per-instance value, but it's not
+stated. Can't imagine any improvement, certainly haven't seen any difference
+since adjusting it down from the ridiculous default. 2) The CTCS option MAY
+have a drawback of pinging your router every few minutes. Mine logs requests
+from own IP on those ports. No visible effect, so modify "params" if you've
+no need for a CTCS server, or keep in mind if strange effects arise. 3) There
+seems no way to remove ACT from the window list to reduce clutter; this
+somewhat sets a limit on number of torrents, but so does my simplistic screen
+routines. However, the main limit for me is upload speed, so hardly matters...
+
+======================= cut from released ctm8_act ===========================
+
+/* v8 kludges in a manual capability to use alternate trackers. For now, again
+  looks like this is the last version. (While we await useable PMCTM...)
+  Start-up can now be tricky when multiple trackers are required.
+  First ensure that current soft-coded value (3) is okay for at least one.
+  If not, follow directions below to set to default (0) or other value.
+  If ACT bails out on some for bad tracker selection, tap a number key for
+  another to try, then hit <backspace> to re-start.
+  One symptom of a non-responding tracker may be system is sluggish.
+
+- CTM8 for use solely with act.exe ctorrent client found at:
+  http://www.os2site.com/sw/internet/peer_peer/act027t2.zip
+  Place executable file in 'C:\ACT' or change code below.
+- ACT has the now necessary feature of alternate trackers. Unlike ctorrent9,
+  initial checking doesn't grind system to near halt (though breaks my wait
+  mechanism of checking for '%' in switch list) even when checking several at
+  once during start-up. Which is good, because so far don't see a way to make
+  this program detect the checking.
+- Setting cache for ACT.EXE to 1M seems to avoid excessive memory use
+  (ctorrent9 still gobbled memory with that value). Can't advise more because
+  seems to be a per-instance value rather than global.
+- ACT.EXE makes and supposedly uses .bf (bit-field) files to record pieces.
+  These can be deleted at will, seem neither necessary nor to speed checking.
+
+>>> I HOPE that I've at last got it to run without an ACT instance. But I hate
+>>> testing for that because is a pain. */
+
+==================== end merged section of ctm8_act ==========================
+
+- NEW in Version 8: now solely for ACT.EXE to use alternate trackers necessary
+  after TPB went down. I *still* can't use the TPB tracker, if it exists. But
+  openbittorrent is usually listed as alternate #3, so I use that for initial
+  value. After you have one instance of ACT running, can vary that value with
+  number keys as needed for other torrents (many MUST use the default).
+
+  CTM could use a total re-write. Some of the start-up complexity is no longer
+  needed with ACT, but since it works, I'm leaving it. And I've a workable way
+  to make tracker selection semi-permanent for a given torrent but frankly,
+  have to know enough are actually using it to put in more time. You can of
+  course continue to wait for a "pretty" GUI from elsewhere that's useable;
+  CTM8 merely does fundamentals like start-up and basic monitoring.
+
+- NEW in Version 7:
+  There actually is code after these lengthy comments! It's quite a heap of
+  kludges yet in continuous use with only minor cosmetic and interface bugs.
+  Could stand a re-write now that have a handle on what functions I want, and
+  the real-time problems, but this is likely the last version. IF I come up
+  with further improvements, guess will move comments to a "whatsnew.txt".
+
+* MUCH faster cold start-up by using '-f' switch, Force Seed Mode, which skips
+  hash test. This saves, for 30G of torrents on my low power for summer time
+  IBM 300PL, over an hour of heavy disk thrashing. Makes it feasible to power
+  down overnight without painful sluggishness on next start.
+
+  However, ctorrent9 isn't smart enough to NOT serve out garbage when a new
+  torrent is started with the '-f' switch given ÄÄ even though it just created
+  the file ÄÄ so are now three states: Current, Finished, and Deleted.
+
+  Files are automatically moved from current_dir to finished_dir by brute
+  force method, but this runs only at start-up or when a torrent reaches 100%.
+  You still CAN mark/move torrents as 'Finished'; this looks same as previous,
+  but those in finished_dir will now be served out as complete. ÄÄ WHETHER
+  they are or not! ctorrent9 doesn't care! So YOU must.
+
+  'Deleting' a 'Finished' torrent is handled by a new procedure. Hit <delete>
+  to begin selection, <delete> again to actually move; <esc> to exit. Files
+  are only moved to deleted_dir; manually move (to current_dir to ensure that
+  it gets hash-checked and is complete) to re-start.
+
+* Initial delay because now in start-up folder of dedicated box, gives time to
+  open other apps before disk thrashing. Hit any key to skip. Easily removed.
+
+* Cosmetics, even some code clean-up, and displays a little more info.
+
+* Creates required dirs. When moving to new box, found that getting going is
+  difficult without these. You might also put a .torrent in current_dir.
+
+* Var "params" now has '-e 168' switch to run finished torrents for 168 hours.
+  Seems best for my selections. Popular torrents don't need my 3-4 KB/s, and
+  my total number must be limited so that any one can get even that high, so I
+  soon delete popular torrents, while keeping the rarer online.
+
+? Ctorrent9 seems to grab huge amount of memory. Have 320M RAM yet swapper.dat
+  keeps growing, with 18 torrents is up to 167M. Firefox is the only sizeable
+  app running. Tried the '-C' cache switch at 1M (as below), but seems to have
+  no effect. Not exactly a problem ÄÄ now, though sluggish with a mere 192M ÄÄ
+  but odd, only OS/2 app I've seen grab ÄÄ or perhaps leak ÄÄ so much memory.
+
+  Another problem with numerous torrents is that my usual more than fills a
+  maximized window list. For those who think of hiding it: experimented via
+  the Pyrxutil utils, and ctorrent9 puts itself back to visible.
+
+- NEW in Version 6:
+  At last have a way (PGMCNTRL) to close the VIO windows. But requires keying
+  or mouse click on a "Yes" button. Still handier. Apparently nothing can kill
+  ctorrent9, doesn't even seem to use stdin. You'll need this in \OS2:
+     http://hobbes2.nmsu.edu/download/pub/os2/util/process/pgmcn107.zip
+  CTM6 runs without PGMCNTRL, still moves .torrent, just can't close windows.
+  ( If .torrent starts with '[' or '(', a PGMCNTRL "feature" causes a bug. )
+
+  To back out of or refresh the selection routine, hit <esc> a couple times.
+
+  After testing with Stop and Finish, found it tedious to close ALL torrents,
+  so added an All choice. You don't need to use arrows to start selecting,
+  just type 'a'; further instructions are given.
+
+  >>> IF you run more than 23 torrents (!) you'll break my selection routine,
+  BUT you can add a line in here to increase screen rows ('mode 80,40').
+
+  Sorting by % done puts those still downloading at bottom, handiest for view
+  under another window. Newest will likely be on bottom line.
+
+ -NEW in Version 5:
+  Separate executable (exec_dir) and download directories (base_dir).
+  A bit more info and better formatting.

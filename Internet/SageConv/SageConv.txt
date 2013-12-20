@@ -1,0 +1,54 @@
+What's new in version 0.000002.  8-)
+
+I fixed a number of bugs related to the handling of part boundaries and got tempsysfile() working correctly.
+
+I also made RCV the default extension if it can't be determined from the header.
+
+Thanks to everyone who gave me input, and I've finally finished converting all 20 mb of my old email to mr/2 so unless someone has problems, version 0.000002 may be the final release.  8-)
+
+
+Skimpy release notes on the re-release of SageConvert...
+
+This rexx program will convert pieces of mail from ultimail to MR/2-ICE format.  After converting your files you can copy them into an mr/2 folder and ask it to do a reindex which will make the files visible.
+
+Obviously there are no guarantees and I assume no responsibility for anything this code does wrong.  But if it actually works correctly, you are free to thank me.  8-)
+
+
+Here are some more detailed instructions:
+
+1) Normal program invokation is: "SageConv <username>"
+
+Replace <username> with your email address userid.  SageConvert uses this to determine whether the piece of mail it is parsing is incoming or outgoing.  If you sent a piece of mail to yourself it will decide it is incoming (why on earth would you do that?).
+
+Run the program inside of an ultimail folder.  You will notice a bunch of *.ENV files and *.TXT files which will be converted.  The conversion does not modify those files but rather creates new SC*.RCV and SC*.OUT files which you can then move to mr/2's folders.  SageConvert does not touch your original ultimail files because you might want them in their unmolested form some day in the future.
+
+2) Check to make sure the temporary file (called tempfile.byl by default) and error file (called scerror.log) do not exist.  If either one exists then something went wrong to a greater or lesser extent.  
+
+If there is only the error file then probably what happened is one of your pieces of email had a graphic in it since SageConvert doesn't do graphics at this point.  
+
+If the temporary file was left over, then something has indeed gone wrong with the conversion so let me know...
+
+3) Move the SC*.RCV and SC*.OUT files to one of the MR/2 folder directories.  They are called F### and are in the mail subdirectory from where MR/2 is installed.  If you want to create unique directory names, do so from within MR/2.
+
+4) Invoke the MR/2 option to reindex the folders you have added pieces of mail to.  This can be done via right click on a folder name in the folder listing or within an open folder.  I have found however that if a folder is open, it must be closed and reopened for a reindex to display the added pieces of mail.
+
+There is also an executable called reindex.exe that comes with MR/2, but I haven't figured out how to use it as of yet...
+
+5) That should do it and it's getting kind of late so I'll stop here for now.  Feel free to email me but please keep in mind that I did this mainly for personal benefit so try not to be too critical since I know the code is hacky.  I'm present at bylee@phoenix.princeton.edu but won't be after 6/96 assuming I stop wasting my time playing with my laptop and get some serious work done on my thesis (I'm a molecular biology major but I've actually gotten very in java lately...).
+
+
+Some other notes:
+
+You can alternately invoke the program as "SageConv <username> <filename>" which will convert only the file in question.  Don't do this on any file other than a *.ENV or who knows what will happen...
+
+The program will output which file it is currently converting as well as what the temporary file (which by default is called tempfile.byl) is being renamed to at the end of the conversion.  If you want to turn debugging messages on, change the line "debug = 0" in the rexx file to "debug = 1".
+
+Currently the parsing process simply copies the *.ENV file to the new mr/2 style file being created until it hits a part definition.  If the part definition is for a text part it then reads in the text part to that location.  If it is not a text part than SageConvert can't handle it and simply inserts a placeholder that tells the user what graphics file is supposed to be there but isn't.  This might be a good reason not to delete your original ultimail files so you can go look directly at the original graphic file stored there.
+
+Basically the conversion is relatively straight forward.  My apologies that it must be done on a directory by directory basis and I have not automated actually moving the new mail into mr/2, but I just wanted to get something that worked for my mail and decided to at least make what I did available.  If someone else wants to spice it up, feel free and definitely let me know since I might be interested in using a more polished version to re-convert my mail to mr/2.  8-)
+
+Also, because SageConvert essentially converts mail to lamail format, it might actually work to go from ultimail to lamail format via SageConvert and from there to other mail products like PMMail via converters other people have written.
+
+And I'd like to add that SageConvert actually comes somewhat out of experience I had parsing SageMail.  It was a good product (I used it), but it was very primitive since it was in rexx and basically just turned your mail into a bunch of text files that you could then manipulate via the WPS.  Definitely low overhead, but definitely low on features too so I switched to ultimail and now to MR/2...
+
+And that's all folks...

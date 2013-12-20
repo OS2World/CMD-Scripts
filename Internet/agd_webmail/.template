@@ -1,0 +1,32 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: AGD_webmail
+       Short Description: Webmail addon for PMMail 1.96
+        Long Description: 
+A Rexx script to allow you to quickly check your PM Mail messages
+from a remote location using a web browser from elsewhere on 
+the internet.  
+      Proposed directory
+           for placement: /pub/os2/apps/internet/mail/reader/pmm
+
+               Your name:  Alex Doll
+           Email address:  adoll@consultant.com
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none) 
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 with TCP/IP and Rexx
+ Additional requirements: 
+ - PM Mail v.1.96 as your email program
+ - A web server with CGI capability (and connected to the Net)
+
+                Replaces: (none)
+
+
+
+

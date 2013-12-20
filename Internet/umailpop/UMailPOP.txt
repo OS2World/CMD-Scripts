@@ -1,0 +1,19 @@
+
+UMailPOP.cmd
+(C) Volker Weber, 1994
+
+You can pick up internet mail from a POP3 server with LamPOP. Unfortunately
+LamPOP does not work with UltiMail. This command file is a small workaround.
+Use LamPOP to pick up you mail from the POP server; then transfer it with
+UMailPOP to the Ultimedia Server. You will still have to send mail with
+OS/2 SendMail.
+
+Please edit the UMailPOP.cmd to suit you needs. You will have to replace my
+username with yours and you may have to change a few directory entries.
+
+UMailPOP is all but perfect, but it works for me. If you like it, send me a
+short note.
+
+Volker Weber
+vowe@bwl.bwl.th-darmstadt.de
+

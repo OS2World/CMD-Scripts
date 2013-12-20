@@ -1,0 +1,87 @@
+ADRUN2NS Dec.20,1996 by Otto R„der
+
+Description:
+
+   ADRUM2NS.CMD is a REXX script which converts Ultimail Lite Addressbook
+   to Netscape Addressbook Format.
+
+Group:
+
+   ADRUM2NS belongs to group: ../os2/textutil
+
+Freeware:
+
+   ADRUM2NS may be distributed freely under the following conditions.
+   Copyright notices must NOT be removed, all files contained in the file
+   inventory below must be distributed together (you may not remove any
+   files), and you may not charge for the program.
+
+   If you find the program useful then send a post-card (picture of
+   the location where you live) to:
+
+       Otto R„der
+       Hauptstrasse 61B/13
+       A3001 Mauerbach
+       ---------------
+       Austria
+
+Prerequisites:
+
+   ADRUM2NS requires OS/2 and REXX.
+
+   It has been developed and tested under OS/2 Warp,
+   there is no intention to move it to other platforms.
+   there is no intention to maintain or improve it.
+
+Distribution:
+
+   The following files are contained in ADRUM2NS.ZIP:
+
+    ADRUM2NS.CMD      the REXX command-file 1996-12-21
+    README.TXT        documentation, this file
+    FILE_ID.DIZ       Id-file
+
+Installation:
+
+   To install ADRUM2NS just UNZIP the ADRUM2NS.ZIP file and place the
+   command into a directory contained in your CONFIG.SYS PATH= statement.
+
+Usage:
+
+     From an OS/2 command line start ADRUM2NS:
+
+       ADRUM2NS umail-addressbook-name [ netscape-addressbook-name
+
+       if 'netscape-addressbook-name' is omitted the outfilename
+       will be 'address.htm' which is the original name used by
+       Nesacape Navigator.
+
+       In my installation the following example worked:
+
+         adrum2ns "c:\tcpip\umail\mailstor\oraeder\Address Book.hnm"
+
+         Note: use dblquotes (") because the filename contains a blank.
+
+   ADRUM2NS will create an output file 'netscape-addressbook-name'
+   and it will start an editor to view this file.
+
+   This file 'netscape-adressbook-name' may be copied or edited
+   into Netscapes real address-book.
+
+Warranty:
+
+   The program is distributed on an as-is basis.
+
+   There is no guarantee to get certain results
+   nor is any guarantee to avoid damages of existing files.
+
+   Note: In the current directory the program will
+         overwrite any file with filename of 'netscape-addressbook-name',
+         if 2nd parameter is not specified, this is 'address.htm'.
+
+Comments:
+
+   Comments pls to:
+
+         oraeder@ibm.net
+

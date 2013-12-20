@@ -1,0 +1,27 @@
+CGspam.cmd is used to invoke Spamassassin.
+Go to www.spamassassin.org for info about it.
+Version 2.42
+
+Spamassassin will mostly work on OS/2, although
+there is non portable code in the autowhitelist_DB
+module.
+
+Of course you need a working PERL.
+
+
+
+
+CGATExit.cmd is used to invoke NORMAN AV
+It could be used to invoke any program with
+some simple modifications.
+
+
+Use at your own risk.
+No claims are made to the fitness or merchantability of the code.
+
+I release this to the public domain to do with as you wish.
+
+Some directories are hard coded in the scripts. You would do well
+to adjust them to you environment. Also the directories must be
+manually defined otherwise the scripts will probably fail.
+

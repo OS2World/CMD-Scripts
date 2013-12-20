@@ -1,0 +1,23 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: polaros2.zip
+       Short Description: PolarOS2 - Polarbar Mailer object creator
+        Long Description: PolarOS2 will create an OS/2 object for starting Polarbar Mailer
+      Proposed directory
+           for placement: /pub/os2/apps/internet/mail/reader
+
+               Your name: Chuck McKinnis
+           Email address: mckinnis@attglobal.net
+    Program contact name: Chuck McKinnis
+   Program contact email: mckinnis@attglobal.net
+             Program URL: http://www.polarbar.org/tools.html
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 Warp 4 and above
+ Additional requirements: REXX, Polarbar Mailer
+ 
+                Replaces: polaros2.zip

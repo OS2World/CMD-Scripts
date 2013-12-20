@@ -1,0 +1,84 @@
+*******************************************************************************
+                              BSmtp/2 v0.42
+        Analyse von BSmtp Files und Versenden enthaltener Mails
+                           (c)2000 by IzzySoft
+*******************************************************************************
+           Beschreibung des Dateiformates einer BSMTP Datei
+*******************************************************************************
+
+Nachdem ich darauf hingewiesen wurde, daá das BSMTP-Format scheinbar nicht
+hinl„nglich bekannt ist (das ist halt die sogenannte "Betriebs-Blindheit":
+Dinge, an die man sich gew”hnt hat, bersieht man leicht), m”chte ich dieses
+kurz in einer separaten Kurz-Dokumentation beschreiben:
+
+BSmtp steht fr Batch-SMTP und bedeutet im Klartext eigentlich soviel, daá
+mehrere Mails unterschiedlicher Absender und Empf„nger in einer Mail trans-
+portiert werden k”nnen. Hierfr wird ein Teil der wahrscheinlichen SMTP-
+Session mit der jeweiligen Nachricht gespeichert - n„mlich das, was der
+SMTP-Client an den Server, welcher die Mail dann letztendlich entgegen nehmen
+soll, fr die betreffende Mail sendet. Ein solcher Dialog sieht in etwa
+folgendermaáen aus (das erste Zeichen jeder Zeile muá sich weg-gedacht werden;
+es zeigt die Richtung an: '>' heiát, der Client sendet dies an den Server, '<'
+entsprechend umgekehrt):
+
+    >HELO ich.bins.de
+    <250 OK
+    <
+    >MAIL FROM:<ein.user@domain.org>
+    <250 Sender accepted
+    >RCPT TO:<wer.anderes@andere.domain.org>
+    <250 mailbox OK
+    >RCPT TO:<noch_wer.anderes@ganz.andere.domain.org>
+    <250 user not local, will forward.
+    >DATA
+    <354 Socket to me
+
+In diesem Beispiel heiát der Client-Rechner 'ich' und ist in der Domain
+'bins.de' eingetragen. Ein User (MAIL FROM) schickt eine Nachricht an zwei
+Empf„nger (RCPT TO) und benutzt dazu als SMTP Server den Server von
+'andere.domain.org'. Dazu ”ffnet er ein entsprechendes Socket (das habe ich
+hier weggelassen) und identifiziert sich mit seinem Rechnernamen (erste
+Zeile: HELO). Diese Anmeldung (und natrlich das vorherige ™ffnen des Sockets)
+ist nur einmal pro Session, nicht aber einmal pro Nachricht notwendig - diese
+Informationen werden daher auch nicht in der BSMTP Datei gespeichert.
+
+Wohl aber die anderen Informationen, welche zum Server geschickt werden
+mssen (also im obigen Beispiel mit '>' beginnen). Die zu obigem Beispiel
+geh”rige BSMTP-Datei máte also etwa folgenden Inhalt haben:
+
+    MAIL FROM:<ein.user@domain.org>
+    RCPT TO:<wer.anderes@andere.domain.org>
+    RCPT TO:<noch_wer.anderes@ganz.andere.domain.org>
+    DATA
+
+Diese Informationen entsprechen den Informationen des sogenannten Envelops;
+die eigentliche Mail folgt nach dem Wort 'DATA' und ist dem Server selbst
+eigentlich relativ egal, weshalb wir den Inhalt hier nicht zu bercksichtigen
+brauchen. Wichtig ist jetzt nur noch zu wissen, wie der Server (und der Client
+natrlich ebenso) erkennen kann, daá eine Nachricht zu Ende ist. Hierfr
+dient ein einzelner '.' in einer Zeile (also '.<CR>', wobei <CR> fr den
+Zeilenumbruch steht).
+
+Soll jedoch nun in einer Nachricht ein einzelner Punkt in einer Zeile stehen,
+muá er freilich "escaped" werden - sonst glauben Server und Client ja, die
+Nachricht w„re bereits beendet. Da unsere Batch-Datei nun mehrere Mails
+enthalten kann - jedoch den Empf„nger komplett erreichen soll, verwenden
+wir am Ende jeder enthaltenen Nachricht zwei Punkte - und die transportierende
+Nachricht endet dann (bis sie im Postfach liegt) mit einem einzelnen Punkt.
+
+Eine vollst„ndige Beispiel-BSmtp-Datei liegt diesem Archiv nun auch bei
+(Sample.Bsm) - so, wie sie mit BSmtp/2 verarbeitet werden kann. Alles vor
+dem ersten 'MAIL FROM:' wird von BSmtp/2 ignoriert, da es zur 'Tr„ger-
+Nachricht' geh”rt - und nicht zu den zu bearbeitenden Mails.
+
+Unn”tig zu erw„hnen, daá die dort enthaltenen Adressen ein wenig manipuliert
+sind, um dem Datenschutz gerecht zu werden :-)
+
+Abschlieáend hoffe ich, das Ganze halbwegs verst„ndlich erkl„rt zu haben.
+Sollte mir dies (stellenweise oder komplett) nicht gelungen sein, teilt mir
+dies bitte mit - ggf. gleich mit einer besseren Formulierung, die ich dann
+frei verwenden darf!
+
+
+Itzchak Rehberg
+izzysoft@buntspecht.de

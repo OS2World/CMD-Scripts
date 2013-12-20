@@ -1,0 +1,14 @@
+Test file for testing the lock meachnismus
+
+It the test is passed, just rename this file
+
+to UPSSV-Lock-Test-Passed
+
+and the UPSSV critical pocesses are allowed to execute by the user.
+
+If there is no Filenamed UPSSV-Lock-Test-passed,
+
+no save and vacuum of the User Profile will be done!! 
+
+  
+

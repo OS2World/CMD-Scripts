@@ -1,0 +1,58 @@
+               Ultimedia Mail Lite-to-Postroad Mailer Conversion Utility
+                               Beta Version
+
+
+You may freely distribute the file PRMCONV.ZIP if you include this
+notice within the file.
+
+  License to Use:
+
+  This UltiMail-to-PostRoad Mailer Conversion Utility is Beta test only.
+  This Utility is copyrighted by InnoVal System's Solution, Inc 1996.
+
+  You may not license, rent, lease, or sell the Utility.
+
+  InnoVal will not be liable for any lost profits, lost savings, or any
+  incidental damages or other economic consequential damages that may
+  arise from the use of the Utility even if InnoVal, or an authorized
+  supplier, has been advised of the possibility of such damage.  InnoVal
+  will not be liable for any damages claimed by you based on any third
+  party claim.
+
+OVERVIEW:
+
+  The Ultimedia Mail Lite-to-PostRoad Mailer Conversion Utility is a menu driven
+  tool. This Utility converts UltiMail folders and address books to a compatible
+  PostRoad Mailer format.  This Utility will not overwrite nor erase any existing
+  files without user permission. If an Address book exists in the PostRoad
+  directory, this Utility will prompt the user to enter a new destination name.
+  Upon exiting this Utility, you may begin Postroad Mailer.  All folders
+  converted by this Utility will be found in the designated inbasket.
+
+INSTRUCTIONS FOR USING THE UTILITY:
+
+  1. Before you begin using the Utility there are a few items of
+     information that you need to collect:
+
+      o Your UltiMail directory name (e.g., C:\TCPIP\UMAIL)
+
+      o Your PostRoad directory name (e.g., C:\POSTROAD)
+
+      o The destination inbasket name (e.g., postsvc@Ibm.net)
+ 
+  2. Unzip PRMCONV.ZIP into your PostRoad Mailer directory.
+
+  3. From the command prompt type UML2POST <UltiMail Path> to run Utility.
+
+
+If you have any comments, suggestions, or inquiries about this Utility, please
+write to us at postsvc@Ibm.net, Subject = UM UTILITY.
+
+      Thank you for testing the UltiMail-to-PostRoad Mailer Conversion Utility
+
+                         The Post Road Mailer Team at
+                         InnoVal Systems Solutions, Inc.
+
+
+
+

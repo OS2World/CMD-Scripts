@@ -1,0 +1,24 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: prm2pbm.zip
+       Short Description: Post Road Mailer to Polarbar Mailer conversion tools
+        Long Description: Conversion tools for converting Post Road Mailer address books and message folders to Polarbar Mailer
+      Proposed directory
+           for placement: /pub/os2/apps/internet/mail/reader
+
+               Your name: Chuck McKinnis
+           Email address: mckinnis@attglobal.net
+    Program contact name: Chuck McKinnis
+   Program contact email: mckinnis@attglobal.net
+             Program URL: http://www.polarbar.org/tools.html
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 Warp 4, OS/2 Warp Server for eBusiness
+ Additional requirements: REXX, Polarbar Mailer
+
+                Replaces: 
+
