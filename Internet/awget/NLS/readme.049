@@ -1,0 +1,370 @@
+Auto WGet Daemon
+Idee und erste Version (C) 1998 Steve Trubachev
+Aktuelle Version (C) 1998-2003 Dmitry A.Steklenev
+
+INHALT:
+    Kurzbeschreibung
+    Downloadprogramme
+    Installation
+    	Wichtiger Hinweis
+    Funktionsbeschreibung
+    	šbergabe von URLs an den Daemon
+    	Benutzung im Netzwerk
+    	Einige Anmerkungen zu NFTP
+    Konfiguration
+    Bekannte Fehler
+    Zus„tzliche Programme
+    Plugins
+    	Job-Datei
+    šber
+    Danksagungen
+
+Kurzbeschreibung
+
+    Auto WGet Daemon ist ein freies Werkzeug zur Steuerung von GNU WGet oder
+    „hnlichen Programmen zum Herunterladen von Dateien. Wenn es Ihnen zu
+    l„stig ist, erst die notwendige Verknpfung im Netscape Navigator zu suchen,
+    sie dann in die Zwischenablage zu kopieren und WGet von Hand zu starten
+    (Mein Gott, sind Sie so faul? :), dann ist Auto WGet Daemon genau das,
+    was Sie suchen. Auto WGet Daemon erm”glicht Downloads durch einfaches
+    Drag'n'Drop in spezielle Ordner. Auáerdem untersttzt Auto WGet Daemon
+    Warteschlangen fr Downloads und erm”glicht die Wiederholung/Fortsetzung
+    fehlgeschlagener Downloads z. B. nach einem Netzausfall oder anderen
+    widrigen Umst„nden.
+
+
+Downloadprogramme
+
+    Zur Zeit werden nur 2 Programme untersttzt: GNU WGet und cURL.
+    Fr die Benutzung von Auto WGet Daemon muss mindestens eines dieser
+    Programme funktionstchtig installiert sein. Sie mssen sich in einem
+    beliebigen Verzeichnis befinden, welches im Suchpfad (PATH-Eintrag)
+    in der Datei CONFIG.SYS eingetragen ist.
+
+    Die OS/2 Version von GNU WGet finden Sie auf dem Hobbes-Server:
+    http://hobbes.nmsu.edu/ (Suchen Sie dort nach "wget")
+
+    cUrl fr OS/2 finden Sie auf der Support-Homepage:
+    http://curl.haxx.se
+
+Installation
+
+    Entpacken Sie das Archiv in ein tempor„res Verzeichnis und starten
+    INSTALL.CMD. W„hrend der Installation mssen Sie einige Fragen
+    beantworten. Das Installationprogramm wird je einen Ordner "Zu erledigen"
+    und "Auto WGet Daemon" auf der Arbeitsoberfl„che anlegen. Weiterhin wird
+    inm Verzeichnis %ETC% die Konfigurationsdatei AWGET.CFG angelegt oder
+    (falls sie schon von einer vorherigen Installation existiert) aktualisiert.
+
+    Ein WPS-Objekt zum Starten des Daemons wird im Ordner "Systemstart" an-
+    gelegt. Sie brauchen den Computer deswegen allerdings nicht neu zu starten
+    nach der Installation, der Daemon wird direkt nach der Installation auto-
+    matisch gestartet.
+
+    Um korrekt zu funktionieren, muss Auto WGet Daemon auf ein Dateisystem
+    installiert werden, welches lange Dateinamen und erweiterte Attribute
+    untersttzt (HPFS, HPFS386, JFS or FAT32).
+
+Wichtiger Hinweis
+
+    Diese Version von Auto WGet Daemon kann ber frhere Versionen kleiner
+    als v1.6.1 installiert werden, allerdings wird davon dringend abgeraten!
+    Wenn Sie derzeit eine Version kleiner als v1.6.1 benutzen, deinstallieren
+    Sie diese zuerst, l”schen Sie die Datei %ETC%\AWGET.CFG und erst dann
+    installieren Sie die neue Version.
+
+Funktionsbeschreibung
+
+    Auto WGet Daemon berprft fortlaufend die Inhalte des Ordners "Zu
+    erledigen" und dessen Unterordner. Sobald ein URL-Objekt in diesen
+    Ordnern abgelegt wird, startet das Download-Programm, dabei wird das
+    Objekt in den "Aktiv"-Ordner verschoben. Dies ist das Signal, dass der
+    Download-Prozess gestartet wurde.
+
+    Im Falle einer Unterbrechung von Downloads oder eines Computer-Neustarts
+    werden alle Objekte aus dem "Aktiv"-Ordner an ihre vorherigen Pl„tze
+    zurck verschoben und in der blichen Weise weiter verarbeitet.
+
+šbergabe von URLs an den Daemon
+
+    Erste Methode: Ziehen Sie ein existierendes URL-Objekt mit der Maus in
+    den "Zu erledigen"-Ordner (oder Unterordner). Die URL wird in die
+    Download-Warteschlange eingefgt.
+
+    Zweite Methode: Drcken Sie die rechte Maustaste auf einer URL im Browser-
+    Fenster und w„hlen Sie "Verknpfungsadresse kopieren" im erscheinenden
+    Kontextmen. Danach drcken Sie die rechte Maustaste auf dem Symbol des
+    Ordners "Zu erledigen" oder eines Unterordners und w„hlen "Einfgen".
+    Sie k”nnen wahlweise auch einen anderen Namen fr das Objekt angeben.
+    Letztendlich brauchen Sie jedoch nur "Einfgen" zu drcken.
+
+    Dritte Methode: Drcken Sie die rechte Maustaste auf einer URL im Browser-
+    Fenster und w„hlen Sie "Verknpfungsadresse kopieren" im erscheinenden
+    Kontextmen. Danach w„hlen Sie "URL hinzufgen" im Auto WGet Daemon-Ordner
+    "Werkzeuge & Hilfsmittel", kopieren die URL in die Eingabezeile (durch
+    Drcken der Tasten UMSCH-EINFG oder durch gleichzeitiges Drcken der
+    linken und rechten Maustaste) und drcken den Knopf "™ffnen". Standardm„áig
+    wird daraufhin im Ordner "Zu erledigen" ein URL-Objekt angelegt, Sie k”nnen
+    jedoch stattdessen auch einen anderen Unterordner mittels der Combo-Box ber
+    der Eingabezeile ausw„hlen.
+
+    Vierte Methode: Bereiten Sie eine ASCII-Datei mit einer Liste von URLs
+    vor (wie z.B. NFTP dies macht), w„hlen Sie "URL hinzufgen" und geben Sie
+    im Eingabefeld den Dateinamen mit der Liste an. Im Ordner "Zu erledigen"
+    wird daraufhin eine Gruppe von URL-Objekten angelegt.
+
+    Fnfte Methode: Setzen Sie den Wert USE_DESKTOP in der Konfigurationsdatei
+    auf 1. Danach k”nnen Sie URL-Objekte wie unter Methode 1 oder 2 beschrieben
+    direkt auf der Arbeitsoberfl„che ablegen. Der Daemon verschiebt Sie dann
+    automatisch in den Ordner "Zu erledigen".
+
+    Sechste Methode:  Setzen Sie den Wert CLIPBOARD_MONITOR in der Konfigura-
+    tionsdatei auf 1 und fhren alles weitere so durch wie in der dritten Methode
+    beschrieben mit nur einer Ausnahme: Das "URL hinzufgen"-Fenster erscheint
+    automatisch, nachdem eine URL in die Zwischenablage kopiert worden ist.
+
+Benutzung im Netzwerk
+
+    Sie k”nnen den Ordner "Zu erledigen" und den Download-Ordner auf einem
+    Server zusammen mit Auto WGet Daemon als gemeinsames Download-Center
+    sowohl von OS/2 als auch von Windows aus benutzen.
+
+    Sie k”nnen auch Client-Server-Verbindungen aufbauen zwischen zwei
+    Computern unter OS/2, wo Auto WGet Daemon installiert ist. Anhand des
+    n„chsten Beispiels mit zwei Computern mit den NetBIOS-Namen SERVER
+    und CLIENT wird demonstriert, wie das funktioniert:
+
+    Auf SERVER legen Sie ein Unterverzeichnis (Name frei w„hlbar) im Ordner
+    "Zu erledigen" an, wir nennen es hier beispielsweise "VomClient". Ziehen
+    Sie mittels Drag'n'Drop die Konfigurations-Schablonendatei awget.cfg (liegt
+    in "Werkzeuge & Hilfsmittel") in dieses Verzeichnis und ”ffnen die Datei
+    dann in einem Editor zum Bearbeiten. Entfernen Sie die Kommentarzeichen
+    am Beginn der jeweiligen Zeile und „ndern Sie die Werte fr folgende
+    Parameter wie beschrieben:
+
+       MESSAGE_DONE  = net send CLIENT "%M: %U"
+       MESSAGE_ERROR = net send CLIENT "%M: %U"
+
+    Zus„tzlich mssen Sie dem Rechner CLIENT Schreib- und Leserechte fr
+    diesen Ordner erteilen. In unserem Fall benutzen wir gemeinsam das
+    Verzeichnis, wo Auto WGet Daemon installiert ist.
+
+    Nun legen wir auf CLIENT ein Verzeichnis "ZumServer" im "Zu erledigen"-Ordner
+    an und erzwingen zus„tzlich eine Download-Umleitung in dieses Verzeichnis in
+    der Konfigurationsdatei:
+
+       REDIRECT_TO = \\server\awget\folders\todo\VomClient
+
+    Das ist alles. Jeder URL, der in den "ZumServer"-Ordner auf CLIENT
+    gezogen wird, wird von dort zum "VomClient"-"Ordner auf SERVER
+    verschoben und eine Download-Fertigmeldung wird von SERVER zu CLIENT
+    zurckgesendet.
+
+    Hinweis: Es ist nicht zwingend erforderlich, auf CLIENT ein spezielles
+    Unterverzeichnis anzulegen. Sie k”nnen awget.cnf auch einfach im
+    "Zu erledigen"-Verzeichnis ablegen.
+
+Einige Anmerkungen zu NFTP
+
+    NFTP ist ein bekannter FTP-Klient fr OS/2. Er wird entwickelt von Sergey
+    Ayukov. Man findet ihn unter http://www.ayukov.com. Um NFTP mit dem Auto
+    WGet Daemon benutzen zu k”nnen, reicht es aus, nur zwei Zeilen in der
+    Datei nftp.ini zu „ndern (vergessen Sie nicht, das Kommentarsymbol ";" am
+    Anfang der Zeilen zu entfernen):
+
+        launch-wget = "x:\path_to_awget\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    "x:\path_to_awget" muss dabei durch das Verzeichnis ersetzt werden, worin
+    sich Auto WGet Daemon befindet. Danach k”nnen Sie Downloads starten, indem
+    Sie die gewnschten Dateien selektieren und die Tastenkombination "UMSCH-W"
+    drcken.
+
+Konfiguration
+
+    Die Hauptkonfigurationsdatei (mit Namen "AWGET.CFG") liegt im
+    Verzeichnis %ETC% (%ETC% zeigt gew”hnlich auf \MPTN\ETC). Im Ordner
+    "Werkzeuge & Hilfsmittel" befindet sich ein WPS-Objekt zur Bearbeitung
+    dieser Konfigurationsdatei. Innerhalb der Datei existiert zu jeder
+    Anweisung eine Beschreibung derselben als Kommentar.
+
+    Sie k”nnen Unterordner im Ordner "Zu erledigen" anlegen und dorthin
+    deren eigene Konfigurationsdateien. Darin k”nnen Sie einige Anweisungen
+    aus der Hauptkonfigurationsdatei ver„ndern (Ordner-Bearbeitungszeit,
+    Downloadverzeichnis usw.). Eine Schablone zur Erzeugung dieser Dateien
+    befindet sich im Ordner "Werkzeuge & Hilfsmittel".
+
+    Vergessen Sie dabei nicht, das Zeichen "#" als Kommentarzeichen vor den
+    Anweisungen, die Sie benutzen m”chten, zu entfernen.
+
+Bekannte Fehler
+
+    Auto WGet Daemon versteht keine URL-Objekte, die von Netscape
+    Communicator 4.61 unter OS/2 Warp 3.0 erzeugt wurden. Sie k”nnen
+    Netscape Navigator 2.02 oder Netscape Communicator 4.04 benutzen oder
+    die URL mittels "URL hinzufgen" senden. Oder Sie k”nnen OS/2 Warp 4
+    oder h”her benutzen :)
+
+Zus„tzliche Programme
+
+    Pmpopup2.exe Ulrich Sturmberg PM Popup Version 1.0
+
+    Auáerdem ben”tigen Sie das Program "netstat" aus dem Standard TCP/IP-
+    Paket, um PPP-Verbindungen zu berprfen.
+
+Plugins
+
+    Plugins sind Programme zur Verbesserung und Erweiterung der Funktionalit„t
+    Auto WGet Daemon. Es werden zwei Modultypen untersttzt - globale und
+    private. Globale Module arbeiten direkt mit dem Daemon zusammen und wirken
+    sich speziell auf Job-Planungen aus. Private Module arbeiten mit einem
+    gestarteten Download-Prozess zusammen und k”nnen sich dabei auf die
+    Ausfhrung dieses Prozesses auswirken.
+
+    Um Plugins benutzen zu k”nnen, mssen Sie sie in der Hauptkonfigurations-
+    datei AWGET.CFG angeben. Benutzen Sie dazu den Schlssel GLOBAL_PLUGIN
+    fr globale Module und PRIVATE_PLUGIN fr private. Beispiel:
+
+    GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    Um ein neues globales Modul benutzen zu k”nnen, mssen Sie den Daemon
+    neu starten. Private Module werden eingeschaltet, sobald ein Download-
+    Prozess startet.
+
+    Hier ist eine Info fr Entwickler:
+
+    Ein Plugin ist ein losgel”ster Prozess. Es l„uft mit dem Daemon als
+    globales Modul oder mit jedem einzelnen Download-Prozess als privates
+    Modul. Sie k”nnen mit Modulen ber Standard-I/O-Streams interagieren.
+    Die Kommunikation findet ber spezielle Befehle mittels Zeichenketten
+    statt. Jede Zeichenkette enth„lt genau einen Befehl. Nachdem ein
+    Befehl an das Modul bermittelt wurde, muss auf die Antwort gewartet
+    werden. Die Ausfhrung des Daemons wird gestoppt bis die Antwort
+    eintrifft. Wenn die Konfigurationsdatei mehr als ein Modul enth„lt,
+    werden alle Module in der Reihenfolge ihrer Definition abgearbeitet.
+
+    Befehle bestehen aus 4 Zeichen langen Schlsselw”rten und optionalen
+    Parametern. Zwischen dem Befehl und den Optionen muss ein Leerzeichen
+    eingefgt werden.
+
+    Es sind nur zwei Arten von Antworten in Modulen erlaubt: DONE und FAIL.
+    DONE kennzeichnet die erfolgreiche Ausfhrung eines Befehls. FAIL zeigt
+    einen Fehler oder die eingeschr„nkte Ausfhrung einer Funktion an. Die
+    Information, die mit DONE gesendet wird, wird auf dem Bildschirm aus-
+    gegeben, die, die mit FAIL gesendet wird, wird auf dem Bildschirm aus-
+    gegeben und in die Fehler-Logdatei geschrieben.
+
+    Module k”nnen einen oder mehrere Befehle fr zus„tzliche Informationen
+    senden (INFO, EVNT und ALRM), bevor sie DONE oder FAIL senden. Die
+    Info, die einem dieser Befehle folgt, wird auf dem Bildschirm ausgegeben.
+    Die Information aus dem EVNT-Befehl wird in die Ereignisanzeige
+    geschrieben und die aus ALRM in die Fehler-Logdatei.
+
+    Folgende Befehle k”nnen in gobalen Modulen benutzt werden:
+
+      INIT awget_home_directory
+      Wird zum Zeitpunkt der Initialisierung von Auto WGet Daemon gesendet.
+      Die Antwort des Moduls wird ignoriert.
+
+      SCAN todo_directory
+      Wird vor dem Beginn der šberprfung der Arbeitsoberfl„che und des
+      Ordners "Zu erledigen" gesendet. Das šberprfen wird auch bei einer
+      FAIL Antwort wenigstens eines Modules fortgesetzt.
+
+      CONF configuration_file
+      Wird gesendet zur Anzeige von nderungen der Hauptkonfiguratiosndatei.
+      Die Antwort des Moduls wird ignoriert.
+
+      SEXE job_file
+      Wird gesendet bevor der Download-Prozess startet. Das Modul kann den
+      Jobdateiinhalt „ndern. Im Falle einer FAIL Antwort, wird der Start
+      verschoben.
+
+      SEND job_file
+      Wird gesendet nach Beendigung des Download-Prozesses. Das Modul kann den
+      Jobdateiinhalt „ndern. Die Antwort des Moduls wird ignoriert.
+
+      STOP
+      Wird gesendet bevor der Daemon beendet wird. der Daemon wartet nicht auf
+      die Antwort des Moduls. Er wird sofort beendet nach Senden des Kommandos
+      an alle Module.
+
+    Folgende Befehle k”nnen in privaten Modulen benutzt werden:
+
+      INIT job_file
+      Wird gesendet zum Zeitpunkt der Download-Initialisierung. Das Modul kann
+      den Jobdateiinhalt „ndern. Im Falle einer FAIL Antwort mindestens eines
+      Modules, wird der Prozess gestoppt.
+
+      DATA
+      Wird gesendet bevor die Ausgabebersetzung des Download-Programms beginnt.
+      Nach der Antwort DONE, muss das Modul den Eingabe-Modus in Symbol „ndern.
+      Die šbersetzung endet bei '00'x.
+
+      STOP job_file
+      Wird gesendet bevor der Download-Prozess beendet wird. Das Modul kann
+      den Jobdateiinhalt „ndern.  ie Antwort des Moduls wird ignoriert.
+
+    Beispiele fr globale und private Plugins finden Sie im "PlugIns"-
+    Verzeichnis von Auto WGet Daemon.
+
+Job-Datei
+
+    Alle fr ein Download erforderlichen Information werden in einer Job-
+    Datei abgelegt. Das Format einer Job-Datei „hnelt dem einer Konfigurations-
+    datei und enth„lt Paare - Schlssel und Werte. Folgende Schlssel werden
+    benutzt:
+
+      OBJECT                Objekt mit URL Namen.
+      URL                   Download URL.
+      DOWNLOAD              Verzeichnis, in dem heruntergeladene Dateien abgelegt werden.
+      MESSAGE_DONE          Nachricht fr einen erfolgreichen Download.
+      MESSAGE_ERROR         Nachricht fr einen fehlerhaften Download.
+      DOWNLOADS_UTILITY     Download-Programm.
+      DOWNLOADS_PARAMETERS  Parameter des Download-Programms.
+      DOWNLOADS_RC          Rckgabewert des Download-Programms.
+      DOWNLOADS_INFO        Letzte Meldung des Download-Programms.
+
+    Beispiele fr das Lesen und Schreiben von Job-Dateien finden Sie in den
+    Dateien awpglob.cmd and awppriv.cmd files im "Plugins"-Verzeichnis von
+    Auto WGet Daemon.
+
+šber
+
+    Idee und erste Version (C) 1998 Steve Trubachev
+    Aktuelle Version (C) 1998-2002 Dmitry A.Steklenev
+
+    Senden Sie Kommentare an: glass@ptv.ru
+
+    Auto WGet Daemon ist freie Software; das bedeutet, dass jeder sie
+    unter bestimmten Bedingungen frei benutzen und verteilen darf.
+    Auto WGet Daemon habe ich in meiner Freizeit entwickelt.
+    Deshalb wrde ich mich, wenn Sie Auto WGet Daemon ntzlich finden
+    oder gerne zus„tzliche Features implementiert haben m”chten, ber
+    eine kleine Spende freuen, um meine Arbeit zu untersttzen.
+
+    Spenden fr das Auto WGet Daemon-Projekt k”nnen Sie ber die BMT
+    Micro Webseite:
+
+    https://secure.bmtmicro.com/ECommerce-OffSite/12080000.html
+
+Besonderer Dank geht an:
+
+    - Yuri Efimoff <yuri.efimoff@multex.com> fr seine Hilfe, dies alles
+      ins Englische zu bersetzen.
+    - bj <bj@ksib.kemerovo.su> fr seine Code-Beispiele fr die Fenster-
+      Shortcut-Behandlung.
+    - Bernd Schemmer fr die "REXX Tipps and Tricks".
+    - Vladimir Zabrodsky fr die "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - Guillaume Gay <guillaume.gay@bigfoot.com> fr die franz”sische šbersetzung
+      der Nachrichtendateien und des Handbuchs.
+    - Che-ching Wu <ccwu@pie.com.tw> fr die (traditionell) chinesische
+      šbersetzung der Nachrichtendateien und des Handbuchs.
+    - Bernd Giesen <Bernd.Giesen@t-online.de> fr die deutsche šbersetzung
+      der Nachrichtendateien und des Handbuchs.
+    - Jan-Erik Larka <j-erik.p@telia.com> fr die schwedische šbersetzung
+      der Nachrichtendateien und des Handbuchs.
+    - Alfredo Fern ndez D¡az <alfredo@netropolis-si.com> fr die spanische šbersetzung
+      der Nachrichtendateien und des Handbuchs.
+

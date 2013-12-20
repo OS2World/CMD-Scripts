@@ -1,0 +1,314 @@
+-- New node --
+Number: 1, Offset: 130 (0x82)
+-- Node data --
+Location:   130    0082
+namePtr:    128    0080
+nameLen:      2      02
+Type:         1      01
+Left:         0    0000
+Down:       168    00A8
+valuePtr:     0    0000
+valueLen:     0    0000
+parent:       0    0000
+-- Additional --
+Name:         "/"
+Navigates to: 168
+
+-- New node --
+Number: 2, Offset: 168 (0xA8)
+-- Node data --
+Location:   168    00A8
+namePtr:    162    00A2
+nameLen:      6      06
+Type:         1      01
+Left:       207    00CF
+Down:         0    0000
+valuePtr:     0    0000
+valueLen:     0    0000
+parent:     130    0082
+-- Additional --
+Name:         "Users"
+Navigates to: 207
+
+-- New node --
+Number: 3, Offset: 207 (0xCF)
+-- Node data --
+Location:   207    00CF
+namePtr:    200    00C8
+nameLen:      7      07
+Type:         1      01
+Left:       297    0129
+Down:       248    00F8
+valuePtr:     0    0000
+valueLen:     0    0000
+parent:     130    0082
+-- Additional --
+Name:         "Common"
+Navigates to: 248
+Navigates to: 297
+
+-- New node --
+Number: 4, Offset: 248 (0xF8)
+-- Node data --
+Location:   248    00F8
+namePtr:    239    00EF
+nameLen:      9      09
+Type:         1      01
+Left:         0    0000
+Down:       392    0188
+valuePtr:   352    0160
+valueLen:     0    0000
+parent:     207    00CF
+-- Additional --
+Name:         "Profiles"
+Navigates to: 352
+Navigates to: 392
+
+-- New node --
+Number: 5, Offset: 297 (0x129)
+-- Node data --
+Location:   297    0129
+namePtr:    280    0118
+nameLen:     17      11
+Type:         1      01
+Left:       439    01B7
+Down:         0    0000
+valuePtr:     0    0000
+valueLen:     0    0000
+parent:     130    0082
+-- Additional --
+Name:         "Version Registry"
+Navigates to: 439
+
+-- New node --
+Number: 6, Offset: 352 (0x160)
+-- Node data --
+Location:   352    0160
+namePtr:    329    0149
+nameLen:     15      0F
+Type:        17      11
+Left:       493    01ED
+Down:         0    0000
+valuePtr:   344    0158
+valueLen:     8    0008
+parent:     248    00F8
+-- Additional --
+Name:         "CurrentProfile"
+Value:        "Alfredo"
+Navigates to: 493
+
+-- New node --
+Number: 7, Offset: 392 (0x188)
+-- Node data --
+Location:   392    0188
+namePtr:    384    0180
+nameLen:      8      08
+Type:         1      01
+Left:         0    0000
+Down:         0    0000
+valuePtr:   571    023B
+valueLen:     0    0000
+parent:     248    00F8
+-- Additional --
+Name:         "Alfredo"
+Navigates to: 571
+
+-- New node --
+Number: 8, Offset: 439 (0x1B7)
+-- Node data --
+Location:   439    01B7
+namePtr:    424    01A8
+nameLen:     15      0F
+Type:         1      01
+Left:         0    0000
+Down:         0    0000
+valuePtr:     0    0000
+valueLen:     0    0000
+parent:     130    0082
+-- Additional --
+Name:         "Private Arenas"
+
+-- New node --
+Number: 9, Offset: 493 (0x1ED)
+-- Node data --
+Location:   493    01ED
+namePtr:    471    01D7
+nameLen:     18      12
+Type:        18      12
+Left:       617    0269
+Down:         0    0000
+valuePtr:   489    01E9
+valueLen:     4    0004
+parent:     248    00F8
+-- Additional --
+Name:         "AutoStartWithLast"
+Value:        x2c(00000000)
+Navigates to: 617
+
+-- New node --
+Number: 10, Offset: 571 (0x23B)
+-- Node data --
+Location:   571    023B
+namePtr:    525    020D
+nameLen:     10      0A
+Type:        17      11
+Left:       669    029D
+Down:         0    0000
+valuePtr:   535    0217
+valueLen:    36    0024
+parent:     392    0188
+-- Additional --
+Name:         "directory"
+Value:        "E:\configs\Mozilla\Profiles\Alfredo"
+Navigates to: 669
+
+-- New node --
+Number: 11, Offset: 617 (0x269)
+-- Node data --
+Location:   617    0269
+namePtr:    603    025B
+nameLen:     13      0D
+Type:        17      11
+Left:       713    02C9
+Down:         0    0000
+valuePtr:   616    0268
+valueLen:     1    0001
+parent:     248    00F8
+-- Additional --
+Name:         "HavePregInfo"
+Value:        ""
+Navigates to: 713
+
+-- New node --
+Number: 12, Offset: 669 (0x29D)
+-- Node data --
+Location:   669    029D
+namePtr:    649    0289
+nameLen:     12      0C
+Type:        19      13
+Left:       766    02FE
+Down:         0    0000
+valuePtr:   661    0295
+valueLen:     8    0008
+parent:     392    0188
+-- Additional --
+Name:         "LastModTime"
+Value:        x2c(72330EEC17010000)
+Navigates to: 766
+
+-- New node --
+Number: 13, Offset: 713 (0x2C9)
+-- Node data --
+Location:   713    02C9
+namePtr:    701    02BD
+nameLen:      8      08
+Type:        17      11
+Left:         0    0000
+Down:         0    0000
+valuePtr:   709    02C5
+valueLen:     4    0004
+parent:     248    00F8
+-- Additional --
+Name:         "Version"
+Value:        "1.0"
+
+-- New node --
+Number: 14, Offset: 766 (0x2FE)
+-- Node data --
+Location:   766    02FE
+namePtr:    745    02E9
+nameLen:     13      0D
+Type:        19      13
+Left:       814    032E
+Down:         0    0000
+valuePtr:   758    02F6
+valueLen:     8    0008
+parent:     392    0188
+-- Additional --
+Name:         "CreationTime"
+Value:        x2c(FFCF8FE017010000)
+Navigates to: 814
+
+-- New node --
+Number: 15, Offset: 814 (0x32E)
+-- Node data --
+Location:   814    032E
+namePtr:    798    031E
+nameLen:     15      0F
+Type:        17      11
+Left:       862    035E
+Down:         0    0000
+valuePtr:   813    032D
+valueLen:     1    0001
+parent:     392    0188
+-- Additional --
+Name:         "NCHavePregInfo"
+Value:        ""
+Navigates to: 862
+
+-- New node --
+Number: 16, Offset: 862 (0x35E)
+-- Node data --
+Location:   862    035E
+namePtr:    846    034E
+nameLen:     15      0F
+Type:        17      11
+Left:       911    038F
+Down:         0    0000
+valuePtr:   861    035D
+valueLen:     1    0001
+parent:     392    0188
+-- Additional --
+Name:         "NCEmailAddress"
+Value:        ""
+Navigates to: 911
+
+-- New node --
+Number: 17, Offset: 911 (0x38F)
+-- Node data --
+Location:   911    038F
+namePtr:    894    037E
+nameLen:     16      10
+Type:        17      11
+Left:       958    03BE
+Down:         0    0000
+valuePtr:   910    038E
+valueLen:     1    0001
+parent:     392    0188
+-- Additional --
+Name:         "NCServiceDenial"
+Value:        ""
+Navigates to: 958
+
+-- New node --
+Number: 18, Offset: 958 (0x3BE)
+-- Node data --
+Location:   958    03BE
+namePtr:    943    03AF
+nameLen:     14      0E
+Type:        17      11
+Left:      1003    03EB
+Down:         0    0000
+valuePtr:   957    03BD
+valueLen:     1    0001
+parent:     392    0188
+-- Additional --
+Name:         "NCProfileName"
+Value:        ""
+Navigates to: 1003
+
+-- New node --
+Number: 19, Offset: 1003 (0x3EB)
+-- Node data --
+Location:  1003    03EB
+namePtr:    990    03DE
+nameLen:      9      09
+Type:        17      11
+Left:         0    0000
+Down:         0    0000
+valuePtr:   999    03E7
+valueLen:     4    0004
+parent:     392    0188
+-- Additional --
+Name:         "migrated"
+Value:        "yes"

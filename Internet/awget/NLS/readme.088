@@ -1,0 +1,285 @@
+Auto WGet Daemon
+Great idea and first release (C) 1998 Steve Trubachev
+Final release (C) 1998-2003 Dmitry A.Steklenev
+
+內容:
+    簡短描述
+    下載軟體
+    安裝
+        注意事項
+    它是怎麼運作的
+        如何將 URL 傳給 daemon
+        在網路環境中使用
+        NFTP 二三事
+    設定
+    己知的問題
+    額外的程式
+    外掛模組
+        工作檔
+    關於
+    致謝
+
+簡短描述
+
+    Auto WGet Daemon 是一個免費的工具, 可以控制 GNU Wget 或其它類似軟體下載指定
+    的檔案. 如果你厭倦老是從 Netscape Navigator 複製鍵結, 手動啟動 WGet (天啊!
+    你有這麼懶嗎? :), 那麼 Auto WGet Daemon 就是你要的東東. Auto WGet Daemon 可
+    以讓你只需透過拖拉 URL 到特定資料夾就自動下載. 除此之外, Auto WGet Daemon 支
+    援下載佇列, 並且在不正常關機或其它不正常地結束時, 可以重新下載失敗的 URL.
+
+下載軟體
+
+    在這個版本中, 目前只支援兩套軟體: GNU WGet 和 cURL. 為了能夠正常執行, 你至少
+    要安裝其中一種. 當然你還必須確定它們也可以正常執行. 最後, 程式必須放在
+    CONFIG.SYS 中 PATH 所設定的其中一個目錄中.
+
+    OS/2 版的 GNU WGet 可以在 Hobbes 找到:
+    http://http://hobbes.nmsu.edu/ (搜尋 "wget")
+
+    OS/2 版的 cUrl 則是在它的首頁:
+    http://curl.haxx.se
+
+安裝
+
+    你必須將壓縮檔解到暫存目錄中然後執行 INSTALL.CMD, 回答一些問題後就算完成安裝
+    了. 安裝程式會在你的桌面上建立 "Auto WGet daemon" 資料夾和 "待辦" 資料夾的投
+    影. 此外, 程式會在 %ETC% 下建立 (如果不是第一次安裝的話會更新) 主設定檔
+    AWGET.CFG.
+
+    而 daemon 物件會被放在 "啟動" 資料夾中. 安裝後你不需要重新啟動電腦. daemon
+    會自動啟動.
+
+    Auto WGet Daemon 必須安裝在支援長檔名和延伸屬性 (EA) 的檔案系統中 (如 HPFS,
+    HPFS386, JFS 或 FAT32).
+
+注意事項
+
+    這個版本的 Auto WGet Daemon 可以用來更新 1.6.1 以前的版本, 但是強烈建議不要
+    這樣做. 如果你目前使用的是 1.6.1 以前的版本, 你可以解除安裝, 刪除
+    %ETC%\AWGET.CFG, 然後安裝新的版本.
+
+它是怎麼運作的
+
+    Auto WGet Daemon 會不斷地掃描 "待辦" 資料夾及其子資料夾的內容. 一旦有包含了
+    URL 的物件被放入這些資料夾中, 下載軟體就會啟動, 然後這些物件就會被移到 "處理
+    中" 資料夾. 這就表示下載程序己經啟動了.
+
+    在中途結束下載或電腦重新啟動, 所有 "處理中" 資料夾中的物件都會被搬回原來的地
+    方, 然後照一般程序重新處理.
+
+如何將 URL 傳給 daemon
+
+    方法 1: 你可以用滑鼠將 URL 拖拉到 "待辦" 資料夾 (或其子資料夾) 中. 這個 URL
+    就會被放入下載佇列中.
+
+    方法 2: 在瀏灠器畫面中的 URL 上按滑鼠右鍵, 然後選 "複製連結位置". 之後再在
+    "待辦" 資料夾 (或其子資料夾) 的圖記上按滑鼠右鍵, 選 "貼上...". 你可以選擇要
+    不要輸入其它名稱. 這並不重要. 完成後按 "貼上" 就可以了.
+
+    方法 3: 在瀏灠器的 URL 上按滑鼠右鍵, 然後選 "複製連結位置". 之後從 Auto WGet
+    Daemon 中的 "工具組" 執行 "新增 URL", 如果在編輯方塊中沒有 URL, 你可以自行貼
+    上 URL (可以按 SHIFT-INS 或同時按下滑鼠左右鍵), 最後按 "新增" 即可. 一般來說
+    對應該 URL 的物件會自動加到 "待辦" 資料夾中, 但你若想放到其它資料夾中, 你可
+    以使用視窗中的下拉式選單選取.
+
+    方法 4: 你也可以產生一個 URL 列表的 ASCII 檔 (像NFTP做的那樣), 然後執行 "新
+    增 URL", 輸入該檔名到編輯方塊中. 這樣就會建立 URL 列表中所有 URL 的物件到
+    "待辦" 資料夾中.
+
+    方法 5: 你可以將設定檔中的 USE_DESKTOP 設為 "1". 然後, 你可以使用方法 1和方
+    法 2中的方式將 URL 放到桌面上. daemon 就會把它搬到 "待辦" 資料夾中. 其實還有
+    一個方法在英文版文件中沒提到, 那就是按右鍵選 "建立 URL 物件", 這樣就 OK 了.
+
+    方法 6: 將設定檔中 CLIPBOARD_MONITOR 的設定值改為 1, 然後其餘的跟方法 3 的步
+    驟差不多, 唯一的差別在於 "新增 URL" 程式會在你複製 URL 後自動執行, 對話盒會
+    自動蹦現出來.
+
+在網路環境中使用
+
+    你可以藉由分享 "待辦" 和 "佇列" 資料夾, 使 OS/2 成為一個下載中心, 那麼無論在
+    Windows 或 OS/2 環境下均可以使用. 在這種環境中, 只能採用拖拉 URL 到 "待辦"
+    資料夾的方式將 URL 傳給 daemon.
+
+    另外, 你也可以在兩部均有安裝 Auto WGet Daemon 的 OS/2 機器上透過建立客戶-伺
+    服關係遠端控制下載. 我們在下面的例子中, 示範如何使用這樣的環境. 在例子中, 有
+    兩部電腦, 分別叫 SERVER 和 CLIENT, 均安裝了 NetBIOS.
+
+    在 SERVER 這部電腦上, 你必須在 "待辦" 資料夾中建立你自己的子資料夾, 假設我們
+    叫他做 "FromClient". 接著拖拉附君設定檔模板 awget.cfg (在 "工具組" 可以找到)
+    到這個子資料夾中, 然後根據需求修改. 你必須拿掉下列設定的註解符號, 並修改其設
+    定值:
+
+       MESSAGE_DONE  = net send CLIENT "%M: %U"
+       MESSAGE_ERROR = net send CLIENT "%M: %U"
+   
+    此外, 你還需要更動資料夾權限, 開放給 CLIENT 讀寫. 在我們的例子中, 我們直接共
+    享整個 Auto WGet Daemon 安裝目錄.
+    
+    再來, 我們在 CLIENT 上的 "待辦" 資料夾中建立 "ToServer" 子資料夾. 同時在附加
+    設定檔中設定其下載重導為:
+
+       REDIRECT_TO = \\server\awget\folders\待辦\fromclient
+    
+    到這裡, 所有的步驟都完成了. 每個在 CLIENT 中丟進 "ToServer" 資料夾的 URL 都
+    會被移到 SERVER 這部電腦的 "FromClient" 資料夾中, 同時下載完成或失敗的訊息,
+    也會從 SERVER 傳到 CLIENT.
+
+    注意: 在 CLIENT 上建立特定資料夾並不是必需的, 你也可以直接在 "待辦" 資料夾中
+    放入 awget.cfg 即可.
+
+NFTP 二三事
+
+    NFTP 是一套 OS/2 上的知名 FTP 軟體, 由 Sergey Ayukov 所開發. 你可以在
+    http://www.ayukov.com 找到這套軟體. 要讓 NFTP 透過 Auto WGet Daemon 只要更動
+    nftp.ini 中的兩行設定即可. (別忘了拿掉這兩行設定的註解符號 ";")
+
+        launch-wget = "x:\path_to_awget\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    "x:\path_to_awget" 是指你 Auto WGet Daemon 的安裝目錄. 在完成上述修改後, 你
+    就可以在 NFTP 下指定想要的檔案, 然後按下 Shift-W 將下載要求導給 Auto WGet
+    Daemon 了.
+
+設定
+
+    主設定檔 (叫做 "AWGET.CFG") 是存在 %ETC% 目錄下 (通常是 \MPTN\ETC). 在 "工具
+    組" 資料夾中有一個物件是用來編輯設定檔的. 每個設定的說明都以註解的方式寫在設
+    定檔中.
+
+    你可以在 "待辦" 資料夾中建立子資料夾, 然後放入它們各自的附加設定檔. 透過這個
+    功能你可以為每個子資料夾改變某些設定 (資料夾處理間隔, 下載目錄, 等等...). 在
+    "工具組" 資料夾中你可以找到一個範例檔.
+
+    如果你想要修改某一個參數時, 別忘了將該參數的註解符號 "#" 拿掉.
+
+己知的問題
+
+    Auto WGet Daemon 無法解析 OS/2 Warp 3.0 中 Netscape Communicator 4.61 所建立
+    的 URL 物件. 你可以改使用 Netscape Navigator 2.02, Netscape Communicator
+    4.04 或用 "新增 URL" 新增 URL 物件. 或者你可以安裝 OS/2 Warp 4.0 或更新的版
+    本會更好 :)
+
+額外的程式
+
+    Pmpopup2.exe Ulrich Sturmberg PM Popup 1.0 版
+
+    除此之外, 你需要標準 TCP/IP 中的 netstat 工具用來確認 PPP 連線狀態.
+
+外掛模組
+
+    外掛模組是用來加強 Auto WGet Daemon 功能的程式. 目前支援兩種型態的模組 - 全
+    域模組和私人模組. 全域模組會直接和 daemon 互相溝通, 影響工作計畫的部份. 私人
+    模組則會和每個下載程序溝通並且改變它們執行的方式.
+
+    要掛上你需要的模組時, 在主設定檔 AWGET.CFG 中加上設定即可. 全域模組使用
+    GLOBAL_PLUGIN 這個關鍵字, 私人模組則使用 PRIVATE_PLUGIN. 例如:
+    GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    要啟動一個新的全域模組你必須重新啟動 daemon. 私人模組則會在特定的下載程序啟
+    動時同時載入.
+
+    下面是一些給開發者的資訊.
+
+    可外掛模組是一個 detached process. 和 daemon (全域模組) 或和每一特定下載程序
+    (私人模組) 同時執行. 你可以透過標準輸入輸出和模組溝通. 溝通的方式是透過一行
+    一行的特定指令. 每一行包含一個指令. 當 daemon 傳遞一個指令給模組後, 會接收回
+    傳值, 在這個時候 daemon 會暫停執行直到得到回傳值. 如果設定檔包含一個以上的模
+    組, 所有的模組會以定義的順序被處理.
+
+    指令包含四個字元的關鍵字和選擇性的資訊部份. 關鍵字和資訊間必須插入一個空白.
+
+    模組只被允許回傳兩種值: DONE 和 FAIL. DONE 表示指令執行成功. FAIL 表示錯誤或
+    要求執行被限制的功能. DONE 的訊息會被印到螢幕上. FAIL 則會被印到錯誤日誌檔中
+    和螢幕上.
+
+    模組在傳送 DONE 和 FAIL 前可以傳送一個或多個指令要求額外的資訊 (INFO, EVNT
+    和 ALRM), 跟在這些指令後頭的資訊將會被印到螢幕上. 同時, EVNT 指令得到的資訊
+    會被記錄到事件日誌檔而 ALRM 則記到錯誤日誌檔中.
+
+    和全域模組溝通時會使用以下的指令:
+
+      INIT awget_home_directory
+      會在 Auto WGet Daemon 初始化時傳送. 模組的回傳值會被忽略.
+
+      SCAN todo_directory
+      會在掃描桌面和 "待辦" 資料夾前傳送. 如果有一個以上的模組傳回 FAIL, 掃描就
+      會被取消.
+
+      CONF configuration_file
+      當主設定檔改變後會送出這個指令. 模組的回傳值會被忽略.
+
+      SEXE job_file
+      在下載程序開始前送出. 模組可以改變工作檔內容. 如果傳回 FAIL, 啟動會延期.
+
+      SEND job_file
+      會在下載完成後傳送. 模組可以改變工作檔的內容. 而模組的回傳值會被忽略.
+
+      STOP
+      會在 daemon 結束前傳送. daemon 不會等待模組的回傳. 它會在傳送給所有模組後
+      直接結束.
+
+    和私人模組溝通時會使用下列的指令:
+
+      INIT job_file
+      會在下載程序初始化時傳送. 模組可以改變工作檔的內容. 當任一個模組的回傳值是
+      FAIL 時, 下載程序會被暫停.
+
+      DATA
+      會在開始轉移下載軟體輸出前傳送. 在回傳 DONE 後, 模組必須改變輸入模式至
+      symbol. 轉移會以 '00'x 結尾. 這段也是怪怪的.
+
+      STOP job_file
+      會在下載程序結束前傳送. 模組可以改變工作檔內容. 而模組的回傳值會被忽略.
+
+    全域和私人外掛模組的範例可以在 Auto WGet daemon 的 "外掛模組" 目錄中找到.
+
+工作檔
+
+    下載程序所需的所有資訊都可以透過工作檔傳遞. 工作檔的格式跟設定檔很像, 包含了
+    關鍵字和值. 下面是關鍵字列表:
+
+      OBJECT                要處理的 URL 物件名稱.
+      URL                   要下載的 URL.
+      DOWNLOAD              下載的檔案要存放的目錄.
+      MESSAGE_DONE          成功下載後要執行的指令.
+      MESSAGE_ERROR         下載失敗時要執行的指令.
+      DOWNLOADS_UTILITY     下載軟體.
+      DOWNLOADS_PARAMETERS  要傳給下載軟體的參數.
+      DOWNLOADS_RC          下載軟體程式結束的傳回值.
+      DOWNLOADS_INFO        下載軟體最後的訊息.
+
+    你可以在 "外掛模組" 目錄的 awpglob.cmd 和 awppriv.cmd 中找到一些關於讀取和撰
+    寫工作檔的範例.
+
+關於
+
+    Great idea and first release (C) 1998 Steve Trubachev
+    Final release (C) 1998-2002 Dmitry A.Steklenev
+
+    你可以將意見寄到: glass@ptv.ru
+
+    Auto WGet Daemon 是一套自由軟體; 也就是說, 每個人都可以在某些特定的限制下自
+    由地使用和傳播這套軟體. 這套軟體是我利用空閒時間完成的. 因此如果你覺得它對
+    你是有用的或你希望某些新功能可以加進去, 請捐款支持我的努力.
+
+    捐款支持 Auto WGet Daemon 請連到 BMT Micro 網站:
+
+    https://secure.bmtmicro.com/ECommerce-OffSite/12080000.html
+
+致謝
+
+    - to Yuri Efimoff <yuri.efimoff@multex.com> for assistance in
+      translation of all this on English.
+    - to bj <bj@ksib.kemerovo.su> for a code samples for windows
+      shortcuts processing.
+    - to Bernd Schemmer for the "REXX Tips and Triks".
+    - to Vladimir Zabrodsky for the "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - to Guillaume Gay <guillaume.gay@bigfoot.com> for translation of a message
+      file and manual on French.
+    - to Che-Ching Wu <ccwu@pie.com.tw> for translation of a message
+      file and manual on Traditional Chinese.
+    - to Bernd Giesen <Bernd.Giesen@t-online.de> for translation of a message
+      file and manual on German.
+    - to Jan-Erik Larka <j-erik.p@telia.com> for translation of a message
+      file and manual on Swedish.

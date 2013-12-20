@@ -1,0 +1,160 @@
+HOME                     = AWGet home
+DOWNLOAD                 = 下載檔案存放資料夾
+DOWNLOADS_SIMULTANEOUSLY = 最多同時下載數量
+DOWNLOADS_FROM_SAME_HOST = 單一伺服器最多下載量
+DOWNLOADS_ATTEMPTS       = 最多嘗試次數
+DOWNLOADS_UTILITY        = 下載軟體名稱
+DOWNLOADS_PARAMETERS     = 下載軟體參數
+DOWNLOADS_WINDOW         = 下載軟體視窗
+CLIPBOARD_MONITOR        = 監看剪貼簿內容
+CLIPBOARD_EXCLUDE        = 欲排除的檔案型態
+SCAN_INTERVAL            = 掃描時間間隔
+LOG_FILE                 = 日誌檔
+ERROR_LOG                = 錯誤日誌檔
+LOG_KEEP                 = 日誌檔中每筆資料保留天數
+LOG_PRUNE                = 定期自動整理日誌檔
+MESSAGE_DONE             = 完成訊息
+MESSAGE_ERROR            = 錯誤訊息
+MESSAGES                 = 顯示啟動和結束下載的訊息
+CHECK_CONNECTION         = 檢查網路連線狀態
+USE_DESKTOP              = 搜尋桌面上的 URL 檔
+KEEP_FAILED_URL          = 儲存下載失敗的 URL
+KEEP_DONE_URL            = 儲存下載成功的 URL
+
+CONNECTION_ESTABLISHED   = 網路連線建立.
+CONNECTION_BROKEN        = 網路連線中斷.
+
+UNINSTAL_WARNING = 注意! 待辦資料夾和該資料夾裡的東西將會在 Auto WGet Daemon 反安裝過程中\n\
+                   被刪除! 如果你不希望這樣, 你可以將檔案儲存到其它地方.
+UNINSTAL_ERROR   = 目前所在目錄 "%s" 並不是 Auto WGet Daemon 的安裝目錄.\n\
+                   反安裝已被中止, 你必須自行刪除重要檔案.\n\
+UNINSTAL         = 反安裝 Auto WGet Daemon
+REMOVE_CONFIG    = 移除設定檔
+
+INSTALL_DIR      = 安裝目錄
+INSTALL          = 開始安裝 Auto WGet Daemon ...
+NOT_FOUND_UTILS  = 找不到下載軟體或下載軟體不存在!\n請閱讀說明文件後再安裝.
+INSTALL_ABORTED  = 安裝程序中斷!
+SELECT_UTIL      = 選擇下載軟體:
+SELECT_NUMBER    = 輸入編號(0 - 離開)
+OBJECT_DONE      = 物件建立完成.
+OBJECT_ERROR     = 建立物件失敗.
+DIR_DONE         = 資料夾建立完成.
+DIR_ERROR        = 建立資料夾失敗.
+COPY_DONE        = 檔案已成功複製.
+COPY_ERROR       = 複製檔案失敗.
+COMPILE_DONE     = 檔案已編譯完成.
+COMPILE_ERROR    = 編譯失敗.
+ERASE_DONE       = 刪除完成.
+ERASE_ERROR      = 刪除失敗.
+READ_ERROR       = 讀取失敗.
+WRITE_ERROR      = 寫入失敗.
+CONFIG_UPDATED   = 設定檔己更新.
+ENTER_URL        = 輸入 URL 或 URL 列表檔的檔名
+ENTER_ADD        = 新增(~A)
+ENTER_CANCEL     = 取消(~C)
+
+YES              = Yy
+NO               = Nn
+BAD_YESNO        = 啊? 請輸入 'Y' 或 'N'!
+
+NOT_FOUND        = 找不到資料夾.
+CONFIG_CHANGED   = 設定檔己更新.
+PRUNE_START      = 開始整理日誌檔.
+PRUNE_DONE       = 日誌檔整理完成, 去除 %u 筆資料.
+BAD_DOWNLDIR     = 找不到佇列資料夾! 將會使用目前的位置(".")替代.
+NOT_MOVE         = 搬移檔案失敗.
+BAD_URL          = 檔案中包含錯誤的 URL.
+DOWNLOAD_START   = 開始下載.
+DOWNLOAD_DONE    = 下載完成.
+DOWNLOAD_ERROR   = 下載失敗.
+DOWNLOAD_STOP    = 下載中斷.
+DOWNLOAD_REDIR   = Download redirected
+ERROR_IN         = 錯誤 :
+UNKNOWN_SID      = 未知的結束狀態(zombie?)
+PLUGIN_DEAD      = 外掛模組不正常結束.
+
+WAIT_STOPPED     = Auto WGet Daemon 正在暫停中. 請稍候.
+STOPPED          = Auto WGet Daemon 己暫停.
+NOT_RUNNING      = Auto WGet Daemon 目前並未啟動.
+STARTED          = Auto WGet Daemon 啟動.
+ALREADY_RUNNING  = Auto WGet Daemon 己啟動.
+
+# Here is objects names
+
+OBJ_HOME         = Auto WGet Daemon
+OBJ_DOWNLOADS    = 佇列
+OBJ_TOOLS        = 工具組
+OBJ_INFO         = 資訊
+OBJ_JOBS         = 工作檔
+OBJ_TODO         = 待辦
+OBJ_RUNNING      = 處理中
+OBJ_DONE         = 下載完成
+OBJ_FAILED       = 下載失敗
+OBJ_DAEMON       = Auto WGet Daemon
+OBJ_UNINSTALL    = 反安裝\nAuto WGet Daemon
+OBJ_EDITCFG      = 編輯設定檔
+OBJ_STOP         = 暫停\nAuto WGet Daemon
+OBJ_EVTLOG       = 觀看事件日誌
+OBJ_ERRLOG       = 觀看錯誤日誌
+OBJ_ADD          = 新增 URL
+OBJ_README_EN    = 讀我檔案(英文版)
+OBJ_README       = 讀我檔案
+OBJ_CHANGES_EN   = 改版歷史
+OBJ_LICENSE_EN   = 版權宣告
+OBJ_LICENSE      = 版權宣告(英文版)
+OBJ_URL_RU       = Auto WGet Daemon\n首頁(俄文版)
+OBJ_URL_EN       = Auto WGet Daemon\n首頁(英文版)
+OBJ_DONATE       = 捐款!
+
+# Here is comments (notes) for configuration file parameters
+
+CFG_HOME                     = Auto WGet Daemon 相關檔案所存放的目錄位置,\n\
+                               這個設定在安裝過程會設好, 通常不需要更動.
+CFG_DOWNLOAD                 = 下載檔案的存放位置.
+CFG_DOWNLOADS_SIMULTANEOUSLY = 定義可以同時處理多少個 URL.
+CFG_DOWNLOADS_FROM_SAME_HOST = 定義每一伺服器最多可下載多少 URL. (0 - 沒有限制)
+CFG_DOWNLOADS_ATTEMPTS       = 定義每個 URL 最多嘗試幾次. 如果下載軟體回傳失敗,\n\
+                               URL 將會被儲存到下一次的處理, 直到定義的次數. (0 - 沒有限制)
+CFG_DOWNLOADS_UTILITY        = 下載軟體的名稱.
+CFG_DOWNLOADS_PARAMETERS     = 這是要傳給下載軟體的參數. 你可以使用以下這些巨集符號: \n\n\
+                               %U - 會被改成要下載的 URL\n\
+                               %D - 會被改成儲存下載資料的目錄\n\
+                               %P - 同上, 會被改成儲存下載資料的目錄, 但\會改成/\n\
+                               %F - 會被改成 URL 中檔名的部份
+CFG_DOWNLOADS_WINDOW         = 定義下載軟體的呈現方式和視窗大小. 參數可以是 "hidden" (隱藏)\n\
+                               或 "visible" (顯示)後面接著是行數及列數(以逗號區隔開).\n\
+CFG_SCAN_INTERVAL            = 掃描待辦資料夾的時間間隔(以秒為單位).
+CFG_CLIPBOARD_MONITOR        = 監看剪貼簿的內容, 當偵測到系統剪貼簿中含有 URL 時,\n\
+                               "新增 URL" 的對話盒會自行蹦現出來.
+CFG_CLIPBOARD_EXCLUDE        = 監看剪貼簿內容時要忽略哪些檔案類型.
+CFG_LOG_FILE                 = 日誌檔名稱, 用來記錄啟動, 暫停, 和其它訊息.
+CFG_ERROR_LOG                = 日誌檔名稱, 用來記錄錯誤訊息.
+CFG_LOG_KEEP                 = 日誌檔中的每筆記錄要保留幾天才清除.
+CFG_MESSAGES                 = 定義開始下載和結束下載時的訊息模式.\n\
+                               1 - 顯示訊息, 0 - 不顯示訊息.
+CFG_MESSAGE_DONE             = 成功下載後要執行的指令. 你可以使用以下的巨集符號:\n\n\
+                               %M - 會被改成成功下載的訊息\n\
+                               %U - 會被改成下載的 URL\n\
+                               %D - 會被改成儲存下載資料的目錄\n\
+                               %P - 同上, 會被改成儲存下載資料的目錄, 但\會改成/\n\
+                               %F - 會被改成 URL 中檔名的部份\n\
+                               %L - 會被改成下載軟體最後的訊息\n\
+                               %R - 會被改成下載軟體的回傳值
+CFG_MESSAGE_ERROR            = 下載失敗後要執行的指令. 你可以使用以下的巨集符號:\n\n\
+                               %M - 會被改成下載失敗的訊息\n\
+                               %U - 會被改成下載的 URL\n\
+                               %D - 會被改成儲存下載資料的目錄\n\
+                               %P - 同上, 會被改成儲存下載資料的目錄, 但\會改成/\n\
+                               %F - 會被改成 URL 中檔名的部份\n\
+                               %L - 會被改成下載軟體最後的訊息\n\
+                               %R - 會被改成下載軟體的回傳值
+CFG_CHECK_CONNECTION         = 在下載前先確認 PPP 或 SLIP 連線狀態. 預設是不做確認.
+CFG_USE_DESKTOP              = 允許掃描桌面上包含 URL 的檔案. 這些檔案會被移到待辦資料夾以便下載.
+CFG_KEEP_FAILED_URL          = 如果設成 1, 下載失敗的 URL 會被移到下載失敗資料夾.
+CFG_KEEP_DONE_URL            = 如果設成 1, 下載成功的 URL 會被移到下載完成資料夾.
+CFG_SCHEDULE                 = 設定資料夾的排程表. 用逗號隔開每個時間區間.\n\
+                               每個時間區間為啟始和結束時間.\n\
+                               例如: SCHEDULE = 06:00-08:30,16:50-03:00
+CFG_REDIRECT_TO              = 將原資料夾中的 URL 重新導向到指定的位置.\n\
+                               目的地必需是確定可存取的完整路徑.

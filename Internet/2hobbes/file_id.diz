@@ -1,0 +1,10 @@
+(V1.04) 2Hobbes - FREEWARE
+This script allows you to automatically
+upload packages and description files to
+the Hobbes File Archive (hobbes.nmsu.edu).
+Before the upload the file names and the
+file_id.diz from the zip file are checked
+for matching version numbers and more.
+Requires UNZIP.EXE of Info-ZIP and using the
+latest upload template from hobbes.
+Author: Christian Langanke <cla@clanganke.de>

@@ -1,0 +1,10 @@
+(v1.01) mzpip - Mozilla Plug-In Pack Install
+The Mozilla Plug-In Pack Installer allows you
+to install the OS/2 Multimedia Plug-In Pack
+for Netscape Communicator to Netscape as
+well as to Mozilla in one step. It can also
+be installed on Mozilla when Netscape
+Communicator is not installed. Simply put
+the REXX script of this package and
+NSPIP30.EXE into one directory and run it.
+Author/Maintainer: cla@clanganke.de

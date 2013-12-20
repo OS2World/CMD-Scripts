@@ -1,0 +1,33 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: awpralf031.zip
+       Short Description: awpralf.cmd v0.3.1 global plugin for Auto WGet Daemon
+        Long Description: additional features for Auto WGet Daemon:
+                          selective download of URL objects on desktop;
+                          download files to different directories
+                          depending on file extensions; check for possible
+                          duplicate files before downloading
+                          bugfix: now works on URLs with less than
+                          18 characters, too
+
+      Proposed directory
+           for placement: /pub/os2/apps/internet/mirror
+
+               Your name: Ralf Maseratis
+           Email address: ralf_maseratis@esper.ping.de
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none)
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 Warp 4 or newer
+ Additional requirements: REXX, Auto WGet Daemon v1.6.5 or newer
+
+                Replaces: /pub/incoming/awpralf03.zip
+
+
+

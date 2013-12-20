@@ -1,0 +1,316 @@
+Auto WGet Daemon
+Utormordentlig orginalid‚ och f”rsta release (C) 1998 Steve Trubachev
+Slutlig release (C) 1998-2003 Dmitry A.Steklenev
+
+INNEHLL:
+    Kort beskrivning
+    Nedladdningsprogram
+    Installation
+	Viktig notering
+    Hur det fungerar
+	Hur man matar in n”dv„ndiga URLer till demonen
+	Anv„ndning i n„tverk
+          N†gra ord om NFTP
+    Konfiguration
+    K„nda problem
+    Till„ggsprogram
+    Plugins
+        Arbetsfil
+    Om
+    Speciella tack
+
+Kort beskrivning
+
+    Auto WGet Daemon „r ett fritt hj„lpmedel f”r att driva GNU WGet eller n†got annat 
+    liknande hj„lpprogram f”r nedladdning av filer. Om du har blivit tr”tt p† att kopiera l„nkar
+    till urklipp f”r hand fr†n Netscape Navigator och starta Wget (Va! r du s† lat? :), s† „r
+    Auto WGet Daemon det du beh”ver. Auto WGet Daemon ger dig m”jlighet att starta
+    nedladdningar genom drag & sl„pp av en l„nk till en speciell mapp. F”rutom att
+    Auto WGet Daemon l„gger upp en k” f”r nedladdning av filer medger det „ven †terstart av
+    misslyckade nedladdningar vid t.ex elavbrott eller andra otrevligheter.
+
+Nedladdningsprogram
+    
+    Just nu finns det endast tv† hj„lpprogram tillg„ngliga och st”dda: GNU WGet och cURL.
+    F”r att Auto WGet Daemon skall fungera beh”ver du installera endera program.
+    Du m†ste dessutom se till att de fungerar som det „r t„nkt. De m†ste placeras i en mapp
+    som refereras till i PATH i CONFIG.SYS.
+
+    OS/2-versionen av GNU WGet kan du finna p† Hobbes:
+    http://http://hobbes.nmsu.edu/ (s”k efter "wget")
+
+    cUrl f”r OS/2 kan du hitta p† dess hemsida:
+    http://curl.haxx.se
+
+Installation
+  
+    Du m†ste packa upp arkivet till en tempor„r mapp och starta INSTALL.CMD,
+    svara p† n†gra fr†gor och allt m†ste vara OK. Installationsprogrammet skapar
+    speciella mappar med namnen "AttG”ra" och "Auto WGet daemon" 
+    p† ditt Skrivbord. Dessutom kommer en mapp %ETC% att skapas (eller uppdateras, om 
+    det inte „r den f”rsta installationen) med konfigurationsfilen AWGET.CFG.
+
+    Ett objekt f”r automatisk start av demonen skapas i mappen "Start". Du beh”ver inte starta
+    om datorn efter installationen. Demonen startas omedelbart efter genomf”rd installation.
+
+    F”r att Auto WGet Daemon skall fungera normalt m†ste det installeras p† n†gon 
+    enhet som st”der l†nga namn och ut”kade attribut i filsystemet (HPFS, HPFS386, 
+    JFS eller FAT32).
+
+Viktig notering
+
+    Denna version av Auto WGet Daemon kan installeras ”ver tidigare version
+    „n 1.6.1, men detta rekommenderas undertryckligen ej. Om du anv„nder en
+    s†dan version, b”r du avinstallera den f”rst, tag bort %ETC%\AWGET.CFG
+    och endast d„refter installera den nya versionen.
+
+Hur det fungerar
+    
+    Auto WGet Daemon scannar "AttG”ra"-mappen  och dess undermappar hela tiden.
+    S† snart ett objekt som inneh†ller en URL-adress dyker upp i en av mapparna, 
+    startas nedladdningsprogrammet. Objektet flyttas till mappen "Aktiv". En ljudsignal
+    talar om att nedladdningsprocessen p†b”rjas.
+
+    Om en situation uppst†r d„r en nedladdning avbryts eller datorn startas om flyttas
+    alla objekt fr†n "Aktiv" till f”reg†ende plats f”r att bearbetas som vanligt.
+
+Hur man matar in n”dv„ndiga URLer till demonen
+
+    Metod 1: n„r du ser n”dv„ndig URL kan du dra den till "AttG”ra"-mappen (eller en
+    undermapp). Den URLen placeras i nedladdningsk”n.
+
+    Metod 2: du kan klicka med h”ger musknapp i webl„sarens f”nster p† l„nken
+    och v„lja "Kopiera L„nkadress". D„refter klickar du med h”ger musknapp p†
+    "AttG”ra"-mappens ikon eller en undermapp och v„ljer "Klistra in..."
+    Du kan ange ett namn p† URL-objektet som skapas om du vill, men det „r inte
+    n”dv„ndigt. Allt du beh”ver g”ra „r att trycka p† "Klistra in".    
+
+    Metod 3: du kan klicka med h”ger musknapp i webl„sarens f”nster p† l„nken
+    och v„lja "Kopiera L„nkadress". D„refter k”r du "L„gg till URL" som finns i mappen
+    "Verktyg och Hj„lpprogram" i mappen Auto WGet Daemon, kopiera URLen till
+    textraden (genom att trycka SHIFT-INS eller genom att trycka in v„nster och klicka med
+    h”ger musknapp samtidigt) och trycka p† knappen "™ppna". Objekt med tillr„cklig info
+    och URL-adress skapas d† i "AttG”ra"-mappen, men du kan ocks† v„lja en mapp fr†n
+    rutan ovanf”r inmatningsf„ltet.
+
+    Metod 4: du beh”ver preparera en ASCII-fil (textfil) med uppradade URL-adresser
+    (s†som NFTP g”r det), k”r "L„gg till URL" och skriv i s”kv„g och filnamn p† textraden f”r
+    den fil som inneh†ller URL-adresserna. I "AttG”ra"-mappen skapas URL-objekt utifr†n listan.
+    
+    Metod 5: st„ll in USE_DESKTOP i konfigurationsfilen till "1". 
+    Efter det kan du placera URLer m.h.a. metod 1 & 2 direkt p† skrivbordet.
+    Demonen tar hand om att flytta URL-objekten till "AttG”ra"-mappen.  
+
+    Metod 6: st„ll in CLIPBOARD_MONITOR v„rdet i konfigurationsfilen till 1
+    och forts„tt som vanligt s†som i metod 3 med endast ett undantag - 
+    en f”nster dyker upp automatiskt s†s snart du kopierat en l„nk till en URL
+    till urklipp.  
+
+Anv„ndning i n„tverk
+
+    Du kan dela ut "AttG”ra"-mappen och anv„nda en server med installerad
+    Auto WGet Daemon f”r nedladdning av filer som central knutpunkt f”r b†de
+    OS/2 och Windows.
+
+    Du kan „ven koppla samman en en arbetsstationn (klient) och server med OS/2
+    d„r Auto WGet Daemon finns installerat. F”ljande exempel visar hur man kan anv„nda
+    tv† datorer f”r detta. F”ruts„ttningen „r att NetBIOS-namnen „r SERVER respektive KLIENT.
+
+    P† SERVERn skapar du en URL-mapp med valfritt namn i AttG”ra-mappen.
+    Som exempel v„ljer vi att d”pa den till "fr†nKlient". Drag en f”rlaga till konfigurationsfilen
+    awget.cfg (som finns i mappen "Verktyg och Hj„lpprogram")
+    till mappen vi just skapade och ”ppna filen f”r redigering. Du m†ste ta bort kommentarer
+    (b”rjar med #) och „ndra v„rdena p† f”ljande parameterar till:
+
+       MESSAGE_DONE  = net send KLIENT "%M: %U"
+       MESSAGE_ERROR = net send KLIENT "%M: %U"
+   
+    Dessutom m†ste du p† servern se till att skapa r„ttigheter f”r KLIENTen att l„sa och skriva
+    till mappen. I v†rt fall v„ljer vi att dela ut mappen d„r Auto WGet Daemon „r installerat.
+    
+    Vi skapar en ny mapp "TillServer" i AttG”ra-mappen p† KLIENTen och „ndrar p† inst„llningarna
+    s† att URLer (l„nkar) som placeras d„r omdirigeras till serven: 
+
+       REDIRECT_TO = \\server\awget\folders\todo\fromclient
+    
+    Det „r allt. Varje URL som sl„pps p† mappen "TillServer" p† KLIENTen flyttas till mappen
+    "fr†nKlient" p† SERVERn varp† meddelanden om n„r filen h„mtats skickas tillbaka till
+    KLIENTen av SERVER.
+
+    Notera: Man beh”ver inte skapa en speciell mapp p† KLIENTen, det g†r lika bra att placera 
+    awget.cfg i AttG”ra-mappen.
+
+N†gra ord om NFTP
+
+    NFTP „r en v„lk„nd FTP klient f”r OS/2. Det utvecklas av Sergey
+    Ayukov och kan hittas p† adressen http://www.ayukov.com. F”r att
+    anv„nda Auto WGet Daemon med NFTP beh”ver endast tv† rader
+    „ndras i filen nftp.ini
+    (gl”m inte att ta bort tecknen f”r kommentarer ";" i b”rjan av varje rad)
+
+        launch-wget = "x:\path_to_awget\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    D„r "x:\path_to_awget" m†ste ers„ttas med s”kv„gen till platsen d„r Auto
+    WGet Daemon finns. N„r detta genomf”rts s† kan du l†ta nedladdningarna
+    g† via daemonen genom att markera ”nskade filer och d„refter trycka
+    Skift-W p† tangentbordet.
+
+Konfiguration
+
+    Huvudkonfigurationsfilen (med namnet "AWGET.CFG") ligger placerad i mappen
+    %ETC% (vanligtvis \MPTN\ETC). Det finns ett objekt i mappen "Verktyg och Hj„lpprogram"
+    d„r det g†r att f”r„ndra inst„llningarna f”r konfigurationsfilen. 
+    Beskrivning och hj„lp finns tillg„nglig under varje inst„llning.  
+
+    Du kan skapa undermappar i "AttG”ra"-mappen och ange ytterligare konfigurationsfiler.
+    N„r du anv„nder dig av den m”jligheten kan du f”r„ndra inst„llningar fr†n
+    huvudinst„llningarna (processtid f”r mappar, nedladdningsmapp, etc.)
+    En mall f”r att skapa s†dana filer hittas i mappen "Verktyg och Hj„lpprogram".
+
+    Gl”m ej att ta bort kommentarer som b”rjar med symbolen "#" framf”r inst„llningen du
+    vill f”r„ndra.  
+
+K„nda problem
+    
+    Auto WGet Daemon f”rst†r inte URL-objekt somskapas med Netscape
+    Communicator 4.61 p† OS/2 Warp 3.0. Du kan anv„nda Netscape Navigator 2.02, 
+    Netscape Communicator 4.04 eller skicka URL-adressen m.h.a. "L„gg till URL". Eller
+    s† kan du ju anv„nda OS/2 Warp 4.0 och b„ttre :)
+
+Till„ggsprogram
+
+    Pmpopup2.exe Ulrich Sturmberg PM Popup Version 1.0
+
+    Dessutom beh”ver du netstat fr†n standard TCP/IP f”r 
+    kontroll att en PPP-uppkoppling „r klar. 
+
+Plugins
+
+    Plugin „r program f”r att f”rb„ttra och ut”ka funktionaliteten hos Auto 
+    WGet Daemon. Tv† typer av moduler st”ds - globala och
+    privata. Globala moduler samarbetar med demonen direkt och „r speciellt
+    anpassade f”r planering av jobbprocesser. Privata moduler samarbetar
+    med varje startad nedladdningsprocess och kan p†verka k”rningen.
+    
+    F”r att l„gga till en modul beh”vs en beskrivning i huvudkonfigurationsfilen
+    AWGET.CFG. Anv„nd den globala nyckeln GLOBAL_PLUGIN f”r globala moduler och
+    PRIVATE_PLUGIN f”r privata. Ett exempel:
+
+    GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    F”r att aktivera en ny global modul m†ste du starta om demonen. Privata 
+    moduler aktiveras s† snart en ny nedladdningsprocess p†b”rjas. 
+
+    Informationen f”r utvecklare.
+
+    Insticksmodeuler k”rs som en process i bakgrunden (detached). Den k”r med
+    demonen (globala moduler) eller med varje nedladdniongsprocess (privata 
+    moduler). Du kan utbyta data med modulen via standard in/ut
+    str”mmar. Kommunikationen utg”rs av str„ng f”r str„ng utbyte m.h.a.
+    speciella kommandon. Varje str„ng inneh†ller endast ett kommando. Efter att
+    str„ng skickats till modul m†ste svar mottas och demonen stoppar k”rningen tills
+    det att svar dyker upp. Om konfigurationsfilen inneh†ller mer „n en modul hanteras
+    de i den ordning de definierats.
+
+    Kommandon inneh†ller fyra nyckelord och en frivillig informationsdel.
+    Mellan kommandon och informationsdelen m†ste en mellanslagssymbol l„ggas in.
+
+    Endast tv† svar fr†n informationsmodulen „r till†tna: DONE och FAIL. DONE 
+    anger att kommandot har utf”rts utan problem. FAIL anger att ett fel har uppst†tt
+    eller att begr„nsad framg†ng med efterfr†gat kommando. Informationen som skickas med
+    DONE, skrivs ut p† sk„rmen. Informationen som skivkas med FAIL skrivs in i Fel-Loggen
+    och till sk„rmen.
+
+    Moduler kan skicka en eller flera konnamdon f”r mera info (INFO, EVNT 
+    och ALRM) innan det skickar DONE eller FAIL. Info, f”ljt av n†got kommando
+    skrivs till sk„rmen. Dessutom, info fr†n EVNT-kommandot 
+    sparas i loggen samt ALRM skrivs till Fel-Loggen.
+
+    F”r att utbyta data med de globala modulerna kan n†got av f”ljande
+    kommandon anv„ndas:
+
+      INIT awget_home_directory
+      Skickas vid initieringen av Auto WGet Daemon. Modulens svar ignoreras.
+      
+      SCAN todo_directory
+      Skickas innan scanning av Skrivbordet och "AttG”ra"-mappen p†b”rjas. Om
+      svaret „r FAIL fr†n n†gon modul, genomf”rs inte scanningen.
+
+      CONF configuration_file
+      Skickas efter det att huvudkonfigurationsfilen har uppdaterats. 
+      Modulens svar ignoreras.
+
+      SEXE job_file
+      Skickas innan en nedladdningsprocess p†b”rjas. Modulen kan f”r„ndra arbetets
+      inneh†ll. Om svaret „r FAIL, skjuts starten upp.
+
+      SEND job_file
+      Skickas efter att nedladdningen av fil „r klar. Modulen kan „ndra p† 
+      inneh†llet i arbetet. Modulens svar ignoreras.
+
+      STOP 
+      Skickas innan demonen avslutas. Demonen v„ntar inte p† svar fr†n modulen.
+      Den avslutar omedelbart efter att ha skickat kommando till all moduler.
+
+    F”r att utbyta data med privata moduler kan f”ljande kommandon anv„ndas:
+
+      INIT job_file
+      Skickas vid initierings”gonblicket. Modulen kan f”r„ndra
+      arbetets innh†ll. Om svaret „r FAIL fr†n n†gon modul stoppas processen.
+
+      DATA 
+      Skickas innan data fr†n nedladdningsprogrammet ”vers„tts. Efter 
+      svar DONE, m†ste modulen „ndra "mode" till symbol, f”r indata. ™vers„ttningen
+      avslutas med '00'x.
+
+      STOP job_file
+      Skickas innan nedladdningsprocessen avslutas. Modulen kan „ndra p† 
+      inneh†llet i arbetet. Modulens svar ignoreras.
+
+    Exemple p† globala och privata plugins kan hittas i  mappen "Plugins" 
+    f”r Auto WGet daemon.
+
+Arbetsfil
+
+    All information som beh”vs f”r nedladdningsprocessen kan skickas genom en arbetsfil.
+    Arbetsfilens format liknar konfigurationsfilen och inneh†ller
+    par - nyckel och v„rde. F”ljande nycklar finns tillg„ngliga:
+
+      OBJECT                             Objekt med URL-namn, som visas.
+      URL                                  URL att ladda ned.
+      DOWNLOAD                        Mapp, d„r filen skall placeras efter nedladdning.
+      MESSAGE_DONE                  Kommando f”r lyckad nedladdning.	
+      MESSAGE_ERROR                Kommando f”r misslyckad nedladdning.
+      DOWNLOADS_UTILITY          Hj„lpprogram f”r nedladdning.
+      DOWNLOADS_PARAMETERS  Parametrar f”r hj„lpprogrammet.
+      DOWNLOADS_RC                 Hj„lpprogram avslutskod.
+      DOWNLOADS_INFO               Hj„lpprogrammets senaste meddelande.
+
+    N†gra exempel p† l„sning och skrivning av arbetsfiler kan hittas i
+    awpglob.cmd och awppriv.cmd i mappen "Plugins".
+
+Om
+
+Utormordentlig orginalid‚ och f”rsta release (C) 1998 Steve Trubachev
+Slutlig release (C) 1998-2002 Dmitry A.Steklenev
+
+    Du kan skicka kommentarer till: glass@ptv.ru
+
+Speciella tack
+
+    - till Yuri Efimoff <yuri.efimoff@multex.com> f”r assistans att 
+      ”vers„tta allt detta till Engelska.
+    - till bj <bj@ksib.kemerovo.su> f”r ett kodexempel ”ver bearbetning av
+      genv„gar i windows.
+    - till Bernd Schemmer f”r "REXX Tips och Tricks".
+    - till Vladimir Zabrodsky fär "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - till Guillaume Gay <guillaume.gay@bigfoot.com> f”r ”vers„ttning av meddelandefil
+      och manual till Franska.
+    - till Che-ching Wu <ccwu@pie.com.tw>f”r ”vers„ttning av meddelandefil
+      och manual till Traditionell Kinesiska.
+    - till Bernd Giesen <Bernd.Giesen@t-online.de> f”r ”vers„ttning av meddelandefil
+      och manual till Tyska.
+    - till Jan-Erik L„rka <j-erik.p@telia.com> f”r ”vers„ttning av meddelandefil
+      och manual till Svenska.

@@ -1,0 +1,192 @@
+Auto WGet Daemon
+Great idea and first release (C) 1998 Steve Trubachev
+Final release (C) 1998-2003 Dmitry A.Steklenev
+
+History of changes
+
+Version 1.8.2
+
+   fix: Problem with URLs containing '%25'.
+   upd: In wget parameters the key --progress=bar:force is added.
+   add: REDIRECT_TO keyword has been added to additional configuration 
+        file. Now you can redirect downloads to another computer. 
+        More in detail read "Using in the network" in the manual.
+
+Version 1.8.1
+
+   upd: Now installation proceeds in the event that is not found any
+        utility of downloading.
+   upd: In wget parameters the key --referer=%h is added. This key
+        allows to download files from some hosts, aggressively
+        reacting on external links.
+   upd: Clipboard monitor are more accurate.
+   fix: SYS3175 in clipboard monitor.
+
+Version 1.8.0
+
+   fix: SYS3175 on closing the dialog for input a URL via close button.
+   upd: Improved "ToDo" sorting algorithm.
+   upd: Setting DOWNLOADS_ATTEMPTS = 0 disables limitation of attempts of 
+        downloading.
+   upd: DOWNLOADS_FROM_SAME_HOST can be changed in additional 
+        configuration file.
+   upd: Some words about NFTP are added into manual.
+   add: Clipboard monitor.
+
+Version 1.7.2
+
+   add: Spanish language support.
+   fix: Now "WP SHARE. SF" and "WP ROOT. SF" files are ignored by 
+        the Daemon.
+   upd: The dialog for input a URL is now aligned relative to 
+        mouse position.
+
+Version 1.7.1
+
+   fix: Issues with URLs contain %X symbols, coincided with AWGet symbols.
+   fix: If few URL exist in clipboard, first one will be used.
+   upd: During installation now it's possible to allow/disallow 
+        periodical logs pruning.
+   upd: Current directory check up feature during uninstallation 
+        has been added.
+   upd: You can point at destination folder when adding URL through object.
+   upd: DOWNLOADS_WINDOW keyword has been added to configuration file. 
+        Now you can change download window size and its appearance.
+
+Version 1.7.0
+
+   fix: Lot of problems with aliases for commands like 'copy' and 'del'
+        in 4OS2.
+   add: In configuration file new key "DOWNLOADS_FROM_SAME_HOST" is
+        added. It allows limit number of downloadable URLs in same
+        time from the same server.
+
+Version 1.6.9
+
+   add: Swedish language support.
+   upd: The system dialog for input of a URL is replaced with 
+        more comfortable dialog. It also troubleshoots additions 
+        of a URL containing "%" and ";".
+   fix: Refreshing of a folder after copying the URL object caused
+        hangs on some systems.
+
+Version 1.6.8
+
+   fix: Prevent possible problems at renaming the object in "Active" folder.
+   fix: Problem with objects containing "%" in the name.
+   fix: Traditional Chinese language support.
+   fix: Download utility selection dialog.
+
+Version 1.6.7
+
+   add: German language is again supported.
+
+Version 1.6.6
+
+   add: Traditional Chinese language support.
+
+Version 1.6.5
+ 
+   upd: awgadd.cmd now can be called from another REXX program.
+   add: Prune of the log files. See LOG_KEEP in the configuration file.
+   fix: Opening of files in OBJECT REXX required presence of option 
+        SHAREREAD.
+   add: Plugins interface.
+   add: After end of downloading URL is placed in the extended
+        attribute .SUBJECT of the downloaded file. URL name and 
+        download date store to .COMMENTS.
+   upd: Can't start more than one copy of daemon.
+   add: Utility for stopping down the daemon.
+   add: Added attempts counter for each of URL and maximum number of
+        downloads parameter in the configuration file.
+   add: Now you can create subfolders in ToDo folder with additional
+        configuration files with different parameters.
+   add: Added cURL support (experimental). 
+   add: Main configuration file allow to use any another download utility.
+   upd: In case of loosing Internet connection All of active downloads will
+        be closed.
+   add: As the argument for awgadd.cmd you can use filename and path 
+        to file, contain URLs.
+   add: You can move active URLs from folder Active to any other or erase. 
+	In this case session with this URL will be closed.
+   upd: Many other, I didn't remember all of them.
+   
+Version 1.5.1.6
+
+   add: German language support.
+   add: Chinese manual.
+   upd: The default view for "ToDo" folder is changed on "Tree" because of
+        problems with Netscape Communicator 4.61.
+
+Version 1.5.1.5
+
+   fix: Value of variable used to store WGet's output is restricted
+        to avoid memory consumption when WGet output is excessive.
+   upd: No above the 20 latest strings of WGet's output are placed 
+        to error log.
+   fix: Unnecessary files now deleted with DEL /F even if "SET DELDIR="
+        is enabled in CONFIG.SYS.
+   upd: Error of WGET, founded at the moment of disconnecting of PPP
+        or SLIP connection at check_connection = 1 are not mistake 
+        at all.
+   add: Chinese language support (ChinesesLanguage,Taiwan BIG-5).
+
+Version 1.5.1.4
+
+   fix: Inquiry of the download directory at installation.
+   fix: Problems with the download directory at use of wget 
+        parameters -m (--mirror) or -r (--recursive).
+   upd: The inetwait call is added 
+   upd: Processing of shortcuts with URL created with the MSIE 
+        or Netscape under windows.
+
+Version 1.5.1.2
+
+   upd: Because of bugs in old versions OBJECT REXX the subsystem 
+        of locking is completely rewritten.
+   upd: The waiting of start of process of downloading with 
+        timeout per 30 seconds is added.
+   add: French language support
+   add: Italian language support
+
+Version 1.5.1.0
+
+   fix: error in installation script.
+
+Version 1.5.0.9
+
+   fix: error in procedure of check existence of the download directory.
+
+Version 1.5.0.8
+
+   fix: problem with URLs containing '&()^'
+
+Version 1.5.0.7
+
+   fix: error in WpsMove().
+
+Version 1.5.0.6
+
+   fix: PPP connection check (for PPP1-PPP7)
+   add: At a error the output of the WGet is append in a error log 
+        for the further analysis
+   add: uninstallation program.
+   add: new icons :)
+   add: error log file.
+   add: after end of downloading URL is placed in the extended
+        attribute .SUBJECT of the downloaded file.
+   add: Netscape Communicator/2 support.
+   add: after processing URL can move in special folders
+        "Failed" or "Done", depending on what finished downloading.
+   upd: refreshing of folders at moving files.
+   add: object "Add Url" in a folder "Info" for manual addition URL.
+   add: creation of a tray "Auto WGet Daemon" in WarpCenter during
+        installation.
+   fix: many small bugs :)
+
+Version 1.4.0.3
+
+   fix: problem with URLs containing '%'
+   upd: process complete message automaticaly disposed after
+        one hour
+

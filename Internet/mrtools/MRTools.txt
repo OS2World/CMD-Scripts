@@ -1,0 +1,14 @@
+Mozilla Registry Tools v0.1.0
+-----------------------------
+This is a set of programs that will (hopefully) allow human beings, disassemble
+to plain text format, easily edit and rebuild Netscape/Mozilla/SeaMonkey
+registry.dat file(s).
+
+RegDump.cmd makes a text dump of a registry file contents. Intended for
+ 'advanced' stuff.
+Reg2txt.cmd dumps just the essential info of a registry file structure so it
+ can be edited.
+Txt2reg.cmd rebuilds a binary registry file from a text dump.
+
+Each program should be otherwise self-explanatory, but if you have any
+questions feel free to drop me a line to mrwarper@yahoo.es

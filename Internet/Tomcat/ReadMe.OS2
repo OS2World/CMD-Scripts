@@ -1,0 +1,86 @@
+---------------------------------------------------
+Tomcat 5.0.27 scripts for OS/2 Warp and eComStation
+---------------------------------------------------
+
+
+
+-------------------------
+1. What is this good for?
+-------------------------
+
+These files allow you to start, stop, and manipulate the Tomcat web server
+from OS/2 command line.
+
+Tomcat is the servlet container that is used in the official Reference
+Implementation for the Java Servlet and JavaServer Pages technologies.
+The Java Servlet and JavaServer Pages specifications are developed by Sun under
+the Java Community Process.
+
+Tomcat is developed in an open and participatory environment and released under
+the Apache Software License. Tomcat is intended to be a collaboration of the
+best-of-breed developers from around the world.
+
+See "http://jakarta.apache.org/tomcat/" for more details.
+
+
+------------------
+2. What do I need?
+------------------
+
+You need:
+ - OS/2 Warp 4.x or eComStation with Rexx installed
+ - Java 1.4 properly installed (either Golden Code or Innotek Java 1.4.x)
+ - Tomcat 5.0.27 (or compatible) properly installed (= unpacked from ZIP)
+
+
+----------------------------
+3. How do I use these files?
+----------------------------
+
+1. Unpack the ZIP archive you have downloaded from Hobbes. (You have probably
+   done it already since you are reading this file.)
+
+2. Download and install (unpack from a ZIP file) Tomcat. The download URL is
+   "http://jakarta.apache.org/site/binindex.cgi".
+
+3. Copy or move all *.CMD files to the "bin" directory of your Tomcat's
+   installation.
+
+4. You can delete all *.SH and *.BAT files from the "bin" directory.
+
+5. To run a script, you must be in the "bin" directory. Do not try to run the
+   scripts from a different directory as the scripts will refuse to run. This
+   applies both for running from the command line and for running from
+   Workplace Shell.
+
+6. To start the server in the current window:
+    Catalina.CMD run
+
+   To start the server in a new (detached) window:
+    Catalina.CMD start
+
+   To stop the server:
+    Catalina.CMD stop
+
+   Or simply use:
+    Startup.CMD to start the server.
+    Shutdown.CMD to stop the server.
+
+   More options are available. Run Catalina.CMD without parameters to display
+   them. Consult the original Tomcat documentation for the purpose and using
+   the rest of the scripts: Digest.CMD, ToolWrapper.CMD,
+   StartupUsingLauncher.CMD, ShutdownUsingLauncher.CMD, and
+   ToolWrapperUsingLauncher.CMD.
+
+7. The script starting Tomcat as a Windows NT service is not available for
+   OS/2.
+
+
+---------------------
+4. Who is the author?
+---------------------
+
+Jarda KACER, Czech OS/2 User Group
+mailto:jkacer@kiv.zcu.cz
+http://home.zcu.cz/~jkacer
+
