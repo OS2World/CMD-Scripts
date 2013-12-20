@@ -1,0 +1,3 @@
+Just look at webcam.cmd...
+
+	pille <pille@chillout.org>
