@@ -1,0 +1,5 @@
+        REXX Internet Utilities v0.16
+    Simple utilities using REXX sockets:
+ urlget.cmd  - fetch files via HTTP and FTP 
+ ngfetch.cmd - obtain list of groups from 
+               specified newserver.

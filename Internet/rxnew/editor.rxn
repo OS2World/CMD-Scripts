@@ -1,0 +1,24 @@
+Editor        Specifying an External Editor for RexxNews
+--------------------------------------------------------
+
+You can specify an external editor for RexxNews to use by placing the line:
+
+editor <program name>
+
+in your REXXNEWS.CFG file or by issuing the command
+
+set editor <program name>
+
+at the RexxNews prompt.
+
+If your editor is called via a '.CMD' file, you will need to specify the
+editor as in:
+
+editor cmd /c the
+
+The editor you specify must take the name of a file as its last parameter.
+If you don't specify an editor, RexxNews will call the Enhanced Editor, EPM.
+
+If you tend to use RexxNews in a fullscreen session, I reccomend that you
+use a full-screen editor such as Mark Hessling's THE or the IBM 'T' editor.
+

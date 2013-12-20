@@ -1,0 +1,8 @@
+POST          Sending an Article to a NNTP Server
+-------------------------------------------------
+
+As of version 1.1, RexxNews allows you to post, followup, mail (forward) and
+reply to news articles.
+
+[There should probably be a discussion here about choosing the correct group
+and Usenet ettiquette.  Look to news.newusers for now...]

@@ -1,0 +1,35 @@
+Article       Display or move to a specific article
+====================================================
+
+The article command is used to display an article on the screen.  If no article
+number is given, the current article is displayed.   The article command can
+also be issued as DISPLAY.
+
+Syntax:
+
+      ARTICLE [article-number]
+              [ ^ ]
+              [ $ ]
+
+where article-number is a valid article number in the range of articles
+available in the current group.  Entering a '^' for the article-number will
+move to first article in the group, and entering a '$' will move to the last
+article in the group.
+
+At the --MORE-- prompt, the 'N' and 'L' keys will move to the Next and Last
+articles, respectively.
+
+Article Numbers and RexxNews
+----------------------------
+
+RexxNews refers to news articles by their index number at the NNTP server.
+
+When you have a group selected, the prompt shows the range of articles
+available in the group, the number of the current article, and an estimate
+of the number of unread articles in the group.
+
+Within a group, the Display or Article command can be used to display the
+current article or move to a specific article number.
+
+The Next and Last commands will move to the next and previous articles,
+respectively.

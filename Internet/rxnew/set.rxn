@@ -1,0 +1,69 @@
+SET           RexxNews Configuration Variables and Values
+
+[This section is due for a major overhaul...]
+
+The SET command is used to display and/or change the various RexxNews options.
+
+When the set command is issued with no paramters, a list of variable names, 
+their values, and their types is displayed.
+
+The variable types are:
+
+       W       Whole Number (including dates such as 940413)
+       B       Binary (0=false, 1=true)
+       A       Alphanumeric 
+       S       Any String
+
+If a variable is displayed by the SET command, you can use the set command to
+change its value.  Most of the variable names are long and self-explanatory.
+
+You must supply a value of the correct type to change a variable's value.  An
+error message will be returned otherwise.
+
+The variables include:
+
+                     T
+                     y
+                     p
+Variable             e Description
+===================  = ========================================================
+server               S Name of the current/default NNTP server
+rows                 W Number of rows on the screen
+cols                 W Number of columns on the screen
+overlap              W Number of lines to overlap when displaying an list
+username             S Email name for the OS/2 user (at the os/2 workstation)
+hostname             S Host name for the OS/2 workstation
+fullname             S Full name for the OS/2 user
+organization         S Organization header field value
+disclaimer           S Disclaimer header field value
+replyto              S Reply-To header field value
+timezone             S Time Zone abbreviation
+quotechar            S Character(s) to be used when quoting articles
+signature            S Name of signature file to include in posts/mail
+displayatgroup       B Display the first article after the group command?
+nextgroupafterlast   B Issue NEXTGROUP after the last article in a group?
+nextgroupatconnect   B Issue NEXTGROUP immeadiately on connecting to server?
+newarticlesatgroup   B List SUBJECTS for new articles after the group command?
+newgroupsatconnect   B List NEWGROUPS immeadiately on connecting to server?
+displayheaders       B Display headers when listing articles?
+editor               S Name of the editor to use for composing posts
+rexxnewsdir          S Location of the REXXNEWS executeables and help files
+etcdir               S Location for ETC files (NEWSRC and alternate server CFG)
+empdir               S Location for placing temporary files
+groupname            S Name of the current group
+groupstat            S Subscription status of the current group
+groupnewsrcline      W Line of the current group within the NEWSRC file
+grouphighest         W Highest article that has been seen in current group
+newsrcdate           W Date the NEWSRC file was last saved
+newsrctime           W Time the NEWSRC file was last saved
+newsrcname           S Name of the current NEWSRC file
+newuser              B Is this the first time the user has ran RexxNews?
+askifsubmore         W Max groups to subscribe to automatically w/o prompting
+postingok            B Does the current server allow posting?
+usexhdr              B Can the XHDR command be used with the current server?
+shellescapechar      S Charachter used to shell to OS/2 at the command prompt
+savenewsrcatexit     B Save the NEWSRC file in case of an abnormal exit
+sortcommand          S Name of the command to use when sorting
+sortmaxbytes         W Maximum number of bytes the sort program can handle
+
+It may not be wise to change the values of some of these variables....

@@ -1,0 +1,160 @@
+Intro         A New Users Introduction To RexxNews
+--------------------------------------------------
+
+RexxNews was written by Albert Crosby <acrosby@uafhp.uark.edu>.
+
+RexxNews is a simple tool for reading UseNet news for OS/2 2.x.
+
+Unlike most Unix newsreaders, RexxNews is completely command driven.  However,
+if you are familiar with RN or NN on Unix, you should find your way around
+fairly readily.
+
+When the --MORE-- prompt is displayed on the bottom of the screen, you can 
+press any of the following keys:
+
+<Enter>        display the next screen
+<T>            return to the top of the list or article
+<U>            back up one screen in the list or article
+<Q>            stop displaying the current list or article
+
+Any other key will advance one screen.
+
+
+
+INTRODUCTION TO REXXNEWS:
+=========================
+
+RexxNews is a simple NNTP client for reading Usenet news from an NNTP server.
+
+This guide is not really intended (at this time) as a guide to Usenet News, 
+but as an introduction to the RexxNews news reader.  
+
+All of the RexxNews commands are case insensitive.  Frequently, the shortest
+part of a command that will be accepted will be printed in upper case, such as
+Article or Quit.
+
+Finding the Groups You Want to Read
+-----------------------------------
+
+RexxNews has a command that makes finding the group you want easy:
+LISTGROUPS.
+
+The LISTGROUPS command by itself will display all the newsgroups available
+from the NNTP server.
+
+LISTGROUPS followed by a character string will display those newsgroups
+whose name contain that character string.
+
+After displaying the list, you will asked if you wish to subscribe to any
+or all of the displayed groups.
+
+For example, if you are interested in all groups about OS/2, you would type
+
+     LISTGROUPS os2
+
+Subscribing to A Group
+----------------------
+
+When you mark a group as "Subscribed" (with either the LISTGROUPS or 
+SUBSCRIBE commands), RexxNews remembers that this is a group you are
+interested in.  RexxNews will automatically display new unread articles in
+these groups when you connect to a server.
+
+RexxNews keeps a list of subscribed and unsubscribed groups in a NEWSRC
+file.  If you use more than one server, RexxNews will automatically create
+a seperate NEWSRC file for each NNTP server that you use.
+
+When you connect to a server, or issue the NEXTGROUP command by itself,
+RexxNews will search for the first/next subscribed newsgroup that has
+unread articles available for you to read.
+
+RexxNews actually makes less distinction between unsubscribed and subscribed
+groups than most Unix newsreaders.  RexxNews assumes that if a newsgroup
+appears in a NEWSRC file, you have some interest in that group.  Issuing
+the NEXTGROUP ANY command will move to the first/next group that appears
+in your newsrc that has unread articles, whether it is marked subscribed or
+unsubscribed.
+
+Moving to a Specific Group You Want to Read
+-------------------------------------------
+
+To 'enter' a group, issue the command GROUP <group-name> (or just G for GROUP).
+When you enter a group, a list of subjects for unread articles in the group 
+will be displayed.  (RexxNews can be configured to not display this list.)  
+You can display the first article in a group with the 'DISPLAY' command (or
+just D for DISPLAY).
+
+When you move to a group for the second time, RexxNews will automatically
+place the current article pointer at the first unread article.
+
+If you have not read articles from the group before, RexxNews will ask if you
+wish to subscribe to the group.
+
+Displaying an Article You Want to Read
+--------------------------------------
+
+RexxNews lists and displays articles using their article number at the site.
+After the list of articles in a group is displayed, the 'article pointer'
+points to the first article.  You can display the current article with the
+'Display' command.  DISPLAY followed by an article number will display that
+article and move the article pointer.
+
+You can move forward and backwards through the articles with the NEXT and LAST
+commands.  These commands move the article pointer and display the next (or
+previous) article.
+
+Press the '?' key while an article is displayed to see help on reading 
+articles.
+
+You can only display articles from the current group.  If you wish to list
+articles from another group, you must first move to that group with the GROUP
+or NEXTGROUP command.  As RexxNews is normally configured, when you issue the
+NEXT command when at the last article in a group, you will move to the first
+unread article in the next subscribed group that has unread articles.
+
+Newsrc files from Unix Machines
+-------------------------------
+
+If you read news on a Unix system using the same NNTP server that you will use
+with RexxNews, you can copy your .newsrc file from your Unix machine to the
+PC.  By default, RexxNews expects to find the newsrc file in the directory
+pointed to by the %etc% variable and named 'newsrc'.  (It is possible to change
+the location RexxNews looks for the newsrc file.)
+
+Leaving RexxNews
+----------------
+
+The Quit command will exit RexxNews and return you to the OS/2 prompt.  It will
+also update your newsrc file.
+
+If you wish to leave RexxNews without updating your newsrc file, use the
+EXIT command.
+
+You can only issue the QUIT command from the RexxNews prompt, not while an article
+or other list is being displayed.
+
+Learning more about RexxNews
+----------------------------
+
+The best (for now, only) place to look for help with RexxNews is in the HELP
+files.  Inside RexxNews, the help files are displayed with the HELP command.
+
+HELP TOPICS will display a list of the available help files.
+
+At the OS/2 prompt, the help files are all named <topic>.rxn, as in INTRO.RXN
+for the file you are currently viewing.
+
+Making RexxNews Comfortable for the RN users among us...
+========================================================
+
+Some of this will obviously wait until the next version.  But there's already
+one feature that is easy to take advantage of -- whenever an article is
+displayed on the screen, you can press 'N' to move to the 'Next' article and
+'L' to move to the 'Last' article.
+
+Currently, RexxNews reads articles exclusively in the order they were received
+by the NNTP host.
+
+The default RexxNews options should be reasonably comfortable for persons
+accustomed to Unix news readers.
+

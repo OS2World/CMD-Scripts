@@ -1,0 +1,19 @@
+NewGroups     Finding out about New Newsgroups at Your NNTP Server
+------------------------------------------------------------------
+
+The NEWGROUPS command is used to display new newsgroups that have been created
+on an NNTP server.  If you issue the command without any operands, all the
+groups that have been created since you updated your NEWSRC file.
+
+You can also specify a time and date that you would like to check for new groups.
+
+For example, if you would like to see all of the groups that were created since
+10 am on April 15, 1993, the command would be:
+
+NEWGROUPS 930415 100000
+
+The actual syntax for the command is:
+
+NEWGroups yymmdd hhmmss
+
+(where hhmmss is in 24 hour time.)

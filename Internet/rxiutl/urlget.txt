@@ -1,0 +1,184 @@
+URL file fetcher v0.16
+
+This utility is intended as a quick way to grab files from remote servers 
+by URL.  
+
+The reason this was written is because I quite often am presented, in one 
+way or another, with a URL pointing to a file that I want or need.  What I 
+don't want or need is to load up a fat web browser, or cut and paste parts 
+of the URL into an FTP client.
+
+The result is urlget.cmd, written in Object REXX, using the REXX Sockets 
+API.
+
+The program will correctly parse the URL you give it and download the file 
+from the remote server using the appropriate protocol; FTP or HTTP.
+
+The usage:
+
+urlget.cmd [/q] <URL name ;[local name] | @file> [/q]
+
+URL name is any valid HTTP or FTP URL, such as:
+
+http://www.somewhere.com/index.html
+ftp://ftp.somewhere.com/pub/files/something.zip
+ftp://user:password@ftp.somewhere.com/userdir/something.zip
+
+With a FTP URL, a hostname without any security information prompts 
+urlget.cmd to assume a username of 'anonymous', with the password being the 
+e-mail address it asks you for the first time you run the program.
+
+If the URL contains spaces, type it normally.  It is not necessary to 
+enclose it in quotes, though that's acceptable as well.
+
+[local name] corresponds to an alternate name to store the file locally as.  
+
+This can be a simple filename, or a fully specified pathname.  The default 
+is to store the file locally with the same name as its remote counterpart.
+
+An exception to this is when the working drive uses the FAT file system, or 
+the drive pointed to by a fully specified alternate name uses the FAT file 
+system.  More on that below.
+
+The @file option (used instead of a URL) should be the name of a plain text 
+file with one or more URL's on separate lines.  Lines beginning with '//',
+'/*', '#', and ';' are ignored, so you can create one-line comments for
+URL's, if you so desire.  Local storage names can optionally be placed at
+the end of the URL, separated from it by a semicolon, such as:
+
+http://www.somewhere.com/somedir/somefile.zip ; thisfile.zip
+
+If the drive to which the file will be stored is formatted with the FAT 
+file system, then the name will be changed automatically to be compatible, 
+if not done so manually.
+
+If the remote filename is not FAT-compatible and no compatible local name 
+is given, or if the given local name isn't FAT-compatible, then random name 
+generation occurs.
+
+The random name chosen is just a hexadecimal 32-bit integer (eight 
+characters, characters 0-9 and A-F).  If the extension of the remote or 
+locally named file is three characters long, that will be the extension of 
+the random filename.  If not, then the extension .UGF will be used.
+
+The original name isn't discarded, however, whether it be the remote 
+filename, or the user's desired local storage name.  The name in question 
+will be written to the new file's .LONGNAME extended attribute.  WPS file 
+folders will display this name, as will any other utilities that display 
+the attribute, such as OS/2's COMMAND.COM in DOS sessions.
+
+If one copies or moves the file to a drive supporting long filenames with 
+the WPS, the name on the new drive will be the one stored in .LONGNAME.  
+The same is true if using a recent version of 4OS2, also.
+
+Except when using FAT-compatible naming, any local files will be 
+overwritten.  That is, if a file exists in the working directory that 
+matches the name at the end of the URL, or the name you specify points to 
+an existing file, it will be overwritten.  With FAT-compatible naming, due 
+to the random nature of the chosen name, nothing will be overwritten.
+
+At the end of the transfer, a stats line will show the total bytes 
+transferred, total time, and the transfer rate.
+
+urlget.cmd is too large for tokenization into the EA's, but for better 
+performance, you can still tokenize it to a separate file, using the 
+rexxc.exe utility that comes with Object REXX.  Simply do this:
+
+ren urlget.cmd urlget.old
+rexxc urlget.old urlget.cmd
+
+urlget.cmd will then be a binary file full of REXX tokens, which will 
+execute more quickly than the text source file.
+
+Options:
+
+/q - operate in quiet mode
+
+This prevents the status display, which shows bytes stored, current 
+transfer rate, total bytes expected (when known), and percentage completion 
+(contingent on knowing total, naturally).
+
+/qq - operate in super quiet mode
+
+This suppresses all output (logging is still performed, if enabled).  Use
+this if you're calling urlget.cmd from a script, and don't want to mess up
+your display.
+
+/r - attempt FTP resume if file exists and is smaller than server copy
+
+This will set the restart marker for FTP servers that support it, if the 
+local filename exists, and is smaller than the copy on the server.  The 
+transfer will commence normally if the remote file size can't be 
+determined, or the server doesn't support resume (the local file will be 
+overwritten).
+
+/f - attempt FTP resume, and abort transfer if not supported
+
+This does the same as the /r option, except that the transfer is aborted if 
+the remote size can't be determined, or the server doesn't support resume.
+
+/n - don't overwrite local files
+
+This prevents any local files from being overwritten.  The transfer aborts
+before any network activity with this switch, if the local file exists.  If
+the size of the remote file can be determined, and it's the same as a local
+copy of the file, the transfer will be skipped.
+
+/c - clobber local files (overridden by resume and forced resume)
+
+This will overwrite the local file even if it's the same size as the copy
+on the server.
+
+/p - attempt transfer even if passive mode denied while behind firewall
+
+If you're configured as behind a firewall, this will attempt to do a normal 
+transfer (with the server connecting to the client's data port) in the 
+event that the server refuses a passive mode connection.  If it works, then 
+you should configure yourself as not being behind a firewall, since passive 
+mode isn't necessary.  This would be the case with an intelligent proxy or
+IP masquerader.
+
+/d# - delay time for FTP commands (seconds); default=0.1
+
+Some FTP servers show an odd inability to handle fast interactions on the 
+control connection.  Therefore, there is a delay between each block of data 
+sent during FTP commands.  If you get odd transfer failures, try increasing 
+this number.
+
+/b# - transfer block size (512-65535); default=10240
+
+This is the maximum transfer block size.  In general, the larger the block, 
+the faster the transfer, as connection speed increases.  
+
+/t# - status timing interval in 1/100th seconds (1-100); default=25
+
+This is the update frequency for transfer status, which is done on a 
+separate thread.  The default value of 25 means that the bytes stored, 
+transfer rate, etc. will be written to the screen four times per second.  
+Lowering this value will make for more erratic reported transfer rates.  It 
+might also slow the transfer down, depending on the speed of your 
+connection, and the speed of your computer.  Increasing this value will 
+make the information less and less accurate, as your connection speed 
+increases.  
+
+/m# - maximum retries on error (0-9999999999); default=1000
+
+This is the amount of times that the program will attempt to get data from 
+the socket after errors before aborting the transfer attempt.
+
+Exit codes:
+
+0 - Successful transfer of all files
+1 - Successful transfer of at least one file (and failure of at least one)
+2 - Parameter error
+3 - Socket-level failure (single file only)
+4 - Server-level failure (single file only)
+5 - User abort with no successful transfers
+6 - Program error, possibly some successful transfers, but unlikely
+30 - Multiple errors, no successful transfers
+255 - Unknown error, shouldn't happen
+
+
+Any questions, comments, complaints, etc., e-mail me at:
+
+    <thannymeister@yahoo.com>

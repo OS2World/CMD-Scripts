@@ -1,0 +1,34 @@
+Reading       Help on Reading Articles with RexxNews
+----------------------------------------------------
+
+While you are reading articles with RexxNews, you can issue any of the
+following commands at the --MORE-- prompt:
+
+N         Next article
+L         Last article
+Q         Quit reading articles (return to RexxNews prompt)
+U         BackUp one screen in the current article
+<Return>  Advance one line in the current article
+T         Goto Top of current article
+B         Goto Bottom of current article
+^         Goto first line of current article
+$         Goto last line of current article
+=         Move to a specific line of current article
+H         Display this help screen
+M         Mail the current article to another person
+R         Reply to the author of the current article
+F         Post a followup to the current article
+G         Go to a different group
+W         Write article to a file
+P         Post an article to a newsgroup
+S         Display the list of subjects for unread articles in the current group
+A         Advance to an Article in the group
+*         Mark all articles in the group as read
+
+Any other key advances one screen.
+
+Depending on the setting of nextgroupafterlast, RexxNews may go on to the
+next subscribed newsgroup in your NEWSRC that has news available.
+
+(All of these commands except those for scrolling can be issued
+from the RexxNews command line.)

@@ -1,0 +1,18 @@
+Listgroups    Finding the Right Newsgroup
+=========================================
+
+RexxNews has a command that makes finding the group you want easy:
+LISTGROUPS.
+
+The LISTGROUPS command by itself will display all the newsgroups available
+from the NNTP server.
+
+LISTGROUPS followed by a character string will display those newsgroups
+whose name contain that character string.
+
+After displaying the list, you will asked if you wish to subscribe to any
+or all of the displayed groups.
+
+For example, if you are interested in all groups about OS/2, you would type
+
+     LISTGROUPS os2

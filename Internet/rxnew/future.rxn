@@ -1,0 +1,17 @@
+Future        The Future Direction of RexxNews
+----------------------------------------------
+
+Some features that may be added to RexxNews include:
+
+o      ROT13 decryption -- A 'simple' encryption used in several 
+          newsgroups to hide potentially offensive material.
+
+o      Optional use of Visual REXX for listing and choosing articles.
+
+o      Multithreading for faster execution by using the YDBAUTIL function
+       library for REXX.
+
+Suggestions for other features/improvements are welcome!  Send them to
+the author, Albert Crosby, at:
+
+acrosby@uafhp.uark.edu 

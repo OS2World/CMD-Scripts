@@ -1,0 +1,55 @@
+General       RexxNews General Help
+
+RexxNews is an NNTP client Newsreader written in REXX using the rxSock package
+that is a part of the IBM Employee Written Software program.
+
+It is a command driven news reader that attaches to a NNTP server to read and
+post news on your OS/2 computer.
+
+These are the RexxNews commands (you can type in just the capitalized portion):
+
+Quit        - quit and update newsrc
+EXIT        - quit without updating newsrc
+Group       - change to a particular group
+Article     - display an article
+Next        - advance to next article
+Last        - go back to last article
+HEAD        - display only the header of the current article
+BODY        - display only the body of the current article
+NEWgroups   - display groups created since last newsrc update
+              or since yymmdd hhmmss
+SUbjects    - display a list of subjects in current group
+              (all subjects or a range of articles)
+AUthors     - display a list of authors in current group
+              (all subjects or a range of articles)
+DEtails     - display information about the current group
+SET         - display various configuration items
+SEArch      - search headers in current group for a string
+LIstgroups  - Display and optionally subscribe to newsgroups 
+              (can search newsgroup names for a string)
+Time        - show the current time and date
+SHow        - show the current NEWSRC file
+OS          - execute an operating system command
+Post        - post an article to a newsgroup
+Mail        - mail the current article to someone
+Followup    - post a follow-up to the current article
+Reply       - mail a message to the poster of the article
+NEXTGroup   - go to the next subscribed group with articles available
+SUBScribe   - subscribe to the current group
+Unsubscribe - unsubscribe from the current group
+SAVENewsrc  - save the NEWSRC file
+EDITnewsrc  - edit the NEWSRC file within RexxNews
+MARk        - mark all articles in the current group as read
+
+The commands can be abbreviated to the capitalized part.  Some commands have
+an alias such as 'd'isplay for article.
+
+When the ---MORE--- prompt is displayed, the following keys can be used:
+   q  - quit
+   u  - up 1 screen
+   t  - top
+Pressing the enter key advances one line, any other key advances one screen.
+
+You can find out more about most of the commands typing HELP command.
+
+See HELP TOPICS for a list of currently available help files.

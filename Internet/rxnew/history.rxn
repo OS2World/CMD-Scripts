@@ -1,0 +1,38 @@
+History       History of RexxNews
+---------------------------------
+RexxNews v 1.1a:
+              The public release of RexxNews had a bug in the NEWUSER portion
+              of the code that kept newusers from connecting.  A couple of
+              other minor changes were made...
+
+RexxNews v 1.1:
+              The second public release.  RexxNews 1.1 adds numerous features
+              to RexxNews, including:
+
+                  * Multiple NEWSRC files
+                  * POST, FOLLOWUP and REPLY commands
+                  * Automatic reconnection on timeout (only partially tested)
+                  * Subscribed/Unsubscribed group status
+                  * The NEXTGROUP command to go to the next subscribed group
+                    with unread articles.
+                  * The LISTGROUPS command to list groups and optionally 
+                    subscribe to them.
+                  * More and improved HELP pages.
+                  * Automatic setting and restoration of screen size
+                  * A substantially improved read mode.
+
+RexxNews v 1.0a:
+              An immeadiate bugfix to replace the publicly available
+              RexxNews v 1.0 (which had problems with the 'Q' command
+              while viewing an article)
+
+RexxNews v 1.0:
+             The first publicly released version of RexxNews for OS/2
+             written by Albert Crosby <acrosby@uafhp.uark.edu>.
+
+rnr:
+             A 'simple' nntp client included with the rxSock package,
+             served as the initial inspiration and base for developing
+             RexxNews developed by Patrick Mueller of IBM served as the
+             inspiration and original base for RexxNews.  The program has
+             changed dramatically since then.

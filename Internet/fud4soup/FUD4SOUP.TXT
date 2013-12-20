@@ -1,0 +1,184 @@
+There are a few people with a certain sickness (it happens more often than
+just in *os2* newsgroups!), who may spoil your Usenet fun. Or some people
+may never be able to write interesting messages for you (I'ld be a good
+example of the latter! :-)), unless they write about, e.g. Pascal.
+
+This is a stripped-down version of my HellDive (AKA SOUP) filter. Written
+in REXX, presented in this almost usable text file. You have to adjust it
+slightly to meet your needs (indeed, I did skip the INSTALL.CMD-part).
+
+The basic idea: if you hate "Me", all messages of "Me" will be deleted.
+All follow-ups to messages of "Me" will be deleted too. Unless you want
+to keep a message for some reason, which are hard-coded in the CMD file.
+
+Installation:
+
+ - Customize/modify/save the CMD file below
+ - Create the file called CRITERIA.HDR, which may contain any information
+   in the header of articles you want to delete. If you hate me, and my
+   newsserver is 192.168.1.1, and I always crosspost to alt.fan.me, you
+   could add the following lines to that file:
+
+      my@email.org
+      From: Me
+      NNTP-Posting Host: 192.168.1.1
+      ,alt.fan.me
+      alt.fan.me,
+      FUD4
+
+   If such a line (case-insensitive) occurs anywhere in a header, the
+   article will be marked for deletion (e.g. "Subject: can someone 
+   please explain me what "[FUD4]" means?" will be deleted).
+ 
+It will create a file with MsgID's of "Me" in the" path"-directory. You'll
+have to maintain that file yourself. You may want to add at least one line
+to that file for the first time, and teh file is going to look like:
+
+     <date> <msgid>
+     <date> <msgid>
+     <date> <msgid>
+
+Sometimes just delete all lines in "MESSAGE.IDS" with old dates, as soon
+as nobody is likely to reply to a <msgid> anymore.
+
+Known limitation: the file below works for one newsgroup. You could use
+a stem to filter more than one newsgroup.
+
+At least search the file below for "Adjust". Great idea: backup retrieved
+files or NEWSRC(.OLD)-settings before running it for the first time, and
+(sometimes) look what articles you skip. You never know, the idiots may
+go to see a doctor, may never be drunk anymore, and follow the instructions
+of the doctor precisely.
+
+It is not intended as a working example, but it should get you started
+with a SOUP filter. It works for me, I hope it works for you too! IRL
+my filter is more advanced than this one, but it still could save you
+some time and your keyboard. Happy hunting!
+
+--- 8X --- 8X --- 8X --- 8X --- 8X --- 8X --- 8X --- 8X --- 8X --- 8X ---
+/* HellDive.CMD (untested version) */
+
+/* Adjust: the location of your CRITERIA.HDR and MESSAGE.IDS files  */
+
+path='C:\SOUPER\FILTER\'
+
+CALL RxFuncAdd 'SysFileDelete','RexxUtil','SysFileDelete'
+eol=D2C(10)
+tab=D2C(9)
+SAY '     ****************'
+SAY '     * FUD4SOUP.CMD *'
+SAY '     ****************'
+
+/* Adjust: your usual SOUPER command */
+
+'@SOUPER -i -m -k 0 NNTP://myuserid123:email@my.news.provider.net'
+
+DO WHILE Lines('AREAS')>0
+   line=LineIn('AREAS')  
+   
+   /* Adjust: name of the newsgroup to be filtered */
+   IF Pos('comp.os.os2.setup.misc',line)>0 THEN PARSE VAR line source (tab) .
+
+END
+CALL LineOut 'AREAS'
+
+IF Strip(Translate(source))='SOURCE' THEN DO
+   '@IMPORT -u'
+   EXIT
+END
+target=Strip(source)||'.BAK'
+source=Strip(source)||'.MSG'
+CALL SysFileDelete target
+counter=0
+i=0
+DO WHILE Lines(path||'MESSAGE.IDS')>0
+   i=i+1   
+   PARSE VALUE LineIn(path||'MESSAGE.IDS') WITH . msgids.i
+END
+msgids.0=i
+CALL LineOut path||'MESSAGE.IDS'
+i=0
+DO WHILE Lines(path||'CRITERIA.HDR')>0
+   i=i+1   
+   PARSE VALUE LineIn(path||'CRITERIA.HDR') WITH criteria.i
+END
+criteria.0=i
+CALL LineOut path||'CRITERIA.HDR'
+DO WHILE Lines(source)>0
+   line=LineIn(source)
+   IF Pos('#! rnews ',line,1)<>1 THEN DO
+      SAY '"#! rnews " not found:' 
+      SAY '"'||line||'"'
+      '@IMPORT -u'
+      EXIT
+   END
+   PARSE VAR line '#! rnews' bytes
+   counter=counter+1
+   CALL CharOut '','Article' Format(counter,5,0) '-' Format(bytes,8,0) 'bytes '
+   message=CharIn(source,,bytes)
+   filter=0
+   header=Left(message,Pos(eol||eol,message,1)-1)
+   IF filter=0 THEN DO
+      DO i=1 TO msgids.0
+         IF Pos(Translate(msgids.i),Translate(message),1)>0 THEN DO
+            CALL CharOut '','Skipped!'
+            filter=1
+            i=msgids.0
+         END
+      END i
+   END      
+   IF filter=0 THEN DO
+      DO i=1 TO criteria.0
+         IF Pos(Translate(criteria.i),Translate(header),1)>0 THEN DO
+            CALL CharOut '','Skipped!'
+            PARSE VAR header . 'Message-ID: <' msgid '>'
+            CALL LineOut path||'MESSAGE.IDS',Date('E') msgid
+            CALL LineOut path||'MESSAGE.IDS'
+            temp=(msgids.0)+1
+            msgids.temp=msgid
+            msgids.0=temp
+            filter=1
+            LEAVE i
+         END
+      END i
+   END      
+   IF filter=1 THEN DO
+
+      /* Adjust: article text to keep an article anyway */
+
+      IF Pos("I'm sorry!",Translate(message),1)>0 THEN DO
+
+         CALL CharOut '',' '||"Well, let's keep this one..."
+         filter=0
+      END
+   END
+   IF filter=1 THEN DO
+      
+      /* Adjust: another article text to keep an article anyway */      
+
+      IF Pos('My Name',Translate(message),1)>0 THEN DO
+         CALL CharOut '',' '||"Well, let's keep this one..."
+         filter=0
+      END
+   END
+   IF filter=1 THEN DO
+
+      /* Adjust: yet another reason to keep an article anyway */
+
+      IF Pos('FUD4SOUP',Translate(message),1)>0 THEN DO
+         CALL CharOut '',' '||"Well, let's keep this one..."
+         filter=0
+      END
+   END
+   SAY
+   IF filter=0 THEN DO
+      CALL CharOut target,'#! rnews' Strip(bytes)||eol
+      CALL CharOut target,message
+   END
+END
+CALL LineOut source
+CALL CharOut target
+CALL SysFileDelete source
+'@REN' target source
+'@IMPORT -u'
+EXIT

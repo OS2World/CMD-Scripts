@@ -1,0 +1,20 @@
+Install       Installing RexxNews
+---------------------------------
+
+RexxNews requires that the rxSock package from the IBM Employee Written
+Software program be installed on your system.
+
+To install RexxNews, place the RexxNews.CMD and RxNewsML.CMD files in a 
+directory that is in your path, along with all of the .RXN files included 
+in the archive.  The .RXN files are the help screens for RexxNews.
+
+RexxNews uses a file named REXXNEWS.CFG to load its default values.  There
+should be a file named SAMPLE.CFG in the archive that is the author's
+REXXNEWS.CFG file.  You can place this file in the directory with the RexxNews
+executables or your TCPIP 1.2.1 %ETC% directory.  See HELP CONFIG
+(CONFIG.RXN) for details.
+
+Some of the help pages may have filenames that are longer than 8 characters.
+On FAT partitions, UNZIP will truncate these to 8 characters.  RexxNews 
+will correctly handle either the long or short filenames.  Any files created
+by RexxNews will obey the FAT 8.3 naming conventions.

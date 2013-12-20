@@ -1,0 +1,43 @@
+SEARCH        Searching with RexxNews
+-------------------------------------
+
+The RexxNews search command is used to search the list of groups or the
+headers of articles within a group.
+
+The format of the command is:
+
+SEarch [<tag>] [RANGE <range>] [ [FOR] <target>]
+
+where:
+
+ <tag>     is a valid header field.  Header fields include FROM, SUBJECT, 
+           DATE, etc.  If no tag is given, subject is assumed as the default.
+
+ <range>   is a range of articles within a group.  Valid ranges are:
+             *                      All articles in a group
+             <number>               A single article
+             <first>-<last>         Articles between first and last
+
+          If range is omitted, articles from the current article to the end 
+          of the group are searched.
+
+ <target> is any string.  No wildcards are allowed, and a match will occur
+          when the target occurs anywhere within the specified field. 
+          Searches always ignore case.
+
+Example commands;
+
+search windows
+
+       would search the subject of all articles within the current group for
+       the string 'windows'.
+
+search from range * for ibm
+
+       would search the 'from' field of all article headers within the current
+       group for 'ibm'.
+
+search subject range 1-234 for os
+
+      would search the subject field of articles 1 through 234 for the string
+      'os'.

@@ -1,0 +1,12 @@
+EditNewsRC    Modifying your NEWSRC file(s) within RexxNews
+-----------------------------------------------------------
+
+To make maintaining your NEWSRC files easier, RexxNews now includes
+a simple NEWSRC file editor built in to RexxNews.  With the EDITNEWSRC
+command, you can move through your NEWSRC file one entry at a time and
+change the subscription status, delete an entry, sort the newsrc file,
+and clear the highest read article pointer.
+
+[The interface is kludgy in this release and may be heavily modified
+later...]
+

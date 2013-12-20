@@ -1,0 +1,25 @@
+MORE          Paging with the RexxNews internal pager
+-----------------------------------------------------
+
+Paging in RexxNews is done with an internal algorithm.
+
+When the --MORE-- prompt is displayed, you can press any of the following keys:
+
+<Enter>        advance the display one line
+<T>            return to the top of the list or article
+<B>            advance to the bottom of the list or article
+<^>            go to the first line of the list or article
+<$>            go to the last line of the list or article
+<=>            go to a specific line of the list or article
+<U>            back up one screen in the list or article
+<Q>            stop displaying the current list or article
+<?>            display this help screen
+
+Any other key will advance one screen.
+
+The --MORE-- prompt will also be displayed at the end of the article or list
+before the command prompt is displayed with a special marker <END>.
+
+Depending on what is displayed, other keys may issue other commands.  Pressing
+the "?" key may display more specific help for the list you are displaying.
+

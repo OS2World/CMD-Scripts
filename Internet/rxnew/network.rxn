@@ -1,0 +1,50 @@
+Network       RexxNews and Networks/Multiple Users
+--------------------------------------------------
+
+RexxNews is designed with Local Area Networks in mind.  You can install
+RexxNews and its help files on a network server, and none of the users
+should suffer any conflicts.
+
+RexxNews will first read the REXXNEWS.CFG file from the directory where
+RexxNews is installed, then from the %ETC% directory, and then the
+current directory.  (Yes, if they all exist, RexxNews will read 3 config
+files.)
+
+In this kind of a configuration, I reccomend a REXXNEWS.CFG file in the
+RexxNews directory that looks like:
+
+==========================
+server default.news.server
+organization Your organization name
+disclaimer Any standard disclaimer
+username os2user
+timezone CDT
+==========================
+
+plus any additional defaults appropriate for your network.  These values
+should create reasonably complete headers for anyone who doesn't create
+a local REXXNEWS.CFG file but still uses RexxNews.
+
+If you desire the user to be prompted for the value for one of the header
+fields, place the value UNKNOWN for that field in the RexxNews.CFG file.
+
+You could easily create a diskette for students to use that would contain
+their own personal REXXNEWS.CFG file that would store their NEWSRC file(s)
+on their floppy.  They could move this floppy from machine to machine
+without any problems as well.  Such a file would probably contain lines
+like this for students in the author's college:
+
+==========================
+server uafhp.uark.edu
+username jane.doe
+fullname Jane Doe
+organization UA College of Agriculture and Home Economics (Student)
+disclaimer Any opinions expressed are not necessarily those of the U of A
+etcdir A:\
+timezone CDT
+==========================
+
+A similiar approach would work for creating newsrc and configuration files
+for two users of the same OS/2 machine.  Create WPS icons that start RexxNews
+from different directories, each of which contains an appropriate REXXNEWS.CFG
+file.

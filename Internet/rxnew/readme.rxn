@@ -1,0 +1,27 @@
+README        ReadMe Introductory FILE FOR RexxNews
+---------------------------------------------------
+
+RexxNews is a NNTP News Reader client for OS/2 TCPIP 1.2.1 and rxSock.
+
+Written by Albert Crosby <acrosby@uafhp.uark.edu>
+
+Be sure to read the WHATSNEW.RXN and README.RXN files either with the
+HELP command or other command internal to RexxNews.
+
+(These *.RXN files are the RexxNews help files.)
+
+You are free to use and distribute RexxNews with no obligation other than
+giving credit where credit is due.  You may modify this program freely,
+though I suggest that modified versions be mailed to the author for
+redistribution in order to keep some order to the program.
+
+The original simple NNTP client for rxSock was written by Patrick J. Mueller
+of IBM, the author of the rxSock package for OS/2.  His work was the
+inspiration and example that RexxNews was based upon.
+
+Disclaimer:  This is free software, and as such, no warranties of any kind
+are made by the author.  As Rexx code, full source is provided so that you
+can modify it to better suit your needs.
+
+If you find that there is a bug or desired feature for a future release of
+RexxNews, please mail the author at acrosby@uafhp.uark.edu.

@@ -1,0 +1,72 @@
+NEWSRC        RexxNews and NEWSRC files
+---------------------------------------
+
+As of version 1.1, RexxNews uses multiple NEWSRC files if you connect to a
+newserver other than the one specified in your REXXNEWS.CFG file.
+
+RexxNews uses a simplified NEWSRC format.  It is simply a list of groupnames
+followed by the highest article read.  A typical NEWSRC file might look like:
+
+comp.os.os2.apps: 1-12345
+comp.os.os2.networking: 1-2345
+news.groups! 1-24567
+
+If you're familiar with Unix newsrc files, you'll note two differences. 
+
+RexxNews only really cares about the highest article that has been
+read.  The other number is there simply to make the newsrc file look like a
+Unix newsrc file.
+
+Unlike Unix Newsreaders, RexxNews keeps pointers for all of the newsgroups
+in your NEWSRC file, even those that are marked unsubscribed.
+
+RexxNews and Unix NEWSRC Files
+------------------------------
+
+If you regularly read news on a Unix host, you can copy your Unix NEWSRC file
+for RexxNews to use, provided that you will be reading news from the same
+NNTP server.  I personally copy my .NEWSRC file that I use with NN to the PC
+and use it with RexxNews.
+
+RexxNews will preserve the subscribed/unsubscribed status of newsgroups from
+a Unix NEWSRC file.  When it encounters a list of read articles, such as:
+
+comp.os.os2.misc: 1-4000,4124-4160,4163,4165-4183
+
+RexxNews simply assumes that the last number is the highest article read.
+When it writes a newsrc file out, it writes the name of the group,
+subscription status (if known) and 1-highest article read.
+
+I haven't yet tried taking a RexxNews NEWSRC file back to a Unix host.
+
+RexxNews and Multiple NEWSRC files
+----------------------------------
+
+When RexxNews is started, it reads in default values from a file named
+REXXNEWS.CFG in the TCPIP %etc% directory (if it exists).  One of the
+defaults you should place in this file is the name of your default news
+server.
+
+When you start RexxNews without specifying a server name, it will use the
+default server and use a NEWSRC file named 'NEWSRC' in the %etc% directory
+(unless your REXXNEWS.CFG file specifies a different newsrc file name).
+
+At the OS/2 command line, you can specify the name of a different news server
+when you start RexxNews.  If you do, RexxNews will use a NEWSRC file whose
+name is the first 8 charachters of the server's name (with any periods 
+changed to dashes) and the extension NRC.  This file will be created in
+the TCPIP %etc% directory unless your REXXNEWS.CFG file specifies a
+different etcdir.
+
+An example:
+
+   The author's REXXNEWS.CFG includes the lines:
+
+;default server
+server uafhp.uark.edu
+
+   And his %ETC% variable is "D:\TCPIP\ETC"
+
+   If he issues the command "rexxnews sol.ctr.columbia.edu", RexxNews will
+use a NEWSRC file named 'D:\TCPIP\ETC\SOL-CTR-.NRC'.
+

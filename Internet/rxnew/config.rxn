@@ -1,0 +1,51 @@
+Config        Instructions for Configuring RexxNews
+---------------------------------------------------
+
+RexxNews can read the default values for its internal variables from a file
+named REXXNEWS.CFG in the directory where RexxNews is stored, the TCPIP 
+%ETC% directory, and/or the current directory.
+
+The syntax for this file is <variable> <value>.  For a list of the variables
+and what they do, look in the SET help page.
+
+If your REXXNEWS.CFG file(s) contain screen size information, RexxNews will
+attempt to change the screen size and then restore it when you leave RexxNews.
+
+See the NETWORKS help page for information about setting RexxNews up for 
+multiple users and/or on a Local Area Network.
+
+The RexxNews config file should contain at least lines like the following:
+
+=======================
+server uafhp.uark.edu
+username acrosby
+fullname Albert Crosby
+organization Univ. of Arkansas AGHE Microcomputer & Network Support
+timezone CST
+=======================
+
+Any lines in the RexxNews.CFG file that are blank or begin with a ';'
+will be ignored, as will any invalid variable names/values.
+
+If you dislike having new files added to your %etc% directory, add the line
+
+etcdir <valid-directory-name>
+
+to your REXXNEWS.CFG file and the NEWSRC files will be placed in that 
+directory.  You can use the value . if you would like the current directory
+to be used.
+
+Conifigurations for Alternate Servers
+-------------------------------------
+
+When RexxNews is started from the command line with the name of a different
+server, it will attempt to load an alternate configuration file.  The name of
+this file will be determined by the following rule:
+
+   Take the first 8 charachters of the server's name and replace an '.'
+      with '-'.
+   If there are not 8 charachters, add '_' to fill to 8 charachters.
+   Add the extension '.CFG'.
+
+The REXXNEWS.CFG file will be read first.  Any settings in a secondary
+CFG file will override those in the REXXNEWS.CFG file.

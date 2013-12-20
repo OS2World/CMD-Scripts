@@ -1,0 +1,173 @@
+                        PPPCNT OS2 PPP CoNnecTion Utility
+
+                         (ala UNIX style PPP connection)
+
+                  Copyright GIGAplexed Consulting Services 1998
+                  A REXX example that drives PPP customizations)
+
+Prereq's
+
+    PPP module
+    Warp 3 Used Version 2.0 Revision 1.12 for testing Warp 3.
+    Warp 4 contains the proper revision of PPP module already.
+
+    OS2 Version 3 or higher (I haven't tried with earlier versions) with a
+    working configuration of PPP. Please DO NOT use this package to install
+    PPP. It won't do that for you.
+
+    NOTE: Where referred to slippm.exe and 'Dial Other Provider' are the same.
+
+
+Assessment: This installation makes almost no change to your environment.
+Uninstall can be as simple as getting rid of the parts listed in pppcnt.lst.
+Config.sys is not changed. One thing is that the resolv file gets changed on a
+connection basis, but the original is maintained in 'resolv.ori' should you need
+it for some reason.
+
+  WHY A UTILITY TO DO THIS? (if you don't care go directly to 'WHAT TO
+DO ...')
+
+If you have never used IBM's Global ISP then you may not know the difference
+but believe me, the dialer.exe is a great deal nicer than slippm.exe. (ie 'Dial
+Other Provider') But still I hate using another window to drive something
+connection oriented, that I use on a regular basis. Actually slippm was reverse
+engineered to include PPP. It's annoying interface is stark, requires you to hit
+enter to launch your connection and asks 'Select OK to Exit'. Well if I
+canceled the app don't I want to exit? Also they did not implement any of
+the custom window save features like holding the 'alt' key and moving
+window permanently to a new location. On the good side this GUI is pretty
+rock solid in terms of problems. This utility DOES NOT DISPENSE entirely of
+slippm! You should still enter your connections via this GUI and test them for
+success. Then proceed to use PPPCNT.
+
+You may already have a connection(s) defined within slippm? I thought to
+myself, wouldn't it be neat to just setup the connection info in slippm and
+then go off and launch ppp.exe directly by hand. (which slippm does) So for a
+while I had this little command file to start my connection from an icon which
+worked pretty dandy. Unless of course I was spaced or stoned and invoked
+the cmd file multiple times, then we had problems.
+
+So I needed an indicator on the desktop but did not want the full GUI and
+lacked the proper specs to define the shared data area that would tell me
+when ppp was up and operational. Think about it .... ppp has to talk to you
+through some common programming communication medium to signal the
+event, then my little widget can say 'we're ready!'.
+
+SO after a long walk in the park I devised a way to CHEAT!
+
+My application knows when things are happening by using pstat to display
+Process ID info. I guessed and tested to find the shared memory name.
+
+Now my utility could go from red to yellow and finally knew when to turn on
+the green light. But how was I to reset the icon to red when ... nothing was
+left running? Another trick up my sleeve. The REXX signal instruction
+provided just the trick.
+
+  WHAT TO DO TO MAKE YOUR PPP GO GO GO ...
+
+                     Click for Warp 3 or Warp 4 Downloads.
+
+
+Download the '.zip' file and unzip to \TCPIP\ETC or for warp 4 use
+\MPTN\ETC. Run 'dial other providers' and if it does not contain any dialer
+definitions create at least one. Also test dial these accounts from that dialer.
+It creates initial pointers in the TCPOS2.INI file that will manage which
+connection is active/last. Now you are ready to procede to create the
+PPPCNT account icons on your desktop without further need for dial other
+providers. Run PINSTALL 'account name'. (no quotes) Account name is one
+that is displayed in your Dial Other Providers screen. (under name) You can
+PINSTALL for as many accounts as are defined. Using an existing icon updates
+it and does not create new.
+
+This will check for PPP's existance on your machine and install a traffic light
+icon on your desktop with the appropriate account name.
+
+The icon's WPS setup information requires that the 'start minimized' button
+be set. This alleviates a slight contention problem in execution. (window is also
+unnecessary except for debug purposes. So if you are looking at the window
+that launches PPP titled 'your connection name' and wondering why things
+are proceding slowly, you have your answer. Minimize the window or bring
+the 'PPP Connection' window to the front.
+
+If you have an internal variable volume modem you may want to manually edit
+the appropriate modem command string in Dial Other Providers to attenuate
+the sound. For USRobotics it is Mx where x=0 (off) and x=3 (for the deaf
+rocker) DO NOT set the '&M' parameter or you will turn error correction off
+and make your connection so slow as to be useless!
+
+Now just 'click' and away you go!
+
+  Shutting Down the Connection
+
+To shutdown, select 'PPP Connection' from the task list. (control-esc) In that
+window (PPP's log) hit control-C. (and note red light is set back on when
+window goes away) It should be noted that care should be taken not to hit
+control-C twice as the first cancels PPP then the second will cancel the exec
+prior to the red light being set on the icon. Should this happen, proper icon will
+be set next time application is invoked. (in other words this is a trivial issue)
+
+Slippm saves the connection info in TCPOS2.INI and pppcnt.cmd reads it each
+time it executes so changes made within slippm are automatically used.
+
+CUSTOMIZATION ICONS
+
+PPPCNT has the facility to specify alternate action icons. I ship a sample, ace,
+duce, three card to show you how it works. Get creative and make your
+own. Have a cool one, send it to me for inclusion in the package.
+
+                 example: pinstall IBM three.ico two.ico ace.ico
+
+
+where 'IBM' is an account name defined in the 'dial other provider' window.
+
+Case sensitivity in account name is important! Also if you invoke pinstall for a
+connection icon which already exists on your desktop, it is redefined. The icon
+names are maintained with the account name in TCPOS2.INI.
+
+  DEBUGGING AND ERRORS
+
+If there is an error message and exec is still running you can just switch to the
+'PPP connection' window in the task list. The problem is that when the exec
+concludes the window usually goes away faster than you can see. In that
+case, it is easiest to modify the WPS object in the folllowing manner and let
+the window hang with all the info at completion.
+
+If you you need to see (or suspect) error messages that disappear too quickly
+it is most convenient to uncheck the 2 boxes on the 'SESSION' page for
+settings of the WPS object. (right click icon and select 'settings') Uncheck
+these...
+
+Start Minimized
+Close Window on Exit
+
+If you experience difficulty you may contact me at
+76354.1617@compuserve.com. Please be sure to include enough info so that
+my response may be thorough.
+
+
+Change History
+______________
+
+04/26/98 Formal introduction
+
+04/28/98 Scripts now work (tested with Compuserve)
+         Made changes with "@" so that password is not displayed in log
+         Added custom icon feature
+
+05/06/98 Noted condition when double control-C is hit from PPP Connection
+         as leaving status icon in confused state. (ie green when gone)
+         This is because first control-C returns to exec (RXppp) from PPP and
+         second cancels exec prior to resetting icon.
+         If it hurts ... don't do it! Reinvocation will sync ... trivial.
+
+         Added more checks for 'PPP running' in starting stage.
+
+06/04/98 Fixed problem with objectids and shorter account names
+
+11/28/98 Modifications for Warp 4. Kept as separate zip file. (fairly trivial)
+
+02/22/99 Added nameserver resolution file setting and maintenance of original
+         resolve file (as resolv.ori) should the user want it for some reason.
+
+03/12/99 Added null setting for empty modem strings per a bug report.
+         Also set CCVIEW=NO so you cannot accidentally reinvoke.

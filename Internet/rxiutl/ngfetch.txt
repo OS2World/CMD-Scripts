@@ -1,0 +1,59 @@
+News group list fetch v0.16
+
+For whatever purpose, you may want a simple list of newsgroups without 
+having to export from a news reader program.  
+
+That's what this news group list fetcher is for.  
+
+The usage:
+
+ngfetch.cmd <host> [options]
+
+<host> is the name of the news server you want to grab a list from.  All 
+available groups will be downloaded and written to a file.  A progress 
+indicator will be displayed, showing bytes transferred, and the rate of 
+transfer, as well as the number of groups parsed.  
+
+Options:
+
+/q - Quiet mode.  No transfer status display.
+
+/qq - Super quiet mode.  Suppresses all output.
+
+/w - Write raw data to file.  No newsgroup parsing.
+
+/s - Sort received newsgroups before writing (somewhat slow).
+
+/b# - Specify transfer block size (512-65535).  Default is 10240.
+
+/t# - Specify transfer status timing interval in 100ths of a second.
+      Default is 50 (updated twice a second).
+
+/m# - Specify maximum retries on socket receive errors.  Default is 1000.
+
+You should note that the final size of .newsrc will not match the total 
+bytes transferred, because the groups will have been parsed out of 
+information pertaining to article numbers and posting permission.  If, for 
+some reason, you want this information, just use the /w switch.  All
+information will be written to .newsrc without any parsing.  Naturally, 
+there will be no status information concerning the number of groups 
+received using this switch.  If you have a fast connection, this will be 
+much faster due to the lack of parsing.
+
+At the end of the transfer, there will be a stats line with the number of 
+bytes transferred, seconds of duration, and effective transfer rate.  If 
+the /w switch is not used, there will be another line stating how many
+groups were received.  
+
+Exit codes:
+
+0 - newsgroup list retrieval successful
+1 - news host connection failed at socket level
+2 - connection refused by remote server
+3 - user aborted
+4 - program error
+5 - bad usage
+
+For any questions, comments, complaints, etc., e-mail me at:
+
+    <thannymeister@yahoo.com>

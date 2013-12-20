@@ -1,0 +1,17 @@
+Help          Adding New Help Files to RexxNews
+-----------------------------------------------
+
+Unfortunately, the help files were the last part to be written, and may
+be somewhat sketchy.  If you would like to contribute a help page,
+mail it to the author:
+
+acrosby@uafhp.uark.edu
+
+You can add your own help files to RexxNews by placing them in files
+named topic.RXN in the RexxNews directory.  HELP TOPICS will
+automatically include your help files in its list.
+
+The first line of any helpfile should be the name of the file (without the
+RXN extension) followed by a brief description of the contents.
+
+HELP TOPICS will display this line when it lists the help topics available.

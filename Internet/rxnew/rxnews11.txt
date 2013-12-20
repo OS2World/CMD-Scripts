@@ -1,0 +1,73 @@
+       OS/2 Upload Information Template for ftp-os2.nmsu.edu
+
+Archive Name: rxnews11a.zip
+Program Description: RexxNews 1.1a NNTP Client Newsreader for OS/2 using rxSock
+Operating System: OS/2 2.x
+Program Source: Uploaded by author
+
+Uploaded by: Albert Crosby  acrosby@uafhp.uark.edu
+
+Proposed directory for placement: os2/2.x/networking
+
+RexxNews v 1.1a is a simple NNTP based newsreader for OS/2 2.x.
+
+[RexxNews v1.1a is a bugfix version that corrects a problem for first
+time users.  My apologies - I hadn't tested it as a new user before I
+uploaded 1.1 to ftp-os2.nmsu.edu - Albert]
+
+It requires rxSock from the IBM EWS Program.
+
+RexxNews's features include:
+
+*  Read and post news articles from an NNTP server with OS/2 2.x
+*  Use multiple NNTP servers
+*  Easily configured for a LAN or multiple users on the same machine
+*  No limit on article size or number of articles in a group
+*  Can use a Unix .NEWSRC file to ease transition to RexxNews
+*  Able to list all of the newsgroups known to a server that contain a
+   string and prompt you about subscribing to each
+*  Able to save articles to a file.
+*  Able to search header fields or group names for specified strings.
+*  Uses external customization files
+
+WHATSNEW      What's New in RexxNews 1.1
+----------------------------------------
+
+RexxNews 1.1 adds several new features; among these is the ability to post
+to newsgroups from within RexxNews.  The new commands related to posting are:
+
+    Post Followup Mail and Reply.
+
+The post, followup, mail, and reply commands make every effort to be compliant
+with RFC977, RFC822, and RFC850.
+
+RexxNews now includes a SUBSCRIBED group concept.  When you enter a group for
+the first time, you will be asked about it's subscription status.
+
+There is a new LISTGROUPS command to help you find and subscribe to groups.
+This command is very useful for new users, since you can use it to search for
+all 'mac' groups and be asked about subscribing to each.
+
+RexxNews should now reconnect automatically if you walk away from a session
+and then return.
+
+The Article reading mode has been improved - you can now spend most of your
+session in RexxNews without ever seeing the RexxNews prompt.
+
+RexxNews now handles multiple NEWSRC files for different servers -- If you
+specify a different server than that indicated in your REXXNEWS.CFG file,
+RexxNews will look for/create a new NEWSRC file whose name is based on the
+name of the NNTP server.  As long as your NNTP servers are all unique in the
+first 8 charachters, this should work fine.
+
+RexxNews now reads up to three REXXNEWS.CFG files from the following 
+directories inorder:  the RexxNews directory, the %ETC% directory, and the
+current directory.   When RexxNews uses an alternative server (other than
+the default in your REXXNEWS.CFG file), RexxNews will also attempt to read
+a configuration file for that server.
+
+If your REXXNEWS.CFG file specifies a different screen size, RexxNews will
+automatically change the screen size to match if possible.  When it exits,
+the original screen size will be restored.
+
+RexxNews also now includes a rough, but useable, NEWSRC file editor.

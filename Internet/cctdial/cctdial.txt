@@ -1,0 +1,30 @@
+-------------------------------------- CCTDIAL.CMD v1.1 Read Me ------------------------------------
+
+Description-
+
+CCTDIAL.CMD is to be used with the OS/2 Warp IAK Dialer for Other Internet Providers. This program is released to the public domain as freeware.
+
+This Rexx command file, the original adaptation written by Don Russel, has been extensively modified by Pat Martini of CCT, Inc. - Sedona, AZ. The objective is to satisfy the many needs for a simple to install and use PPP dialer script, that will redial when busy, alternate between two access provider phone numbers, and allow the option of automatically connecting to a server requiring a third login parameter.
+
+This has been accomplished using a very flexible method, allowing any or all of these features to be enabled as needed.
+
+NOTICE: The program has not been extensively tested using the additional prompt and response feature. If you experience trouble with this feature, or anything using this program, copy any errors from the dialer Status window to the clip board and EMail to CCT: cct@sedona.net (Pat Martini).
+
+Installation-
+
+After unzipping, move both the CCTDIAL.CMD and CCTREAD.ME (this file) files to your \TCPIP\BIN subdirectory. Follow the simple setup procedure below to use immediately. NOTE a few setup requirements: Insert your user information between single quotes: 'xxxxx', or leave two single quotes for any unused parameters: '' (NO double quote marks are used). The exception to this is those non-text entries, such as timeout, retry, and pause values, which are numbers without quotes.
+
+Setup-
+
+Load CCTDIAL.CMD with the OS/2 editor, E.EXE. Replace the dummy values for k1, k2, and k3 with your access provider's phone number, your userid, and your password, respectively. This is all that needs to be done for normal installations. You may optionally change the timeout parameter (maximum number of seconds the program waits for a request from the server), the pause parameter (number of seconds to wait between redials), and the maxtry parameter (number of times the program attempts to connect if busy is encountered). These parameters are 45, 10, and 5 by default. Save the file after changes have been completed.
+
+For custom installations, you may add a second phone number for your access provider, and also insert an additional prompt (to expect from the server after name and password), and the proper response to transmit back.
+
+Fill-in k4 if your access provider allows for two phone numbers. CCTDIAL.CMD will alternate between them when busy. Fill-in the prompt3 parameter if your connection will send you another prompt after name and password, such as 'netname:', and then fill-in the proper response text. Note that it may be necessary to experiment with the prompt3 parameter, as the entire text may not arrive in whole on each connection. For example, 'tname:' may work reliably, rather than 'netname:', assuming the first two characters don't always come through. This varies from system to system, because of modem timing, phone line quality, and transmission speed. Save the file after the custom parameter changes.
+
+Add or Modify Entry in the IBM Dial-Up for TCP/IP dialer (other access provider).  On page 1 of 4, enter a name and description, as required, along with ID and password info (used by other programs). In the Login Sequence, enter cctdial.cmd and make sure PPP is selected.
+
+On page 2 of 4, Your IP Address, Destination IP Address, and Netmask are NOT required - leave blank. The same goes for the Modem Prefix and Initialization strings on page 4 of 4.
+
+Close the Entry Notebook and Save Changes when prompted. Click the Dial button and observe that CCTDIAL.CMD is running without problem. Any connect or login errors will be reported in the Status window. Enjoy your connections!
+

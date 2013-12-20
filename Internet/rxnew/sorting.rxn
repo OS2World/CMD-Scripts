@@ -1,0 +1,24 @@
+Sorting       Sorting & RexxNews
+--------------------------------
+
+For preparing certain lists, RexxNews will use the system sort command.
+
+The OS/2 sort command has several limits, the most important that it
+cannot sort files larger than 64592 bytes.
+
+To overcome this limit, RexxNews allows you to specify an external sort
+program and the size it can sort with two set commands:
+
+sortcommand
+sortmaxbytes
+
+Note: if sortcommand points to a .CMD file, you must put cmd /c in front
+of the command.  Also, the sortcommand CANNOT be a DOS program.
+
+You should set both variables if you have a replacement sort routine.
+If you do not, you will not be able to sort files larger than 64592 bytes.
+
+The sample.cfg file is setup for using the BIGSORT program available on
+ftp-os2.nmsu.edu (for internet users) and has sortmaxbytes set to
+10000000 (1 megabyte), which is a reasonable size for the largest file to
+attempt sorting.
