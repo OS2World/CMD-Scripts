@@ -1,0 +1,21 @@
+[playlist]
+numberofentries=6
+File1=http://94.228.208.80:8140
+Title1=(#1 - 169/3000) Radio Paloma - 100% Deutscher Schlager!
+Length1=-1
+File2=http://94.228.208.90:8142
+Title2=(#2 - 182/3000) Radio Paloma - 100% Deutscher Schlager!
+Length2=-1
+File3=http://94.228.208.90:8140
+Title3=(#3 - 191/3000) Radio Paloma - 100% Deutscher Schlager!
+Length3=-1
+File4=http://94.228.208.70:8140
+Title4=(#4 - 203/3000) Radio Paloma - 100% Deutscher Schlager!
+Length4=-1
+File5=http://94.228.208.70:8142
+Title5=(#5 - 215/3000) Radio Paloma - 100% Deutscher Schlager!
+Length5=-1
+File6=http://94.228.208.80:8142
+Title6=(#6 - 219/3000) Radio Paloma - 100% Deutscher Schlager!
+Length6=-1
+Version=2

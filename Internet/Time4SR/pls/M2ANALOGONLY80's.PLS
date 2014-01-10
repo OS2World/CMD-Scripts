@@ -1,0 +1,21 @@
+[playlist]
+numberofentries=6
+File1=http://91.121.99.205:8000
+Title1=(#1 - 162/200) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length1=-1
+File2=http://91.121.123.15:8080
+Title2=(#2 - 207/250) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length2=-1
+File3=http://91.121.103.218:443
+Title3=(#3 - 209/250) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length3=-1
+File4=http://91.121.91.110:3000
+Title4=(#4 - 84/100) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length4=-1
+File5=http://188.165.40.142:8000
+Title5=(#5 - 175/200) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length5=-1
+File6=http://91.121.140.217:9080
+Title6=(#6 - 90/100) M2 ANALOG : ONLY 80's HITS - Live From Paris France - www.m2radio.fr
+Length6=-1
+Version=2

@@ -1,0 +1,177 @@
+Time4SR, a scheduler front-end for StreamRipper.
+þ Timed recording, simple text file format.
+þ Good display of schedule and status.
+þ Allows multiple instances for concurrent recordings.
+þ Allows time-shift by playing recent files while recording more.
+þ Monitoring and automatic re-start in case of stream errors.
+þ Flying starts from anywhere (except last minute) in event.
+þ TryZ.cmd utility useable separately to try downloaded playlists.
+þ Freeware in plain REXX source code, so customizable. (Fixable too, heh.)
+
+Time4SR is converted from Time4Z, which turned out non-trivial because SR.EXE 
+uses duration mode and can't be easily stopped from REXX. Also, since most of 
+the impetus for this project was to be able to record more than one stream at 
+a time (not least because Z monopolizes the audio), a good deal of structural 
+change was needed. Yet, because started from a robust scheduler framework 
+(that provides adequate visual info), took only a few days, including testing.
+
+Installation:
+Put in C:\TSR (or edit the source code). Recordings will be saved in C:\DAILY 
+(created if doesn't exist), unless you edit SAVEPATH in Time4SRx.SCH. 
+Recordings will be named like the .pls file plus a date and time for easy 
+identification (somewhat distinct from the method in Time4Z too, though I may 
+change that to same method).
+
+StreamRipper, where to get it:
+Here's the entirety of what I know about the OS/2 StreamRipper port, having 
+searched for where I got it from Dink's site, but he's apparently taken it 
+down. Dink wrote, sometime back in 2006:
+Just use streamripper, it does the best job possible. Heres the latest OS/2 
+port, thanks to froloff!
+
+Strings.exe reveals internal IDs of:
+STREAMRIPPER unix 1.61.19, and sr-POSIX/1.61.19.
+
+From those clues, got to:
+http://froloff.homeip.net/utils/streamripper-1.61.19-os2.zip
+That link works as of Feb 7, 2010. Has I guess adequate documentation, besides 
+some source code (may just be what's changed for the port).
+
+So, thanks to Froloff! And of course also to the many wizards: they may be 
+Unix, but they're no nuts, and I cast straight praise, without stones.
+
+Now, need a stream server or two:
+Anyhoo, to use Time4SR, you'll need some web addresses. If you have my Time4Z 
+scheduler for Dink's Z, you may already have some .pls and .m3u files, and 
+those are what I use by looking into them for the http #s. There's 
+Shoutcast.com and other places to get them. You *can* use Z to listen and then 
+copy and paste from Z's text display: to save it for use here, just create a 
+text file with a .pls extension; just http:\\#.#.#.#, don't need the rest.
+
+[Digression: Shoutcast.com changed its web page so that I can no longer use it 
+with my OS/2 system. Not sure why, but it's garbaged up with parasites (what 
+an apt name), demands javascript (yuck), and I use a "hosts" file to minimize 
+being tracked by money-grubbers. However, they recognized that not everyone is 
+going to be wild over the new look and there's http://classic.shoutcast.com/. 
+I could SO NOT get anything on the new page to work that had to use view 
+source just to get that address. GRRR. And I decided not to send them flames 
+because somehow involved with that cesspit AOL, sure to spam my email.]
+
+Assuming you're rummaging with a browser, download the .pls. Here's where some 
+conflicts arise. First, *you* may send those files to media player to start 
+streaming. I don't. Despise the whole notion, particularly when web sites 
+BLAST me with unexpected sound. So you do need to *download* the .pls or .m3u 
+rather than send it to an executable. 
+
+THE BIG PROBLEM:
+For utterly incomprehensible reason *all* are named "shoutcast-playlist.PLS" 
+or some other generic name. Incredible. You can save several in a session 
+(they'll be renamed with a serial # in parentheses), and then use Z to try 
+them out (except that Z doesn't recognize them in browse mode, so you'll have 
+to copy-paste the names, or see Solution below), but it's not much fun to keep 
+them straight, and you'll soon find Dink's GOTCHA in that Z *EATS* .pls files 
+unless you first protect them with > attrib *.pls +r. -- WHY? DON'T KNOW. He 
+didn't answer that direct question on his message board, and now even that 
+seems to be gone, dang it. -- It's a problem I handled in Time4Z, but in a fit 
+to simplify here, chopped out the file browser and re-naming. 
+
+[Digression: Was staggered to find this stoopidity even with Windows Media 
+Player: can *play* but filename is generic unless manually re-named. JUST 
+INCREDIBLE. Even Dink seemed to not grasp how handy it is to save playlists 
+(and not have Z *EAT* them). I'm *still* of the opinion that's their purpose, 
+but apparently some people don't believe in anything so *permanent* as an easy 
+way to "tune in" the same station *twice* and maybe even more times. -- I'd be 
+HAPPY for someone to tell me you *can* save playlists from modern media 
+players with a meaningful name, that I just haven't found it while gritting my 
+teeth against other *stoopidity* in those, but I'm afraid the world is even 
+*stoopider* than I can believe. No matter how cynical I get, I'm still behind. 
+... Once upon a time I dreamed that computers would automate trivial details 
+in The Future, but GUIs get more dystopian as we go...] 
+
+Fairly adequate solution:
+SO, included is TryZ.cmd, a little utility that works along my notions after 
+you've downloaded a few playlists from wherever. Has soft-coding for (your) 
+destination directory, invokes Z (or with editing, the player of your choice) 
+on each .pls or .m3u, then after you've listened and exited Z, gives a menu 
+for what to do with that one. TryZ will either manually rename, or TRY TO form 
+a unique name from the text in a .pls (already it's failed because of related 
+sources and illegal filename characters). To keep same name, hit 'R', then 
+<enter>. When renamed, or not, the .pls or .m3u is then moved to the 
+destination directory.
+
+TryZ.cmd is also handy to go through existing playlists to see which still 
+work, an otherwise tedious task even with the Time4Z file selector. Edit 
+TryZ.cmd to make a new destination for those that do work; if just clearing 
+out, delete the originals and copy the working ones back. Because can be 
+difficult to find again, TryZ NEVER deletes a playlist, you'll have to do that 
+manually. (TryZ and TZ.cmd both auto-protect them with read-only attribute.)
+
+Making files work:
+Sometimes you'll need to remove the first address in a playlist because it's 
+an announcement, or just doesn't work (going through all with TryZ is handy to 
+find those). Don't bother with adjusting the rest: Time4SR reads only to the 
+first occurrence of "http".
+
+Concurrent recording:
+To run multiple instances (up to 9!) of Time4SR: check "Create new window" in 
+"Window" properties of program object (that you made: get EWS ProgRef). Now, 
+copy Time4SR1.sch to Time4SR2.sch, and edit latter as desired. The #s must be 
+consecutive (and in HEX past 9). You can then open another Time4SR.cmd and it 
+will automatically find the next Time4SRx.sch file in sequence. Each instance 
+of Time4SR.cmd will show an ID #. The StreamRipper VIOs will be labeled with 
+corresponding #. Unfortunately, there's no easy programmatic way to put those 
+numbers into the titles of Time4SR windows, so you'll have to open them up to 
+find which controls a given stream. Shouldn't be too much of a flaw in 
+practice.
+
+!!! Overlooked flaw: if 3 instances of Time4SR are running, and you stop #2 
+then re-start, it wrongly gets the *3rd* schedule file. So stop all higher 
+before re-start. That will probably only affect me, while modifying code. -- 
+If only changing a schedule, just hit <backspace> in corresponding cmd file.
+
+!!! However, a bug I've yet to get a handle on is when starting 2nd or further 
+instances, doesn't begin recording right off (you won't notice if no event at 
+start-up), but either waits for seconds to become '00' and does a re-start, 
+but sometimes just fails entirely, sits and does nothing, at least on a 
+current event. On other hand, I've now tested the scheme with 3 instances, 
+much overlapping, and seems to work as expected, once past that initial (not 
+consistent) failure. -- Since as bragged about above, my scheduler is 
+*robust*, er... umm... hmm.
+
+CUE files:
+These clutter up your drive if nothing else, but I've already found them worth 
+it because *are* tracks that I want to rip out (one of Z's best features: just 
+hit 'r' at start point, move to end, hit 't', name it). You can comment out 
+the code to copy them to permanent storage, or CUE files will be deleted in 
+due course if you leave CLEAR or MAX keywords. -- Have an idea for convenience 
+when skimming through recorded .mp3s: utility that will read the window list 
+to find what Z is playing, and automatically view that CUE file...
+
+RAMDRIVE highly recommended:
+If you have a ramdrive, you can add a command line parameter of the drive 
+letter to use for the \TSR directory, which *may* allow your HDs to spin down, 
+depending on other factors, not least being how often you save files from 
+ramdrive to HD versus the spin-down time set in BIOS. A ramdrive avoids wear 
+and tear on your HD; as with Time4Z, a SPOOL path can be separately specified 
+for each stream, and then files are moved to HD for permanence. But the timing 
+*might* just thrash your HD. It's said that spin-up is rough on them, hmm, but 
+probably IS a good idea to minimize, may avoid noise at least. I've been 
+moving to CompactFlash, sort of, which avoids the noise. 
+
+[Digression: Been having trouble using OS/2 on larger than 1G CompactFlash, 
+strange slowness (a glacial 5KB/S...) though both XP and Linux work normally, 
+and even OS/2 began loading normally, but didn't make first boot. No clues 
+whether is due to size or manufacturer (Sandisk and Lexar); the smaller older 
+ones that do work are generic. BUT supposed to emulate an HD, and 4 and 8G 
+tried just don't work right with OS/2 (even with the Dani driver and trying 
+various settings of PIO / DMA modes in BIOS), so HMM.]
+
+WHY Time4SR? Well, because it (this functionality) was *NOT* there.
+This project was given impetus in part by an odd little board originally some 
+sort of video switch, has four BNC connectors. It's a miniature PC, 6x9 inch 
+or so, just 12V, low power, 300MHz Cyrix Media CPU, 64M, CompactFlash socket, 
+two Realtek 8139 Ethernet ports, and supposedly SB audio, but I've yet to find 
+a driver that works (or possibly to figure out the interrupts), so needed 
+something other than Z! to put it to use recording audio streams.
+
+For all further instructions, read Time4SR1.sch or Time4SR.cmd.
