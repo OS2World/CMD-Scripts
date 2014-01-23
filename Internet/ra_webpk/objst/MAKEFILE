@@ -1,0 +1,27 @@
+# IBM Developer's Workframe/2 Make File Creation run at 13:57:55 on 06/03/95
+
+# Make File Creation run in directory:
+#   F:\PROGRAMMING\CODE\OBJST;
+
+.SUFFIXES:
+
+.SUFFIXES: .c .cpp .cxx
+
+OBJST.EXE:  \
+  objst.OBJ \
+  MAKEFILE
+   ICC.EXE @<<
+ /Fe"objst.exe" 
+objst.OBJ
+<<
+
+{.}.c.obj:
+   ICC.EXE /Ss /O /G4 /C   .\$*.c
+
+{.}.cpp.obj:
+   ICC.EXE /Ss /O /G4 /C   .\$*.cpp
+
+{.}.cxx.obj:
+   ICC.EXE /Ss /O /G4 /C   .\$*.cxx
+
+!include MAKEFILE.DEP

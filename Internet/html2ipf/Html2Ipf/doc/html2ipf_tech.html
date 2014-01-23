@@ -1,0 +1,108 @@
+<HTML SUBLINKS="../html2ipf.cmd">
+<HEAD>
+<TITLE>HTML2IPF - Techical information</TITLE>
+</HEAD>
+<BODY>
+<P>This section covers some technical details on how HTML2IPF works, and how to make it work
+when it does not :-)</P>
+<P>If HTML2IPF makes an empty IPF file (or empty sections), this usually means that original
+HTML file is a bit non-standard. To verify this, you can enable debugging:</P>
+<P><TT>HTML2IPF -DEBUG+ index.html</TT></P>
+<P>This normally will produce a log file HTML2IPF like this:</P>
+<PRE>
+--- [30 Mar 1997, 11:42pm] Conversion started: Index file index.html
+--- Parsing file "index.html" ...
+--- Parsing file "opengl_index_alpha.html" ...
+--- Parsing file "glAccum.html" ...
+--- Parsing file "glAlphaFunc.html" ...
+--- Parsing file "glArrayElementEXT.html" ...
+[...]
+</PRE>
+<P>If after a 'Parsing file "..."' you see a lot of 'unexpected tag' and 'unexpected text' messages,
+this usually means that HTML2IPF's state machine gets out of synch with the HTML file sections, i.e. for
+example, it encounters tags used in &lt;BODY&gt; section in &lt;HEADER&gt; section, plain text in the
+&lt;HEADER&gt; section and so on. You should fix such files manually.
+</P>
+<P>If you get lots of 'Unexpected tag' message on certain tag, and this tag is crucial for
+you, you can add your own handler for such tags into HTML2IPF. For this, you should do
+two things:</P>
+<UL>
+<LI>Find the ParseContents subroutine, and find the big SELECT...END block in it. This select
+calls different routines depending of tag. Insert a handler for your tag here, like these:
+<PRE>
+when Tag = 'TITLE'	then TagBreakPos = doTagTITLE();
+when Tag = '!TITLE'	then TagBreakPos = doTag!TITLE();
+when Tag = 'META'	then TagBreakPos = doTagMETA();
+when Tag = 'A'		then TagBreakPos = doTagA();
+when Tag = '!A'		then TagBreakPos = doTag!A();
+</PRE>
+Note that HTML2IPF replaces the "/" character from tags with a "!" character, since "/" cannot be
+a part of a subroutine name. So, the &lt;HTML&gt; tag becomes &lt;!HTML&gt;
+<LI>Realize a 'tag handler' subroutine; all tag handlers have the 'doTag####' name where
+#### is the name of your tag.
+</UL>
+<P>Tag handler gets called from the ParseContents subroutine (and can recursively call
+ParseContents too, like the handlers for &lt;HEADER&gt; and &lt;BODY&gt; do), and can
+use following variables to get information about its environment:</P>
+<UL>
+<LI>Token - contains the full text between &lt; and &gt; marks for current tag.
+<LI>Tag - is the current tag (i.e. 'BODY', 'HEADER', 'B', 'A' etc).
+</UL>
+</P>
+<P>Beside this, to parse tokens with multiple subtags
+(like &lt;IMG SRC="a.gif" ALT="missing picture" ALIGN=center &gt;),
+there is a procedure called ParseTag. It accepts as a parameter the initial token (i.e.
+the contents of described above Token variable). All 'subtag' handlers should have the name in the
+form: doTag[Prefix]_[Subtag] where Prefix is the 'main' HTML tag, i.e. the handler for
+&lt;IMG SRC="..."&gt; subtag will have the doTagIMG_SRC name etc. Following variables are
+usable in the context of such a handler:
+<UL>
+<LI>Prefix - contains the prefix of the subtag, i.e. 'A', 'IMG' or any other tag, the handler
+for which calls ParseTag routine.
+<LI>SubTagValue - contains the right side of the expression, i.e. for the IMG SRC="a.gif"
+the SubTagValue variable will contain a.gif (quotes are automatically removed).
+So, a simple &lt;IMG ...&gt; handler should look somewhat like this:
+</P>
+<PRE>
+doTagIMG:
+ call ParseTag Token;
+[insert image into output text]
+return 0;
+
+doTagIMG_ALIGN:
+ if Pos('&lt;'translate(SubTagValue)'&gt;', '&lt;LEFT&gt;&lt;RIGHT&gt;&lt;CENTER&gt;') > 0
+  then Global._imgAlign = SubTagValue;
+return 0;
+
+doTagIMG_SRC:
+ Global._imgName = SubTagValue;
+return 0;
+
+doTagIMG_ALT:
+ Global._altName = SubTagValue;
+return 0;
+</PRE>
+</UL>
+
+<P>To output a text string into output text, you can use either PutToken or PutText
+subroutines. The difference is that first is used to put control tokens (like :p. or :ehp4.)
+while second is meant for plain text, and does conversion of control codes (i.e. if you`ll
+call PutText(':ehp3.') in the output file you`ll got the "&col.ehp3&per." text, which is not
+a valid IPF tag, but will be seen as the original :ehp3.' in the INF book). Also there is a NewLine
+routine which does a NewLine in the output stream <B>if</B> current line is non-empty.
+</P>
+<P>One more detail: the Global. stem is used to keep all global variables, while any other
+variable is usualy local to the procedure. Each procedure contains an
+<PRE>
+expose Global.;
+</PRE>
+operator, which makes every member of Global. stem visible everywhere.
+</P>
+<P>If you`ll make some useful changes, please send the changes <A HREF="apz.html">to me</A>,
+so I will incorporate any valuable changes into the HTML2IPF in future versions.
+</P>
+<HR>
+<A HREF="../html2ipf.cmd">Browse through REXX script</A> |
+<A HREF="html2ipf.html">Return to title page</A>
+</BODY>
+</HTML>

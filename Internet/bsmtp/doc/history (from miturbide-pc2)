@@ -1,0 +1,162 @@
+
+BSmtp/2 Version History
+=======================
+
+Legend
+------
+
++ new addon
+- removed
+! bugfix
+* other changes
+
+/****************************************************************************/
+
+0.1 (04.02.2000)
+================
+
+* first working version
+* socket functions realized with Rexx library RXTelnet (rxtelnet.zip on
+  Hobbes / GFD)
++ delivers mail to smtp server supplied on command line
+  (port parameter optional)
++ some sort of error checking: if mail is rejected, this is notified on
+  screen and in LogFile - but no special action is taken (no bounce or
+  whatever)
+
+
+0.2 (21.02.2000)
+================
+
+* completely rewritten code
+* now uses additional Rexx library:
+  + RXU (RXU1A.Zip on Hobbes / GFD)
++ created "interface" possibilities for "add-ons" like spam checker or
+  majordomo or ...
++ BSmtp checks if mail is to local user (local domain configurable within
+  the script now) and optionally checks if user is a local mailing list
+  (local lists configurable by external config file, which later on can
+  be used for a majordomo I plan to write), thus certain add-ons can be
+  called "on condition" (e.g. only if mail to local user or to one of our
+  mailing lists, or if not) -- but the "call function" is not implemented
+  yet, so count this just as preparation now
++ enhanced error handling: rejected mail now written to file for later
+  analysis
++ in case of multiple 'RCPT TO' (recipients), if one is rejected the mail
+  will still be delivered to the other recipients (if they are not rejected,
+  too, of course ;)
+! BSmtp.Cmd should no correctly terminate when socket could not be initialized
+  (error level 12)
+! sometimes Rexx functions were not available do to false check of loaded
+  libs - fixed.
++ some cosmetical stuff done
+* first public version -- consider it Beta, since it is not fully tested!!!
+
+
+0.3 (05.03.2000)
+================
+
++ added bounce function. If one (or more) recipient(s) is/are rejected by the
+  SMTP server, a bounce mail to sender (Envelope 'MAIL FROM') is generated,
+  informing him of the fact and hereby providing information of
+    * bounced address(es)
+    * error message of the server
+    * content of the mail
+  If the bounce mail is rejected as well by the server, an additional LogFile
+  entry is generated
+! fixed another bug concerning loading Rexx Libs
++ implemented a simple MajorDomo (QMDomo.Cmd). To use it, you have to set
+  MajorDomo.Weasel to 0 and MajorDomo.Is to 1. Right now a Weasel-like
+  call for MajorDomos is not implemented - maybe it follows sometimes.
+  No (un)subscribe by mail now - all lists have to be maintained manually.
+  No "chained lists" (one list has another list as member) are supported.
+  If a mail is to more than one lists / recipients, the reply-to is set to
+  the last list in line. Sorry - maybe I fix this up sometimes, if needed.
+
+
+0.4 (12.03.2000)
+================
+
+! if no Reply-To was present, BSmtp/2 crashed. Fixed.
++ if no Reply-To present, BSmtp/2 sets it to the value of header-"From:"
++ reworked QMDomo. Now the problem with reply-to is solved: it will now
+  be set correctly for each mail. "chained lists" are still unsupported
+  (and will stay so). (un)subscribing has still to be done manually in
+  maillist.cfg - so consider all lists as "closed lists" ;)
++ when invoked without command line parameter BSmtp/2 now displays its
+  "calling conventions" (explains parameter in short)
+* some cosmetical changes/fixes
+! Fixed a bug in QMDomo that could cause some Smtp servers to reject your
+  mail ("501 unknown parameter")
++ command line parameter for Smtp server now optional - you can provide it
+  by the config
+* out-sourced user editable configuration to BSmtp.Cfg - now the user is only
+  confronted with those data he is expected to change, not with all the other
+  stuff :-)
+
+
+0.41 (14.03.2000)
+=================
+
+* changed version numbering into two digits after the dot
+  (mainly to prevent a version 0.5 - someone could expect to have half the
+  pleasure he could have, with a program called ".../2" AND even a version
+  number of 0.5, and blaming me to do things by halves)
++ comments in maillist.cfg should now be possible - same comment-syntax as in
+  BSmtp.Cfg
++ loglevel is now configurable. See BSmtp.Txt for details.
+* some cosmetical stuff
+
+
+0.42 (24.03.2000)
+=================
+
+* BSmtp/2 is from now on distributed under GPL (Gnu Public License), version 2.
+  This may be changed in some future version - but nevertheless I probably will
+  not revoke the right to use code (fragments) in other GPL programs.
+* 'in-sourced' QMDomo.Cmd into BSmtp.Cmd, so external QMDomo.Cmd is no longer
+  needed (I decided to not implement an interface for external MajorDomo
+  programs - these can be configured by the SMTP servers, if needed).
+! BSmtp aborted abnormally in some cases when connection broke while delivering
+  a message. Fixed.
+* changed structure of the distribution archive - the dox are now in a separate
+  directory for more clarity
++ added short description of the BSMTP file format - hope, it's understandable
++ added English documentation. I hope I can keep both versions of documentation
+  up to date and will not forget to update both each time I change something ;)
+
+
+0.43 (xx.03.2000)
+=================
+
++ BSmtp/2 now adds a 'Received:' line to the header of each mail, so the
+  routing can be traced to you ;)
++ Logfile (and output on screen) now also tell you if a mail was delivered
+  successfully (LogLevel '-')
+* changed LogLevel for 'Processing...' from '+' to 'x'
++ added LogLevel function for output on screen. Syntax is the same as for
+  LogLevel, keyword in config is 'scrlevel'.
++ added LogLevel for file i/o: '#'
+! some minor bugs detected and fixed before they ever had a chance to cause
+  a problem (that situation did not appear yet)
+
+
+0.43a (07.05.2000)
+==================
+
++ new keyword "deletepkt". If set, the BSmtp MailPaket will be deleted after
+  sending *all* contained msgs successfully. That means explicitly: if even
+  only one contained msg could - for some reason - not be transmitted, the
+  BSmtp file will not be deleted, even if this keyword is set.
+! discovered a bug: if a line in a msg exceeds the length of 256 chars, BSmtp/2
+  crashed. This is, as I found out, due to a not commented limitation in the
+  tput() function of rxtelnet. I tried to work around this by splitting long
+  lines into several parts and sending these one after the other - but
+  unfortunately there's another bad thing with this function: it appends a
+  line break to each part :-( So I made the parts <= 255 chars and appended
+  a "=" to all but the last part, so it should at least work fine for
+  quoted-printable. Consider this as a "temporary work around": I wrote to Ben
+  (the programmer of the Api) and got a very fast response: he's going to fix
+  this up very soon.
+
+

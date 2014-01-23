@@ -1,0 +1,92 @@
+<HTML SUBLINKS="*">
+<HEAD>
+<TITLE>HTML2IPF - command-line usage</TITLE>
+</HEAD>
+<BODY>
+<P>
+Here is the format of the HTML2IPF command line:
+<PRE>
+Usage: HTML2IPF [IndexFileName.HTML] {OutputFileName.IPF} {Conversion options}
+[IndexFileName.HTML]
++-|is the "root" .HTML file to start with
+{OutputFileName.IPF}
++-|is the output filename (usually with the .IPF extension)
+{Conversion options}
++-+|are one or more of the following:
+  \+-|-CO{LORS}{+|-}
+   |  Use (+) or don`t use (-) ANSI [C]olors in output
+   +-|-CE{NTER}{+|-}
+   |  enable (+) or disable (-) processing &lt;CENTER&gt; tags
+   +-|-CH{ECK}{+|-}
+   |  check (+) or process (-) HTML file (along with all recursive links)
+   |  Handy for checking HTML files (along with the -DEBUG+ switch)
+   |  In the -CHECK+ state no output file(s) will be produced.
+   +-|-S{ORT}{+|-}
+   |  Enable (+) or disable (-) alphabetical sorting of all links
+   |  belonging to same HTML.
+   +-|-P{ICTURES}{+|-}
+   |  Include (+) or don`t include (-) [P]ictures in .IPF file
+   |-|-D{EBUG}{+|-}
+   \_ Enable (+) or disable (-) [D]ebug logging into HTML2IPF.LOG
+Default HTML2IPF options:
+   -COLORS+ -CENTER+ -CHECK- -SORT+ -PICTURES+ -DEBUG-
+</PRE>
+You launch HTML2IPF specifying the root (index) file; HTML2IPF will try to follow all local
+links (theoretically I can extend HTML2IPF to follow even Internet links - but what for?)
+and incorporate everything into a single .IPF file; this file will have same name as the
+root (index) file except that its extension will be replaced by IPF.
+</P>
+<UL>
+<LI> The -COLORS switch you can use to avoid HTML2IPF's colored output. You can use this
+switch if you want to redirect HTML2IPF's output into a file (or pipe); otherwise you will
+see lots of ANSI color sequences.
+<LI>The -CENTER switch must be used if you do not want HTML2IPF to handle &lt;CENTER&gt;
+tags, since HTML2IPF will treat all text between &lt;CENTER&gt; and &lt;/CENTER&gt; as
+pre-formatted text which is not compliant with HTML specs.
+<LI>The -CHECK switch is handy to use when you want to check if every component of a big
+HTML tree is present. HTML2IPF will analyse each HTML file and check each &lt;A HREF=...&gt;
+link. Before program exits, it will give a list of missing components. You should log them
+(using the -DEBUG+ switch) and then analyze HTML2IPF.LOG file. This file will also contain
+all syntax errors (and unrecognized tags) of HTML files, and maybe you will want to correct
+them first before converting to INF.
+<LI>The -SORT switch can be used to disable (by default it is enabled) sorting subheadings
+for each HTML node.
+<LI>The -PICTURES switch can be used to enable/disable (by default it is enabled)
+ebmedding pictures into the .IPF file. If the pictures are disabled (-PICTURES-) (or
+HTML2IPF cannot find the image file), HTML2IPF will replace pictures by the &lt;IMG
+ALT=...&gt; text.
+<LI>The -DEBUG switch can be used to enable debug logging into the HTML2IPF.LOG file.
+The program will output all unrecognised and unexpected tags (and unexpected plain text
+too...) into the log file - you can check it if you`re suspecting HTML2IPF is fooling you.
+</UL>
+<H2>Examples</H2>
+<PRE>
+HTML2IPF index.html -check+ -debug+
+<CENTER><B>** or **</B></CENTER>
+HTML2IPF index.html -ch -d
+</PRE>
+<P>This example will check the syntax and the presense of all links found inside the
+index.html file (and all descendents). No output file will be produced</P>
+<PRE>
+HTML2IPF index.html JavaBook.ipf -pictures- -sort-
+<CENTER><B>** or **</B></CENTER>
+HTML2IPF index.html JavaBook.ipf -p- -s- -co-
+</PRE>
+<P>
+This example will produce the JavaBook.ipf file from the Index.html file, skipping
+all pictures and not sorting subheadings alphabetically.
+</P>
+<PRE>
+HTML2IPF index.html -check+ -debug+ -colors- >html2ipf.out
+<CENTER><B>** or **</B></CENTER>
+HTML2IPF index.html -ch -d -co- >html2ipf.out
+</PRE>
+<P>
+This example will check the syntax and links of the index.html file, redirecting program's
+output into the html2ipf.out file. The -COLORS- switch is used because otherwise ANSI color
+sequences will be also logged into the redirected file.
+</P>
+<HR>
+<A HREF="html2ipf.html">Return to title page</A>
+</BODY>
+</HTML>

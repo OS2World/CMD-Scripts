@@ -1,0 +1,20 @@
+# IBM Developer's Workframe/2 Make File Creation run at 13:57:55 on 06/03/95
+
+# Make File Creation run in directory:
+#   F:\PROGRAMMING\CODE\OBJST;
+
+# Assumed INCLUDE environment variable path:
+#   f:\TOOLKT20\CPLUS\OS2H;
+#   F:\TOOLKT20\C\OS2H;
+#   F:\TOOLKT20\ASM\OS2INC;
+#   F:\IBMCPP\INCLUDE;
+#   F:\IBMCPP\IBMCLASS;
+
+
+INCLUDE000=$(INCLUDE)
+
+
+objst.OBJ:  objst.c  \
+#  {$(INCLUDE000)}os2.h  \
+#  {$(INCLUDE000)}string.h  \
+   MAKEFILE

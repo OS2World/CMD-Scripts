@@ -1,0 +1,1211 @@
+19 May 2001 
+Contact: Daniel Hellerstein (danielh@crosslink.net)
+
+         CheckLink ver 1.13b: Create, display, traverse, and index a web-tree
+
+Abstract:  CheckLink is a multi-threaded, socket aware utility used to
+           create, verify, traverse, and index a web-tree; where 
+           "web-tree" is defined as all URLs (in-line images, anchors, 
+           etc.) that are referenced in a chosen HTML document, and in  
+           documents reachable from this document. CheckLink can be run as an
+           SRE-http addon, or from an OS/2 command prompt.
+           
+                                -------------------
+
+Contents:
+
+1.     Introduction
+1.a       Quick Start
+1.b.      Web Tree? Does that make sense?
+II.    Installation
+II.a.     Installing as an SRE-http addon.
+II.b:  Using CheckLink as a standalone program
+III.   CheckLink parameters.
+III.a.     A Note on How CHEKLINK displays results
+III.b.     CHEKLINK, CHEKLNK2, and CHEKINDX  parameters
+IV.    CHEKLINK Options -- Create a Web Tree
+V.     CHEKLNK2 Options -- Display and Traverse a Web Tree
+VI.    CHEKINDX -- Create an Index of a Web Site
+VI.a      CHEKINDX Options
+VI.b      CHEKINDX edit mode
+VII.  CHEKRPT report writer -- Report information about a Web Tree
+VIII. CHEKFIX "fix" busted URLs-- Note busted links in files that contain them
+IX.   Notes
+X.    Disclaimer
+
+                                -------------------
+
+I. Introduction
+
+CheckLink is a robot that is used to create, verify, traverse and index 
+a web-tree. In other words, CheckLink will find and variously display all 
+the URLs (such as anchors and in-line images) that appear in a set of HTML 
+documents. In particular, CheckLink will:
+  
+  ... given a "Starter-URL"  provided by a client:
+
+  a) use TCP/IP socket calls to obtain the contents of the html document 
+     (that this "Starter-URL" points to)
+     Alternatively, in standalone mode you can use the 
+       FILE:///filename.ext 
+     syntax to read & process a file on your hard disk.
+  b) find URLs referred to by this document (i.e., <A Href=.. elements contained
+     within the document)
+  c) verify the "existence" of all of these URLs
+  d) recursively check each URL that maps to an html document
+        The recursive part simply means "go back to step a" for each 
+        and every "on-site" text/html document pointed to by a URL in this
+        "Starter-URL" (etc.).
+
+The net effect is that a "web-tree" is mapped, with the base of the 
+web-tree being the "Starter-URL" selected by the client, and with 
+each element of the web-tree being a unique URL.  Typically, the bulk
+of these URLs lie on a single site; though off-site URLs can be checked 
+to see if the resources they point to are still available (off-site URLs
+will NOT be "recursively examined").
+ 
+CheckLink will maintain information on all links "contained
+in", or that "point to", the resources represented by the URLs that comprise
+the web-tree.  With this information in hand, CheckLink makes it easy to 
+traverse a web-tree, such traversal being a handy way to ascertain the
+devious ways the web-site (or the portion of the web-site spanned by
+the web-tree) is interconnected. 
+
+Along with the "web tree creation" component of CheckLink, the CheckLink 
+package also includes several utilities that allow you to index, report 
+on connections, and traverse the links in a web-tree.
+
+CheckLink is best run as an "addon" for the SRE-http web server
+(http://www.srehttp.org/). However, when run as an addon, 
+you can select any "Starter-URL" desired -- it need NOT be on the 
+site hosting CheckLink.  
+
+For those lacking SRE-http, you can run several of the CheckLink components
+as standalone programs (running from an OS/2 prompt). You can also run
+one of the components (CHEKLNK2, used for web tree traversal), as a 
+CGI-BIN script.
+
+Lastly,  CheckLink is multi-threaded, and uses non-blocking sockets. 
+In addition to adding speed to web-traversals, the multi-threaded 
+nature protects CheckLink against recalcitrant servers; servers 
+that might stop or otherwise hang-up a single threaded link checker.
+
+By the way. CheckLink is freeware. Please read the disclaimer for the 
+usual details.
+
+                                -------------------
+1.a. Quick Start
+
+Of course you SHOULD READ THE ENTIRE MANUAL, but here's the quick start.
+This will give you the basics of CheckLink -- illustrating the use
+of the ChekLINK, ChekRPT, and ChekFIX programs. Do note that each
+of these programs has on-line help -- use it when you are ready to 
+deviate from the defaults!
+
+a) Make a directory on your hard drive. 
+b) Unzip the CHEKLINK .ZIP file to this directory.
+
+Do you have a site whose links you want to check. 
+Let's say you choose the site "starting at" 
+http://www.foo.bar.net/index.html
+
+c) Run CHEKLINK.CMD, and use http://www.foo.bar.net/index.html
+   as the "starter-URL".
+   For the other options, you can use the defaults,though you might want 
+   to pick your own names for the output and link files.
+d) Sit back and watch. If you get bored, hit ESC to stop, or
+   E to end (ESC is a cold stop, END will stop further link
+   checking and report on what it has found).
+   Note that the speed of ChekLink is pretty much determined by
+   the speed of your web connection, and the speed of the server(s)
+   you are communicating with. An average processing time of 1 link 
+   per second is not unusual.
+e) ChekLINK will fire up NetScape and show you a list of
+   the various URLs it has found, with some information on 
+   the links between these URLs.
+
+For more details, you an now run ChekRPT
+
+f) Run CHEKRPT.CMD, and give it the link file you selected in step c.
+   If you chose the default "link file" in step c, then choose the
+   default when selecting the "link" file in ChekRPT.
+g) Choose what you want to see. The defaults give you the basic info on
+   link structure. If you want more, choose 
+        Show Which URLS: Everything, 
+        Display list of "links in this URL": Long
+        Display short list of "URLS that link to this URL":  Yes
+   Caution: if you choose these "want to see more" options,
+            the resulting output can be quite large. 
+h) ChekRPT finishes quickly, and will fire up NetScape -- but if your
+   report is long, if might take a minute or more to display.
+
+Alternatively, instead of checking a URL on the web, you can check a
+file on your hard drive.  The steps are the same, except when you run
+ChekLINK (step c), you should enter a file name using the syntax:
+  FILE:///x:\dir\name.ext
+ChekLINK will examine this file, and attempt to read URLS both on the net
+(urls that start with http://) and on your hard drive (relative urls, or
+URLS that explicitly start with FILE:///).
+
+If you do use a FILE as your starter-URL, you can then use the ChekFIX 
+program to "note the busted links" (note that the use of ChekFIX is not
+a function of ChekRPT -- you can use them independently). 
+
+i) Run CHEKFIX.CMD, and give it the "link" file produced by ChekLINK (the default
+   in ChekFIX is the same as the default in ChekLINK).  
+j) Choose the reporting options
+k) When ChekFIX is done (it's quite fast), you can examine the files that were
+   changed, and use the information placed there by ChekFIX to help you 
+   decide what links to remove and/or modify.
+
+CheckLink has two other utilities that can only be run as web server "scripts".
+  ChexLNK2 allows you to traverse a web tree -- it makes it easy to see
+  the links between the various URLS comprising the web tree.
+  ChekINDX helps make a "site index".
+
+For those who are running the SRE-http web server:
+   you can use CHEKLINK.CMD, CHEKINDX.CMD and CHEKLNK2.CMD as "addons". 
+For users of other OS/2 web servers:
+   you can use CHEKINDX.CMD and CHEKLNK2.CMD as CGI-BIN scripts.
+Then, instead of running CHEKLINK.CMD as a standalone program, you can use 
+CHEKLINK.HTM as a convenient front-end.  For the details see the installation 
+section below!
+
+                                -------------------
+
+1.b.  Web Tree? Does that make sense? 
+
+    Perhaps the use of the term "web-tree" is misleading -- it's more of a 
+    web-network, web-graph, or (dare we say it?) a web-web.  The point
+    is that a tree implies a bottom-to-top branching structure, with a 
+    clearly defined set of precedences. In contrast, a web site is defined
+    by a network of nodes, with each node connecting to a wide variety
+    of other nodes. Although most web-sites do have some sort of hierarchy
+    (i.e., there is usually one or several "home pages"), this is usually
+    loosely defined, with lots of cross-cutting links.
+
+    Nevertheless, for reasons of brevity we will use the term "web-tree"    
+    in this documentation to refer to "the network of resources, as referred
+    to by URLs, that may be reached from a single starting point". Although
+    this single-starting point (the "Starter-URL") is really just a point of
+    entry, one usually chooses a "Starter-URL" that is somehow more
+    fundamental -- say, a home page.  Hence, this "Starter-URL" is 
+    referred to as the "base of the web-tree".
+
+                                -------------------
+
+II. Installation
+
+CheckLink consist of several separate program files, one sample HTML FORM,
+a sample input file, and this documentation file. 
+
+The files are:
+   CHEKLINK.CMD --- creates the web-tree, and displays basic information on
+                    the web tree
+   CHECK1.SRF   --- A "procedure file" used by CHEKLINK.CMD
+   CHEKLNK2.CMD --- examine and traverse a web-tree
+   CHEKINDX.CMD --- create a hierarchical index of a web-tree.
+   CHEKRPT.CMD  --- standalone program to create reports using link files
+   CHEKLINK.HTM --- an HTML document with several forms for invoking the
+                    above programs.
+   CHEKLINK.SMP --- A sample CheckLink input file (used when CheckLink is run
+                    in standalone mode).
+   CHEKRPT.SMP  --- A sample CheckLink Report Utility (CHEKRPT.CMD) options
+   CHEKLINK.TXT --- This file!
+
+II.a : Installing as an SRE-http addon.
+
+  i) UNZIP CHEKLINK.ZIP to an empty temporary directory.
+
+ ii) Copy CHEKLINK.CMD, CHECK1.SRF, CHEKLNK2.CMD, CHEKRPT.CMD, and CHEKINDX.CMD
+     to your SRE-http "ADDON" directory (i.e., D:\GOSERVE\ADDON)
+
+iii) Copy CHEKLINK.HTM to your GoServe data directory, or some other
+     WWW accessible location (i.e., D:\WWW)
+
+  iv) Optional:
+                  a) create a CHEKLINK directory under your SRE-http directory
+                  b) set the CHEKLINK_DIR parameter (in both CHEKLINK.CMD and
+                     in CHEKLNK2.CMD) to point to this directory.
+                  c) Copy CHEKLINK.CMD and CHEKRPT.CMD to this directory 
+                     (these two programs can be run in standalone mode).
+  
+The easiest way to use CheckLink is by pointing your browser at /CHEKLINK.HTM.
+CheckLink works with all browsers that understand tables, but the results 
+look best with browsers that understand either multi-part documents or 
+client pull (such as Netscape 2.01 and above).  
+
+                                -------------------
+
+II.b:  Using CheckLink as a standalone program
+
+If you are not an SRE-http user, you can run CheckLink as a standalone
+program -- just copy all the files to an appropriate directory
+(say, D:\INTERNET\CHEKLINK). You may also want to set some of the user 
+changeable parameters in each of the .CMD (in particular, the 
+CHEKLINK_DIR parameter in CHEKLINK.CMD).
+
+When you are ready to run CheckLink, just CD to this directory, run 
+CHEKLINK from an OS/2 command prompt, and follow the directions. There is
+some on-line help, and you are given an opportunity to view the
+CHEKLINK.TXT documentation.
+
+For example:
+     D:>cd \internet\cheklink
+     D:\INTERNET\CHEKLINK>cheklink
+
+When run in standalone mode, the i/o interface is somewhat primitive (no mouse,
+no graphics), and the final output is HTML code -- it is  meant to be viewed 
+with a browser. Otherwise, the results are the same as when run as an 
+SRE-http addon (it might even be a touch faster).
+
+ IMPORTANT NOTE: To use CheckLink as a standalone program, you MUST have
+                 REXXLIB.DLL.  REXXLIB was a commercial package, which 
+                 now seems to be in the public domain now. Regardless,
+                 you can obtain a legal-to-use-with-CheckLink version 
+                 of REXXLIB.DLL from:
+                    http://www.srehttp.org/apps/cheklink/chekdll.zip
+
+If you are running an OS/2 web server that understands CGI-BIN (most of them
+do), then you should copy the CHEKLNK2.CMD and CHEKINDX.CMD files to your 
+CGI-BIN scripts directory.  The output from CHEKLINK can be instructed to
+include appropriate calls to CHEKLNK2. In addition, you can use the CHEKLINK.HTM
+"front end" to invoke both of these utilities.
+
+Thus, to use CheckLink in a non-SRE-http environment, you will
+        a) Run CHEKLINK.CMD, from an OS/2 command prompt, to generate the
+           index of a web-tree, and to produce several tables of results.
+              BE SURE TO SAY Yes when asked:
+                  "Use CGI-BIN to specify CHEKLNK2 (web traversal) links?"
+        b) Invoke CHEKLNK2.CMD and CHEKINDX.CMD as CGI-BIN scripts
+           One way to do this is to ...
+              Invoke CHEKLNK2.CMD or CHEKINDX.CMD from CHEKLINK.HTM -- you'll
+              need to make a few simple modifications to CHEKLINK.HTM
+              (see CHEKLINK.HTM for the details)
+
+Alternatively, you can run CHEKRPT.CMD as standalone programs.
+CHEKRPT is not quite as powerful as CHEKLNK2,  but it does have a number of
+nice report writing features, and the HTML documents it produces give you 
+a limited amount of "web tree traversal" opportunities.
+
+                                -------------------
+
+III. CheckLink parameters.
+
+Regardless of how you run CheckLink, you may wish to first adjust
+several performance-tuning and display-customization parameters.
+Most of these appear at the top of the CHEKLINK.CMD, and there are a
+few in CHEKLNK2.CMD, CHEKRPT.CMD, and CHEKINDX.CMD -- you should modify 
+these files with your favorite text editor. 
+
+Note that to use any of the CheckLink programs you do NOT need to set 
+these parameters -- the default values work reasonably well. 
+
+   However, if you intend to make more then occasional use of CheckLink,
+   we recommend setting the LINKFILE_DIR parameter in  CHEKLINK.CMD, 
+   CHEKLNK2.CMD, CHEKRPT.CMD, and CHEKINDX.CMD.
+
+                                -------------------
+
+III.a.  A Note on How CHEKLINK displays results
+
+Before further discussion, a note on how CHEKLINK (the web-tree creator)
+displays results (when run as an SRE-http addon) is germane:
+
+   CHEKLINK can return results either in one long document, as a
+   "two part" document, or in two separate documents. 
+
+   In a "two part" document:
+        The first part contains status information, and is sent to the
+        client in pieces. 
+        The second part contains the results tables.  
+
+   In a "long document" these parts are concatenated -- the final
+   output contains both "status" and "results" information (and will
+   be a bit more cluttered as a result)
+
+   Since CHEKLINK can take several minutes to process a thousand or so 
+   links, the production of "status" information is crucial. In fact, this
+   status information is "sent in pieces" -- with some sort of output
+   being sent to the client every few seconds. Not only does this help
+   keep the client from giving up, it also prevents  "server inactive" 
+   timeouts.
+ 
+   In fact, it's this "may take several minutes to finish" aspect of 
+   CHEKLINK that makes it very difficult to distribute a pure CGI-BIN
+   version of CHEKLINK -- most CGI-BIN implementations do NOT allow
+   for "sending results as they become available", and one can not
+   count on lengthy (i.e., more then a few minutes) inactive-timeouts. 
+
+   Although two-part documents are the more elegant solution, with
+   certain browsers some very annoying "over refresh" behavior occurs
+   (i.e., every time you "back up" to the results, CHEKLINK is reinvoked).
+
+   As a work around, the "two document" strategy can be used, which will
+   result in almost the same display as a two-part document (client pull
+   is used to automatically replace the "status" document with the 
+   "results" document). The drawback is the requirement for semi-permanent
+   storage of the results file on your server's disk -- you may need to 
+   monitor disk space if you allow CHEKLINK to be extensively used in 
+   two-document mode.
+
+                                -------------------
+
+III.b.  CHEKLINK, CHEKLNK2, and CHEKINDX  parameters
+
+BACK_1 : <BODY> modifiers.
+BACK_2
+ 
+  BACK_1 and BACK_2 are used to set a BGCOLOR (or BACKGROUND) for the
+  "two parts" of CheckLink's output.  Note that if you are using CheckLink
+  in single-part mode (i.e., if you are using an older web browser, or
+  if you set the MULTI_USE option to 0) BACK_2 is ignored.
+
+  Examples:
+     BACK_1='bgcolor="#668a78"'
+     BACK_2='bgcolor="#8888dd" background="CL.GIF' 
+
+  Note: BACK_1 (BACK_2) is ignored if INTRO_1A (INTRO_1B) is set to a non-null
+        value.
+
+CHEKLINK_HTM : URL pointing to CHEKLINK.HTM
+
+   CHEKLINK_HTM should contain a URL (usually, a relative URL) that
+   points to the CHEKLINK.HTM file shipped with CheckLink. This variable
+   is used to add a "generate another web-tree" option to the output file.
+   Thus, neglecting to properly set CHEKLINK_HTM will have minimal deleterious
+   effects.
+
+   Example: CHEKLINK_HTM = '/CHEKLINK.HTM'
+
+CHECK_ROBOT : Suppress checking ROBOTS.TXT.
+  If CHECK_ROBOT=1, then check the "Starter-URL" site for a /robots.txt file, 
+  and use it to control extent of search.  
+
+  Proper net'iquette dictates that when checking a stranger's site,
+  make sure you have set CHECK_ROBOT=1.
+
+  Note: the contents of a ROBOTS.TXT file are added to the special
+        "site-specific" EXCLUSION_LIST -- it only effects URLs on the
+        "Starter-URL" site.
+
+  Example: CHECK_ROBOT=1
+
+DOUBLE_CHECK:
+
+   Since servers can be momentarily busy, it's often wise to "double check"
+   busy servers. 
+
+       DOUBLE_CHECK=0  : do NOT double check 
+       DOUBLE_CHECK=1   : double check "inaccessible servers"
+       DOUBLE_CHECK=2   : double check "inaccessible servers" AND "missing resources"
+
+   Double checking will occur after all links have been examined (thus 
+   giving the "not available" server a chance to become available.
+   Lastly, GET queries are used (instead of HEAD queries).
+
+   However, HTML documents retrieved via a double check will NOT be "recursively 
+   processed, even if they should have been (even if they had not required
+   this double check).
+
+GET_QUERY:
+   As part of mapping a web-tree, CheckLink will query servers for basic
+   information on URLs.  These queries are best done with HEAD
+   requests. 
+
+   Unfortunately, there are a number of older servers that
+   do not properly respond to HEAD requests. If you find that CheckLink
+   is identifying many URLs as unavailable (even though your browser
+   can get to them readily), it may be due to their host server's failure 
+   to recognize these HEAD requests.
+
+   As a work around, you can use short GET requests instead of
+   HEAD requests.  This method is engaged by setting GET_QUERY=1.
+
+   Example: GET_QUERY=0
+
+   Note: This GET_QUERY=1 method is not highly recommended -- it's slower,
+         and somewhat "ruder" (connections are purposely broken, which
+         tends to add garbage to the visited server's log file).
+         Instead, we recommend setting DOUBLE_CHECK=1
+
+LINKFILE_DIR: directory to store "linkage" files in.
+
+   Linkage files contain "link" information on all the URLs discovered during
+   CheckLink's recursive mapping of a "web tree".  In particular, the LINKFILE
+   option (see section IV) specifies a filename, which will then
+   be stored in the LINKFILE_DIR.
+
+   By default, LINKFILE_DIR will be your OS/2 TEMP drive.
+
+   Example: LINKFILE_DIR='D:\GOSERVE\CHKLNKS'
+
+   Note: in addition to storing LINKFILEs, the LINKFILE_DIR is also used
+         to store "RESULTS" files.
+
+MAXATONCE: maximum number of "query" threads 
+
+  Specifies the maximum number of threads to use when checking for the
+  existence (and mimetype) of a link (using HEAD requests).  
+  Increasing this number may speed up throughput, but it may subject the
+  target server(s) to  excessive loads.
+      
+  Example: MAXATONCE=6       
+
+MAXATONCE_GET: maximum number of "read" threads.
+
+  Specifies the maximum number of threads to use when retrieving the
+  contents of a URL (using GET requests).  Increasing this number may 
+  speed up throughput, but it may subject the target server(s) to  excessive 
+  loads.
+
+  Example:  MAXATONCE_GET=2   
+
+MAXAGE: Kill a query if it's old
+
+  Specifies number of seconds to wait on a query (a HEAD request). 
+  You may need to increase this time span if sites are far away or otherwise
+  slow. However, increasing MAXAGE will increase the time that
+  CheckLink waits on "hung" sites.
+
+  Example:  MAXAGE=30       
+
+MAXAGE2: Kill a read if it's old
+
+  Specifies number of seconds to wait on a read (a GET request). 
+  You may need to increase this time span if sites are far away or otherwise
+  slow. However, increasing MAXAGE will increase the time that
+  CheckLink waits on "hung" sites.
+
+  Example:  MAXAGE2=60     
+
+PROXY_SERVER: Specify a proxy server to route request through
+
+  The proxy server to send http requests through.
+  Use an IP name or numeric address, with optional port.
+  If you are NOT using a proxy server, set this to 0
+  
+  Examples:
+      PROXY_SERVER='voxy.mycompany.com:8080'
+      PROXY_SERVER=0
+ 
+ROW_COLOR1   : Used to set the <TR> in the results tables
+ROW_COLOR2
+ROW_COLOR1A
+ROW_COLOR2A
+    
+  ROW_COLOR1 and ROW_COLOR2 set the odd and even rows (respectively)
+  of tables used to display the results of checking IMG links.
+
+  ROW_COLOR1A and ROW_COLOR2A set the odd and even rows (respectively)
+  of tables used to display the results of checking Anchor links.
+
+  Examples:
+
+   ROW_COLOR1='bgcolor="#bbcc66"'   
+   ROW_COLOR2='bgcolor="#aaccdd"'   
+
+   ROW_COLOR1A='bgcolor="#bbaa44"'  
+   ROW_COLOR2A='bgcolor="#aaccdd"'  
+
+REMOVE_SCRIPT: Remove <SCRIPT> blocks and JavaScript links
+  
+  1 = Remove all <SCRIPT> blocks, and all JavaScript links.
+  0 = Do not remove
+
+  It's safer to remove these links (since CheckLink is not very intelligent 
+  about processing <SCRIPT> blocks and JavaScript "URLs")
+
+ Example:
+    REMOVE_SCRIPT=1
+
+USER_INTRO1A  : Files containing "header" information.
+USER_INTRO1B
+
+  Fully qualified file names containing "header" information, for each part.
+  If ='', then a generic header is used 
+  If specified, the file MUST contain at least:
+       <HTML><HEAD>.... </HEAD> <BODY ...> <h1>... </h1> 
+  Note: use of USER_INTRO1A (user_intro1b) means that back_1 (back_2) are 
+  NOT used. 
+ 
+  Examples:
+    USER_INTRO1A=''
+    USER_INTRO1B='D:\GOSERVE\CHEK1.HDR'
+
+                                -------------------
+
+IV.    CHEKLINK Options -- Create a Web Tree
+
+Request options are specified when one of the CheckLink programs
+is requested as an SRE-http addon (or as a CGI-BIN script).
+The following briefly describe these options.  
+
+For further details, we recommend perusing CHEKLINK.HTM.
+
+The only required option is URL (defaults will be used for the other options
+when they are not specified). 
+
+Options:
+
+ BASEONLY :  
+        BASEONLY=0 : Read URLs relative to the root of the request
+        BASEONLY=1 : Read URLs relative to the base of the request
+
+       Example: if URL=/dogs/foo.htm; then
+         BASEONLY=0 : /cats/bar.htm would be "recursively" read
+         BASEONLY=1 : /cats/bar.htm would NOT "recursively" read
+
+       Notes:
+          * root is usually the "server" of the "Starter-URL"
+          * base is usually the "directory" of the "Starter-URL"
+          * However, if the "Starter-URL" contains a <BASE> element, then
+            its value is used as the base (and the root is derived from its "server")
+          * see BASE_QUERY for an alternative
+
+ BASE_QUERY: Set the values of the BASEONLY and QUERYONLY parameters.
+        
+     Allowable values of BASE_QUERY are:
+        0_0  -- Neither BASE_ONLY or QUERY_ONLY are enabled
+                (all HTML documents on-site will be recursively read)
+        1_0  -- BASEONLY is enabled (only read HTML documents that
+                are "under" the stater-URL.
+        1_1  -- BASEONLY and QUERYONLY are enabled (only read the starter-
+                URL, though other links may be queried).
+       
+   Notes:
+      * "Reading" means obtaining the contents, and parsing the contents
+        in order to find more links
+      * "Querying" means checking with the server to see if the resource is
+        still available.  The server will return some status information,
+        but will NOT return the contents of the URL.
+
+ DESCRIP:
+        Create & save descriptions for "on-site" (and "in directory", 
+        if BASEONLY=1) documents.
+         DESCRIP=0   -- do not create descriptions
+         DESCRIP=1   -- create descriptions for text/html documents
+         DESCRIP=2   -- create descriptions for text/html and text/plain 
+                        documents
+
+         DESCRIP=1 is fairly costless (it uses information that's already 
+         been read).  DESCRIP=2 requires reading additional files.
+
+         A maximum of 300 characters is retained (this can be modified
+         by changing the DSCMAX parameter in CHEKLINK.CMD).
+
+ EXCLUSION_LIST: 
+        Space delimited list of selectors to NOT query or read.
+                *'s can be used as wildcards.
+        Example:!*  *?* *MAPIMAGE/* CGI-*' 
+                (this is also the default)
+
+        Note that the contents of a ROBOTS.TXT file (on the "Starter-URL's" 
+        server) may be added to this (assuming you've enabled CHECK_ROBOT 
+        in CHEKLINK.CMD).
+
+ LINKFILE :  Name of a file to store "linkage" information. 
+
+        Linkage information pertains to each and every URL in the web-tree.
+        This information includes:
+          * how many links this contains (if it's an HTML document)
+          * how many other html documents in this web tree point to this URL
+          * size and other information (i.e., a description)
+        
+        The LINKFILE is used to store this information.  More importantly,
+        CHEKLNK2.CMD uses the LINKFILE to "examine and traverse" the
+        web tree.
+
+        Notes:
+          * The LINKFILE should be a file name, without path or extension
+            information. A default extension of .STM is used, and 
+            the file is written to the LINKFILE_DIR directory.
+          * If you do not want to retain this information, set LINKFILE=0
+          * If you set LINKFILE (to a non-0 value), the output from
+            CHEKLINK will contain links (one for each URL) to CHEKLNK2.
+
+ NAME: A descriptive name
+        You can enter a descriptive name for this "web-tree" -- it will be 
+        displayed at various points.  If you do not specify a name, a default 
+        name will be constructed from the URL option (see below).
+
+        Example:  NAME=A+Sample+web_tree
+                       (note the URL encoding of spaces as + characters)
+
+ OUTTYPE: A space delimited list of tables to produce.  
+
+    The following values can be used in any combination:
+      OK ) Display successfully found links
+  NOSITE ) Display links to unreachable sites
+   NOURL ) Display links missing resources>
+ OFFSITE ) Display links to off-site URLs
+EXCLUDED ) Display links to excluded URLs (as specified in the EXCLUSION_LIST)
+     ALL ) Display all links
+
+  Examples: OUTTYPE='ALL'
+            OUTTYPE='OK NOURL '
+
+ QUERYONLY : Only read the starter-URL (query links in the starter-URL,
+             but to not recursively process any of them).
+             
+  Set to 1 to enable. Otherwise, all accesible HTML documents
+  will be "recursively" read and processed.  
+
+ Example: QUERYONLY=1                   
+          BASEONLY=1&QUERYONLY=0
+ Notes:
+   * The "accessibility" of an HTML document is s determined by whether 
+     it is are on-site, and by the value of the BASEONLY option.
+   * See BASE_QUERY for an alternative
+
+ RESULTS : A file containing the results of a prior call to CheckLink
+          (primarily for internal use by CheckLink).
+        
+        Due to inappropriate refreshing by certain browsers, CheckLink
+        can be instructed to save it's results tables to a file (see
+        description of USE_MULTI).  RESULTS points to one of these
+        files -- when included, CheckLink will just return the RESULTS
+        file.
+
+        Example: RESULTS="CHKS0001.HTM"
+        
+        Note that these "results" files are stored in the LINKFILE_DIR 
+        directory.
+
+ SITEONLY:
+       SITEONLY=0 : Query (check the existence of) all URLs
+       SITEONLY=1 : Query URLs the on "Starter-URL's "own site"
+
+ URL:  URL=fully qualified, or relative, URL
+      This is the "Starter-URL"
+
+      Example: URL="/samples/guide.htm"  
+
+ USE_MULTI: 
+    USE_MULTI=0 : Return results in one long document
+    USE_MULTI=1 : Return results in two-part document; with the second
+                  part replacing (overwriting) the first.
+    USE_MULTI=2 : Return results in two separate documents, the second
+                  one being stored on the server's disk.
+
+        Note that if an older browser (that does not support
+        connection:maintain) is used, then USE_MULTI is set to 2.
+        
+        The primary reason for USE_MULTI=2 is to work around the "over-
+        refreshing" bugs of certain browsers.
+
+        Note that when USE_MULTI=2 is used, the RESULTS option is
+        used internally by CHEKLINK to provide a link to the second
+        document. This document, which will be assigned random name,
+        will be stored on the LINKFILE_DIR directory.
+
+        Note that access to this RESULTS file is done via special calls to
+        CHEKLINK. Typically, these files will NOT be directly accessible from
+        the WWW.
+
+                                -------------------
+
+V.     CHEKLNK2 Options -- Display and Traverse a Web Tree
+
+CHEKLNK2 is used to examine and traverse a web tree. Typically, you would not
+code a request to CHEKLNK2 -- you would use links to CHEKLNK2 in the table
+produced by CHEKLINK. In addition, CHEKLNK2 includes numerous links 
+back into CHEKLNK2, links that utilize the options listed below.
+
+   That is, CHEKLNK2 is meant to be used in a fashion transparent
+   to most users.  Most CheckLink users will NOT ever use these
+   CHEKLNK2 options.
+        
+           Therefore -- the following description will be rudimentary.
+       
+Note that CHEKLNK2 can be called as an SRE-http addon, or as a CGI-BIN 
+script (but not as a standalone program).
+
+Options:
+
+ LINKFILE -- Same definition as above -- the linkage file (relative to the
+             LINKFILE_DIR directory) that was created by a request to CHEKLINK.
+
+ ENTRYNUM -- pointer to an entry in the LINKFILE -- his entry corresponds to a
+             unique URL; CHEKLNK2 will display links to and from this 
+             unique URL.
+
+             Example: ENTRYNUM=12
+              
+             If ENTRYNUM=0, an alphabetized index of all text/html documents 
+             (in the web-tree) will be displayed.
+              
+ ISIMG    -- Select between image & anchors links. Setting ISIMG=1 means to
+             use "image" links; otherwise, use "anchor" links.  Note that
+             the combination of ENTRYNUM and ISIMG dictate which URL will
+             be examined -- 
+
+             Example: ENTRYNUM=15&ISIMG=1  (examine "image link # 15")
+                    : ENTRYNUM=15&ISIMG=0  (examine "anchor link # 15")
+
+ VIA     -- Information on what location in the web-tree (which URL) was
+             being examined prior to jumping here.
+
+ LIST     -- Enable "traverse web tree mode".  LIST can take the following 
+             values:
+
+           LIST=0  (the default (used if LIST is not specified).
+               Display a "synopsis" of the URL. This synopsis includes 
+               basic information (such as the size and mime type), 
+               and a list of text/html URLs (in the web tree) that
+               contain links to this URL (the entrynum URL). In addition, if 
+               this (the entrynum) URL is a text/html document, a table of all 
+               its links (images and anchors) will be displayed.
+     
+           LIST=1 
+                 Display an (alphabetized) list of text/html links in this 
+                 entrynum  (more precisely, by the text/html document 
+                 pointed to by the ENTRYNUM URL).
+
+           LIST=2
+                 Similar to LIST=1, but display text/html documents that
+                 point TO the "ENTRYNUM URL" (LIST=2 is the reverse
+                 of LIST=1)
+             
+           LIST=3
+                  Display an alphabetized table of ALL URLs contained in 
+                  web-tree.  ENTRYNUM is ignored.
+                  In contrast, using LIST=0 and ENTRYNUM=0 will
+                  generate a list of "on-site, text/html documents".
+
+          Example: LIST=1&ENTRYNUM=5
+     
+ MIME   --   A space delimited list of mimetypes, possibly containing 
+             wildcards.        
+
+             MIME is only used when LIST=3.  When you specify MIME, then
+             only URLs with a mimetype matching (one of) the elements of
+             the MIME value will be used.
+                   
+             Examples: LIST=3&MIME=text/plain
+                       LIST=3&MIME=image/*   
+                       LIST=3&MIME=application/pdf+application/x-pdf
+                                   (note use of + as a url encoded space)
+
+Special Note: 
+  If you include an * in the LINKFILE value, CHEKLNK2 will 
+  produce a short list of currently available linkage files, and let you 
+  choose one to examine. The choice uses normal file matching rules.
+  For example  /CHEKLNK2?linkfile='CHK*' may yield CHK01, CHKNOW, and CHK_C.
+
+                                -------------------
+
+VI.    CHEKINDX -- Create an Index of a Web Site
+
+CHEKINDX is used to create a hierarchical index of your web-tree. By 
+hierarchical index, we mean the sort of index we are all familiar with
+-- a highly indented list, with more "subsidiary" resources on more indented
+lines.  Basically, the notion is to use CHEKINDX to create a "web index" that
+you can post on your site (usually with suitable prettifications).
+Note that CHEKINDX can use either a TABLE or an "unordered lists" 
+(<UL> constructs) to display the hierarchical index.
+
+As noted in section 1a, the web-tree is something of a misnomer; and
+construction of such a "hierarchical index" is not a cut and dried 
+affair. That is, given the multiplicity of cross-cutting links, there is
+no single hierarchical representation of these "web-trees".
+
+Therefore, CHEKINDX uses a simple heuristic: given a specified "entry-url" 
+(which may, or may not, be the "Starter-URL"), CHEKINDX will determine the
+position in the hierarchy as a function of distance to the entry-url.
+Basically, the following rules are used:
+
+Level 1 (starting closest to the left margin):
+    The entry-url. There is only one "level 1" row (it's the top row).
+
+Level 2: (second closest to the left margin):
+    All URLs contained in the "entry-URL" (that is, contained in the text/html
+    document pointed to by the "entry-URL".
+
+Level 3:
+    All URLs contained in a level 2 URL.  
+
+Level 4, 5, etc. are defined similarly.  Note that level 3 lists appear directly
+after the appropriate level 2 URL, and so forth. 
+
+                   Entry-URL
+                      2A
+                      2B
+                         3B.i
+For example:             3B.ii
+                         3B.iii
+                      2C
+                         3C.i
+                         3C.ii
+                            4.C.ii.x
+                            4.C.ii.xx
+                         3.C.iii
+
+The above heuristic contains a key rule:
+ *  Once listed, a URL can never appear in a "higher level". That is,
+    3C.i can NOT list 2A.  
+
+This rule can be applied at various levels of stringency.  For example, you 
+could allow "ties" to displayed multiple times, or you could only allow 
+"one listing" per URL.
+
+Controlling this stringency, as well as otherwise influencing the scope of the
+listing, is a function of the CHEKINDX options.
+
+                                -------------------
+
+VI.a.  CHEKINDX options.
+
+Options:
+
+ CLEANUP :  Used to remove "earlier, higher level references"
+          
+     CLEANUP=1 signals CHEKINDX to remove "higher level" references
+     that preceded lower level references. In the examples used
+     below (in the description of MULTI) setting MULTI=1 would cause 
+     the earlier "level 5" reference to be removed from the index.
+
+     CLEANUP has no effect when used with MULTI=0.
+     When used with MULTI=1, then only the first (of several
+     possible ties) is displayed. That is, MULTI=1 and CLEANUP=1
+     invokes a "use first occurrence of lowest level" rule.
+
+     When used with MULTI=2, all ties are displayed -- "use all
+     occurrences of the best level".
+
+     Note that CLEANUP requires an extra iteration, hence
+     requires more processing time.
+
+     Example: CLEANUP=1
+
+     By default, CLEANUP=0      (cleanup is not attempted).
+
+ DESCRIP: Write descriptions (if available)
+        DESCRIP=1  : Write descriptions (under the title-link), if available       
+        DESCRIP=0  : Do not write descriptions
+
+ DROP: Space delimited list of (possibly wildcarded) selectors to drop
+
+    URL's with a selector portion that matches one of the
+    items in DROP will not be displayed in the index.
+    However, links within "dropped" selectors may be displayed!
+    Thus, you should coordinate DROP with EXCLUDE.
+
+    Examples: DROP=*SAMPLES/*FILELIST.HTM   
+              DROP=*/IND*.HTM+*/MAP*.HTM
+                         (note use of + as a URL-encoded space)
+
+    By default, DROP=''  (nothing is dropped)                
+
+ EXCLUDE:  Space delimited list of (possibly wildcarded) selectors to 
+      "not expand".
+
+    URL's with a selector portion that matches one of the
+    items in EXCLUDE will be included in the index, but will
+    not be "expanded".  That is, the "links" associated with
+    an EXCLUDEd selector are not used.  Contrast this with DROP,
+    which drops display of the selector, but (possibly) retains
+    URL's with links that appear within the document the selector refers to.
+
+    Examples: EXCLUDE=FILELIST.HTM   
+                EXCLUDE=*/SITEMAP.HTM+*/INDICE.HTM
+                         (note use of + as a URL-encoded space)
+
+    The primary use of EXCLUDE is to prevent some kind of "site index"
+    from being placed at a low level and "capturing" the bulk of
+    the URLs. Such an occurrence may distort the true relationship
+    between URLs.
+          
+    By default, EXCLUDE=''  (nothing is excluded)                
+
+ HEADER: Optional header to display at top of index.
+        If not specified, the servername will be displayed.
+        
+        Example: HEADER='This+is+OUR+Site'
+
+ LINKFILE:  As defined above (filename only, no path).
+    LINKFILE is the only required parameter (note that the
+    LINKFILE=* shortcut is NOT supported by CHEKINDX).
+
+ MIME: Space delimited list of mimetypes (possibly wildcarded)
+    URLs to include in the index. 
+
+    More precisely: The mimetype of the resource (that is pointed
+    to by URLs in the web-tree) is compared to the list of
+    mimetypes in the MIME option. If no match occurs, the 
+    URL is NOT included in the index.
+
+    Examples:  MIME=text/*
+               MIME=image/jpeg+image/gif
+                    (note use of + for URL-encoding)
+               MIME=application/pdf
+
+    By default, MIME=text/html.
+
+ MULTI:  Used to control the "stringency" of display.
+
+   As mentioned above, it is likely that URLs will be referred
+   to by several other "URLs" (that is, by html documents pointed
+   to by several other URLs).  To prevent infinite recursion,
+   the basic rule is to:
+      "never include a URL if it's already been included at a lower level"  
+
+    MULTI controls the other cases:
+       
+       MULTI=0  -- The default.
+                   Only one reference to a URL per index. Thus,
+                   if the first reference found is at "level 5", and
+                   a "level 3" reference is found later, the
+                   "level 3" reference will NOT be displayed.
+
+                   Note that "level 2" references are ALWAYS
+                   displayed -- since they are checked first (they
+                   are directly referred to by the entry-URL).
+
+       MULTI=1 --  If latter references are strictly lower, then
+                   also display them. Thus, the level 3 reference
+                   mentioned above would be displayed (along with               
+                   the level 5 reference).
+
+       MULTI=2  -- Similar to MULTI=1, but ties are also displayed
+                   (thus, a second level 5 reference would be
+                   displayed if MULTI=2, but not if MULTI=1).  Note 
+                   that this only refers to "ties" -- higher level
+                   references (say, a level 6 reference) will NOT be
+                   displayed.
+
+    Example: MULTI=2
+
+ PIX. :  Stem variable pointing to mime-type specific IMGs.
+
+   PIX. is a stem variable that points to small
+   .GIF icons that will be displayed next to the title
+   (or selector) of each entry in the index.  
+   The syntax is:
+        PIX.0=number of entries
+        PIX.n="mime/type  selector
+            where
+               n: 1.. pix.0
+               mime/type can include * as a wildcard
+               selector is a selector
+        PIX.!INCLUDE=text to include in IMG element
+
+        For example:
+           pix.0=3
+           pix.1='text/plain  /imgs/text.gif '
+           pix.2='image/* /imgs/image.gif '
+           pix.3='text/html '
+               pix.!include=' height=18 width=18 ALT="*" align="center" '
+
+        Note that when there is no "selector", no icon is 
+        drawn. Also, the first (of several possible) matches is used.
+
+ SITEONLY: Only include URLs on the "Starter-URL's" site.
+  
+    If SITEONLY=1, then URLs that point off-site will
+    not be included in the index. 
+    If SITEONLY=0, then all URLs may be included in the index.
+       
+    Note that "off-site" URLs will NEVER reference other links --
+    for purposes of the web-tree, they are all "leafs".
+
+    By default SITEONLY=1  (off-site URLs are excluded)
+
+ TYPE: Display type
+     
+    There are three types of display:
+       TYPE=1  : Use an Unordered List (<UL>)
+       TYPE=2  : Use a table (<TABLE>)
+       TYPE=3  : Return an "editable" document. You can use this to delete,
+                 change or move various records and fields (see section 
+                 IV.c.iii for details).
+                 
+    Note: if you select TYPE=2, you might want to play with the various TABLE_, TR_
+          and TD_ parameters in CHEKINDX.CMD.
+
+ URL: The "entry-URL".  
+    Actually, it's the "entry selector" -- you don't need to specify the
+    http://a.b.c/ portion.   CHEKINDX will use this "entry-URL" as
+    the "level 1" of the hierarchical index.  
+   
+        Example:  URL=/samples/index.htm
+
+    By default, the "Starter-URL" of the LINKFILE is used.
+        
+                                -------------------
+
+VI.b.  CHEKINDX edit mode.
+
+In many cases, the hierarchical index created the CheckLink can use
+editing.  You may want to remove uninteresting links, change the
+indentation levels, modify uniformative descriptions, or even move
+index entries around.  To facilitate such actions, you can invoke
+the "edit" mode of CHEKINDX (see the description of the TYPE option above).
+
+In "edit" mode, an HTML form that lists all the entries, along with several options
+per entry, will be created. With this form you can:
+  * Remove entries
+  * Move entries
+  * Change an entries indentation level
+  * Modify the "title" of the entry
+  * Modify the "description" of the entry.
+
+After making these changes, you can then create a <UL> or <TABLE> index;
+or, you can re-edit the index (and make additional changes).
+
+Notes:
+   * These edits do NOT effect the "link file" (from which the index is first
+     generated). 
+   * Edit mode is NOT available when CHEKINDX is run as a cgi-bin script.  It 
+     is only available if you are running this CheckLink package as an SRE-http
+     addon.
+   * You can re-edit several times, until you like what you see; and then you
+     can finalize the index as a <UL> or a TABLE.  
+   * After finalizing, you should save the index to an HTML document (you might
+     then further modify it with your favorite text editor).
+   * A <UL> version of the index (reflecting current changes) is written on the 
+     bottom portion of the customization page.
+
+                                -------------------
+
+VII.  CHEKRPT report writer -- Report Information about a Web Tree
+
+As an alternative to using CHEKLNK2, the CHEKRPT.CMD "standalone" utility can be used
+to produce reports on the links between resources in a web tree. CHEKRPT uses
+the "link" files produced by CheckLink. It will produce a list of the URLs
+(or of a subset of the URLs) found in the web tree, displaying the links included 
+in each URL, and the resources that contain links to each URL.
+
+The results are written to an HTML document, that contains a number of internal
+links that permit a simple kind of web-tree traversal.
+
+CHEKRPT should be run from an OS/2 command prompt. You will be asked several questions,
+which allow you control what you wish to have reported. Note that the report files
+can become large. For example, displaying all the information from a small web site
+(of 190 files) resulted in a report that is over 200k long. In fact, it takes a lot
+longer for Netscape to display the results than it does for CHEKRPT to write them!
+
+As with CHEKLINK (when run as a standalone program), you can also use an "options" 
+file to select the options to feed into CHEKRPT. See CHEKRPT.SMP for a sample
+of an options file.
+
+                                -------------------
+
+VIII.  CHEKFIX "fix" busted URLs-- Note busted links in files that contain them
+
+To help you find and fix busted links, the CHEKFIX "standalone" 
+program can be used. CHEKFIX will:
+
+ 1) scan through a CheckLink "link" file,
+ 2) find all FILE:/// URLs,
+ 3) for each FILE:/// url, see if it contains ANY busted links -- links 
+    for which either the resource is missing, or the server is unavailable 
+    (for FILE:/// links, missing files are treated as "server n.a." errors).
+ 4) If a FILE:/// url does contain busted links, write comments to the
+    end of this file noting what the busted links are.  
+    Alternatively, for each busted link, a special tag can be added to the 
+    element containing the busted link.
+
+After running CHEKFIX, you can then edit your files, and use the added 
+comments (or special tags) to direct your modifications.
+
+** Important Limitation:   
+     CHEKFIX does NOT use TCP/IP calls -- it can ONLY modify files on
+     your hard drive. Hence, CHEKFIX should ONLY be used with CheckLink "link" 
+     files that were created when:
+        1) You ran CHEKLINK in standalone mode
+        2) Your "Starter-URL" was a local file.
+
+The special tags have the format:
+  CheckLink="missing resource"
+or
+  CheckLink="server n.a."
+
+For example, suppose the following link occurs in your starter-URL
+  <a href="http://foo.bar.net/help.htm">help!</a>
+Assuming that /help.htm does not exist on this server (on foo.bar.net),
+the above would be changed to:
+  <a href="http://foo.bar.net/help.htm" CheckLink="missing resource">help!</a>
+
+Actually, you can instruct CHEKFIX to add tags to ALL links, even non-busted ones. For
+non-busted links, a Checklink="Length: nnn" will be added, where nnn is the length
+(in bytes) returned when the URL was read (or, nnn is "unknown" if the URL's server
+did not provide a Content-Length header).
+
+Lastly, CHEKFIX can either delete, or rename (to a backup file in the same 
+directory) the original versions of the file containing the busted link.
+
+                                -------------------
+
+IX. Notes:
+
+   *  CHEKLINK looks for a few kinds of "image" links, and several kinds 
+      of "anchor" links:
+        Image Links:
+                <IMG src="xxx">
+                <BODY background="XXX">
+        Anchor Links
+                <A Href="XXX">
+                <AREA Href="xxx">
+                <FRAME src="XXX">
+                <EMBED src="XXX">
+                <LINK href="xxx">
+                <APPLET code="xxx" codebase="http://x.x.x/yy" >
+                <OBJECT codebase="xxx">
+                
+        Note that tags in comments (between <!-- --> are NOT processed.
+
+        Note that if there is some tag I've left out, please contact me
+        (danielh@crosslink.net) if inclusion of such a capability would
+        greatly enhance CheckLink!
+
+        ? The major difference between IMG and ANCHOR links is that IMG links are
+          never "read" (they are only queried).  Should APPLET or OBJECT be
+          treated as images?
+
+  *   A possibility (given enough interest): A graphical web-mapper component
+      for CheckLink.
+
+  *   To display some of the run-time status information, you'll need 
+      PMPRINTF.EXE  (http://www2.hursley.ibm.com/goserve).
+
+  *   Sample speeds of CHEKLINK (on a Pentium 100 over a 16/4M Token Ring
+      LAN based Intranet, with a T1 line to the outside world): 
+         1 GETs per second (of html/text URLs, average size  of 20k).  
+         8 HEADs per second (requests for basic information)
+
+                                -------------------
+
+X. Disclaimer and Acknowledgments
+
+  Copyright 1997,1998, 2001 by Daniel Hellerstein. 
+
+  Permission to use this program for any purpose is hereby granted 
+  without fee, provided that the author's name not be used in
+  advertising or publicity pertaining to distribution of the software 
+  without specific written prior permission.
+
+  This includes the right to subset and reuse the code, with proper attribution; 
+  and with the following understanding:.
+
+     We, the authors of CheckLink and any potentially affiliated institutions,
+     disclaim any and all liability for damages due to the use, misuse, or
+     failure of the product or subsets of the product.
+
+  Furthermore you may also charge a reasonable redistribution fee for
+  CheckLink; with the understanding that this does not remove the
+  work from the public domain and that the above proviso remains in effect.
+
+    THIS SOFTWARE PACKAGE IS PROVIDED "AS IS" WITHOUT EXPRESS
+    OR IMPLIED WARRANTY.
+    THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE PACKAGE,
+    INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.
+    IN NO  EVENT SHALL THE AUTHOR (Daniel Hellerstein) OR ANY PERSON OR
+    INSTITUTION ASSOCIATED WITH THIS PRODUCT BE LIABLE FOR ANY
+    SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+    RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+    OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+    IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE PACKAGE.
+
+
+We thank Buddy Donnely for beta testing, proofreading, and useful pestiness.

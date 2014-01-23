@@ -1,0 +1,72 @@
+<!-- This is an alternative "BBS startup document".
+Typically, it is invoked by an ALTSTART option
+to BBS, as contained in  BBS1A.HTM.
+You should put in links to the desired directories", in what
+ever fashion you see fit.  Notice that for cookie capable
+browsers, there is NO need to re-ask for username/pwd.
+-->
+
+<HTML>
+<HEAD>
+<TITLE>The BBS</TITLE>
+<!-- This is not necessary if called through BBS1A.HTM. -->
+<meta http-equiv="Set-Cookie:" content="BBS_INIT=SET">
+
+</HEAD>
+
+<body>
+<!-- replace date --> <!-- replace time --> <br>
+<h2> Select a file area to examine</h2>
+
+<FORM ACTION="/bbs" METHOD="POST">
+
+<table>
+<th> </th>
+<th> </th>
+
+<tr>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir1" CHECKED>file area 1</td>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir4">file area 4</td>
+
+<tr>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir2">file area 2</td>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir5">file area 5</td>
+
+<tr>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir3">file area 3</td>
+<Td> <INPUT TYPE=RADIO NAME="dir" VALUE="dir6">file area 6</td>
+
+
+</table>
+
+<p>
+<!-- if previous visit by cookie capable browser, then don't for username/pwd.
+     Typically, BBS1A.HTM will have set the appropriate cookie, and this WILL
+      be skipped
+-->
+
+<!-- select tmp1=sref_get_cookie('bbs_user_pwd') ;
+                 if tmp1<>' ' then return 0 ;
+-->
+
+<EM>Please enter your username and password:</em>
+<blockquote> <b>Username: <INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+<br> <b> Password </b> <INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8>
+<!-- select end -->
+
+<!-- you can modify the VALUE field of this line -->
+<INPUT TYPE="submit" VALUE="I'm ready to browse the BBS">
+</FORM>
+
+<HR>
+<pre>
+
+
+
+</pre>
+<HR>
+
+</BODY>
+</HTML>
+
+

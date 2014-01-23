@@ -1,0 +1,526 @@
+<HTML>
+<HEAD>
+<TITLE>HTML_TXT manual</TITLE>
+</HEAD>
+<BODY>
+
+<A HREF="#intro">Intro</A> ||  <A HREF="#cmdline">Install&amp;Run </A>|| 
+<a href="#features">Features</a>||
+<A HREF="#parameters">Parameters</A> || <A href="#troubles">Troubleshooting</A>||
+<A HREF="#disclaim">Disclaimer and Contact</A>
+
+<h1 align="center">HTML_TXT: An HTML to Text Converter </h1>
+
+<A NAME="intro"><H2 >Introduction </H2></A>
+<B>HTML_TXT</B>, version 1.12, is used to convert an <EM>HTML</EM> file to a <TT>text </TT>file.
+<B>HTML_TXT</B> is written in REXX and is meant to be run under OS/2.  However,
+it also runs under other REXX interpreters, such as Regina REXX for DOS and Regina
+REXX for WIN95.
+<P>HTML_TXT will attempt to maintain the format of the <EM>HTML</EM> document
+by using appropriate spacing and <TT>ASCII</TT> characters. <b>HTML_TXT</b> can use ASCII art <EM>(<u>lines</u> and boxes)</EM>, as well as other high-ascii characters, to improve the appearance of the output (text) file.
+<P>
+<B>HTML_TXT</B> can be customized in a number of ways. For example, you can:
+<UL>
+ <li> suppress the use of line art and other high ASCII characters (your output
+   will be rougher, but will suffer from fewer compatability problems).
+ <li> display tables (including nested tables) in a tabular format with 
+    auto-sized columns
+ <li> change the bullet characters used in ordered lists
+ <li> display <b>&lt;Hn&gt;</b> <em>headings</em> as an hierarchical outline
+ <li> change characters used to signify logical elements (emphasis, anchors, list bullets, etc.)
+</UL>
+<HR width=50%>
+<A NAME="cmdline"> <h2>Installling and Executing HTML_TXT</h2></A>
+<B>HTML_TXT</B> is easy to install and run:
+<ol>
+<li> Copy HTML_TXT.CMD to a directory. 
+<li> Open up an OS/2 prompt, change to the directory containing <code>HTML_TXT.CMD</code>,
+and type <code>HTML_TXT</code> at the command prompt.
+<li> Follow the instructions.
+</ol>
+<EM>No other libraries or support files are needed.</EM>
+<blockquote>The READ.ME file describes how to install HTML_TXT if you are a Regina REXX user. </blockquote>
+
+<h3> Running from the command line </h3></A>
+You can also run HTML_TXT from the command line. The syntax is
+ (where <font color="#445599">x:\HTMLTXT</font> is the directory containing <code>HTML_TXT.CMD</code>): <br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#445599">x:\HTMLTXT&gt;</font><tt>HTML_TXT file.htm file.txt /var var1=val1 ; var2=val2 </tt>
+<br>
+where : <menu>
+<li> <tt>file.htm</tt> is the input file (an HTML document)
+<li> <TT>file.txt</tt> is the output file (a text document)
+<li> <tt> /VAR  var1=val1 ; var2=val2 </tt> is an <b>optional</b> list of 
+<A NAME="parameters">parameters to modify</A>.
+</menu>
+<table border=0>
+<tr> <td><em>Example:</em> </td>
+ <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#445599">D:\HTMLTXT&gt;</font>HTML_TXT foo.htm foo.txt /VAR lineart=0 ; lagul=* $ </tt>
+</table>
+<b>Alternatively</b>, you can run HTML_TXT from an (OS/2) prompt without any
+arguments; you will then
+be asked for an input and output file, and will be permitted to change
+the values of several of the more important parameters.
+
+
+<HR width=50%>
+
+
+<a name="features"><h2>Features </h2></a>
+
+HTML_TXT attempts to support many HTML options; including nested tables,
+nested lists, centering, and recognition of FORM elements.<p>
+The following summarizes HTML_TXT's capabilities.<p>
+<center><em>This table assumes that you have a
+ basic familiarity with HTML.</em></center>
+<br>
+<table>
+<tr><th width=14%>Type of Feature 
+<th width=60%> Discussion  
+<th width=26% > <a href="#parameters">Customization</a>
+<tr><td colspan=3><hr>
+
+<tr>
+<td valign=TOP> <strong>Character Display</strong>
+<td valign=TOP> HTML_TXT uses a few tricks to identify where emphasis (italics, bold, etc.) are used in
+an HTML document. These include:
+<ul><li> Capitalization of <b>bold</b> emphasis
+<li> Underlining of <u>underlined</u> emphasis
+<li> "quoting" of <i>italic</i> and <a href="#features">&lt;A&gt;nchor</a> emphasis
+<li> "quoting" of the labels used to identify image elements.
+Image elements consist of &lt;IMG&gt;s and &lt;AREA&gt;s 
+ <em>(the ALT attribute, or the source image filename, is used as the label)</em>.
+
+</ul>
+<td><menu>
+<LI> <var>DOCAPS</var>  specifies when to use CAPITALIZATION (or <b>bold signifiers</b>) as an emphasis
+<li> <var>DOULINE</var> specifies when to use under_linining as an emphasis. 
+<li> <var>DOQUOTE</var> specifies when to use "quotes" as an emphasis <EM> (suggestion: you might want
+to add <tt>FONT</tt> to DOQUOTE) </em>
+    <br><var>QUOTESTRING1 and QUOTESTRING2</var> specify the characters to use "as quotes"
+    <br><var>BOLDSTRING1 and BOLDSTRING2</var> are <em>optional</em> characters 
+         that specify characters to to use "as <b>bold signifiers</b>". Or, set them to 0 to
+         capitalize.
+
+<li><var>PREA and POSTA</var> specify the characters used to identify &lt;A&gt;nchors.
+<li><var>PREIMG and POSTIMG</var> specify the characters to use as "quotes" around image labels.
+<br><var>IMGSTRING_MAX</var> is used to control how to display an image label.
+</menu>
+<tr><td colspan=3><hr>
+
+<tr>
+<td valign=TOP><strong>Lists </strong>
+<td valign=TOP> HTML_TXT supports nested lists -- with  successively deeper indentations used to display
+nested lists. Supported lists include &lt;UL&gt; and &lt;MENU&gt; unordered lists,
+&lt;OL&gt; ordered lists, &lt;DL&gt; definition lists, and &lt;BLOCKQUOTE&gt; <em>both-side indented</em> blocks.
+You can:
+<ul>
+<li> Change the bullet styles used in &lt;UL&gt; and &lt;MENU&gt; lists -- with different bullets
+used at different nesting levels.
+<li> Change the numbering style used (by default) for  &lt;OL&gt; lists. Note that HTML_TXT will use 
+TYPE and START attributes of &lt;OL&gt; lists, and will use the VALUE attribute (if specified) of
+a &lt;LI&gt;.
+<td>
+<menu>
+<li><var>FLAGUL</var> and <VAR>FLAGMENU</var> specifies the bullets to use in 
+&lt;UL&gt; and &lt;MENU&gt; (unordered) lists
+<li><var>OL_NUMBERS</var> specifies the "numbers" to use in an &lt;OL&gt; (ordered) list.
+</menu>
+<tr><td colspan=3><hr>
+
+
+<tr>
+<td valign=TOP><strong>Headings    </strong>
+<td valign=TOP > HTML_TXT supports two methods of displaying &lt;Hn&gt; headings (where n=1,2,..,7).
+<ol>
+<li> Headings can be "quoted" 
+<li> Headings can be used to create a hierarchical outline.
+</ol>
+A hierarchical outline refers to headers that identify a section. For example:
+<pre> I)Main section
+      I.a)Subsection
+      I.a.1) Sub subsection
+      I.b)Sub section 2
+</pre>
+In the above example: the <tt>I)</tt> and  <tt>I.a)</tt> could be used by HTML_TXT to display an
+&lt;H2&gt; and an &lt;H3&gt; heading (respectively)
+
+
+<td>
+<menu>
+<li><VAR>PREH1 and POSTH1</var> specify the "quote" character to use for &lt;H1&gt; headings,
+<VAR>PREHN and POSTHN</var> specify the "quote" character to use for other &lt;Hn&gt; headings (n=2,..,7).
+<li><var>HN_OUTLINE</var> specifies at what heading level to start the hierarchical index at 
+<em> (i.e.; you probably do <u>not</u> want &lt;H1&gt; headings to be the "top level numbers" of an index)
+</em>
+<li> HN_NUMBERS.n (n=1,2,.,7) specifies numbering styles to use
+</menu>
+<tr><td colspan=3><hr>
+
+<tr>
+<td valign=TOP><b>TABLES</b>
+
+<td valign=TOP > HTML_TXT supports tabluar display of nested tables.  Many (but not all)
+&lt;TABLE&gt; attributes are supported, including:
+<ul>
+<li> Display of CAPTION, either at the top or bottom of the
+ table (depending on the value of the CAPTION ALIGN attribute).
+<li>WIDTH attributes of &lt;TABLE&gt; and &lt;TD&gt;. If WIDTH is not specified,
+HTML_TXT will "auto-size" columns, assigning more width to columns with wider
+content (that is, that would have longer lines of text if horizontal space was not
+limited).
+<li>COLSPAN and ROWSPAN attributes are recognized. ROWSPAN is only partially
+supported, and may not work properly in complicated tables (tables with
+lots of ROWSPANs and COLSPANs).
+<li>ALIGN and VALIGN attributes of  &lt;TR&gt; and &lt;TD&gt;
+<li> BORDER attribute of &lt;TABLE&gt; (either a single or double line is drawn, depending on
+the value of the BORDER= attribute).
+<LI> FRAME="VOID" and RULES="NONE" attributes of &lt;TABLE&gt (suppress outer
+and inner border, respectively)
+<li> the ALIGN attribute of &lt;TABLE&gt; is partially supported:
+<ol><Li> ALIGN=LEFT in a top level table (that is not nested in another table)
+enablers  other text (and other tables) to flow around this table. Note that a
+&lt;BR CLEAR=LEFT &gt; will break in this flow (subsequent text is displayed
+below the table)
+<li>ALIGN=LEFT, RIGHT, or CENTER in a nested table will align the table (relative 
+to the table cell it is nested within). However, text flow will not be attempted --
+when nested tables are encountered, a paragraph break (a new line) is 
+always added.
+</ol>
+<li> Empty tables, and empty rows, can be suppressed.
+</ul>
+Alternatively, HTML_TXT can display tables (or highly nested tables) as
+nested lists.
+<td> <menu>
+<li> <var>IGNORE_WIDTH</var> can be used to suppress use of WIDTH attributes, and
+to suppress auto-sizing of columns.
+<li><Var>TABLE_BORDER</var> can be used to write a table border by default; it can
+also be used to override a <em>no border </em> (a BORDER=0) attribute
+<li> <var>NOSPAN</var> can be used to suppress COLSPAN and ROWSPAN options.
+<li> <VAR>SUPPRESS_EMPTY_TABLE</var> can be used to enable, or suppress, the display
+of tables rows.
+<li><var>TABLEMODE, TABLEMODE2, and TABLEMAXNEST </var> can be used to control when (if ever) 
+to convert tables to lists.
+<li><VAR>TABLEFILLER</var> can be used to fill blank spaces in a table with something
+other then a space (say, with a white box).
+<li><VAR>TD_ADD</var> can be used to adjust minimum cell widths 
+<li><VAR>TABLEVERT and TABLEHORIZ</var> can be used to specify characters to use
+when drawing horizontal and vertical borders. These are only used if high ascii
+characters are suppressed (using <var>LINEART</var>); otherwise, ascii 
+line-art characters are used to draw table borders.
+
+<tr><td colspan=3><hr>
+<tr>
+<td valign=TOP><b>FORMS</b>
+<td valign=TOP>HTML_TXT displays FORM elements using several tricks, including:
+<ul>
+<li>FILE and TEXT boxes are displayed as a <em>bracketed dotted</em> line.
+<li>TEXTAREA boxes are displayed as a box surrounding default text.
+<li>RADIO and CHECKBOX boxes are displayed using special characters (by default,
+high-ascii boxes are used)
+<LI>SELECT (and it's OPTIONS) are displayed as a bulleted list (with length
+controlled by the SIZE option of SELECT) -- with special lines bracketing the
+top and bottom of the list.
+<li> SUBMIT and RESET are displayed as "quoted" strings.
+<td>
+<ul>
+<LI> <VAR>RADIOBOX and RADIOBOXCHECK</var> can be used to specify which characters to
+use as <em>radio buttons</em> 
+<li><var>CHECKBOX and CHECKBOXCHECK</var>  can be used to specify which characters to
+use as <em>checkbox boxes</em>
+<li><var>SUBMITMARK1 and SUBMITMARK2</var> can be used to specify "quote" characters
+for SUBMIT and RESET
+<li><var>TEXTMARK1, TEXTMARK2, and TEXTMARK</var> can be used to specify characters
+used to construct <em>bracketed dotted</em> lines. 
+<LI><VAR>SHOWALLOPTS</var> can be used to suppress the SIZE attribute of SELECT lists
+(so as to force display of all OPTIONs).
+<LI><VAR>FORM_BR</var> is used to force a new line (a BR) after the end of a FORM
+
+
+<tr><td colspan=3><hr>
+<tr>
+<td valign=top ><b>MISCELLANEOUS</b>
+<td colspan=2>
+<ul>
+<LI>&lt;CENTER&gt;, &lt;DIV&gt;, and &lt;P ALIGN=LEFT, CENTER, or RIGHT&gt;
+ alignment instructions are recognized
+
+<LI> <var>LINELEN</var> can be used to specify the width of the text file
+ (in characters). <VAR> CHARWIDTH</var> is used to map "pixels to character size" --
+it is used when interpreting WIDTH attributes.
+<li><var>NO_WORDWRAP</var> is used to suppress word wrapping in a paragraph.
+This yields an <em>infinitely long</em> line, which is suitable for reading by
+a word processor. NO_WORDWRAP is <b>only</b> applied to <b>non-table</b> lines, and
+to lines that are <b>not</b> CENTERed or RIGHT justified. In addition,
+indentations (at the beginning of these <em>infinitely long</em> lines) will be replaced
+with tabs (which can be converted to <code>indent</code> characters by your word processor).
+<li><var>TOOLONGWORD</var> controls whether to trim, or wrap, words that won't fit into a
+line (or into a cell of a table).
+<li><var>LINEART</var> controls whether to use high ascii characters to 
+draw table borders, list bullets, and "quote characters".
+<II><VAR>LINK_DISPLAY</VAR> controls whether to create a "reference list" of URLs
+<li><var>SUPPRESS_BLANKLINES</var> suppresses output of sequential blank lines.
+<li><var>DISPLAY_ERRORS</var> controls the amount of error reporting (of HTML syntax)
+<li>HTML_TXT ignores embedded &lt;SCRIPT&gt;s and &lt;APPLET&gt;s
+</ul>
+
+</table>
+
+
+<HR width=50%>
+<a name="parameters"><h2> Changing Parameters </h2></a>
+
+As noted in the customization column of the above table,
+HTML_TXT contains a number of user configurable parameters. 
+<p> Although the default values of these parameters work well in most cases, 
+you can change them by editing HTML_TXT.CMD 
+with your favorite text editor <em>(look for the "user 
+   configurable parameters" section)</em>
+<p>Alternatively, you can temporarily
+changes values using the <tt>/VAR </tt> command line option. In fact,
+by specifying a PLIST=file.ext (in the /VAR section), you can create
+custom instructions for sets of HTML documents.
+
+<p>
+The following lists the more important parameters.
+<em> Of particular interest are 
+the <TT>NOANSI, LINEART, TABLEMAXNEST, TABLEMODE2</tt> and <tt>TOOLONGWORD</tt> parameters.</em>
+<p>
+
+
+<table border=1>
+
+<tr><td align="center"> General Controls  </td>
+
+
+<tr><td>
+  <table>
+  <tr><td>DOCAPS </td>
+     <td> Captialization is used to indicate these "logical and physical" elements  </td>
+  <tr><td>DOULINE</td>
+     <td> Spaces are replaced with <u>underscores</u> to indicate these elements</td>
+  <tr><TD> DOQUOTE</td>
+     <td> "quotes" are used to indidate these elements.</td>
+
+ <TR><TD>DISPLAY_ERRORS</td>
+<td> Set level of error reporting (of html coding errors encountered)
+
+ <TR><TD>FORM_BR</td>
+<td> If enabled a line BReak is added after the end of every FORM
+
+
+  <tr><td>HN_OUTLINE</td>
+     <td> Create a hierarchical outline from <B>&lt;Hn&gt;</b> elements </td>
+
+
+ <tr><TD>IMGSTRING_MAX</td>
+  <td> Controls how  &lt;IMG&gt; labels are displayed. For example, you can
+display the ALT attribute, a [], a reference to a list (at the bottom of
+the document), or you can display nothing (so that the text document
+ignores all IMG elements)</td>
+
+ <TR><TD>IGNORE_WIDTH</td>
+  <td>Ignore WIDTH option in &lt;TD&gt; elements (and/or suppress auto-sizing)
+
+  <tr><td><B>LINEART</b></td>
+     <Td> Suppress use of high ascii (non keyboard) characters.</td>
+
+  <tr><td><B>LINK_DISPLAY</b></td>
+     <Td> controls whether or not URL information should be displayed (when
+displaying links). You can suppress display of URL info, display
+a number into a reference list (that will be written to the end of the
+text output file), or include the URL in the body of the text.</td>
+
+
+  <tr><td><b>NOANSI</b></td>
+     <td> Suppress use of ANSI screen controls.</td>
+
+  <tr><td>SHOWALLOPTS</td>
+     <td> display all OPTIONS in a SELECT list.</td>
+
+ <TR><TD>SUPPRESS_BLANKLINES </td>
+<TD>Suppress display of consecutive blank lines 
+
+  <tr><td><b>TOOLONG WORD</b></td>
+     <td>trim long strings.</td>
+
+   </table></td>
+
+<tr><td> <hr size=6> <center>Table Controls</center><p>
+Display of tables, in a tabular format, can be tricky. In  particular, nested tables may
+tax the resources of your 80 character text display.  HTML_TXT allows you to
+modify table specific display options, and convert tables into lists.
+
+ </td>
+
+<tr><td><table>
+
+  <tr><td>SUPPRESS_EMPTY_TABLE </td>
+    <td> suppress display of empty rows and empty tables</td>
+
+  <tr><td>TABLEMODE</td>
+    <td> Suppress "tabular" display of tables (use lists instead)</td>
+  
+  <tr><td><b>TABLEMODE2</b></td>
+     <td> Suppress tabular display of <em>nested  </em> tables</td>
+
+
+  <tr><td><b>TD_ADD</b></td>
+     <td> Used to increase minimum cell widths (useful if narrow cells
+are clipping short words)
+
+
+  <tr><td>TABLEBORDER</td>
+     <td>type of default table borders</td>
+  </table></td>
+
+
+<tr><td><hr size=6><center>Display Controls </center>
+<p> Since it's <b>not</b> possible to use <em>italics</em>, <b>bold</b>, <font size=-1>font styles</font>, 
+and other such visual aids in a text file, HTML_TXT uses a few tricks instead.  
+<ul>
+<li>Capitalization can be used -- by default, <b>Bold</b>, <strong>STRONG</strong> and 
+<tt>TypewriTer</tt> emphasis is indicated with capitalization.
+<li>Spaces can be replaced with underscores -- this is used to indicate <u>Underline emphasis</u>
+<li>"quote strings" can be placed around emphasised strings. 
+</ul>
+The last trick, the use of "quote strings", is frequently used by HTML_TXT; with different
+sets of quote strings used for different emphasis. For example,<form> <menu>
+<li><em>EM and I emphasis</em>, 
+<li><a href="#display">anchors</a>,
+<li><form method="GET">
+submit <input type="submit" value="SUBMIT"> fields, 
+<li> and &lt; src="xxx" alt="in-line images"&gt; in-line images
+</menu>
+are indicated with unique sets of "quote strings".</td>
+</form>
+<tr><td><table border=0 cellspacing=9>
+
+  <tr><td>CHECKBOX and <br> CHECKBOXCHECK</td>
+  <td> Character used as a CHECKBOX button, and a <em>selected</em> CHECKBOX button</td>
+
+  <tr><TD>FLAGMENU</td>
+  <td> bullets used in &lt;MENU&gt; lists. </td>
+  <tr><TD>FLAGUL</td>
+  <td> bullets used in &lt;UL&gt; lists. </td>
+
+  <tr><td> FLAGSELECT and <br>FLAGSELECT2</td>
+  <td>character used to signify OPTION and a <em>selected</em> OPITON (in a SELECT list), respectively</td>
+
+  <tr><td>HN_NUMBERS.n <br><em>(n=1,2,..,7)</em></td>
+  <td> characters to use when outlining <b>&lt;Hn&gt;</b> headings</td>
+
+  <tr><td>HRBIG</td>
+  <td> character used to make large &lt;HR&gt; bars.</td>
+
+  <tr><td>OL_NUMBERS</td>
+  <td> Characters (i.e.; roman numerals, numbers, or letters) as bullets in &lt;OL&gt; (ordered lists)</td>
+
+  <tr><td>PRETITLE and <br>POSTTITLE</td>
+  <td>Strings used before and after the doucment <b>title</b></td>
+
+  <tr><td>PREA and <br> POSTA</td>
+  <td>characters used before and after &lt;A&gt; <b>anchors</b></td>
+
+  <tr><td>PREH1 and <br> POSTH1</td>
+  <td>characters used before and after &lt;H1&gt; <b>headings</b></td>
+
+  <tr><td>PREHN and <br> POSTHN</td>
+  <td>characters used before and after &lt;Hn1&gt; (n>1) <b>headings</b></td>
+
+  <tr><td>PREIMG and <br> POSTIMG</td>
+  <td>characters used before and after &lt;IMGgt; <b>names of in-line images</b></td>
+
+  <tr><td> QUOTESTRING1 and <br> QUOTESTRING2</td>
+  <td> characters used to <em>quote </em> emphasize</td>
+    (in some cases, you may want to use ANSI characters)
+
+  <tr><td> BOLDSTRING1 and <br> BOLDSTRING2</td>
+  <td> characters used to <b>bold</b> emphasize. Or set to 0 to CAPITALIZE.</td>
+    (in some cases, you may want to use ANSI characters)
+
+  <tr><td>RADIOBOX and <br> RADIOBOXCHECK</td>
+  <td>Character used as a RADIO button, and a <em>selected</em> RADIO button</td>
+
+  <tr><td>SUBMITMARK1 and <br>SUBMITMARK2</td>
+  <td> characters used before and after a &lt;SUBMIT&gt; and &lt;RESET&gt; field </td>
+
+  <tr><td> TEXTMARK1, TEXTMARK2, <br> and TEXTMARK</td>
+  <td> characters to use on the left, right, and middle of a FILE and TEXT field.</td>
+
+  <tr><Td>TABLEVERT and <br> TABLEHORIZ</td>
+  <td> characters to use as vertical, and horizontal, lines in tables (used only when lineart is suppressed)</td>
+
+  <tr><Td> TABLEFILLER</td>
+  <td> character to used to fill empty spaces in tables and textbox's </td>
+
+</table>
+
+</table>
+
+<blockquote><em>For detailed descriptions of these parameters, see HTML_TXT.CMD.</em> </blockquote>
+
+<HR width=50%>
+<A NAME="troubles"> <h2>Troubleshooting HTML_TXT</h2></A>
+
+The following lists possible troubles you might have, and suggested solutions.
+<dl>
+<dt><strong>&#201;</strong> HTML_TXT display all kinds of wierd garbage (such as $ and [ characters)
+<dd> You don't have ANSI support installed. You should either install ANSI.SYS 
+(for example, include a DEVICE=C:\OS2\MDOS\ANSI.SYS in your OS/2 CONFIG.SYS file),
+or set NOANSI=1 (in HTML_TXT.CMD)..<br> <br>
+
+<dt><b>&#202;</b> Nested tables aren't displaying properly (this is especially likely to happen when running
+under Regina REXX for DOS).
+<dd> You can try using lists instead of tables -- set TABLEMAXNEST=0 (in HTML_TXT.CMD). .<br> <br>
+
+<dt><b>&#201;</b> Tables have unappealing characters used as vertical and horizontal lines
+<dd> Either your output device (say, your printer) does not support high-ascii characters,
+or your code page is somewhat unusual. You can use standard characters (- and !) for
+line borders by setting LINEART=0 (in HTML_TXT.CMD)..<br> <br>
+
+<dt><b>&#204;</b> Unappealing characters are being used as bullets and to "quote" text strings
+<dd> This can also occur if your code page is somewhat unusual. You can either change the 
+various "display control parameters" (in HTML_TXT.CMD), or you can set LINEART=-1; in which
+case some default, standard charactes (such as * and @ for bullets) will be used. .<br> <br>
+
+<dt><b>&#205;</b> Long words (such as URLs) are being lost.
+<dd> You can change the "trimming" action to "word wrap", or to "extend beyond margins", by
+setting the TOOLONGWORD parameter.<br> <br>
+
+<dt><b>&#206;</b> The display of headings is not informative
+<dd> You can set HN_OUTLINE=2, heading will then be displayed in an "outline format".
+You can even change the numbering style (say, 2.a.ii versus II.2.b) by changing the
+HN_NUMBERS.n parameters.
+
+</dl>
+
+
+<HR width=50%>
+<A NAME="disclaim"> <h2>Disclaimer and Contact Information</h2></A>
+<Pre>
+<h3>Disclaimer</h3>
+
+   This is freeware that is to be used at your own risk -- the author
+   and any potentially affiliated institutions disclaim all responsibilties
+   for any consequence arising from the use, misuse, or abuse of
+   this software.
+
+
+   You may use this, or subsets of this program, as you see fit,
+   including for commercial  purposes; so long as  proper attribution
+   is made, and so long as such use does not preclude others from making
+   similar use of this code.
+
+</Pre>
+
+<h3>Contact Information</h3>
+Do you have the <a href="http://www.srehttp.org/apps/html_txt/">
+latest version of HTML_TXT</a>?
+<p>
+If you find errors in this program, would like to make suggestions, or otherwise wish
+to commment.... please contact <a href="mailto:danielh@econ.ag.gov">Daniel 
+Hellerstein</a>
+
+
+</BODY>
+</HTML>

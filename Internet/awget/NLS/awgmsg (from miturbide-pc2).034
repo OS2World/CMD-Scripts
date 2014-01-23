@@ -1,0 +1,178 @@
+HOME                     = AWGet home
+DOWNLOAD                 = Carpeta de descarga
+DOWNLOADS_SIMULTANEOUSLY = M ximo de descargas simult neas
+DOWNLOADS_FROM_SAME_HOST = M ximo de descargas simult neas del mismo servidor
+DOWNLOADS_ATTEMPTS       = M ximo de intentos
+DOWNLOADS_UTILITY        = Programa para descargar
+DOWNLOADS_PARAMETERS     = Par metros de descarga
+DOWNLOADS_WINDOW         = Ventana de descargas
+CLIPBOARD_MONITOR        = Monitorizar el portapapeles
+CLIPBOARD_EXCLUDE        = Excluir tipos de archivo
+SCAN_INTERVAL            = Intervalo de comprobaci¢n para descargar
+LOG_FILE                 = Archivo de registro
+ERROR_LOG                = Archivo de registro de errores
+LOG_KEEP                 = D¡as que se mantienen las entradas de los registros
+LOG_PRUNE                = Limpieza peri¢dica de los registros
+MESSAGE_DONE             = Mensaje al descargar con ‚xito
+MESSAGE_ERROR            = Mensaje si hay un error al descargar
+MESSAGES                 = Mostrar mensajes de inicio y fin para los procesos
+CHECK_CONNECTION         = Comprobar la conexi¢n a Internet
+USE_DESKTOP              = Intentar encontrar archivos URL en el Escritorio
+KEEP_FAILED_URL          = Guardar los URLs fallidos
+KEEP_DONE_URL            = Guardar los URLs descargados
+
+CONNECTION_ESTABLISHED   = La conexi¢n a Internet est  activa.
+CONNECTION_BROKEN        = Se ha cortado la conexi¢n a Internet.
+
+UNINSTAL_WARNING = ­ATENCIàN! ­La carpeta ToDo/Pendientes y su contenido ser n\n\
+                   eliminados al desinstalar Auto WGet Daemon! Si esto le resulta\n\
+                   poco conveniente, mueva los archivos a otro directorio.
+UNINSTAL_ERROR   = El directorio actual "%s" es distinto del directorio de \n\
+                   directorio de instalaci¢n de Auto WGet Daemon.\n\
+                   Se interrumpe la desinstalaci¢n; tendr  que eliminar los archivos\n\
+                   manualmente.
+UNINSTAL         = Desinstalar Auto WGet Daemon
+REMOVE_CONFIG    = Eliminar archivo de configuraci¢n
+
+INSTALL_DIR      = Directorio de instalaci¢n
+INSTALL          = ¨Comenzar la instalaci¢n de Auto WGet Daemon
+NOT_FOUND_UTILS  = ­No ha sido posible encontrar el programa de descarga!\n\
+                   Por favor, lea la documentaci¢n e instale alguno.
+INSTALL_ABORTED  = ­Se ha interrumpido el proceso de instalaci¢n!
+SELECT_UTIL      = Seleccione el programa de descarga:
+SELECT_NUMBER    = Introduzca el n£mero del programa (0 = salir )
+OBJECT_DONE      = Se ha creado el objeto
+OBJECT_ERROR     = Error al crear el objeto
+DIR_DONE         = Se ha creado la carpeta
+DIR_ERROR        = Error al crear la carpeta
+COPY_DONE        = Se ha copiado el archivo
+COPY_ERROR       = Error al copiar el archivo
+COMPILE_DONE     = Se ha compilado el archivo
+COMPILE_ERROR    = Error al compilar
+ERASE_DONE       = Eliminado
+ERASE_ERROR      = Error al borrar
+READ_ERROR       = Error de lectura
+WRITE_ERROR      = Error de escritura
+CONFIG_UPDATED   = Se ha actualizado la configuraci¢n
+ENTER_URL        = ~Introduzca un URL o nombre
+ENTER_ADD        = ~A¤adir
+ENTER_CANCEL     = ~Cancelar
+
+YES              = Ss
+NO               = Nn
+BAD_YESNO        = ­Pulse 'S' o 'N', por favor!
+
+NOT_FOUND        = Carpeta no encontrada
+CONFIG_CHANGED   = Se ha actualizado el archivo de configuraci¢n.
+PRUNE_START      = Iniciada la limpieza de registros.
+PRUNE_DONE       = Limpieza de registros terminada, %u l¡neas eliminadas.
+BAD_DOWNLDIR     = No se ha encontrado la carpeta de descargas. Se utilizar  la actual (".") en su lugar
+NOT_MOVE         = Error moviendo archivo(s)
+BAD_URL          = El archivo no contiene un URL v lido
+DOWNLOAD_START   = Proceso de descarga iniciado
+DOWNLOAD_DONE    = Proceso de descarga terminado
+DOWNLOAD_ERROR   = Error durante la descarga
+DOWNLOAD_STOP    = Descarga interrumpida
+DOWNLOAD_REDIR   = Download redirected
+ERROR_IN         = Error en
+UNKNOWN_SID      = Sesi¢n desconocida terminada (¨zombi?)
+PLUGIN_DEAD      = El plugin ha muerto
+
+WAIT_STOPPED     = Auto WGet Daemon va a detenerse. Por favor, espere
+STOPPED          = Auto WGet Daemon se ha detenido.
+NOT_RUNNING      = Auto WGet Daemon no est  activo en este momento.
+STARTED          = Auto WGet Daemon iniciado.
+ALREADY_RUNNING  = Auto WGet Daemon ya se ha iniciado.
+
+# Here is objects names
+
+OBJ_HOME         = Auto WGet Daemon
+OBJ_DOWNLOADS    = Descargas
+OBJ_TOOLS        = Herramientas
+OBJ_INFO         = Informaci¢n
+OBJ_JOBS         = Tareas
+OBJ_TODO         = Pendientes
+OBJ_RUNNING      = Activas
+OBJ_DONE         = Completas
+OBJ_FAILED       = Fallidas
+OBJ_DAEMON       = Auto WGet Daemon
+OBJ_UNINSTALL    = Desinstalar\nAuto WGet Daemon
+OBJ_EDITCFG      = Editar el archivo de configuraci¢n
+OBJ_STOP         = Detener\nAuto WGet Daemon
+OBJ_EVTLOG       = Ver el registro de eventos
+OBJ_ERRLOG       = Vier el registro de errores
+OBJ_ADD          = A¤adir URL
+OBJ_README_EN    = L‚ame (Ingl‚s)
+OBJ_README       = L‚ame
+OBJ_CHANGES_EN   = Historal de cambios
+OBJ_LICENSE_EN   = Licencia (Ingl‚s)
+OBJ_LICENSE      = Licencia
+OBJ_URL_RU       = P gina principal de\nAuto WGet Daemon (Ruso)
+OBJ_URL_EN       = P gina principal de\nAuto WGet Daemon (Ingl‚s)
+OBJ_DONATE       = Make your donation!
+
+# Comentarios sobre los par metros de los archivos de configuraci¢n
+
+CFG_HOME                     = Apunta al directorio donde se encuentran los archivos\n\
+                               de Auto WGet Daemon.\n\
+                               Este valor se fija durante la instalaci¢n y\n\
+                               normalmente no necesitar  cambiarlo despu‚s.
+CFG_DOWNLOAD                 = Apunta al directorio donde se encuentran los archivos descargados.
+CFG_DOWNLOADS_SIMULTANEOUSLY = Define el n£mero de URLs que se pueden procesar a la vez.
+CFG_DOWNLOADS_FROM_SAME_HOST = Define cu ntos URLs pueden descargarse a la vez del mismo\n\
+                               servidor. (0 = eliminar todas las limitaciones).
+CFG_DOWNLOADS_ATTEMPTS       = Define el n£mero de intentos para descargar cada URL.\n\
+                               Si el programa de descarga devuelve un error, el URL queda\n\
+                               almacenado para el pr¢ximo turno, hasta el valor dado.
+                               (0 = eliminar todas las limitaciones).
+CFG_DOWNLOADS_UTILITY        = Nombre del programa de descarga.
+CFG_DOWNLOADS_PARAMETERS     = Par metros para el programa de descarga. Puede utilizar las\n\
+                               siguientes macros: \n\n\
+                               %U - Cambiar al URL activo\n\
+                               %D - Cambiar a la carpeta de descargas\n\
+                               %P - Cambiar a la carpeta de descargas donde se cambian las contrabarras (\) por barras (/)\n\
+                               %F - Cambiar al nombre de archivo tomado del URL activo\n\
+                               %H - Change to the host name taken from the active URL.
+CFG_DOWNLOADS_WINDOW         = Define el tama¤o y modo de presentaci¢n del programa de descarga.\n\
+                               Debe introducirse primero la clave "hidden" (oculto) o "visible" y luego,\n\
+                               separados por comas, el n£mero de filas y columnas.
+CFG_SCAN_INTERVAL            = Periodo de comprobaci¢n de la carpeta "Pendientes" en segundos.
+CFG_CLIPBOARD_MONITOR        = Activa la vigilancia del portapapeles del sistema. Si se detecta un URL en\n\
+                               el portapapeles el di logo de Auto WGet Daemon "A¤adir URL" aparece autom ticamente.
+CFG_CLIPBOARD_EXCLUDE        = Tipos de archivo ignorados por el monitor del portapapeles.
+CFG_LOG_FILE                 = Nombre del archivo donde se registra el comienzo/fin de descarga y los dem s mensajes.
+CFG_ERROR_LOG                = Nombre del archivo donde se registran los errores.
+CFG_LOG_KEEP                 = N£mero de d¡as que se pueden mantener las entradas de los registros hasta la limpieza.
+CFG_MESSAGES                 = Define si se dan mensajes de inicio o fin de descarga.\n\
+                               1 - mostrar mensajes, 0 - no mostrarlos.
+CFG_MESSAGE_DONE             = La orden para ejecutar despu‚s de una descarga. Puede\n\
+                               utilizar las siguientes macros:\n\n\
+                               %M - Cambiar a un mensaje de descarga sin errores\n\
+                               %U - Cambiar al URL activo\n\
+                               %D - Cambiar a la carpeta de descargas\n\
+                               %P - Cambiar a la carpeta de descargas donde se cambian las contrabarras (\) por barras (/)\n\
+                               %F - Cambiar al nombre de archivo tomado del URL activo
+                               %L - Cambiar al £ltimo mensaje del programa de descarga\n\
+                               %R - Cambiar al c¢digo de salida del programa de descarga\n\
+CFG_MESSAGE_ERROR            = La orden para ejecutar despu‚s de una descarga fallida. Puede\n\
+                               utilizar las siguientes macros:\n\n\
+                               %M - Cambiar a un mensaje de descarga sin errores\n\
+                               %U - Cambiar al URL activo\n\
+                               %D - Cambiar a la carpeta de descargas\n\
+                               %P - Cambiar a la carpeta de descargas donde se cambian las contrabarras (\) por barras (/)\n\
+                               %F - Cambiar al nombre de archivo tomado del URL activo
+                               %L - Cambiar al £ltimo mensaje del programa de descarga\n\
+                               %R - Cambiar al c¢digo de salida del programa de descarga\n\
+CFG_CHECK_CONNECTION         = Comprobar la conexi¢n PPP o SLIP antes de iniciar una descarga.\n\
+                               Por omisi¢n no se comprueba.
+CFG_USE_DESKTOP              = Buscar en el Escritorio archivos que contengan URLs. Los archivos\n\
+                               encontrados se mover n a la carpeta "Pendientes" para ser procesados.
+CFG_KEEP_FAILED_URL          = Si vale 1, los archivos URL cuya descarga falle ser n movidos a la carpeta "Fallos".
+CFG_KEEP_DONE_URL            = Si vale 1, los archivos URL descargados sin errores ser n movidos a la carpeta "Completo".
+CFG_SCHEDULE                 = Establece la agenda para el proceso de la carpeta actual.\n\
+                               La agenda consiste en intervalos separados por comas, y cada \n\
+                               intervalo especifica la hora de inicio y fin de proceso de la\n\
+                               carpeta. Ejemplo: SCHEDULE = 06:00-08:30,16:50-03:00
+CFG_REDIRECT_TO              = Redirects URL from original folder to specified one. Destination\n\
+                               folder is specified as full path to desired folder. UNC path\n\
+                               is allowed.

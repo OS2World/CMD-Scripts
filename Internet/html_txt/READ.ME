@@ -1,0 +1,218 @@
+03 April 2000. Daniel Hellerstein. danielh@crosslink.net
+              HTML_TXT.CMD : An HTML to text converter
+
+HTML_TXT, ver 1.12, is a freeware program that will convert HTML documents to 
+text files.  It is written in REXX for OS/2, but also works under other
+flavors of REXX (in particular, Regina REXX).
+
+Features include:
+    Supports UL, OL, DL, and MENU lists.
+    Supports nested TABLES, with several forms of tabular output
+    FORM elements supported, including SELECT, TEXTAREA, and CHECKBOX.
+    Hierarchical outline can be created from H1, H2, ..., H7 headings.
+    Highly configurable; emphasis style, list bullets, outline numbering
+      style, table writing options, and many other features are
+      readily modified by changing user configurable parameters.
+    Moderately efficient (table intensive 60k file in 10 seconds on a P166)
+    Run from command line, or from a simple keyboard (non-gui) interface.
+    Can be used as an "addon" for the SRE-http web server.
+
+Installation:
+
+  1) unzip HTML_TXT.ZIP to an empty temporary directory; say, D:\HTML_TXT.
+
+  2) Then....
+    OS/2 Users:
+       Just copy HTML_TXT.CMD to any directory (for example, to a
+       directory in your PATH).
+       Note that HTML_TXT runs a bit better with, but does NOT require, 
+       the REXXUTIL.DLL procedure library.
+
+       Or... you can use HTM_TXT2.CMD; the "faster but less complete"
+       version. If so, in these instructions just substitute HTM_TXT2.CMD
+       for HTML_TXT.CMD
+  
+    Non-OS/2 (using REGINA REXX):
+       See instructions below. 
+
+  3) HTML_TXT.HTM is the manual (HTML_TXT.TST is the "HTML_TXT'ed" version of
+     HTML_TXT.HTM).
+
+Installation as an SRE-http addon:
+
+   HTML_TXT can be used as an SRE-http addon; just copy HTML_TXT.CMD
+   to your GoServe/SRE-http "addon" directory (say, D:\GOSERVE\ADDON).
+
+   You should also copy HTMLCVT.SHT to a WWW-accessible directory
+   HTMLCVT.SHT contains a FORM that provides a nice front-end to
+   HTML_TXT. Do note that when used as an SRE-http addon, your results
+   will depend on what the URL's server would return to a generic (Mozilla
+   2.0 compatible, with no frame capability) user-agent.
+
+   ** Information on SRE-http can be obtained from:  **
+   **   http://www.srehttp.org                       **
+
+Usage:
+
+   Assuming you installed HTML_TXT.CMD in x:\HTML_TXT>, from an
+   os/2 command prompt you can enter:
+      x:\HTML_TXT>HTML_TXT file.htm file.txt
+   which will convert the HTML document "file.htm" into an equivalent
+   text (ascii), and save the results as "file.txt".
+
+   Or, enter HTML_TXT at a command prompt, and answer the queries.
+
+   Although the defaults work well in most cases, there are a number of
+   parameters you might want to modify.  You can change them by editing 
+   HTML_TXT.CMD with your favorite text editor, look for the "user 
+   configurable parameters" section. 
+
+   Although there is some rudimentary help available from within HTML_TXT,
+   you should see HTML_TXT.HTM for usage details.  
+
+
+Possible future additions:
+   1) WIDTH and HEIGHT attribute of <IMG> 
+   2) A "WordPerfect tables" output mode
+
+
+The Quick Version
+
+   If you are converting less complex HTML documents, or are less
+   concerned with the quality of the conversion, then HTM_TXT2 (the 
+   "quicker" version) of HTML_TXT might be useful.  For longer
+   pages, HTM_TXT2 can be up to 50% faster.  The penalty is that 
+   HTM_TXT2 does not support several features, such as  ROWSPAN and  
+   CAPTIONs in tables.  In addition, HTM_TXT2 can not be run 
+   as an SRE-http addon.
+  
+   HTM_TXT2 does support tables (with autosizing), and most of the
+   other HTML_TXT features -- thus, in many cases it will be quite
+   adequate.  On the other hand, if you are only converting documents on an
+   occassional basis, a 50% improvement on a few seconds is probably 
+   not that big a deal!
+
+A note on other HTML to Text converters.
+   
+   I created HTML_TXT mostly because I couldn't find a decent HTML to text 
+   converter -- one that was both stable and full featured. Nevertheless,
+   others may better suit your needs. You can try:
+
+  * hobbes.nmsu.edu contains a few other OS/2 converters, such as 
+    HTML2TXT ( :{ the name I wanted to use)
+
+  * a rather complete list of converters (for all platforms) can be found at 
+          http://www.hypernews.org/HyperNews/get/www/html/converters.html
+
+  * YAHOO lists some other converters; try: 
+     http://search.yahoo.com/bin/search?p=text+%2Bhtml+%2Bconvert
+
+
+Disclaimer:
+
+   This is freeware that is to be used at your own risk -- the 
+   author and any potentially affiliated institutions disclaim all 
+   responsibilties for any consequence arising from the use, misuse, or abuse 
+   of this software (or pieces of this software).
+
+   You may use this (or subsets of this) program as you see fit,    
+   including for commercial purposes; so long as  proper attribution
+   is made, and so long as such use does not in any way preclude 
+   others from making use of this code.
+
+   
+          ---------------------------------------------------
+
+         Running HTML_TXT with the REGINA REXX interpreter
+
+HTML_TXT was designed to be run under OS/2 (either classic
+or object REXX).  However, it has  been tested under the
+LINUX, DOS and WIN95 and NT versions of the free REGINA REXX interpreter.
+This section briefly describes how to install HTML_TXT to
+run under Regina REXX.  
+
+First, you can obtain Regina REXX from:
+  http://www.lightlink.com/hessling/
+You might have to go down a few links, but as of April 1999 you'll
+end up at an FTP site from which you can get the appropriate version
+of REXX.  For example:
+  *  the WIN95 and NT version 08f is R08F_W95.ZIP,
+  *  the DOS VCPI version of 08f is RX08FVCP.ZIP.
+You can find the LINUX version at 
+  http://www.labyrinth.net.au/~dbareis/regina.htm
+Look for the Red Hat link (actually, since this is
+just a compressed file, it can be just as easily installed
+under Caldera or other flavors of Linux).
+
+After obtaining the appropriate version, we recommend
+  * Create a "HTML_TXT" directory on your hard disk.
+    For example (lower case is what you type at a DOS prompt):
+      D:>md html_txt
+  * Unzip regina to this HTML_TXT directory.
+
+The WIN95 and NT version of REGINA requires no further installation;
+you can use HTML_TXT by entering
+   x:>regina html_txt.cmd
+
+The LINUX version requires one small change -- edit 
+html_txt.cmd and set opsys='LINUX' (in the user-changeable
+parameters section at the top of the file).
+
+The DOS VCPI version is tricker (unfortunately, I've not been
+able to get the DOS DPMI version of REGINA REXX to work).
+
+  1) You'll need EMX.EXE to run the DOS VCPI version of Regina.
+     You can get EMX (0.9c) from hobbes (http://hobbes.nmsu.edu) --
+     note that the EMX.EXE that comes with the OS/2 version of EMX will also
+     work under DOS.
+
+  2) The DOS VCPI version of REGINA  requires EMM386.SYS
+     (or EMM386.EXE).  You probably have already installed one of these;
+     check for a line that looks like:
+        DEVICE=C:\DOS\EMM386.EXE 
+     in your C:\CONFIG.SYS file.
+
+  3)HTML_TXT.CM2 is an older version of HTML_TXT.CMD; it's been modified to be 
+    more stable under the DOS VCPI version of REGINA REXX (it's a bit less recursive). 
+    You might want to rename this to be HTML_TXT.CMD (we give it the 
+   .CM2 extension to differentiate  it from the newer version).
+
+    Note:  HTML_TXT.CM2 is an older version of HTML_TXT.CMD -- it will not be updated.
+   
+  4) At a DOS prompt type
+       x:>rexx HTML_TXT.CM2
+
+    For example:
+         D:\HTML_TXT>rexx HTML_TXT.CM2
+
+Notes:
+
+ *  A series of prompts will guide you (it's a primitive user
+    interface, any volunteers to write a GUI front-end?)
+
+  * Several options are a bit flakey  when run under Regina REXX (options 
+    that work fine under OS/2!)
+
+  * As a test, you can convert HTML_TXT.HTM (the manual). It should be nearly
+    identical to HTML_TXT.TST.
+
+  * As of version 1.10 of HTML_TXT.CMD contains a few runtime options 
+   (that allow users to change parameter values).
+  
+
+Bugs:
+
+   Most, but not all, of HTML_TXT's features are available under
+   Regina REXX. In particular, some screen io options are not supported.
+
+   More importantly, on rare occasions Regina REXX will sometimes inexplicably
+   drop portions of nested tables (it might be stack problem?). To be
+   safe, you might want to set (in HTML_TXT.CM2 or HTML_TXT.CMD) 
+   TABLENESTMAX=0 (nested tables will be displayed as lists).
+   This problem is especially bad when using html_txt.cmd under 
+   the DOS VCPI version of REGINA REXX.
+
+
+
+
+

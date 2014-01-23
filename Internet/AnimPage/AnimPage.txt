@@ -1,0 +1,155 @@
+AnimPage.cmd - v1.4 - By Sallie Krebs, 07/13/96 (skrebs@inwave.com)
+
+AnimPage is a Rexx program which generates an HTML page for loading IBM
+WebExplorer** animations. The main HTML page displays an icon representing
+each animation which can be clicked to load the associated animation. The
+animation title, source (author), and number of frames are also displayed.
+
+Send any comments, suggestions, flames, etc to: skrebs@inwave.com. This
+program is free. You may use it and re-distribute it as you like. I only
+ask that if you make any modifications to the code, you note them in the
+original AnimPage.cmd file. Email to me which includes your
+modifications would be nice, as well, but not absolutely necessary. I
+welcome constructive criticism! Also, please do not remove my name from
+this file, or the .cmd file.
+
+Standard disclaimers apply: Use this program at your own risk. I will
+not be responsible for any damage to your system from using this
+program. Etc, etc, etc. I can't see how any damage *could* occur, but
+that line is in all of the disclaimers I've seen, so I included it;)
+
+Installation and usage notes:
+
+1.  Unzip the ANIMPG10.ZIP file into its own directory. All of the
+    included files should be kept in this directory in order for the
+    program to work properly.
+
+2.  Create separate subdirectories underneath the AnimPage directory for
+    each of your animations. Each animation must have its own
+    subdirectory. (Be sure that only subdirectories containing
+    animations are below the AnimPage directory.)
+
+3.  *IMPORTANT*: Check the 'user variables' at the beginning of the
+    AnimPage.cmd file. Edit as needed.
+
+4.  Run AnimPage.cmd: Running AnimPage.cmd will generate the
+    AnimPage.htm file plus separate .htm files for each graphic.
+
+5.  Load AnimPage.htm into WebExplorer: select 'File', 'Open' from the
+    menu (or press Ctrl-O) and then use the file open dialog box to
+    locate and load the file. Now, you should either save it in the
+    quicklist or make it your "home page" in order to load it more
+    easily in the future.
+
+Each time you want to add a new animation, simply re-run AnimPage.cmd.
+The old AnimPage.htm file will be renamed to AnimPage.bak. The
+individual loader files will be deleted and recreated. If you want to
+remove an animation, delete the subdirectory containing it. Re-run
+AnimPage.cmd to remove it from the AnimPage.htm file.
+
+Note that if an animation included an .htm file for loading, a new .htm
+loader file will be created anyhow. The <TITLE> from the original loader
+file will be used for the animation title on the AnimPage.htm page.
+Also, if any <A HREF> links are found in the original loader file, they
+will be included in the new file. Right now, only the <A HREF> is
+searched for, so if the end tag- </A>- is on a different line, the link
+won't work. The only way to correct this at present is to edit the
+original loader file for the animation to put the end tag on the same
+line as the <A HREF> start tag. If there is no <A HREF> link in the
+original loader file, then "Animation source unknown" will appear at the
+bottom of the new loader file. I know of no way to search for all
+variations of things like "by John Smith", if the name didn't include a
+link.
+
+This is a very preliminary version of the program, therefore many
+improvements could be made. For example, as written all files must
+remain in the directory in which they were generated. Paths to the files
+are hard-coded into the generated .htm files. Maybe one day I will have
+time to work on improvements... and even a VX-Rexx interface! For now,
+though, it meets my needs. I hope others may find it useful, as well.
+
+Notes about the user variables:
+
+1.  AnimTables: if this variable is set to 1, then the AnimPage.htm file
+    will be generated using a 'Table' format. If you are running an
+    older version of WebExplorer which does not support Tables, then set
+    the AnimTables variable to 0. A 'List' format will then be
+    generated.
+
+2.  AnimPath is the base directory for your animation files. As noted
+    above, each separate animation must be located in its own
+    subdirectory beneath the base directory. If this variable is blank,
+    then the current directory will be used for the AnimPath variable.
+    (This assumes that animpage.cmd is run from the base directory.)
+
+    Example:    Animpath='c:\inet\animate'
+
+3.  You may substitute your own graphics for the ones supplied. Just
+    edit the user variable for the desired graphic to match your
+    graphics file name, and copy your graphics file(s) to the base
+    directory.
+
+4.  The AnimArcHRef variables are links to animation archives sites. Of
+    course, you can set them to any site you want, but as supplied they
+    point to 3 animations sites. These links will be displayed below the
+    'AnimArc' graphic located near the bottom of the page. Currently
+    AnimPage only supports 5 links. To change the links, edit both the
+    AnimArcHRef and the AnimArcTitle variables for the link you want to
+    add/modify. You could also use one (or more) of these links to load
+    another HTML page, instead of an http:// link. For example, I created
+    a page of links to my favorite sites:
+
+    file:///E:\INET\PAGES\SALHOME\HOMEPAGE.HTM
+
+5.  If you don't want the Blue Ribbon logo and link displayed at the
+    bottom of the page, then just edit the AnimRibbon user variable to
+    make it an empty string:
+
+    AnimRibbon=''       /* Blue Ribbon Logo graphic for bottom of page */
+
+    The AnimPage program checks to see if this string is empty, and if so
+    it doesn't add the link.
+
+6.  AnimOnward: Same as for the blue ribbon link, but the graphic and
+    link are for the "Ever Onward OS/2 Campaign" page.
+
+7.  AnimLogo: Same as for the blue ribbon link, but the graphic and
+    link are for the "Building for Merlin" page.
+
+Known problems:
+
+1.  WebExplorer crashes upon loading the AnimPage.htm file with a
+    SYS3175 error (WEBEXWIN.DLL.) (I'm running WebExplorer v1.1B.) I
+    only had this happen on one of 46 animations I've tried. I use the
+    first animation of the series for the icon on the AnimPage.htm file.
+    For some reason WebExplorer doesn't like some graphics files. The
+    one I had the problem with was a .BMP file. To resolve the problem,
+    I loaded the file into a graphics editor and then saved it. I
+    noticed that the file size changed, even though I didn't edit the
+    file... sorry folks, I don't know anything about graphics, so I
+    can't say what was changed that fixed the problem, but it worked.
+    Note that I didn't do anything to other files in the series, and the
+    animation itself works fine. If you experience this problem, try to
+    see which icon is being loaded when WebExplorer crashes, then do as
+    I did above, or remove the individual animation subdirectory and all
+    of its files.
+
+2.  As mentioned above, credits will not appear properly in the new
+    individual loader .htm files if both the start and end tags for a
+    href reference are not on the same line. Edit the .htm loader file
+    located in the affected animation's subdirectory accordingly.
+
+History:
+    v1.0 - first release
+    v1.1 - minor aesthetic fixes, not released
+    v1.2 - corrections to code to fix possible problems which could
+           occur if an original loader file had a "bad" title or href
+           line. Added more links.
+    v1.3 - added 'Table' formatting.
+    v1.4 - minor corrections to the HTML code generated to display
+           graphics and format table data better. Also added the new
+           header graphic for the top of the page created by Ingo
+           Guenther. Thank you Ingo!
+
+** WebExplorer is a copyright of IBM Corp.
+

@@ -1,0 +1,40 @@
+I wrote this because I needed to automatically fetch a HTML file via HTTP, 
+and couldn't find any utilities that offered to do that.
+
+HTTP is actually fairly simple when all you're doing is getting a file, and 
+so this utility is also fairly simple.
+
+The usage is:
+
+httpget.cmd <URL name ;[local name] | @file>
+
+Where the URL name is something like http://www.somewhere.com/index.html, 
+and [local name] is the local name to use in storing it.
+
+The @file option (used instead of a URL) should be the name of a plain text 
+file with one or more URL's on separate lines.  Local storage names can 
+optionally be placed at the end of the URL, separated from it by a 
+semicolon, such as:
+
+http://www.somewhere.com/somedir/somefile.zip ; thisfile.zip
+
+In order to use this, you must have the REXX socket DLL (RXSOCK.DLL), which 
+comes with Warp 4, and is available for Warp 3 all over the place.  Also 
+required is Object REXX, because I've got the Object REXX bug, and won't do 
+SAA REXX for even the simplest things (those built-in classes are just too 
+damn attractive).  If you don't specify a short filename compatible with 
+FAT, any long-named URL's will be saved to a random 8 character name, with 
+the same extension.  If the extension is not FAT compatible, then the 
+extension .HTF is used instead.  No files will be overwritten in this 
+method, and the long filename (whether as on the remote site or the desired 
+one indicated after the semicolon) is stored as the .LONGNAME EA, so you 
+can see via the WPS which files are which in case you didn't see the 
+onscreen report of how the file was being saved.
+
+In all cases except the FAT compatibility naming, specified names (whether 
+separately or implicitly as the filename part of the URL) will be written 
+without regard to existing files.  You will overwrite anything of the same 
+name in the working directory.  This is your own responsibility.  If you 
+don't like it, feel free to modify the program to suit your desires.
+
+Any comments can be directed to thanny@home.com

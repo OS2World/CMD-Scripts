@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="Author" content="Ralf Maseratis" />
+
+    <title>Awpralf.cmd - global plugin for Auto WGet Daemon</title>
+<style type="text/css">
+ body {
+  background-color: #F8FCF8;
+  color: #000000;
+ }
+ :link { color: #0000EE }
+ :visited { color: #551A8B }
+ :active { color: #FF0000 }
+ b.c5 {font-size: 120%}
+ tt.c4 {font-size: 120%}
+ span.c3 {color: #CC0000}
+ div.c2 {text-align: center}
+ p.c1 {color: #CC0000}
+</style>
+  </head>
+
+  <body>
+    <p>Last updated on 11 Jul 2001, at 22.01 CDT.</p>
+
+    <h1><a id="contents" name="contents">awpralf.cmd v0.3.1 - global plugin for
+    Auto WGet Daemon</a></h1>
+
+    <p>By Ralf Maseratis (<a
+    href="mailto:ralf_maseratis@esper.ping.de">ralf_maseratis@esper.ping.de</a>).
+    This product includes software developed by Dmitry A.Steklenev.</p>
+
+    <ol>
+      <li><a href="#features">Short description</a></li>
+
+      <li><a href="#prere">Prerequisites</a></li>
+
+      <li><a href="#install">Installation</a></li>
+
+      <li><a href="#how">How it works</a></li>
+
+      <li><a href="#bugs">Limitations, Possible Problems, To Do and Don&#39;t
+      ask for...</a></li>
+
+      <li><a href="#copy">Copyrights</a></li>
+
+      <li><a href="#cred">Credits</a></li>
+
+      <li><a href="#hist">History</a></li>
+
+      <li><a href="#cfg">awpralf.cfg</a></li>
+    </ol>
+    <hr />
+
+    <h2><a id="features" name="features"></a>Short description</h2>
+
+    <p>Awpralf.cmd is a global plugin for Auto WGet Daemon. It adds some
+    features to this wonderful download manager:</p>
+
+    <ul>
+      <li>
+        <p>If Auto WGet Daemon uses the desktop, awpralf.cmd can
+        &quot;prescan&quot; the desktop and move URL objects which are not
+        supposed to be downloaded to a folder of your choice.</p>
+      </li>
+
+      <li>
+        <p>With awpralf.cmd Auto WGet Daemon optionally can save files to
+        different directories automatically, depending on the file
+        extensions.</p>
+      </li>
+
+      <li>
+        <p>Awpralf.cmd optionally can check for possible duplicate files before
+        Auto WGet Daemon starts a download job. When finding a duplicate,
+        awpralf.cmd gives the opportunity to continue the download, to start it
+        from the beginning or to cancel it.</p>
+      </li>
+
+      <li>
+        <p>Awpralf.cmd is configured through its configuration file <a
+        href="#cfg">awpralf.cfg</a>.</p>
+      </li>
+
+      <li>
+        <p>Awpralf.cmd uses pmpopup2.exe (included in Auto WGet Daemon) for
+        user interaction.</p>
+      </li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+
+    <h2><a id="prere" name="prere"></a>Prerequisites</h2>
+
+    <p>For using awpralf.cmd you&#39;ll need:</p>
+
+    <ul>
+      <li>
+        <p>OS/2 Warp 4 or better with &quot;classic&quot; or Object REXX
+        support</p>
+      </li>
+
+      <li>
+        <p>Auto WGet Daemon version 1.6.5 or higher</p>
+      </li>
+
+      <li>
+        <p>A file system capable of long filenames (HPFS or FAT32)</p>
+      </li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+
+    <h2><a id="install" name="install"></a>Installation</h2>
+
+    <ul>
+      <li>
+        <p>Copy awpralf.cmd to the &quot;Plugins&quot;-directory of Auto WGet
+        Daemon</p>
+      </li>
+
+      <li>
+        <p>Add the following line to Auto WGet Daemon&#39;s configuration file
+        &quot;awget.cfg&quot;:</p>
+
+        <p><tt>GLOBAL_PLUGIN = Plugins\awpralf.cmd</tt></p>
+
+        <p>awget.cfg is located in directory %ETC% (search for &quot;SET
+        ETC=&quot; in config.sys)</p>
+      </li>
+
+      <li>
+        <p>Copy sample awpralf.cfg to the same place where awget.cfg is
+        located</p>
+      </li>
+
+      <li>
+        <p>Edit %ETC%\awpralf.cfg. This sample awpralf.cfg contains detailed
+        comments. You can view in-depth information about this file <a
+        href="#cfg">here</a>.</p>
+
+        <p class="c1">After editing awpralf.cfg you&#39;ll have to restart Auto
+        WGet Daemon to activate awpralf&#39;s features!</p>
+      </li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+
+    <h2><a id="how" name="how"></a>How it works</h2>
+
+    <p>As a global plugin awpralf.cmd is started along with Auto WGet Daemon.
+    For any action Auto WGet Daemon performs it sends a message to the plugin,
+    giving it the opportunity to do additional tasks. For details on Auto WGet
+    Daemon plugins see Auto WGet Daemon&#39;s readme.</p>
+
+    <h3>Desktop &quot;prescanning&quot;</h3>
+
+    <p>Awpralf.cmd can &quot;prescan&quot; the desktop directory.
+    &quot;Prescanning&quot; happens just before Auto WGet Daemon itself scans
+    the desktop for downloadable URLs.</p>
+
+    <p>This feature is meant to ease the use of Netscape Communicator&#39;s
+    v4.61 drag&#39;n&#39;drop abilities. I&#39;m using URL objects as
+    bookmarks, and it kept bothering me that Auto WGet Daemon just tries to
+    download each and any HTTP- or FTP-URL - even if I only wanted to add them
+    to my bookmark folder. Now awpralf.cmd decides whether to let Auto WGet
+    Daemon download the URL.</p>
+
+    <p>To enable &quot;prescanning&quot; Auto WGet Daemon must be configured to
+    use the desktop (USE_DESKTOP = 1 in awget.cfg) and in awpralf.cfg <a
+    href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> directory must be set.</p>
+
+    <p>Then awpralf.cmd does a preliminary search for URL objects on the
+    desktop, just before Auto WGet Daemon does the same. For every found URL
+    object awpralf.cmd tries to determine a file extension contained in the
+    URL. If a file extension is found, it is compared to the extension lists in
+    <a href="#OBSOLETE_EXT">OBSOLETE_EXT</a> and <a
+    href="#SECURE_EXT">SECURE_EXT</a> (see <a href="#cfg">awpralf.cfg</a>).</p>
+
+    <ul>
+      <li>
+        <p>If an <a href="#OBSOLETE_EXT">OBSOLETE_EXT</a> is found, awpralf.cmd
+        moves the URL object to the directory stated in <a
+        href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a>. If the <a
+        href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> directory doesn&#39;t
+        exists, it will be created as a WPUrlFolder object.</p>
+
+        <p>The same happens if the URL ends in &quot;/&quot; (or does anybody
+        want to use Auto WGet Daemon to download index.html of a server
+        directory?).</p>
+      </li>
+
+      <li>
+        <p>If a <a href="#SECURE_EXT">SECURE_EXT</a> is found, the URL object
+        is not touched. Further processing is left to Auto WGet Daemon
+        then.</p>
+      </li>
+
+      <li>
+        <p>If none of the above conditions is matched, the following dialog
+        appears:</p>
+
+        <div class="c2">
+          <img src="img/prescan.jpg" alt="prescan.jpg" />
+        </div>
+
+        <p>You then have the choice to let Auto WGet Daemon continue with
+        processing this URL object (by pressing &quot;Yes&quot;) or to move it
+        to <a href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> (by pressing
+        &quot;No&quot;).</p>
+      </li>
+    </ul>
+
+    <h3>&quot;Extended download&quot;</h3>
+
+    <p>Awpralf.cmd can intercept any Auto WGet Daemon download job (by using
+    Auto WGet Daemon&#39;s plugin interface), thus providing different download
+    directories.</p>
+
+    <p>If at least one <a href="#EXT_DOWNLOAD">EXT_DOWNLOAD</a> entry is
+    properly configured in awpralf.cfg, awpralf.cmd tries to determine the
+    extension of the file to be downloaded. It then compares this extension
+    with all <a href="#EXT_DOWNLOAD">EXT_DOWNLOAD</a> entries. On a match
+    awpralf.cmd manipulates Auto WGet Daemon&#39;s jobfile, replacing the
+    download directory there (and creating it beforehand, if necessary).</p>
+
+    <h3>Dupe checking</h3>
+
+    <p>Before Auto WGet Daemon starts a download, awpralf.cmd can check if the
+    file to be downloaded already exists in the download directory. This is
+    triggered by <a href="#DUPE_CHECK">DUPE_CHECK</a> in awpralf.cfg. If a file
+    of the same name already exists, the following dialog appears:</p>
+
+    <div class="c2">
+      <img src="img/dupe.jpg" alt="dupe.jpg" />
+    </div>
+
+    <p>You then have the choice to:</p>
+
+    <ul>
+      <li>
+        <p><img src="img/cancel.jpg" alt="cancel.jpg" hspace="10"
+        align="ABSCENTER" />Cancel the download completely.</p>
+
+        <p>Awpralf.cmd then tells Auto WGet Daemon to cancel the download
+        job.</p>
+      </li>
+
+      <li>
+        <p><img src="img/scratch.jpg" alt="scratch.jpg" hspace="10"
+        align="ABSCENTER" />Start the download from scratch.</p>
+
+        <p>Awpralf.cmd then <span class="c3">moves</span> the existing file to
+        a backup in the download directory. The backup name contains the string
+        &quot;_AWGetBkp_&quot; and a generation number. After that awpralf.cmd
+        returns execution of the download job to Auto WGet Daemon.</p>
+      </li>
+
+      <li>
+        <p><img src="img/continue.jpg" alt="continue.jpg" hspace="10"
+        align="ABSCENTER" />Continue the job.</p>
+
+        <p>Awpralf.cmd then <span class="c3">copies</span> the existing file to
+        a backup in the download directory. The backup name contains the string
+        &quot;_AWGetBkp_&quot; and a generation number. After that awpralf.cmd
+        returns execution of the download job to Auto WGet Daemon.</p>
+      </li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+    <a id="bugs" name="bugs"></a>
+
+    <h2>Limitations, Possible Problems, To Do and Don&#39;t ask for...</h2>
+
+    <h3>Limitations</h3>
+
+    <ul>
+      <li>&quot;Prescanning&quot; will not work on Warp 3 because WPUrl and
+      WPUrlFolder are missing there.</li>
+
+      <li>No National Language Support (see &quot;Don&#39;t ask
+      for...&quot;)</li>
+    </ul>
+
+    <h3>Possible Problems</h3>
+
+    <ul>
+      <li>Awpralf.cmd was developed and tested on WSeB FP2 with Object REXX.
+      Works with &quot;classic&quot; REXX, too, but was not extensively
+      tested.</li>
+    </ul>
+
+    <h3>To Do</h3>
+
+    <ul>
+      <li>Maybe switching off wget proxies depending on file extension?</li>
+    </ul>
+
+    <h3>Don&#39;t ask for...</h3>
+
+    <ul>
+      <li>National Language Support (see &quot;Limitations&quot;)</li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+    <a id="copy" name="copy"></a>
+
+    <h2>Copyright</h2>
+
+    <p>The code of awpralf.cmd is under copyright 1998-2001 Dmitry A.Steklenev.
+    Parts of code contributed by <a
+    href="mailto:ralf_maseratis@esper.ping.de">Ralf Maseratis</a>. All code
+    underlies following conditions:</p>
+
+    <p>Copyright (C) 1998-2001 Dmitry A.Steklenev</p>
+
+    <p>Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:</p>
+
+    <ol>
+      <li>
+        <p>Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.</p>
+      </li>
+
+      <li>
+        <p>Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the
+        distribution.</p>
+      </li>
+
+      <li>
+        <p>All advertising materials mentioning features or use of this
+        software must display the following acknowledgment:</p>
+
+        <p>&quot;This product includes software developed by Dmitry
+        A.Steklenev&quot;.</p>
+      </li>
+
+      <li>
+        <p>Redistributions of any form whatsoever must retain the following
+        acknowledgment:</p>
+
+        <p>&quot;This product includes software developed by Dmitry
+        A.Steklenev&quot;.</p>
+      </li>
+    </ol>
+
+    <p>THIS SOFTWARE IS PROVIDED BY THE AUTHOR OR CONTRIBUTORS &quot;AS
+    IS&quot; AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+    PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR THE
+    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+    OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+    OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+    ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+    <a id="cred" name="cred"></a>
+
+    <h2>Credits</h2>
+
+    <p>Thanks to</p>
+
+    <ul>
+      <li>Dmitry A.Steklenev for maintaining Auto WGet Daemon, for creating the
+      plugin interface and for his help on this program.</li>
+
+      <li>Christian Hennecke (<a
+      href="mailto:christian.hennecke@os2voice.org">christian.hennecke@os2voice.org</a>)
+      for testing and help on this documentation.</li>
+
+      <li>Harald Kamm (<a
+      href="mailto:harald.kamm@bnv-bamberg.de">harald.kamm@bnv-bamberg.de</a>)
+      for testing.</li>
+
+      <li>Bernd Schemmer for the &quot;REXX Tips and Tricks&quot;.</li>
+    </ul>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+    <a id="hist" name="hist"></a>
+
+    <h2>History</h2>
+
+    <p>release 0.3.1:</p>
+
+    <ul>
+      <li>Bugfix: on &quot;prescanning&quot; awpralf.cmd broke down when URL
+      contained in URL object had less than 18 characters. Fixed.</li>
+    </ul>
+
+    <p>release 0.3: first public release</p>
+
+    <p>Unofficial: based on code used to &quot;hack&quot; older Auto WGet
+    versions (those without plugin interface) for private use. As Dmitry
+    A.Steklenev is now updating Auto WGet in rapid order, &quot;hacking&quot;
+    every new release is no solution anymore... :-)</p>
+
+    <p><a href="#contents">Back to index</a></p>
+    <hr />
+
+    <h2><a id="cfg" name="cfg"></a>awpralf.cfg</h2>
+
+    <p>Awpralf.cfg (located in %ETC%) configures all features of awpralf.cmd by
+    pairs of &quot;KEYWORD = VALUE&quot; entries (just like awget.cfg does for
+    Auto WGet Daemon).</p>
+
+    <p class="c1">BEWARE: After editing awpralf.cfg you&#39;ll have to restart
+    Auto WGet Daemon to activate awpralf&#39;s features!</p>
+    <a id="EXT_DOWNLOAD" name="EXT_DOWNLOAD"></a>
+
+    <div class="c2">
+      <table border="1" cellspacing="0" cellpadding="5" width="100%"
+      bgcolor="#FFFFCC">
+        <tr bgcolor="#CCFFFF">
+          <td>KEYWORD</td>
+
+          <td>=</td>
+
+          <td>VALUE</td>
+        </tr>
+
+        <tr>
+          <td width="50%"><b><tt class="c4">EXT_DOWNLOAD</tt></b></td>
+
+          <td><b><tt>=</tt></b></td>
+
+          <td width="50%"><b><tt>extension,directory</tt></b></td>
+        </tr>
+
+        <tr>
+          <td width="50%">
+            <p>EXT_DOWNLOAD configures which files are stored in which
+            directories</p>
+          </td>
+
+          <td>&#160;</td>
+
+          <td width="50%">
+            <p>comma separated pair of <tt>extension</tt> and
+            <tt>directory</tt></p>
+
+            <p><tt>extension</tt>: case independent extension of download
+            file</p>
+
+            <p><tt>directory</tt>: where to save files which end in
+            <tt>extension</tt></p>
+
+            <p><tt>directory</tt> may be a complete path (must contain
+            driveletter) or a path relative to global DOWNLOAD path in
+            awget.cfg. All characters after the comma (except leading or
+            trailing spaces) are interpreted as <tt>directory</tt> name.</p>
+
+            <p>If <tt>directory</tt> does not exist, awpralf.cmd tries to
+            create it</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>There is no explicit limit for the number of
+            <tt>EXT_DOWNLOAD</tt>-entries in awpralf.cfg.</p>
+
+            <p>To deactivate this feature, comment out all
+            <tt>EXT_DOWNLOAD</tt>-entries in awpralf.cfg.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>Examples:</p>
+
+            <ul>
+              <li>
+                <p>If extension of downloaded file is &quot;mpg&quot;, save the
+                file to &quot;e:\wgetdownloads\video&quot;:</p>
+
+                <p><tt>EXT_DOWNLOAD = MPG,e:\wgetdownloads\video</tt></p>
+              </li>
+
+              <li>
+                <p>If extension of downloaded file is &quot;exe&quot;, save the
+                file to &quot;d:\all my downloaded exe files&quot;:</p>
+
+                <p><tt>EXT_DOWNLOAD = EXE,d:\all my downloaded exe
+                files</tt></p>
+              </li>
+
+              <li>
+                <p>If extension of downloaded file is &quot;zip&quot;, save the
+                file to subdirectory &quot;zipped&quot; of Auto WGet
+                Daemon&#39;s global download directory (set by &quot;DOWNLOAD
+                =&quot; in awget.cfg):</p>
+
+                <p><tt>EXT_DOWNLOAD = ZIP,zipped</tt></p>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p><a href="#contents">Back to index</a></p>
+
+    <p><a id="DUPE_CHECK" name="DUPE_CHECK"></a></p>
+
+    <div class="c2">
+      <table border="1" cellspacing="0" cellpadding="5" width="100%"
+      bgcolor="#FFFFCC">
+        <tr bgcolor="#CCFFFF">
+          <td>KEYWORD</td>
+
+          <td>=</td>
+
+          <td>VALUE</td>
+        </tr>
+
+        <tr>
+          <td width="50%"><b><tt class="c4">DUPE_CHECK</tt></b></td>
+
+          <td><b><tt>=</tt></b></td>
+
+          <td width="50%"><b><tt>1 or 0</tt></b></td>
+        </tr>
+
+        <tr>
+          <td width="50%">
+            <p>Turns checking of duplicate files on or off</p>
+          </td>
+
+          <td>&#160;</td>
+
+          <td width="50%">
+            <p>1 or 0</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p><a href="#contents">Back to index</a></p>
+
+    <p><a id="OBSOLETE_OBJECTS" name="OBSOLETE_OBJECTS"></a></p>
+
+    <div class="c2">
+      <table border="1" cellspacing="0" cellpadding="5" width="100%"
+      bgcolor="#FFFFCC">
+        <tr bgcolor="#FF6666">
+          <td colspan="3"><b class="c5">Following option only becomes active if
+          USE_DESKTOP = 1 in awget.cfg!</b></td>
+        </tr>
+
+        <tr bgcolor="#CCFFFF">
+          <td>KEYWORD</td>
+
+          <td>=</td>
+
+          <td>VALUE</td>
+        </tr>
+
+        <tr>
+          <td width="50%"><b><tt class="c4">OBSOLETE_OBJECTS</tt></b></td>
+
+          <td><b><tt>=</tt></b></td>
+
+          <td width="50%"><b><tt>directory</tt></b></td>
+        </tr>
+
+        <tr>
+          <td width="50%">
+            <p>Directory where to move desktop URL objects which are not
+            supposed to be downloaded by Auto WGet Daemon</p>
+          </td>
+
+          <td>&#160;</td>
+
+          <td width="50%">
+            <p>Full path of directory</p>
+
+            <p>All characters after &quot;=&quot; except leading or trailing
+            spaces count as the directory name. So, if directory name contains
+            spaces, <b>do not quote it!</b></p>
+
+            <p>If <tt>directory</tt> does not exist, awpralf.cmd tries to
+            create it as a WPUrlFolder</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>Deleting or commenting out OBSOLETE_OBJECTS disables all
+            &quot;prescanning&quot; of the desktop, <a
+            href="#OBSOLETE_EXT">OBSOLETE_EXT</a> and <a
+            href="#SECURE_EXT">SECURE_EXT</a> have no meaning then!</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>Examples:</p>
+
+            <ul>
+              <li>
+                <p>Move desktop URL objects which are not supposed to be
+                downloaded to directory &quot;F:\URLs\temporary url
+                folder&quot;:</p>
+
+                <p><tt>OBSOLETE_OBJECTS = F:\URLs\temporary url folder</tt></p>
+              </li>
+
+              <li>
+                <p>Disable all desktop &quot;prescanning&quot;:</p>
+
+                <p><tt>#OBSOLETE_OBJECTS = F:\URLs\URLTMP</tt></p>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p><a href="#contents">Back to index</a></p>
+
+    <p><a id="OBSOLETE_EXT" name="OBSOLETE_EXT"></a></p>
+
+    <div class="c2">
+      <table border="1" cellspacing="0" cellpadding="5" width="100%"
+      bgcolor="#FFFFCC">
+        <tr bgcolor="#FF6666">
+          <td colspan="3"><b class="c5">Following option only becomes active if
+          USE_DESKTOP = 1 in awget.cfg and <a
+          href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> is active!</b></td>
+        </tr>
+
+        <tr bgcolor="#CCFFFF">
+          <td>KEYWORD</td>
+
+          <td>=</td>
+
+          <td>VALUE</td>
+        </tr>
+
+        <tr>
+          <td width="50%"><b><tt class="c4">OBSOLETE_EXT</tt></b></td>
+
+          <td><b><tt>=</tt></b></td>
+
+          <td width="50%"><b><tt>extension1,extension2,extension3
+          ...</tt></b></td>
+        </tr>
+
+        <tr>
+          <td width="50%">
+            <p>File extensions of URLs contained in desktop URL objects which
+            will <b>never</b> be downloaded by Auto WGet Daemon and instead
+            <b>always</b> be moved to <a
+            href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> directory</p>
+          </td>
+
+          <td>&#160;</td>
+
+          <td width="50%">
+            <p>case independent comma separated list of file extensions</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>Example:</p>
+
+            <p>Move all URL objects on desktop which end in .HTM, .HTML, .SHTM,
+            .SHTML or .ASP to directory F:\URLs\URLTMP:</p>
+
+            <p><tt>OBSOLETE_OBJECTS = F:\URLs\URLTMP<br />
+             OBSOLETE_EXT = HTM,HTML,SHTM,SHTML,ASP</tt></p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p><a href="#contents">Back to index</a></p>
+
+    <p><a id="SECURE_EXT" name="SECURE_EXT"></a></p>
+
+    <div class="c2">
+      <table border="1" cellspacing="0" cellpadding="5" width="100%"
+      bgcolor="#FFFFCC">
+        <tr bgcolor="#FF6666">
+          <td colspan="3"><b class="c5">Following option only becomes active if
+          USE_DESKTOP = 1 in awget.cfg and <a
+          href="#OBSOLETE_OBJECTS">OBSOLETE_OBJECTS</a> is active!</b></td>
+        </tr>
+
+        <tr bgcolor="#CCFFFF">
+          <td>KEYWORD</td>
+
+          <td>=</td>
+
+          <td>VALUE</td>
+        </tr>
+
+        <tr>
+          <td width="50%"><b><tt class="c4">SECURE_EXT</tt></b></td>
+
+          <td><b><tt>=</tt></b></td>
+
+          <td width="50%"><b><tt>extension1,extension2,extension3
+          ...</tt></b></td>
+        </tr>
+
+        <tr>
+          <td width="50%">
+            <p>File extensions of URLs contained in desktop URL objects which
+            <b>always</b> will be downloaded by Auto WGet Daemon <b>(without
+            asking)</b></p>
+          </td>
+
+          <td>&#160;</td>
+
+          <td width="50%">
+            <p>case independent comma separated list of file extensions</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <p>Example:</p>
+
+            <p>Let Auto WGet Daemon proceed with URLs from desktop&#39;s URL
+            objects when they end in .ZIP, .EXE, .MOV, .MPG, .MPEG, .JAR, .JPG,
+            .JPEG or .GIF:</p>
+
+            <p><tt>SECURE_EXT = ZIP,EXE,MOV,MPG,MPEG,JAR,JPG,JPEG,GIF</tt></p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p><a href="#contents">Back to index</a></p>
+  </body>
+</html>
+

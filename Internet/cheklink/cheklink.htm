@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3 Organization//DTD W3 HTML 2.0//EN">
+
+<!-- This is a sample HTML FORM used to invoke the 3 components of the
+     CheckLink utility. By default, it is setup for use under SRE-http.
+     If you are not using SRE-http, you can run two of these 3
+     components as CGI-BIN scripts (CHEKLNK2 and CHEKINDX). The third
+     (CHEKLINK) can NOT be run as a cgi-bin script, but can be run
+     as a standalone program (from an os/2 prompt).
+
+    To enable cgi-bin mode, simply change
+             ACTION="/CHEKINDX" to ACTION="/CGI-BIN/CHEKINDX"
+     and
+             ACTION="/CHEKLNK2" to ACTION="/CGI-BIN/CHEKLNK2"
+
+-->
+         
+
+<html>
+<head>
+<title>CheckLink</title>
+</head>
+<body>
+<CENTER><h1>CheckLink</h1></CENTER>
+<p>
+
+<b>CheckLink </b> will map out a <a href="#webtree">web-tree</a> whose root is a specific
+HTML document (the <tt>starter-URL</tt>).   CheckLink can
+also be used to <em> examine and traverse </em> the URLs that comprise
+a web-tree, and to create a <em>hierarchical </em> index of the web tree..
+
+<p>From this page you can:
+<ul><li> <a href="#createi"> Create</a> a web tree<br>
+<em>and after you've created a web tree, you can..</em>
+<li> <a href="#traverse">traverse &amp; examine</a> the links in this web tree <br> <em>or</em>
+<li> <a href="#hindex">create a hierarchical index </a> of the web-tree (starting from a specific page)
+</ul>
+<hr width=30%>
+
+
+<!--      Create an index of a  web-tree  ****************** -->
+<dl>
+<dt> <a name="hindex"><h3> Create a Hierarchical Index of a Web-Tree</h3></a>
+<dd><!-- Note: Change this to /CGI-BIN/CHEKINDX to run as cgi-bin -->
+<form action="/CHEKINDX" method="GET">
+
+<input type="submit" value="Create a web-index ..."> 
+from the web-tree defined by the
+<input type="text" name="linkfile" size=30 maxlength=60> "linkage" file
+ <em>(enter a filename, with no path information) </em>
+<br><b>Options:</b> <BR>
+<ul>
+<li>Selector(s) to start index from <INPUT TYPE="text" NAME="url"  SIZE=36 MAXLENGTH=96>
+<em>(default=the web-tree's <u>starter-URL</u>)</em>
+<li> Display URLS with the following (possibly wildcarded) <b>mime types</b>
+<INPUT TYPE="text" NAME="mime"  SIZE=35 MAXLENGTH=75> 
+<em>(default= text/html only)</em>
+<li> <INPUT TYPE="CHECKBOX" NAME="siteonly" VALUE="1" >
+   Display <em>off-site</em> URLs <em>(otherwise, only display on-site URLs)</em><br>
+<li> Selectors (possibly wildcarded) to <b>not</b> expand (sub-tree is suppressed):
+<INPUT TYPE="text" NAME="EXCLUDE"  SIZE=36 MAXLENGTH=76>
+<em>(default= no suppression)</em>
+
+<li> Selectors (possibly wildcarded) to <b>drop</b> from index:
+<INPUT TYPE="text" NAME="DROP"  SIZE=36 MAXLENGTH=76>
+<em>(default= no drops)</em>
+
+<li>Display a given URL multiple times:
+
+<SELECT NAME="multi" SIZE=2>
+<OPTION SELECTED value=0 >No -- display where first found
+<OPTION value=1>Yes, if latter occurence is at a lower level
+<OPTION value=2>Yes, if at same OR lower level
+</SELECT>
+<br>
+<li> <INPUT TYPE="CHECKBOX" NAME="cleanup" VALUE="1" > Remove earlier "high level"
+entries <em>(do not use with "display where first found")</em>
+<Li> <INPUT TYPE="CHECKBOX" NAME="descrip" VALUE="1" > Display descriptions (if available)
+</uL>
+
+<br>
+Display of output: 
+<INPUT TYPE="radio" NAME="TYPE" VALUE="1" checked>
+Display using Unordered List (&lt;UL&gt;) ||
+<INPUT TYPE="radio" NAME="TYPE" VALUE="2"  >
+Display using Table  ||
+<INPUT TYPE="radio" NAME="TYPE" VALUE="3"  >
+Edit Mode 
+
+<br><input type="submit" value="Create a web-index ..."> 
+
+</form>
+
+
+<!--      Examine and traverse a web-tree  ****************** -->
+<hr width=30%>
+<dt> <a name="traverse"> <h3> Examine and traverse a web-tree </h3></a>
+<dd>
+<!-- Note: Change this to /CGI-BIN/CHEKLNK2 to run as cgi-bin -->
+
+<form action="/cheklnk2" method="GET"> 
+
+<input type="submit" value="Examine and traverse a web-tree">
+using the 
+<input type="text" name="linkfile" size=30 maxlength=60> "linkage" file
+ <em>(enter a filename, with no path information) </em>
+</form>
+<blockquote>"Linkage" files are created when you create a <b>web-tree</b>
+(see the <a href="#linkage">description below</a> for details).</blockquote>
+<hr width=66%>
+
+<!--      Create a web-tree  ****************** -->
+
+<dt> <a name="createi"> <h3>Create a web-tree </h3> </a>
+<dd>
+<!-- This can NOT be run as cgi-bin -->
+
+<FORM ACTION="/cheklink" METHOD="GET">
+
+<INPUT TYPE="submit" VALUE="Enter a starter-URL">:
+<INPUT TYPE="text" NAME="url"  VALUE="/"  SIZE=50 MAXLENGTH=90>
+<br> 
+<em>The starter-URL should either be a selector (relative to this site
+[<!-- replace servername -->]); or a fully specified URL (including the 
+<tt>http://</tt>).</em>
+
+&nbsp;&nbsp;<blockquote>
+A web tree whose root is the <b>starter-URL</b> (it should be an HTML document)
+ will be created by recursively checking for <u>links</u> <em>(IMGs, Anchors, etc.)</em>
+ </blockquote>
+
+</dl>
+
+<!--      Further "Create a web-tree" options  ****************** -->
+
+
+<hr width=30%>
+<h3>More "create a web tree" options</h3>
+The following options control the  extent to which the web-tree is searched, and
+the appearance of the output.'
+
+<table cellpadding=14>
+<th>Option </th> <th>Description</th>
+
+<tr>
+<td>
+Descriptive Name:
+<input type="text" name="name" size=35 maxlength=70><br>
+</td>
+<td>
+The <em>descriptive name </em> is simply used as a title. If you do not
+enter one, the starter-URL will be used to create a descriptive name.
+</td>
+
+<tr>
+<td valign=top>
+<INPUT TYPE="RADIO" NAME="siteonly" VALUE="1" CHECKED>
+   Check <em>off-site </em> URLs 
+<br><INPUT TYPE="RADIO" NAME="siteonly" VALUE="0" >
+Do <B>NOT</B> check <em>off-site </em> URLs </td>
+
+<td valign=top>CheckLink can attempt to verify the existence
+of resources residing <u>off-site</u> (where <u>off-site</u> means 
+"with an IP address different then the <em>starter-URL's</em> IP address").
+Or, you can suppress this option (off-site URLS will <b>not</b> be queried).
+</td>
+
+<tr>
+<td valign=top>
+<table><tr><td>
+Read &amp; process html documents that are:</td>
+<td><select size=3 name="BASE_QUERY">
+<option value="0_0" selected>on this site
+<option value="1_0">under the starter-URL
+<option value="1_1">only process the starter-URL
+</select>
+</td>
+</table>
+
+</td>
+
+<td valign=top><a name="askstarter">
+If you select the <tt>under the starter-URL</tt> option,
+then <b>only</b> documents in (or under) the <tt>directory</tt>
+of the <em>starter-URL</em> will be processed for 
+<em>recursive</em> links.<br>
+If you select <tt>only process the starter-URL</tt>,
+then only the <em>starter-URL</em> will be read
+&amp; processed. <em> <a href="#starter_example">Example.</a>
+
+</td>
+
+<tr>
+<td valign=top>
+<a name="descrips">Create &amp; save descriptions:</a><br>
+<INPUT TYPE="radio" NAME="descrip" VALUE="1"> No
+<br><INPUT TYPE="radio" NAME="descrip" VALUE="2" checked> html documents
+<br><INPUT TYPE="radio" NAME="descrip" VALUE="3"> html and plain text documents
+</td>
+<td>
+CheckLink can create &amp; save short descriptions of html (text/html)
+and plain text (text/plain) <a href="#descrip_example"> documents</a>. 
+
+</td>
+
+<tr>
+
+<td valign=top><INPUT TYPE="radio" NAME="USEMULTI" VALUE="0">
+Return results as one long document
+<br><INPUT TYPE="radio" NAME="USEMULTI" VALUE="1"  >
+Return results in a multi-part document
+<br><INPUT TYPE="radio" NAME="USEMULTI" VALUE="2" checked >
+Return results in two seperate documents
+
+<td valign=top> <a name="results"> CheckLink can return results in several fashions</a>.
+<br> The simplest means is to first send run-time status information,
+and then send the results immediately following the status information
+(one long document).
+<br> Using a multi-part (or two seperate) document is 
+<a href="#example_parts">visually more appealing </a>-- the 
+"results" part will overwrite the "status" portion (the status portion's main
+purpose is to prevent server time-outs!)
+</td>
+
+
+<tr>
+<td valign=top> Exclusion list: 
+<INPUT TYPE="text" NAME="exclusion_list"  
+ VALUE="*?* !* CGI* *MAPIMAGE/*"  SIZE=35 MAXLENGTH=80>
+</td>
+
+<td valign=top> To avoid invocation of addons, scripts, and other dynamic and otherwise 
+complicated
+resources, CheckLink will compare the <em>selector</em> of each link against each
+word in the <em>space delimited </em> <b>exclusion list</b>. If any of these words
+match the selector (and you can use multiple * wildcards), then the link will
+not be checked.
+</td>
+
+
+
+</td>
+<tr>
+<td valign=top> <a name="asktables">Types of tables: </a>
+<INPUT TYPE="text" NAME="outtype" VALUE="ALL"  SIZE=30 MAXLENGTH=80>
+
+<td>
+This <em>space delimited</em> list of <tt>codes</tt> is used to specify what
+results should be reported.  For each <tt>code</tt> in this list, two seperate
+tables (one for for <b>IM</b>a<b>G</b>es and one for <b>A</b>nchors) is
+created. Valid codes are <a href="#tables_example">OK NOSITE NOURL OFFSITE EXCLUDED ALL</a>
+</td>
+
+<tr>
+<td valign="top"> (<em>optional</em>&nbsp;) <a name="linkage"> linkage file </A>
+<INPUT TYPE="text" NAME="linkfile" VALUE=""  SIZE=8 MAXLENGTH=9>
+<br><em>Note: </em>  if you want to create a linkage file, enter a filename only -- 
+do <b>not</b> include path information. 
+<p>To avoid overwriting a pre-existing
+linkage file, include ? marks in the file name. For example:
+ <tt>LFILE??</tt> will cause unique names to be used, starting with
+<tt>LFILE01</tt>.
+
+</td>
+<td valign="top">
+As well as creating tables that list the various URLs that comprise a 
+<b>web-tree</b>, you can also use CheckLink to <em>examine and traverse </em>
+the web tree.  That is, for each URL in the web-tree:
+ CheckLink will retain "linkage" information -- 
+including information on all text/html documents (in the web tree) 
+that contain this URL. In addition, for text/html documents CheckLink will retain
+a list of all the links in the document.  
+
+<p>In order to do this, you must create a "linkage" file. If you specify a
+linkage file, you can then use the <u>?</u> links in the results tables,
+or you can invoke the "examine and traverse" option above.
+</td>
+
+</table>
+<INPUT TYPE="submit" VALUE="Create the web-tree">
+
+</FORM>
+
+<hr>
+<a name="webtree"> <h3> Web Tree? Does that make sense? </h3></a>
+<blockquote><tt>
+    Perhaps the use of the term "web-tree" is misleading -- it's more of a 
+    web-network, web-graph, or (dare we say it?) a web-web.  The point
+    is that a tree implies a bottom-to-top branching structure, with a 
+    clearly defined set of precedences. In contrast, a web site is defined
+    by a network of links, with each node connecting to a wide variety
+    of other nodes. Although most web-sites do have some sort of hierarchy
+    (i.e.; there is usually one or several "home pages"), this is usually
+    loosely defined, with lots of cross-cutting links.
+<p>
+    Nevertheless, for reasons of brevity CheckLink uses the term "web-tree"    
+    to refer to "the network of resources, as refered
+    to by URLs, that may be reached from a single starting point". Although
+    this single-starting point (the "starter-URL") is really just a point of
+    entry, one usually chooses a "starter-URL" that is somehow more
+    fundamental -- say, a home page.  Hence, this "starter-URL" is often
+    refered to as the "root of the web-tree".
+
+</blockquote></tt>
+<hr>
+<a name="notes"><h3> Descriptive Notes </h3> </a>
+
+<dl>
+
+<dt> <a name="starter_example">Example </a> of <em>Only process html documents in  starter-URL's directory </em>
+<dd>
+<menu>
+<li><STRONG>---&gt; </STRONG>If  the <em>starter-URL</em> is <tt>/SAMPLES/FOOBAR.HTM</tt>
+<br> then the <em>base-url</em>&nbsp; is /SAMPLES/
+<li><STRONG>---&gt;</STRONG>If /SAMPLES/FOOBAR.HTM  contains links to /SAMPLES/TURKEY.HTM
+   and /USERS/DOG.HTM,
+<br>Then:
+<br> <STRONG>&nbsp;&nbsp;*</STRONG> /SAMPLES/TURKEY.HTM <b>will</b> be processed (it will be read, Anchors
+and Images will be extracted, etc.)
+<br> <STRONG>&nbsp;&nbsp;*</STRONG> /USERS/DOG.HTM  <b>will <u>not</u></b> be processed (however, CheckLink
+will check that it exists).
+</menu>
+<br><a href="#askstarter">back to form</a>
+<p>
+
+<dt> <a name="descrip_example">Creating Descriptions</a>
+<dd>
+Html descriptions are either pulled from
+a DESCRIPTION header (in the &lt;HEAD&gt; section of the html document), or 
+generated from &lt;Hn&gt; elements.  Plain text descriptions are the first few
+hundred characters of the document.<br> <b>Note:</b> Descriptions are made only for
+documents that are "on-site" (and in the starter-URL directory, it you checked the above).
+
+<p><a href="#descrips">back to form</a>
+
+
+<p>
+
+<dt> <a name="example_parts">Multi-part, and two seperate, documents</a>
+<dd>
+
+Using two seperate documents is similar to using a multi-part document,
+but avoids certain "over refresh" problems of certain browsers (i.e.; Netscape 2.x).
+However, use of "two seperate documents" does require storage of a semi-permanent
+output file on this server.
+
+<p>Note that to use a multiple-part document you must have a browser that
+ supports <tt>Connection:maintain</tt> (such as Netscape 2.0 and above).
+If you select "multi-parts" but your browser does <b>not</b> support Connection:maintain,
+then "two seperate documents"  will be returned.
+
+<p><a href="#results">back to form</a>
+
+
+
+<p>
+<dt> <a name="tables_example">Types of tables</a> 
+<dd>
+The following tables (codes) can be requested (in any combination):
+<menu>
+<li> &nbsp; &nbsp;<b>OK</b>) Display succesfully found links
+<li> &nbsp; &nbsp;<b>NOSITE</b>) Display links to <b>unreachable</b> sites
+<li> &nbsp; &nbsp;<b>NOURL</b>) Display links to <b>missing resources</b>
+<li> &nbsp; &nbsp;<b>OFFSITE</b>) Display links to <em>off-site </em> URLs
+<li> &nbsp; &nbsp;<b>EXCLUDED</b>) Display links to <em>excluded</em> URLs
+<li><em> or ... </em> &nbsp; &nbsp;<b>ALL</b>) Display all links
+</menu>
+<p>
+In general:
+<br>&nbsp;*&nbsp; The NOURL links are the most interesting (they should be reachable,
+but aren't).
+<br>&nbsp;*&nbsp;If you are <b>not</b> "checking off-site links": you should <b>not</b>
+display the NOSITE links, but you <b>should</b> display OFFSITE links.
+
+<p><a href="#asktables">back to form</a>
+
+
+</dl>
+
+</body>
+</html>
+

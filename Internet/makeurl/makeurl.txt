@@ -1,0 +1,12 @@
+This REXX script creates WEB Explorer URL objects from the quicklist that
+is stored in the explore.ini file. It creates a folder on the desktop
+called URL's" and populates it with all the quicklist entries.
+
+Warning: This script only works with the beta v950525 version of the Web
+Explorer or newer, as this feature does not exist on previous versions.
+
+
+Frank Mena
+frankm@knowledgy.com
+
+

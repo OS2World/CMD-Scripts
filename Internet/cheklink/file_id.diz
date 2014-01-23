@@ -1,0 +1,24 @@
+CheckLink v1.13b:
+Create, examine, traverse, and index
+Web-Trees.
+
+Description: 
+CheckLink is a free, multi-threaded, 
+socket aware utility used to create,
+verify, traverse, and index a web-tree;
+where "web-tree" is defined as all the 
+URLs (in-line images, anchors,etc.)
+that are referenced in a root HTML 
+document, and in html documents 
+reachable from this root. 
+CheckLink is written in REXX, and can 
+be run as an addon for the SRE-http 
+web-server, or as a CGI-BIN script.
+
+See CHEKLINK.TXT for installation 
+instructions.
+
+Author: Daniel Hellerstein
+        danielh@crosslink.net
+
+

@@ -1,0 +1,142 @@
+<!-- This is used to play with  the BBS options. -->
+
+<HTML>
+<HEAD>
+<TITLE>The BBS</TITLE>
+<!-- If you want to "suppress url display of user:pwd, using cookies",
+     do NOT remove the next line -->
+<meta http-equiv="Set-Cookie:" content="BBS_INIT=SET">
+
+</HEAD>
+
+<body>
+<!-- replace date --> <!-- replace time --> <br>
+<h2> Play with BBS request options </h2>
+
+This form will demonstrate the effects of the various BBS 
+<EM>request string options</EM>.
+<HR>
+
+
+<!-- Do NOT modify this next line -->
+<FORM ACTION="/bbs" METHOD="GET">
+
+<table border=0>
+<th> </th>
+<th> </th>
+<th> </th>
+<tr>
+<Td rowspan=2>
+<b> The basics </b>
+</Td>
+<Td>
+ Enter your username and password:
+</Td>
+<td>
+ <b>Username</b>: <INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+ <br><b> Password </b> <INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8><P>
+<tr>
+<td>
+What file area to peruse:
+</td>
+<td>
+<STRONG>/ = main file area:</STRONG> <BR><input type="text" name="dir" value="/" size=30>
+</td>
+</table>
+
+<P>
+<table border=0><Th> </th>
+<Th> </th><Th> </th>
+<tr>
+<td>
+<b> Links </b>
+</d>
+
+<td>
+What <em>set</em> of links should be displayed  <br>
+(you should only check <b>one</b> of these):
+</td>
+<td>
+<INPUT TYPE=checkbox NAME="forcetext" VALUE="1">Force Text Download
+<br><INPUT TYPE=checkbox NAME="forcebinary" VALUE="1">Force Binary Download
+<br><INPUT TYPE=checkbox NAME="bin_text_links" VALUE="1" checked>Display Text and Binary Download Links
+</td>
+</table>
+
+<P>
+<table border=0 >
+<th> </th>
+<th> </th>
+<th> </th>
+<th> </th>
+
+<tr>
+<td rowspan=3> <b>Select which display <br>
+fields to suppress:</B></td>
+<td><INPUT TYPE=checkbox NAME="noicons" VALUE="1" > Do not display descriptive icons </td>
+<td><INPUT TYPE=checkbox NAME="nodate" VALUE="1" > No Date </td>
+<td><INPUT TYPE=checkbox NAME="notime" VALUE="1" > No Time </td>
+<tr>
+<td><INPUT TYPE=checkbox NAME="nosize" VALUE="1" > No File Size </td>
+<td><INPUT TYPE=checkbox NAME="nodesc" VALUE="1">  No File Description </td>
+<td><INPUT TYPE=checkbox NAME="nodir" VALUE="1" > Do not display child and parent directories</td>
+<tr>
+<td><INPUT TYPE=checkbox NAME="rootdir" VALUE="1" > Do not display  parent directory</td>
+<td><INPUT TYPE=checkbox NAME="nocache" VALUE="1" > Do not <b>cache</b> this listing</td>
+</table>
+<P>
+
+<table border=0>
+
+<th> </th>
+<th> </th>
+<tr>
+
+<td rowspan=6> <b> Display formatting<br>options</b></td>
+<td>The date format:<SELECT NAME="datefmt" SIZE=3><OPTION SELECTED value="N" > Internet Default : 27 Aug 1988
+<OPTION value=B" > Julian      : 725975
+<OPTION value=D" > Day of year : 240
+<option value="E"> European    : 27/08/88
+<option value="L"> Long        : 27 August 1988
+<option value="M"> Month       : August
+<option value="O"> Ordered     : 88/08/27
+<option value="S"> Sorted      : 19880827
+<option value="U"> US          : 08/27/88
+<option value="W"> Weekday     : Saturday
+</select>
+</td><tr>
+
+<td> <input type=checkbox name="TIMEFMT" value="24">Use military time ?</td>
+</td><tr>
+
+<td><INPUT TYPE=Checkbox NAME="sizefmt" VALUE="ABBREV">Abbreviated file size format <em>( 14K instead of 14,132)</em>?
+</td><tr>
+
+<td>Number of columns to use when displaying directories:<SELECT NAME="dircols" SIZE=1>
+<OPTION >1
+<OPTION >2
+<OPTION SELECTED >3
+<OPTION >4
+</SELECT> </td><tr>
+
+<td><INPUT TYPE="CHECKBOX" NAME="short" VALUE="1" >Use a short display format?
+</td><tr>
+
+<td> The sorting criteria:<SELECT NAME="sortby" SIZE=5>
+<OPTION selected value="name" > Name
+<OPTION value="ext"> Extension
+<OPTION value="size"> Size
+<OPTION value="date"> Date
+<OPTION value="nosort"> Do not sort
+</SELECT>
+
+</table>
+
+
+<INPUT TYPE="submit" VALUE="Submit to BBS">
+</form>
+
+</body></html>
+
+
+

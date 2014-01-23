@@ -1,0 +1,46 @@
+
+You just found the most, perhaps, exciting REXX script in your life :-)
+This program will help those of you who want to replace that pile of
+.HTML, .GIF and other files in the, say, \JavaOS2\docs\ directory with
+something easier to read, manage, search and so on, I mean the usual OS/2
+.INF books. I personally don`t like to search needed information using GREP.
+You too? Well, then this program is for just for you.
+
+Since version 2.0 (and maybe even 1.2?) OS/2 have a so-called Information
+Presentation Facility subsystem. Well, let`s face it - it is far from
+perfection, especially counting that it has not been changed *at all*
+since 1990 :-( On the other hand, it have a very neat feature: its small
+and (relatively) fast. How much time loads your browser? Well, divide
+this time by ten and you`ll obtain the time required to load VIEW.EXE.
+
+The processing is fully automa(g)(t)ical. You just have to launch
+
+ HTML2IPF <index.html>
+
+and you`re done. Of course, like any well-behaved program HTML2IPF has a
+number of switches, but usually you won`t need them.
+
+The conversion process requires two stages. First (the most complex) is to
+convert the bunch of HTML files into a single .IPF file, and all pictures
+into the plain dumb .BMP format. Once you`re done, you just have to
+run IPFC on this IPF file and you`ll get the final .INF file! (of course,
+if no fatal errors will happen - and usualy they don`t).
+
+To try it just now, go into the doc/ subdirectory and launch MAKEINF.CMD.
+The documentation for the HTML2IPF is provided in HTML format, but you
+can convert it into INF format and delete the pile of HTML and GIF files.
+For this script to work properly, you`ll need the Image Alchemy for OS/2
+to convert GIF files into OS/2 BMP. If you don`t have it - don`t worry, you
+have many other ways to do it. If you`re running OS/2 v4.0 (Merlin) you can
+pre-convert GIF files by right-clicking on them and selecting Convert to->
+Bitmap->OS/2 v1.3 format (I REPEAT: v1.3 NOT THE 2.0 FORMAT!). If you
+have Warp 3.0 you can use any suitable conversion tool (say PMView),
+or even a DOS tool (aaaaargh! if you`ll do it, you`ll lose the nifty
+character cases in names).
+The second thing you`ll need for this process to complete, is the
+Information Presentation Facility Compiler, i.e. IPFC.EXE. It is included
+into OS/2 Developer`s Toolkit. Set up it properly (if you installed
+the Toolkit, the installer already done it) - the only thing it requires
+is a SET IPFC=#:\toolkit\ipfc environment variable. Now you can run
+MAKEINF.CMD and see what`ll happen.
+

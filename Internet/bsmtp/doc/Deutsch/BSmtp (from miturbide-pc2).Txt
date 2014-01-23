@@ -1,0 +1,255 @@
+*******************************************************************************
+                              BSmtp/2 v0.42
+        Analyse von BSmtp Files und Versenden enthaltener Mails
+                           (c)2000 by IzzySoft
+*******************************************************************************
+
+Diese Doku ist garantiert nicht vollstÑndig - sondern absolut minimal. Aber
+immer noch besser als garnix, gelle? Also:
+
+	1.   - Warum dieses Programm? Was tut es?
+	2.   - Systemvoraussetzungen
+	3.   - beiliegende Scripte/Dateien
+	4.   - Konfiguration
+	4.1. - BSmtp.Cmd
+	4.2. - MailList.Cfg
+	5.   - Syntax
+	6.   - ErrorLevel
+	7.   - Known Limitations/Bugs
+	8.   - Wo finde ich die aktuellste Version?
+	9.   - Disclaimer :-)
+
+
+1. Warum dieses Programm? Was tut es?
+=====================================
+
+  BSmtp analysiert Dateien im BSmtp (Batch-Smtp) Format und "verfÅttert" sie
+  an einen Smtp-Server. Nebenbei ist seit Version 0.3beta auch ein simpler
+  MajorDomo implementiert.
+
+  Wann bzw. wozu ist dies sinnvoll?
+
+  Wenn man z.B. eine eigene Domain "Offline" betreibt, und der MX-Record
+  auf einen anderen Rechner verweist, als auf den, auf dem man den lokalen
+  MailServer laufen hat (z.B. fÅr ein kleines IntraNet). Hier kann der Provider
+  die Mail fÅr die Domain im BSMTP Format sammeln und in einem anderen Account
+  (z.B. einem Pop3 Postfach) zur VerfÅgung stellen. Dieses Postfach wird per
+  Dial-Up geleert - und sodann das BSMTP File mit BSmtp verarbeitet.
+
+  So lÑuft das hier (qumran.org) prima :-)
+
+
+2. Systemvoraussetzungen
+========================
+
+  * ein Rechner (echt?) auf dem Rexx installiert ist (OS/2 kompatibel;
+    getestet habe ich es nur mit OS/2, evtl. tut es Regina unter DOS/Win
+    auch - wenn das jemand getestet hat, wÑre ich fÅr eine Information
+    dankbar!)
+  * ZusÑtzlich mÅssen die Bibliotheken RxTelnet (rxtelnet.zip auf Hobbes
+    und im GFD) und RXU (rxu1a.zip auf Hobbes und im GFD - beides auch in
+    meiner Mailbox, der Qumran Cave, download- und requestbar (2:2426/2160
+    im Fido, bzw. 0441-9570436 per Terminal-Prog)
+  * Achja: ein (lokaler) SMTP-Server, an den die Mail verfÅttert werden
+    soll, sowie ein Pop3 Account (o.a.), um die BSMTP Daten zu bekommen ;)
+
+ 
+3. beiliegende Scripte/Dateien
+==============================
+
+  * BSmtp.Cmd:         das BSmtp Script
+  * BSmtp.Cfg:         Konfigurations-Datei fÅr BSmtp/2 (Main Config)
+  * File_Id.Diz        Kurzbeschreibung des Programmes
+  * File_Id.xxx        das gleiche in Landessprache (xxx = LÑndercode)
+  * MailList.Cfg:      Konfigurations-Datei fÅr MailingListen
+  * QMDomo.Cmd:        MajorDomo AddOn
+  * Doc\2do:           ToDo-List (nicht bindend ;)
+  * Doc\COPYING:       GNU General Public License
+  * Doc\COPYRIGHT:     Copyright disclaimer
+  * Doc\xx\BSmtp.Txt:  Ñh - habe ich vergessen.... #-)
+  * Doc\xx\Format.Txt  Kurzbeschreibung des verwendeten BSMTP Formates
+  * Doc\History:       fÅr Historiker: die Entwicklungsgeschichte dieses Proggies
+  * Doc\Sample.Bsm:    Beispiel Eingabe-Datei im BSMTP-Format
+
+
+4. Konfiguration
+================
+
+
+4.1. BSmtp.Cfg
+--------------
+
+  Kurz zur Syntax dieser Konfigurations-Datei:
+  Kommentarzeilen beginnen mit einem ";" oder einer "#". Soll ein Kommentar
+  hinzugefÅgt werden, mu· zwischen dem ";"/"#" und dem Kommentar mindestens
+  ein Leerzeichen stehen. Kommentare mÅssen in separaten Zeilen stehen, d.h.
+  ein Kommentar a la
+
+     Debug # Debug anschalten
+
+  wird nicht unterstÅtzt! "Default" Werte werden benutzt, wenn die entsprechende
+  Anweisung auskommentiert ist. Doch nun zu den einzelnen Anweisungen, welche in
+  BSmtp.Cfg verwendet werden (kînnen):
+
+  hostname         der Smtp-Host, an den die Mail geschickt werden soll. Der
+                   hier angegebene Wert kann an der Kommandozeile Åberschrieben
+                   werden (siehe Syntax unter 5.)
+  port             zu benutzender Port. StandardmÑ·ig sollte dies Port 25 sein.
+                   Default: 25
+  timeout          normalerweise 1000. Sollte der SMTP-Server ein wenig
+                   schwerfÑllig sein (schlechte Verbindung), sollte dieser
+                   Wert erhîht werden (Empfehlung fÅr diesen Fall: 5000).
+                   Default: 1000
+  debug            falls Debug-Infos gewÅnscht werden, das Kommentar-Zeichen
+                   entfernen. Es wird dann im aktuellen Verzeichnis zusÑtzlich
+                   eine Datei namens Session.Log angelegt, in welcher alle
+                   AktivitÑten auf dem Socket (also alles, was
+                   gesendet/empfangen wird) protokolliert ist.
+                   Default: kein Debug.
+  LogFile          Naja, ein Logfile halt. Wird kein Laufwerk/Verzeichnis 
+                   angegeben, wird die Datei im aktuellen Verzeichnis
+                   angelegt. Es werden verschiedene LogLevel benutzt (s.u.)
+                   Default: BSmtp.Log
+  BadMailDir       Verzeichnis, in dem "abgewiesene" Mails (fÅr die spÑtere
+                   Analyse) gespeichert werden sollen. Die Mails werden im BSMTP
+                   Format (also inklusive des Envelopes) abgelegt. Unterschiede
+                   zur Eingabedatei:
+                   - nur eine Nachricht pro Datei
+                   - Ende der Mail wird nur durch EINEN '.' (sonst: '..')
+                     signalisiert
+                   Default: BadMail (unterhalb des aktuellen Verzeichnisses)
+  LocalDomain      die lokale Domain
+  MajorDomo        soll der interne MajorDomo benutzt werden? => auskommentieren.
+                   Default: MajorDomo wird nicht benutzt.
+  ListFile         Konfigurationsdatei des MajorDomo. Format siehe unten (4.2)
+                   FÅr Laufwerk/Verzeichnis gilt hier das gleiche wie bei
+                   LogFile (s.o.)
+                   Default: MailList.Cfg
+  LogLevel         Welche Informationen werden im LogFile gewÅnscht? Die
+                   mîglichen Werte sind einer der folgenden oder eine
+                   Kombination daraus:
+                   ! Fehler-Meldungen (z.B. nicht zustellbare Nachrichten,
+                     unerwartete Programm-AbbrÅche wegen z.B. Verbindungs-
+                     abbruch...)
+                   + "Basic" Information (z.B. Programm-Start, Verbindungsauf-
+                     und -abbau etc.)
+                   - zusÑtzliche Informationen: EmpfÑnger der Mail
+                   # File I/O
+                   x weitere zusÑtzliche Informationen (nahezu Debug-Level)
+                   $ Debug-Info
+                   Default: alles eingeschaltet
+  ScrLevel         das gleiche wie LogLevel - nur halt fÅr den Screen
+  DeletePkt        soll die BSmtp Eingabedatei gelîscht werden, wenn alle
+                   enthaltenen Mails erfolgreich versendet wurden?
+                   => Kommentarzeichen entfernen
+                   Default: Eingabedatei wird nicht gelîscht
+
+
+4.2. MailList.Cfg
+-----------------
+
+  Jede Zeile reprÑsentiert einen Eintrag. Die Syntax ist hier:
+  <listenname> <User>
+  FÅr jede Zeile gilt demzufolge: exakt 1 <listenname> und exakt 1 <User>.
+  Bei mehreren Usern (was ja bei einer Liste durchaus Sinn macht ;) werden
+  halt mehrere Zeilen angelegt. Die beigefÅgte Beispieldatei definiert zwei
+  MailingListen: Test1 (mit den Usern "TestUser" und "John Doe") und Test2
+  (mit den Usern "Dummy" und "Martin Mustermann").
+
+  Was bei <User> steht, ist fÅr BSmtp recht egal, da dieses es nicht
+  auswertet. FÅr QMDomo ist allerdings folgende Syntax von <User> zu beachten:
+  "Real Name" <user@kiste.domain>
+  user@kiste.domain (Real Name)
+  Beide Schreibweisen sind mîglich - also ganz so, wie es auch per RFC
+  vorgesehen und von MailClients bekannt ist.
+
+
+5. Syntax
+=========
+
+  BSmtp <BSMTP Eingabe-Datei> [<HostName> [<Port>]]
+
+  <BSMTP Eingabe-Datei> ist hier die zu verarbeitende Datei (logo), <HostName>
+  der Name des Rechners, auf dem der SMTP Server lÑuft, an den die Mail
+  geschickt werden soll. <Port> ist der Port, auf den der SMTP Server reagiert.
+  Sowohl <HostName> als auch <Port> sind optionale Parameter, um die Defaults
+  in BSmtp.Cfg ggf. kurzfristig/vorÅbergehend zu ersetzen.
+
+
+6. ErrorLevel
+=============
+
+  0   normales Ende (entweder nix zu tun gewesen, oder halt alles fertig)
+  1   Aufruf erfolgte ohne Parameter bzw. Fehler in der Konfig
+  2   eine Datei (idR das LogFile) konnte nicht geîffnet/geschlossen werden.
+      NÑhere Information im Logfile.
+  9   unexpected end of data (wahrscheinlich kamen noch "Leerzeilen" nach
+      Ende der letzten Mail im BSmtp-File - in diesem Fall kann der "Fehler"
+      getrost ignoriert werden)
+ 11   Connection lost (Verbindung wÑhrend der öbertragung verloren)
+ 12   Telnet connection failed (Verbindungsaufbau fehlgeschlagen)
+
+
+7. Known Limitations/Bugs
+=========================
+
+  Limitations:
+  ------------
+    - (un)subscribe ist (noch) nicht per Mail mîglich - jeder Teilnehmer
+      mu· (noch) manuell in maillist.cfg eingetragen (bzw. aus selbiger
+      entfernt) werden. Betrachtet also diese Listen als "closed" ;)
+
+  Bugs:
+  -----
+    bislang keiner bekannt (au·er der vor dem Bildschirm sitzende ;)
+
+
+8. Wo finde ich die aktuellste Version?
+=======================================
+
+  HierfÅr gibt es mehrere Anlaufpunkte - je nach verwendeter Technologie:
+
+  FidoNet    : 2:2426/2160
+  Online-BBS : +49-441-9570436
+  FTP        : ftp.qumran.org/net/div/izzysoft/
+  
+  Zu FTP wÑre hier jedoch noch anzumerken, da· der Server nicht permanent
+  erreichbar ist (derzeit habe ich nur einen "normalen" Dial-Up Account,
+  der jeweils zu xx:30 Uhr fÅr einige Minuten aktiv ist - oder lÑnger, wenn
+  ich selber surfe). Dies Ñndert sich ein wenig, sobald ich mir eine
+  Flatrate gînne (evtl. April/Mai via Callando).
+
+
+9. Disclaimer
+=============
+
+  Hiermit setze ich den Åblichen Disclaimer als bekannt voraus. FÅr diejenigen,
+  die ihn nicht kennen, hier die kurze Zusammenfassung:
+  Ich (der Autor des Programmes) Åbernehme fÅr nix weiter eine Garantie als
+  dafÅr, da· das Programm ein paar KiloByte auf der Festplatte verbraucht.
+  Jegliche Benutzung geschieht also auf eigene Gefahr, fÅr eventuelle
+  SchÑden (welcher Art auch immer) durch die Benutzung komme ich nicht auf!
+  
+  Seit der Version 0.42 ist BSmtp/2 unter die GPL (Gnu Public License)
+  Version 2 gestellt (ich behalte mir allerdings vor, dies eventuell in
+  einer zukÅnftigen Version zu Ñndern - dennoch darf Code aus bis dahin
+  erschienenen Versionen auf jeden Fall weiterhin in anderen Programmen,
+  die dann selbstverstÑndlich auch der GPL unterliegen, verwendet werden).
+  Was dieses KONKRET hei·t, bitte ich in den Dateien COPYING und COPYRIGHT
+  nachzulesen.
+
+  FÅr eine kurze Notiz, da· BSmtp/2 woanders auch sinnvoll benutzt werden kann,
+  bin ich in jedem Fall dankbar. Ich kann nicht garantieren, da· es jemals
+  weiterentwickelt wird oder da· eventuelle Bugs entfernt werden
+  (eigentlich habe ich es ja nur fÅr mich gebastelt ;) Sollten jedoch Bugs
+  gefunden werden, oder Anregungen zur Weiterentwicklung bestehen, schickt
+  mir bitte eine Nachricht. Wer wei·, vielleicht... ;) Auf jeden Fall ist
+  mehr Motivation vorhanden, wenn man um einen gewissen Sinn wei·.
+
+
+Nachsatz: Bevor die Doku mal wieder lÑnger wird als das Programm, zeichne ich
+hier fÅr eventuelle RÅckfragen: izzysoft@buntspecht.de
+
+
+Itzchak Rehberg
+24.03.2000

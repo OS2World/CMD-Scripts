@@ -1,0 +1,43 @@
+FeelX:
+  feelx.exe             The main program
+  feelxdll.dll          The main DLL
+  feelx586.dll          For a 486 or pentium: copy feelx586.dll feelxdll.dll
+  feelxpix.dll          The pictures. Can be deleted.
+  wpfeelx.dll           The Workplace Shell DLL
+  toolbox.inc           Included by feelx.go
+  feelx.go              The menu definitions
+  nowps.go              - " - if you use FeelX as a WPS replacement
+  feelx.inf             The documentation. View feelx.inf
+  instwps.exe           Install the WPS object (wpfeelx.dll)
+  uninst10.exe          Uninstall FeelX v1.0
+  uninstal.exe          Uninstall FeelX v1.1/1.1a
+  changes.txt           Changes since FeelX v1.0
+  readme                The readme file
+  examples.go           Some commented examples
+  files.dat             This file
+
+Tools:
+  fxopt.exe             Change FeelX parameters. DOS & OS/2
+  wpopen.exe            Open a folder of the current directory or a WPS object
+  wo.exe                Fault-tolerant search of files
+  fg.exe                Change Shell parameters. DOS & OS/2
+  popuppm.exe           Must be running for fg.exe
+  ischild.exe           See Doc. Trivial program
+  line.exe              Change lines of a shell
+  msgbox.exe            Display a MsgBox
+  font.exe              Change the font of a shell
+  fontc.exe             Called by font.exe with parameter makelist
+  callrx.exe            Starts a ReXX file. Displays result on stdout
+  interp.cmd            Interprets a ReXX string
+  fxexec.exe            Execute a FeelX object
+
+api\
+  feelxapi.h            Must be included if you program for FeelX
+  fxapi.h               Must be compiled
+  feelxdll.lib          Lib with API
+  setx.c                sample: Turn sliding focus on/off
+  testdll.c             sample: How to create a DLL for FeelX
+  testdll.def           the .def file
+  anidll.c              sample: Integrate a to to turn on/off animation
+  anidll.def            the def
+  anidll.dll            compiled DLL

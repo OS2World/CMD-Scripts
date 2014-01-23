@@ -1,0 +1,126 @@
+Changes for Version 1.1a
+------------------------
+
+FEELX (THE MAIN PROGRAM):
+=========================
+ - Only those hotkeys are deleted from the message queue that are associated
+   with an action
+ - Ability to change hotkey-shift-combination. Use either the new "hotkey"-page
+   of the WPS object or the hflag-flag of fxopt.
+ - Access hotkeys from OS/2 FS sessions
+ - Big Bug in the sliding focus feature removed. Because of this bug
+   a) the combo-boxes didn't work (sorry, sorry, sorry, sorry)
+   b) the system could hang when dragging a program object on the WPS
+ - Activate all controls is now off per default. This feature is still
+   available (fxopt all:on save  / WPS object, page 1)
+ - ini-entry changed to FeelX11a (you can delete FeelX11)
+ - New entry point: B2Desktop (this does work for native PM w/o WPS only!)
+ - Init of Spooler (??)
+ - tried to improve always on top (still problems left)
+ - tried to improve shutdown
+ - Minnie is shown as long as FeelX is initializing.
+   (instead of 10 sec.)
+
+Changes to FeelX objects:
+=========================
+ - switchto: new object
+      name      a program name (e.g. e.exe, viewdoc.exe)
+                forces FeelX to switch to that session. Useful with hotkeys!
+
+
+WPS-Object:
+===========
+ - new page "hotkey" (shift modifier and Full-Screen-Hotkey support)
+ - the default object name is now <WP_FEELX>
+ - (rudimentary) "help" is now working
+
+Tools:
+======
+ - The lines of fxopt.exe now depend on whether you use codepage 437 or 850 :-)
+ - fxopt now supports:
+        fshotkey:[yes|no]    Enable hotkey support from OS/2 Fullscreen
+        delhotkey:[key]      delete a hotkey (e.g. delhotkey:f2)
+        delhotkey:all        delete ALL hotkeys (=turn off)
+        hflags:[c|s|a]       Turn on/off shift/alt/ctrl as hotkey shift flags
+
+
+
+Changes since Version 1.0 (compressed. See feelx.inf for more infos)
+--------------------------------------------------------------------
+
+FEELX (THE MAIN PROGRAM):
+=========================
+
+general improvements:
+ - smaller, faster
+ - better (and less) usage of memory
+
+Bugs removed:
+ - PM-Kill now works even if the PM-Shell has been killed (and got a new PID).
+ - Hide mouse ptr feature now independent from sliding focus
+ - change Z-order iff (not if...) Shift is pressed
+ - Full Screen programs are now started at front
+
+problems removed:
+ - better work with screen savers
+ - tried to make the program more stable
+ - better work with FM/2 (no flickering) and hopefully Lotus 1-2-3 (???)
+ - problems with Dlg boxes removed (new windows do always receive the focus)
+ - menus are easier to use
+
+new features:
+ - make use of 3-button mouse
+ - change Z-order with 3rd button
+ - Display settings with the 3rd mouse button
+ - move windows with all contents (right mouse button)
+   (you can 'grab' it at his frame also)
+ - easier marking and pasting
+ - ability to specify a alternate cut/paste shift comination
+ - Ctrl-Shift PgUp, PgDn now works for shells too
+ - Ctrl-Shift PgUp, PgDn are now implemented in the FeelX.go
+ - keyin for DOS-shells via clipboard
+ - more flexibility for cut, pasten, ...
+ - high flexibility for configuring menus and submenus by using a simple small
+   description language
+ - while Ctrl is pressed the sliding focus is off
+ - (menu) entry points are now (*=new):
+     Menu in all 4 corners, Titlebar, Shell(right button), *Shell3(3rd buttton)
+     *Desktop(DbClick left button), *Desktop(3rd button), *Hotkeys, *Startup
+
+new functions:
+ - lots of new functions for program launching
+   - Define name, path, parameters (specify at run-time, use the clipboard), ...
+   - redirect output to clipboard or a PM-Viewer
+   - specify DOS-Settigs for Dos-programs
+   - error message when program does not exist.
+ - a very (,very) simple macro recorder
+ - Hotkeys
+ - improved kill and pmkill and adapted to OS/2 2.1
+ - window list menu and OS/2 windowlist ( quick switch still there)
+ - (up to 10) Actionbars for PM/WPS
+ - shutdown
+ - start WPS objects (currently not very user-friendly)
+
+WPS-Object:
+===========
+ - completly rewritten. I hope you like it!
+
+Documentation:
+==============
+ - almost completly rewritten. I hope it is easier now.
+
+Tools:
+======
+ - wpopen added (opens default view of WPS objects or current path)
+ - wo added (fault-tolerant search of file(names))
+ - isChild added (return code signals wether a command is the shell itself
+   or a child of the shell).
+ - fg now runs with full screen programs
+   (but still requires popuppm to be running)
+ - fg now runs even if it is the child of a child (...) of the shell
+ - fg now runs in DOS shells.
+ - callrx added to show integration of ext. prgs.
+ - fxopt runs from DOS-session (full functionality)
+ - other tools just recompiled
+
+(... and still a lot of work left)

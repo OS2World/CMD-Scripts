@@ -1,0 +1,31 @@
+WebOrg-to-XHTML conversion tool
+Initial release, 2005-04-10
+Michael DeBusk, m_debusk@despammed.com
+
+WHY THIS SCRIPT?
+WebOrganizer is one of the few shareware tools I've ever found so useful that I registered it the same day I tried it out. And even though it's been many years since it's been updated, I still find it a very useful tool. What it does, it does very well: it opens a Netscape bookmark file and allows you to drag and drop folders and links to a new window, thereby creating (visually simple and good-looking) HTML pages which you can use as your local home page. 
+
+What it doesn't do, however, is create good, clean HTML which can work consistently well on the World Wide Web. It wasn't meant to do that. But I wanted to upload my WebOrg-created pages to a remote server so I could access my bookmarks from wherever I happened to be, and I am reasonably picky about Web standards on pages I upload to my site.
+
+WHAT DO I DO WITH IT?
+Put it (and the Cascarding Style Sheet WEBORG.CSS) in the same directory as the HTML pages created by your copy of WebOrganizer (usually WEBORG/PAGES/). In its current incarnation, it requires that the drive support long filenames, because the new files will be named with the extention HTML. Run the program without parameters.
+
+You could use the resulting files locally, as you already do with the original files, or you could upload them to your Web space and enjoy them from anywhere.
+
+WHAT DOES IT DO?
+It reads each file with an HTM extension into memory, modifies that file to meet the XHTML 1.0 Strict standard (as best I can tell), and writes it to a new file with the extension "HTML". That's all. If the file it wants to write already exists, the script deletes it without warning or ceremony. Your original files will not be modified in any way.
+
+The accompanying CSS file, WEBORG.CSS, does a fair job of emulating the default look and feel of WebOrg-created pages. If you have a rudimentary knowledge of CSS, you can modify this file and the changes will affect all pages.
+
+WHO IS THE AUTHOR?
+Michael DeBusk, who appreciates constructive feedback, suggestions, and code modifications, and who would love to have a copy of your own Cascading Style Sheet for use with the modified pages. Please send to m_debusk@despammed.com
+
+The procedure AmpEsc, which converts ampersands within a URL to the HTML character entity "&amp;", was written by Mr. Brian Inglis in response to my query posted in Usenet newsgroup comp.lang.rexx. Thank you, Brian, for the lesson. :)
+
+WHAT IS WEBORGANIZER?
+See http://www.ongsw.com/ for full details and a trial copy.
+
+Incidentally, I have been in contact with the developer of WebOrganizer and he has given his approval of the use and dissemination of this script. He is, as of the time of this writing, considering a minor update to WebOrganizer, and may include in it the functionality of this script. No decision has been made. I would be delighted, though, if a release of WebOrg made this script moot.
+
+LICENSE? WARRANTY?
+Except for the procedure AmpEsc, which was written by Brian Inglis and posted in Usenet newsgroup comp.lang.rexx, I hereby release the WebOrg-to-XHTML conversion tool to the public domain. There is no warranty whatsoever.

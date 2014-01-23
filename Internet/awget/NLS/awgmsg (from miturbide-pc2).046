@@ -1,0 +1,176 @@
+HOME                     = AWGet installationsmapp
+DOWNLOAD                 = Ladda ned i mapp
+DOWNLOADS_SIMULTANEOUSLY = Maximalt antal samtidiga nedladdningar
+DOWNLOADS_FROM_SAME_HOST = Maximalt antal samtidiga nedladdnigar fr†n samma server
+DOWNLOADS_ATTEMPTS       = Maximalt antal nedladdningsf”rs”k
+DOWNLOADS_UTILITY        = Hj„lpprogram f”r nedladdning
+DOWNLOADS_PARAMETERS     = Parametrar f”r nedladdning
+DOWNLOADS_WINDOW         = F”nster f”r nedladdning
+CLIPBOARD_MONITOR        = ™vervaka urklipp
+CLIPBOARD_EXCLUDE        = Exkludera filtyper
+SCAN_INTERVAL            = Intervall f”r s”kning
+LOG_FILE                 = Loggfil
+ERROR_LOG                = Fel-Loggfil
+LOG_KEEP                 = Antal dagar som loggen skall beh†llas
+LOG_PRUNE                = Till†t periodisk loggning
+MESSAGE_DONE             = Nedladdningen lyckades
+MESSAGE_ERROR            = Nedladdningen misslyckades
+MESSAGES                 = Visa start och stoppmeddelande f”r processer
+CHECK_CONNECTION         = Kontrollera uppkopplingen till Internet
+USE_DESKTOP              = Hitta URL-filer p† Skrivbordet
+KEEP_FAILED_URL          = Spara misslyckade URLer
+KEEP_DONE_URL            = Spara lyckade URLer
+
+CONNECTION_ESTABLISHED   = Internetuppkopplingen klar.
+CONNECTION_BROKEN        = Ingen Internetuppkoppling.
+
+UNINSTAL_WARNING         = VARNING! Existerande mapp AttG”ra och dess inneh†ll kommer att\n\
+                           tas bort under avinstallationen av Auto WGet Daemon!\n\
+                           Om du inte vill att inneh†llet i mappen skall tas bort kan du flytta filerna\n\
+                           f”r hand till en annan mapp.
+UNINSTAL_ERROR   = Nuvarande mapp "%s" „r inte densamma som den mapp d„r Auto WGet Daemon installerades.\n\
+                   Avinstallationen har avbrutits och du m†ste sj„lv ta bort viktiga filer.
+UNINSTAL         = Avinstallera Auto WGet Daemon
+REMOVE_CONFIG    = Ta bort konfigurationsfil
+
+INSTALL_DIR      = Installationsmapp
+INSTALL          = Starta installationen av Auto WGet Daemon
+NOT_FOUND_UTILS  = Hj„lpprogrammet f”r nedladdning av filer kan inte hittas eller existerar ej!\n\
+                   V„nligen, l„s dokumentationen och installera hj„lpprogrammet. (L„s readme.046)
+INSTALL_ABORTED  = Installationsprocessen avbr”ts!
+SELECT_UTIL      = V„lj hj„lpprogram f”r nedladdning:
+SELECT_NUMBER    = Ange nummer p† hj„lpprogram (0 - avsluta)
+OBJECT_DONE      = Objekt skapades
+OBJECT_ERROR     = Fel uppstod n„r objektet skapades
+DIR_DONE         = Mappen har skapats
+DIR_ERROR        = Fel uppstod n„r mappen skapades
+COPY_DONE        = Filkopieringen lyckades
+COPY_ERROR       = Filkopieringen misslyckades
+COMPILE_DONE     = Filen har kompilerats
+COMPILE_ERROR    = fel vid kompileringsprocessen
+ERASE_DONE       = Borttagen
+ERASE_ERROR      = Fel vid borttagning
+READ_ERROR       = L„sfel
+WRITE_ERROR      = Skrivfel
+CONFIG_UPDATED   = Konfigurationsfilen har uppdaterats
+ENTER_URL        = Ange ~URL eller listans namn
+ENTER_ADD        = ~L„gg till
+ENTER_CANCEL     = ~Avbryt
+
+YES              = Jj
+NO               = Nn
+BAD_YESNO        = Vad†? V„nligen ange 'J' eller 'N'!
+
+NOT_FOUND        = Mappen kunde inte hittas
+CONFIG_CHANGED   = Konfigurationsfilen har uppdaterats.
+PRUNE_START      = Loggning startad.
+PRUNE_DONE       = En lyckad loggning har genomf”rts, %u rader sparade.
+BAD_DOWNLDIR     = Mapp f”r nedladdning kunde inte hittas!\n\
+                   Nuvarande mapp (".") kommer att anv„ndas ist„llet.
+NOT_MOVE         = Fel vid flyttning av fil(er)
+BAD_URL          = Filen inneh†ller fel URL
+DOWNLOAD_START   = Nedladdningsprocessen har p†b”rjats
+DOWNLOAD_DONE    = Nedladdningen „r avslutad
+DOWNLOAD_ERROR   = Fel vid nedladdning
+DOWNLOAD_STOP    = Nedladdningen avbr”ts
+DOWNLOAD_REDIR   = Sparas p† annan plats
+ERROR_IN         = Fel i
+UNKNOWN_SID      = Ok„nd session avslutad (zombie?)
+PLUGIN_DEAD      = Plugin svarar inte
+
+WAIT_STOPPED     = Auto WGet Daemon avslutas nu. V„nligen v„nta
+STOPPED          = Auto WGet Daemon har stoppats.
+NOT_RUNNING      = Auto WGet Daemon „r inte aktiv just nu.
+STARTED          = Auto WGet Daemon startad.
+ALREADY_RUNNING  = Auto WGet Daemon har redan startats.
+
+# H„r „r objektnamn
+
+OBJ_HOME         = Auto WGet Daemon
+OBJ_DOWNLOADS    = Nedladdningar
+OBJ_TOOLS        = Verktyg och Hj„lpprogram
+OBJ_INFO         = Information
+OBJ_JOBS         = Arbeten
+OBJ_TODO         = AttG”ra
+OBJ_RUNNING      = Aktiv
+OBJ_DONE         = Klar
+OBJ_FAILED       = Misslyckad
+OBJ_DAEMON       = Auto WGet Daemon
+OBJ_UNINSTALL    = Avinstallera\nAuto WGet Daemon
+OBJ_EDITCFG      = Redigera konfigurationsfil
+OBJ_STOP         = Stoppa\nAuto WGet Daemon
+OBJ_EVTLOG       = Visa Logg
+OBJ_ERRLOG       = Visa Fel-Logg
+OBJ_ADD          = L„gg till URL
+OBJ_README_EN    = L„s Mig (Engelska)
+OBJ_README       = L„s Mig
+OBJ_CHANGES_EN   = F”r„ndringar
+OBJ_LICENSE_EN   = Licens (Engelska)
+OBJ_LICENSE      = Licens
+OBJ_URL_RU       = Auto WGet Daemon\nHemsida (Ryska)
+OBJ_URL_EN       = Auto WGet Daemon\nHemsida (Engelska)
+OBJ_DONATE       = Donera pengar till projektet!
+
+# H„r „r kommentarer (noteringar) f”r konfigurationfilens parameterar
+
+CFG_HOME              = Pekar till mappen d„r filerna f”r Auto WGet Daemon „r placerade,\n\
+                        Detta v„rde fylls i under installationen och vanligtvis beh”ver du\n\ 
+                        inte f”r„ndra det senare. 
+CFG_DOWNLOAD                 = Pekar till mappen d„r de nedladdade filerna placeras.
+CFG_DOWNLOADS_SIMULTANEOUSLY = Ange antalet URLer som skall bearbetas samtidigt.
+CFG_DOWNLOADS_FROM_SAME_HOST = Definierar maximalt antal URLer som kan l„sas in fr†n samma server.\n\
+                               (0 - ingen begr„nsning).
+CFG_DOWNLOADS_ATTEMPTS       = Ange antalet f”rs”k som skall g”ras f”r varje URL.\n\
+                               Om nedladdningsprogrammet returnerar en felkod, kommer URLen att sparas\n\
+                               enligt f”ljande definierade v„rde. (0 - ingen begr„nsning).
+CFG_DOWNLOADS_UTILITY        = Nedladdningsprogrammets namn.
+CFG_DOWNLOADS_PARAMETERS     = H„r visas parametrarna f”r nedladdningsprogrammet. Du kan anv„nda f”ljande\n\
+                               makrosymboler: \n\n\
+                               %U - Žndra till aktiv URL\n\
+                               %D - Žndra till nedladdningsmapp\n\
+                               %P - Žndra till nedladdningsmapp d„r (\) ers„tts med (/)\n\
+                               %F - Žndra till filnamnet p† den aktiva URLen\n\
+                               %H - Žndra till namnet p† v„rden f”r hemsidan utifr†n aktiv URL.
+CFG_DOWNLOADS_WINDOW         = Definerar storlek och representerar inst„llning/l„ge f”r nedladdnigsprogram.\n\
+                               F”rsta nyckelordet b”r anges som "hidden" (g”md) eller "visible" (synlig) f”ljt av \n\
+                               nummer f”r kolumner och rader avgr„nsade med kommatecken.\n\
+CFG_SCAN_INTERVAL            = Intervall f”r genoms”kning av AttG”ra-mappen i sekunder.
+CFG_CLIPBOARD_MONITOR        = Sl†r p† automtisk avs”kning av urklipp. Om s”kv„gen till en URL hittas i systemets\n\
+                               urklipp startas L„gg till URL automatiskt.
+CFG_CLIPBOARD_EXCLUDE        = Fil typer som ignoreras vid avs”kning av urklippshanteraren.
+CFG_LOG_FILE                 = Loggnamn d„r start, stop och andra meddelanden sparas.
+CFG_ERROR_LOG                = Loggnamn med felmeddelanden.
+CFG_LOG_KEEP                 = Antalet dagar som logg skall beh†llas i loggfilen.
+CFG_MESSAGES                 = Ange om meddelande skall visas under start och avslutning av nedladdningar.\n\
+                               1 - visa meddelanden, 0 - visa ej meddelanden.
+CFG_MESSAGE_DONE             = Kommandot anger vad som skall k”ras efter en lyckad nedladdning.\n\ 
+                               Du kan anv„nda f”ljande makrosymboler:\n\n\
+                               %M - Žndra till ett lyckat nedladdningsmeddelande\n\
+                               %U - Žndra till den aktiva URLen\n\
+                               %D - Žndra till nedladdningsmappen\n\
+                               %P - Žndra till nedladdningsmappen d„r (\) ers„tts med (/)\n\
+                               %F - Žndra till filnamnet p† den aktiva URLen\n\
+                               %L - Žndra till nedladdnigsprogrammets senaste meddelande\n\
+                               %R - Žndra till nedladdnigsprogrammets returkod
+CFG_MESSAGE_ERROR            = Kommando som k”rs efter att ett fel har uppst†tt vid nedladdning.\n\
+                               Du kan anv„nda f”ljande makrosymboler: \n\n\
+                               %M - Žndra till ett lyckat nedladdningsmeddelande\n\
+                               %U - Žndra till den aktiva URLen\n\
+                               %D - Žndra till nedladdningsmappen\n\
+                               %P - Žndra till nedladdningsmappen d„r (\) ers„tts med (/)\n\
+                               %F - Žndra till filnamnet p† den aktiva URLen\n\
+                               %L - Žndra till nedladdnigsprogrammets senaste meddelande\n\
+                               %R - Žndra till nedladdnigsprogrammets returkod
+CFG_CHECK_CONNECTION         = Ange kontroll av PPP eller SLIP-uppkoppling innan nedladdning p†b”rjas\n\
+                               Ej f”rinst„llt.
+CFG_USE_DESKTOP              = Till†t att Skrivbordet genoms”ks efter filer som inneh†ller URL.\n\
+                               Filerna kommer att flyttas till AttG”ra-mappen f”r att bearbetas senare.
+CFG_KEEP_FAILED_URL          = URL som ej h„mtats p.g.a. problem flyttas till mappen Misslyckad om 1 anges.
+CFG_KEEP_DONE_URL            = URL som laddats ned flyttas till mappen Klar, om 1 anges.
+CFG_SCHEDULE                 = Schemal„ggning av nedladdning f”r den aktuella mappen.\n\
+                               Schemat inneh†ller kommaseparerade tidsintervaller. \n\
+                               Varje intervall anger start och stop f”r processtiden\n\
+                               Ange helt enkelt: SCHEDULE = 06:00-08:30,16:50-03:00
+CFG_REDIRECT_TO              = Anger en ny mapp d„r URLen (l„nken) skall sparas.\n\
+                               Mappen anges med hela s”kv„gen. UNC s”kv„g g†r „ven bra att\n\
+                               anv„nda. Se L„s Mig f”r mer information.

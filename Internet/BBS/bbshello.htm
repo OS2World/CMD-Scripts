@@ -1,0 +1,65 @@
+<!-- This is a sample "BBS startup screen". You can
+modify it as you see fit, but please take note of the
+comments about which lines should not be modified -->
+
+<HTML>
+<HEAD>
+<TITLE>The BBS</TITLE>
+<!-- If you want to "suppress url display of user:pwd, using cookies",
+     do NOT remove the next line -->
+<meta http-equiv="Set-Cookie:" content="BBS_INIT=SET">
+
+</HEAD>
+
+<body>
+<!-- replace date --> <!-- replace time --> <br>
+<h2> Welcome to our BBS </h2>
+
+If you are a  <em>new user</em>, you must
+<A HREF="bbsnewu.htm">fill out a registration form</A>.
+
+<p>
+Woud you like to:
+<ul>
+<li> Browse the <A HREF="#download">file download area</A>
+<LI> <A HREF="bbsup.htm">Upload a file</A>
+</ul>
+
+<hr>
+<em><!-- replace url --> </em>  <br>
+<strong>Questions? </strong> Contact <!-- replace webmaster -->
+<pre>
+
+
+
+
+</pre>
+<hr>
+<A NAME="download"> <br> </A> 
+
+<h3><A NAME="download2">Browse the file download area </A> </h3>
+
+<!-- Do NOT modify this next line -->
+<FORM ACTION="/bbs" METHOD="GET">
+
+<p> Please enter your username and password:
+<blockquote> <b>Username: <INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+<br> <b> Password </b> <INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8>
+<input type="hidden" name="dir" value="/">
+
+<!-- you can modify the VALUE field of this line -->
+<INPUT TYPE="submit" VALUE="I'm ready to browse the BBS">
+</FORM>
+
+<HR>
+<pre>
+
+
+
+</pre>
+<HR>
+
+</BODY>
+</HTML>
+
+

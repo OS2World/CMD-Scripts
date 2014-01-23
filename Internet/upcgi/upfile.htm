@@ -1,0 +1,23 @@
+<html>
+ <head>
+    <title>Upload a file to a server </title>
+</head>
+<body>
+<h2>Upload a file to this server </h2>
+This demonstrates the UPFILE.CMD cgi-bin script. <p>
+
+<FORM enctype="multipart/form-data" ACTION="/cgi-bin/upfile.cmd" METHOD="post">
+<table><tr>
+<td> What name should the server assign to this file:<br>
+<em>Leave this empty to use the name used on your computer.</em> </td>
+<td>  <input type="text" name="callit" size=25> </td>
+
+<tr>
+<td>Select the file to upload:
+<td><INPUT TYPE="file"  name="upload_file"> </td>
+</table>
+
+<INPUT TYPE="submit" VALUE="Upload the file">
+</form>
+</body></html>
+

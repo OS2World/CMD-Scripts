@@ -1,0 +1,49 @@
+; Sample input file for CheckLink Report Writer (CHEKRPT.CMT).
+;
+; For more details on these options, see CHEKLINK.TXT
+;
+; The run-time options that can be set here are:
+;   LINKFILE      OUTFILE     TOSHOW
+;   SHOWREFLIST   SHOWTOLIST  EXCLUSION_LIST 
+;   INCLUSION_LIST 
+;
+; The "linkfile" (created by checklink). It contains the information that
+; ChekRpt uses to create its reports
+linkfile=chek_res.stm
+
+; Where to write the HTML document (that contains the report)
+outfile=chek_rpt.htm
+
+;What links to display information on. Choose one of the following options:
+; E :  Everything (Images and Anchors)
+; A :  Links to anchors (do not display image links)
+; H :  Links to HTML documents
+; R :  Links to all retrieved (i.e.; on site) HTML documents
+; B :  Links to all retrieved HTML documents with busted links
+toshow=A
+
+; For each URL displayed, also display a list of links contained with the URL
+;   N = No
+;   S = short list (numbers that jump to entries in the report)
+;   L = long list (more detailed info)
+showreflist=S
+
+; For each URL displayed, also display a list of all resources that contain links
+; to this URL (that is, all "read html" documents in the webtree that contain this
+; URL as a link
+;   N = Don't display this list
+;   Y = Display this list
+showtolist=Y
+
+; A space delimited list of exclusions. Each exclusion can contain * wildcard characters.
+; if the full url matches (possibly wildcard matches) any of the entries in this list,
+; then do NOT display this URL.  To suppress, set EXCLUSION_LIST=0
+exclusion_list=0
+
+; A space delimited list of inclusions. Each inclusion can contain * wildcard characters.
+; if the full url does NOT match (possibly wildcard matches) any of the entries in this list,
+; then do NOT display this URL.  To suppress, set INCLUSION_LIST=*
+inclusion_list=*
+
+
+

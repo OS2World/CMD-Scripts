@@ -1,0 +1,20 @@
+<body>
+<h2> BBS.HDR </h2>
+This is a sample BBS Header file.<p>
+You can put BBS header files in the <cede>BBS_PARAM_DIR</code> directory, and
+in the various file directories.  BBS will first try to use
+ the "header_file" in the target directory. If it can't find
+such a file, it will then look in the BBS_PARAM_DIR directory.
+If it still can't find the file, a generic header is used.
+
+<P>Two <em>special strings</em> are manipulated by BBS:
+<ol> 
+<li>  &#36;SERVERNAME yields the server IP name (i.e.; $SERVERNAME
+<li>  &#36;DIR yields the current directory (i.e.; $DIR)
+</ol>
+
+<blockquote>
+<b>Important note</b>: if you use a header file, you <b>must</b>
+include a &lt;BODY &gt; element at it's top.</blockquote>
+
+

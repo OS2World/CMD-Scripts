@@ -1,0 +1,54 @@
+How to use Java LiveCounter in OS2 WARP
+=======================================
+
+* Tested with IBM-ICS 4.1.1 only, but It may work with any WWW server
+
+* Tested with wwwcount 2.2 only
+ 
+* Tested with 0.95i version of JavaCounter if you have newer version change
+  this number in rexx script
+  
+Install
+=======
+
+* Install and setup any httpd which works with rexx cgi scripts
+
+* Download (and install) classic counter wwwcnt23.zip from
+    
+   Hobbes:/pub/os2/apps/internet/www/util:
+
+* Download Java Live Counter from
+     
+   http://www.chamisplace.com/prog/lc/
+
+* copy REXX script to directory for CGI scripts
+
+* edit rexx script and change path to your .dat file from www counter
+
+* setup your WWW page with classic and Java Counters. Here is part of my page.
+
+<BR>
+Welcome
+   <applet codebase="http://www.op56.vzp.cz:8080/" 
+   code="LiveCounter.class" width=90 height=20>
+   <param name="urlimage" 
+   value="http://www.op56.vzp.cz:8080/lcdgts_a.gif" >
+   <param name="urlscript1" 
+   value="http://www.op56.vzp.cz:8080/usr-cgi/livecnt1.cmd">
+   <param name="urlscript2" 
+   value="http://www.op56.vzp.cz:8080/usr-cgi/livecnt1.cmd">
+   <!-- following code will display a CGI counter --------------->
+   <!-- when viewed using a browser that does not support Java -->
+   <img src="/cgi-bin/counter?df=count2.dat&beep=1" alt="****">
+   </applet> 
+Visitor!
+
+
+Known bugs/limitation
+
+* On server with high load, some calls to script may fail, becouse there are
+  another copy of script running, which have locked dat file. If this is your
+  problem email me and I will try to fix it.
+  
+==================
+Radim Kolar (hsn@cybermail.net)

@@ -1,0 +1,615 @@
+                            *** HTML_TXT manual ***                             
+ 
+Æ[1]IntroØ || Æ[2]Install&RunØ|| Æ[3]FeaturesØ|| Æ[4]ParametersØ || 
+Æ[5]TroubleshootingØ|| Æ[6]Disclaimer and ContactØ 
+ 
+                      HTML_TXT: An HTML to Text Converter                       
+ 
+ I) Introduction  
+ 
+HTML_TXT, version 1.09, is used to convert an ÙHTMLı file to a TEXT file. HTML_
+TXT is written in REXX and is meant to be run under OS/2. However, it also runs 
+under other REXX interpreters, such as Regina REXX for DOS. 
+ 
+HTML_TXT will attempt to maintain the format of the ÙHTMLı document by using 
+appropriate spacing and ASCII characters. HTML_TXT can use ASCII art Ù(lines and 
+boxes)ı, as well as other high-ascii characters, to improve the appearance of 
+the output (text) file. 
+ 
+HTML_TXT can be customized in a number of ways. For example, you can:
+
+   @ suppress the use of line art and other high ASCII characters (your output 
+     will be rougher, but will suffer from fewer compatability problems). 
+ 
+   @ display tables (including nested tables) in a tabular format with 
+     auto-sized columns 
+ 
+   @ change the bullet characters used in ordered lists
+ 
+   @ display <HN> Ùheadingsı as an hierarchical outline
+ 
+   @ change characters used to signify logical elements (emphasis, anchors, list 
+     bullets, etc.) 
+ 
+                     ______________________________________                     
+ 
+ II) Installling and Executing HTML_TXT 
+ 
+HTML_TXT is easy to install and run:
+
+  1. Copy HTML_TXT.CMD to a directory.
+ 
+  2. Open up an OS/2 prompt, change to the directory containing HTML_TXT.CMD, 
+     and type HTML_TXT at the command prompt. 
+ 
+  3. Follow the instructions.
+ 
+ÙNo other libraries or support files are needed.ı
+ 
+    The READ.ME file describes how to install HTML_TXT if you are a Regina 
+    REXX user. 
+ 
+ II.a)  Running from the command line  
+ 
+You can also run HTML_TXT from the command line. The syntax is (where x:\HTMLTXT 
+is the directory containing HTML_TXT.CMD): 
+    x:\HTMLTXT>HTML_TXT FILE.HTM FILE.TXT /VAR VAR1=VAL1 ; VAR2=VAL2
+where :
+
+  #  FILE.HTM is the input file (an HTML document)
+ 
+  #  FILE.TXT is the output file (a text document)
+ 
+  #  /VAR VAR1=VAL1 ; VAR2=VAL2 is an OPTIONAL list of parameters to modify.
+ 
+                                                                                 
+ÙExample:     D:\HTMLTXT>HTML_TXT FOO.HTM FOO.TXT /VAR LINEART=0 ; LAGUL=* $     
+                                                                                 
+ALTERNATIVELY, you can run HTML_TXT from an (OS/2) prompt without any arguments; 
+you will then be asked for an input and output file, and will be permitted to 
+change the values of several of the more important parameters. 
+ 
+                     ______________________________________                     
+ 
+ III) Features  
+ 
+HTML_TXT attempts to support many HTML options; including nested tables, nested 
+lists, centering, and recognition of FORM elements. 
+ 
+The following summarizes HTML_TXT's capabilities.
+ 
+       ÙThis table assumes that you have a basic familiarity with HTML.ı        
+
+                                                                                
+TYPE OF    DISCUSSION                                      Æ[7]CUSTOMIZATIONØ   
+FEATURE                                                                         
+                                                                                
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+CHARACTER  HTML_TXT uses a few tricks to identify where     ÙDOCAPSı specifies  
+DISPLAY    emphasis (italics, bold, etc.) are used in an    when to use         
+           HTML document. These include:                    CAPITALIZATION as   
+                                                            an emphasis         
+              @ Capitalization of BOLD emphasis                                 
+                                                            ÙDOULINEı specifies 
+              @ Underlining of underlined emphasis          when to use under_  
+                                                            linining as an      
+              @ "quoting" of Ùitalicı and Æ[8]<A>nchorØ     emphasis.           
+                emphasis                                                        
+                                                            ÙDOQUOTEı specifies 
+              @ "quoting" of the labels used to identify    when to use         
+                image elements. Image elements consist of   "quotes" as an      
+                <IMG>s and <AREA>s Ù(the ALT attribute, or  emphasis            
+                the source image filename, is used as the   Ù(suggestion: you   
+                label)ı.                                    might want to add   
+                                                            FONT to DOQUOTE)ı   
+                                                            ÙQUOTESTRING1 and   
+                                                            QUOTESTRING2ı       
+                                                            specify the         
+                                                            characters to use   
+                                                            "as quotes"         
+                                                                                
+                                                            ÙPREA and POSTAı    
+                                                            specify the         
+                                                            characters used to  
+                                                            identify <A>nchors. 
+                                                                                
+                                                            ÙPREIMG and         
+                                                            POSTIMGı specify    
+                                                            the characters to   
+                                                            use as "quotes"     
+                                                            around image        
+                                                            labels.             
+                                                            ÙIMGSTRING_MAXı is  
+                                                            used to control how 
+                                                            to display an image 
+                                                            label.              
+                                                                                
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+LISTS      HTML_TXT supports nested lists -- with                               
+           successively deeper indentations used to                             
+           display nested lists. Supported lists include    ÙFLAGULı and        
+           <UL> and <MENU> unordered lists, <OL> ordered    ÙFLAGMENUı          
+           lists, <DL> definition lists, and                specifies the       
+           <BLOCKQUOTE>Ùboth-side indentedı blocks. You     bullets to use in   
+           can:                                             <UL> and <MENU>     
+                                                            (unordered) lists   
+              @ Change the bullet styles used in <UL> and                       
+                <MENU> lists -- with different bullets      ÙOL_NUMBERSı        
+                used at different nesting levels.           specifies the       
+                                                            "numbers" to use in 
+              @ Change the numbering style used (by         an <OL> (ordered)   
+                default) for <OL> lists. Note that HTML_    list.               
+                TXT will use TYPE and START attributes of                       
+                <OL> lists, and will use the VALUE                              
+                attribute (if specified) of a <LI>.                             
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+HEADINGS   HTML_TXT supports two methods of displaying                          
+           <Hn> headings (where n=1,2,..,7).                ÙPREH1 and POSTH1ı  
+                                                            specify the "quote" 
+             1. Headings can be "quoted"                    character to use    
+                                                            for <H1> headings,  
+             2. Headings can be used to create a            ÙPREHN and POSTHNı  
+                hierarchical outline.                       specify the "quote" 
+                                                            character to use    
+           A hierarchical outline refers to headers that    for other <Hn>      
+           identify a section. For example:                 headings            
+                                                            (n=2,..,7).         
+            I)Main section                                                      
+                 I.a)Subsection                             ÙHN_OUTLINEı        
+                 I.a.1) Sub subsection                      specifies at what   
+                 I.b)Sub section 2                          heading level to    
+                                                            start the           
+           In the above example: the I) and I.A) could be   hierarchical index  
+           used by HTML_TXT to display an <H2> and an <H3>  at Ù(i.e.; you      
+           heading (respectively)                           probably do not     
+                                                            want <H1> headings  
+                                                            to be the "top      
+                                                            level numbers" of   
+                                                            an index)ı          
+                                                                                
+                                                            HN_NUMBERS.n        
+                                                            (n=1,2,.,7)         
+                                                            specifies numbering 
+                                                            styles to use       
+                                                                                
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+TABLES     HTML_TXT supports tabluar display of nested                          
+           tables. Many (but not all) <TABLE> attributes    ÙIGNORE_WIDTHı can  
+           are supported, including:                        be used to suppress 
+                                                            use of WIDTH        
+              ~ Display of CAPTION, either at the top or    attributes, and to  
+                bottom of the table (depending on the       suppress            
+                value of the CAPTION ALIGN attribute).      auto-sizing of      
+                                                            columns.            
+              ~ WIDTH attributes of <TABLE> and <TD>. If                        
+                WIDTH is not specified, HTML_TXT will       ÙTABLE_BORDERı can  
+                "auto-size" columns, assigning more width   be used to write a  
+                to columns with wider content (that is,     table border by     
+                that would have longer lines of text if     default; it can     
+                horizontal space was not limited).          also be used to     
+                                                            override a Ùno      
+              ~ COLSPAN and ROWSPAN attributes are          borderı (a          
+                recognized. ROWSPAN is only partially       BORDER=0) attribute 
+                supported, and may not work properly in                         
+                complicated tables (tables with lots of     ÙNOSPANı can be     
+                ROWSPANs and COLSPANs).                     used to suppress    
+                                                            COLSPAN and ROWSPAN 
+              ~ ALIGN and VALIGN attributes of <TR> and     options.            
+                <TD>                                                            
+                                                            ÙSUPPRESS_EMPTY_    
+              ~ BORDER attribute of <TABLE> (either a       TABLEı can be used  
+                single or double line is drawn, depending   to enable, or       
+                on the value of the BORDER= attribute).     suppress, the       
+                                                            display of tables   
+              ~ FRAME="VOID" and RULES="NONE" attributes    rows.               
+                of <TABLE>(suppress outer and inner                             
+                border, respectively)                       ÙTABLEMODE,         
+                                                            TABLEMODE2, and     
+              ~ the ALIGN attribute of <TABLE> is           TABLEMAXNESTı can   
+                partially supported:                        be used to control  
+                                                            when (if ever) to   
+                 1. ALIGN=LEFT in a top level table (that   convert tables to   
+                    is not nested in another table)         lists.              
+                    enablers other text (and other tables)                      
+                    to flow around this table. Note that a  ÙTABLEFILLERı can   
+                    <BR CLEAR=LEFT > will break in this     be used to fill     
+                    flow (subsequent text is displayed      blank spaces in a   
+                    below the table)                        table with          
+                                                            something other     
+                 2. ALIGN=LEFT, RIGHT, or CENTER in a       then a space (say,  
+                    nested table will align the table       with a white box).  
+                    (relative to the table cell it is                           
+                    nested within). However, text flow      ÙTD_ADDı can be     
+                    will not be attempted -- when nested    used to adjust      
+                    tables are encountered, a paragraph     minimum cell widths 
+                    break (a new line) is always added.                         
+                                                            ÙTABLEVERT and      
+              ~ Empty tables, and empty rows, can be        TABLEHORIZı can be  
+                suppressed.                                 used to specify     
+                                                            characters to use   
+           Alternatively, HTML_TXT can display tables (or   when drawing        
+           highly nested tables) as nested lists.           horizontal and      
+                                                            vertical borders.   
+                                                            These are only used 
+                                                            if high ascii       
+                                                            characters are      
+                                                            suppressed (using   
+                                                            ÙLINEARTı);         
+                                                            otherwise, ascii    
+                                                            line-art characters 
+                                                            are used to draw    
+                                                            table borders.      
+                                                                                
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+FORMS      HTML_TXT displays FORM elements using several                        
+           tricks, including:                              @ ÙRADIOBOX and      
+                                                             RADIOBOXCHECKı can 
+              $ FILE and TEXT boxes are displayed as a       be used to specify 
+                Ùbracketed dottedı line.                     which characters   
+                                                             to use as Ùradio   
+              $ TEXTAREA boxes are displayed as a box        buttonsı           
+                surrounding default text.                                       
+                                                           @ ÙCHECKBOX and      
+              $ RADIO and CHECKBOX boxes are displayed       CHECKBOXCHECKı can 
+                using special characters (by default,        be used to specify 
+                high-ascii boxes are used)                   which characters   
+                                                             to use as          
+              $ SELECT (and it's OPTIONS) are displayed as   Ùcheckbox boxesı   
+                a bulleted list (with length controlled by                      
+                the SIZE option of SELECT) -- with special @ ÙSUBMITMARK1 and   
+                lines bracketing the top and bottom of the   SUBMITMARK2ı can   
+                list.                                        be used to specify 
+                                                             "quote" characters 
+              $ SUBMIT and RESET are displayed as "quoted"   for SUBMIT and     
+                strings.                                     RESET              
+                                                                                
+                                                           @ ÙTEXTMARK1,        
+                                                             TEXTMARK2, and     
+                                                             TEXTMARKı can be   
+                                                             used to specify    
+                                                             characters used to 
+                                                             construct          
+                                                             Ùbracketed dottedı 
+                                                             lines.             
+                                                                                
+                                                           @ ÙSHOWALLOPTSı can  
+                                                             be used to         
+                                                             suppress the SIZE  
+                                                             attribute of       
+                                                             SELECT lists (so   
+                                                             as to force        
+                                                             display of all     
+                                                             OPTIONs).          
+                                                                                
+                                                           @ ÙFORM_BRı is used  
+                                                             to force a new     
+                                                             line (a BR) after  
+                                                             the end of a FORM  
+                                                                                
+                                                                                
+  ___________________________________________________________________________   
+                                                                                
+                                                                                
+MISCELLANE                                                                      
+              @ <CENTER>, <DIV>, and <P ALIGN=LEFT, CENTER, or RIGHT> alignment 
+                instructions are recognized                                     
+                                                                                
+              @ ÙLINELENı can be used to specify the width of the text file (in 
+                characters). ÙCHARWIDTHı is used to map "pixels to character    
+                size" -- it is used when interpreting WIDTH attributes.         
+                                                                                
+              @ ÙNO_WORDWRAPı is used to suppress word wrapping in a paragraph. 
+                This yields an Ùinfinitely longı line, which is suitable for    
+                reading by a word processor. NO_WORDWRAP is ONLY applied to     
+                NON-TABLE lines, and to lines that are NOT CENTERed or RIGHT    
+                justified. In addition, indentations (at the beginning of these 
+                Ùinfinitely longı lines) will be replaced with tabs (which can  
+                be converted to INDENT characters by your word processor).      
+                                                                                
+              @ ÙTOOLONGWORDı controls whether to trim, or wrap, words that     
+                won't fit into a line (or into a cell of a table).              
+                                                                                
+              @ ÙLINEARTı controls whether to use high ascii characters to draw 
+                table borders, list bullets, and "quote characters". ÙLINK_     
+                DISPLAYı controls whether to create a "reference list" of URLs  
+                                                                                
+              @ ÙSUPPRESS_BLANKLINESı suppresses output of sequential blank     
+                lines.                                                          
+                                                                                
+              @ ÙDISPLAY_ERRORSı controls the amount of error reporting (of     
+                HTML syntax)                                                    
+                                                                                
+              @ HTML_TXT ignores embedded <SCRIPT>s and <APPLET>s               
+                                                                                
+                                                                                
+
+                     ______________________________________                     
+ 
+ IV)  Changing Parameters  
+ 
+As noted in the customization column of the above table, HTML_TXT contains a 
+number of user configurable parameters. 
+ 
+Although the default values of these parameters work well in most cases, you can 
+change them by editing HTML_TXT.CMD with your favorite text editor Ù(look for 
+the "user configurable parameters" section)ı 
+ 
+Alternatively, you can temporarily changes values using the /VAR command line 
+option. In fact, by specifying a PLIST=file.ext (in the /VAR section), you can 
+create custom instructions for sets of HTML documents. 
+ 
+The following lists the more important parameters. ÙOf particular interest are 
+the NOANSI, LINEART, TABLEMAXNEST, TABLEMODE2 and TOOLONGWORD parameters.ı 
+ 
+⁄ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒø
+≥                              General Controls                              ≥
+√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¥
+≥                                                                            ≥
+≥                                                                            ≥
+≥DOCAPS             Captialization is used to indicate these "logical and    ≥
+≥                   physical" elements                                       ≥
+≥                                                                            ≥
+≥DOULINE            Spaces are replaced with underscores to indicate these   ≥
+≥                   elements                                                 ≥
+≥                                                                            ≥
+≥DOQUOTE            "quotes" are used to indidate these elements.            ≥
+≥                                                                            ≥
+≥DISPLAY_ERRORS     Set level of error reporting (of html coding errors      ≥
+≥                   encountered)                                             ≥
+≥                                                                            ≥
+≥FORM_BR            If enabled a line BReak is added after the end of every  ≥
+≥                   FORM                                                     ≥
+≥                                                                            ≥
+≥HN_OUTLINE         Create a hierarchical outline from <HN> elements         ≥
+≥                                                                            ≥
+≥                   Controls how <IMG> labels are displayed. For example, you≥
+≥                   can display the ALT attribute, a [], a reference to a    ≥
+≥IMGSTRING_MAX      list (at the bottom of the document), or you can display ≥
+≥                   nothing (so that the text document ignores all IMG       ≥
+≥                   elements)                                                ≥
+≥                                                                            ≥
+≥IGNORE_WIDTH       Ignore WIDTH option in <TD> elements (and/or suppress    ≥
+≥                   auto-sizing)                                             ≥
+≥                                                                            ≥
+≥LINEART            Suppress use of high ascii (non keyboard) characters.    ≥
+≥                                                                            ≥
+≥                   controls whether or not URL information should be        ≥
+≥                   displayed (when displaying links). You can suppress      ≥
+≥LINK_DISPLAY       display of URL info, display a number into a reference   ≥
+≥                   list (that will be written to the end of the text output ≥
+≥                   file), or include the URL in the body of the text.       ≥
+≥                                                                            ≥
+≥NOANSI             Suppress use of ANSI screen controls.                    ≥
+≥                                                                            ≥
+≥SHOWALLOPTS        display all OPTIONS in a SELECT list.                    ≥
+≥                                                                            ≥
+≥SUPPRESS_          Suppress display of consecutive blank lines              ≥
+≥BLANKLINES                                                                  ≥
+≥                                                                            ≥
+≥TOOLONG WORD       trim long strings.                                       ≥
+≥                                                                            ≥
+≥                                                                            ≥
+√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¥
+≥  ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹  ≥
+≥                                                                            ≥
+≥                               Table Controls                               ≥
+≥                                                                            ≥
+≥Display of tables, in a tabular format, can be tricky. In particular, nested≥
+≥tables may tax the resources of your 80 character text display. HTML_TXT    ≥
+≥allows you to modify table specific display options, and convert tables into≥
+≥lists.                                                                      ≥
+√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¥
+≥                                                                            ≥
+≥                                                                            ≥
+≥SUPPRESS_EMPTY_TABLE suppress display of empty rows and empty tables        ≥
+≥                                                                            ≥
+≥TABLEMODE            Suppress "tabular" display of tables (use lists        ≥
+≥                     instead)                                               ≥
+≥                                                                            ≥
+≥TABLEMODE2           Suppress tabular display of Ùnestedı tables            ≥
+≥                                                                            ≥
+≥TD_ADD               Used to increase minimum cell widths (useful if narrow ≥
+≥                     cells are clipping short words)                        ≥
+≥                                                                            ≥
+≥TABLEBORDER          type of default table borders                          ≥
+≥                                                                            ≥
+≥                                                                            ≥
+√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¥
+≥  ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹  ≥
+≥                                                                            ≥
+≥                              Display Controls                              ≥
+≥                                                                            ≥
+≥Since it's NOT possible to use Ùitalicsı, BOLD, font styles, and other such ≥
+≥visual aids in a text file, HTML_TXT uses a few tricks instead.             ≥
+≥                                                                            ≥
+≥   @ Capitalization can be used -- by default, BOLD, STRONG and TYPEWRITER  ≥
+≥     emphasis is indicated with capitalization.                             ≥
+≥                                                                            ≥
+≥   @ Spaces can be replaced with underscores -- this is used to indicate    ≥
+≥     Underline_emphasis                                                     ≥
+≥                                                                            ≥
+≥   @ "quote strings" can be placed around emphasised strings.               ≥
+≥                                                                            ≥
+≥The last trick, the use of "quote strings", is frequently used by HTML_TXT; ≥
+≥with different sets of quote strings used for different emphasis. For       ≥
+≥example,                                                                    ≥
+≥                                                                            ≥
+≥  #  ÙEM and I emphasisı,                                                   ≥
+≥                                                                            ≥
+≥  #  Æ[9]anchorsØ,                                                          ≥
+≥                                                                            ≥
+≥  #  submit ÃSUBMITπ fields,                                                ≥
+≥                                                                            ≥
+≥  #  and < src="xxx" alt="in-line images"> in-line images                   ≥
+≥                                                                            ≥
+≥are indicated with unique sets of "quote strings".                          ≥
+≥                                                                            ≥
+√ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ¥
+≥                                                                            ≥
+≥CHECKBOX and         Character used as a CHECKBOX button, and a Ùselectedı  ≥
+≥CHECKBOXCHECK        CHECKBOX button                                        ≥
+≥                                                                            ≥
+≥FLAGMENU             bullets used in <MENU> lists.                          ≥
+≥                                                                            ≥
+≥FLAGUL               bullets used in <UL> lists.                            ≥
+≥                                                                            ≥
+≥FLAGSELECT and       character used to signify OPTION and a Ùselectedı      ≥
+≥FLAGSELECT2          OPITON (in a SELECT list), respectively                ≥
+≥                                                                            ≥
+≥HN_NUMBERS.n         characters to use when outlining <HN> headings         ≥
+≥Ù(n=1,2,..,7)ı                                                              ≥
+≥                                                                            ≥
+≥HRBIG                character used to make large <HR> bars.                ≥
+≥                                                                            ≥
+≥OL_NUMBERS           Characters (i.e.; roman numerals, numbers, or letters) ≥
+≥                     as bullets in <OL> (ordered lists)                     ≥
+≥                                                                            ≥
+≥PRETITLE and         Strings used before and after the doucment TITLE       ≥
+≥POSTTITLE                                                                   ≥
+≥                                                                            ≥
+≥PREA and             characters used before and after <A>ANCHORS            ≥
+≥POSTA                                                                       ≥
+≥                                                                            ≥
+≥PREH1 and            characters used before and after <H1>HEADINGS          ≥
+≥POSTH1                                                                      ≥
+≥                                                                            ≥
+≥PREHN and            characters used before and after <Hn1> (n>1) HEADINGS  ≥
+≥POSTHN                                                                      ≥
+≥                                                                            ≥
+≥PREIMG and           characters used before and after <IMGgt; NAMES OF      ≥
+≥POSTIMG              IN-LINE IMAGES                                         ≥
+≥                                                                            ≥
+≥QUOTESTRING1 and     characters used to Ùquoteı emphasize                   ≥
+≥QUOTESTRING2                                                                ≥
+≥                                                                            ≥
+≥RADIOBOX and         Character used as a RADIO button, and a Ùselectedı     ≥
+≥RADIOBOXCHECK        RADIO button                                           ≥
+≥                                                                            ≥
+≥SUBMITMARK1 and      characters used before and after a <SUBMIT> and <RESET>≥
+≥SUBMITMARK2          field                                                  ≥
+≥                                                                            ≥
+≥TEXTMARK1,           characters to use on the left, right, and middle of a  ≥
+≥TEXTMARK2,           FILE and TEXT field.                                   ≥
+≥and TEXTMARK                                                                ≥
+≥                                                                            ≥
+≥TABLEVERT and        characters to use as vertical, and horizontal, lines in≥
+≥TABLEHORIZ           tables (used only when lineart is suppressed)          ≥
+≥                                                                            ≥
+≥TABLEFILLER          character to used to fill empty spaces in tables and   ≥
+≥                     textbox's                                              ≥
+≥                                                                            ≥
+≥                                                                            ≥
+¿ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒŸ
+
+    ÙFor detailed descriptions of these parameters, see HTML_TXT.CMD.ı
+ 
+                     ______________________________________                     
+ 
+ V) Troubleshooting HTML_TXT 
+ 
+The following lists possible troubles you might have, and suggested solutions.
+
+     … HTML_TXT display all kinds of wierd garbage (such as $ and [ characters)
+ 
+         You don't have ANSI support installed. You should either install 
+         ANSI.SYS (for example, include a DEVICE=C:\OS2\MDOS\ANSI.SYS in your 
+         OS/2 CONFIG.SYS file), or set NOANSI=1 (in HTML_TXT.CMD).. 
+ 
+       Nested tables aren't displaying properly (this is especially likely to 
+     happen when running under Regina REXX for DOS). 
+ 
+         You can try using lists instead of tables -- set TABLEMAXNEST=0 (in 
+         HTML_TXT.CMD). . 
+ 
+     … Tables have unappealing characters used as vertical and horizontal lines
+ 
+         Either your output device (say, your printer) does not support 
+         high-ascii characters, or your code page is somewhat unusual. You can 
+         use standard characters (- and !) for line borders by setting LINEART=0 
+         (in HTML_TXT.CMD).. 
+ 
+     Ã Unappealing characters are being used as bullets and to "quote" text 
+     strings 
+ 
+         This can also occur if your code page is somewhat unusual. You can 
+         either change the various "display control parameters" (in HTML_
+         TXT.CMD), or you can set LINEART=-1; in which case some default, 
+         standard charactes (such as * and @ for bullets) will be used. . 
+ 
+     Õ Long words (such as URLs) are being lost.
+ 
+         You can change the "trimming" action to "word wrap", or to "extend 
+         beyond margins", by setting the TOOLONGWORD parameter. 
+ 
+     Œ The display of headings is not informative
+ 
+         You can set HN_OUTLINE=2, heading will then be displayed in an "outline 
+         format". You can even change the numbering style (say, 2.a.ii versus 
+         II.2.b) by changing the HN_NUMBERS.n parameters. 
+ 
+                     ______________________________________                     
+ 
+ VI) Disclaimer and Contact Information 
+ 
+  
+
+ 
+ VI.a) Disclaimer 
+ 
+  
+  
+   This is freeware that is to be used at your own risk -- the author
+   and any potentially affiliated institutions disclaim all responsibilties
+   for any consequence arising from the use, misuse, or abuse of
+   this software.
+  
+  
+   You may use this, or subsets of this program, as you see fit,
+   including for commercial  purposes; so long as  proper attribution
+   is made, and so long as such use does not preclude others from making
+   similar use of this code.
+  
+
+ 
+ VI.b) Contact Information 
+ 
+Do you have the Æ[10]latest version of HTML_TXTØ?
+ 
+If you find errors in this program, would like to make suggestions, or otherwise 
+wish to commment.... please contact Æ[11]Daniel HellersteinØ 
+ 
+      =============================== 
+          Reference List of URLs     
+      =============================== 
+ 
+[   1] #intro
+[   2] #cmdline
+[   3] #features
+[   4] #parameters
+[   5] #troubles
+[   6] #disclaim
+[   7] #parameters
+[   8] #features
+[   9] #display
+[  10] http://www.srehttp.org/apps/html_txt/
+[  11] mailto:danielh@econ.ag.gov
+ 
+      =============================== 
+          Reference List of IMGs     
+      =============================== 
+ 

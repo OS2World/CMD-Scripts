@@ -1,0 +1,75 @@
+*******************************************************************************
+                              BSmtp/2 v0.42
+        Analysis of BSmtp Files and sending of contained mails
+                           (c)2000 by IzzySoft
+*******************************************************************************
+                 description of the BSMTP file format
+*******************************************************************************
+
+Peter informed me that the BSMTP file format is not that well known as I
+expected - so I added this short description to the archive:
+
+BSmtp is an abbreviation of Batch SMTP and in short means to put one or more
+mails into one file to transport this in another mail. Doing this, a part of
+the expected SMTP session is saved together with the mail - namely all commands
+to be sent to the server the mail should be delivered to. To give you an
+example, I first have to introduce you a part of such a session. The first
+char in each line is NOT part of the session, but tells you wether the
+information is sent ('>') or received ('<'):
+
+    >HELO its.me.com
+    <250 OK
+    <
+    >MAIL FROM:<some.user@some.domain.org>
+    <250 Sender accepted
+    >RCPT TO:<another.guy@domain.org>
+    <250 mailbox OK
+    >RCPT TO:<yet_another_one@somewhere.else>
+    <250 user not local, will forward.
+    >DATA
+    <354 Socket to me
+
+In this example the client machine (that deliveres the mail) is named 'its' and
+belongs to the domain 'me.com'.Some user (MAIL FROM) sends a message to two
+recipients (RCPT TO) and delivers it to the server of 'domain.org'. He therefore
+opens a socket (not contained in the dialog above) and introduces himself (HELO).
+Up to here, this has to be done once per session (not per mail), so this is
+NOT part of the BSMTP file.
+
+But all other information (which have to be sent to the server - see the lines
+starting with '>' in the above example) have to be part of the BSMTP file. So
+our BSMTP file for the above example should look like this:
+
+    MAIL FROM:<some.user@some.domain.org>
+    RCPT TO:<another.guy@domain.org>
+    RCPT TO:<yet_another_one@somewhere.else>
+    DATA
+
+These are the informations belonging to the envelope of the mail; the mail
+itself follows after the keyword 'DATA' and is of almost no interest for the
+server (other than just to save it to disk), so we don't have to discuss it
+here. But we need to know how the server (and the client) recognize the end
+of one message. For this purpose serves a single '.' followed by a line break.
+
+For a BSmtp file we could now run into a problem: our file may contain some
+hundreds of messages. If now the first end with a dot both, the server and
+the client may assume the end of the whole thing! So for the transport, each
+single message in the BSmtp file ends with a double-dot ('..'), and the
+'transport message' ends as usual (with the single dot as described above).
+
+If my explanations were too much confusing, just take a look at the sample
+BSMTP file to verify - it's not that complicated! Not necessary to mention
+that the addresses used in that file are that real as John Doe is ;)
+
+Btw: everything in front of the first 'MAIL FROM' is ignored by BSmtp/2 since
+it obviously belongs to the transport message.
+
+
+So finally I hope I could express myself in an understandable way. If somebody
+feels he could have done better - I'm fine with this and would be glad if
+he/she sends me his version. If I like it better than mine I replace this text
+(he/she should give me permission to do so).
+
+
+Itzchak Rehberg
+izzysoft@buntspecht.de

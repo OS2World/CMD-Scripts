@@ -1,0 +1,65 @@
+<!-- This is a sample "BBS new user registragion"  prompt screen. 
+You can modify it as you see fit, but please take not of the
+comments about which lines should not be modified -->
+
+<HTML>
+<HEAD>
+<TITLE>BBS: New User Registration</TITLE>
+</HEAD>
+
+<body>
+<h2 align=center> BBS: New User Registration </h2>
+
+
+To use this BBS, you need to complete this registration
+form.  Upon filling it out, you can immediately start to use our
+bulletin board.
+
+
+<!-- Do NOT modify the next line -->
+<FORM ACTION="/bbsnewu" METHOD="GET">
+
+<!-- You can ask for username and password using whatever descriptive
+material you want, but be sure to user  'user' and 'pwd' as the NAME
+values -->
+
+<!-- The next fields are required, though you can rewrite the
+surrounding text -->
+<p> Please select a <STRONG>username </STRONG>(8 character maximum):
+<INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+<p> Enter your <STRONG>password: </STRONG>
+<INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8>,
+ (<EM>verify</EM>: <INPUT TYPE="password" NAME="pwd2"  SIZE=8 MAXLENGTH=8> )
+
+<p> What is your <STRONG>name: </STRONG><INPUT TYPE="text" NAME="realname"  SIZE=30 MAXLENGTH=50>
+<br> What is your <STRONG>e-mail address</STRONG>: <INPUT TYPE="text" NAME="email"  SIZE=30 MAXLENGTH=50>
+
+<hr width=50% align=center>
+<!--The following questions are strictly optional -->
+<br>
+Would you like to recieve regular e-mail notifications about new
+features of this BBS?
+<INPUT TYPE=RADIO NAME="sendnotes" VALUE="1"  checked>Yes |
+<INPUT TYPE=RADIO NAME="sendnotes" VALUE="0">no 
+
+<hr width=50% align=center>
+<br>
+
+
+<!-- It's a good idea to put a pointer to the "hello" screen
+for the bbs. -->
+<input type="hidden" name="hello" value="/bbshello.htm" >
+
+<!-- you can modify the VALUE field of this line -->
+<INPUT TYPE="submit" VALUE="submit your registration">
+
+</FORM>
+
+<!-- you might want to place a link to more descriptive material
+(such as upload/download policy, below here -->
+
+
+</BODY>
+</HTML>
+
+

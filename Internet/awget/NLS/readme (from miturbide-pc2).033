@@ -1,0 +1,406 @@
+D‚mon Auto WGet
+Id‚e originale et premiŠre version (C) 1998 Steve Trubachev
+Version finale (C) 1998-2003 Dmitry A.Steklenev
+
+CONTENU : 
+    BrŠve description
+    Utilitaires de t‚l‚chargement
+    Installation
+        Note importante
+    Comment ‡a fonctionne ?
+        Comment fournir les URL n‚cessaires au d‚mon ?
+        Utilisation en r‚seau
+        Quelques mots au sujet de NFTP
+    Configuration
+    Bugs connus
+    Programmes additionnels
+    Addiciels (Plugins)
+        Fichier de travail
+    · propos du programme
+    Remerciements particuliers
+
+BrŠve description
+
+    Le d‚mon Auto WGet est un set d'utilitaires gratuits pour piloter
+    GNU WGet ou autres utilitaires similaires servant au t‚l‚chargement
+    de fichiers. Si vous en avez assez de lancer WGet … la main pour
+    t‚l‚charger … coup s–r un lien copi‚ dans le presse-papiers depuis
+    NetScape (Ce que vous ˆtes fain‚ant(e) tout de mˆme ! :), le d‚mon
+    Auto WGet est exactement ce dont vous avez besoin. Le d‚mon Auto
+    WGet permet le t‚l‚chargement par Glisser/D‚poser sur un dossier
+    particulier. Le d‚mon Auto WGet propose une file de t‚l‚chargement
+    et permet la reprise des t‚l‚chargements qui ont ‚chou‚s pour une
+    raison ou pour une autre.
+
+Utilitaires de t‚l‚chargement
+
+    Pour le moment, seuls deux utilitaires sont support‚s : GNU WGet et
+    cURL. Pour que le d‚mon Auto WGet puisse fonctionner normalement,
+    vous devrez installer l'un ou l'autre de ces utilitaires.
+    Vous devez aussi vous assurer qu'ils fonctionnent correctement. Ils
+    doivent ˆtre plac‚s dans n'importe quel chemin figurant dans la
+    variable d'environnement PATH du fichier CONFIG.SYS.
+
+    La version OS/2 de GNU WGet peut ˆtre trouv‚e sur Hobbes :
+    http://hobbes.nmsu.edu/ (recherchez "wget")
+
+    cUrl for OS/2 est touvable sur son site WWW :
+    http://curl.haxx.se
+
+Installation
+  
+    Vous devrez d‚compresser le fichier d'archive dans un r‚pertoire
+    temporaire et lancer INSTALL.CMD qui vous posera quelques questions
+    et s'assurera que tout est OK. Le programme d'installation cr‚era
+    deux dossiers particuliers nomm‚s "· t‚l‚charger" et "D‚mon Auto WGet"
+    sur votre bureau. En outre, dans le r‚pertoire %ETC% un fichier de
+    configuration AWGET.CFG sera g‚n‚r‚ (ou mis … jour s'il ne s'agit
+    pas l… d'une toute premiŠre installation).
+
+    Pour que le d‚mon soit automatiquement d‚marr‚, un objet sera plac‚
+    dans le dossier "Lancement". Vous n'avez cependant pas besoin de
+    red‚marrer votre ordinateur aprŠs l'installation. Un d‚mon sera
+    lanc‚ imm‚diatement aprŠs l'installation.
+
+    Pour un fonctionnement normal, le d‚mon Auto WGet doit ˆtre install‚
+    sur n'importe quel systŠme de fichier supportant les noms de fichiers
+    longs et les attributs ‚tendus  (HPFS, HPFS386, JFS ou FAT32).
+
+Note importante
+
+    Cette version du d‚mon Auto WGet peut ˆtre install‚e par dessus une
+    version ant‚rieure … la version 1.6.1, mais c'est fortement
+    d‚conseill‚. Si vous utilisez une telle version, vous devrez la
+    d‚sinstaller en premier lieu, supprimer le fichier %ETC%\AWGET.CFG et,
+    seulement aprŠs, installer la nouvelle version.
+
+Comment ‡a fonctionne ?
+    
+    Le d‚mon Auto WGet v‚rifie en continu le contenu du dossier
+    "· t‚l‚charger" et de ses sous-dossiers. DŠs qu'un objet avec un
+    URL ("Uniform Resource Locator" ou lien vers une ressource internet)
+    apparaŒt dans l'un de ces dossiers, l'utilitaire de t‚l‚chargement
+    est lanc‚. Cet objet sera alors d‚plac‚ dans le dossier "En cours".
+    C'est le signal qu'un processus de t‚l‚chargement a d‚but‚.
+
+    Dans le cas d'un t‚l‚chargement interrompu ou d'un red‚marrage de
+    l'ordinateur, tous les objets du dossier "En cours" seront d‚plac‚s
+    dans l'endroit o— ils ‚taient pr‚c‚demment pour ˆtre trait‚s de
+    maniŠre usuelle.
+
+Comment fournir les URL n‚cessaires au d‚mon ?
+
+    PremiŠre m‚thode : lorsque vous voyez un URL, vous le prenez … l'aide
+    de la souris, vous le glissez et le d‚posez dans le dossier
+    "· t‚l‚charger" ou l'un de ses sous-dossiers. Cet URL sera alors
+    plac‚ dans la file de t‚l‚chargement.
+
+    DeuxiŠme m‚thode : vous cliquez avec le bouton droit de la souris sur
+    l'URL dans la fenˆtre de votre navigateur et s‚lectionnez "Copier
+    l'adresse du lien". Ensuite, vous cliquez avec le bouton droit de la
+    souris sur l'ic“ne du dossier "· t‚l‚charger" ou l'un de ses
+    sous-dossiers et s‚lectionnez "Collage...". Vous pouvez, si vous le
+    d‚sirez, donner un nouveau nom … l'objet, mais cela n'a pas
+    d'importance. Tout ce que vous aurez … faire ensuite sera d'appuyer
+    sur "Collage".
+
+    TroisiŠme m‚thode : vous cliquez avec le bouton droit de la souris sur
+    l'URL dans la fenˆtre de votre navigateur et s‚lectionnez "Copier
+    l'adresse du lien". Ensuite, vous ex‚cutez "Ajouter un URL" situ‚ dans
+    le dossier "Outils" du d‚mon Auto WGet. Si il n'y apparaŒt pas d‚j…,
+    collez l'URL dans le champ d'entr‚e propos‚ (en appuyant sur MAJ-INSER
+    ou en cliquant simultan‚ment sur les boutons gauche et droit de la
+    souris), puis appuyez sur "Ouverture". Un objet contenant l'URL choisi
+    sera alors cr‚‚ par d‚faut dans le dossier "· t‚l‚charger", mais vous
+    pouvez choisir un sous-r‚pertoire diff‚rent en utilisant la boŒte
+    de liste sous le champ d'entr‚e.
+
+    QuatriŠme m‚thode : vous pr‚parez un fichier ASCII avec une liste
+    d'URL (comme NFTP permet de faire), ex‚cutez "Ajouter un URL" et
+    placez le fichier ASCII dans le champ d'entr‚e propos‚. Dans le
+    dossier "· t‚l‚charger" sera cr‚‚ un groupe d'objets URL tir‚s de la
+    liste.
+
+    CinquiŠme m‚thode : vous devrez avoir l'option "USE_DESKTOP" du
+    fichier de configuration param‚tr‚ … "1". AprŠs ‡a, en utilisant la
+    m‚thode 1 ou la m‚thode 2, vous pourrez placer votre URL directement
+    sur le bureau. Le d‚mon les d‚placera dans le r‚pertoire
+    "· t‚l‚charger".
+
+    SixiŠme m‚thode : param‚trez … "1" l'option "CLIPBOARD_MONITOR" du
+    fichier de configuration et suivez exactement les instructions
+    d‚crites dans la troisiŠme m‚thode … une exception prŠs : la fenˆtre
+    "Ajouter un URL" apparaŒtra automatiquement aprŠs la copie de l'URL
+    vers le presse-papiers.
+
+Utilisation en r‚seau
+
+    Vous pouvez partager les dossiers de t‚l‚chargement et "· t‚l‚charger"
+    et utiliser un serveur avec un d‚mon Auto Wget install‚ comme centre
+    de t‚l‚chargement que ce soit depuis OS/2 ou depuis Windows.
+
+    Vous pouvez aussi ‚tablir une relation client-serveur entre deux
+    ordinateurs fonctionnant sous OS/2 o— le d‚mon Auto WGet est
+    install‚. L'exemple suivant avec deux ordinateurs, un SERVEUR et
+    un CLIENT de noms NetBIOS respectivement, vous montre comment faire.
+
+    Sur le SERVEUR, vous devez cr‚er un sous-dossier avec le nom de
+    votre choix dans le dossier "· t‚l‚charger". Par exemple, nous
+    l'appellerons "DepuisClient". Ajoutez-y un modŠle de configuration
+    additionnel awget.cfg (situ‚ dans "Outils") et ‚ditez ce fichier.
+    Vous devrez retirer les commentaires et modifier les valeurs des
+    paramŠtres suivants :
+
+       MESSAGE_DONE  = net send CLIENT "%M: %U"
+       MESSAGE_ERROR = net send CLIENT "%M: %U"
+
+    Par ailleurs, vous devrez assigner au CLIENT les droits de lecture et
+    d'‚criture sur le dossier. Dans le cas pr‚sent, nous partagerons le
+    dossier dans lequel le d‚mon Auto WGet a ‚t‚ install‚.
+
+    Maintenant, nous devons cr‚er le sous-dossier "VersServeur" dans le
+    dossier "· t‚l‚charger" de CLIENT et forcer la redirection du
+    t‚l‚chargement pour le dossier dans le fichier de configuration
+    additionnel :
+
+       REDIRECT_TO = \\server\awget\folders\· t‚l‚charger\DepuisClient
+
+    C'est fini ! Chaque URL d‚pos‚ dans le dossier "VersServeur" c“t‚
+    CLIENT sera d‚plac‚ dans le dossier "DepuisClient" c“t‚ SERVEUR
+    et les messages de fin de t‚l‚chargement seront renvoy‚s … CLIENT
+    par SERVEUR.
+
+    Remarque : la cr‚ation d'un sous-dossier particulier sur CLIENT
+    n'est pas ce qu'il y a de mieux, vous pouvez juste placer awget.cfg
+    dans le dossier "· t‚l‚charger".
+
+Quelques mots au sujet de NFTP
+
+    NFTP est un client FTP pour OS/2 bien connu. Il est d‚velopp‚ par
+    Sergey Ayukov. Il peut ˆtre trouv‚ sur http://www.ayukov.com. Pour
+    utiliser le d‚mon Auto WGet avec NFTP, il suffit juste de modifier
+    deux lignes dans le fichier nftp.ini (n'oubliez pas de retirer le
+    symbole de mise en remarque ";" en regard de ces lignes)
+
+        launch-wget = "L:\Chemin_vers_Auto_WGet\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    O— "L:\Chemin_vers_Auto_WGet" sera … remplacer par le chemin complet
+    du r‚pertoire dans le quel r‚side le d‚mon Auto WGet. Une fois ceci
+    fait, vous pouvez soumettre les requˆtes de t‚l‚chargement au d‚mon
+    en mettant en surbrillance les fichiers d‚sir‚s et en appuyant sur
+    Maj-W.
+
+Configuration
+
+    Le fichier principal de configuration (nomm‚ "AWGET.CFG") r‚side
+    dans le r‚pertoire %ETC% (pointant en g‚n‚ral vers \MPTN\ETC).
+    Il y a un objet dans le dossier "Outils" pour l'‚dition du
+    fichier de configuration.
+    Dans le corps du fichier de configuration, … chaque entr‚e sont
+    associ‚s une description et un commentaire.
+
+    Vous pouvez cr‚er des sous-dossiers dans le dossier "· t‚l‚charger"
+    et y placer leurs propres fichiers de configuration. Ils seront
+    utilis‚s pour remplacer certaines options du fichier de configuration
+    principal (fr‚quence de rafraŒchissement, r‚pertoire de t‚l‚chargement,
+    etc.).
+    Vous trouverez un modŠle pour la cr‚ation d'un tel fichier dans le
+    dossier "Outils".
+
+    N'oubliez pas de retirer le symbole de mise en remarque "#" en regard
+    de l'option que vous voulez activer/changer.
+
+Bugs connus
+
+    - Le d‚mon Auto WGet ne peut pas comprendre les objets URL cr‚‚s par
+      Netscape Communicator 4.61 sous OS/2 Warp 3.0. Vous pouvez utiliser
+      Netscape Navigator 2.02, Netscape Communicator 4.04 ou utiliser
+      l'objet "Ajouter un URL". Ou alors, utilisez OS/2 Warp 4.0 ou
+      sup‚rieur ! :)
+    - Ce logiciel est incompatible avec Vadim Yegorov alias VYX.
+
+Programmes additionnels
+
+    Pmpopup2.exe : PM Popup Version 1.0 de Ulrich Sturmberg.
+
+    Vous aurez en outre besoin de l'utilitaire standard TCP/IP "netstat"
+    pour la v‚rification de la connexion … l'Internet.
+
+Addiciels (Plugins)
+
+    Les addiciels (ou plugins - prononcez "Pleuguin'se") sont des
+    programmes permettant d'am‚liorer et d'‚tendre les fonctionnalit‚s du
+    d‚mon Auto WGet.
+    Deux types de modules sont support‚s - global et priv‚.
+    Un module global interagit directement avec le d‚mon et est
+    sp‚cialement con‡u pour affecter le processus de planification des
+    travaux.
+    Un module priv‚ interagit avec chaque processus d‚marr‚ et affecte son
+    ex‚cution.
+
+    Pour int‚grer un module addiciel, vous devrez ajouter sa description
+    dans le fichier de configuration principal AWGET.CFG. Vous utiliserez
+    la cl‚s GLOBAL_PLUGIN pour les modules globaux, et PRIVATE_PLUGIN pour
+    les modules priv‚s.
+
+    Exemple :
+
+     GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    Pour activer un nouveau module global, vous devez red‚marrer le d‚mon.
+    Les modules priv‚s, quant … eux, seront int‚gr‚s dŠs qu'un processus
+    de t‚l‚chargement d‚butera.
+
+    Quelques informations pour les d‚veloppeurs.
+
+    Un module addiciel est un processus d‚tach‚. Il est ex‚cut‚ par le
+    d‚mon (module global) ou par chacun des processus de t‚l‚chargement
+    (module priv‚).
+    Vous pouvez interagir avec le module via les flux standard
+    d'entr‚es/sorties. La communication se fait chaŒne de caractŠres aprŠs
+    chaŒne de caractŠres en utilisant des commandes sp‚ciales. Chaque
+    chaŒne contient une commande et une seule.
+    AprŠs avoir envoy‚ la chaŒne au module, l'ex‚cution du d‚mon est
+    stopp‚e jusqu'… ce qu'une r‚ponse soit rendue.
+    Si le fichier de configuration contient plus d'un module, les modules
+    seront trait‚ selon l'ordre de d‚finition.
+
+    Une commande est compos‚e d'un mot-cl‚ de quatre symboles et d'une
+    partie information optionnelle. Entre le mot cl‚ et l'information,
+    un symbole espace doit ˆtre ins‚r‚.
+
+    Seules deux r‚ponses de la part du module d'information sont
+    autoris‚es : DONE et FAIL.
+    DONE d‚note un succŠs de l'ex‚cution de la commande.
+    FAIL d‚note l'existence d'une erreur ou d'une restriction pour la
+    fonction demand‚e.
+    L'information retourn‚e avec DONE est affich‚e … l'‚cran.
+    L'information retourn‚e avec FAIL est affich‚e … l'‚cran et est ‚crite
+    dans le fichier de rapport d'erreur.
+
+    Un module peut envoyer une ou plusieurs commandes pour donner des
+    informations additionnelles (INFO, EVNT et ALRM) avant d'envoyer un
+    DONE ou un FAIL. L'information de la commande EVNT sera ‚crite dans
+    le fichier de rapport des ‚v‚nements, celle de ALRM dans le fichier de
+    rapport d'erreur.
+
+    Pour l'interaction avec les modules globaux, les commandes suivantes
+    pourront ˆtre utilis‚es : 
+
+      INIT awget_home_directory
+      Envoy‚ au moment de l'initialisation du d‚mon Auto WGet.
+      Toute r‚ponse de module sera ignor‚e.
+      
+      SCAN todo_directory
+      Envoy‚ avant que ne commence la v‚rification du bureau et du
+      dossier "· t‚l‚charger". Dans le cas d'une r‚ponse FAIL d'au moins
+      un module, la v‚rification sera ignor‚e.
+
+      CONF configuration_file
+      Envoy‚ aprŠs l'indication d'un changement du fichier de
+      configuration principal.
+      Toute r‚ponse de module sera ignor‚e.
+
+      SEXE job_file
+      Envoy‚ avant le lancement d'un processus de t‚l‚chargement.
+      Un module peut alors changer le contenu du fichier de travail.
+      Dans le cas d'une r‚ponse FAIL, le lancement sera report‚.
+
+      SEND job_file
+      Envoy‚ aprŠs la fin d'un processus de t‚l‚chargement.
+      Un module peut alors changer le contenu du fichier de travail.
+      Toute r‚ponse de module sera ignor‚e.
+
+      STOP 
+      Envoy‚ avant l'arrˆt du d‚mon. Le d‚mon n'attendra pas la r‚ponse
+      d'un module. Il s'arrˆtera imm‚diatement aprŠs avoir envoy‚
+      l'information … tous les modules.
+
+    Pour l'interaction avec les modules priv‚s, les commandes suivantes
+    pourront ˆtre utilis‚es : 
+
+      INIT job_file
+      Envoy‚ au moment de l'initialisation du t‚l‚chargement.
+      Un module peut alors changer le contenu du fichier de travail.
+      Dans le cas d'une r‚ponse FAIL, le processus sera interrompu.
+
+      DATA 
+      Envoy‚ avant que ne d‚bute la 'traduction' vers l'utilitaire de
+      t‚l‚chargement. AprŠs une r‚ponse DONE, le module doit changer
+      son mode d'entr‚e pour symbole. La 'traduction' se terminera par
+      '00'x.
+
+      STOP job_file
+      Envoy‚ avant l'arrˆt d'un processus de t‚l‚chargement. 
+      Un module peut alors changer le contenu du fichier de travail.
+      Toute r‚ponse de module sera ignor‚e.
+
+    Vous trouverez des exemples de modules addiciels dans le dossier
+    "Plugins" du d‚mon Auto WGet.
+
+Fichier de travail
+
+    Toutes les informations requises par le processus de t‚l‚chargement
+    peuvent lui ˆtre fournies par l'interm‚diaire d'un fichier de travail.
+    Le format d'un fichier de travail est comme celui d'un fichier de
+    configuration et contient un ensemble de paires - Cl‚ Valeur.
+    Les cl‚ suivantes sont utilis‚es : 
+
+      OBJECT                Nom de l'objet avec l'URL … traiter.
+      URL                   L'URL … t‚l‚charger.
+      DOWNLOAD              Dossier dans lequel le fichier sera plac‚
+                            aprŠs t‚l‚chargement.
+      MESSAGE_DONE          Commande de succŠs du t‚l‚chargement.	
+      MESSAGE_ERROR         Commande de t‚l‚chargement interrompu.
+      DOWNLOADS_UTILITY     Utilitaire de t‚l‚chargement.
+      DOWNLOADS_PARAMETERS  ParamŠtres de l'utilitaire de t‚l‚chargement.
+      DOWNLOADS_RC          Code de sortie de l'utilitaire de
+                            t‚l‚chargement.
+      DOWNLOADS_INFO        Dernier message de l'utilitaire de
+                            t‚l‚chargement.
+
+    Vous trouverez des exemples de lecture et d'‚criture de fichiers de
+    travail dans les fichiers awpglob.cmd et awppriv.cmd du dossier
+    "Plugins" du d‚mon Auto WGet.
+
+· propos du programme
+
+    Id‚e originale et premiŠre version (C) 1998 Steve Trubachev
+    Version finale (C) 1998-2003 Dmitry A.Steklenev
+
+    Vous pouvez envoyer vos commentaires … : glass@ptv.ru
+
+    Le D‚mon Auto WGet est un gratuiciel ; cela signifie que n'importe
+    qui est libre de l'utiliser et de le redistribuer sous certaines
+    conditions. Tout le travail est effectu‚ par moi-mˆme sur mon temps
+    libre.
+
+    Aussi, si vous trouvez le D‚mon Auto WGet utile ou s'il y a une
+    fonctionnalit‚ que vous voudriez voir impl‚ment‚e, veuillez faire
+    un don pour supporter mon ouvrage.
+
+    Vous pouvez faire un don pour le projet D‚mon Auto WGet sur le site
+    de BMT Micro : 
+
+    https://secure.bmtmicro.com/ECommerce-OffSite/12080000.html
+
+Remerciements particuliers …
+
+    - Yuri Efimoff <yuri.efimoff@multex.com> pour son assistance dans 
+      la traduction de tout ‡a en anglais.
+    - bj <bj@ksib.kemerovo.su> pour les exemples de codes
+      de traitement de raccourcis.
+    - Bernd Schemmer pour les "REXX Tips and Triks".
+    - Vladimir Zabrodsky pour les "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - Guillaume Gay <guillaume.gay@bigfoot.com> pour la traduction des
+      fichiers de messages et lisezmoi en fran‡ais.
+    - Che-ching Wu <ccwu@pie.com.tw> pour la traduction des
+      fichiers de messages et lisezmoi en chinois traditionnel.
+    - Bernd Giesen <Bernd.Giesen@t-online.de> pour la traduction des
+      fichiers de messages et lisezmoi en allemand.
+    - Jan-Erik Larka <j-erik.p@telia.com> pour la traduction des
+      fichiers de messages et lisezmoi en su‚dois.
+    - to Alfredo Fern ndez D¡az <alfredo@netropolis-si.com> pour la
+      traduction des fichiers de messages et lisezmoi en espagnol.

@@ -1,0 +1,314 @@
+Auto WGet Daemon
+Gran idea y primera versi¢n (C) 1998 Steve Trubachev
+Versi¢n actual (C) 1998-2003 Dmitry A.Steklenev
+
+CONTENIDO:
+    Descripci¢n corta
+    Utilidades de descarga
+    Instalaci¢n
+	Nota importante
+    C¢mo funciona
+	C¢mo pasar URLs a Auto WGet Daemon
+	Uso de Auto WGet Daemon en una red
+        Acerca de NFTP
+    Configuraci¢n
+    Fallos conocidos
+    Programas adicionales
+    Plugins
+        archivo de tareas
+    Acerca de
+    Agradeciminetos
+
+Descripci¢n corta
+
+    Auto WGet Daemon es una utilidad gratuita para controlar f cilmente
+    la descarga de archivos mediante GNU WGet o cualquier programa similar.
+    Si se ha cansado de buscra el enlace necesario en Netscape Navigator,
+    copiarlo al portapapeles e iniciar WGet a mano (­Dios! ¨es usted tan
+    vago? :), Auto WGet Daemon es lo que necesita. Auto WGet Daemon le permite
+    iniciar descargas simplemente arrastrando los enlacas a una carpeta
+    especial. Adem s, Auto WGet Daemon soporta colas de descarga y permite
+    reiniciar o continuar descargas en caso de fallos de alimentaci¢n u otras
+    inconveniencias.
+
+Utilidades de descarga
+    
+    En este momento s¢lo est n soportadas dos utilidades: GNU WGet y cURL.
+    Para el funcionamiento normal de Auto WGet Daemon debe usted instalar
+    alguna de ellas. Aseg£rese tambi‚n de que funcionan correctamente. Deben
+    residir en cualquier directorio de la variable PATH del CONFIG.SYS.
+
+    La version para OS/2 de GNU WGet est  en Hobbes:
+    http://http://hobbes.nmsu.edu/ (busque "wget")
+
+    cUrl para OS/2 se encuentra en la siguiente p gina:
+    http://curl.haxx.se
+
+Instalaci¢n
+  
+    Necesita descomprimir el archivo a cualquier directorio temporal e iniciar
+    INSTALL.CMD, responder un par de preguntas y todo deber¡a ir bien. El
+    programa de instalaci¢n crear  dos carpetas especiales llamadas "Pendientes"
+    y "Auto WGet daemon" en el Escritorio. Adem s se crear  (o actualizar , si
+    no es la primera instalaci¢n) en %ETC% el archivo de configuraci¢n
+    AWGET.CFG.
+
+    Se colocar  un objeto para iniciar el programa en la carpeta "Inicio". No
+    es necesario reiniciar el ordenador tras la instalaci¢n, Auto WGet Daemon
+    se iniciar  de forma autom tica al t‚rmino de ‚sta.
+
+    Para el funcionamiento normal de Auto WGet Daemon, ‚ste debe residir en
+    cualquier unidad que soporte nombres largos y atributos extendidos (HPFS,
+    HPFS386, JFS o FAT32).
+
+Nota importante
+
+    Esta versi¢n de Auto WGet Daemon puede instalarse sobre cualquier versi¢n
+    previa a la 1.6.1, pero se recomienda encarecidamente que NO lo haga. Si
+    utiliza una de estas versiones, desinst lela, borre el archivo
+    %ETC%\AWGET.CFG y s¢lo despu‚s de haber hecho eso instale la nueva versi¢n.
+
+C¢mo funciona
+    
+    Auto WGet daemon examina de forma continua el contenido de la carpeta
+    "Pendientes" y sus subcarpetas. Tan pronto como en ellas aparece un objeto
+    que contiene un URL, se inicia la utilidad de descarga elegida. En ese
+    momento, el objeto es trasladado a la carpeta "Activas", se¤al de que se
+    ha iniciado el programa de descarga.
+
+    En caso de que se interrumpa la descarga o se reinicie el ordenador, todos
+    los objetos de la carpeta "Activas" ser n movidos al lugar anterior y se
+    reiniciar  la descarga de forma normal.
+
+C¢mo pasar los URLs a Auto WGet Daemon
+
+    Primer m‚todo: cuando vea el URL, arr strelo con el rat¢n a la carpeta
+    "Pendientes" o cualquier subcarpeta. El URL se colocar  en la cola de
+    descargas.
+
+    Segundo m‚todo: haga clic con el segundo bot¢n del rat¢n en el URL en el
+    navegador y seleccione "Copiar la direcci¢n del enlace". Despu‚s haga
+    clic con el segundo bot¢n del rat¢n en la carpeta "Pendientes" o en una
+    subcarpeta y seleccione "Pegar". No importa si especifica un nombre para
+    el objeto o no. A continuaci¢n pulse "Pegar".
+
+    Tercer m‚todo: haga clic con el segundo bot¢n del rat¢n en el URL en el
+    navegador y seleccione "Copiar la direcci¢n del enlace". Despu‚s inicie
+    "A¤adir URL" en la carpeta "Herramientas y utilidades" de Auto WGet Daemon,
+    pegue el URL en el campo de entrada si no aparece all¡ (pulsando May+Ins o
+    ambos botones del rat¢n a la vez) y haga clic en "A¤adir". Se crear  un
+    objeto con el URL apropiado en la carpeta "Pendientes", a no ser que
+    escoja una subcarpeta diferente de la lista que se le presenta m s abajo.
+
+    Cuarto m‚todo: necesita preparar un archivo ASCII con una lista de URLs
+    (p. ejemplo NFTP hace esto), ejecutar "A¤adir URL" y poner en el campo de
+    entrada el nombre del archivo con la lista. Se crear  un grupo de objetos
+    URL en la carpeta "Pendientes"
+  
+    Quinto m‚todo: establezca en "1" el valor USE_DESKTOP del archivo de
+    configuraci¢n.  Tras esto, podr  colocar URLs directamente en el
+    Escritorio usando los dos primeros m‚todos. AWGet Daemon los mover  a la
+    carpeta "Pendientes".
+
+    Sexto m‚todo: establezca en "1" el valor CLIPBOARD_MONITOR del archivo de
+    configuraci¢n y haga lo mismo descrito en el tercer m‚todo, excepto que la
+    vantana "A¤adir URL" aparecer  autom ticamente tras copiar la direcci¢n URL
+    al portapapeles.
+
+Uso de Auto WGet Daemon en una red
+
+    Puede compartir las carpetas "Pendientes" y "Descargas" y utilizar el
+    servidor con Auto WGet instalado como centro de descargas com£n tanto
+    desde OS/2 como desde Windows.
+
+Acerca de NFTP
+
+    NFTP es un cliente FTP para OS/2 bien conocido, desarrollado actualmente
+    por Sergey Ayukov. Puede encontrarlo en http://www.ayukov.com. Para utilizar
+    Auto WGet Daemon con NFTP basta con alterar solamente dos l¡neas en nftp.ini
+    (no olvide descomentarlas retirando el punto y coma ";" inicial):
+
+        launch-wget = "x:\path_to_awget\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    Donde "x:\path_to_awget" ha de ser reemplazado con el directorio donde se
+    encuentre instalado Auto WGet Daemon. Habiendo hecho esto, puede pasar a
+    Auto WGet Daemon las peticiones de descarga marcando los archivos que desee
+    y pulsando Shift-W.
+
+Configuraci¢n
+
+    El archivo principal de configuraci¢n (llamado "AWGET.CFG") se encuentra
+    en el directorio %ETC% (que normalmente apunta a \MPTN\ETC). Hay un objeto
+    en la carpeta "Herramientas y utilidades" que le permite editar el archivo
+    de configuraci¢n. Cada entrada del archivo tiene comentarios en el cuerpo
+    del mismo explicando su utilizaci¢n.
+
+    Puede crear subcarpetas en la carpeta "Pendientes" y colocar all¡
+    archivos de configuraci¢n adicionales. De esta forma puede cambiar algunas
+    opciones respecto a su valor en el archivo de configuraci¢n principal
+    (horas de procesado de la carpeta, directorio de descarga, etc.). Hay un
+    modelo para crear este tipo de archivos en la carpeta "Herramientas y
+    utilidades".
+
+    No olvide descomentar las l¡neas que quiera cambiar eliminando el car cter
+    "#" del principio de las mismas.
+
+Fallos conocidos
+    
+    - Auto WGet Daemon no procesa correctamente los objetos URL creados por
+      Netscape Communicator 4.61 en OS/2 Warp 3.0. Utilice Netscape Navigator
+      2.02, Netscape Communicator 4.04 o env¡e los URls a trav‚s del objeto
+      "A¤adir URL". O mejro a£n : utilice OS/2 Warp 4.0 o superior :)
+    - Este programa es incompatible con Vadim Yegorov, aka VYX.
+
+Programas adicionales
+
+    Pmpopup2.exe Ulrich Sturmberg PM Popup Version 1.0
+
+    Adem s se necesita el programa netstat de la distribuci¢n de TCP/IP
+    est ndar para comprobar las conexiones por PPP.
+
+Plugins
+
+    Los Plugins son programas para mejorar y ampliar la funcionalidad de Auto 
+    WGet Daemon. Se soportan dos tipos de m¢dulos: globales y privados.
+    Los m¢dulos globales interact£an directamente con el daemon y est n
+    orientados especialmente a modificar el proceso de planificaci¢n de tareas.
+    Los m¢dulos privados interact£an con cada uno de los procesos de descarga
+    iniciados y pueden afectar a su ejecuci¢n.
+    
+    Para conectar uno de stos m¢dulos a Auto WGet Daemon debe a¤adir una
+    descripci¢n al archivo de configuraci¢n principal AWGET.CFG. Utilice la
+    clave GLOBAL_PLUGIN para m¢dulos globales y PRIVATE_PLUGIN para los
+    privados. Ejemplo:
+
+    GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    Para activar un nuevo m¢dulo global debe reiniciar Auto WGet daemon. Los
+    m¢dulos privados se activan en cuanto se inicia el proceso de descarga
+    correspondiente.
+
+    Aqu¡ est  la informaci¢n necesaria para los desarrolladores:
+
+    Cada m¢dulo conectable es un proceso desconectado del procesador de
+    mandatos (DETACH). Se ejecuta junto con el proceso principal de Auto
+    WGet Daemon (m¢dulo global) o con cada proceso de descarga particular
+    (m¢dulo privado). Puede d. interactuar con cada m¢dulo a trav‚s de
+    flujos de entrada y salida est ndar. La comunicaci¢n se efect£a mediante
+    cadenas, y consiste en mandatos especiales. Cada cadena contiene un solo
+    mandato. Tras enviar la cadena al m¢dulo, debe recibirse una respuesta
+    y se detendr  la ejecuci¢n de Auto WGet Daemon hasta que as¡ ocurra. Si
+    el archivo de configuraci¢n contiene m s de un m¢dulo, todos los m¢dulos
+    se servir n en el orden en que hayan sido definidos.
+
+    Cada mandato contiene una palabra clave de cuatro caracteres y una parte
+    opcional de informaci¢n. Entre las dos partes debe haber un espacio.
+
+    S¢lo se permiten dos respuestas de un m¢dulo: DONE y FAIL. DONE indica
+    que el mandato se ha llevado a cabo con ‚xito, FAIL que se ha producido
+    un error o hay alguna restricci¢n a la funci¢n que se intentaba ejecutar.
+    La informaci¢n que se env¡e junto a DONE es escrita en pantalla, la
+    enviada con FAIL se escriobe en pantalla y en los archivos de registro.
+
+    Un m¢dulo puede enviar m s mandatos para dar m s informaci¢n (INFO, EVNT 
+    y ALRM) antes de enviar DONE o FAIL. La informaci¢n precedida por
+    cualquiera, de estos mandatos se escribir  en pantalla. De igual forma,
+    la informaci¢n que acompa¤e a EVNT se almacenar  en el registro de eventos
+    y la que acompa¤e a ALRM en el de errores.
+
+    Se pueden utilizar los siguientes mandatos para comunicarse con los
+    m¢dulos globales:
+
+      INIT awget_home_directory
+      Se enviar  al inicializar Auto WGet Daemon. Se ignorar  cualquier
+      respuesta de los m¢dulos.
+      
+      SCAN todo_directory
+      Se enviar  antes de comenzar la exploraci¢n del Escritorio y la carpeta
+      "Pendientes". En caso de que al menos un m¢dulo responda FAIL, se
+      suspender  la exploraci¢n.
+
+      CONF configuration_file
+      Se enviar  cuando se indiquen cambios en el archivo principal de
+      configuraci¢n. Se ignorar  cualquier respuesta de los m¢dulos.
+
+      SEXE job_file
+      Se enviar  antes de iniciar un proceso de descarga. Cada m¢dulo puede
+      cambiar el contenido del archivo de tareas. En caso de que haya una
+      respuesta FAIL, se pospondr  el inicio de la descarga.
+
+      SEND job_file
+      Se enviar  despu‚s de terminar una descarga. Cada m¢dulo puede cambiar
+      el contenido del archivo de tareas. Se ignorar  cualquier respuesta de
+      los m¢dulos.
+
+      STOP 
+      Se enviar  antes de concluir Auto WGet Daemon y no se esperar  a que
+      responda ning£n m¢dulo. El programa concluir  despu‚s de enviar este
+      mandato a todos los m¢dulos.
+
+    Se pueden utilizar los siguientes mandatos para comunicarse con los
+    m¢dulos privados:
+
+      INIT job_file
+      Se enviar  en el momento de inicializar una descarga. El m¢dulo puede
+      cambiar el contenido del archivo de tareas. Si hay una repuesta FAIL
+      por parte de al menos un m¢dulo, se detendr  el proceso.
+
+      DATA 
+      Se enviar  antes de que empiece la interpretaci¢n de la salida del
+      programa de descarga. Despu‚s de la respuesta DONE, el m¢dulo debe
+      cambiar el modo de entrada a instrucciones simb¢licas. La
+      interpretaci¢n acabar  al encontrar un car cter '00'x.
+
+      STOP job_file
+      Se enviar  antes de concluir el proceso de descarga. El m¢dulo puede
+      cambiar el contenido del archivo de tareas. Se ignorar  cualquier
+      respuesta de los m¢dulos.
+
+    Pueden encontrarse ejemplos de m¢dulos globale y privados en el directorio
+     "Plugins" de Auto WGet daemon.
+
+El archivo de tareas
+
+    Toda la infromaci¢n necesaria para los procesos de descarga puede enviarse
+    a trav‚s de un archivo de tareas. El formato de este archivo es igual al
+    del archivo de configuraci¢n y consiste en pares clave - valor. Se utilizan
+    las siguientes claves:
+
+      OBJECT                Onjeto con un nombre de URL.
+      URL                   URL para descargar.
+      DOWNLOAD              Carpeta donde colocar el archivo que se est  descargando.
+      MESSAGE_DONE          Mandato si se completa la descarga.
+      MESSAGE_ERROR         Mandato si falla la descarga.
+      DOWNLOADS_UTILITY     Programa de descarga.
+      DOWNLOADS_PARAMETERS  Par metros para el programa de descarga.
+      DOWNLOADS_RC          C¢digo de salida del programa de descarga.
+      DOWNLOADS_INFO        éltimo mensaje del programa de descarga.
+
+    Pueden encontrarse ejemplos para leer y escribir archivos de tareas en los
+    archivos awpglob.cmd y awppriv.cmd del directorio "Plugins".
+
+Acerca de
+
+    Gran idea y primera versi¢n (C) 1998 Steve Trubachev
+    Versi¢n final (C) 1998-2002 Dmitry A.Steklenev
+
+    Env¡e sus comentarios a: glass@ptv.ru
+
+Agradecimientos
+
+    - a Yuri Efimoff <yuri.efimoff@multex.com> por su ayuda al traducir todo
+      esto al ingl‚s.
+    - a bj <bj@ksib.kemerovo.su> por sus ejemplos de c¢digo para procesar
+      accesos directos de Windows.
+    - a Bernd Schemmer por "REXX Tips and Triks".
+    - a Vladimir Zabrodsky por "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - a Guillaume Gay <guillaume.gay@bigfoot.com> por su traducci¢n al franc‚s.
+    - a Che-ching Wu <ccwu@pie.com.tw> por su traducci¢n al chino tradicional.
+    - a Bernd Giesen <Bernd.Giesen@t-online.de> por su traducci¢n al alem n.
+    - a Jan-Erik Larka <j-erik.p@telia.com> por su traducci¢n al sueco.
+    - a Alfredo Fern ndez D¡az <alfredo@netropolis-si.com> por su traducci¢n
+      al espa¤ol.

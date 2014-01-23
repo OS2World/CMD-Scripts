@@ -1,0 +1,6 @@
+LIBRARY ANIDLL
+DESCRIPTION 'A sample DLL for FeelX v1.1 to change status of WPS animation'
+EXPORTS
+   showToggle
+   animation
+

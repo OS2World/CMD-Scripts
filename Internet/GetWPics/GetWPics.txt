@@ -1,0 +1,23 @@
+
+GetWEBPics 0.2b (C) 1996 by Marco Pontello
+
+Just a little REXX script to download all pics from a specified WEB page.
+Simply indicate the URL of the page, and the script do the rest, ex:
+
+> getwpics http://www.images.com/space.html
+
+
+If you find this little piece of code usefull, write me an E-Mail! Thanx!
+
+N.B.
+This script need GetURL, from Derek J. Decker of Decker Automation. You can
+find GetURL at ftp://hobbes.nmsu.edu/os2/network/tcpip/GETURL.ZIP.
+
+Bye!
+
+Marco Pontello
+markopo@mbox.vol.it
+http://www.geocities.com/SiliconValley/3095
+
+
+

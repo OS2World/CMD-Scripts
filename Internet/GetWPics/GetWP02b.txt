@@ -1,0 +1,26 @@
+       OS/2 Upload Information Template for ftp-os2.nmsu.edu
+
+
+
+Archive Name: GetWP02b.ZIP
+
+Program Description: (keep it under 60 characters)
+
+Command Line Internet WWW Pics retriver
+
+Operating System Versions: OS/2 Warp
+
+Program Source: Rexx
+
+Replaces: GetWP01a.ZIP
+
+
+
+Your name: Marco Pontello
+
+Your email address: markopo@mbox.vol.it
+
+
+
+Proposed directory for placement: /os2/network/tcpip
+

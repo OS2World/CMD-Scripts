@@ -1,0 +1,38 @@
+14 Jan 2000. UpCGI A CGI script for uploading files 
+
+UpCGI is a simple OS/2 REXX cgi-bin script to process
+HTML uploads-- it provides support for an HTML FORM with 
+ENCTYPE="multi-part/form" and <INPUT TYPE="FILE"> elements. 
+
+The heart of UpCGI is the READ_MULTIPART procedure that is 
+contained in the UPCGI.CMD and in the UPFILE.CMD files.
+REXX Programmers familiar with CGI-BIN can use this procedure
+to implement their own upload interfaces. 
+
+UPCGI.CMD contains a simple example that can be used to 
+display how READ_MULTIPART works -- this example will echo 
+back the "parts" submitted (i.e.; the file that was uploaded). 
+You can easily modify it to do more.
+
+For non-programmers who need a simple upload-files-to-a-server
+utility,  UPFILE.CMD and UPFILE.HTM can be used. You should
+modify a few parameters in UPFILE.CMD, and you might want
+to customize UPFILE.HTM.
+
+Disclaimer:
+   The various components of UpCGI are freeware that are to be used at  
+   your own risk -- the author and any potentially affiliated 
+   institutions disclaim all responsibilties for any consequence arising from 
+   the use, misuse, or abuse of this software (or pieces of this software).
+
+   You may use this software as you see fit, including for 
+   commercial purposes; so long as  proper attribution
+   is made, and so long as such use does not in any way preclude 
+   others from making use of this software.
+
+  
+Contact:
+  Daniel Hellerstein
+  danielh@crosslink.net
+
+

@@ -1,0 +1,246 @@
+
+
+HL_News: A  Headline News Viewer (ver 2.1)
+By Tom Fredrickson
+6-12-1999
+
+
+Citation:
+   Headline News Viewer is based on  the  Deja News Reader  by
+   Eric Walker (ftp.highboskage.com/dnreader)
+
+   It also has some modified code taken from HTML_TXT by 
+   Daniel Hellerstein 
+
+Requirements:
+   Headline News requires the following dynamic link libraries (DLL):
+     REXXLIB.DLL and RXWIN30.DLL from Quercus Systems at
+        http://www.quercus-sys.com/files/rexxlib.zip
+     RXSOCK.DLL:  the IBM EWS RxSock library is usually installed with 
+           OS/2. If you do not have a copy of RXSOCK.DLL, you  can find it at
+           ftp.ibm.com/pub/pccbbs/os2_ews/rxsock.zip
+   These DLL library files must be in your LIBPATH (say, in x:\os2\dll, where
+      x: is your boot drive), or in the same directory as HL_NEWS.CMD
+
+Installation:
+  a)  Copy HL_NEWS.CMD, NEWS.CNF, sites_list, HL_install.CMD, Maint.CMD and 
+      possibly the aforementioned DLLs to one of your applications directory.
+        
+  b)  Run HL_install.CMD. This creates a LOADS and SITES subdirectories 
+      under this directory --   these are used for workspace.
+
+  Caution:
+       The  LOADS subdirectory is subject to bulk erasal -- 
+       do NOT put anything in LOADS that you want to keep!
+
+  c)  Start HL_News and select Maintenance, This will make a sites list.
+      The sites list file is used to select which sites to download articles from.
+      You may find this list rather long --  you can use the Maintenance
+      mode f4 option to remove sites that don't interest you. If you want to 
+      edit the sites list off line run Maint.CMD. 
+      
+
+Acknowlegements:
+
+  * I must give specal thanks to Daniel Hellerstein author of HTML_TXT
+    Without his help I would have probably not been able to get the text
+    formatted in such a nice way.
+
+Disclaimer:
+
+   This is freeware that is to be used at your own risk -- the 
+   author and any potentially affiliated persons disclaim all 
+   responsibilties for any consequence arising from the use, misuse, or abuse 
+   of this software.
+
+
+Running Headline News:
+
+   a)you must be online to run Headline News.
+
+   b)News.cnf contains several user-configurable variables: 
+    
+    (line_len) is used to set the length of lines used when displaying
+     articles (the default is 78).
+
+    (Hi_asc) is used used to turn on or off the display of hi ascii characters 
+     used in html markup. This may be turned on or off. 1=on 0=off
+
+       *some characters may still show as this only controls &#num;
+        elements of the markup.
+
+      (h_mark) is used to set the character used to display headings 
+      in a hierarchical outline.  the default is '' and will display
+      indented with the number; for example:
+            1)like so
+
+         *you may set this to display a specific character buy using D2C(num)
+          with num being a three digit number from 128 - 255
+
+      (savesdir) is used to save articles to a specific directory. 
+       This is a convenience, so that you don't have to enter a directory
+       when saving articles to file. 
+       For example:
+          savesdir=homedir||'\SAVE\' 
+       will save the file in the sub directory  named SAVE under 
+       the directory that HL_News is started from.
+
+          * To save the files in another directory enter the full path 
+            in quotes. 
+            For example:
+               'C:\tcpip\tmp\' 
+             will save the file in the tmp directory.
+
+
+    c) Set up the site list and Maintenance 
+             
+       You can edit the site list to choose which sites Headline List 
+       should obtain pages from.  This is done by using the Maintenance option 
+       of HL_News. Or Maint.cmd to edit the site list
+       offline.
+
+       With the Maintenance option, you can: 
+           1) Delete sites from the list.
+           2) Edit a list to change the title of a site.
+           3) Add a Horizontal rule or divider line to  sepertate groups of sites.
+           4) Add sites that you are interested in getting articles from.
+           5) Move a site to rearange the order of the list.
+
+  
+   d)Geting around
+
+              **Using the keyboard to  navigate in Headline News**
+       
+    Most of the windows have a help screen that can be read by pressing
+    the F1 key.
+    The ESC key will leave any current window.
+     
+    The first time that Headline News is run you must build a sites list. 
+       * Do this by pressing M key at the task selection screen.
+
+                    * The Task-Selection screen choices *
+
+    Pressing the I key at the Task selection screen (the HL_News
+    startup window) will display a list of sites.
+    You can then select which single site you would like to recieve
+    headlines and articles from.
+
+    Pressing D key at the main selection screen will generate
+    a list of all articles  available at all the sites. 
+       * Caution: It may take several minutes to create this list
+
+    Otherwise you may chose to browse an existing list by pressing 
+    the B key.
+
+    Pressing the M Key starts HL_News Maintenance, which lets you
+    build or edit a sites list.
+                          
+                            * HL_News Maintenance  *
+
+      The first time Maintenance is run it will make a sites list using all 
+      available sites and load it for editing.
+           Note that the sites are stored in the SITE_LIST file. 
+
+      
+        A list of sites is  then displayed. You select a site for editing by pressing
+          the <arrow> keys. The selected site is Heighlighted.
+               *    Use the PAGE_UP or PAGE_DOWN keys to go through the list.
+               *    The Ctrl+PageUp key will take you to the top of the list. 
+               *    The home key selects the site at the top of the list.
+               *    The Ctrl+PageDown key goes to the end of the list.
+               *    The end key selects the site at the end of the list.
+               *    Press f1 for help.
+               *    Press f2 to save the site list and exit maintenance. 
+               *    press f3 to exit without saving the site list.
+               *    Press f4 to delete the selected site from the list.
+
+        Edit site name
+             Press f5 to edit this brings up a window that allows editing of the 
+             site name. 
+               *  Press enter to keep the name or enter a new name.
+
+        Add sites
+             Press f6 to add sites to the site list if no available site can be 
+             added a window will popup otherwise a list of sites will be 
+             displayed. Sites are selected in the same fashion as before.    
+
+               *   Press enter key to add the selected site to a temporary list. 
+
+               *   After all the desired sites have been entered in the temporary
+                   list press f3 to return and insert them into site list.
+
+            1) The sites in the temporary list will be displayed on the bottom 
+                 line of the screen one at a time until they have all been 
+                 added.
+
+                     *   Press f7 to insert the site on the line below the 
+                          selected site.
+
+                     *   Press f8 to insert the site on the line above the 
+                          selected site
+
+         When no sites are in the temporary list to be added then the <HR>
+            horizontal rule is displayed on the bottom line of the screen.
+
+                    *     Press f7 to add horizontal rules to the list -- The 
+                          horizontal rule will be written below the selected 
+                          site.
+
+         Move a site in the list By selecting that site and then press f9 key. 
+          The site will be removed from the list and displayed on the bottom 
+           line of the the screen.  
+
+                     *   Press f7 to insert the site on the line below the 
+                          selected site.
+
+                     *   Press f8 to insert the site on the line above the 
+                          selected site
+
+                                 
+
+
+                                        * Selecting Articles *
+
+    A list of articles is displayed. You should then select an article
+    by pressing the corresponding letter key (A-V).
+        *    Use the PAGE_UP or PAGE_DOWN keys to go through the list.
+        *    The HOME key will take you to the top of the list. 
+        *    The END key goes to the end of the list.
+       
+   After selecting the letter(A-V) key, that matches the article you wish  
+   to view, Headline News will download, format, and display the text of 
+   the article.
+     
+        *  If the text is displayed off the screen, you can use the LEFT 
+           and RIGHT arrow keys to scroll.
+ 
+        *  The PAGE_UP PAGE_DOWN HOME and END keys are all active.
+       
+   The article may be saved by pressing the ALT-S key. This displays
+   a window to enter the directory where the file is to be placed along, 
+   with the name of the file.
+  
+          * The default directory can be set by modifying the savesdir 
+            parameter (in News.cnf)
+
+          * Caution: 
+                The cursor is at the left end of the line -- so it must be
+                moved to the proper location to before typing in the name
+                (you can use the END key). 
+       
+   After the article has been read the ESC key will bring the selection list 
+   screen back up.
+       
+   To exit Headline News press ESC until a window pop's up asking if you 
+   wish to exit  (pressing the Y key will exit).
+
+Caveats: 
+     From time to time the news servers will move or discontinue an 
+     article. If errors about (text start or text end) get frequent try 
+     downloading a new list of articles.
+
+          * At any time a site may decide to reformat their web pages
+            making this program inoperable until changes are made.
+
+[end of file] 
+

@@ -1,0 +1,88 @@
+<html> <head> 
+<meta name="description" content="A sample of  how to use SRE-http's BBS
+add-on procedure to upload a file">
+
+<Title> Sample File Uploader for BBS </title></head>
+
+<body>
+
+<h3> <A NAME="top">Uploading a file to the BBS </A></h3>
+
+If you are using Netscape 2.01 (and above), or some other browser 
+that supports the <code>type=file</code> FORM attribute,
+you can use this form to upload files to the BBS.<br>
+<blockquote>
+<em> Do you want to check if </em> a copy of this
+   this file <A HREF="#checkfile">already exists in our incoming directory</A>?
+</blockquote>
+
+<hr align=center width=40%>
+
+<FORM enctype="multipart/form-data" ACTION="/bbsup" METHOD="post">
+Send this file
+<INPUT TYPE="file"  name="userfile" value=" "><BR>
+<p>
+<code>What name should we use for this file:</code>
+<INPUT TYPE="text" name="userfile" value=" "
+ size=20 maxlength=60> </code>
+<ul>
+<li>If you do not enter a name, <em>your "local file name" will be used! </em>
+<li>You can include path information in the file name 
+</ul>
+<p>
+Please enter a brief description of this file:<br>
+<TEXTAREA NAME=description ROWS=3 COLS=40></TEXTAREA>
+
+
+<p> <em> and don't forget your </em> <b>username</b>
+<INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>  <em>and</em>
+<STRONG>password </STRONG><INPUT TYPE="password" NAME="pwd"  SIZE=10 MAXLENGTH=10>
+<br>
+<INPUT TYPE="submit" VALUE="upload the file">
+
+</FORM>
+<p>
+<HR>
+<Pre>
+
+
+
+
+
+
+</pre>
+<hr>
+<A NAME="checkfile"><br></A>
+<h3> Check incoming directory for a file </h3>
+To avoid needless uploads, you can check the incoming directory
+to see if the file name already exists.
+<p>
+<FORM  ACTION="/bbsup" METHOD="get">
+Check for this file:
+
+<!-- Do NOT modify the NAME field of this next line -->
+<INPUT TYPE="file"  name="checkfile1" value=" "><BR>
+
+<p>
+
+<code>or, check for this alternative name:</code>
+<!-- Do NOT modify the NAME field of this next line -->
+<INPUT TYPE="text" name="checkfile2" value=" " size=30 maxlength=60> </code>
+
+<ul>
+<li>You can include path information in the file name 
+
+<li> <em> and don't forget your </em> <b>username</b>
+<INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>  <em>and</em>
+<STRONG>password </STRONG><INPUT TYPE="password" NAME="pwd"  SIZE=10 MAXLENGTH=10>
+<br>
+
+
+</ul>
+
+<INPUT TYPE="submit" VALUE="Does this file already exist?">
+<p>
+<a href="#top">Return to top of form</a>
+</body>
+</html>
+

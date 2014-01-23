@@ -1,0 +1,8 @@
+This program produces a set of html pages from a netscape 4.xx bookmark file. 
+Use the generated myindex.htm as the default browser homepage and you always 
+have quick access to your bookmarks. 
+(c) 1997-2002 by Jens M Schlatter, Version 2.1.
+
+Usage: Run it in the directory where you bookmarks are. It generates a set of html files, 
+one for each bookmark folder. The main file is myindex.htm.
+

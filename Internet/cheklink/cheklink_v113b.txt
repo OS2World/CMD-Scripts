@@ -1,0 +1,30 @@
+            Archive Name: CHEKLINK_V113b.ZIP
+       Short Description: CheckLink ver 1.13b:Create and traverse, Web-Trees.
+         Long Description:
+CheckLink is a free, multi-threaded, socket aware utility used to create,
+verify, traverse, and index a web-tree; where "web-tree" is defined as all the 
+URLs (in-line images, anchors,etc.) that are referenced in a base HTML 
+document, and in html documents reachable from this base. 
+CheckLink is written in REXX, and can be run as an addon for the SRE-http 
+web-server, or as a standalone program.
+
+      Proposed directory
+           for placement:  /pub/os2/apps/internet/www/util:
+
+               Your name:  Daniel Hellerstein   
+           Email address:  danielh@crosslink.net
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.srehttp.org/apps/cheklink/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 3.0
+ Additional requirements: REXXLIB.DLL (available seperately)
+                Replaces: CHEKLINK.ZIP (this is a major upgrade)
+
+
+
+

@@ -1,0 +1,50 @@
+Real Audio Setup for WebExplorer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+These scripts are the easiest and cleanest way of setting up Real Audio 2.0.
+Please follow all instructions, and replace displayed directories with your 
+own.  Be sure to have DOS TCP/IP and Win-OS/2 sound card _correctly_ setup.
+
+0. Install Real Audio 2.0 for Win 3.1 in Win-OS/2 ;-)
+
+1. Run makeobj.cmd followed by the FULL path name to and including
+   raplayer.exe.  Set Win-OS/2 settings like you want them and hide the
+   object wherever you want, if won't matter at all.
+
+   [G:\temp>] makeobj g:\raplayer\raplayer.exe
+
+2. Be sure you have WebEx external files setup like this in explore.ini:
+
+   [advanced]
+   ; advanced user settings - edit with care!
+   ;
+   ; mailcap= specifies full path to user mailcap file
+   ; format is:  mime/type; program_name params %s
+   ; example:    image/jpeg; jview -r %s
+   ; no wildcards allowed, no piping, no unix commands
+   mailcap=g:\tcpip\etc\explore.cap
+   ; extmap= specifies full path to user extension map file
+   ; format is:  mime/type     extension_list
+   ; example:    image/jpeg    jpg jpeg jpe
+   extmap=g:\tcpip\etc\explore.ext
+
+3. In the 'mailcap' file you have specified, add a line like this:
+
+   audio/x-pn-realaudio; G:\RAPLAYER\raplay.cmd %s
+
+4. In the 'extmap' file you have specified, add this exact line:
+
+   audio/x-pn-realaudio   ra ram
+
+5. Listen to Real Audio pages!!
+
+Notes
+~~~~~
+Setup Real Audio Player object to run in Win-OS/2 enhanced mode to fix "out
+of memory" errors.
+
+Clicking on a Real Audio link while Real Audio Player object is opened will
+only bring foreground the Real Audio Player.  When that happens, go "Open
+File..." and choose the immediate "-random-.ram" or "-random-.ra" file you
+see.
+
+(C) Copyright 1996  Samuel Audet  <guardia@cam.org>

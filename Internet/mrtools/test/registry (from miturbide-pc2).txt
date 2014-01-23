@@ -1,0 +1,142 @@
+;-- New node --
+Number:    1
+Type:      1
+Name:      "/"
+1st child: 2
+
+;-- New node --
+Number:    2
+Type:      1
+Name:      "Users"
+Parent:    1
+Sibling:   3
+
+;-- New node --
+Number:    3
+Type:      1
+Name:      "Common"
+Parent:    1
+Sibling:   5
+1st child: 4
+
+;-- New node --
+Number:    4
+Type:      1
+Name:      "Profiles"
+Parent:    3
+1st child: 7
+2nd child: 6
+
+;-- New node --
+Number:    5
+Type:      1
+Name:      "Version Registry"
+Parent:    1
+Sibling:   8
+
+;-- New node --
+Number:    6
+Type:      17
+Name:      "CurrentProfile"
+Value:     "Alfredo"
+Parent:    4
+Sibling:   9
+
+;-- New node --
+Number:    7
+Type:      1
+Name:      "Alfredo"
+Parent:    4
+2nd child: 10
+
+;-- New node --
+Number:    8
+Type:      1
+Name:      "Private Arenas"
+Parent:    1
+
+;-- New node --
+Number:    9
+Type:      18
+Name:      "AutoStartWithLast"
+Value:     x2c(00000000)
+Parent:    4
+Sibling:   11
+
+;-- New node --
+Number:    10
+Type:      17
+Name:      "directory"
+Value:     "E:\configs\Mozilla\Profiles\Alfredo"
+Parent:    7
+Sibling:   12
+
+;-- New node --
+Number:    11
+Type:      17
+Name:      "HavePregInfo"
+Value:     ""
+Parent:    4
+Sibling:   13
+
+;-- New node --
+Number:    12
+Type:      19
+Name:      "LastModTime"
+Value:     x2c(72330EEC17010000)
+Parent:    7
+Sibling:   14
+
+;-- New node --
+Number:    13
+Type:      17
+Name:      "Version"
+Value:     "1.0"
+Parent:    4
+
+;-- New node --
+Number:    14
+Type:      19
+Name:      "CreationTime"
+Value:     x2c(FFCF8FE017010000)
+Parent:    7
+Sibling:   15
+
+;-- New node --
+Number:    15
+Type:      17
+Name:      "NCHavePregInfo"
+Value:     ""
+Parent:    7
+Sibling:   16
+
+;-- New node --
+Number:    16
+Type:      17
+Name:      "NCEmailAddress"
+Value:     ""
+Parent:    7
+Sibling:   17
+
+;-- New node --
+Number:    17
+Type:      17
+Name:      "NCServiceDenial"
+Value:     ""
+Parent:    7
+Sibling:   18
+
+;-- New node --
+Number:    18
+Type:      17
+Name:      "NCProfileName"
+Value:     ""
+Parent:    7
+Sibling:   19
+
+;-- New node --
+Number:    19
+Type:      17
+Name:      "migrated"
+Value:     "yes"
+Parent:    7

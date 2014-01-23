@@ -1,0 +1,100 @@
+                     ******************************
+                     *                            *
+                     *         UrlGet 1.0         *
+                     * copyright 1997 Ed Blackman *
+                     *                            *
+                     ******************************
+
+A Rexx script that scans text files for URLs, creating URL objects in a
+folder on your desktop.
+
+*************************************************************************
+
+Requirements
+============
+
+- OS/2 Warp 3 or Warp 4
+    - use under Warp 3 additionally requires WebExplorer to be installed
+- Rexx support installed
+
+*************************************************************************
+
+Setup
+=====
+
+Run install.cmd and answer the questions asked.
+
+Copy urlget.cmd to a directory on your PATH.
+
+Setup news, mail, etc, programs to be able to call urlget with the name
+of the file containing the URL you want to get, or call urlget manually
+from the command line.
+
+If you wish to modify installation parameters or uninstall URLGet, run
+install.cmd again.
+
+*************************************************************************
+
+Registration
+============
+
+None.  If you like it, tell others, and tell me.  If you have ideas for
+enhancements, tell me.  See "Contacting the Author" below for my email
+address.
+
+**********************************************************************
+
+License agreement
+=================
+
+The script files (urlget.cmd and install.cmd) and this file (readme) are
+the copyrighted property of Ed Blackman.
+
+1. You may use this software, for free, as much as you please,
+2. You may copy and redistribute this software, as long as the
+   recipient receives urlgetxx.zip (where xx are numeric digits
+   representing the version) unchanged, and there is no cost
+   to the recipient, other than the cost of providing media and
+   transmission.
+3. You may modify this software for personal use or for
+   distribution, provided that you also meet all of the following
+   conditions:
+   a) You must not remove the copyright notice, the acknowledgements,
+      or the change log.
+   b) You must cause the modified files to carry prominent notices
+      stating that you changed the files and the date of any change.
+   c) You must not charge a fee for the modified program, or the
+      licensing thereof, other than the cost of providing media and
+      transmission.
+
+4. You may redistribute this software under other conditions than
+   those above if, and only if, you have a personal agreement with
+   Ed Blackman, to do so (See "Contacting the Author" below.)
+
+5. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+   FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT
+   WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+   PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND,
+   EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+   PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+   PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME
+   THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+6. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+   WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+   REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR
+   DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL
+   DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM
+   (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED
+   INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE
+   OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH
+   HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+   DAMAGES.
+
+**********************************************************************
+
+Contacting the Author
+=====================
+
+e-mail:     edgewood@pobox.com

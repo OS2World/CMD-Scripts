@@ -1,0 +1,61 @@
+Hello Everybody!
+
+I have had Real Audio working under WARP CONNECT for about a week now
+and I thought I would share my success with everyone.  I previously
+tried to make it work with the instructions in the RA_WEBPK.ZIP file (
+the one that needs the FEELIX and OBJST programs ), but I thought that
+although some got it to work ( I didn't bother ), it was still too
+complicated ...  after all this is OS/2!!  So here is my custom
+solution:  Please enjoy it as much as I have and let me know how it
+works for you.  Also I am just about finished with a REXX program that
+will play your favorite Real Audio radio station via a LIST BOX ...  you
+point at a predefined station and double click.  The advantage of this
+code it that you DO NOT need to have WEBEX running at all, just be
+connected!  I'll upload it as soon as it is ready.  Good luck!  Skip
+
+1) Download and install the Real Audio client ( version 1.0 or 2.0 )
+
+2) Find your explore.ini file ( should be in \mptn\etc if WARP CONNECT or
+                                             \tcpip\etc if regular WARP )
+
+   Edit the explore.ini so that the advanced section looks like this -
+
+     [advanced]
+     ; advanced user settings - edit with care!
+     ;
+     ; mailcap= specifies full path to user mailcap file
+     ; format is:  mime/type; program_name params %s
+     ; example:    image/jpeg; jview -r %s
+     ; no wildcards allowed, no piping, no unix commands
+     mailcap=c:\tcpip\etc\mailcap.cap
+     ; extmap= specifies full path to user extension map file
+     ; format is:  mime/type     extension_list
+     ; example:    image/jpeg    jpg jpeg jpe
+     extmap=c:\tcpip\etc\extmap.ext
+
+   The two key lines are the mailcap= and extmap= ones.
+
+3) Create the mailcap.cap and extmap.ext files.  They must be located
+   in the directories pointed to by the above advanced settings in the
+   explore.ini file.
+
+   mailcap.cap should contain the following single line:
+
+audio/x-pn-realaudio; c:\raplayer\ra2.cmd %s
+
+   extmap.ext should contain the following single line:
+
+audio/x-pn-realaudio ram ra
+
+   The mailcap.cap file is how to add an external viewer to the WebEx
+   and the extmap.ext sets up the extension association.
+
+4) Place the REXX program ( RA2.CMD ) in the c:\raplayer
+   directory.  If you boot from other than C: then you will need
+   to adjust the hard coded 'C:' references in all of the files above
+   and below, otherwise I don't believe you will have to modify any-
+   thing to get it working.  The REXX code will put a Real Audio icon
+   on your Desktop.  After you have done all this, then just dial in
+   to the Internet and go find a Real Audio site like www.audionet.com
+   and start listening.
+

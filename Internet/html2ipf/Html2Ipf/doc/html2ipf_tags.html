@@ -1,0 +1,180 @@
+<HTML SUBLINKS="*">
+<HEAD>
+<TITLE>HTML2IPF - Recognised HTML tags</TITLE>
+</HEAD>
+<BODY>
+<P>
+HTML2IPF will recognise a limited number of HTML tags; basicaly this is a subset of
+HTML 2.0. However, keep in mind that I never seen an complete HTML 2.0 specification,
+so maybe I`m somewhere wrong :-)<BR>
+If you think HTML2IPF is ignoring some tags, you can enable debug logging (-D+), in this
+state HTML2IPF will track all unrecognised tags into a file named HTML2IPF.LOG.<BR>
+So, what features of HTML documents are kept (basically) intact in the resulting INF book?
+Here is a list of HTML tags supported by HTML2IPF (however, keep in mind that some of them
+are simply ignored):
+</P>
+<DL>
+<TT><DT>&lt;HTML&gt; &amp; &lt;/HTML&gt;</TT>
+<DD>This tag is not required by HTML2IPF although it is a good practice to put it in every document.
+Note that like any normal browser (;-) HTML2IPF has some HTML extensions; notably to this tag:
+<UL>
+<LI>&lt;HTML HIDDEN&gt; - if you specify this attribute, the title of this document will 
+not appear in book contents. You cannot hide the index file, this keyword is ignored in such
+cases. This document also contains such a section, if you`re reading it with VIEW.EXE, try finding it ;-)
+<LI>&lt;HTML SUBLINKS="..."&gt; - this attribute will specify the first characters for all
+sublinks (A HREF=..`s) found in this HTML file which will be compiled as subheadings, i.e.
+their title will appear when you`ll expand the [+] sign before current HTML title in the book
+contents tree. Processing of all links which do not fit at least one of given masks (you can
+specify any number of SUBLINKS= tags) will be delayed until a document with a suitable
+SUBLINKS= attribute (or without any such attribute) will be encountered, and placed as its
+sublinks. This especially can be useful when you have to split a large HTML file into
+sections (see <A HREF="html2ipf_tips.html">tips`n`tricks</A> section). If some links are
+still unresolved after processing all files, they are resolved at heading level 1 mandatory.
+Note that the HIDDEN keyword automatically sets SUBLINKS to '*' (impossible filename), so
+that any sublinks will be placed as subheadings after next suitable chapter.
+<LI>&lt;HTML NOSUBLINKS="..."&gt; - this is exactly the inverse of the previous subtag,
+it defines the first characters of links which must NOT be included as subheadings to the
+current file. The NOSUBLINKS subtag has priority over the SUBLINKS. For example, the<BR>
+<TT>
+&lt;HTML SUBLINKS="java.awt." NOSUBLINKS="java.awt.image." NOSUBLINKS="java.awt.peer."&gt;
+</TT><BR>
+tag tells HTML2IPF to compile current file, then to include those links referenced in
+this file as subheadings, which begins with "java.awt." but not with either "java.awt.image."
+or "java.awt.peer.".
+</UL>
+<TT><DT>&lt;META ...&gt;</TT>
+<DD>This tag is simply ignored
+<TT><DT>&lt;HEAD&gt; &amp; &lt;/HEAD&gt;</TT>
+<TT><DT>&lt;TITLE&gt; &amp; &lt;/TITLE&gt;</TT>
+<DD>The text marked as the title of the first (INDEX) HTML file is taken as overall document name.
+<TT><DT>&lt;BODY ...&gt; &amp; &lt;/BODY&gt;</TT>
+<DD>This pair of tags marks the body of the document; any 'advanced' things like
+background colors and bitmaps are ignored since IPF doesn't support them.
+<TT><DT>&lt;H1&gt; &amp; &lt;/H1&gt;</TT>
+<TT><DT>&lt;H2&gt; &amp; &lt;/H2&gt;</TT>
+<TT><DT>&lt;H3&gt; &amp; &lt;/H3&gt;</TT>
+<TT><DT>&lt;H4&gt; &amp; &lt;/H4&gt;</TT>
+<TT><DT>&lt;H5&gt; &amp; &lt;/H5&gt;</TT>
+<TT><DT>&lt;H6&gt; &amp; &lt;/H6&gt;</TT>
+<DD>The H1 through H6 headings are emulated using 'big' fonts; you can change the fonts
+used to mark headings by changing the initial values of the Global.Header1Font,
+Global.Header2Font etc. at the start of the REXX script; in the same place you can change
+the default font for book (by default HTML2IPF uses default system font; this in most
+cases is the System Proportional font if you haven`t added a PM_SystemFonts -&gt;
+DefaultFont key in the OS2.INI file); you can change it to WarpSans Bold for a nicer
+looking books; however this font has not been supplied with OS/2 versions prior to 4.0.
+<TT><DT>&lt;I&gt; &amp; &lt;/I&gt;</TT>
+<TT><DT>&lt;B&gt; &amp; &lt;/B&gt;</TT>
+<TT><DT>&lt;U&gt; &amp; &lt;/U&gt;</TT>
+<TT><DT>&lt;EM&gt; &amp; &lt;/EM&gt;</TT>
+<TT><DT>&lt;CITE&gt; &amp; &lt;/CITE&gt;</TT>
+<DD><I>Italic</I>, <B>Bold</B>, <U>Underlined</U>, <EM>Emphasis</EM> and
+<CITE>Citations</CITE> are supported using IPF's :hp#. &amp; :ehp#. tags.
+Citation is equivalent to Italicized text.
+<TT><DT>&lt;TT&gt; &amp; &lt;/TT&gt;</TT>
+<TT><DT>&lt;CODE&gt; &amp; &lt;/CODE&gt;</TT>
+<DD>The &lt;CODE&gt; tag actually does the same as &lt;TT&gt; tag; TypeWriter font is
+emulated with System VIO font; you can change this by replacing the initial value for
+Global.ProportFont in the start of the REXX script.
+<TT><DT>&lt;P&gt; &amp; &lt;/P&gt;</TT>
+<TT><DT>&lt;BLOCKQUOTE&gt; &amp; &lt;/BLOCKQUOTE&gt;</TT>
+<DD>The &lt;BLOCKQUOTE&gt; tag is treated like the new-paragraph tag
+<TT><DT>&lt;BR&gt;</TT>
+<DD>The break-line tag is supported
+<TT><DT>&lt;HR&gt;</TT>
+<DD>The horizontal rule is emulated with a row of 80 'Ä' (0xC4) characters.
+<TT><DT>&lt;OL&gt; &amp; &lt;/OL&gt;</TT>
+<TT><DT>... &lt;LI&gt;</TT>
+<DD>Ordered lists are fully supported by HTML2IPF
+<TT><DT>&lt;UL&gt; &amp; &lt;/UL&gt;</TT>
+<TT><DT>&lt;MENU&gt; &amp; &lt;/MENU&gt;</TT>
+<TT><DT>... &lt;LI&gt;</TT>
+<DD>Unordered lists are fully supported by HTML2IPF.
+The &lt;MENU&gt; tag is treated in same manner as &lt;UL&gt;
+<TT><DT>&lt;DL&gt; &amp; &lt;/DL&gt;</TT>
+<TT><DT>... &lt;DT&gt; &amp; &lt;DD&gt;</TT>
+<DD>Descriptive lists are fully supported by HTML2IPF. Note that HTML language
+allows lists with &lt;DD&gt; tags only and IPF language doesn`t, so empty :dt.
+tags are inserted in these cases.
+<TT><DT>&lt;PRE&gt; &amp; &lt;/PRE&gt;</TT>
+<DD>Preformatted text is supported via the :cgraphic. & :ecgraphic. tags of IPF
+<TT><DT>&lt;A&gt; &amp; &lt;/A&gt;</TT>
+<DD>&lt;A HREF=&gt; tag is supported only for local files; if tag references a remote file
+(i.e. starts with something like ###://), HTML2IPF will add them to a chapter
+called 'Internet links' to the end of the book. Every link in this chapter will launch
+Web Explorer (if you want to use a different browser, change the Global.WWWbrowser variable
+at the beginning of the script).<BR>
+&lt;A NAME=&gt; tag is ignored since IPF lacks the possibility to reference links inside
+same section.
+<TT><DT>&lt;IMG&gt;</TT>
+<DD>The IMG tag is partialy supported; it works only to embed pictures and simple links
+(i.e. when the IMG tag is surrounded by &lt;A HREF=...&gt; ... &lt;/A&gt; pair). Image maps
+are not supported by HTML2IPF although IPFC supports them in its own fashion.<BR>
+Other limitation is that IPFC accepts only OS/2 BMP files as image files; however, most
+images on the net are kept in GIF or JPEG formats; because of this HTML2IPF uses an
+external image converter (I used the demo version of Image Alchemy for OS/2 - it must be
+available somewhere on <A HREF="http://hobbes.nmsu.edu">hobbes.nmsu.edu</A> archive.
+If you know of other (preferably free) image conversion tool (which can be used automatically
+from command line), <A HREF="mailto:bit@freya.etu.ru">please mail me.</A><BR>
+If you don`t have the Image Alchemy see <A HREF="html2ipf_tips.html">tips`n`tricks</A>
+section for a work-around.
+<TT><DT>&lt;STRONG&gt; &amp; &lt;/STRONG&gt;</TT>
+<TT><DT>&lt;ADDRESS&gt; &amp; &lt;/ADDRESS&gt;</TT>
+<DD>This is just ignored
+<TT><DT>&lt;CENTER&gt; &amp; &lt;/CENTER&gt;</TT>
+<DD>This tag is emulated using the IPF tag :lines align=center., i.e. the text is treated
+as pre-formatted. If you don`t like this behaviour, you can disable centering at all
+using the -CENTER- command-line switch.
+<TT><DT>&lt;TABLE&gt; &amp; &lt;/TABLE&gt;</TT>
+<TT><DT>... &lt;TR&gt; &amp; &lt;/TR&gt;</TT>
+<TT><DT>... &lt;TH&gt; &amp; &lt;/TH&gt;</TT>
+<TT><DT>... &lt;TD&gt; &amp; &lt;/TD&gt;</TT>
+<DD>IPF tables are much more limited, so HTML2IPF will mostly strip any 'extra' things such
+as images (IPF does not support them), un&amp;ordered/descriptive lists (same), line breaks
+and some other. Table headers (&lt;TH&gt;) are imitated with a underlined font (first I
+tried to do it using a bold font, but IPFC displays tables with different font widths
+distorted). The only neat thing supported in tables are links. Centered tables are not
+supported; if HTML2IPF encounters a table in &lt;CENTER&gt; context, it disables centering
+during table processing. IPFC can display a 'Out of memory' message when processing
+really big tables - sorry, it`s not my fault.
+</DL>
+<P>Here is a example of a not too complex table which will be so-so well transformed into IPF
+language:</P>
+<TABLE BORDER=2>
+<TR>
+<TH>Heading 1-1</TH>
+<TH>Heading 2-1</TH>
+<TH>Heading 3-1</TH>
+<TH>Heading 4-1</TH>
+<TH>Heading 5-1</TH>
+</TR>
+<TR>
+<TH>Heading 1-2</TH>
+<TD>Cell 2-2</TD>
+<TD>Cell 3-2</TD>
+<TD>Cell 4-2</TD>
+<TD>Cell 5-2</TD>
+</TR>
+<TR>
+<TH>Heading 1-3</TH>
+<TD><A HREF="html2ipf.html">Example link to title page</A></TD>
+<TD><IMG SRC="apz.gif" ALT="missing photo"><P>picture example
+(as I said, IPF does not support pictures inside tables)</P></TD>
+</TR>
+<TR>
+<TH>Heading 1-4</TH>
+<TD><B>Bold</B> text in a IPF table will cause distorted tables</TD>
+<TD>so avoid <I>such</I> things if you`re planning to convert HTML files into INF.</TD>
+<TD>Theoretically, this can be fixed automatically (i.e. HTML2IPF will ignore such tags
+in tables), but for now I don`t see why I should do it</TD>
+<TD>If you want such a feature, please <A HREF="mailto:bit@freya.etu.ru">mail me</A>.</TD>
+</TR>
+</TABLE>
+<P>One more example of a HTML which converts so-so good with HTML2IPF you can find,
+say, on <A HREF="http://home.netscape.com/people/mcw/">Netscape Navigator for OS/2 Warp</A> unofficial homepage (I found it while looking for testcases :-). Try to convert it, you never
+seen such a pretty INF file :-) Actually, it contains some unrecognised by HTML2IPF tags
+(you can see this in DEBUG+ state) but they`re not too important for the overall look.</P>
+<HR>
+<A HREF="html2ipf.html">Return to title page</A>
+</BODY>
+</HTML>

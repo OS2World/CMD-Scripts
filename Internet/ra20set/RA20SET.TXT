@@ -1,0 +1,10 @@
+Archive Name: ra20set.zip
+Program Description: Easiest way to setup Real Audio 2.0 in WebEx
+Operating System Versions: OS/2 Warp with REXX
+Program Source: my home             
+Replaces: N/A                                       
+
+Your name: Samuel Audet                                                
+Your email address: guardia@cam.org
+
+Proposed directory for placement:  /os2/network/tcpip

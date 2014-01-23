@@ -1,0 +1,47 @@
+<!-- This is a sample "BBS logon prompt screen". You can
+modify it as you see fit, but please take not of the
+comments about which lines should not be modified -->
+
+<HTML>
+<HEAD>
+<TITLE>BBS Logon form</TITLE>
+<!-- If you want to "suppress url display of user:pwd, using cookies",
+     do NOT remove the next line -->
+<meta http-equiv="Set-Cookie:" content="BBS_INIT=SET">
+
+</HEAD>
+
+<body>
+<h2> Access not allowed to this BBS </h2>
+
+<!-- the next line can be used for information purposes -->
+The problem is: <em> <!-- option 2 --> </em><p>
+
+<!-- You can modify the href= to point to some other "new user 
+registration" form. -->
+You need to enter a correct user name, or password.
+<br>Are you a new user? Then you <A HREF="bbsnewu.htm">need to register</A>!
+
+<!-- Do NOT modify this next line -->
+<FORM ACTION="/bbs" METHOD="GET">
+
+<!-- You can ask for username and password using whatever descriptive
+material you want, but be sure to user  'user' and 'pwd' as the NAME
+values -->
+<p> Please reenter your username and password:
+<blockquote> <b>Username: <INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+<br> <b> Password </b> <INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8>
+
+<!--Do NOT modify this next line -->
+<input type="hidden" name="oldstuff" value="<!-- option 1 -->" >
+
+<!-- you can modify the VALUE field of this line -->
+<INPUT TYPE="submit" VALUE="recontact the bbs">
+
+</FORM>
+
+
+</BODY>
+</HTML>
+
+

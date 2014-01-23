@@ -1,0 +1,66 @@
+This REXX program can be used to launch several Mozilla products (*) more comfortably and even at the same time, adjusting environment variables and stuff under OS/2 - now with FULL roaming of profiles.
+
+(*) Not tested with every version of Mozilla, SeaMonkey, FireFox and ThunderBird
+
+The idea behind this little script is that you will place it wherever, then use it to run as many instances of any Mozilla applications you like (either via command line, WPS object programs or whatever), and you simply need to create an appropriate config file for each of those instances. Any parameters that you would like to pass to your Mozilla app, pass them along to MozCall using the EXACT same syntax - you don't need to change anything else.
+
+If you're interested in the roaming stuff, please read roaming.en
+
+General usage:
+
+You can keep a single copy of the program and as many configurations as you like, or multiple copies of the program.
+
+The main script (MozCall.cmd) can be renamed to whatever you see fit; both scripts must reside in the same directory.
+
+As for the syntax, it is (or should be) simple & flexible enough:
+
+MozCall [-cfg<file.cfg>] [<parameters>]
+
+Where <parameters> is any combination of parameters you may want to pass along to Mozilla applications, like "-ProfileManager", "-Mail", and the like.
+
+If you specify a .cfg file, it must be preceded by '-cfg' (no space in between!) and be the first parameter, otherwise it would get passed along to your Mozilla app. By default (no .cfg specified), the main script will look for one called <whatever>.cfg in the current directory. If no .cfg is found, the program will bomb out with an error message.
+
+See the included config file templates and adjust them to your needs. The configuration parameters are as follows:
+
+ (1 means true or yes, 0 means false or not)
+
+- MozExe   = FireFox.exe, or Mozilla.exe, ThunderBird.exe or whatever
+- MozDir   = where to look for the Mozilla executable.
+- MozHome  = your default data directory, RELATIVE to the config file. You can set it to an absolute path too, or riddle it with "%<env variable name>%" to have the right value(s) filled in when running Mozilla apps :)
+- BeginLibPath  = 0, or 1. Specifies if MozDir should be prepended to the environment variable BEGINLIBPATH before running Mozilla.
+- Path  = 0, or 1. Specifies if MozDir should be prepended to the environment variable PATH
+- Moz_No_Remote = 0, or 1. Set this environment variable to "T", or not. If set, prevents Mozilla instances from detecting each other.
+- LibPathStrict = 0, or 1. Set this environment variable to "T", or not.
+  Unnecesary if we use ONE Mozilla app at a time, or several based on the exact same DLLs (when in doubt or trouble, set this to 1 and forget)
+- UILocale = 0, or 1. Add locale info to the Mozilla command-line parameters.
+  VERY OLD setting, kept just in case.
+- contentLocale    = same as UIlocale.
+
+- roaming = 0 or 1. Enable roaming profiles. See roaming.en for details.
+- AppType = FX, TB, SM or MZ. See roaming.en for details.
+- CacheParent = Where to store cahce files. See roaming.en for details.
+
+- separate_session = 0, or 1. Indicates if you want to execute the Mozilla product as a child process of the script, or in a separate session.
+
+Usual settings: false if you want to use the .cmd in WPS program objects (they'll remain open until the application itself is closed), true to launch the Mozilla product from the command line and coninue working.
+
+If you have any questions, drop me a line to mrwarper@yahoo.es
+
+Revision history:
+
+v0.3.0 (2008/02/24):
+-Everything rewritten several times
+-Old stuff reincorporated
+-Added roaming support
+-Finally found a workaround for the damn '//' limitation :)
+-Added environment support to roaming -> Super-roaming
+-Removed writing of a default .cfg file; templates are included, for God's sake
+
+v0.2.0 (2005/02): Second? public release...
+
+Known limitations:
+-Parameters can't be passed to a running copy of the application if needed (yet).
+
+ToDo:
+-Workaround / get over limitations
+-Work out how to combine the use of macros and environment variables within a profile.

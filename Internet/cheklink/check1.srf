@@ -1,0 +1,467 @@
+/* CheckLink library file. This contains a procedure that checklink will load 
+into macrospace From macrospace, it is the source for
+threads used to get resources from other servers */
+
+cheklink_get_url:
+
+/** ---- begin user configurable parameters ---- */
+
+/* Default Number of seconds wait on a socket.
+
+This is NOT the total time for a complete response , it's the amount of 
+time to wait for a response from a socket call.
+It can be overridden by the sock_time argument */
+
+sock_time_def=30
+
+/** ---- end user configurable parameters ---- */
+
+parse arg tottime,type,server,request,isauth,verbose,qs_info,transaction,mehost,sock_time
+
+/* -------------
+ Arguments:
+   TotTime = max time (in seconds) to allocate for this request. If this time is exceeded,
+             close the connection and return whatever results you've gotten.
+   Type   = type of request. Typically, HEAD or GET.
+             However, three special proprietary types can be specified:
+                   DNS  = lookup ip address of server. Return the IP address, perhaps
+                          with :port appended
+                HEADGET = Use a GET request, but only return the HEAD (or
+                          the first 999 characters, whichever is less)
+                DSCGET  = Use a GET request, but only return the first 1499 characters
+   Server  = the server to send the request to. 
+             Actually, server should have the syntax of  (everything after 
+             ip_name is optional):
+                 ip_name,ip_address,proxy_address
+            where:
+           
+                    ip_name : the ip name (or number) to send the request to.
+                              If a non-80 port is used, append :port_number
+                              (i.e.; foo.bar.net:8082)
+                 ip_address : optional, the ip number for this ip name. If not
+                              included, a DNS request is done (thus, use of
+                              ip_address is a time saver), Do NOT append
+                               the ip port (if needed, it should be appended to ip_name)
+             proxy_address  : Ip address of this proxy. If possible, give
+                              the numeric address. If a name is given, then
+                              a DNS request is done (thus, use of a numeric
+                              address is a time saver)
+                              If the proxy is using a port other then 80, 
+                              append :port_number to the proxy_address (even
+                              if it's numeric).
+                              For example: foo.bar.net:8080 or 152.15.22.16:8080
+             Notes:
+               * If you are NOT using a proxy server, leave  proxy_address blank.
+                  For example:  foo.bar.net,189.12.51.62
+               * If you specify a proxy, then IP_address is ignored
+               * ip_name is required, even if it's the same as the ip_address (it is 
+                 used to form a Host: header)
+
+    Request: the request string. 
+              I.e.; the /mydir/index.sht portion of http://foo.bar.net/mydir/index.sht
+    Isauth :  An "authorization string".  Should be a properly base64 encoded username
+              and password. If  blank, an Authorization: header will NOT be sent.
+    verbose : Verbosity of intermediate output. Intermediate output is written to the
+              PMPRINTF "window" (which can be displayed using PMPRINTF.EXE).
+              0 = NO intermediate output
+              1,2,3 signal various levels (minimal, some, too much)
+    qs_info : The queue  to send results back on, and the semaphore to use for forcing timeouts.
+                queue is used when cheklink_get_url is called as a "daemon"
+                semaphore is can be used when called as a procedure
+              The syntax is 
+                        Queue_name' 'semaphore_name
+              For example:
+                        QCH_0193  /SEM32/CHECKLINK_32_02
+              The optional semaphore_name should be an open and posted 32 bit semaphore. 
+              Cheklink_get_url will polls this before all socket calls, and if
+              is not posted (or if it has been closed), then an immediate timeout is forced.
+              If you do not include a semaphore_name, then you won't be able to force a timeout.
+              Otherwise, everything else will work (the polling will NOT occur).
+
+   transaction: a transaction id. Should be unique to this transaction -- it's used to
+                identify the response when returned through a queue.
+   mehost:  the callers ip address. This is used in a REFERER header, so it's optional.
+   sock_time : max time PER SOCKET REQUEST. MUST be less then tottime.
+               If not specified, sock_time_def is used
+
+Returns:
+
+When called as a procedure:
+     1_character_error_code||20_character_ip_address||stuff
+where stuff is typically the contents of the request.
+When called as daemon, cheklink_get_url will write prepend the "transaction" argument to
+the above, and "queue" the result to queue_name
+
+Examples:
+ Call as procedure
+    moo=cheklink_get_url(50,'GET','foo.bar.net,125.22.251.2','/abc/alpha.htm',,1,,,'me.net,20)
+
+  a10=transaction||stuff                            /* else, called as daemon */
+
+
+through a proxy
+  oo=cheklink_get_url(50,'DNS','proxy.wow.com')
+  aproxy=substr(oo,21)
+  moo=cheklink_get_url(50,'foo.bar.net,,'||aproxy,'/abc/alpha.htm',,1,,,'me.net,20)
+
+
+- ------------------------ */
+
+if tottime='VERSION' then return '1.13b'
+
+if sock_time='' then sock_time=sock_time_def
+
+signal on error name iserr ; signal on syntax name iserr   
+
+  parse var qs_info myqueue mysem . 
+  myqueue=strip(myqueue) ;   mysem=strip(mysem)
+
+  stuff=bget_url(type,server,request,isauth)   
+
+   
+  if myqueue='' then return stuff               /* called as proc */
+  a10=transaction||stuff                            /* else, called as daemon */
+  foo=rxqueue('s',myqueue)  
+  queue a10 
+  exit " "              /* end thread */
+
+/* jump here if socket is killed or other such error. */
+  iserr: 
+
+signal on error name iserr2 ; signal on syntax name iserr2   
+
+  if myqueue='' then return ' '               /* called as proc */
+  a10=transaction                         
+  foo=rxqueue('s',myqueue)  
+  queue a10 
+
+iserr2:
+  exit ""   
+
+/************************/
+/* this gets a url , and uses the "sockin" procedure to avoid hangs 
+ returns error_code,stuff
+error codes:   
+               4 = sockgethostbyname error 
+               1 = ioctl error
+               2 = connection error
+               3 = problem encountered in sockrecv 
+               0 = no error 
+*/
+
+
+bget_url:procedure expose verbose  mehost  sock_time tottime  mysem
+parse arg type,server,request,isauth  
+
+parse var server server ',' servern ',' proxy 
+
+family  ="AF_INET"  
+crlf="0d0a"x ; maxchar=1000000000  
+if tottime='' | tottime=0 then tottime=30               /* 30 second default */
+
+/****** if no proxy.... */
+if proxy='' then do
+  serv.0addr=' '
+  if servern<>'' then do
+    servern=strip(servern)
+    if verify(servern,'1234567890.')=0 then serv.0addr=servern /* use supplied number */
+  end
+
+  httpport=80  
+  parse var server server ":" bport 
+  if bport<>"" then httpport=bport  
+
+  rc=1 
+  if serv.0addr='' then do
+    if verify(server,'1234567890.')>0 then do  
+        rc=sockgethostbyname(strip(server), "serv.0")   
+        if verbose>2 & rc<>0 then call pmprintf2('DNS lookup of 'server "=="serv.0addr)
+    end   
+    else do  
+      serv.0addr=strip(server)  
+    end 
+  end
+
+  if rc=0 then do  
+    if verbose>1 then call PMPRINTF2(' CHEKLINK_GET_URL sockin error in sockgethostbyname 'rc '('server)
+     return "4"
+  end
+
+  
+end
+/* or there is a proxy? */
+if proxy<>'' then do
+   serv.0addr=' '
+
+   httpport=80  
+   parse var proxy proxy ":" pport 
+   if pport<>"" then httpport=pport  
+
+   rc=1 
+   if verify(proxy,'1234567890.')>0 then do  
+       rc=sockgethostbyname(strip(proxy), "serv.0")   
+      if verbose>2 & rc<>0 then call pmprintf2('DNS lookup of 'server "=="serv.0addr)
+
+   end   
+   else do  
+        serv.0addr=strip(proxy)  
+   end 
+   if rc=0 then do  
+       if verbose>2 then call PMPRINTF2(' CHEKLINK_GET_URL sockin error in sockgethostbyname 'rc '('proxy)
+       return "4"
+   end
+
+/* and change request to include the original server */
+   request=strip(request,"l","/")  
+   request='http://'||server||'/'||request
+/* and possibly strip port off of server (server will be used in Host: header */
+  parse var server server ":" . 
+
+end             /* end of proxy */
+
+/* dns request? */ 
+if type="DNS" then do
+  dd=serv.0addr
+  if httpport<>80 then  dd=dd||':'||httpport
+  if verbose>2 then call pmprintf2('DNS lookup: 'server "=="serv.0addr)
+
+  adot=left(dotserver,20,' ')
+  return '0'||adot||dd
+end
+
+if mysem<>'' then do
+   aa=eventsem_query(mysem)
+   if aa<1 then do
+     adot=left(dotserver,20,' ')
+     if verbose>2 then call pmprintf2("Semaphore cancel (1) = "aa)
+     return '0'||adot||' '
+   end
+end
+
+/* this is the stuff we really need */
+
+dotserver=serv.0addr  
+gosaddr.0family=family        
+gosaddr.0port  =httpport  
+gosaddr.0addr  =dotserver  
+
+gosock = SockSocket(family, "SOCK_STREAM", 0)  
+
+if type='HEADGET' then do ; type='GET' ; maxchar=999 ; end  
+if type='DSCGET' then do ; type='GET' ; maxchar=1499 ; end  
+
+ if proxy='' then do
+   request=strip(request,"l","/")  
+   message=type" /"request" HTTP/1.0"crlf"HOST: "server||crlf  
+ end
+ else  do
+   message=type" "request" HTTP/1.0"crlf"HOST: "server||crlf  
+  end
+
+ message=message||"Referer: checklink@"||mehost||crlf  
+ if isauth<>"" then message=message||"Authorization: "isauth||crlf  
+ message=message||crlf  
+
+
+got=""  
+
+hh=Sockioctl(gosock,'FIONBIO',1) 
+if hh= -1 then do 
+  call PMPRINTF2('crashed in ioctl 'errno)
+  return '1'
+end
+
+rc = SockConnect(gosock,"gosaddr.0")
+r.0=0;e.0=0;w.0=1;w.1=gosock
+
+rcx=sockselect("R.","W.","E.",sock_time)
+if rcx<=0 then do
+   rc1=sockshutdown(gosock,2)  
+   rc = SockClose(gosock)  
+   if verbose>2 then call PMPRINTF2(" ChekLink_GET_URL error on connecting to " server "=" rcx)  
+   return "2"  
+ end  
+
+
+hh=Sockioctl(gosock,'FIONBIO',0) 
+rc = SockSend(gosock, message)  
+if rc<0 then do
+   goo=socksock_errno()
+   rc=sockshutdown(gosock,2)  
+   rc = SockClose(gosock)  
+   if verbose>1 then call PMPRINTF2('CHEKLINK_GET_URL sockin error ('gosock'): 'goo '(from:' server " "request)
+   return '2'||goo
+end 
+
+if mysem<>'' then do
+   aa=eventsem_query(mysem)
+   if aa<1 then do
+     adot=left(dotserver,20,' ')
+     if verbose>2 then call pmprintf2("Semaphore cancel (2) = "aa)
+     return '0'||adot||' '
+   end
+end
+
+
+ YOW=bSOCKIN(GOSOCK,sock_time,maxchar,verbose,tottime,mysem)  /* several vars are exposed */
+ parse var yow astat ',' got
+ rc=sockshutdown(gosock,2)  
+ rc = SockClose(gosock)  
+ if astat=0 then do             /* 1=success, 2=stop at maxlen */
+    if verbose>1 then call PMPRINTF2('CHEKLINK_GET_URL sockin error ('gosock'): 'got '(from:' server " "request)
+    return '3'||got
+ end
+ if verbose > 2 then  
+    call PMPRINTF2("CHEKLINK_GET_URL: ("gosock") "type"; got" length(got) "bytes of response from:" server " "request)  
+
+ adot=left(dotserver,20,' ')
+ return '0'||adot||got  
+ 
+
+
+/**************************/
+/* bSOCKIN: a replacement for sockrecv. 
+  call as
+      stuff=sockin(socket,timeout,maxlen,verbose,tottime)
+  where:
+     socket == a socket that's been established using sockconnect
+    timeout == a timeout value in seconds
+    maxlen  == maximum length of message to recieve
+               If not specified, then no maximum is imposed
+  verbose  == If 1, then report status messages. 
+              If not specified, then do NOT report status messages 
+    tottime == total amount of time allocated (across all sockrecv calls
+and
+   stuff = the contents returned from the server (up to maxlen characters)
+            or an error message 
+            Responses start with 1,
+            Error messages start with 0,
+
+Note: timeout refers to maximum seconds between "sockrecv" requests. 
+      It does NOT refer to total length of time required to recieve a message.
+      Thus, a number of medium length delays (say, a few seconds required
+      to complete each of several sockrecv requests) will NOT cause a timeout 
+      (in other words, the timeout counter is reset upon each successful 
+      completion of a 1000 byte sockrecv request).
+
+*/
+
+bSOCKIN:PROCEDURE 
+PARSE Arg socket,timeout,maxlen,verbose,tottime,mysem
+
+if maxlen=0 | maxlen='' then maxlen=100000000
+
+if verbose>2 then call PMPRINTF2("Start read of  socket " socket)
+
+if Sockioctl(socket,'FIONBIO',1) = -1 then /* switch to nonblocking mode */
+   Return '0,'||'crashed in ioctl 'errno
+
+ict=0
+ok=0
+incoming=''
+asec1=time('s')
+
+Do While TimeOut > 0
+
+   if mysem<>'' then do
+     aa=eventsem_query(mysem)
+     if aa<1 then do
+       if verbose>2 then call pmprintf2("Semaphore cancel (3) = "aa)
+        ok=-1
+        leave           /* simulate timeout */
+      end
+    end
+
+    asec2=time('s')
+    if (asec2<asec1) then asec1=asec2  /* reset if span midnight */
+    if (asec2-asec1)>tottime then return '0,total time too long in SOCKIN '
+
+    res=Sockrecv(socket,'data',1000) 
+
+
+    if res=-1 then do                           /* error condition ? */
+
+      If errno <> 'EWOULDBLOCK' THEN       /* real crash ? */
+            Then Return '0,'||'crashed in sockrecv 'errno /* yes */
+
+      /* not-fatal,no-data-available-condition:  errno = EWOULDBLOCK & sockrecv returned -1 */
+
+      ict=ict+1
+      if verbose>2 then call PMPRINTF2('SockIn: Waiting on 'socket' ('ict')...')
+      Call SysSleep 1             
+
+      TimeOut = TimeOut - 1; /* count down my timer */
+      Iterate; /* loop again */
+    End; /* if sockrecv = -1 */
+
+    if res=0 then do
+        ok=1 ; leave            /* got end of message, so exit this do loop*/
+    end 
+    if res<0 then do      /* non EWOULDBLOCK error */
+         return '0,'||" Error in sockrecv " rc
+    end
+    incoming=incoming||data
+    if verbose>2 then call PMPRINTF2('SockIn ('socket'): total data recieved: 'length(incoming) )
+    if length(incoming)>maxlen then do
+       ok=2
+       leave
+    end 
+    ict=0               /* reset counter */
+End /* do while timeout > 0 */
+
+/* here we are timed out, or got entire message, or violated maxlen */
+if ok=1  then do  /* got message */
+   If sockioctl(socket,'FIONBIO',0) = -1 then do /* switch to blocking mode */
+       if verbose>0 then call PMPRINTF2('SockIn: ioctl error on switch to blocking mode: ' errno)
+   end
+   return '1,'||incoming                              /* success! */
+end
+if ok=2  then do  /* maxlen violation */
+   if sockioctl(socket,'FIONBIO',0) = -1 then do  /* switch to blocking mode */
+      if verbose>0 then call PMPRINTF2( 'SockIn: ioctl error on switch to blocking mode: ' errno)
+   end
+   Return '2,'||incoming
+end
+
+if ok=-1  then Return '0,'||' forced timeout on sockrecv'  /* forced timed out via semaphore */
+
+Return '0,'||' timeout on sockrecv'  /* timed out (ok=0) */
+
+
+PMPRINTF2:PROCEDURE
+PARSE ARG A1
+a1=decodekeyval(a1)
+IF LENGTH(A1)>128 THEN A1=LEFT(A1,128)
+CALL PMPRINTF(A1) 
+RETURN 1
+
+
+
+
+
+
+
+
+/************************************************/
+/* procedure from TEST-CGI.CMD by  Frankie Fan <kfan@netcom.com>  7/11/94 */
+DecodeKeyVal: procedure
+  parse arg Code
+  Text=''
+  Code=translate(Code, ' ', '+')
+  rest='%'
+  do while (rest\='')
+     Parse var Code T '%' rest
+     Text=Text || T
+     if (rest\='' ) then
+      do
+        ch = left( rest,2)
+        if verify(ch,'01234567890ABCDEF')=0 then
+           c=X2C(ch)
+        else
+           c=ch
+        Text=Text || c
+        Code=substr( rest, 3)
+      end
+  end
+  return Text
+

@@ -1,0 +1,95 @@
+<HTML SUBLINKS="*">
+<HEAD>
+<TITLE>HTML2IPF - Tips'n'tricks</TITLE>
+</HEAD>
+<BODY>
+<H1>Tips and tricks</H1>
+<P>Well, not too much tricks at this time :-) Everything should go smooth in most cases, except for
+very complex HTML files, and mostly it`s not a HTML2IPF fault, but that of IPF :-)</P>
+<H2>Trick number one</H2>
+<P>You don`t have Image Alchemy. Well, this is not a extremal situation, though it
+will require a bit of manual work. All you have to do is to convert it with <I>anything</I> you have into a
+suitable BMP format, since HTML2INF will be glad too see that somebody already done the dirty
+job before him. "A suitable format" means that IPFC compiler recognises only OS/2 metafiles
+(these are unlikely to find on the net), and OS/2 v1.3 BMPs AKA uncompressed OS/2 BMP files. There
+are a lot of programs which do that, but if you have OS/2 Warp 4 installed, you don`t need any of
+them at all - Warp4`s multimedia subsystem can handle lots of graphic formats (although it often
+locks the desktop :-). You have to open the folder(-s) where reside all the images you want to convert,
+then mark them all (or at least a number of them), then right-click on any marked object and select
+Convert to -> Bitmap -> OS/2 v1.3. Note: DO NOT SELECT OS/2 v2.0 bitmap since this bitmap format
+is packed (with something like RLE, I guess), and IPFC will give an 'Invalid Format' error.</P>
+<P>Too bad IBM didn`t included a simple REXX script to do this conversion - if someone knows
+how to do this, please urgently <A HREF="mailto:bit@freya.etu.ru">mail me</A>!</P>
+<P>Other way is to use PMView or PMJpeg or JView/JView Pro or any other available package
+which can afford this conversion. Well, I said enough on this topic.</P>
+<H2>Trick number two</H2>
+<P>This is rather a paragraph borrowed from IPF manual :-) If you have very large HTML files
+(really there are a few), you will be forced to split them into parts:</P>
+<CITE>
+<P> Do not exceed 16000 words, numbers, and punctuation marks between two consecutive heading tags
+in your source file.  This includes blank spaces, but does not include commented lines.  If the source file
+exceeds this limit, the compiler will generate an error message. To correct the error, use another heading tag.</P>
+</CITE>
+<P>You can either split the initial HTML file (and then process them automatically) or split it later before
+compiling with IPFC (and if you`ll have to reconvert HTML files you will be forced to do it again and again).
+Basicaly you should use a header tag deeper than its parent by one, i.e. if you`re splitting a :h2. chapter, you
+should insert somewhere in the middle an :h3. tag. The format for the tag is:</P>
+<PRE>
+:h#. Chapter name
+</PRE>
+<P>HTML2IPF inserts before each :h#. tag an comment like this:</P>
+<PRE>
+.* Source filename: glspec.html
+</PRE>
+<P>so you can easily track all chapters in the .IPF file by searching all lines beginning with a ".* Source" text</P>
+<P>The biggest HTML file I`ve ever seen is \JavaOS2\docs\API\AllNames.html - its about 550K (wow!)
+size. Of course, it exceeds many times the pity limit of 16000 words and spaces. So, what I`ve done
+(this is a success story :-)</P>
+<OL>
+<LI>I loaded this file into a browser and seen that it consists of about 26 sections named A to Z
+(alphabetical listing of all Java API functions). So all I have to do is to split that file into 26 subfiles and
+voila!
+<LI>First I had to separate the header from the proper API list. I saved the backup copy of the
+AllNames.html and proceeded. The header contains links to every of 26 section anchors, so I replaced
+anchor links by local links, and named the subsequent files AllNames_A.html ... AllNames_Z.html.
+Then I dumped each subsection into a separate HTML file, adding a standard header:
+<PRE>
+&lt;html>
+&lt;head&gt;&lt;title&gt;Index - A&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+</PRE>
+<LI>And we`re done! If everything is correct, nothing more should be changed.
+<LI>Actually I had to insert some &lt;HTML SUBLINKS=... NOSUBLINKS=...&gt;
+tags (see the <A HREF="html2ipf_tags.html">recognized tags</A> section) to
+reorder a bit the paragraphs.
+</OL>
+<H2>Trick number three</H2>
+<P>or the best way to rip HTMLs from the Internet :-)</P>
+<P>I tried lots of rippers (AKA grabbers), but the best tool I`ve found is GNU WebGET. Actually I found it on
+<A HREF="http://hobbes.nmsu.edu">hobbes.nmsu.edu</A> but since now its directory structure is fully
+rebuilt, I cannot say where it will reside when you`re reading this text. It was in the /old/os2/unix directory,
+as far as I remember, and its archive name is GNU-WGET.ZIP.</P>
+<P>It is operated from the command line (the best way for such a tool, I`d say) and permits to grab recursively,
+non-recursively, limiting domains, limiting extensions, fetching from ftp (even with reget) etc. 
+A must-have. You will need an HPFS drive, though (you`re still running on FAT?! Shame on you! :-)</P>
+<P>And last but not least, it is free of charge, and (of course) distributed with sources.</P>
+<P>Maybe I`ll include it (only the executable) in future versions of HTML2IPF to convert HTMLs directly from
+Internet :-) You`ll have to point to an URL and the rest is history! Well, I`m not sure this is what people
+wants :-) Please mail me your suggestions regarding this.</P>
+<H2>Trick number four</H2>
+<P>...the program is so slow... it takes me all day to wait until at least something gets converted</P>
+<P>Seems that you`re running Object REXX, not the classic REXX interpreter. For some unknown reasons
+Object REXX is *VERY* slow for big REXX scripts (on a ~500K HTML file HTML2ipf runs <B>8</B> times slower) than
+the classic REXX interpreter. If you`re running OS/2 Warp 4.0 you should simply run \OS2\SWITCHRX.CMD
+which will switch REXX interpreters. For OS/2 Warp 3 users you should follow the deinstallation instructions
+in the Object REXX. <BR>
+One more example: it took me 6 minutes 40 seconds (400 seconds) to convert all Java for OS/2 API docs into
+.IPF format with classic REXX, and more than 3 hours (!!! on my P5/200, oh shit!) with Object REXX.
+This looks to me like something is trashing inside REXX kernel, since it begins converting very
+fast, but the more it works, the slower it is. At the end of second hour it took about 1 minute
+to convert a 1K HTML file!<BR>
+And anyway, you`re in a multitask OS, isn`t it? Minimize the window in which it runs, and forget about it.</P>
+<HR>
+<A HREF="html2ipf.html">Return to title page</A>
+</BODY>
+</HTML>

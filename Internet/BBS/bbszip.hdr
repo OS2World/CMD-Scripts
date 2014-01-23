@@ -1,0 +1,31 @@
+<body>
+<h3> BBSZIP.HDR</code></h3>
+This is a sample header file for .ZIP expansion.
+<br>
+It's use is equivalent to "header_files" (a version in the
+target directory is used if available, otherwise the
+bbs_param_dir directory is searched for a footer_file)
+
+<P>Three special strings are manipulated by BBS:
+<ol> 
+<li>  $ SERVERNAME yields the server IP name (i.e.; $SERVERNAME )
+<li>  $ DIR yields the current directory (i.e.; $DIR )
+<li>  $ ZIPFILE yields the current .ZIP file (i.e.; $ZIPFILE )
+</ol>
+
+Notes:
+<ul>
+<li> You MUST start zip_header_file with a &lt;BODY &gt;
+element.
+<li>There is no ZIP_HEADER_TEXT option -- the ZIP_HEADER_FILE
+is assumed to be HTML.
+<li> In addtion to the ZIP_HEADER_FILE, BBS will display:
+  <menu>
+<li> The -z ZIP file comments (using a &lt;PRE&gt; format).
+<em>This can be suppressed by setting <code>get_z_zip_description=0 </code> </em>
+
+<li> The ZIP_DESCRIPTOR_FILE (typically FILE_ID.DIZ), as HTML.
+</menu>
+</ul>
+<p>
+

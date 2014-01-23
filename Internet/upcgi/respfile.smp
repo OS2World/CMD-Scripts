@@ -1,0 +1,5 @@
+<Html><head><title>Your upload was succesful</title> </head><body>
+<h2>Your upload was successful </h2>
+You uploaded <!-- upload_size --> bytes to <!-- upload_name -->.
+</body></html>
+

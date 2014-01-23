@@ -1,0 +1,167 @@
+(E)CLF Host IP to Name Resolver V1.00 (REXX)
+様様様様様様様様様様様様様様様様様様様様様様
+(C) Mads Orbesen Troest & SIRIUS Cybernetics 2000
+
+
+ [ What?! ]
+
+  CLF Resolver is a small REXX script I wrote for personal reasons, but which
+  I believe others may make use of as well.
+
+  What is does is scan a log file in Common Log Format (CLF) or Extended
+  Common Log Format (ECLF), attempting to resolve unresolved IP addresses in
+  the "remote host" section of each log entry. If successful, it the dotted IP
+  address is replaced with the host name; if not, the line is left as is.
+
+  The changed log file is output to a separate file; if the output file does
+  already exist, it will be appended. This makes the script capable of
+  collecting cycled log files into one large, resolved file; for instance for
+  use with log analysers/statistics generating programs.
+
+  Specifically, this tool was written to be used in conjunction with Xitami,
+  but it will work with any other web server using CLF (e.g. Apache); indeed,
+  with /any/ server conforming to the CLF or ECLF log format...
+
+
+ [ Why?! ]
+
+  Well, it all began with me realising that the Xitami web server (which I
+  happen to love) is not capable of doing (and logging) reverse-DNS on access
+  in the standard version (allegedly, the Pro version can).
+
+  I should note that since doing reverse-DNS might take a bit of time, there
+  can be sound performance reasons for /not/ enabling/logging reverse-DNS in
+  high-impacted environments like that of a web server; particularly on small
+  systems (and I run my www.subetha.dk on an outdated 486-DX-66 (with OS/2 of
+  course) so that was another good reason for me to do this script)...
+
+  As a result, statistics generators, like Webalizer, which can show various
+  interesting information based on host names would not provide the statistics
+  I needed.
+
+  Well, that's all changed! :-)
+
+  Now, in the Cron'ed statistics job, I simply use this script on the log file
+  before feeding the changed version to Webalizer.
+
+
+ [ How?! ]
+
+  For each valid line in the source log file, my CLF Resolver pulls out the
+  "remote host" field and tries to resolve it to a name using the native
+  REXX socket API. I've seen similar solutions (hi Michael Reinsch .-) that
+  did all sorts of tremendously tedious and overheadish work by spawning the
+  external "HOST.EXE" program of OS/2, piping the output into the RXQUEUE and
+  then parsing that. Geez... Where that might work it's not as neat and tidy
+  a solution as this; and ofcourse - since we run OS/2 - we want it neat and
+  tidy! :-) This script resolves hosts very fast compared to that solution,
+  because it uses no external programs, merely the socket enabling REXX EWS
+  extension DLL that has been bundled with OS/2 for quite some time now!
+
+  Do note that since this program was never meant to be a "cycled log
+  collector", it has no explicit features regarding this, apart from its
+  ability to append the output. You will need to handle this yourself from
+  another script, if you really have to. I don't have to; I use Webalizer as
+  my log analyser, and it is capable of incremental log processing, i.e. it
+  doesn't care how often the logs are cycled.
+
+
+ [ Invokation ]
+
+  Usage: "CLF Resolver.CMD" <Input LOG File> <Output LOG File> [NoProgressMark]
+
+   Input and Output log files are mandatory. If the output log already exists,
+   it is appended.
+
+   During processing CLF Resolver will normally display a progress indicator
+   along with the number of the current line # being processed. If you do not
+   want this (it slows things down a little but, but not all that much) - for
+   instance if it will always be run unattended in the background by a Cron
+   schedule - you can disable the progress indicator by entering any 3rd
+   argument on the command line.
+
+   During its hard work to please you, CLF Resolver will output some minimal
+   information about what it's doing. In particular, errors will, of course,
+   be reported (along with an error level) if such occur. Warnings of un-
+   resolvable addresses are also output; these are quiet and only meant as
+   informational (i.e. the script continues to run without problems).
+
+
+ [ Examples ]
+
+  "CLF Resolver.CMD" before.log after.log
+
+   ^^^ This will try to resolve dotted addresses to names in "before.log",
+       saving the transformed log file as "after.log".
+       Progress indicator will be visible...
+
+  "CLF Resolver.CMD" Access.LOG Statistic.LOG NoProgress
+
+   ^^^ This will try to resolve dotted addresses to names in "Access.LOG",
+       saving the transformed log file as "Statistics.LOG"
+       Progress indicator will /not/ be visible... It is not important what
+       the 3rd argument contains; it may be anything, really...
+
+  The above invokations could, as an example, transform the following lines ...
+
+   194.192.158.236 - - [09/Apr/2000:14:51:10 +0002] "GET / HTTP/1.0" 200 1002 "" "MindCrawler v3.1 Indexer, support@mindpass.com"
+   194.255.118.225 - - [09/Apr/2000:21:57:25 +0002] "GET / HTTP/1.1" 200 1002 "" ""
+   195.215.220.189 - - [11/Apr/2000:09:11:08 +0002] "GET /Frodo HTTP/1.1" 302 0 "" ""
+
+  ... into the following lines ...
+
+   cph-crwl1.mindpass.com - - [09/Apr/2000:14:51:10 +0002] "GET / HTTP/1.0" 200 1002 "" "MindCrawler v3.1 Indexer, support@mindpass.com"
+   194.255.118.225 - - [09/Apr/2000:21:57:25 +0002] "GET / HTTP/1.1" 200 1002 "" ""
+   ip189.abnxr6.ras.tele.dk - - [11/Apr/2000:09:11:08 +0002] "GET /Frodo HTTP/1.1" 302 0 "" ""
+
+  Note that the second line has not changed. This is because CLF Resolver was
+  unable to resolve the IP to a name.
+
+
+ [ Who?! ]
+
+  Ah, well, it's me again...
+
+   Mads Orbesen Troest
+   Valdemarsgade 6, 1.TV
+   DK-9000 Aalborg
+   Denmark
+
+   Mail: mads@troest.dk - ICQ: Eek@15194612 (Rarely, though...)
+
+   Feel free to contact me for any reason what so ever!
+   Spam me and die!
+
+
+ [ Conditions ]
+
+  "Free CardWare!"
+
+  Hmmm... If you can use this program, great! If not, I don't want to hear
+  about it - just delete it.
+
+  Also, I can make /no/ guarantees - implied nor explicit - that this script
+  in an unlikely frenzy misbehaves on your system; if it does, I'm sorry, but
+  that's all I can do about that.
+
+  BUT IF you find CFG Resolver really useful (I define that as: continuing to
+  use it after a month); /please/ do consider mailing me a local postcard with
+  a quick comment. It's great to see that other OS/2 users exist, and to find
+  out where they are situated.
+
+
+ [ Final Words! ]
+
+  Hos and hellos to the rest of Team OS/2 Aalborg, Denmark; my brother Mikkel;
+  my girlfriend Signe - and every remaining faithful OS/2 user out there! :-)
+
+  And please: Stop whining about OS/2 dying because there won't be a new
+              client and all such rubbish. I don't use OS/2 because I wan't
+              a new client every odd year - on the contrary, I revel in the
+              fact that it is so thoroughly well designed a system that it
+              can do perfectly well without being released in a "new" version
+              every year (like another OS we all know and loathe) - or every
+              month, like another, free, technically obsolete, OS we know...
+
+
+ That's about it, I guess. See you around folks! :-)

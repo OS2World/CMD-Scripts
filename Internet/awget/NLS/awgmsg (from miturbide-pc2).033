@@ -1,0 +1,187 @@
+HOME                     = Emplacement de AWGet
+DOWNLOAD                 = R‚pertoire de t‚l‚chargement
+DOWNLOADS_SIMULTANEOUSLY = T‚l‚chargements maximum simultan‚s
+DOWNLOADS_FROM_SAME_HOST = T‚l‚chargements maximum depuis le mˆme serveur
+DOWNLOADS_ATTEMPTS       = Nombre maximum de tentatives
+DOWNLOADS_UTILITY        = Utilitaire de t‚l‚chargement
+DOWNLOADS_PARAMETERS     = ParamŠtres de t‚l‚chargement
+DOWNLOADS_WINDOW         = Fenˆtre de t‚l‚chargement
+CLIPBOARD_MONITOR        = Utilisation de la surveillance du presse-papier
+CLIPBOARD_EXCLUDE        = Exclusion des objets fichiers
+SCAN_INTERVAL            = Fr‚quence de rafraŒchissement
+LOG_FILE                 = Fichier de rapport
+ERROR_LOG                = Fichier de rapport d'erreurs
+LOG_KEEP                 = Dur‚e de conservation des entr‚es de rapport (jours)
+LOG_PRUNE                = lagage p‚riodique des rapports
+MESSAGE_DONE             = Message de succŠs du t‚l‚chargement
+MESSAGE_ERROR            = Message d'‚chec du t‚l‚chargement
+MESSAGES                 = Affichage des messages de d‚marrage/fin de processus
+CHECK_CONNECTION         = V‚rification de la connexion … l'Internet
+USE_DESKTOP              = Recherche des fichiers URL sur le bureau
+KEEP_FAILED_URL          = Sauvegarde des URL incorrects
+KEEP_DONE_URL            = Sauvegarde des URL corrects
+
+CONNECTION_ESTABLISHED   = Connexion … l'Internet ‚tablie.
+CONNECTION_BROKEN        = Connexion … l'Internet rompue.
+
+UNINSTAL_WARNING = ATTENTION ! Le dossier "· t‚l‚charger" (ainsi que son contenu)\n\
+                   sera supprim‚ lors du processus de d‚sinstallation du d‚mon Auto WGet ! \n\
+                   Si cela ne vous convient pas, vous pouvez sauvegarder les\n\
+                   fichiers … un autre endroit.
+UNINSTAL_ERROR   = Le r‚pertoire courant "%s" diffŠre du r‚pertoire d'intallation du d‚mon Auto WGet.\n\
+                   La d‚sinstallation a ‚t‚ interrompue et vous devrez supprimer vous-mˆme\n\
+                   certains fichiers importants.
+UNINSTAL         = D‚sinstallation du d‚mon Auto WGet
+REMOVE_CONFIG    = Suppression du fichier de configuration
+
+INSTALL_DIR      = R‚pertoire d'installation
+INSTALL          = D‚but de l'installation du d‚mon Auto WGet
+NOT_FOUND_UTILS  = L'utilitaire de t‚l‚chargement n'a pas ‚t‚ trouv‚\n\
+                   ou n'existe pas!\n\
+                   Veuillez consulter la documentation et en installer un.
+INSTALL_ABORTED  = Le processus d'installation a ‚t‚ interrompu ! 
+SELECT_UTIL      = S‚lectionnez l'utilitaire de t‚l‚chargement :
+SELECT_NUMBER    = Entrez le num‚ro de l'utilitaire (0 - pour sortir)
+OBJECT_DONE      = L'objet a ‚t‚ cr‚‚
+OBJECT_ERROR     = Erreur lors de la cr‚ation de l'objet
+DIR_DONE         = Le dossier a ‚t‚ cr‚‚
+DIR_ERROR        = Erreur lors de la cr‚ation du dossier
+COPY_DONE        = Fichier copi‚ avec succŠs
+COPY_ERROR       = Erreur lors de la copie du fichier
+COMPILE_DONE     = Le fichier a ‚t‚ compil‚
+COMPILE_ERROR    = Erreur lors du processus de compilation
+ERASE_DONE       = Supprim‚ avec succŠs
+ERASE_ERROR      = Erreur lors de la suppression
+READ_ERROR       = Erreur de lecture
+WRITE_ERROR      = Erreur d'‚criture
+CONFIG_UPDATED   = Le fichier de configuration a ‚t‚ mis … jour
+ENTER_URL        = ~Entrez l'URL ou le nom de liste
+ENTER_ADD        = ~Ajouter
+ENTER_CANCEL     = A~nnuler
+
+
+YES              = Oo
+NO               = Nn
+BAD_YESNO        = Pardon ? Entrez 'O' ou 'N', s'il vous plait ! 
+
+NOT_FOUND        = Dossier non trouv‚.
+CONFIG_CHANGED   = Le fichier de configuration a ‚t‚ mis … jour.
+PRUNE_START      = L'‚lagage du rapport a d‚but‚.
+PRUNE_DONE       = L'‚lagage du rapport s'est achev‚ avec succŠs, %u ligne(s) vir‚e(s).
+BAD_DOWNLDIR     = Dossier de t‚l‚chargement non trouv‚ ! Utilisation du r‚pertoire courant (".").
+NOT_MOVE         = Erreur lors du d‚placement de fichiers.
+BAD_URL          = Le fichier ne contient pas d'URL valides.
+DOWNLOAD_START   = Le t‚l‚chargement a d‚but‚.
+DOWNLOAD_DONE    = Le t‚l‚chargement s'est achev‚.
+DOWNLOAD_ERROR   = Erreur lors du t‚l‚chargement.
+DOWNLOAD_STOP    = Le t‚l‚chargement a ‚t‚ interrompu.
+DOWNLOAD_REDIR   = T‚l‚chargement redirig‚
+ERROR_IN         = Erreur dans
+UNKNOWN_SID      = Session inconnue termin‚e (zombie ?)
+PLUGIN_DEAD      = Le plugin est zigouill‚
+
+WAIT_STOPPED     = Le d‚mon Auto WGet Daemon est en cours d'arrˆt. Veuillez patienter...
+STOPPED          = Le d‚mon Auto WGet Daemon est arrˆt‚.
+NOT_RUNNING      = Le d‚mon Auto WGet Daemon est actuellement inactif.
+STARTED          = D‚mon Auto WGet Daemon d‚marr‚.
+ALREADY_RUNNING  = D‚mon Auto WGet Daemon DJ· d‚marr‚.
+
+# Here is objects names
+
+OBJ_HOME         = D‚mon Auto WGet
+OBJ_DOWNLOADS    = T‚l‚chargements
+OBJ_TOOLS        = Outils
+OBJ_INFO         = Information
+OBJ_JOBS         = Travaux
+OBJ_TODO         = · t‚l‚charger
+OBJ_RUNNING      = En cours
+OBJ_DONE         = Fait
+OBJ_FAILED       = chec
+OBJ_DAEMON       = D‚mon Auto WGet
+OBJ_UNINSTALL    = D‚sinstallation\ndu d‚mon Auto WGet
+OBJ_EDITCFG      = diter le fichier de configuration
+OBJ_STOP         = Stopper\nle d‚mon Auto WGet
+OBJ_EVTLOG       = Voir le rapport d'‚v‚nements
+OBJ_ERRLOG       = Voir le rapport d'erreurs
+OBJ_ADD          = Ajouter un URL
+OBJ_README_EN    = LisezMoi (Anglais)
+OBJ_README       = LisezMoi
+OBJ_CHANGES_EN   = Historique des modifications
+OBJ_LICENSE_EN   = Licence
+OBJ_LICENSE      = Licence (Anglais)
+OBJ_URL_RU       = D‚mon Auto WGet\nSite WWW (Russe)
+OBJ_URL_EN       = D‚mon Auto WGet\nSite WWW (Anglais)
+OBJ_DONATE       = Faites un don  ! 
+
+# Here is comments (notes) for configuration file parameters
+
+CFG_HOME                     = R‚pertoire dans lequel les fichiers du d‚mon Auto WGet sont situ‚s,\n\
+                               Cette valeur est entr‚e lors du processus d'installation et vous n'aurez\n\
+                               th‚oriquement pas … la modifier ult‚rieurement.
+CFG_DOWNLOAD                 = R‚pertoire dans lequel les fichiers t‚l‚charg‚s sont situ‚s.
+CFG_DOWNLOADS_SIMULTANEOUSLY = Nombre d'URL qui pourront ˆtre trait‚s en mˆme temps.
+CFG_DOWNLOADS_FROM_SAME_HOST = D‚finit combien d'URL au maximum pourront ˆtre t‚l‚charg‚s depuis le mˆme\n\
+                               serveur (0 - d‚sactive toute limitation).
+CFG_DOWNLOADS_ATTEMPTS       = Nombre de tentatives de chargement de chaque URL.\n\
+                               Si l'utilitaire de t‚l‚chargement retourne un code d'erreur, l'URL sera\n\
+                               stock‚ pour une tentative de t‚l‚chargement ult‚rieure selon la valeur\n\
+                               d‚finie (0 - d‚sactive toute limitation).
+CFG_DOWNLOADS_UTILITY        = Nom de l'utilitaire de t‚l‚chargement.
+CFG_DOWNLOADS_PARAMETERS     = ParamŠtres de l'utilitaire de t‚l‚chargement.\n\
+                               Vous pouvez utiliser les symboles de macro-commandes suivants : \n\n\
+                               %U - prend la valeur de l'URL actif\n\
+                               %D - prend la valeur du dossier de t‚l‚chargement\n\
+                               %P - prend la valeur du dossier de t‚l‚chargement dans lequel les 'back slashes' (\) sont remplac‚s par des slashes (/)\n\
+                               %F - prend la valeur du nom de fichier … l'URL actif\n\
+                               %H - Change to the host name taken from the active URL.
+CFG_DOWNLOADS_WINDOW         = D‚finition de la taille et du mode de repr‚sentation de la fenˆtre de\n\
+                               l'utilitaire de t‚l‚chargement.  Dans l'ordre, doivent figurer\n\
+                               le paramŠtre "hidden" (cach‚) ou "visible" suivi par deux nombres\n\
+                               s‚par‚s par une virgule, repr‚sentant les nombres de colonnes et de\n\
+                               lignes.
+CFG_SCAN_INTERVAL            = Fr‚quence de rafraŒchissement du dossier "· t‚l‚charger" en secondes.
+CFG_CLIPBOARD_MONITOR        = Permet la surveillance du presse-papiers du systŠme. Si un URL est\n\
+                               d‚tect‚ dans le presse-papiers, la fenˆtre 'Ajouter un URL' du\n\
+                               d‚mon Auto WGet apparaŒt.
+CFG_CLIPBOARD_EXCLUDE        = Les objets fichiers sont ignor‚s pour la surveillance du presse-papiers.
+CFG_LOG_FILE                 = Nom du fichier de rapport dans lequel les d‚marrages, arrˆts et autres\n\
+                               messages sont consign‚s.
+CFG_ERROR_LOG                = Nom du fichier de rapport dans lequel les messages d'erreur sont consign‚s.
+CFG_LOG_KEEP                 = Nombre de jours de conservation des entr‚es du rapport avant de l'‚laguer.
+CFG_MESSAGES                 = Mode d'affichage des messages aux d‚marrages/arrˆts des t‚l‚chargements.\n\
+                               1 - Affiche les messages, 0 - n'affiche aucun message.
+CFG_MESSAGE_DONE             = Commande lanc‚e aprŠs un t‚l‚chargemant achev‚ avec succŠs.\n\
+                               Vous pouvez utiliser les symboles de macro-commandes suivants : \n\n\
+                               %M - prend la valeur du message du succŠs du t‚l‚chargement\n\
+                               %U - prend la valeur de l'URL actif\n\
+                               %D - prend la valeur du dossier de t‚l‚chargement\n\
+                               %P - prend la valeur de dossier de t‚l‚chargement dans lequel les 'back slashes' (\) sont remplac‚s par des slashes (/)\n\
+                               %F - prend la valeur du nom de fichier pris dans l'URL actif\n\
+                               %L - prend la valeur du dernier message de l'utilitaire de t‚l‚chargement\n\
+                               %R - prend la valeur du code retourn‚ par l'utilitaire de t‚l‚chargement
+CFG_MESSAGE_ERROR            = Commande lanc‚e … … l'issue d'un ‚chec du t‚l‚chargement.\n\
+                               Vous pouvez utiliser les symboles de macro-commandes suivants : \n\n\
+                               %M - prend la valeur du message d'‚chec du t‚l‚chargement\n\
+                               %U - prend la valeur de l'URL actif\n\
+                               %D - prend la valeur du dossier de t‚l‚chargement\n\
+                               %P - prend la valeur de dossier de t‚l‚chargement dans lequel les 'back slashes' (\) sont remplac‚s par des slashes (/)\n\
+                               %F - prend la valeur du nom de fichier pris dans l'URL actif\n\
+                               %L - prend la valeur du dernier message de l'utilitaire de t‚l‚chargement\n\
+                               %R - prend la valeur du code retourn‚ par l'utilitaire de t‚l‚chargement
+CFG_CHECK_CONNECTION         = Propose de v‚rifier la connexion PPP ou SLIP avant le d‚marrage du\n\
+                               processus de t‚l‚chargement.\n\
+                               D‚coch‚ par d‚faut.
+CFG_USE_DESKTOP              = Autorise la recherche sur le bureau de fichiers contenant un URL valide.\n\
+                               Ces fichiers seront d‚plac‚s dans le r‚pertoire "· t‚l‚charger" pour un\n\
+                               traitement ult‚rieur.
+CFG_KEEP_FAILED_URL          = Les URL avec t‚l‚chargement interrompus seront d‚plac‚s dans le dossier\n\
+                               chec, si param‚tr‚ … 1.
+CFG_KEEP_DONE_URL            = Les URL t‚l‚charg‚s avec succŠs seront d‚plac‚s dans le dossier Fait, si\n\
+                               param‚tr‚ … 1.
+CFG_SCHEDULE                 = Contient l'emploi du temps pour le traitement de dossiers.\n\
+                               Il est compos‚ d'intervales de temps s‚par‚s par des virgules, chaque\n\
+                               intervale contient les dates de d‚but et fin d'une p‚riode de traitement.\n\
+                               Par exemple : SCHEDULE = 06:00-08:30,16:50-03:00
+CFG_REDIRECT_TO              = Redirige un URL de son dossier d'origine vers un autre sp‚cifi‚.\n\
+                               Le chemin complet vers le dossier de dossier de destination doit ˆtre\n\
+                               sp‚cifi‚. Les chemins en notation universelle (UNC) sont autoris‚s.

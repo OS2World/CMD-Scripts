@@ -1,0 +1,73 @@
+<!-- DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN" -->
+<HTML SUBLINKS="html2ipf_">
+<HEAD>
+<TITLE>HTML2IPF User's Guide</TITLE>
+</HEAD>
+<BODY>
+<CENTER><P>Best viewed with VIEW.EXE ;-)</P><IMG SRC="Coffee.gif" ALIGN=RIGHT ALT="and with a cup-of-coffee">
+<H1>HTML to IPF conversion tool</H1>
+<B>,HTML -&gt; .IPF conversion utility</B>
+<P><I>Copyright (C) 1997 FRIENDS software, All Rights Reserved</I></P>
+</CENTER>
+<P>
+In the middle of Mar, 1997 I downloaded a handy OpenGL API reference from Digital corp.
+WWW site. Alas, I hate documentation in HTML format since it takes too much time until
+browser gets loaded, beside this each such documentation is a big set of HTML files,
+which you should keep in a separate directory, otherwise you`re completely messed up.
+I don`t like this since I have really lots (around 40 megabytes) of documentation on my
+HD in the INF format, and everything fits in a single directory without worry. So I thought
+of a way to make an 'regular' OS/2 INF book from a bunch of HTML and GIF files.
+</P>
+<P>
+So I took a look inside all those HTML files (believe me or not, I didn`t know the HTML
+language until that). Then I looked into OS/2 IPF (Information Presentation Facility)
+reference and - oh God! - I've seen almost the same tags, except that IPF tags are written
+using ':' in the beginning and '.' at the and, and HTML tags are written using '&lt;' and
+'&gt;' respectively. (Seems that OS/2 IPF language is a slightly enhanced and modified
+version of HTML 1.0, although maybe I`m wrong - it could be the Unix MAN format, I`m not
+familiar with it).
+</P>
+<P>It took me about two weeks to complete the task (I have a job beside hobbies, you know
+:-). I first wrote a 'first-version' in one night (it was really <B>SLOW</B>), then I
+invented a neat way to parse HTML tags in REXX (if you`re interested - take a look at the
+<A HREF="html2ipf_tech.html">tech info</A> section or even directly to the
+<A HREF="../html2ipf.cmd">REXX script</A>), and then about a week I`ve added some
+bells &amp; whistles (you know, they`re taking most of the time). And here
+is it, the first version of HTML2IPF.
+</P>
+<P>
+This REXX script will convert a set of .HTML files into one big .IPF file. The .IPF file 
+can be used as a input to IBM's IPFC (Information Presentation Facility Compiler) to 
+create regular OS/2 INF files. One more usage for this is that you can use any of lots 
+of available today HTML editors to create OS/2 books.
+</P>
+<P>What's the pro and cons for doing this?</P>
+<UL>
+<LI>Pro: Basicaly .INF files are much smaller than .HTML files. Usualy an INF file generated 
+from a set of .HTML files occupies half of space occupied by HTML files (a exception from the
+rule are files with many GIF & JPEG pictures since IPFC picture compression is much worse
+than that of GIF and JPG). Another gain is that you have a single .INF file which you can
+easily manage.<BR>
+Beside this, many software makers publishes complex HTML documents on their Web site, which
+many of us want to have at hand. This is especially crucial to miscelaneous white papers
+(say, the OpenGL reference manual -- the main cause why I started to write HTML2IPF), since
+INF file are fully (and fast) searchable.
+<LI>Con: You lose portability. INF format is not so widespread as HTML, so you basicaly
+should convert documents for internal usage only (or documents which presents interest to
+OS/2 (and maybe DOS) community only). Beside this, IPF tag language is much less flexible
+than HTML, so complex documents (especially which makes heavy use of HTML 2.0 and 3.0 tags)
+will be converted into a unusable book (although in most cases you can manually fix this
+later, if the task is worth it).
+</UL>
+<P>This document contains several topics:
+<UL>
+<LI>HTML2IPF <A HREF="html2ipf_usage.html">command-line usage</A>
+<LI><A HREF="html2ipf_tags.html">Supported HTML tags</A>
+<LI><A HREF="html2ipf_tech.html">Techincal info</A> on HTML2IPF
+<LI><A HREF="html2ipf_news.html">What's new</A> in this version
+<LI><A HREF="html2ipf_tips.html">Tips and tricks</A>
+<LI><A HREF="apz.html">Author info</A>
+</UL>
+</P>
+</BODY>
+</HTML>

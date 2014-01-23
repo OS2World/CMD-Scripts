@@ -1,0 +1,2254 @@
+15 Nov 1997.  BBS ver 1.02e: A bulletin board system for the World Wide Web.
+
+BBS, version 1.02e, is a freeware OS/2 bulletin board system for
+the World Wide Web (WWW).  It requires the freeware SRE-Http WWW Server
+for OS/2; and the free, IBM EWS GoServe Internet Server.
+Note: Prior to 15 Nov 1997, SRE-http was named SRE-Filter. 
+
+You can obtain GoServe from http://www2.hursley.ibm.com/goserve/
+SRE-http, and the latest version of BBS, can be obtained from
+http://rpbcam.econ.ag.gov/srehttp (use the "download" and
+"addons" links).
+
+
+                             INTRODUCTION
+
+BBS is designed to offer a rich array of features in a relatively simple
+to configure package.  Some of the more basic features include:
+
+*  A flexible access control mechanism allows explicit controls on which
+   directories (file-areas) a user can peruse.
+*  Directory specific inclusion files (i.e.; FILES.BBS)  can be used to control
+   file and sub-directory display.
+*  Alternatively, directory specific headers, footers, "description files" and
+   "exclusion lists" can be used.
+*  Individual file descriptions can be displayed, along with file size and
+   creation date. If desired, you can suppress any of these fields.
+*  Optional "automatic descriptions" can be generated for  HTML, .ZIP,
+   and text files.
+*  .ZIP files can be "opened and displayed", with subsequent retrieval
+    of a specific file from within the .ZIP archive
+*  Netscape 2.01, and other HTML 3.2 compliant browsers, can upload
+   files to your bulletin board (with several forms of notification).
+*  Uploads and downloads can be recorded on a per user basis.
+*  Downloads can be disallowed if a user's "download to upload" ratio grows
+   too large.
+*  Multiple links per file (text-download, binary-download, and "mime
+   type" download can be specified.
+*  You can create a "latest submissions" index that spans multiple directories.
+*  You can create user specific upload and download directory (trees).
+
+For a quick start, you should read the installation notes (section 1),
+and the "hints and suggestions" (section 1a).
+
+
+                 **** IMPORTANT INSTALLATION NOTES ***
+
+*  For BBS downloads to work, the following entries MUST be present in your
+   SRE-http "alias" file:
+       bbs/download/*  bbs?download=*
+       bbs/zipdownload/*  bbs?zipdownload=*
+   To add these entries, you can either run the SRE-http configurator
+   or edit ALIASES.IN in the /DATA subdirectory of the GoServe working
+   directory.
+
+   Note: by default, SRE-http is installed with these entries. So don't be
+         alarmed if they are already there!
+
+*  Make sure that a copy of UNZIPAPI.DLL is either in your GoServe working
+   directory, or in you LIBPATH (say, in C:\os2\dll).
+        Since SRE-http comes with a copy of UNZIPAPI.DLL, you will
+        probably find a copy of UNZIPAPI.DLL in the GoServe working directory.
+   If for some odd reason you do not have a copy, you can download it from:
+        http://rpbcam.econ.ag.gov/srefilter/unzipapi.dll.
+   Note: UNZIPAPI.DLL is courtesy of the Info-Zip project:
+         http://quest.jpl.nasa.gov/Info-ZIP/
+         ftp://ftp.uu.net/pub/archiving/zip/ .
+
+*  BBS uploads may require tweaking GoServe (see section V).
+
+==================================================
+Table of Contents:
+
+   I)  Installation Instructions
+  1a)  Hints and suggestions
+  II)  Choosing Authentication Mode or User Mode
+ IIa)  Using INCLUSION_MODE_FILE for refined control
+ IIb)  Using BBSRECNT.CMD to display recent submissions
+ III)  The User Log Files.
+  IV)  Controlling access to selected directories.
+   V)  Notes on file uploads, and a note on configuring GoServe
+  VI)  Determining the user's required download/upload ratio.
+ VII)  BBS and Caching
+VIII)  Descriptions of request-string options to BBS.
+  IX)  Description of BBS initialization parameters
+   X)  Creating use statistics
+  XI)  Notes on the BBS caching daemon.
+ XII)  Notes on the use of "own" download and upload directories
+
+===============================================================
+I) Installation Instructions
+
+The first thing you should do is unzip the BBS .ZIP file (BBS102E.zip)
+to an EMPTY temporary directory. You then install the files, modify
+some parameters, test it, and let the world know!
+
+
+I.1) --- Installing BBS files:
+
+   Most people will probably want to use the BBS installer. It's
+   the INSTALL.CMD file that is shipped in the BBS .ZIP file (you
+   did unzip BBS to an empty temporary directory?). To use it, just
+   type INSTALL at an OS/2 command prompt (make sure your default
+   directory is this "empty temporary directory" you unzipped BBS into).
+
+   For those who want finer control, or if you are curious as to what
+   INSTALL will do:  please read the following step-by-step instructions.
+
+    1) Copy:
+          BBS.CMD,
+          BBSNEWU.CMD, and
+          BBSUP.CMD
+          BBSCONFG.CMD
+       to your SRE-http "addon" directory (i.e.; D:\GOSERVE\ADDON).
+
+   1a) Copy:
+          BBSRECNT.CMD
+          BBSCACHE.CMD
+          BBS.INI
+        to your GoServe "working" directory (i.e.; D:\GOSERVE)
+
+    2) Copy:
+          BBSHELLO.HTM,
+          BBSLOGON.HTM,
+          BBSPLAY.HTM,
+          BBS1A.HTM,
+          BBS1B.HTM,
+          BBSUP.HTM and
+          BBSNEWU.HTM
+       to your GoServe "data directory" (say, D:\WWW).
+    2a) Copy:
+           *.GIF
+         to the /IMGS/ subdirectory of your GoServe data directory.
+            Note that the /IMGS/ subdirectory should contain the small
+            .GIF files installed by SRE-http.
+
+    3a) Create a "BBS parameters directory".
+           For example, D:\GOSERVE\BBSDATA
+    3b) Create a "BBS files directory".
+           For example, D:\BBSFILES.
+             This is where the contents of your bulletin board (the file area)
+             is located.
+    3c) Create several BBS working directories:
+        i) Create a "BBS user log directory".
+           For example, D:\GOSERVE\BBSDATA\USERLOG
+       ii) Create a "BBS upload directory".
+           For example,  D:\GOSERVE\BBSDATA\UPLOAD
+      iii) Create a "BBS cache directory".
+           For example, D:\GOSERVE\BBSDATA\CACHE.
+
+    4a) Copy:
+           BBS.HDR (the default "HEADER" file)
+           BBS.FTR (the default "footer" file)
+           BBSZIP.HDR (the default "ZIP HEADER" file)
+           BBS.CTL (the default "access control" file)
+           BBS.DSC (the default "descriptor" file)
+           BBS.EXC (the default "exclusion" file)
+           FILES.BBS (the sample "inclusion mode" file)
+        to your BBS parameters directory (that you created in step 3a).
+
+    4b) Copy:
+           BBSSTAT.CMD (the statistics generator)
+        to your BBS user log directory (that you created in step 3c.i).
+
+
+I.2) -- Modifying parameters
+
+  To set/modify the various BBS parameters, most people will probably want
+  to use the BBS configurator.
+         To use the BBS configurator, (after installing BBS) just point your
+         browser at  http://your.server/bbsconfg?
+         (make sure you include the trailing ?, with nothing after it).
+  You will be given a lightly documented form that allows you to change
+  almost all the BBS parameters.
+
+  Alternatively, if you aren't afraid of getting personal with a text
+  editor, you can edit the BBS.INI file (look in your GoServe working
+  directory).
+
+  In either case, the following steps are recommended. If you are an
+  undemanding bbs-master, they will be enough to get you started.
+  You'll probably want to read the "hint and suggestions" (section 1a)
+  to get some ideas on what can be done with BBS.
+  If you like to tinker, then you should read the volumunious descriptions
+  contained in the latter portion of this document.  In particular, section
+  IX describes the various and sundry BBS initialization parameters.
+
+    1) Set the following "BBS directories" parameters:
+           BBS_PARAM_DIR : The "BBS parameters directory" (set in I.1.3a above)
+           FILE_DIR   :    The "BBS files directory" (set in I.1.3b above)
+           USERLOG_DIR:    The "BBS user log directory" (set in I.1.3c.1 above)
+           INCOMING_DIR:   The "BBS upload directory" (set in I.1.3c.ii above)
+           BBSCACHE_DIR:   The "BBS cache directory" (set in I.1.3c.iii above)
+
+         *** If you used INSTALL.CMD to install BBS, you can use the default
+             values of these parameters. ***
+
+       1a) If you do NOT want a HEADER and FOOTER added to your
+           directory displays, set the HEADER_FILE, FOOTER_FILE, and
+           ZIP_HEADER_FILE variables to ' '.  If you do want HEADERs
+           and FOOTERs displayed, you SHOULD EDIT THESE FILES!
+
+       1b) The HEADER_FILE, FOOTER_FILE, and ZIP_HEADER_FILE
+           can be "directory specific".  BBS will first look for
+           these files in the requested directory, and if not found
+           it will then look in the BBS_PARAM_DIR directory.
+
+        1c) If you want newly registered users to be assigned an "own" upload
+            and download directory, set the OWN_DOWNLOAD_DIRECTORY and
+            OWN_UPLOAD_DIRECTORY parameters (see section XII for details).
+
+     2) Edit the BBS.EXC  "exclusion" file (in your BBS_PARAM_DIR).
+        As with HEADER_FILE, etc.; the BBS.EXC file can be
+        "directory specific".  Note that exclusions are not additive --
+        the version of the exclusion file located in the BBS_PARAM_DIR
+        directory is used ONLY if there is no "directory specific" exclusion
+        file. If you do NOT want to use an exclusion file, set the
+        EXCLUSION_FILE variable to ' '.
+
+      3) Edit the BBS.DSC "descriptors file" (in your BBS_PARAM_DIR
+         directory). As with the HEADER_FILE, etc.; the BBS.DSC file can
+         be directory specific.  However, it is cumulative:
+         descriptions from the version of BBS.DSC located in your
+         BBS_PARAM_DIR directory are added to an "own directory"
+         version of BBS.DSC (if an entry occurs in both files, the "own
+         directory" version is used).
+
+      4) Edit the BBS.CTL "access control" file (in your BBS_PARAM_DIR
+         directory).  If you do NOT need to control access to specific
+         directories, you can skip this step.
+
+      5) If you want to use the "FILES.BBS" emulator, then set
+         the INCLUSION_MODE_FILE variable to the name of your
+         directory listing file (i.e.; FILES.BBS).
+
+I.3) Give it a try
+  You are now ready to go (assuming you also read the "IMPORTANT
+  INSTALLATION NOTES" at the top of this document).
+
+  You can use BBSHELLO.HTM as your "welcome" screen.  Feel free
+  to modify it, but please do pay attention to the embedded comments.
+       Or, to get a hang of what BBS can do, you can try BBSPLAY.HTM.
+  Note that you may want to "register" a few users right away,
+  such as yourself!
+  Advanced users note: if you like to customize, you should look at BBS1A.HTM
+                         and BBS1B.HTM.
+
+
+I.4) Tell the world
+   If I knew how to do that well, I'ld be a happier software developer.
+
+I.5) Notes:
+*  To disable caching, set the CACHE_FILES parameter to 0.
+    Alternatively, you can include a "NOCACHE=1" option in the request string.
+
+*  BBS will attempt to send pieces of the response as they become
+   available.  This speeds up percieved throughput (since something is
+   displayed almost immediately), at the expense of slightly increasing
+   server load. If you wish, you can turn this off by setting the
+   SEND_FILE parameter in BBS.CMD (that's right, it's NOT in BBS.INI).
+
+*  To select "authorization" mode, set the AUTHORIZATION_MODE parameter
+   (in BBS.CMD) to 1. See the next section for a discussion of
+   authorization mode.
+
+*  You may want to customize the various BBS*.HTM files (that you
+   copied in step 2 above). If you do, please pay attention to the
+   embedded comments. For example, the BBSHELLO.HTM file points
+   to several other BBS*.HTM files -- make sure those links
+   aren't broken.
+
+*  If you wish to name your "request username" response file to something
+   other then BBSLOGON.HTM, change the BBS_LOGON_FILE variable.
+   Note that the BBS_LOGON_FILE is assumed to be relative to the GoServe data
+   directory, or to a virtual directory -- you should NOT specify a fully
+   qualified directory.
+
+*  We HIGHLY recommend that you customize  the BBS.HDR, BBS.FTR, BBSZIP.HDR,
+   and BBS.EXC files.  You can use the versions that come with BBS as a
+   template.
+
+*  FILES.BBS files can be used as a BBS descriptor file (you will need to
+   you can change the value of the DESCRIPTION_FILE variable in BBS.INI).
+   You may also want to change the value of the CONTINUATION_FLAG variable.
+
+*  If you choose to use an INCLUSION_MODE_FILE, be aware that the "descriptor
+   file (BBS.DSC) will be ignored, sorting of files is not attempted (since the
+   order of display is strictly controlled by the INCLUSION_MODE_FILE).
+   However, most other parameters and options (including display options,
+   caching, HEADER, and FOOTER files) remain valid.
+
+*  If you use the OWN_UPLOAD_DIRECTORY and OWN_DOWNLOAD_DIRECTORY parameters,
+   be aware that BBS will create subdirectories (under these directories)
+   when a new user registers.
+
+===============================================================
+Ia) Some Hints and Suggestions
+
+* The following parameters will be of greatest interest.  For details,
+  see section IX.
+
+   FILE_DIR
+       The location of your "main file area".
+
+   DEF_BIN_TEXT_LINKS (enabled by default)
+      If DEF_BIN_TEXT_LINKS is enabled (and you do NOT include a NOICONS=1
+      option in the request string), each entry will contain 3 links:
+        1) A "text icon" to "download as text"
+        2) A "binary icon" to "download as binary"
+        3) An "underlined file name" to download using SRE-http's
+           mime-type resolution algorithim (i.e.; .HTM files are downloaded
+           as text/html documents).
+      If this is too crowded, you can set DEF_BIN_TEXT_LINKS=0 (in BBS.INI).
+
+    WRITE_DETAILS (enabled by default)
+       If WRITE_DETAILS is enabled, then transactions are recorded in the
+       user's log file.  By default, these files are in the BBSDATA\USERLOG
+       directory, and have names of the form USERNAME.IN (i.e.; someone with
+       a user name of JOE will have JOE.IN file).  You might want to
+       keep an eye on these files to make sure they don't get too big.
+
+   TABLE_BORDER and CELL_SPACING (default values are 0 pixels, and 2 pixels)
+       These can increased to help offset each entry (each row/column of
+       the table of entries).
+
+    DEFFAULT_DATEFMT  (default value is 10 Mar 1997).
+        You can set this to one of several styles; such as 10/3/97
+        or 3/10/97.
+
+    USE_SERVERNAME (default: your server's IP name)
+        You might want to set this to be a "colloquial" name,
+        such as "The Fabulous BBS at FOO.BAR.NET".
+
+    DEFAULT_RATIO and DEFAULT_BYTE_RATIO (default= ignore)
+        If you want to encourage uploads from your BBS members,
+        you should set these values (and read section VI).
+
+     OWN_DOWNLOAD_DIR and OWN_UPLOAD_DIR (default: disabled)
+         If you want to grant new users a "personal" upload and
+         download directory, you should set these values.
+
+*  If you want to experiment with the various "request string" options,
+   you can play with BBSPLAY.HTM.
+
+
+*  The BBSCACHE.CMD "caching daemon" can help keep your cache up to date.
+   See section XI for details.
+
+*  BBSSTAT.CMD (in the USERLOG directory) can be used to create use
+   statistics.
+
+*  Instead of BBSHELLO.HTM, you may wish to modify BBS1A.HTM and BBS1B.HTM --
+   they allow you to customize the BBS front end (i.e.; you can set up a
+   table of "file areas", each of which will be handled by BBS).  See BBS1A.HTM
+   and BBS1B.HTM for details.
+
+===============================================================
+II) Choosing Authentication Mode or Native Mode
+
+BBS has two modes: a native mode, and an "authentication mode".
+In general, we recommend the native mode; but in some circumstances
+the authentication mode may be preferred.
+
+Roughly speaking, "authentication mode" is similar to using "cookies" to
+identify username and passwords, with the difference being in how the BBS
+requests (and reads) the username and password.  The main advantage of
+"authentication mode" is that older browsers (that do not understand cookies)
+will work.  The major disadvantage is that BBS "logon" must be more closely
+coordinated with SRE-http's access control facilities.
+
+More specifically, authentication mode has the following features:
+  a) Browser authentication tools are used to ascertain who the users is.
+     In particular, when an unknown user attempts to access BBS, she is then
+     "challenged" with the username/password screen (that her browser displays
+     when it recieves a '401 Unauthorized' response).
+  b) If you are using the SRE-http logon or selector-specific access
+     controls, the BBS username must be the same as the "SRE-http" username
+     (as set in SRE-http's USERS.IN file).
+  c) BBS Registration is granted automatically to everyone with "server" logon
+     rights (new BBS users will automatically be given a simple "user log"
+     file).
+
+In contrast, the native mode has the following features:
+  a) Username and password information is built into the request string.
+     Alternatively, if the client's browser understand cookies (i.e.;
+     Netscape 1.3 and  above), it's passed in an  unencoded "cookie".
+  b) SRE-http's user list (USERS.IN0 is not needed (though it may still be
+     used by SRE-http for general access controls).
+  c) If a user is not found, a customizable HTML document (set in the
+     BBS_LOGON_FILE parameter) is returned, which asks for a username and
+     password, or allows one to "register" as a new user.
+  d) Anyone with access to your site, whether or not they have an explicit
+     entry in SRE-http's user list, can register as a BBS user (you can
+     suppress this auto-registration feature).
+
+
+Basically, authentication mode is similar to the use of "cookies",
+and can be handled by most browsers. On the other hand, it is  a little less
+flexible (you can't customize the "logon" prompt, and you have to be careful
+about coordinating BBS usernames with SRE-http usernames).
+
+==============================================================
+II.a) Using INCLUSION_MODE_FILE for refined control
+
+Introduction:
+  The INCLUSION_MODE_FILE parameter is used when you already have an extensive
+  list of "FILES.BBS-style" directory descriptor files, or if you are willing
+  to create such a set of files (one per directory).
+
+  INCLUSION_MODE_FILE is similar to the EXCLUSION_FILE; except rather then
+  listing files to exlude, it lists files and sub-directories that may be
+  included -- if a file appears in the directory and is not explicitily listed
+  in the "own directory" INCLUSION_MODE_FILE, then it will NOT be shown to the
+  user.  Note that unlike the EXCLUSION_FILE, wildcard matches are NOT used.
+
+  In addition, use of the INCLUSION_MODE_FILE gives one a few additional
+  options:
+    i)  The order of display is controlled by the order of appearance in
+        the INCLUSION_MODE_FILE.
+    ii) You can include "comment lines" that will be displayed (in the
+        order of appearance).
+    iii) You can specify a "preview mode" -- only the INCLUSION_MODE_FILE
+         will be sent to the user; with an optional "link" back to
+         the regular file listing. This is useful for quick review
+         of site contents.
+
+  Of course, the downside is that you have to create an INCLUSION_MODE_FILE
+  in EACH directory (though you could use tools from other packages to assist
+  in this task).
+  AND REMEMBER: Files, and subdirectories not explicitily listed in
+                a directory's INCLUSION_MODE_FILE will NOT be displayed.
+
+Basic structure:
+  There are 3 types of entries in the INCLUSION_MODE_FILE.
+   i) If the first character is a non-space, it is ALWAYS interpreted
+      as a filename or a directory name.  Directory names are signified
+      by using a / as the first character.
+      Following the file or directory name (seperated by at least one
+      space) is the (first line of the) description.
+   ii) If the first character is a space, and the next NON-SPACE character
+       is the "continuation flag" (stripped of spaces), then the
+       line is treated as a "continuation" of a previous file
+       (or directory) description.
+  iii) If the first character is a space, and the next NON-SPACE character
+       is NOT the "continuation flag", the line is treated as
+       a comment. Comments are displayed as seperate lines in the
+       document (they will span the entire width of the table).
+
+  It is likely that the INCLUSION_MODE_FILE will occasionally reference
+  a non-existent file or directory.  Should this happen, a "not available"
+  entry will be included in the file listing. This listing will contain
+  the name of the file (without a link associated), and the
+  first line of the description (as pulled from the INCLUSION_MODE_FILE).
+
+Notes:
+  * A single character "continuation flag" (as set in the
+    CONTINUATION_FLAG parameter) should not be used.
+  * The EXCLUSION_FILE is still used -- it is checked AFTER
+    the INCLUSION_MODE_FILE.
+  * The DESCRIPTION_FILE is ignored -- the descriptions are all pulled  from
+    the INCLUSION_MODE_FILE. Similarly, AUTO_DESCRIBE is not available.
+  * Sorting is ignored -- files are displayed in the order of appearance
+    (in the INCLUSION_MODE_FILE).
+  * HEADER, FOOTER, and comments found in the INCLUSION_MODE_FILE, are
+    all displayed.
+  * When using BBS's "table mode": comments written before the first file
+    entry are written above the table header (but below the document HEADER).
+
+
+Notes on Preview Mode:
+  * To indicate a "preview mode", just include a &PREVIEW=1 in the request
+    string.  You could do this by adding a "hidden" form element to
+    BBSHELLO.HTM.
+       For example: http://your.server/bbs?dir=/foo1&preview=1
+  * To suppress the "link back" to the regular file listing (the listing
+    that contains links to the actual files), use &PREVIEW=2.
+  * When the user selects a "link back", all sub directories of the selected
+    directory will have "preview" links.
+  * If you want to display a directory with a full listing of files
+    (including links), but a "preview" listing of subdirectories, use
+    &PREVIEWDIRS=1.
+       For example: http://your.server/bbs?dir=/foo1&previewdirs=1
+  * Note that to return to the page from which a "preview link" was
+    initiated, the user must use her browsers "back" button.  That is, the
+    only explicit link included in a "preview link" invoked document is the
+    link to the "regular listing" represented by the displayed
+    INCLUSION_MODE_FILE.
+
+Notes on directory entries in the INCLUSION_MODE_FILE:
+  * Directory entries MUST be placed in the INCLUSION_MODE_FILE.  If not
+    explicitily included, links to subdirectories will NOT be displayed.
+  * Directory entries should start with a /, and should be relative to the
+    "own directory".  Thus, an entry of /SUBDIR1 is valid, but an entry of
+    D:\BBSFILES\SUBDIR1 is not allowed.
+  * Directories are ALWAYS displayed at the end of the document, regardless
+    of where the directory entry occurs in the INCLUSION_MODE_FILE.
+  * Comments can NOT be interspersed with directory entries (since the
+    directory entries are moved to the end of the document, but comments are
+    not).
+
+Examples:
+      INCLUSION_MODE_FILE='FILES.BBS'
+      INCLUSION_MODE_FILE=0
+
+      For a very simple sample of an INCLUSION_MODE_FILE, see the
+      FILES.BBS file that comes with BBS.
+
+===============================================================
+II.b) Using BBSRECNT to display recent files
+
+The BBSRECNT.CMD facility allows you to create an index of "recently
+added" files.  This index will contain file names, and descriptive
+information, that BBS can use to display "a list of recent files".  Note that
+this list can span several directories (but it can not contain links to other
+directories).
+
+The following outlines how one might use BBSRECNT:
+
+   1) From an OS/2 prompt (in your GoServe working directory),
+      run BBSRECNT.CMD
+   2) BBSRECNT will ask you several questions. Let's assume
+          you use the defaults.
+   3) Create a link that you put in your BBSHELLO.HTM file.
+     For example:
+          <a href=bbs?user=auser&pwd=apwd&Index_list=bbsrecnt.idx>
+          See the latest additions? </a>
+
+     Alternatively, if everyone is using Netscape, and you have
+     BBS's cookie-mode enabled, you could put the following link in a
+     footer file:
+          <a href=bbs?index_list=bbsrecnt.idx>See the latest additions?</a>
+
+    In either cases when this link is selected, the files chosen
+    by BBSRECNT.CMD will be displayed.
+
+
+NOTES:
+
+  *  When BBS uses an index, it first checks that the client has
+     privileges for EACH file contained in the index. Files for which
+     the client does NOT have privileges are NOT displayed (files for
+     which a client DOES have privileges ARE displayed).
+
+  *  When BBSRECNT is run, it will check the various (possibly directory
+     specific) EXCLUSION_FILES (and drop all files that appear in an
+     appropriate exclusion file).
+
+  *  If you use a "cookie" (no explicit mention of user or pwd) link
+     to an "index list", and a non-cookie browser is being used;
+     BBS will use the BBS_LOGON_FILE to request a user/pwd from
+     the client.
+
+  *  BBSRECNT.CMD will look in the DESCRIPTOR (.DSC) files for descriptions --
+     it will NOT attempt auto_descriptions.
+
+  *  These indices are NOT dynamic -- BBS uses them as is. So, if things
+     change on your site, you have to re-run BBSRECNT.CMD
+
+  *  When displaying an INDEX_LIST, BBS will use most of the request and
+     BBS.INI options (but sorting can only be set when you create the
+     index list).
+
+  *  A special option, INDEX_DAYS, can be included to further narrow the
+     set of files displayed. For example:
+                BBS?INDEX_LIST=BBS1.IDX&INDEX_DAYS=20
+     where BBS1.IDX may contain files added in the past 30 days.
+
+  *  You can create as many different "index lists" as you want -- just be
+     sure to use different links (that is, different values for the
+     INDEX_LIST option).
+
+  *  Ambitious programmers may wish to create their own "index list"
+     generators, that may use criteria other then file dates.  You can
+     see BBSRECNT.CMD for a description of what is expected in these
+     "index list" files.
+
+   * As a complement to BBSRECNT, you may also want to create a "search
+     index" of your BBS site.  This can be easily done with SRE-http's
+     SRCHINDX.CMD add-on (http://rpbcam.econ.ag.gov/srefilter/srchindx.zip).
+     One nice trick is to create a "description cache" using the .DSC files
+     in your BBS directories -- and then include a "search descriptions
+     using SRCHINDX" link in your  BBS logon page.
+     For further details, see the SRCHINDX documentation at
+     http://rpbcam.econ.ag.gov/srefilter/srchindx.doc
+
+
+===============================================================
+III) The User Log Files
+
+The User Log files, which are located in the USERLOG_DIR directory, are used
+to store user specific information.  These files are first created when an
+individual "registers" -- typically by invoking the BBSNEWU.HTM document, or
+indirectly from BBSLOGON.HTM.  They contain various information, some of which
+you may wish to change on a fairly frequent basis.
+
+User Log files are named as username.IN, where username is the "username" an
+individual "registered" with.  Thus, a user with the name KAREN will have a
+KAREN.IN user log (in the USERLOG_DIR directory).
+
+---  Example of a User Log file. Lines beginning with a ; are comments.
+
+; User file for :  daniel
+; The status: line contains information on downloads and uploads:
+;    Dwnld_files  Upld_files  Dwnld_bytes Upld_bytes time_last_dwnld
+Status: 5 0 79959 0 729000.658
+; the User: line contains the username and password (unencoded)
+User:  daniel   purple
+; The Privilege: line contains his privileges.
+; !! YOU WILL WANT TO MODIFY THIS LINE IF YOU WISH TO USE BBS.CTL
+;    FOR ACCESS CONTROL !!
+Privileges:  NEWUSER group1 group3
+; The ratio: line contains the user's upload ratio -- you may
+; want to change this for favored (or unfavored) users
+; In extreme cases, setting a ratio of -1 means "no downloads permitted"
+; Alternatively, a ratio of 0 means "unlimited" (assuming no other ratios apply)
+; Note that the DEFAULT_RATIO and DEFAULT_BYTE_RATIO variables are used
+; to initialize this "Ratio".
+Ratio :  8 100
+; The "real name" of the user.
+Name:  danny h
+; The user's E-mail address
+Email:  dhm@nowhere.org
+; (optional) A (set of) user specific download & upload directories.
+;  These both contain:
+;     a "prefix", and
+;     a fully qualified directory
+;  Upload_dir entries may contain an (optional) "weight factor"
+;  Download_dir entries may contain an (optional) "privilege list"
+;  Note that the OWN_DOWNLOAD_DIRECTORY, OWN_UPLOAD_DIRECTORY, and OWN_FLAG
+;  variables are (optionally) used to initialize these entries.
+Upload_Dir: myup dmh/
+Download_Dir: personal  d:\bbs2\danielh
+;
+; other, miscellaneous variables (not currently used by BBS)
+SENDNOTES: 1
+;
+; the Messages: line signals the end of the main section.
+; Entries recording individual transactions are written below here.
+; These entries are created if write_details=1 (set in BBS.INI)
+Messages:
+DIR1/    ADDHITC.SRF   15:44:58 8 Dec 1996
+DIR1/    Extract from SREFPRC1.ZIP   makelib.cmd   15:45:38 8 Dec 1996
+DIR3/    SHOWDIR.DOC   15:46:03 8 Dec 1996
+
+----- End of example.
+
+Notes:
+ * In "authentication mode", the User Log files are based on the SRE-http
+   username.  They will be created automatically upon an individual's first
+   access to BBS -- the individual is not informed of it's creation.
+
+ * For efficiency reasons, there should NOT be more then 40 lines before the
+   MESSAGE: line -- you should remove comment lines if you are above
+   this limit (say, if you have several miscellaneous variables, or
+   several UPLOAD_DIR and DOWNLOAD_DIR entries).
+
+ * The User Log files can be used to track all download requests made by an
+   individual (these entrires are placed at the end of the file).  To enable
+   this, set WRITE_DETAILS=1.
+
+ * BBS also maintains a count of all downloads, on a "file specific" basis.
+   This record is contained in the BBS.CNT file in your BBS_PARAM_DIR
+   directory.
+
+ * The DOWNLOAD_DIR and UPLOAD_DIR parameters must contain a "prefix" and
+   a fully-qualified directory name. See Section XII for further discusssion.
+
+===============================================================
+IV)  Using BBS.CTL to control access to selected directories.
+
+If you want to control access to selected directories, the BBS.CTL file can
+be used.  BBS.CTL can also be used to assign which "root directory" the
+"requested directory" is relative to.
+
+For details on how to add entries to BBS.CTL, please read the version of
+BBS.CTL that is shipped with BBS.  Briefly,
+each entry should have the structure:
+       dir  priv_list  , root_dir
+where:
+       dir is a possible "requested directory",
+       priv_list is a list of "required privileges"
+       root_dir is an (optional) "alternative root directory"
+
+Examples:
+  1) /DIR1 (of your FILE_DIR directory), and it's subdirectories,
+      are open to everyone.
+          /dir1/*   *
+     Note the use of an asterisk (a *):
+       i)  as a wildcard for "all subdirectories", and
+      ii)  as an "everyone has access" privilege.
+
+  2) /DIR2 (and it's subdirectories) are available only to users with
+     a CATS  privilege.
+       /dir2/*   CATS
+
+  3) /DIR3 is available only to users with a DOGS privilege. Also,
+     /DIR3 is relative to d:\others, and not to the default FILE_DIR.
+     Lastly, subdirectories of d:\others are NOT available (since
+     no * appears after the /dir3).
+        /dir3     DOGS , d:\others
+
+Note: If FILE_DIR = 'D:\BBSFILES:
+         Example 1 refers to all files in D:\BBSFILES\DIR1 and it's
+         subdirectories.
+         Example 2 refers to all files in D:\BBSFILES\DIR2 and it's
+         subdirectories.
+         Example 3 refers to all files in  D:\OTHERS\DIR3.
+
+
+Notes:
+ *  In order to use privileges, you'll have to add appropriate privileges
+    to the lucky user(s) "user log" file(s).  See the section III,
+    "The User Log Files", for details.
+
+ *  BBS.CTL is part of the "setting a  user's download/upload ratio"
+    puzzle. See the section VI, "Determining the user's required
+    download/upload ratio", for details.
+
+ *  See the discussion of "own" download and upload directories (in section
+    XII) for an alternative means of dictating "root directories".
+
+
+===============================================================
+V) Notes on file uploads.
+
+File uploads are achieved through the use of  the "multipart/form-data"
+variant of html FORMS.  Specifically, HTML 3.2 compliant browsers
+(such as  NetScape 2.01) will transfer a file to the server
+when an <input type="file" ...> element appears in an html FORM.
+
+BBSUP.HTM is an example of such an html form -- it can be used as-is to
+provide access to the BBS uploader.
+    Feel free to modify BBSUP.HTM, but do pay attention to the embedded
+    comments).
+BBSUP.HTM calls the BBSUP.CMD component of BBS.  When BBSUP.CMD
+gets a request, it will:
+  1) Check the http syntax. If the syntax is not correct, an
+     error message is returned.
+  2) Determine the upload directory.  By default, uploads
+     are to the INCOMING_DIR directory (or are relative to it).
+     This can be changed by the use of UPLOAD_DIR entries in the
+     user log file(s) (see section XII for details)
+  3) Check to see if the name that the file will be saved to (in
+     the upload directory) already exists.
+     If a file with the desired name already exists, an error message
+     will be returned.
+     Hint: if you don't care about exact names, you can instruct
+            the user to include ? characters in the file name.
+            These will be filled in with characters that should
+            yield a unique name.
+  4) Save the uploaded file.
+  5) Return a short status message.
+  6) Record the upload in the user's user log file.
+  7) Write a note to the UPLOAD.LOG file (which is located in your
+     BBS_PARAM_DIR directory) describing the details (user name,
+     original filename, filename saved as, etc.) of the upload.
+  8) Optionally, send an E-mail not to the BBS-administrator informing
+     her of this upload (see the ADMIN_EMAIL, BBS_SMTP_GATEWAY, and
+     SEND_ALERT variables for details).
+
+Example:
+       INCOMING_DIR =  'b:\upfiles'
+       BBS_PARAM_DIR =    'D:\BBS'
+       the users UPLOAD_DIR parameter = 'myup d:\private\bobj'
+       the uploaded file is to be saved as 'myup\simple\minds.htm'
+   then BBS will write the uploaded data to d:\private\bobj\simple\minds.htm
+
+
+** A Note on Configuring GoServe
+
+GoServe (especially earlier versions) seems to have intermittent problems when
+processing these multipart requests.
+These settings sometimes help:
+     1) Double click on the GoServe icon
+     2) Select the OPTIONS  menu
+     3) Select the LIMITS tab
+     3) Change the Connection Maintain to some relatively large positive value.
+        The proper value should be determined by experimentation, and
+        may depend on the size of files being transfered.
+     4) You may also want to go to page 2 of this tab, and change the
+        "body data size" variable (to the largest size you expect to recieve).
+        NOTE THAT GOSERVE SEEMS TO HAVE A 1M LIMIT ON UPLOADS.
+
+
+
+================================================================
+VI) Determining the user's required download/upload ratio.
+
+To encourage active participation by users of your bulletin board, you can
+require that each user maintains a satisfactory download to upload ratio.  BBS
+offers a number of mechanisms to enforce this; including options to set
+different requirements per directory, or per user.
+
+The client's required upload download/upload ratio is determined using the
+maximum of:
+        #1) The value of the RATIO: entry in her user log file.
+        #2) The "privilege specific" ratios associated with a directory.
+
+    #1  (which is initialized with the DEFAULT_RATIO and
+    DEFAULT_BYTE_RATIO parameters) is designed to provide "user specific"
+    ratios.
+
+    #2 is designed to provide ratios to "groups of users".
+
+    In order to provide flexibility, BBS uses the following (slightly
+    complicated) method of determining which "group" the user falls into.
+
+    The basic logic is:
+       i)  If the requested directory matches an entry in the BBS.CTL file
+           (or a matching DOWNLOAD_DIR entry in the .IN file), the
+           "privileges" associated with this entry are read.
+
+       ii) If there is no matching entry, the following steps are skipped --
+           only #1 above is used to determine the user's download to upload
+           ratio.
+
+      iii) These "directory privileges" are compared to the "user's
+           privileges".  The matches (the privileges in both lists)
+           are then extracted.
+
+           Notes on matches:
+                  * If there are no matches (and a BBS.CTL entry is being
+                    used), the client is denied access to this directory (in
+                    which case, the ratio is irrelevant).
+
+                  * For matches to a DOWNLOAD_DIR entry, privileges are NOT
+                    used to control access.
+
+                  * The user's privileges are read from the Privileges:
+                    entry in her user log file.
+
+       iv) For each element (of this set of matching privileges), a
+           "privilege specific" ratio is read from a PRIV_RATIO.! parameter.
+           If such a PRIV_RATIO.! entry has not been defined, this element
+           is skipped.
+
+           Notes:
+              * PRIV_RATIO.! parameters are set in the BBS.INI file
+              * there is NO requirement that you specify a PRIV_RATIO.!
+                parameter for all the privileges you might use.
+
+
+ Summarizing:  The maximum of the "privilege specific" ratios (from step iv)
+               and the user specific ratio (from #1) is  used as the required
+               download to upload ratio.
+
+ Important note:  A ratio of "0" means unlimited, BUT if a ratio of
+                  0 and a non-0 ratio are found, the non-zero ratio
+                  is used!  That is, "0 means unlimited" is ONLY used
+                  if NO other information is available.
+
+Example:
+  Assume:
+    a) The BBS.CTL File contains:
+          /dir1   GROUP1
+          /dir2   GROUP2
+          /dir12  GROUP1 GROUP2
+          /dir34  GROUP3 GROUP4
+          /dir35  GROUP3 GROUP5
+    b) The clients user log file contains:
+        Privileges: GROUP1 GROUP3 GROUP5 NEWUSER
+        Ratio: 20 100
+    c) The BBS.INI file contains:
+        PRIV_RATIO.!GROUP2='50 1000'
+        PRIV_RATIO.!GROUP3='75 800'
+        PRIV_RATIO.!GROUP4='10 4000 '
+        PRIV_RATIO.!GROUP5='0  400 '
+
+  Requests for files in the following directories will yield:
+     /DIR1 ---  the ratio is 20 and 100
+                  * no matching PRIV_RATIO entry, so use the  Ratio: values
+     /DIR2 ---  the client is not allowed access to /DIR2
+                  * she does not have a GROUP2 privilege
+     /DIR3 ---  the ratio is 20 and 100
+                  * no matching entry in BBS.CTL, so use the Ratio: values
+     /DIR34 --  the ratio is 75 and 800
+                  * RATIO: and  PRIV_RATIO.!GROUP3  are used, with:
+                    max(20,75)=75 and max(100,800)=800.
+                  * PRIV_RATIO.!GROUP4 is not used (for this user), since she
+                    does not have a GROUP4 privilege.
+     /DIR35 --  the ratio is 75 800
+                  * RATIO:, PRIV_RATIO.!GROUP3, and PRIV_RATIO.!GROUP5 are
+                    used, with: 75=max(20,75,0) and 800=max(100,800,400).
+                    Note that the 0 (file) ratio for GROUP5 is NOT used
+                    as infinity (however, if all relevant ratios had been
+                    been 0, then an "unlimited" download ratio is assumed).
+
+Note:
+   To suppress downloads on a "per-user" basis (but allow the user to view the
+   contents of a directory), you can use -1 as a file ratio in one of your
+   PRIV_RATIO.!  variables.  However, if a non "-1" ratio also applies to a
+   given user, this suppression will not be invoked (that is, ratios of -1
+   and 0 are both subject to the "greater values dominate" rule).
+
+Advanced Note:
+  You might want to fine tune the "significance" of downloads from selected
+  directories.  That is, in addition to relaxing (or tightening) the
+  requirements for downloading from a given directory, you may want to state
+  that downloads from this directory effect your TOTAL byte (and file) counts
+  less then (or more then) usual.  In other words, you may want to "weight"
+  the bytes by some factor.  You can do this by setting the appropriate
+  PRIV_WEIGHT.!  variables.
+
+
+================================================================
+VII) BBS and Caching
+
+To improve throughput, BBS supports a form of "dynamic caching" of the
+listings of directories and .ZIP file expansions.  This involves "partial
+compilation of HTML" files, with these partially compiled files used to honor
+sufficiently similar requests.
+
+  Basically, after BBS has constructed a document displaying a directory, or a
+  .ZIP file expansion, it "caches" a copy of it to the BBSCACHE_DIR directory.
+  Since the actual listing may contain user and password information (as may
+  the request string that invoked this listing), BBS first strips out username
+  and password information.  When a similar request comes in, that differs
+  only in the username and password (that is, the same request from a
+  different user), BBS will use this "cached" copy (after possibly
+  substituting the current username and password).
+
+Although this can greatly improve throughput, there are a few potential
+drawbacks.  First and foremost, unless otherwise instructed, BBS does NOT
+attempt to verify the listing against the current contents of the directory.
+Thus, if one removes files from a directory that has been "cached", these
+deletions will not be reflected (to the next user requesting a listing of the
+directory).  Similarly, changes to the header or footer file will not be
+displayed.
+
+BBS provides several mechanisms for mitigating this problem.
+  1) The CACHE_DURATION parameter.  CACHE_DURATION should be set to number
+     of days (where 0.5 yields 12 hours) a "cached file" is valid.  After this
+     time has elapsed (measured from the moment the temporary file was
+     created), a request will create a new listing (and overwrite the current
+     one).  The best value of this parameter will depend on how busy the BBS
+     is, both in terms of user requests, and in terms of addition or deletion
+     of files.
+  2) The INIT option of BBS.  If a BBS?INIT=1 request is issued (by a
+     SUPERUSER), BBS will reset the cache (all cached files are deleted).
+     This is especially useful after the BBS administrator has made
+     substantial changes to the file structure.
+! 3) For greatest efficiency in caching, we highly recommend using the BBS
+     caching daemon (BBSCACHE.CMD).  This is described in section XI!
+  4) If you enable the CACHE_CHECK variable, file stamps will be checked.
+
+
+Another concern is the size of the cache.  This can be controlled with the
+CACHE_FILES parameter.  Large values will lead to a larger cache; while small
+values save disk space. As a very rough example, if an average "listing" takes
+10-20k, then a CACHE_FILE=100 may lead to a cache of 1 to 2 megabytes.
+
+Miscellaneous Notes:
+
+ * When the CACHE_FILES limit is hit, BBS will delete the "oldest" listing
+   first; no attempt is made to gauge which cached listing is the "busiest".
+
+ * The cached listing is unique for all possible combination of options.
+   That is (ignoring user and password infomation), a request of BBS?dir=/dir1
+   and a request of BBS?dir=/dir1&nosize=1 will lead to seperate listing
+   files.  Thus, if you let users easily modify their requests, you may need
+   to substantially increase the value of CACHE_FILES.
+
+ * If you have a .ZIP file, or a directory, that contains the & character in
+   it's name; caching will not work (for convoluted reasons having to with the
+   HTML character encoding rules).  However, normal (non-cached) retrieval
+   will work.  In other words, for efficiency sake, you should avoid the use
+   of the & character in file and directory names.
+
+ * If you have enabled the use of "cookies" (by setting USE_COOKIES=1), then
+   a seperate cache file is saved for "cookies responses" and "non-cookies"
+   responses.
+
+
+================================================================
+VIII) Descriptions of request-string options to BBS.
+
+Note: A GET method request will consist of:
+     BBS?option1=value&option2=value2&....
+
+
+The following "options" are recognized (we exclude a few options
+that are designed for internal use by BBS):
+
+ALTSTART       :  Instead of displaying BBS, redirect to ALTSTART (used by BBS1A.HTM)
+BIN_TEXT_LINKS  : Display multiple "links" to the document
+DATEFMT        :  The date display format
+DIR               : The directory to view
+DIRCOLS         : Number of columns to use when displaying directory links
+FORCETEXT       : Transfer all files as "text/plain"
+FORCEBINARY     : Transfer all files as "application/octet-stream" (binary)
+INIT            : Initialize
+NOICONS         : Do NOT display icons
+NODIR           : Do NOT display parent and child directories
+NOTIME          : Dos NOT display file creation time
+NODATE          : Do NOT display file creation time and date
+NODESC          : Do NOT display file description
+NOSIZE          : Do NOT display file size
+NOCACHE         : Do NOT cache this directory listing
+ROOTDIR         : Do NOT provide link to parent directory
+SHORT           : Use a short display format
+SIZEFMT         : The file-size display format
+SORTBY          : The sorting criteria (date, name, etc.)
+TIMEFMT         : The time format
+ZIPFILE         : The .ZIP file to view.
+
+
+        ------------------------------------------------------
+
+ALTSTART:  Redirect to an "alternative" startup document
+
+   ALTSTART should be equal to an absolute or relative URL.   It is typically
+   used by BBS1A.HTM (or your own equivalent) to provide an "alternative"
+   startup document.
+   For example, you could point to a complicated table, with each cell
+   corresponding to the root of some directory tree -- with BBS handling
+   each of these trees.
+
+   Example: ALTSTART="/BBS1B.HTM"
+
+  Note:  for "cookies" to work properly, the ALTSTART URL should be relative
+         to the document that invokes it.
+
+
+BIN_TEXT_LINKS:  If 1, then include a "text" link and a "binary" link.
+
+          This is a convenient way of allowing the client to choose how
+          the file should be "requested".
+
+          Example:  BBS?DIR=SpotDog/Files&bin_text_links=1
+
+
+        If BIN_TEXT_LINKS=1, three choices are displayed:
+            i)  a "download at text" link (displaying a text icon)
+           ii)  a "download as binary" link (displaying a binary icon)
+          iii)  a "download as mime type" link (displaying the file name)
+        Note that if NOICONS is set, then i and ii will be displayed as text.
+
+        If BIN_TEXT_LINKS=0, two choices are displayed:
+            i)  a "download as mime type" link (using an appropriate icon)
+           ii)  a "download as mime type" link (displaying the file name)
+        Note that if NOICONS is set, then i will NOT be displayed.
+
+        Notes:
+           *  See the DEF_BIN_TEXT_LINKS parameter for an alternative to
+              the use of BIN_TEXT_LINKS.
+           *  If you use BIN_TEXT_LINKS (or DEF_BIN_TEXT_LINKS), you should
+              NOT use FORCETEXT and FORCEBINARY.
+
+
+DATEFMT:   Can take several values (see REXX Date function documentation
+           for details):
+
+          default:    27 Aug 1988
+                B:    725975
+                D:    240
+                E:    27/08/88
+                L:    27 August 1988
+                M:    August
+                N:    27 Aug 1988
+                O:    88/08/27
+                S:    19880827
+                U:    08/27/88
+                W:    Saturday
+
+          Example:  BBS?DIR=SpotDog/Files&datefmt=N
+          Example:  BBS?DIR=SpotDog/Files&datefmt=U
+
+
+DIR:      This is the "requested directory" to be displayed.
+
+                Example: BBS?DIR=SpotDog/Fires
+
+                The "requested directory" is SpotDot/Files
+                The "prefix" is SpotDog
+
+          Note that the actual directory pointed to by the "requested
+          directory" should be:
+           i) relative to the FILE_DIR directory,
+          ii) relative to a directory specified in BBS.CTL.
+         iii) specified (using the "prefix") by a DOWNLOAD_DIR
+              entry.
+          See section XII for further details.
+
+DIRCOLS:  Number of table columns used to display directories.
+
+          Example:  BBS?DIR=SpotDog/Files&dircols=4
+
+          Notes:
+           *  If you have directory descriptions, you probably
+              should set DIRCOLS=1.
+           *  The default is 2.
+           *  DIRCOLS is ignored if NOTABLE=1
+
+FORCETEXT:  If =1, asume all files are "text/plain" MIME type.
+
+          This is a convenient way to force the client's browser to display
+          all files (such as .LST files), without the need to run a "helper
+          app".  Of course, if a binary file is chosen, this will yield ugly
+          and inappropriate results!
+
+          Example:  BBS?DIR=SpotDog/Files&forcetext=1
+
+          When FORCETEXT is used:
+            with icons: A text icon (that links to a "text download")
+                        and a file name (that links to a "mime-type download")
+                        are displayed.
+         without icons: A file name (that links to a "text download")
+                        is displayed.
+
+          Notes:
+             * You should not use both FORCETEXT and FORCEBINARY
+               (the results will be unpredictable, but not disasterous).
+             * See BIN_TEXT_LINKS for an alternative to FORCETEXT and
+               FORCEBINARY
+
+
+FORCEBINARY:  If =1, asume all files are "application/octet-stream" MIME type.
+
+          This is a convenient way to force the client's browser to save
+          all files to disk (octet-stream is longhand for "binary").
+
+          Example:  BBS?DIR=SpotDog/Files&forcebinary=1
+
+          When FORCETEXT is used:
+            with icons: A binary icon (that links to a "binary download")
+                        and a file name (that links to a "mime-type download")
+                        are displayed.
+         without icons: A file name (that links to a "binary download")
+                        is displayed.
+
+          Notes:
+             * You should not use both FORCETEXT and FORCEBINARY
+               (the results will be unpredictable, but not disasterous).
+             * See BIN_TEXT_LINKS for an alternative to FORCETEXT and
+               FORCEBINARY
+
+
+
+INIT:     If =1, then initialize (clear) the BBS cache.
+
+               Example:  BBS?INIT=1
+
+NOTABLE         : Use <PRE>, not <TABLE>
+
+
+NOTABLE:  If =1, use <PRE> statements to structure display.
+          If not specified (or if =0), a TABLE will be used.
+
+          Example:  BBS?DIR=SpotDog/Files&notable=1
+
+
+
+NOICONS: If=1, then do NOT insert small descriptive icons next to file names.
+         (default is to include these icons).
+
+         Example:  BBS?DIR=SpotDog/Files&noicons=1
+
+
+NODIR:     If =1, then do NOT display parent and child subdirectories.
+
+           Example:  BBS?DIR=SpotDog/Files&nodir=1
+
+NOTIME:    If =1, then do NOT dispay creation time
+
+           Example:  BBS?DIR=SpotDog/Files&notime=1
+
+NODATE:    If =1, then do NOT display date (or time)
+
+           Example:  BBS?DIR=SpotDog/Files&nodate=1
+
+NODESC:    If =1, then do NOT display a description.
+
+           Example:  BBS?DIR=SpotDog/Files&nodesc=1
+
+NOSIZE:    If =1, the do NOT display file size
+
+           Example:  BBS?DIR=SpotDog/Files&nosize=1
+
+NOCACHE:   If =1, then suppress the use of caching.
+
+           That is, force the generation of a listing, rather then using a
+           cached listing.
+
+           Example:  BBS?DIR=SpotDog/Files&nocache=1
+
+
+ROOTDIR:   If =1, then this request is treated as the "root" of a tree.
+
+          The user can go to subdirectories, but not to the parent.  Note
+          the user is allowed to go backwards after going to one of the child
+          subdirectories (there is no suppression of "parent directory" links
+          of child subdirectories).
+
+SHORT:    If =1, then a very short form of display is used
+          (no icons, no time, no date, no description).
+
+           Example:  BBS?DIR=SpotDog/Files&short=1
+
+
+SIZEFMT:   If =ABBREV, use nnnK or nM.  If not, use 12,345 format.
+
+           Example:  BBS?DIR=SpotDog/Files&sizefmt=ABBREV
+
+
+SORTBY:   Sort by NAME, EXT, SIZE, or DATE; or NOSORT.
+          Default is NAME.
+
+          Example:  BBS?DIR=SpotDog/Files&sortby=NAME
+          Example:  BBS?DIR=SpotDog/Files&sortby=DATE
+
+
+
+TIMEFMT:   If =24, use  15:03 format. If not, use 3:03p format.
+
+           Example:  BBS?DIR=SpotDog/Files&timefmt=24
+
+
+ZIPFILE:  A .ZIP archive to "open and display".
+
+          Example:
+             Display contents of GIFS.ZIP:
+                BBS?dir=foo1/wow&zipfile=GIFS.ZIP
+
+          This option is typically generated by BBS when it creates
+          directory listings.
+
+
+=======================================================================
+IX) Description of BBS initialization parameters.
+
+These description are in more or less alphabetical order.  You can modify them
+by editing (with your favorite text editor) the BBS.INI file.  Or, you can use
+the BBS configurator -- just point your browser at:
+   http://your.server/bbsconfg?
+
+List of BBS.INI parameters --------------
+
+The following lists the various parameters set in BBS.INI
+
+Parameter Name                  Description
+
+ADMIN_EMAIL       E-mail address of BBS adminstrator
+AUTO_DESCRIBE     Enable "auto description" of files.
+BBS_PARAM_DIR     Location of BBS support files
+BYTES_NEWUSER     Bytes "credited" to new users
+FILES_NEWUSER     Files "credited" to new users
+BBS_SMTP_GATEWAY  The SMTP gateway to use for optional mail messages
+BBSCACHE_DIR      Location of BBS "cache" files
+CACHE_FILES       Maximum number of files to store in BBSCACHE_DIR
+CACHE_DURATION    Lifespan of a BBS cache file
+CACHE_CHECK       Check filestamp of cache file before use
+CELL_SPACING      Space between table cell border and contents, in pixels
+CONTINUATION_FLAG The continuation flag used in multi-line descriptions.
+DEF_BIN_TEXT_LINKS The default "bin_text_links".
+DEFAULT_DESCRIPTION  Used when no description is available
+DEFAULT_DESCRIPTION_DIR  Used when no description is available for a directory.
+DEFAULT_DATEFMT   Default format for displaying date information
+DEFAULT_RATIO     Default file downloads/file uploads ratio
+DEFAULT_BYTE_RATIO Default byte downloads/file uploads ratio
+DESCRIPTION_FILE  Name of file(s) that contains descriptions.
+DEFAULT_SORT_TYPE The default sort type.
+DESCRIPTION_TEXT  Descriptions displayed as HTML, or as <PRE> text
+DESCRIPTION_TEXT_LENGTH Control line length of <PRE> text descriptions.
+DESCRIPTION_TEXT_LENGTH_1LINE Controls format of 1-line descriptions
+EXCLUSION_FILE    Name of file(s) contains file exclusion information.
+FILE_DIR          Fully qualified name of the (default) root of the BBS.
+GET_Z_ZIP_DESCRIPTION Extract -z description from .ZIP files
+HEADER_FILE       Name of file(s) containing header (displayed to client)
+FOOTER_FILE       Name of file(s) containing footer (displayed to client)
+HEADER_TEXT       Display header as HTML or as <PRE> text
+FOOTER_TEXT       Display footer as HTML or as <PRE> text
+ICONS.1 ..        List of custom icons for specific files/directories.
+ICONS.N
+IMAGEPATH         Location of .GIF files
+INCOMING_DIR      Default location to store uploaded files
+INCLUSION_MODE_FILE  Name of "inclusion mode" file
+MUST_WAIT         Number of days "too many downloads" clients must wait
+OWN_NAME_PRIVILEGE  Add a !username to client's privilege list.
+OWN_UPLOAD_DIRECTORY   Default "root" of own upload directory (used by BBSNEWU)
+OWN_DOWNLOAD_DIRECTORY Default "root" of own download directory  ("   "    "  )
+OWN_FLAG          Default "prefix" for own download directory (" "    "  )
+PRIV_RATIO.!name1 List of "privilege specfic" upload/download ratios.
+PRIV_RATIO.!nameN
+PRIV_WEIGHT.!name1 List of "privilege specfic" download weights.
+PRIV_WEIGNT.!nameN
+SEND_ALERT        Send an e-mail alert (via BBS_SMTP_GATEWAY) to ADMIN_EMAIL.
+TABLE_BORDER      Width of table border (or 0 for no border)
+UPLOAD_MAXSIZE    Maximum size, in kbytes, of uploadable files.
+UPLOAD_MINFREE    Minimum disk space free, in kbytes, after upload.
+UPLOAD_QUICK_CHECK  Check upload directory for matching name before uploading.
+USE_COOKIES       Use "cookies" to send username/pwd information.
+USERLOG_DIR       Directory containing user logs (username,password,history,etc)
+USE_SERVERNAME    Colloquial name of your server
+WRITE_DETAILS     Write details to the user log files
+ZIP_HEADER_FILE   Header file(s) to use in ZIP expansions
+ZIP_DESCRIPTOR_FILE Alternate for FILE_ID.DIZ file
+
+
+Detailed Descriptions ---- (in more or less alphabetical order)  -------------
+
+ADMIN_EMAIL
+
+    The e-mail address of the BBS administrator.  Used when SRE-http sends
+    e-mail alerts (as when a successful upload occurs).
+
+  Example: ADMIN_EMAIL='admin@foo.bar.net'
+
+
+AUTO_DESCRIBE
+
+  Controls whether BBS should attempt to create an "automatic description" for
+  files that do not have a explicit description.
+  If =0, auto describe is NOT attempted.
+  If >0, then auto describe is attempted.
+       Auto describe constructs a description from:
+         *  <TITLE> and <META EQUIV NAME="CONTENTS">  headers in HTML files
+         *  -z comments, or FILE_ID.DIZ files in .ZIP files
+         *  The first several hundred bytes in text files
+       For other types of files, automatic descriptions are NOT created.
+
+  Notes:
+
+    *  The value of auto_describe controls the maximum length of
+       the description.
+
+         Examples: AUTO_DESCRIBE=200
+                 -- a max 200 character description is created
+
+                   AUTO_DESCRIBE=0
+                  -- no automatic description is attempted
+
+    *  If AUTO_DESCRIBE=1 is used, then a max 120 character description is
+       generated.
+
+    *  The description can be broken into seperate lines, using the
+       DESCRIPTION_TEXT_LENGTH variable (or using a value of 30, if
+       DESCRIPTION_TEXT_LENGTH=0) -- see DESCRIPTION_TEXT for
+       details.
+
+BBS_PARAM_DIR
+
+  Directory containing BBS control, etc. files.  If a relative directory is
+  entered, it is assumed to be relative to the GoServe working directory
+
+  Example:  bbs_param_dir='BBSDATA'
+
+  If the GoServe working directory is E:\GOSERVE, the above example
+  refers to  E:\GOSERVE\BBSDATA.
+
+ Notes: bbs_param_dir\bbs.ctl contains the "access control" and "directory
+        privileges" information.
+        bbs_param_dir\bbs.cnt contains counts (by file) of  downloads
+        bbs_param_dir\upload.log contains record of all uploads
+
+
+BYTES_NEWUSER and FILES_NEWUSER
+
+  Bytes and file "downloads" granted to new users.  This lets them
+  have a first shot at the system.
+
+  Examples:
+     bytes_newuser=10000
+     files_newuser=1
+
+
+BBS_SMTP_GATEWAY
+
+  The valid IP address of an SMTP Gateway.  This is used if you want
+  to send e-mail alerts to the WEB_ADMIN address (see below) when succesful
+  file uploads occur.
+
+   Example: BBS_SMTP_GATEWAY='MAIL.OURSITE.NET'
+
+   Note: this is NOT necessarily the same as the the SRE-http SMTP_GATEWAY
+         variable -- though it can be the same.
+
+
+BBSCACHE_DIR
+  The directory to store the BBS cache files.  THIS SHOULD BE A DEDICATED
+  DIRECTORY -- since it will fill up with files, and since BBS occasionally
+  clears it out.  If a relative directory is given (not starting with a drive
+  letter or a /), it is assumed to be relative to the BBS_PARAM_DIR directory.
+
+  Example:  BBSCACHE_DIR='BBSCACHE'
+
+
+CACHE_FILES
+  The size of the BBS cache, in files.  After this number of files have been
+  stored (with each file representing a unique request string), BBS will
+  delete the oldest files.
+
+  Example: Cache_files=100
+
+  Note: to suppress caching, set CACHE_FILES=0
+
+
+
+CACHE_DURATION
+  This is the number of days (fractional days are allowed) that a BBS cache
+  will be valid for.  Thus, if a cached "request" is more then CACHE_DURATION
+  days old, it will not be used (in fact, it will be replaced).
+
+  Example: cache_duration=0.5
+
+  Note: a tiny (say 0.000001) cache duration is equivalent to a
+        CACHE_FILES value of 0.
+
+
+CACHE_CHECK
+  Before using a cache entry, BBS can perform a simple check for any file
+  modifications (either to the files in a directory, or to the .ZIP file
+  chosen for expansion).  If modifications are detected, the cache is not used
+  (in fact, it will be replaced).
+
+  To enable this check, set CACHE_CHECK=1.
+
+  Example: cache_check=1
+
+  Notes:
+      * BBS uses a simple CRC on file dates.  This should find most, but not
+        NOT all changes.  For example, changes in "generic" FOOTER and HEADER
+        files will not be detected.
+      * Use of CACHE_CHECK will slow throughput down somewhat.  You may want
+        to consider using the BBSCACHE daemon instead.
+      * The Toronto Virtual File System (TVFS) has a bug which may impact the
+        use of CACHE_CHECK (the effect of this bug is to cause BBS to over-
+        refresh the cache, leading to slower throughput).
+        If you are running TVFS, you might want to set CACHE_CHECK=0.
+
+
+CELL_SPACING
+
+  Space between cell border and cell content (in a table), in pixels.
+  Set to 0 for "no extra spacing".  This is useful as an alternative
+  to the TABLE_BORDER option (helps visually offset rows of the table).
+
+  Example: cell_spacing=2
+
+
+CONTINUATION_FLAG
+
+   Continuation flag is a character string used to indicate a "continuation"
+   line in the description_file.
+
+   Example: continuation_flag=','
+
+   Another popular example is ' |'  (space followed by a |).
+
+   Note: if your continuation flag starts with a space, and has a non-space
+         second character, then BBS will match the "first space in the
+         continuation_flag" to an arbitrary number (>0) of spaces in the
+         description file.  For example, if continuation_flag=' |',
+         it WILL match
+ |  first line of description
+      |  second line
+    | third line
+
+         However, it will NOT match
+| bad line.
+      (note that in this example, the | is the first character in the line)
+      For this case, you MUST set the continuation flag ='|'. However,
+      if continuation_flag='|', the prior 3 examples will NOT be matched.
+
+   Notes
+     * The SRCHINDX add-on also can read these "multi-line description
+       files" (that is, it understands continuation flags)
+       If you intend to "share" description files between BBS and SRCHINDX,
+       please note that SRCHINDX is not as sophisticated as BBS:
+          it treats any line, whose first non-space character is equal to
+          the stripped-of-spaces continuation flag, as a "continuation line".
+     * If you are using INCLUSION_MODE_FILEs, the CONTINUATION_FLAG must start
+       with a space.
+
+
+DEF_BIN_TEXT_LINKS
+
+  The "default BIN_TEXT_LINKS" is used to control whether multiple download
+  options are to be included for each file.  That is, when
+  DEF_BIN_TEXT_LINKS is enabled (is set to 1), then each file
+  will have three links: a text download link, a binary
+  download link, and a "mime-type" download link.  If set to 0,
+  only one link is used (the mime type link).
+
+  Note: this setting can be overridden by the BIN_TEXT_LINKS request
+        line option.
+
+  Example:        DEF_BIN_TEXT_LINKS=1
+
+
+DEFAULT_DESCRIPTION:
+
+  The "default description".  Used if no description for a file can
+  be found in the (appropriate) description_file.
+  Can be useful as a filler when tables are used to display descriptions.
+
+  Example: default_description='...'
+
+
+
+DEFAULT_DESCRIPTION_DIR:
+
+  The "default description" for directory entries.
+  Used if  no description can be found,  for a directory, in the
+  (appropriate) description_file.
+
+  Example: default_description=' '
+
+
+DEFAULT_DATEFMT
+
+  The default "date format" to use.  This is used if a DATEFMT option
+  is not included in the URL. See the description of the DATEFMT
+  parameter (in section VIII) for a list of acceptable values.
+
+  Note: if a bad value of DEFAULT_DATEFMT is used, BBS wil use
+        a value of 'N' (i.e.; 15 Feb 1994)
+
+
+DEFAULT_RATIO and DEFAULT_BYTE_RATIO
+
+   The default download/upload ratios.
+      The default_ratio is for files,
+      The default_byte_ratio is for bytes.
+   These are assigned to a user when they "register".
+
+   In general: if either are exceeded, downloads are not permitted.
+
+   This ratio can be overridden through the use of "privilege specific"
+   ratios.  For further details, see the description of the PRIV_RATIO.!
+   parameters, or see section VI of this document.
+
+   Notes:
+      If both values are 0, it means "no limit" (unless overridden).
+      If one is -1 means, it means "downloads denied" (unless overridden).
+      If both values are very high (say, 1000000), it effectively means
+      "no limit" (and can NOT be overridden).
+
+   Examples:
+      default_ratio=0
+      default_byte_ratio=0
+
+      default_ratio=10
+      default_byte_ratio=100
+
+      default_ratio=-1
+
+
+DESCRIPTION_FILE
+
+   The "description file".  It contains short descriptions of each
+   file in the directory.  It also can contain descriptions of "directories".
+   BBS looks for the description_file in two locations: the "directory
+   being examined", and the BBS_PARAM_DIR directory.  If both places contain
+   a description file, the results are concatenated. Thus, a description
+   may come from an "own directory" description file, or from the "default"
+   (BBS_PARAM_DIR directory) description file.
+   Note that if a match occurs in both files, the "own directory" entry
+   is used.  However, exact matches in the BBS_PARAM_DIR version are used
+   instead of "wildcard" matches in the "own directory" version.
+
+   Example: description_File='BBS.DSC'
+
+
+DEFAULT_SORT_TYPE
+     The default "sortby" critieria (used to sort the list of files).
+     The options are the same as for the SORTBY request option.
+     By default, files will be sorted by Name.
+
+     Example: DEFAULT_SORT_TYPE='NAME'
+
+
+DESCRIPTION_TEXT
+
+  This is used to control how descriptions are displayed.  When =1,
+  <PRE> is used to display descriptions "as they are written". Otherwise,
+  descriptions are displayed as regular HTML text (i.e.; line breaks
+  are ignored).
+
+   Example: DESCRIPTION_TEXT=1
+
+
+DESCRIPTION_TEXT_LENGTH
+
+  This is used to control how "text" style descriptions are displayed.
+  When =0, it is ignored. When >0, line lengths are limited to the
+  selected value (<BR> elements are inserted to create these line lengths).
+
+   Example: DESCRIPTION_TEXT_LENGTH=25
+            (lines in the description will be approximately 25 characters
+             long, with breaks inserted between words)
+
+
+DESCRIPTION_TEXT_LENGTH_1LINE
+
+   When set =1, this signals that the DESCRIPTION_TEXT_LENGTH variable only
+   be applied to 1 line descriptions.  That is, multi-line descriptions will
+   be left "as is", but 1-line descriptions will be broken up.
+
+  Example: DESCRIPTION_TEXT_LENGTH_1LINE=0
+
+EXCLUSION_FILE
+
+  The "exclusion file" contains file names (and subdirectory names)
+  that will NOT be displayed.
+  The EXCLUSION_FILE is assumed to be in the "requested directory".
+  If not found, the  BBS_PARAM_DIRECTORY directory is searched.  Note that
+  these are NOT cumulative --  the first "exclusion_file" found is used.
+
+  Example:  exclusion_file='BBS.EXC'
+
+  Notes:
+    *  the default BBS.EXC file contains further details on the use of
+       exclusion files.
+    *  the "exclusion file", "header file",  "description file", etc.
+       are NOT automatically excluded!
+
+FILE_DIR
+
+  Fully qualified root directory of the "bbs tree".
+  This is the default "root" of requested directories (where a request
+  is accomplished by a "DIR=xxx" option in the request string).
+  Note that information in the BBS.CTL file, or DOWNLOAD_DIR entries in the
+  user's user log file, may override this "default".
+
+  Example:  file_dir='g:\goserv\BBSFILES'
+
+  Note: Section XII of this document, and the default BBS.CTL file,  contain
+        further descriptions of how the "root directory" may be set on a
+        requsted-directory specific basis.
+
+
+GET_Z_ZIP_DESCRIPTION:
+
+    If =1, then the internal zip file description is displayed
+    (if it is available) using a <PRE> format.
+
+    Example:   GET_Z_ZIP_DESCRIPTION=1
+
+
+    Note: The internal zip file description can be modified by using
+          ZIP.EXE's -z switch.
+
+
+HEADER_FILE and FOOTER_FILE
+
+  The "header file" and "footer file".  The header file is displayed at the
+  top of the "directory listing", the footer file at the bottom.
+  They are both  assumed to be in the requested directory.
+  If  not available, then the BBS_PARAM_DIRECTORY directory is searched.
+  If not in either location, no footer is displayed, and a generic header
+  is displayed.
+
+**  Important Note: You MUST include a <BODY> element in your HEADER_FILE. **
+
+
+  Other notes:
+     *  The BBS.HDR and BBS.FTR files that are shipped with BBS contain
+        additional details on the use of HEADER and FOOTER  files.
+
+ Examples: header_file="BBS.HDR"
+           footer_file="BBS.FTR"
+
+
+HEADER_TEXT and FOOTER_TEXT
+
+  Flags (if set to 1) which signal "display the HEADER and FOOTER
+  files as text" --  text files will be  displayed with the
+  help of <PRE> elements.
+
+  Examples: header_text=1
+            footer_text=1
+
+
+ICONS.n
+
+   A list of entries that are used to provide "custom" icons for selected
+   files.  This list should contain entries that look like:
+        FILENAME.EXT    <IMG SRC="...">
+   where filename.ext can contain the * wildcard character.
+   Note that you can have as many entries as you want, with n going from
+   1 (the first) to N (the last entry).  You should also have an N+1 entry
+   set to 0.
+
+   Examples (each example should be on one line; we split them onto two
+             lines JUST for 80 character display purposes):
+     icons.1='*.CMD   <IMG Src="/imgs/blueball.gif"
+                            height=24 width=24 alt="[cmd]" >'
+     icons.2='PERSONAL.HTM  <IMG src="/imgs/mypic.gif"
+                                 height=30 width=30 alt="[me]">'
+     icons.3='\USERS\BOB   <img src="/usr/pics/bobby.gif
+                                height=22 width=22  alt="[bobs]">'
+     icons.4 =0
+
+   Notes:
+      * If a file does not match one of these ICONS.n entries, one of the
+           generic icons will be used.
+      * In the above example, icons.3 is used for a directory -- don't forget
+        that you MUST preceed "directory" entries with a \ (or a /).
+
+
+IMAGEPATH
+
+  Directory, relative to the Goserve DATA directory (NOT the BBS_PARAM_DIR
+  directory), that contains the file-type icons (.gif files).
+
+  Example:   imagepath="imgs/"
+
+    Note that a leading / will be ignored -- it does NOT signal a "fully
+    qualified" directory
+
+INCOMING_DIR
+
+   Default directory for file uploads.
+   If a relative directory is used, it is assumed to be relative to the
+   BBS_PARAM_DIR directory
+
+   This is used if there is no (matching) UPLOAD_DIR parameter specified in a
+   given user's .IN file.
+
+   If a "matching" UPLOAD_DIR parameter does exist, then the INCOMING_DIR is
+   ignored. Note that this UPLOAD_DIR parameter should be a fully qualified
+   directory.
+
+
+   Example:    If:
+                  UPLOAD_DIR: up1  d:\private\JOE\STUFF
+                  INCOMING_DIR = 'newfiles'
+                  BBS_PARAM_DIR = 'e:\bbs'
+              Then uploads to up1/foo.bar will map to:
+                 d:\private\joe\stuff\foo.bar
+              And uploads to up2/foo.bar will map to
+                 e:\bbs\newfiles\up2\foo.bar
+
+INCLUSION_MODE_FILE
+
+ The INCLUSION_MODE_FILE contains file names and subdirectories that will be
+ displayed, as well as comments and descriptions.  Only these files and
+ directories will be displayed (with possible exclusions due to the
+ EXCLUSION_FILE).
+
+ Examples:
+     INCLUSION_MODE_FILE=0
+          Do not use an inclusion_mode_file.
+    INCLUSION_MODE_FILE='FILES.BBS'
+
+ For further details on the use of the INCLUSION_MODE_FILE, see section IIa of
+ this document.
+
+
+MUST_WAIT
+
+   If default_ratio is exceeded, client must wait this many days before he can
+   download 1 more file (after this 1 download, the "must-wait clock
+   restarts").  Fractional days are allowed.
+
+   Example: must_wait=0.1
+
+OWN_NAME_PRIVILEGE
+
+    If =1, include a !username in the user's privilege list.
+    This can facilitate assignation of privileges on a user specific basis.
+    Note that a ! is appended to the username-- this is done as a security
+    precaution (to preclude a randomly chosen username from matching
+    a privilege; since usernames can NOT start with !).
+
+   Example:  own_name_privilege=1
+    (if the user is JOEY, then a !JOEY privilege is added to his
+    privilege list).
+
+OWN_DOWNLOAD_DIRECTORY
+
+   The OWN_DOWNLOAD_DIRECTORY is used by the BBS new user registration facility
+   (BBSNEWU.HTM).  It should either equal 0  or " " (in which cases it is
+   ignored), or it should equal an existing fully qualified directory.
+
+   When a new user is registered (and if OWN_DOWNLOAD_DIRECTORY<>0), a
+   Download_dir entry will be added to the users's .IN file.
+
+   For example,
+       if OWN_FLAG='PERSONAL' (see below),
+       the username is JOEY
+       and OWN_DOWNLOAD_DIRECTORY='D:\BBS2
+    then the following will be added to JOEY.IN
+        Download_dir: PERSONAL  D:\BBS2\JOEY
+
+  Notes:
+       * If it doesn't exist, D:\BBS\JOEY will be created
+       * A request for dir=/personal will yield a  listing of the contents of
+         D:\BBS2\JOEY
+       * See section XII for further details
+
+OWN_FLAG
+
+  The OWN_FLAG is used by the BBS new user registration facility
+  (BBSNEWU.HTM).  It's used in conjunction with the OWN_DOWNLOAD_DIRECTORY
+  and OWN_UPLOAD_DIRECTORY.
+
+  Example: OWN_FLAG='PERSONAL'
+
+
+OWN_UPLOAD_DIRECTORY
+
+   The OWN_UPLOAD_DIRECTORY is used by the BBS new user registration facility
+   (BBSNEWU.HTM).  It should either equal 0 (in which case it is ignored), or
+   equal an existing fully qualified directory.
+
+   When a new user is registered (and if OWN_UPLOAD_DIRECTORY<>0), then an
+   Upload_dir entry will be added to the user's user log file.
+
+   For example,
+       if OWN_FLAG='PERSONAL'
+       the username is JOEY
+       and OWN_UPLOAD_DIRECTORY='D:\NEWUP'
+    then the following will be added to JOEY.IN
+       Upload_dir: PERSONAL D:\NEWUP\JOEY
+
+  Notes:
+       * Uploads to PERSONAL/ will be placed in D:\NEWUP\JOEY (rather
+         then in the PERSONAL subdirectory of the INCOMING_DIR).
+       * See section XII for further details
+
+
+PRIV_RATIO.!
+
+    The PRIV_RATIO.! entries are used to assign a download/upload ratio on
+    a "privilege specific" basis.  These are used in conjunction with the
+    user's  default ratio (set in the RATIO: entry of the user log file),
+    and the "required privileges" (set in bbs.ctl on a directory specific
+    basis).
+
+    Note that these parameters are a little different then other
+    "stem" variables -- you do not put a number after the ".".
+    Instead, put a !, followed by a "privilege name".
+
+    The value of these parameters should be a string containing two
+    numbers, the file ratio and the byte ratio.
+
+    Example (first number is file, second number is byte):
+     PRIV_RATIO.!PREFERRED='50 1000'
+     PRIV_RATIO.!NEWGUY='10 50 '
+
+    For more details on BBS's use of "privileges", please see section VI.
+
+PRIV_WEIGHT.!
+
+   These are similar to the PRIV_RATIO.! variables.  They are used to set a
+   "privilege specific" download weight.  Lower download weights mean that
+   a download will result in a smaller number of bytes being added to a
+   users "downloaded bytes count" (and a smaller number of files).
+   Note that the default weight is (not suprisingly) 1.0.
+
+   Example:  PRIV_WEIGHT.!PERSONAL='0.5'
+     Requests to a directory for which a "PERSONAL" privilege applies
+     (as set in BBS.CTL or in a download_dir entry) will use a
+     download-weight of 0.5.
+
+
+SEND_ALERT
+
+   Set this to 1 to instruct BBS to send an e-mail alert to the WEB_ADMIN
+   (see below), via the SMTP_GATEWAY (see above) whenever a succesful
+   file upload occurs.
+
+    Example:  SEND_ALERT=1
+
+
+TABLE_BORDER
+
+  Width of borders, if table is used. Set to 0 for "no border".
+  Note: see the cell_spacing option for an alternative method
+        of visually delineating rows in a table.
+
+  Example: table_border=1
+
+
+UPLOAD_MAXSIZE and UPLOAD_MINFREE
+
+  UPLOAD_MAXSIZE: Maximum size, in kbytes, of uploadable files.
+  UPLOAD_MINFREE: Minimum disk space free, in kbytes, after upload.
+
+  Examples: upload_maxsize=5000
+           upload_minfree=20*1000
+
+  Note: This is NOT THE SAME as the SRE-http UPLOAD_MAXSIZE and
+        UPLOAD_MINFREE parameters.
+
+UPLOAD_QUICK_CHECK
+   To speed up "pre-existing file" UPLOAD error responses, BBSUP can
+   perform an early check to see if the selected filename already
+   exists.  To do this, set upload_quick_check=1.
+
+   Although speeding up "error response" a bit, this requires that:
+       No "alternative" file name is used -- the "client's own" filename
+       is used, and it is to be placed in the "root" of the INCOMING_DIR
+       directory.  If you use "alternative file names", you should
+       set UPLOAD_QUICK_CHECK=0.
+
+   Furthermore, if any UPLOAD_DIR entries have been specified, then
+   UPLOAD_QUICK_CHECK is disabled.
+
+
+USE_COOKIES
+
+   BBS will attempt to use "cookies" (request header information) to
+   store the username and password information.  To suppress this
+   feature, set USE_COOKIES=0; to enable it set USE_COOKIES=1.
+
+   The primary advantage of cookies is that the username and password
+   will not be displayed on the URL -- this gives a little more
+   security to the user.  The primary disadvantage is that it requires
+   more cache files.
+
+      Example: USE_COOKIES=1
+
+  Notes:
+     Many older browsers do not understand cookies.  BBS can recognize
+     this, and will use the request-string-based username/password technique.
+
+     When cookies are being used, otherwise identical requests will result
+     in different "cache files" on the basis of whether the browser is
+     cookie-capable.
+
+     The request-string-based technique is still used on the first call to
+     the BBS (that is, from BBSHELLO.HTM).  To remove this last bit
+     of exposure, you can try to use POST method in your
+     welcoming FORM (see BBSHELLO.HTM  for an example).
+
+     For further discussion of "authorization modes", see section II of
+     this document.
+
+
+
+USERLOG_DIR
+
+   Directory containing BBS "user log" files.
+   If a relative directory is entered, it is assumed to be relative to the
+   BBS_PARAM_DIR directory.
+
+   Example:  userlog_dir='USERLOG'
+
+   Notes
+     * "user log files" have names of UserName.IN.
+     * for further discussion of "user log" files, see section
+       III of this document.
+
+
+USE_SERVERNAME
+
+   Optional.  If available, this value will be used in $SERVERNAME
+   string replacements in the HEADER_FILE, ZIP_HEADER_FILE, and FOOTER_FILE.
+   If =0, then look up the server name (from GoServe if available,
+   otherwise from OS/2).
+
+    Examples:
+        use_servername=0
+        use_servername='The Free-to-all Project Web Site '
+
+
+WRITE_DETAILS
+
+   Write request info to the user-log file.
+   If =1, "request specific" information is recorded in the user's .IN
+   files.  This includes the name of the file uploaded, and
+   the date of transaction.
+   If 0, just the "upload counts", or  "download counts", are augmented.
+
+   Examples: write_details=1
+
+
+ZIP_HEADER_FILE
+  Similar to the HEADER_FILE, this is displayed at the top of
+  "ZIP file extraction" listings.
+  The ZIP_HEADER_FILE is  assumed to be in the directory
+  being displayed. If not, then the  bbs_param directory is searched.
+  If not in either directory, a generic header is displayed.
+
+  Notes:
+    *  You MUST include a <BODY> element in your ZIP_HEADER_FILE.
+    *  A ZIP_HEADER_TEXT_ONLY option is NOT currently available (that is, the
+       ZIP_HEADER_FILE is assumed to be HTML).
+    *  A ZIP_FOOTER_FILE is NOT currently available.
+
+  Example: zip_header_file="BBSZIP.HDR"
+
+ZIP_DESCRIPTOR_FILE
+
+  The "within .ZIP file" header file. If found (in a .ZIP file)
+  it will be extracted and displayed at the top of the document
+  (along with -z comments and the ZIP_HEADER_FILE).
+
+  Examples: zip_descriptor_file='FILE_ID.DIZ'
+
+  Notes:
+   * ZIP_DESCRIPTOR_FILE should NOT contain path info
+
+   * Display of ZIP file contents is more rudimentary then directory
+     displays; with no file exclusion, no file descriptions, and <PRE>
+     used instead of TABLES.
+
+
+========================================================================
+X) Creating Use Statistics
+
+The BBSSTAT.CMD file, that you copied to your USERLOG_DIR directory, can be
+used to generate some simple usage statistics.  BBSSTAT.CMD should be run from
+an OS/2 command prompt -- it is NOT an SRE-http add-on!
+
+You will be asked to provide a few pieces of information:  the number of
+entries to display, and an output file.  For example, if you choose 10
+entries, then the 10 "busiest" users (for each of several variables) are
+listed.
+
+The output file will contain these lists as plain text (no HTML elements).
+You may want to:
+     a) modify it (say, with a  few HTML tags),
+     b) copy it to your GoServe data directory.
+     c) include a link to it in BBSHELLO.HTM (or whatever you use as your BBS
+        "welcome" page).
+
+The variables reported are:
+       File downloads, file uploads, byte downloads, byte uploads,
+       download/upload ratio for files and for bytes,
+       and the most recent users.
+In addition, the total (weighted) number of files (and bytes)
+downloaded (and uploaded), and the number of users in the
+last m days, are reported.
+
+========================================================================
+XI)  Using the Caching Daemom
+
+The BBS caching daemon, BBSCACHE.CMD, can be used to prevent the BBS cache
+from becoming seriously out of date.  To use this, simply open up an OS/2
+window, change directories to your GoServe working directory (where BBS.CMD,
+BBSCACHE.CMD, etc.  are installed), and run the BBSCACHE.CMD program.
+
+There is one important consideration when using BBSCACHE.  BBSCACHE requires a
+"reference" cache-index -- it uses this reference as a list of "request
+strings" whose output will be cached.
+
+   The notion is that the administrator will save the BBSCACHE.IDX file
+   (the cache index file) after a representative time period.  Alternatively,
+   she could issue an BBS?INIT=1 request, and then meticulously browse the
+   most important (or most frequently demanded) file areas (and .ZIP files).
+   If this administrator-intensive approach is adopted, note that "cookie" and
+   "non-cookie" versions are cached separately -- you might want to hit your
+   favorite file areas with both kinds of browsers.
+
+Regardless of the source of this "reference" cache index; it should be saved
+in the BBS_PARAM_DIR directory -- and NOT in the BBSCACHE_DIR directory.  One
+convenient way to do this is by running BBSCACHE.CMD -- it will ask if you
+want to save your cache index.  Of course, once you've saved a good
+cache-index, the next time you run BBSCACHE.CMD (say, after shutting down your
+machine for maintenance), you probably do NOT want to "save the current cache
+index" again.
+
+After asking if you want to save the current cache index, BBSCACHE will ask
+you to provide the name of the cache index you wish to use.
+   If you have just "saved" the current cache index, you'll probably
+   want to use it (it's the default)!
+It will then ask for a frequency of  cache refreshes (in minutes) --
+or you can tell BBSCACHE to do it "just once" (but don't forget to
+re-run BBSCACHE in a timely fashion).
+
+BBSCACHE will then enter a  "scan, refresh, sleep" loop:
+  1) Scan through the lists of "request strings" stored in the cache-index you
+     selected
+ 2)  For each "request string", generate a cache file containing the correct
+     output.
+  3) The working cache-index is refreshed.  Note that this is NOT the
+     same as the cache-index you selected (although it may contain
+     similar information, especially if you "saved the current cache index").
+  4) BBSCACHE sleeps for the specified number of minutes.
+  5) Jump to step 1.
+Note: If you selected "do it just once", BBSCACHE will exit after step 3.
+
+
+========================================================================
+XII) Using "own" upload and download directories
+
+By default, BBS will assume that all requested downloads are "relative" to
+the FILE_DIR directory.  Similarly, all uploads will be placed into the
+INCOMING_DIR.  While this may be adequate for most installations, there may
+be cases where "customization" is desired. In order to fill this need,
+you should consider the use of "own" upload and download directories.
+
+A point about more general control methods is worth mentioning:
+
+   If you've read this far, you are aware of the use of privileges, in
+   conjunction with the BBS.CTL file, to control access to directories.  In
+   many cases, the use of BBS.CTL may be more then adequate (especially when
+   you have a few large classes of users).  In other words, you may want to
+   review the material in section IV.
+
+That said, the beauty of the "own" directory strategy is the fine control it
+gives. In short, you can specify directories that will only be accessible by a
+single user (or a small set of users).
+In particular:
+  i) You can specify one, or several, "own" upload directories.
+ ii) You can specify one, or several, "own" download directories.
+
+Specification of "own" upload and download directories is done by
+adding entries to the user's .IN file. That is, for a username of JINX,
+you would add entries to the JINX.IN file.
+
+For uploads, these entries take the form:
+   UPLOAD_DIR: prefix  fully-qualified-directory  weight_factor
+Download entries take the form:
+   DOWNLOAD_DIR: prefix  fully-qualified-directory privilege_list
+where:
+   prefix: the "leading sub-directory" of the requested-directory.
+   fully-qualified-directory: where to read (or write) files from (to)
+   weight_factor: (optional) weighting factor (default value is 1.0)
+   privilege_list: (optional) list of privileges
+
+Let's define the above in greater detail:
+  requested-directory:
+      the directory that appears after a dir=, or
+      the directory portion of a file download (or upload) request.
+      For example, if a client requests (ignoring username/password):
+           bbs?dir=animals/primates
+      the "requested-directory" is "animals/primates".
+  prefix: the "first sub-directory" in the "requested-directory"
+      Some examples:
+        the prefix of "dir=animals/primates" is animals
+        the prefix of "dir=simple"  is simple
+        "dir=/" does NOT have a prefix.
+  fully-qualified-directory:
+        a (fully-qualified) directory used as the upload (or download)
+        directory. It must already exist.
+  weight_factor:
+       usually BBS adds the actual number of bytes to the upload bytes-count.
+       The weight_factor instructs BBS to multiply the byte-count by
+       the "weight_factor".
+       Thus, a weight_factor of 0.5, in conjunction with an upload of
+       10000 bytes, would increase the upload-bytes-count by 5000.
+       If this is not specified, a value of 1.0 is used.
+  privilege_list:
+        as with the privilege list in BBS.CTL, it's used to determine the
+        appropriate "upload/download" ratio(s), and the "weighting factor".
+        However, it is not used to control access (since these are "personal
+        directories", it would be annoying and redundant to "require"
+        privileges).
+
+Examples:
+ *  If INCOMING_DIR='D:\BBS\UPLOAD'
+      and the username is JINX
+      and JINX.IN contains an entry of: Upload_dir: myup d:\others\jinx
+   then
+      a BBS upload to myup\foo.1 will write results to
+          d:\others\jinx\foo.1
+     If there were no Upload_dir entry, results would be written to
+         D:\BBS\UPLOAD\MYUP\FOO.1
+
+ * If FILE_DIR='D:\BBSFILES'
+      and the username is JINX
+      and JINX.IN contains an entry of:
+          Download_dir: personal d:\private\jinx
+   then a request for dir=/personal
+       would yield a listing of the files in d:\private\jinx
+
+ *  If JINX.IN contained two entries:
+      Download_dir: personal d:\private\jinx
+      Download_dir: group1 d:\groups
+   then a request for dir=group1/party
+      would yield a list of the files in d:\groups\party
+
+Notes:
+
+  * You can have multiple download_dir and upload_dir entries -- just
+    be sure you use a different prefix for each one (though you can use
+    the same prefix for a download_dir and an upload_dir).
+    Also note that sub-directories are always allowed (as in the
+    third example) -- you should NOT use the * to signal "directories are
+    okay" (contrast this to BBS.CTL).
+
+ *  Please be aware that the "fully-qualified-directory" is used as an
+    "alias" for the "prefix".  In contrast, BBS.CTL  assumes the
+    entire "requested directory" is under the "alternate root directory".
+    Example:
+      Assume a request for dir=/newstuff/dir0
+      a BBS.CTL entry of: newstuff/* * , g:\BBS2
+         would yield a listing of: g:\bbs2\newstuff\dir0
+      a USERS.IN entry of: DOWNLOAD_DIR: newstuff g:\bbs2
+         would yield a listing of: g:\bbs2\dir0
+
+  * The "own download directory" is checked before BBS.CTL -- if a
+    matching "own download directory entry" is found, BBS.CTL will not be
+    examined. Thus, in the above example, if both entries existed the latter
+    (g:\bbs\dir0) would be used.
+
+  * The DEFAULT prefix has a special meaning for both UPLOAD_DIR and
+    DOWNLOAD_DIR.  DEFAULT signals that "this fully-qualified-directory
+    should be used instead of the FILES_DIR (or the INCOMING_DIR)".
+    It's a "user-specific" general replacement: if a requested-directory does
+    NOT match a BBS.CTL entry or some other DOWNLOAD_DIR (or UPLOAD_DIR)
+    entry, then the DEFAULT directory will be used.
+     Example: download_dir: DEFAULT  d:\special\users\files
+
+
+* Automatically creating "own" directories.
+
+  You can always add, delete, and modify entries in the various .IN files.
+  This can become tedious, so the new user registration offers a simple way
+  to automatically create these entries.
+
+  Three BBS.INI parameters are used by this automatic creation facilty:
+  OWN_DOWNLOAD_DIR, OWN_UPLOAD_DIR, and OWN_FLAG. The first two should
+  be fully qualified directories, or 0.  The last should be a short string.
+
+  If  OWN_UPLOAD_DIR<>0, then the following entry is added to the user's .IN
+  file:
+      Upload_dir: OWN_FLAG Own_upload_dir\username
+   For example,
+              if:
+                 OWN_UPLOAD_DIR='E:\STOREF', and E:\STOREF exists,
+                 username is COYOTE
+                 own_flag='PERSONAL'
+              then the following entry is created,
+                     Upload_dir: personal E:\STOREF\COYOTE
+              and an upload from COYOTE to personal/ will be placed in
+                 E:\STOREF\COYOTE
+
+
+   Similarly, if OWN_DOWNLOAD_DIR<>0, then the following entry is added to the
+   user's .IN  file:
+      Download_dir: Own_flag Own_download_dir\username
+      For example:
+           if OWN_DOWNLOAD_DIR='E:\MYOWN' (and E:\MYOWN exists),
+                    and the username is COYOTE
+                    and OWN_FLAG='PERSONAL'
+           then the following entry is created,
+                     Download_dir: PERSONAL  E:\MYOWN\COYOTE
+           * a request (from COYOTE) for dir=personal will yield a listing of
+             E:\MYOWN\COYOTE
+           * a request for dir=personal/kids will yield a listing of
+             E:\MYOWN\COYOTE\KIDS
+
+
+  Notes:
+   * In both of these examples, note that use of OWN_FLAG.  By default, it
+     equals PERSONAL, but you can change it to suit your tastes.
+
+   * If the "own_upload_dir\username" directory, or the
+     "own_download_dir\username" directories to not exist, they will be
+     created.
+
+  *  These three parameters (OWN_DOWNLOAD_DIR, OWN_UPLOAD_DIR, and
+     OWN_FLAG) are only used in "new user registrations". If you prefer,
+     you can always hand-enter entries into the various .IN files -- in which
+     case you can freely assign directory names (and "requested directory
+     prefixes").
+
+
+-- End of BBS documentation.
+

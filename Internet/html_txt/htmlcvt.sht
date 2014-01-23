@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3 Organization//DTD W3 HTML 2.0//EN">
+<html>
+<head>
+<title>HTML to Text </title>
+</head>
+<body>
+<h1 align=center>HTML to Text</h1>
+<p>
+
+<form method="POST" action="/HTML_TXT">
+
+<a name="top"><h2> Convert an HTML document to text </h2></a>
+<input type="SUBMIT" value="Enter a URL to convert">
+
+ <input type=text name=theurl maxlength=80 size=50> 
+  <a href="#options">advanced options</a>
+<br><em>If you are a SUPERUSER for this <Em>SRE-http</em> web site, you
+  can specify a fully qualified
+ filename of a <b>file on this server</b>  (the drive letter <u>must</u> be specified)</em>
+
+<hr width=50%>
+<a name="options"><h3>Advanced Options</h3></a>
+The following parameters can be used to customize HTML_TXT.<br>
+Note that:
+<ul><li>To specify bullets and other special characters</em>, enter the actual character(s),
+ or enter 3 digit ascii code(s). 
+<li>Pairs of "quote" characters are often used to provide emphasis -- with
+different pairs used for different types of text emphasis. 
+</ul>
+<p>
+
+<table border=1 frame="VOID">
+
+<tr><td>Basics
+<td>
+<table>
+
+<tr>
+<td align="right"> <a href="#highascii">Use high ascii characters</a>.<br></td>
+<td> <select name="LINEART" size="3" >
+       <option value="-1" selected> Do not use high ascii characters 
+       <option value="0"> Use high ascii characters, but no lineart
+       <option value="1">  Use high ascii characters  
+     </select> </td></tr>
+
+
+<tr><td colspan=1><input type=text name="LINELEN" value="80" size=6 maxlength=6> Width of text file 
+ (in characters) </td>
+<td><input type="checkbox" name="no_wordwrap" value=1><a href="#DEF_nowordwrap">Infinite length</a> for non-table lines
+</td>
+<tr><td>Record  HTML syntax errors (in text file):</td>
+<td> 
+  <select name="DISPLAY_ERRORS" size=3>
+    <option value="0"> Do not record errors
+    <option value="1" selected> Record serious errors
+    <option value="3"> Record all errors and warnings
+  </select>
+ </td></tr>
+
+
+</table>
+
+<tr><td>Emphasis 
+<td><table >
+<tr><td><input type=text name="DOCAPS" value="TT CODE B STRONG" size=26 maxlength=56> 
+     Capitalization emphasis used for these <strong>strong emphasis</strong> codes.
+<tr><td><input type=text name="DOULINE" value="U BLINK" size=26 maxlength=56> 
+     Underscores_between_words used for these <u>underline</u> codes.
+<tr><td><input type=text name="DOQUOTE" value="I EM VAR" size=26 maxlength=56> 
+     "quotations" placed around these <em>emphasis</em> codes.
+<p>Left  <input type=text name="QUOTESTRING1" value="244" size=6 maxlength=6>,
+ and right <input type=text name="QUOTESTRING2" value="245" size=6 maxlength=6>
+ <em>emphasis</em> <a href="#quotes">quote characters</a>
+</table>
+
+<tr><Td>Section Emphasis
+<br> and list bullets
+<td>
+<table cellpadding=5>
+<tr><td colspan=2>
+<a name="section"> Precede </a> <b>&lt;TITLE&gt;</b> with 
+    <input type=text name="PRETITLE" value="   ***   " size=10 maxlength=6>,
+ and follow <b>&lt;TITLE&gt;</b> with 
+   <input type=text name="POSTTITLE" value="   ***   " size=10 maxlength=6>
+</td></tr>
+
+<tr><td colspan=2>Left 
+     <input type=text name="PREA" value="174" size=5 maxlength=6>,
+ and  right 
+    <input type=text name="POSTA" value="175" size=5 maxlength=6>
+  <a href="#section"> link</a> <a href="#quotes">quote characters</a>
+</td></tr>
+
+<tr  valign="top"><td  valign="top">
+   Left  
+     <input type=text name="PREIMG" value="[" size=10 maxlength=6>,
+  and right 
+     <input type=text name="POSTIMG" value="]" size=10 maxlength=6>,
+   <b>IMG label</b> <a href="#quotes">quote characters</a>
+  </td>
+ <td  valign="top">
+    <em> <input type=text name="IMGSTRING_MAX" value="80" size="4" maxlength="4">
+    how to <a href="#IMGSTRING">display IMG information </a>
+  </td>
+</tr>
+
+<tr><td colspan=2>Preceed <b>H1 headings</b> with 
+   <input type=text name="PREH1"  value="* " size="10" maxlength="6">,
+and follow  with 
+   <input type=text name="POSTH1" value=" *" size="10" maxlength="6">.
+</td>
+<tr> <td>Precede <b>Hn headings</b> (n=2...7) with 
+   <input type=text name="PREHN"   size="10" maxlength="6">,
+and follow  with 
+  <input type=text name="POSTHN" size="10" maxlength="6">.
+</td>
+<td>
+<tt>Or ....</tt>
+  display <b>Hn</b> headings as a <a href="#hier">hierarchical outline</a>?
+        <input type=radio name="HN_OUTLINE" value="2" checked> YES <b>||</b>
+        NO  <input type=radio name="HN_OUTLINE" value="8"> 
+</td></tr>
+
+<tr><td colspan=2> <hr>
+<tr><td>UL bullets: <input type=text name="FLAGUL" value="@  ~  $" size=25 maxlength=50> </td>
+ <td> MENU bullets: <input type=text name="FLAGMENU" value=" # " size=25 maxlength=50> </td></tr>
+ 
+<tr><td colspan=2>OL numbers: <input type=text name="OL_NUMBERS"
+                     value="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"  
+                     size=45 maxlength=60> 
+</td></tr>
+
+</table>
+
+<tr>
+<td>TABLES
+<td>
+
+<table width=98%>
+
+  <tr><td colspan=4><a href="#tlist">Display tables using: </a> </tr>
+  <tr>
+    <td width=20>  </td>
+    <td><input type=radio name="TABLEMODE" value="1" checked>tabular display,  </td>
+    <td><input type=radio name="TABLEMODE" value="2" >unordered lists,  </td>
+    <td><input type=radio name="TABLEMODE" value="3" >paragraph breaks and &lt;HR&gt; rules  </td>
+    </tr>
+
+  <tr><td colspan=4>Display <b>nested</b> tables using:</td></tr>
+  <tr>
+    <td width=20> </td>
+    <td><input type=radio name="TABLEMODE2" value="1" CHECKED>tabular display   </td>
+    <td><input type=radio name="TABLEMODE2" value="2" >unordered lists </td>
+    <td><input type=radio name="TABLEMODE2" value="3" >paragraph breaks and &lt;HR&gt; rules </td>
+    </tr>
+
+  <tr><td width=50> </td>
+      <td colspan=2> If  lists or paragraphs are selected above, this "table replacement"
+      should occur for:</td>
+     <td>
+     <select name="TABLEMAXNEST" size=3>
+        <option value="0">all nested tables
+        <option value="1" selected> double nested tables
+        <option value="2"> 3x nested
+        <option value="3"> 4x nested
+        <option value="4"> 5x nested
+     </select>    </td>
+   </tr> 
+ 
+ <tr>
+  <td colspan=2> Display empty rows and empty tables: </td>
+   <td> <input type=radio name="SUPPRESS_EMPTY_TABLE" value="0" > YES </td>
+   <td>     NO  <input type=radio name="SUPPRESS_EMPTY_TABLE" value="1" CHECKED>  </td>
+  </tr>
+
+ <tr>
+  <td colspan=2> Table borders (may be overridden by BORDER= attribute): </td>
+  <td colspan=2> 
+    <select name="TABLEBORDER" size=3>
+     <option value="-1"> Never display borders
+     <option value="0" selected> Default: No borders
+     <option value="1"> Default: Display borders
+     <option value="1.4"> Always display borders
+     <option value="2.4"> Always display thick borders
+    </select>
+  </td> </tr>
+
+ <tr>
+  <td colspan=2> &lt;TD <b>WIDTH</b> &gt; attribute:</td>
+  <td colspan=2> 
+    <select name="IGNORE_WIDTH" size=3>
+     <option value="0" selected> Use WIDTH attribute, or autosize
+     <option value="1" > Autosize (ignore WIDTH)
+     <option value="2"> Equi-sized columns (ignore WIDTH)
+    </select>
+   </td></tr>
+
+ <tr>
+  <td colspan=2 align="LEFT">  Suppress COLSPAN and ROWSPAN: </td>
+      <td>  <input type=radio name="NOSPAN" value="1" > YES  </td>
+      <td>  NO  <input type=radio name="NOSPAN" value="0" CHECKED>  </td>
+  </tr>
+
+
+  <tr> 
+   <td colspan=2>  <input type="TEXT" name="TABLEFILLER" value="32" size="5" maxlength="5">
+    Table (and TEXTAREA) fill character </td>
+   <td colspan=2>
+ <input type="TEXT" name="TD_ADD" value="0" size="5" maxlength="5">
+     <a href="#td_add">Minimum column width</a> adjustment factor
+  </td></tr>
+
+
+
+
+</table>
+</td>
+
+<tr>
+<td>FORMS</td>
+
+<td> <table >
+<tr><td colspan=2> Ignore &lt;SELECT <b>SIZE</b> &gt; attribute </td>
+    <td colspan=2>
+     <select name="SHOWALLOPTS" size=2>
+        <option value="1"> YES (display all OPTIONS)
+        <option value="0" selected> NO (display specified number of OPTIONS)
+     </select> </td>
+   </tr>
+<tr><td colspan=4>
+<b>Characters to use as:</b>
+<tr><td colspan=2>OPTION bullets</td>
+  <td> UnSelected:<input type="TEXT" name="FLAGSELECT" value="?" size=6 maxlength=10> </td>
+  <td>Selected:<input type="TEXT" name="FLAGSELECT2" value="x" size=6 maxlength=10> </td>
+
+
+<tr><td colspan=2> CHECK Boxes:</td>
+<td>UnChecked:<input type="TEXT" name="CHECKBOX" value="176" 
+    size="6" maxlength="10"></td>
+<td>Checked:<input type="TEXT" name="CHECKBOXCHECK" 
+    value="178" size="6" maxlength="10"></td> </tr>
+
+<tr><td colspan=2> RADIO buttons</td>
+<td> UnChecked: <input type="TEXT" name="RADIOBOX" 
+                   value="176" size="6" maxlength="10"> </td>
+<td>Checked: <input type="TEXT" name="RADIOBOXCHECK" 
+                       value="178" size="6" maxlength="10"> </td>
+</tr>
+
+<tr><td colspan=2>SUBMIT and RESET <a href="#quotes">quote characters</a></td>
+<td> Left <input type="TEXT" name="SUBMITMARK1" value="204" size="6" maxlength="10"></td>
+<td> Right <input type="TEXT" name="SUBMITMARK2" value="185" size="6" maxlength="10">,
+</td></tr>
+
+<tr> 
+<td colspan=1 valign="TOP">TEXT input box   <a href="#quotes">quote characters</a>.</td>
+<td colspan=3 valign="TOP">
+  Left: 
+   <input type="TEXT" name="TEXTMARK1" value="222" size="6" maxlength="10"><br>
+  Fill character:
+    <input type="TEXT" name="TEXTMARK" value="250" size="6" maxlength="10"> <br>
+  Right
+    <input type="TEXT" name="TEXTMARK2" value="221" size="6" maxlength="10">
+</td></tr> 
+
+
+
+</table>
+</td>
+
+<tr>
+<td> Miscellaneous</td>
+<td>
+<table>
+<tr><td>Minimize number of blank lines: </td>
+   <td> <input type=radio name="SUPPRESS_BLANKLINES" value="1" CHECKED> YES 
+   <b>||</b> NO  <input type=radio name="SUPPRESS_BLANKLINES" value="0">  </td> </tr>
+
+<tr><td> Trimming long strings. </td>
+<td> <select name="TOOLONGWORD" size=3>
+   <OPTION value="-1"> Trim excess 
+   <OPTION value="0"> Wrap excess (onto new line)
+   <OPTION value="-1" selected> Expand margins 
+</select></td></tr>
+
+
+<tr><td colspan=2><input type=text name="CHARWIDTH" value="8" size=6 maxlength=6> <a href="#charwide">Width of a character
+</a> (in pixels) </td>
+
+<tr> <Td colspan=2>
+<select name="LINK_DISPLAY">
+<option value=1 selected>Create a reference list of URLs
+<option value=0>Do not create a reference list of URLs
+</select>
+ </td>
+
+</table>
+</td>
+
+
+</table>
+
+<a href="#top">Top of page</a> || <input type="SUBMIT" value="Convert to Text"> || <input type="RESET">
+<p>
+<hr width=50%>
+<h3>Notes</h3>
+<dl>
+<dt><a name="highascii">Using <b>high ascii</b> characters</a>
+<dd>  High ascii (non-keyboard) characters are often useful as bullets, lines, and
+emphasis characters. Often, you can specify a high ascii character by 
+entering a 3 (decimal) digit value. 
+<p>For example: <tt>X</tt> and <tt>88</tt> are equivalent. <p>
+Yes, this example is <tt>not</tt> "high ascii"! That's because there is a small
+problem using high ascii -- the actual character displayed is context specific.
+For example, browsers might use a URL encoding rule to display high ascii characters,
+while text editors might use a country specific code-page. For example, compare
+the "code page" rendition (verbally described) and the URL mapping your
+browser is using
+<ul>
+<li> <tt>219</tt> : often a black box : URL mapping= &#219;
+<li> <tt>174</tt> : often a <<: URL mapping= &#174;
+<li> <tt>186</tt> : often a || : URL mapping= &#186;
+<li> <tt>251</tt> : often a "square root" sign : URL mapping= &#251;
+</ul>
+<p>
+<dt><a name="DEF_nowordwrap">Using <b>infinite</b> line lengths </a>
+<dd>If you intend to import your text file into a word processor, or into
+any program that can wrap long lines, you probably should use <b>infinite
+line lengths</b>.  This basically means that each paragraph is on a single
+line; with seperate paragraphs on seperate lines.<p>
+Note that this does <b>not</b> apply to lines in a table.
+<p>
+
+
+<dt><a name="IMGSTRING">How to <b>display IMG information </b>
+<dd>Enter one of the following values:
+<ul>
+<li><tt>-3 </tt>: Do not display (ignore all IMG elements)
+<li><tt>-2 </tt>: Just display the pre and post img characters
+<li><tt>-1 </tt>: Display a reference number (and generate a SRC and ALT reference list
+        at the bottom of the text file)
+<li><tt>0 </tt>: Display all characters in an ALT attribute
+<li><tt>1 </tt>: Display, at most, current linelength characters from an ALT attribute
+<li><tt>nnn</tt>: Display, at most, nnn characters from an ALT attribute.
+<br> For example
+<tt>30</tt> means <em>display at most 30 characters of the ALT attribute</em>
+</ul>
+<br>
+<dt><a name="quotes">Using special <tt>quote characters</tt> for emphasis</a>
+<dd>To indicate different kinds of textual emphasis, such as <i>italics</i>,
+the text can be bracketed by special "quote characters".  Typically, a  pair
+of quote characters are used: one for the <tt>left side</tt>
+(preceding the text), and another for the <tt>right side</tt> (following the  text).
+For example:
+<ul><LI> <b>[</b> and <b>]</b> are the default quote characters for <em>image labels</em>;
+<li>the  high-ascii equivalents of <tt> &lt;&lt; and &gt;&gt; are the defaults for
+links.</tt>
+</ul>
+<p>
+<dt><a name="td_add">Minimum column width adjustment</a>
+<dd>The <u>minimum column width adjustmen</u> is used to 
+augment cell widths.  Non-zero value  will increase narrow
+   cell widths, and decrease wide cells. 
+<ul>
+<li>Small values (say, 6) are useful when short words are being clipped
+in narrow columns
+<li>  Large values (say, 60)  will tend to make all cells the same size.
+<li> 0 means "no adjustment"
+</ul>
+<p>
+<dt><a name="charwide">Character width</a>
+<dd>Character width (in pixels) is used to to convert pixel widths
+(as used in WIDTH attributes of table cells) into character equivalents.
+By default, HTML_TXT assumes that an 80 character wide text file is
+being mapped to a 640 pixel wide screen, hence the default
+character width is 8.
+<p>
+If you increase LINELEN (say, to 128), you should consider adjusting
+the CHARWIDTH (say, to 5).
+<p>
+<dt><a name="hier">Hierarchical outline </a>
+<dd>
+HTML_TXT can use &lt;Hn&gt; (n=1,.2,..,7) to create a
+<u>hierarchical outline</u>; a list of numbered list of section
+titles, with the numbering reflecting section and subsection.
+<p> For example: 
+<pre>
+ I)Main section
+
+This is the main section
+
+ I.a)Subsection
+  Subsection 1 starts here
+  and we also have a
+
+ I.a.1) Sub subsection
+
+  which contains very lttle
+
+ I.b)Sub section 2
+      This is the second subsection.
+  
+</pre>In the above example:  
+&lt;H2&gt;, &lt;H3&gt;, &lt;H4&gt, and an &lt;H3&gt; heading
+could have created 
+the <tt>I)</tt>, <tt>I.a)</tt>, <tt>I.a.1)</tt>, and  <tt>I.b)</tt> 
+headings (respectively).Note that since &lt;H1&gt; is considered a "page heading", outline numbering
+starts with &lt;H2&gt; headings.
+<p>
+<dt><a name="tlist">Converting tables to lists</a>
+<dd>In some cases, the display of complicated tables may be quite messy -- such as 
+when the level of nesting becomes large.  Should this happen, you can try displaying
+ tables as
+unordered (&lt;UL&gt;) lists, or as seperate paragraphs seperated by horizontal
+rules (&lt;HR&gt;).  
+<p>
+Since problems are most likely to occur with nested tables (rather then main tables),
+you can select whether to convert main tables, or just nested tables. In fact, you
+can even select whether to convert all nested tables, or just highly nested
+tables (that is,  tables within a nested table).
+
+</dl>
+
+</form>
+</body>
+</html>

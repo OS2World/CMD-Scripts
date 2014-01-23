@@ -1,0 +1,25 @@
+ This is a sample of a "bbs inclusion" file. Note the use of
+ space | as a contination flag. Also note that this descriptive
+ header is included!.
+
+LOGOFF. BAT    This is a sample logoff the lan file
+DOSEARCH.HTM     This is the doesearch front end, used to demonstrate
+ |the available options
+DOPUT.CMD     demo of the put method
+dogunk.cmd  This is a fake entry
+ | will it work?
+INDEX.HT0     a default home page
+ADDHITC.SRF    Srefilter macrospace routine code, check hits
+ | before augmenting.  If a hit exists in the appropriate list,
+         | do no augment hit dounter
+INSTALL.CMD    Ths installation program.
+ALL_FILE.CTL   sample access control file
+
+ Note that directories are given only 1 line descriptions.
+ In addition, all directory entries are moved to the end of the
+ document BEFORE further processing. This means that descriptions
+ can NOT have continuation lines, and that comments will
+ not moved (they will stay in their original positions).
+/BIG
+/D&D
+

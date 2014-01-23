@@ -1,0 +1,15 @@
+WebOrganizer-to-XHTML, first release
+
+ONG Software's WebOrganizer was
+developed when Netscape 2.02 was the
+best available browser and with the
+intent of using the created pages only
+locally. With new standards for Web
+documents and new browsers, and with
+the desire to access bookmarks from any
+location, this Rexx script has been
+composed. It updates WebOrganizer's
+pages to XHTML 1.0 + CSS. Package
+includes a basic style sheet which
+(mostly) emulates the stock
+WebOrganizer pages' look and feel.

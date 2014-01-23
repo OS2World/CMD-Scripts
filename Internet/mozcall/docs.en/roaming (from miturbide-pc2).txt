@@ -1,0 +1,189 @@
+Roaming rationale:
+
+I want full, transparent roaming of my user data files!
+
+New Mozilla applications (FireFox, ThunderBird, SeaMonkey) are said to implement so-called 'roaming' of profiles, thus allowing users to keep all of their configuration data in ONE place, then access it from several locations.
+
+While this is a great idea, it is still said to be in 'beta' stage (you even get a warning in SeaMonkey) and, more important, this 'roaming' has several limitations. Being a extreme tweaker (tm), I found these limitations unbearable, and thus I wrote a small program to overcome them...
+
+So, what's the matter?
+
+Well, due to limitations on the 3 main Mozilla apps I have to keep using them all, which can become a real sync nightmare for data.
+
+Now, each application is designed to keep some data on its users profile (spam filter training, bookmarks, mail...) or at a specific location. On SeaMonkey and ThunderBird, mail paths are even allowed to be relative to the profile directory, which helps a lot in sharing mail folders between apps. Unfortunately, the same does not hold true for bookmarks, for example; you have to use absolute paths, which works fine unless you're me :)
+
+Due to past data losses I like keeping most of my user data on removable media, which is also great for mobility. Now, the problem is that you cannot always mount the data directory on the same drive and directory, and obviously this renders absolute paths useless.
+
+So I decided to take advantage of how easy is to tell Mozilla applications where to store their profile(s) data through environment variables -at least on OS/2-, and since I was already running Mozilla through this program to play with the environment I added roaming support...
+
+When this option is enabled, MozCall will take relative paths from a set of special text templates, convert them to absolute, patch mozilla preferences files with them, and run it, on the fly. Now I can move everything as a whole and rest assured it'll work flawlessly on ANY of my systems as long as the applications are present and up to date.
+
+Or, if you have plenty of room on your removable media, you can even keep full portable applications like in Windows, only much better :)
+
+How to make this thing work:
+
+First, you enable roaming in your .cfg file, and tell MozCall what type of Mozilla app you're running, through the AppType option. This is important so your profile(s) can be found and patched each time...
+
+AppType must be MZ for Mozilla or SeaMonkey 1.x (which rely on the horrendous registry.dat thing), SM for SeaMonkey 2, TB for ThunderBird or FX for FireFox.
+
+If you're using Mozilla/SeaMonkey 1.x you'll have to disassemble your registry.dat file (under your MozHome directory) to registy.txt before messing with it. Get my Mozilla Registry (Re)Builder from Hobbes and used to do that. Now change any "directory" entry values you want from absolute to relative (relative to the registry template).
+
+Now you're expected to generate a prefs.txt file under each Mozilla profile to patch the matching prefs.js file. On each of them simply copy back the lines in prefs.js that point something to an absolute path, and make them relative, according to the macro scheme below.
+
+The next time you run MozCall using that .cfg file absolute paths will be generated from the templates and merged into the Mozilla preferences files, NO MATTER where you may have moved the whole directory meanwhile, thus enabling FULL profile roaming.
+
+Of course, unless that second time everything is on a *different* path this will be of very little use, if any at all. But again, that is the whole point of 'roaming'.
+
+Remarks-registry:
+
+-If Mozilla/SeaMonkey modifies the registry in ways you want to keep, a new template will have to be generated from registry.dat and changed again according to your liking.
+
+I don't make so many intentional changes, anyway - so this remains as a non-issue for me :)
+
+Remarks-preferences:
+-Relative paths only can be established between files residing on the same drive. I still have to see the point in Mozilla-approved relative paths like [ProfD]../../../../E:/Whatever/it/is - don't bug me with this unless you have very good reasons to do so.
+-The special macro for the cache is global, because typical removable media are fit to transport files where access speed is not critical (like 300MB of mail in my case + 1.5MB of profile stuf) but not for a disk cache. Of course, its use is optional (just leave it blank in the cfg file, or don't use it in prefs.txt).
+
+Macros defined for prefs.txt:
+
+1) MozHome: refers the directory where MOZILLA_HOME is pointed to.
+
+2) ProfD: refers to the 'current profile' directory within a prefs.js file. It is intentionally called the same that Mozilla apps themselves use.
+
+3) CacheParent. This is a special macro that allows you to use a global path for the cache files of all the profiles. Define "CacheParent" in the config file (use SINGLE backslashes there), and setup it in prefs.txt.
+
+Macro syntax:
+
+Because paths can be used in different style in Mozilla preferences files, the macros should be written in a matching style:
+
+[/Macro]: After combining the macro with the relative path following it, any slashes in the resulting path will be converted to forward slashes.
+
+[\Macro]: After combining the macro with the relative path following it, any slashes in the resulting path will be converted to backward slashes.
+
+[\\Macro]: After combining the macro with the relative path following it, any slashes in the resulting path will be converted to double backward slashes.
+
+Specific examples
+
+Now for a couple of 'real' examples of how to use the roaming support :)
+
+For simplicity, let's say all your workstations have Mozilla applications installed in the same locations (I keep them that way - if you don't, you'll have to play a bit and keep different .cfg files but it's not difficult) but you keep your data in a removable drive. As some drive letters may already be in use, it won't always be attached as E: on every workstation. 
+
+Say you want to keep your SeaMonkey data under what currently is E:\Configs\Mozilla. Go to E:\Configs, put a default seamonkey.cfg file there, and execute "MozCall SeaMonkey.cfg". MOZILLA_HOME is pointed to the default "./", relative to "E:\Configs\seamonkey.cfg" and thus becomes "E:\Configs".
+
+After closing Mozilla, you'll have a registry file called E:\Configs\Mozilla\registry.dat. 
+
+Now let's say you want to keep your SeaMonkey data under E:\Configs\SeaMonkey instead of the rather silly E:\Configs\Mozilla\Profiles\default\123456.slt ...
+
+-Disassemble your registry to E:\Configs\Mozilla\registry.txt.
+-Change "E:\Configs\Mozilla\Profiles\default\123456.slt" to "../SeaMonkey" in registry.txt.
+-Edit SeaMonkey.cfg, change roaming to "1", and set AppType to SM.
+
+Next time you run MozCall with that .cfg file it'll ensure SeaMonkey uses the data from that directory, NO MATTER if for whatever reason you've mounted it in drive J: this time.
+
+Voil…. A FULLY mobile profile built in minutes.
+
+That's for the SeaMonkey specific part.
+
+(Please note and keep in mind that you can NEVER get rid of the Mozilla subdirectory under MOZILLA_HOME, since that's where FireFox AND SeaMonkey will start looking for the adequate pointer to their preferences data directories, and sometimes even XUL.MFL files are left there. But doesn't mean you need to keep your important data there any more :)
+
+Now, we'll assume you'd rather use ONE copy of your bookmarks file instead of two to keep FireFox and SeaMonkey in full, real sync. On FireFox, for example, you'll normally have to go to about:config and edit browser.bookmarks.file to point to the other file, again using an absolute path, f.e. "E:\Configs\SeaMonkey\bookmarks.html".
+
+You may also want to use the global CacheParent macro directory, and use a local file as startup page.
+
+Easy:
+-Copy prefs.js to prefs.txt
+-Edit prefs.txt anf get rid of everything except these lines:
+----8<--------8<--------8<--------8<--------8<----
+user_pref("browser.bookmarks.file", "E:\\Configs\\SeaMonkey\\bookmarks.html");
+user_pref("browser.cache.disk.parent_directory", "D:\whatever...");
+user_pref("browser.startup.homepage", "file:///E:/Personal/startup.htm");
+----8<--------8<--------8<--------8<--------8<----
+-Change them to:
+----8<--------8<--------8<--------8<--------8<----
+user_pref("browser.bookmarks.file", "[\\ProfD]../../bookmarks.html");
+user_pref("browser.cache.disk.parent_directory", "[\\CacheParent]");
+user_pref("browser.startup.homepage", "file:///[/ProfD]../../../Personal/startup.htm");
+----8<--------8<--------8<--------8<--------8<----
+-You're done :)
+
+Another (twisted) example:
+You have moved a profile somewhere strange (outside %MOZILLA_HOME% maybe? ;) so Mozilla will insist in writing its cache files to [MozHome]...whatever...Cache because there's no cache setting in that profile prefs.js. You want your cache files to be under your profile directory, just as God intended.
+
+Simple: just add a prefs.txt template to that profile containing
+
+user_pref("browser.cache.disk.parent_directory", "[\\ProfD]");
+
+Last (but not least) example - just in case I'll show you a .cfg file and the output of MozCall as I use it at home (yes I use every feature!):
+
+MyCfg file, D:\Internet\MozCall\SMonkey.cfg:
+----8<--------8<--------8<--------8<--------8<--------8<--------8<----
+MozExe        = seamonkey.exe
+MozDir        = ../SeaMonkey
+MozHome       = ../SeaMonkey
+Extended_FT2  = 1
+BeginLibPath  = 0
+Path          = 0
+Moz_No_Remote = 0
+LibPathStrict = 0
+UILocale      = 0
+contentLocale = 0
+Roaming       = 1
+AppType       = MZ
+CacheParent   = D:\Internet\SeaMonkey\Mozilla\Alfredo
+separate_session = 0
+----8<--------8<--------8<--------8<--------8<--------8<--------8<----
+
+MozCall output:
+----8<--------8<--------8<--------8<--------8<--------8<--------8<----
+MozCall v0.3.0
+
+--- Roaming enabled. Looking for profiles to patch.
+--- Reading registry template "D:\Internet\SeaMonkey\Mozilla\registry.txt"
+Changed: "./Fede" -> "D:\Internet\SeaMonkey\Mozilla\Fede"
+Changed: "./MamÃ¡" -> "D:\Internet\SeaMonkey\Mozilla\MamÃ¡"
+Changed: "./PapÃ¡" -> "D:\Internet\SeaMonkey\Mozilla\PapÃ¡"
+Changed: "./Alfredo" -> "D:\Internet\SeaMonkey\Mozilla\Alfredo"
+Changed: "%ALPH_DRV%\Configs\SeaMonkey\Alfredo" -> "E:\Configs\SeaMonkey\Alfredo"
+Changed: "./X" -> "D:\Internet\SeaMonkey\Mozilla\X"
+--- Done, 64 node(s).
+Calculating node offset(s)...
+Resolving cross references...
+--- Done. Dumping binary file "D:\Internet\SeaMonkey\Mozilla\registry.dat".
+
+Detected 6 profiles(s).
+
+Profile 1: D:\Internet\SeaMonkey\Mozilla\Fede
+ user_pref("browser.cache.disk.parent_directory", "[\\ProfD]");
+ -> Changed to "D:\\Internet\\SeaMonkey\\Mozilla\\Fede"
+
+Profile 2: D:\Internet\SeaMonkey\Mozilla\Mam 
+ user_pref("browser.cache.disk.parent_directory", "[\\ProfD]");
+ -> Changed to "D:\\Internet\\SeaMonkey\\Mozilla\\Mam "
+
+Profile 3: D:\Internet\SeaMonkey\Mozilla\Pap 
+ user_pref("browser.cache.disk.parent_directory", "[\\ProfD]");
+ -> Changed to "D:\\Internet\\SeaMonkey\\Mozilla\\Pap "
+
+Profile 5: E:\Configs\SeaMonkey\Alfredo
+ user_pref("browser.bookmarks.file", "[\\ProfD]../../Mozilla/mzbkmrks.htm");
+ -> Changed to "E:\\Configs\\Mozilla\\mzbkmrks.htm"
+ user_pref("browser.cache.disk.parent_directory", "[\\CacheParent]");
+ -> Changed to "D:\\Internet\\SeaMonkey\\Mozilla\\Alfredo"
+ user_pref("browser.startup.homepage", "file:///[/ProfD]../../../Personal/enlaces.htm");
+ -> Changed to "file:///E:/Personal/enlaces.htm"
+
+Profile 6: D:\Internet\SeaMonkey\Mozilla\X
+ user_pref("browser.cache.disk.parent_directory", "[\\ProfD]");
+ -> Changed to "D:\\Internet\\SeaMonkey\\Mozilla\\X"
+
+--- Running application from D:\Internet\SeaMonkey ... 
+Command line: "seamonkey.exe "
+Return code: 1
+----8<--------8<--------8<--------8<--------8<--------8<--------8<----
+
+That's all folks!
+
+
+All this stuff should work exactly the same with any settings containing a file path in any form. Just remember to indicate the adequate macro style.
+
+Enjoy!!

@@ -1,0 +1,58 @@
+Put objst.exe into a directory on your path.
+
+Install FeelX, just for awhile.  Or forever if you like what it does.
+
+Install the RAPlayer.
+
+Create an icon for the RAPlayer.
+
+Make sure the RAPlayer session is set windowed and that
+size=0 x:\tcpip\bin\vdostcp.sys is in the settings notebook under DOS device.
+
+Drop the RAPlayer icon on the FeelX icon.
+
+You now have the object handle for your RAPlayer icon in the clipboard.
+
+Paste that number into RAGO.CMD replacing the number that's there.
+
+Edit mailcap.cap to match the paths on your system.
+
+Place mailcap.cap and extmap.ext in x:\tcpip\ext
+
+Edit explorer.ini to change this section:
+
+[advanced]
+; advanced user settings - edit with care!
+;
+; mailcap= specifies full path to user mailcap file
+; format is:  mime/type; program_name params %s
+; example:    image/jpeg; jview -r %s
+; no wildcards allowed, no piping, no unix commands
+mailcap=x:\tcpip\etc\mailcap.cap
+; extmap= specifies full path to user extension map file
+; format is:  mime/type     extension_list
+; example:    image/jpeg    jpg jpeg jpe
+extmap=x:\tcpip\etc\extmap.ext
+
+I have used x: in this doc.  You need to use whatever drive letter you use.
+
+You're done.  Reboot (for luck), and run the Web Explorer.
+Goto http://www.realaudio.com/
+Pick something and play it.
+
+Enjoy!
+
+
+**** Really Important ****
+
+If you have problems using this, make sure that some other Winsock app
+works for you.  If not, you'll need to troubleshoot your Winsock
+configuration.  If all is well, this method works.  If you are unable to
+run any other Winsock app standalone, this will not work.
+
+This package is simply a method to allow RealAudio from the Web Explorer.
+It is not a "howto" on getting Winsock apps running under OS/2.  That is
+your responsibility.
+
+
+Gary Hammer  Wed 11-29-1995

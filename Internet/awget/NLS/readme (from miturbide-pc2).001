@@ -1,0 +1,342 @@
+Auto WGet Daemon
+Great idea and first release (C) 1998 Steve Trubachev
+Final release (C) 1998-2003 Dmitry A.Steklenev
+
+CONTENTS:
+    Short description
+    Download utilities
+    Installation
+	Important notice
+    How it works
+	How to feed necessary URL to daemon
+	Using in the network
+        Some words about NFTP
+    Configuration
+    Known bugs
+    Additional programs
+    Plugins
+        Job file
+    About
+    Special thanks
+
+Short description
+
+    Auto WGet Daemon is a free utility set for driving GNU WGet or any 
+    similar utility for downloading files. If you had been tired after you 
+    found necessary link in Netscape Navigator, copy it to clipboard and 
+    start WGet by hands (God! Are you so lazy? :), Auto WGet Daemon is that
+    thing, you need. Auto WGet Daemon allows you to start downloading by 
+    simply Drag'n'Drop to special folder. Aside from, Auto WGet Daemon 
+    supports queue for downloads and allows restart failed downloads in
+    the power fail or any other unpleasantness.
+
+Download utilities
+    
+    At this time only two utilities are supported: GNU WGet and cURL.
+    For a normal functionality Auto WGet Daemon you need to install either.
+    Also you need make sure they are working. They must to be placed to any
+    directory in PATH statement in CONFIG.SYS file.
+
+    OS/2 version of GNU WGet you can find at Hobbes:
+    http://http://hobbes.nmsu.edu/ (search "wget")
+
+    cUrl for OS/2 you can find at support homesite:
+    http://curl.haxx.se
+
+Installation
+  
+    You need unpack archive file to any temporary folder and start INSTALL.CMD,
+    to response to a couple of questions and all must be OK. Installation 
+    program will create special folders named "ToDO" and "Auto WGet daemon" 
+    at your Desktop. In addition, in %ETC% will be created (or updated, if 
+    it isn't first installation) configuration file AWGET.CFG.
+
+    Object for daemon starting will be placed to "Startup" folder. You don't 
+    need restart computer after installation. Daemon will start immediately 
+    after installation.
+
+    For normal functional Auto WGet Daemon must be installed to any 
+    long-name and extended attributes supported filesystem (HPFS, HPFS386, 
+    JFS or FAT32).
+
+Important notice
+
+    This version of Auto WGet Daemon can be installed over previous version
+    less than 1.6.1, but this isn't recommended strongly. If you are using
+    version like this, you need de-install it, delete %ETC%\AWGET.CFG file
+    and only after that install new one.
+
+How it works
+    
+    Auto WGet daemon scans "ToDo" folder and sub-folder contents continuously.
+    As soon as object with URL appears in those folders, download utility
+    starts. At that object will be moved to Active folder. It is signal that
+    download process had been started.
+
+    In case of broken download or computer restarts all objects from Active
+    folder will be moved to previous place and will be proceed in the regular
+    manner.
+
+How to feed necessary URL to daemon
+
+    First method: when you see necessary URL, you can drag it by mouse to 
+    "ToDo" folder (or subfolder). This URL will be placed to downloads queue.
+
+    Second method: you need click right mouse button at the URL in the browser
+    window and select "Copy Link Location". After that you need click right
+    mouse button at "ToDo" folder icon or subfolder and select "Paste..."
+    You can or can not enter other name for object. It doesn't matter. After 
+    all you need press "Paste".    
+
+    Third method: right click on the URL in the browser window and choose
+    "Copy Link Location". After that, start "Add URL" from the 
+    "Tools & Utilities" folder of Auto WGet Daemon, paste URL to the 
+    edit-box if it doesn't appear there (by pressing SHIFT-INS or mouse 
+    buttons simultaneously) and click on the "Add". By default object 
+    with appropriate URL will be created in the "ToDo" folder, but you 
+    can choose different sub-folder using combo-box over edit-box.
+
+    Fourth method: you need prepare ASCII file with URL list (as sample NFTP 
+    does this), execute "Add URL" and put to the edit box filename with list.
+    In the "ToDo" folder will be created group of URLs objects from list.
+    
+    Fifth method: you need set USE_DESKTOP in configuration file to "1". 
+    After this you will able to put URL by first and second method to 
+    Desktop directly. Daemon will move it to "ToDo" folder.
+
+    Sixth method: set CLIPBOARD_MONITOR key value in configuration file to 1
+    and do everything the same as described in the third method with one
+    exclusion only - add URL window will come up automatically after copying
+    URL to clipboard is done.
+
+Using in the network
+
+    You can share "ToDo" and download folder and use server with installed 
+    Auto WGet Daemon as common download center either as from OS/2 as from 
+    Windows. In the case you have to drop URL in the folder.
+
+    You can also establish client-server relations between two computers 
+    working under OS/2 where Auto WGet Daemon is installed. Next example
+    with two computers having NetBIOS names SERVER and CLIENT respectively 
+    will show you how to do it.
+
+    On SERVER you have to create subfolder with name at your will in "ToDo"
+    folder. For an instance we call it "FromClient". Drag additional 
+    configuration template file awget.cfg (located in "Tools & Utilities")
+    into this folder and edit it. You have to uncomment and change values 
+    for the following parameters:
+
+       MESSAGE_DONE  = net send CLIENT "%M: %U"
+       MESSAGE_ERROR = net send CLIENT "%M: %U"
+   
+    Additionally you have to assign to CLIENT reading and writing permissions 
+    to the folder. In our case we share folder where Auto WGet Daemon is 
+    installed.
+    
+    Now we create subfolder "ToServer" in "ToDo" folder on CLIENT and force
+    download redirection for the folder in additional configuration file: 
+
+       REDIRECT_TO = \\server\awget\folders\todo\fromclient
+    
+    That is it. Each URL dragged into "ToServer" folder on CLIENT will be 
+    moved to "FromClient" folder on SERVER side and download completion 
+    messages will be sent back to CLIENT by SERVER.
+
+    Notice: creating special subfolder on CLIENT is not a must, you may
+    just put awget.cfg into "ToDo" folder.
+
+Some words about NFTP
+
+    NFTP is well known FTP client for OS/2. It is being developed by Sergey
+    Ayukov. It can be found at http://www.ayukov.com. To use Auto WGet 
+    Daemon with NFTP it is enough to alternate two lines only in nftp.ini
+    (don't forget to remove comment symbol ";" before them)
+
+        launch-wget = "x:\path_to_awget\awgadd.cmd %s"
+        enable-passworded-wget = yes
+
+    Where "x:\path_to_awget" needs to be replaced to the directory where Auto
+    WGet Daemon is located. Having this done you may issue download request
+    to daemon highlighting desired files and pressing Shift-W.
+
+Configuration
+
+    Main configuration file (named "AWGET.CFG") is lying in the %ETC% 
+    directory (usually point to \MPTN\ETC). There is an object in 
+    the "Tools & Utilities" folder for editing configuration file. 
+    Statement description is written in the configuration file body 
+    as comments for each.  
+
+    You can create subfolders in "ToDo" folder and put in their additional 
+    configuration files. Use this future you can change some statements from
+    main configuration file (folder processing time, download directory, etc.)
+    A template for creating file like this can be found in "Tools & Utilities"
+    folder.
+
+    Don't forget erase comment begins symbol "#" before statement you want 
+    to change.  
+
+Known bugs
+    
+    - Auto WGet Daemon can't understand URL objects created by Netscape
+      Communicator 4.61 in OS/2 Warp 3.0. You can use Netscape Navigator 2.02, 
+      Netscape Communicator 4.04 or send the URL by "Add URL" object. Or
+      you can use OS/2 Warp 4.0 and better :)
+    - This software is incompatible with Vadim Yegorov aka VYX.
+
+Additional programs
+
+    Pmpopup2.exe Ulrich Sturmberg PM Popup Version 1.0
+
+    Aside from, you need netstat utility from standard TCP/IP in 
+    check for PPP connection case. 
+
+Plugins
+
+    Plugins are programs for improve and extend functionality of Auto 
+    WGet Daemon. Two types of modules are supported - global and
+    private. Global modules interact with daemon directly and are especially
+    oriented to affect to job planning process. Private modules interact
+    with each of started download processes and can affect at it 
+    execution manner.
+    
+    To plug a module in you need add description to main configuration file 
+    AWGET.CFG. Use the key GLOBAL_PLUGIN for global modules and PRIVATE_PLUGIN
+    for private. A sample:
+
+    GLOBAL_PLUGIN = Plugins\awpglob.cmd
+
+    For activating a new global module you need restart daemon. Private 
+    module will be plugged in as soon as particular download process will 
+    be started. 
+
+    Here is the info for the developers.
+
+    Pluggable module is a detached process. It is running with daemon 
+    (global modules) or with each particular download process (private 
+    modules). You can interact with module through standard input/output
+    streams. Communication accomplishes in string by string mode using
+    special commands. Each string contains only one command. After posting
+    string to module, answer must be received and daemon execution will be 
+    stopped until answer appears. If configuration file contains more than
+    one module, all modules will be served in order of definition.
+
+    Command contains four symbol size keyword and optional information part.
+    Between command and information part one space symbol must be inserted.
+
+    Only two answers from information module are allowed: DONE and FAIL. DONE 
+    denotes successful command execution. FAIL denotes existing of error or 
+    execution restriction for the function asked. The information sent with 
+    DONE, is printed to the screen. The information sent with FAIL is printed
+    in the error log and to screen.
+
+    Module can send one or more commands for additional info (INFO, EVNT 
+    and ALRM) before sending DONE or FAIL. Info, following any of those 
+    commands, will be printed at the screen. Also, info from EVNT command 
+    will be recorded to event log and ALRM to error log.
+
+    To interact with global modules next commands can be used:
+
+      INIT awget_home_directory
+      Will be sent in initialization time of Auto WGet Daemon. Module answer
+      will be ignored.
+      
+      SCAN todo_directory
+      Will be sent before scanning of Desktop and "ToDo" folder begins. In
+      the case of FAIL answer at least of one module, scanning will be passed
+      through.
+
+      CONF configuration_file
+      Will be sent after indicating of main configuration file changes. 
+      Module answer will be ignored.
+
+      SEXE job_file
+      Will be sent before starting download process. Module can change job
+      file content. In the case of FAIL answer, startup will postpone.
+
+      SEND job_file
+      Will be sent after download process completion.  Module can change
+      job file content. Module answer will ignore.
+
+      STOP 
+      Will send before daemon's shutdown. Daemon won't wait for an answer
+      from module. It will shutdown immediately after sending command to all 
+      modules.
+
+    To interact with private modules next commands can be used:
+
+      INIT job_file
+      Will be sent in the download initialization moment. Module can change
+      job file content. In the case of FAIL answer at least of one module, 
+      process will stop.
+
+      DATA 
+      Will be sent before download utility output translation begins. After 
+      answer DONE, module must change input mode to symbol. Translation will
+      end by '00'x.
+
+      STOP job_file
+      Will be sent before download process shutdown. Module can change 
+      job file content. Module answer will ignore.
+
+    Samples for global and private plugin can be found in the "Plugins" 
+    directory of Auto WGet daemon.
+
+Job file
+
+    All the information required by the download process can be sent through
+    job file. Job file format is like configuration file and contains 
+    pairs - key and value. Next keys are used:
+
+      OBJECT                Object with URL name, which will proceed.
+      URL                   Download URL.
+      DOWNLOAD              Folder, where file will placed after download.
+      MESSAGE_DONE          Successful download command.	
+      MESSAGE_ERROR         Broken download command.
+      DOWNLOADS_UTILITY     Download utility.
+      DOWNLOADS_PARAMETERS  Download utility parameters.
+      DOWNLOADS_RC          Download utility exit code.
+      DOWNLOADS_INFO        Download utility last message.
+
+    Some samples for reading and writing job files can be found in 
+    awpglob.cmd and awppriv.cmd files in "Plugins" directory.
+
+About
+
+    Great idea and first release (C) 1998 Steve Trubachev
+    Final release (C) 1998-2002 Dmitry A.Steklenev
+
+    You can send comments to: glass@ptv.ru
+
+    Auto WGet Daemon is free software; this means that everyone is
+    free to use it and free to redistribute it on certain conditions
+    All of the work on this is done by me in spare time. 
+
+    Therefore if you find Auto WGet Daemon useful or if you know of some 
+    new features that you'd like to see implemented, please send a
+    donation to support my work.
+
+    You can make your donation to Auto WGet Daemon Project on BMT Micro
+    site:
+
+    https://secure.bmtmicro.com/ECommerce-OffSite/12080000.html
+
+Special thanks
+
+    - to Yuri Efimoff <yuri.efimoff@multex.com> for assistance in 
+      translation of all this on English.
+    - to bj <bj@ksib.kemerovo.su> for a code samples for windows
+      shortcuts processing.
+    - to Bernd Schemmer for the "REXX Tips and Triks".
+    - to Vladimir Zabrodsky for the "Album of Algorithms and Techniques for
+      Standard Rexx".
+    - to Guillaume Gay <guillaume.gay@bigfoot.com> for translation of the message
+      file and manual on French.
+    - to Che-ching Wu <ccwu@pie.com.tw> for translation of the message
+      file and manual on Traditional Chinese.
+    - to Bernd Giesen <Bernd.Giesen@t-online.de> for translation of the message
+      file and manual on German.
+    - to Jan-Erik Larka <j-erik.p@telia.com> for translation of the message
+      file and manual on Swedish.
+    - to Alfredo Fern ndez D¡az <alfredo@netropolis-si.com> for translation 
+      of the message file and manual on Spanish.

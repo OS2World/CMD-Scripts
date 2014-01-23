@@ -1,0 +1,141 @@
+                        FeelX v1.1a
+                        -----------
+
+This package does contain only small changes. For information see v1.1 readme
+below. To install v1.1a if you already installed *v1.1* follow these steps
+(For upgrade v1.0 -> v1.1a see info below).
+
+
+FEELX v1.1 -> v1.1a only
+
+        1. If v1.1 WPS object is installed:
+               - delete WPS-object (e.g. shredder)
+           and - use uninstal
+        2. REBOOT (necessary especially when installed as a WPS object)
+        3. Exit FeelX by starting
+               - fxopt (old fxopt v1.1 !!) quit
+            or - using one of the menu items
+        4. Copy new files over old files
+
+
+New info:
+    - Sorry, I forgot to mention that you can program FeelX with the
+      FeelX.go (nowps.go) file
+    - default name for startup-file is nowps.go if started as a WPS-replacement
+      and feelx.go otherwise
+    - For more info cf. changes.txt
+    - To start a program that is not in the path please don't forget
+      to specify the FULL qualified path in the program attribute.
+
+Hotkey info:
+    Some users were not very lucky about the hotkey feature. Mostly
+    because all Ctrl-Shift-combinations were deleted from the message
+    queue. This is not true any longer. The hotkeys can be a very
+    powerful help. Have a look at the toolbox.inc file. It is loaded
+    by feelx.go, the default description file. Some ideas are included
+    there (section Default_Hotkeys). Almost all samples are commented out.
+    Remove the comments, restart FeelX, try the hotkey (default: Ctrl-Alt+key)
+    and modify the file to your own preferences.
+
+ideas?
+    - I don't want to make any promises about future versions - but I
+      currently thinking of a more use-friendly way to define FeelX actions
+      (menus, hotkeys, ...). If you have any good ideas, let me know
+      (but don't expect miracales from the next version ...)
+    - Furthermore I want to enhance the toolbox.inc file to make it easier
+      to program FeelX. If you have any good idea for a FeelX object,
+      or if you expect the FeelX language to do something that is not
+      possible now, let me kow (or send me the FOOL-definition).
+    - If you have problems to integrate your program or DLL, send me a mail
+    - ideas for new objects are very welcome (it's easy to enhance FeelX)
+
+Felix.
+
+================================================================================
+                        FeelX v1.1
+                        ----------
+
+The aim of this program (package) is:
+  - simulate some X-Window features (sliding focus, PM - Kill, 3rd mouse button)
+  - increase personal producuctivity by
+        a) offering a lot of menus (may be used as a WPS replacement)
+        b) easier mark & paste than standard OS/2
+        c) some small stand-alone tools
+        d) other features as described in FeelX.inf
+  - increase your fun using OS/2 :-)
+
+Features of v1.1
+  - Same as v1.0 (WPS integration, context menus, ...)
+ minus:
+  - (some of the) bugs & problems
+ plus:
+  - new "special" functions: like hotkeys, windowlist(s), actionbar(s)
+  - support of 3rd mouse button
+  - much more flexibility (use a small language)
+  - easier program launching (OS/2 [->clipbrd, ->pm], dos, win)
+
+Additional programs:
+  open WPS-object, fault-tolerant search for file(names), move
+  program into foreground from a batch file, change lines in an OS/2 shell,
+  change font in an OS/2 shell
+
+--------------------------------------------------------------------------------
+
+How to read the documentation:
+
+        view feelx.inf
+
+How to UNINSTALL FeelX *v1.0*
+
+        1. uninst10
+        2. remove feelx.exe (+popuppm.exe) from startup folder
+        3. reboot (!!!)
+        4. Save old version to diskette??
+        5. delete all v1.0 files
+
+How to test FeelX v1.1
+
+        [ If you are user of 1.0:
+          1) reboot (!!!)
+          2) start OLD (=v1.0) fxopt quit
+             (or kill feelx in some other way. Don't use the marking
+             feature of FeelX or the DLL will not be freed!!)
+
+        *** FEELX v1.0 AND FEELX v1.1 ARE COMPLETLY INCOMPATIBLE ***
+               *** INCLUDE FEELX.GO *.DLL WPS-OBJECT!!!! ***
+        ]
+
+        feelx.exe
+
+How to install FeelX v1.1
+
+
+(A) Installing FeelX (required)
+
+      [ 1  UNINSTALL FeelX v1.0 - see notes above
+           v1.0 and v1.1 are completly incompatibel! (sorry!) ]
+        2. Copy all files into your "FeelX"-directory
+        4. Add this path to LIBPATH in config.sys
+        5. Add this path to PATH in config.sys
+        6. Add this path to BOOKSHELF in config.sys
+
+(B) Installing the WPS object (optional)
+        1. switch to the FeelX path
+        2. register.exe
+
+(C) Have it restarted on boot - time
+        1. Move feelx.exe or the WPS object in the startup folder
+
+(D) Using FeelX as a WPS replacement
+        1. SET RUNWORKPLACE=c:\feelx\feelx.exe
+
+
+I hope you enjoy this program.
+
+                                                        Felix.
+
+Felix von Normann
+Innstr.82
+94036 Passau
+Germany
+e-mail: normann@kirk.fmi.uni-passau.de

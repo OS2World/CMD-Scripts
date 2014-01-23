@@ -1,0 +1,99 @@
+Headline News Configuration File
+for use with v. 2.0
+
+Put NOTHING on an assignment line (this=that) except the value you 
+are assigning; otherwise, feel free to add to, change, or delete
+things from this file.
+
+In the directory assignments below, "homedir" is the directory in 
+which you will have placed the HL_News.CMD file.  You can leave it 
+that way, as the program assigns it the correct value.  If you change 
+any assignments, be sure to include the trailing \ character.
+=====================================================================
+
+
+BOOPS controls whether the program is allowed to use audible signals
+to signify progress, errors, and choices to be made.  A value of 1
+enables sound; a zero disables.  (Anything else defaults to 1.)
+---------------------------------------------------------------------
+boops=1
+
+
+
+The LOADSDIR is where the program will store the download files it
+uses during the course of a given session.  Since it deletes those
+files later, do NOT make this a directory with anything else in it!
+---------------------------------------------------------------------
+loadsdir=homedir||'\LOADS\'
+
+
+
+The SAVESDIR is where the program will store saved articals
+------------------------------------------------------------------
+savesdir=''
+
+
+LINE_LEN sets the length of lines used to display article text the default is 78
+------------------------------------------------------------------
+line_len=78
+
+
+Colors:
+=======
+Color numbers are calculated this way:
+
+The colors themselves are the usual old CGA numbers--
+
+Foreground colors       Background colors     
+  0 - black                       0 - black           
+  1 - blue                       16 - blue           
+  2 - green                     32 - green          
+  3 - cyan                      48 - cyan           
+  4 - red                        64 - red            
+  5 - magenta                 80 - magenta        
+  6 - brown                    96 - brown          
+  7 - white                    112 - white         
+  8 - gray
+  9 - light blue
+ 10 - light green
+ 11 - light cyan
+ 12 - light red
+ 13 - light magenta
+ 14 - yellow
+ 15 - high intesity white
+
+Attribute values are computed by adding the disired foreground color
+to the number representing the background color. For bright background
+colors add 128 to this value.
+
+
+SITESCOLOR is for display of the site list. The default 79 is white
+text on bright red
+---------------------------------------------------------------------
+sitescolor=79
+
+ARTCOLOR is for display of an article being read.  The default 96 is 
+black text on plain brown.
+---------------------------------------------------------------------
+artcolor=96
+
+
+HITPICK is for display of articles from a slection list.  The default 10 is
+bright green on black.
+---------------------------------------------------------------------
+hitpick=10
+
+
+H_MARK is used to mark  display of <HN> ôheadingsõ as an hierarchical outline
+default is '' which indents and marks with <HN>.  1) you may use any character  
+D2C(num)or 'num'X
+----------------------------------------------------------------------
+h_mark=''
+
+HI_ASC is used to toggle display of &num; characters used in html markup. 
+It can be 0=off or 1=on
+-----------------------------------------------------------------------
+hi_asc=0
+
+[end of file]
+

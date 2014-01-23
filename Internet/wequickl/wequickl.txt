@@ -1,0 +1,50 @@
+From: Rony.Flatscher@wu-wien.ac.at
+Newsgroups: comp.os.os2.networking.tcp-ip,comp.os.os2.networking.www
+Subject: REXX-script to generate URL-objects from quicklist (WE0525)
+Date: 5 Jun 1995 01:35:35 GMT
+Distribution: world
+Message-ID: <3qtn17$29n@osiris.wu-wien.ac.at>
+Reply-To: Rony.Flatscher@wu-wien.ac.at
+
+WE0525 introduced a very cool feature:  one can simply drags a web page to the
+workplace shell and an URL-object is automatically created, with a title, an
+editable URL and a file containing that URL (allowing for editing the URL in
+different places). By double-clicking on the URL-object a window pops up which 
+allows for editing the URL, by dragging the URL to the WebExplorer object or on 
+to an open instance of WebExplorer that URL gets immediately loaded.
+
+Ever since then I wished to have a utility to transfer my very large quicklist
+from previous versions to those nice URL-objects, so I would be able to arrange
+them the way I want by means of WPS folders, sorting, defining links (shadows)
+etc.
+
+As no one so far was able to tell the setup-string necessary for the workplace
+shell I started to play around with REXX and the SysCreateObject function and
+found a way to do exactly what I wanted: to create URL-objects from REXX.
+
+It may be possible that some others also like the new URL-object feature of
+WE0525, so I enclose the REXX-script to this file, so it becomes possible to you
+to have your quicklist available as URL-objects.  
+
+You would need to save the REXX-program starting right after the first
+"cut-here" message as "wequickl.cmd" (as for "WebExplorer Quicklist"; the first
+line *must* start with the opening REXX-comment "/*" as this tells the OS/2
+command interpreter that this file contains a REXX program).  
+
+Thereafter open any OS/2 window and run the REXX-program by typing "wequickl" at
+the prompt.  The script will automatically create a folder named "WEB Quicklist
+Folder" on the desktop and place all quicklist-entries as URL-objects into it.
+If you ever repeat this script URL-objects already in this folder won't be
+recreated (unless your move those URL-objects to other folders *or* rename the
+title).
+
+Please remember, it is OS/2 Warp's object orientation which makes it feasible
+for object greenhorns like myself to even dare to write such a REXX-script which
+employs WPS objects.  As you see it works and is not even difficult.  I
+commented the code so REXX "illegibles" (no insults intended :)  ) should be
+able to grasp the logic.
+
+Good luck.
+
+---rony
+

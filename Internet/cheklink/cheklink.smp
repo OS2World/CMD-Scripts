@@ -1,0 +1,198 @@
+; Sample input file for CheckLink.
+;
+; This may be used when CheckLink is run in standalone mode
+; Lines beginning with a ; are comments (they are ignored)
+; Blank lines are also ignored
+
+; For more details on these options, see CHEKLINK.TXT
+;
+; There are two types of parameter that can be changed using this type of file.
+;
+;  Run-time parameters:
+;      STARTER_URL   TREENAME    USER_PWD   BASEONLY   QUERYONLY   SITEONLY 
+;      MAKE_DESCRIP  EXCLUSION_LIST         OUTTYPE    STANDALONE_VERBOSE
+;      DEFAULT_OUTUPTFILE                   LINKFILE   INCLUDE_CHEKLNK2
+;      ASCGI
+;
+;  User configurable parameters 
+;      CHECK_ROBOT    CHEKLINK_HTM  DOUBLE_CHECK     MAXAGE  MAXAGE2
+;      MAXATONCE      MAXATONCE_GET  MAX_TABLE_ROWS  PROXY_SERVER
+;      REMOVE_SCRIPT  TEXT_TYPES
+
+; ------------ --------------
+; This section contains parameters that CheckLink allows you
+; to change at run-time. These values are  will be saved when 
+; you select the SAVE_CURRENT option in CheckLink.
+; ------------ --------------
+
+; The URL to begin with.
+; You can also enter a file name, using FILE:///x:\dir\dir\name.ext
+starter_url=http://www.srehttp.org/
+
+; The descriptive name for this webtree [optional]
+treename=Sample CheckLink Output
+
+; A  username and password to include with each request [optional]
+; Seperate them with a space
+user_pwd=username password
+; BaseOnly, SiteOnly, QueryOnly, and AsCGI are 0/1 variables -- 
+; where 0 means NO, and 1 means Yes
+
+; 1= Only examine URLs relative to the "base" of the starter-url. 
+;    Typically, this means everything in or under the starter-URL's directory
+; 0= Examine URs relative to the "root" of the starter-url.
+;    Typically,this means any URL on the same site as the starter-url
+baseonly=0
+
+; 1 = Query (check the existence) of all URLS
+; 0 = Only query URLs on this site 
+siteonly=0
+
+; 1 = Query, but do NOT read & process, URLs found in the starter-URL
+; 0 = Possibly read URLS (given baseonly and siteonly values) found in the
+;    starter-URL
+queryonly=0
+
+
+; Make descriptions for the varions URLS
+;  1 = Do NOT make descriptions
+;  2 = Make descirptions for text/html files
+;  3 = Make descriptions for text/html and text/plain files
+make_descrip=3
+
+; A space delimited list. If a URL matches any item in this list, then do NOT
+; query or read it. Each item may contain * (wildcard) characters
+exclusion_list=/CGI* *?*
+
+; A space delimited list of codes that select which tables to create:
+; OK - All "okay" URLS
+; NOSITE -- All URLS  whose site does NOT respond
+; NOURL -- All URLS that return a "not found" (or other error code)
+; OFFSITE -- All URLS that are "offsite". This is only relevant when
+;            SITEONLY=1
+; EXCLUDED -- All URLS that are excluded (those that match an entry in
+;             EXCLUSION_LIST)
+; ALL      -- All the urls (in alphabetical order)
+; outtype (list of): OK NOSITE NOURL OFFSITE EXCLUDED (or ALL)
+outtype=NOSITE NOURL
+
+; verbose: 0=quiet, 1=normal, 2=verbose, 3=very verbose
+; To suppress "intermediate output" in the results table, set standalone_verbose=0
+standalone_verbose=0
+
+; The output file to write results to (results are written using HTML syntax)
+; If no path is given, then write it to the current directory
+DEFAULT_OUTPUTFILE=def.htm
+
+; The "links" file. The "links" file is used by CHEKLNK2 to traverse
+; the web tree -- to show what links are in each html document, and
+; to show what html documents contain links to a given URL
+; If no path is given, then write it to the current directory
+; To suppress creation of this file, set linkfile=0
+linkfile=links.stm
+
+; Include links to "traverse the webtree with CHEKLNK2
+; One such link is added for each URL 
+;   1 = yes
+;   0 = no 
+; Notes:
+;  * CHEKLNK2 is meant to be used as CGI-BIN script, or
+;    as an SRE-http addon. 
+;  * If you are ONLY using CheckLink in standalone mode,
+     you might as well save same space and set INLCUDE_CHEKLNK2=0 
+;  * If you do NOT create a links file, INCLUDE_CHEKLNK2 will be
+;    give a value of 0 
+include_cheklnk2=1
+
+
+; 1 = Use CGI-BIN protocol when specifying links to CHEKLNK2
+; 0 = Use SRE-http addon protocol when specifying links to CHEKLNK2
+; Of INCLUDE_CHEKLNK2=0, ascgi is ignored
+ascgi=1
+
+
+; ------------ --------------
+; This section contains "user-configurable" parameters. 
+; Since these are set in CHEKLINK.CMD, they are OPTIONAL.
+; If you want to change them permanently, please see the 
+; "user configurable" parameters section of CHEKLINK.CMD.
+;
+; In general, we do NOT recommend changing these parameters
+; (the default values work reasonably well).  If you do
+; need to change some of these parameters, you do NOT
+; need to specify all of them -- only specify the parameters
+; you want to change
+; 
+; Note: these values are NOT written when you select the SAVE_CURRENT option
+; ------------ --------------
+
+; CheckLink will check the starter-URL's site for a "robot exclusion list" -- 
+; a list of URLS that the site does NOT want robots to query.
+; 1 = Use a site's "robot exclusion list"
+; 0 = Do not
+; For reasons of proper netiquette, we STRONGLY recommend using CHECK_ROBOT=1
+check_robot=1
+
+; This is used in CHEKLNK2 -- it's the "url" (or relative URL) at which
+; CHEKLINK.HTM (a HTML document used as a front-end to CheckLink) can be found
+cheklink_htm=CHEKLINK.HTM
+
+
+; Double Check "bad" URLS
+; 0= do NOT double check
+; 1 = double check "no site" urls
+; 2 = double check both "no site" and "missing resource" urls
+DOUBLE_CHECK=1
+
+; Extensions that signify text/html resources. This is used ONLY for FILE:/// URLS.
+html_types=HTM HTML SHT SHTML HTML-SSI
+
+
+; Maximum time, in seconds, to wait on a "query existence" request 
+maxage=60
+
+; Max time, in seconds, to wait on a "read contents of html document" request
+maxage2=80
+
+; Maximum number of simultaneously open "query existence" requests 
+; Actually, the maximum # open will be maxatonce+1
+maxatonce=4
+
+; Maximum number of simultaneously open  "read contents of html document"
+; requests. Actually, the maximum # open will be maxatonce_get+1
+maxatonce_get=2
+
+
+; Maximum # of rows per subtable in the HTML output file. 
+; The list of all URLS will be composed of several subtables,
+; each of (up to) MAX_TABLE_ROWS long. 
+; * Advantages of Shorter subtables:
+;   1. Netscape displays more quickly
+;   2. Isolate overly wide rows (due to LOOOOONNGGG URLS)
+;       to a subset of the urls.  
+; * Disadvantages to shorter subtables
+;   1. Each  subtable will have different column sizes, which may be 
+;      visually displeasing.
+; To use just one big table, set MAX_TABLE_ROWS=10000000
+max_table_rows=50
+
+
+; The proxy server to send http requests through.
+; Use a fully specified address, with optional port.
+; For example:  proxy.mycompany.com:8080  (do NOT include the leading http://)
+; If you are NOT using a proxy server, leave this blank (or set equal to 0)
+;     For example, if you are using the "SmartCache proxy",
+;     you could set proxy_server=127.0.0.1:8080
+
+proxy_server=0
+
+; 1 = Remove all <SCRIPT> blocks, and all JAVASCRIPT links.
+; 0 = Do not remove
+; It's safer to remove these links (since CheckLink is not very intelligent 
+; about processing <SCRIPT> blocks and JAVASCRIPT "urls")
+REMOVE_SCRIPT=1
+
+; Extensions that signify text/plain resources. This is used ONLY for FILE:/// URLS.
+text_types='TXT FAQ ME LOG LST DOC '
+
+

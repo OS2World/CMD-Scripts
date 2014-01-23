@@ -1,0 +1,32 @@
+            Archive Name: UPCGI.ZIP
+       Short Description: A CGI script for uploading files 
+        Long Description:
+  A simple OS/2 REXX cgi-bin script to process
+  HTML uploads-- it provides support for a
+  FORM with enctype="multi-part/form",
+  and with INPUT TYPE="FILE" elements. 
+  This script will echo back the "parts" submitted (i.e.; the
+  file that was uploaded), but you can easily modify it
+  to do more interesting tasks.
+
+      Proposed directory
+           for placement:  /os2/apps/internet/www/util      
+
+               Your name:  Daniel Hellerstein   
+           Email address:  danielh@econ.ag.gov
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.srehttp.org/apps/misc/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 3.0
+ Additional requirements: a cgi-bin compliant web server
+
+                Replaces: none
+
+
+
+

@@ -1,0 +1,175 @@
+HOME                     = AWGet home
+DOWNLOAD                 = Download folder
+DOWNLOADS_SIMULTANEOUSLY = Maximum of simultaneous downloads
+DOWNLOADS_FROM_SAME_HOST = Maximum downloads from same server
+DOWNLOADS_ATTEMPTS       = Maximum of attempts
+DOWNLOADS_UTILITY        = Utility for download
+DOWNLOADS_PARAMETERS     = Download parameters
+DOWNLOADS_WINDOW         = Download window
+CLIPBOARD_MONITOR        = Use clipboard monitor
+CLIPBOARD_EXCLUDE        = Exclude file types
+SCAN_INTERVAL            = Scanning interval
+LOG_FILE                 = Log file
+ERROR_LOG                = Error log file
+LOG_KEEP                 = Days to keep log files entries
+LOG_PRUNE                = Allow periodical logs pruning
+MESSAGE_DONE             = Success of downloading message
+MESSAGE_ERROR            = Error in downloading message
+MESSAGES                 = Show start and stop message for processes
+CHECK_CONNECTION         = Check connection to Internet
+USE_DESKTOP              = Try to find URL files at the Desktop
+KEEP_FAILED_URL          = Save mistaken URLs
+KEEP_DONE_URL            = Save successfull URLs
+
+CONNECTION_ESTABLISHED   = Internet connection is etablished.
+CONNECTION_BROKEN        = Internet connection is broken.
+
+UNINSTAL_WARNING = WARNING! Existing folder ToDo and its contents will be\n\
+                   deleted during uninstallation process of Auto WGet Daemon! If it isn't\n\
+                   convenient to you, you can save files in the other place.
+UNINSTAL_ERROR   = Current directory "%s" differs of Auto WGet Daemon installation directory.\n\
+                   Uninstallation has been interrupted and you have to delete important\n\
+                   files by yourself.
+UNINSTAL         = Uninstall Auto WGet Daemon
+REMOVE_CONFIG    = Remove configuration file
+
+INSTALL_DIR      = Installation directory
+INSTALL          = Start of installation Auto WGet Daemon
+NOT_FOUND_UTILS  = The utility for downloading not found or doesn't exists!\n\
+                   Please, read documentation and install one.
+INSTALL_ABORTED  = Installation process was interrupted!
+SELECT_UTIL      = Select utility for download:
+SELECT_NUMBER    = Enter utility number (0 - exit )
+OBJECT_DONE      = Object was created
+OBJECT_ERROR     = Error during object creating
+DIR_DONE         = Folder was created
+DIR_ERROR        = Error during folder creating
+COPY_DONE        = File copied successfully
+COPY_ERROR       = Error during file copying
+COMPILE_DONE     = File was compiled
+COMPILE_ERROR    = Error in compilation process
+ERASE_DONE       = Successfully deleted
+ERASE_ERROR      = Error during deleting
+READ_ERROR       = Reading error
+WRITE_ERROR      = Writing error
+CONFIG_UPDATED   = Configuration file is updated
+ENTER_URL        = ~Enter URL or list name
+ENTER_ADD        = ~Add
+ENTER_CANCEL     = ~Cancel
+
+YES              = Yy
+NO               = Nn
+BAD_YESNO        = What? Enter 'Y' or 'N', please!
+
+NOT_FOUND        = Folder not found
+CONFIG_CHANGED   = Configuration file was updated.
+PRUNE_START      = Logs pruning started.
+PRUNE_DONE       = Logs pruning finished successfully, %u lines pruned.
+BAD_DOWNLDIR     = Download folder not found! Current (".") will be used instead
+NOT_MOVE         = Error during moving file(s)
+BAD_URL          = File contains wrong URL
+DOWNLOAD_START   = Download process was started
+DOWNLOAD_DONE    = Downloading is finished
+DOWNLOAD_ERROR   = Error during download process
+DOWNLOAD_STOP    = Download process was interrupted
+DOWNLOAD_REDIR   = Download redirected
+ERROR_IN         = Error in
+UNKNOWN_SID      = Unknown session finished (zombie?)
+PLUGIN_DEAD      = Plugin is dead
+
+WAIT_STOPPED     = Auto WGet Daemon is stopping now. Wait, please
+STOPPED          = Auto WGet Daemon is stopped.
+NOT_RUNNING      = Auto WGet Daemon isn't active right now.
+STARTED          = Auto WGet Daemon started.
+ALREADY_RUNNING  = Auto WGet Daemon already started.
+
+# Here is objects names
+
+OBJ_HOME         = Auto WGet Daemon
+OBJ_DOWNLOADS    = Downloads
+OBJ_TOOLS        = Tools & Utilities
+OBJ_INFO         = Information
+OBJ_JOBS         = Jobs
+OBJ_TODO         = ToDo
+OBJ_RUNNING      = Active
+OBJ_DONE         = Completed
+OBJ_FAILED       = Failed
+OBJ_DAEMON       = Auto WGet Daemon
+OBJ_UNINSTALL    = Uninstall\nAuto WGet Daemon
+OBJ_EDITCFG      = Edit Configuration File
+OBJ_STOP         = Stop\nAuto WGet Daemon
+OBJ_EVTLOG       = View Event Log
+OBJ_ERRLOG       = View Error Log
+OBJ_ADD          = Add URL
+OBJ_README_EN    = Readme (English)
+OBJ_README       = Readme
+OBJ_CHANGES_EN   = History of Changes
+OBJ_LICENSE_EN   = License (English)
+OBJ_LICENSE      = License
+OBJ_URL_RU       = Auto WGet Daemon\nHome Page (Russian)
+OBJ_URL_EN       = Auto WGet Daemon\nHome Page (English)
+OBJ_DONATE       = Make your donation!
+
+# Here is comments (notes) for configuration file parameters
+
+CFG_HOME                     = Point to the directory where Auto WGet Daemon files are located,\n\
+                               This value is filled during installation process and usually you don't,\n\
+                               need change it later. 
+CFG_DOWNLOAD                 = Point to the directory where downloaded files are located.
+CFG_DOWNLOADS_SIMULTANEOUSLY = Define the number of URLs can be proceed in same time.
+CFG_DOWNLOADS_FROM_SAME_HOST = It defines how many URLs in the maximum can be downloaded from\n\
+                               the same server. (0 - disables all limitations)
+CFG_DOWNLOADS_ATTEMPTS       = Define the number of attempts to load each URL.\n\
+                               If download utility returns error code, URL will be stored\n\
+                               to the next turn up to defined value. (0 - disables all limitations)
+CFG_DOWNLOADS_UTILITY        = Download utility name.
+CFG_DOWNLOADS_PARAMETERS     = Here are parameters for download utility. You can use next\n\
+                               macrosymbols: \n\n\
+                               %U - Change to active URL\n\
+                               %D - Change to download folder\n\
+                               %P - Change to download folder where back slashes (\) are replaced to forward (/)\n\
+                               %F - Change to the file name taken from the active URL\n\
+                               %H - Change to the host name taken from the active URL.
+CFG_DOWNLOADS_WINDOW         = Defines size and representation mode of download utility. In the first\n\
+                               order keyword "hidden" or "visible" should be entered and after it comma-separated\n\
+                               numbers of columns and rows are going.
+CFG_SCAN_INTERVAL            = Scanning period for the folder ToDo in seconds.
+CFG_CLIPBOARD_MONITOR        = Enables system clipboard monitoring. If URL is detected in system\n\
+                               clipboard Add dialog of Auto WGet Daemon will come up.
+CFG_CLIPBOARD_EXCLUDE        = File types are being ignored by clipboard monitor.
+CFG_LOG_FILE                 = Log file name where start, stop, other messages is stored.
+CFG_ERROR_LOG                = Log file name with error messages.
+CFG_LOG_KEEP                 = The number of days to keep log file entries before pruning the logs.
+CFG_MESSAGES                 = Define messaging mode during starting and finishing of downloads.\n\
+                               1 - show messages, 0 - don't show messages.
+CFG_MESSAGE_DONE             = The command what is running after successfully download. You\n\
+                               can use next macrosymbols:\n\n\
+                               %M - Change to a successful download message\n\
+                               %U - Change to the active URL\n\
+                               %D - Change to download folder\n\
+                               %P - Change to download folder where back slashes (\) are replaced to forward (/)\n\
+                               %F - Change to the file name taken from the active URL\n\
+                               %L - Change to download utility last message\n\
+                               %R - Change to download utility return code
+CFG_MESSAGE_ERROR            = The command what is running after error during download. You\n\
+                               can use next macrosymbols: \n\n\
+                               %M - Change to a successful download message\n\
+                               %U - Change to the active URL\n\
+                               %D - Change to download folder\n\
+                               %P - Change to download folder where back slashes (\) are replaced to forward (/)\n\
+                               %F - Change to the file name taken from the active URL\n\
+                               %L - Change to download utility last message\n\
+                               %R - Change to download utility return code
+CFG_CHECK_CONNECTION         = Say to check PPP or SLIP connection before starting dowload process\n\
+                               It isn't check by default.
+CFG_USE_DESKTOP              = Allow Desktop scanning for a files containing URL.\n\
+                               Those files will be moved to ToDo folder for future processing.
+CFG_KEEP_FAILED_URL          = URL with broken download will be moved to Failed folder, if set in 1.
+CFG_KEEP_DONE_URL            = URL wich download succesfully will be moved to Completed folder, if set in 1.
+CFG_SCHEDULE                 = Sets schedule for the current folder processing.\n\
+                               Shedule contains comma separated time intervals. Each\n\
+                               interval seems like beginning and ending processing time\n\
+                               As simple: SCHEDULE = 06:00-08:30,16:50-03:00
+CFG_REDIRECT_TO              = Redirects URL from original folder to specified one. Destination\n\
+                               folder is specified as full path to desired folder. UNC path\n\
+                               is allowed.

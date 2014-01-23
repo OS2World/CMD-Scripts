@@ -1,0 +1,71 @@
+-----------------------------------------------------------------------------
+What UrlConv does
+-----------------------------------------------------------------------------
+
+UrlConv goes through the subdirectories of an URL object tree and copies URLs and their descriptions into a single file, either in plain text format or in HTML format. HTML format is default.
+
+The HTML output file may be imported, for example into the bookmarks file of Netscape Communicator.
+
+-----------------------------------------------------------------------------
+This is important!
+-----------------------------------------------------------------------------
+
+UrlConv is freeware. You pay for nothing, and the authors of this program don't guarantee anything!
+
+Please distribute only the complete and unmodified UrlConv package. Otherwise. add another readme file (call it, say, readme-2) that describes your modifications.
+
+-----------------------------------------------------------------------------
+Files in this distribution
+-----------------------------------------------------------------------------
+
+In the urlconv directory:
+
+urlconv.cmd               - The Rexx source code and executable
+readme                    - This file
+register-rexxutil-dll.cmd - Script to register RexxUtil.dll (see below)
+
+In the urlconv\pgp directory:
+
+urlconv.sig               - RL's PGP signature for urlconv.cmd
+readme.sig                - RL's PGP signature for readme
+register-rexxutil-dll.sig - RL's PGP signature for register-rexxutil-dll.cmd
+
+----------------------------------------------------------------------------
+The most recent version of UrlConv
+----------------------------------------------------------------------------
+
+You will find future version of UrlConv on Hobbes (http://hobbes.nmsu.edu/ or ftp://hobbes.nmsu.edu/).
+
+You may also check http://homepages.together.net/~rolf for a link to a newer revision.
+
+-----------------------------------------------------------------------------
+How to use UrlConv
+-----------------------------------------------------------------------------
+
+The output of "urlconv /h" should tell you everything you need.
+
+-----------------------------------------------------------------------------
+RexxUtil library
+-----------------------------------------------------------------------------
+
+UrlConv requires functions from the RexxUtil DLL. These functions are also used by many other Rexx scripts. So, instead of trying again and again to register these functions each time you run a script that needs them, you should consider loading them when you start your system. 
+
+To do this, put the script register-rexxutil-dll.cmd (or a link to this script) into your startup folder, or simply run register-rexxutil-dll.cmd at least once after each system boot, before you use UrlConv the first time.
+
+-----------------------------------------------------------------------------
+Miscellaneous
+-----------------------------------------------------------------------------
+
+To get RL's PGP public key, send an empty email with "send pgp key" in the subject line to rolf@together.net.
+
+Feel free to send us any suggestions for improvements of UrlConv. Of course we'd also appreciate a short note, if you actually use this program. 
+
+
+
+
+
+
+Rolf Lochbuehler <rolf@together.net>
+Paul Elliott     <pelliott@io.com>
+--
+$Id: readme.m4,v 1.5 1999-12-05 00:04:24-05 rl Exp $

@@ -1,0 +1,22 @@
+Upload Information
+==================
+Archive Name:        
+	NS_Weird_P.zip
+Program Description: 
+	Rexx Script to patch Netscape.INI.
+	"Repairs" list bullets (instead of weird p's)
+	Use with v2.02 of March '97 
+Operating System/Version:
+	OS/2 Warp 4 
+Program Source:
+	Peter Franken, peter@pool.informatik.rwth-aachen.de
+Replaces:
+	nothing
+Your name: 
+	Peter Franken
+Your email address:
+	peter@pool.informatik.rwth-aachen.de
+Proposed directory for placement:
+	fixes or patches, Netscape
+
+Tip: Run in Netscape directory or see script!

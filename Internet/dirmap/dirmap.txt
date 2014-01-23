@@ -1,0 +1,141 @@
+CONTENTS
+
+# PURPOSE OF THIS PROGRAM
+# NEW IN THIS VERSION
+# PREREQUISITES
+# USER SETUP
+# CALLING SYNTAX
+# PROGRAM OUTPUT
+# DISCLAIMER AND CREDITS
+# BUG REPORT, COMMENTS ETC.
+
+
+# PURPOSE OF THIS PROGRAM
+
+The purpose of this program is to automatically compile directory
+overviews into one or more HTML files which then can be viewed with a
+browser.
+
+It can be used to compile any directory overviews, but was primarily
+written to get a more or less comfortable overview of the ever growing
+number of HTML files which find their way on the local hard disk these
+days.
+
+When HTML files are found the program will extract the document title
+and display it in the overview. This is especially useful when you
+have to deal with cryptic filenames which will not let you get any
+idea of the contents of the document itself.
+
+If you are using the Netscape browser the program will make use of
+Javascript for extended information about the files found like file
+size, file date etc.
+
+# NEW IN THIS VERSION 
+
+- version 1.03
+
+  - Bug fixes only. Now also works on CD drives. Please update.
+
+- version 1.02
+
+- Added command line switch /r to change the default drive range
+  scanned by the program. You will now be able to choose either
+  all local drives like before (default), all network drives
+  or all accessible drives, i.e. all local and all network drives.
+
+- Made recognition of html files more flexible, before only
+  *.html and *.htm files were assumed to be html. You now can
+  easily add own file extensions. Currently recognized as
+  HTML are files which's file extension includes one of the
+  following substrings: HTM ASP PHP
+
+# PREREQUISITES
+
+You should have OS/2 and classic REXX installed.
+
+# USER SETUP
+
+None.
+
+
+# CALLING SYNTAX
+
+The calling syntax will be also shown to you if you call the program
+without any commandline arguments.
+
+
+dirmap [/a /r<lna> /1 /2 /3 /n<map.htm> /-<def...>] <filemask> [...]
+
+  /a: scan all disk drives
+  /1: one HTML page for all files (default)
+  /2: one HTML page per drive
+  /3: one HTML page per directory
+  /n: name of root page (default: dirmap.htm)
+  /-: drives to be excluded
+  /r: drive range: [l]ocal (default), [n]et, [a]ll 
+
+Examples:
+
+dirmap c:\netscape\cache\*.*htm? g:\hypertxt\html\*.*
+
+=> Compile an overview for the two directories given and
+   put it on one page, the root page. Look for HTML files
+   only in the first directory and for all files in the 
+   second directory given.
+
+dirmap /a /3 /-ij *.*htm? *.gif *.jp*g
+
+=> Compile an overview for all local disk drives, but exclude 
+   drive i: and drive j:. Look for HTML, GIF and JPEG files and 
+   make one HTML page for every directory.
+
+
+# PROGRAM OUTPUT
+
+The program output depends on which commandline arguments are used and
+can get huge. It's a good idea to call the program in an empty
+directory especially when you plan to use commandline argument /3.
+
+E.g. when I call the program with commandline argument /3 on my home
+PC it compiles 670 files resulting in approximately 4 megabytes.
+
+
+# DISCLAIMER AND CREDITS
+
+This program is freeware. You may use it in any context, commercial
+or private. However I would appreciate if you send me an eMail if
+you use it and say hello.
+
+This program comes without any warranty. The author shall not be helt
+responsible for any dammage you may suffer from using this program.
+PLEASE USE THIS PROGRAM AT YOUR OWN RISK.  You may freely use and
+modify it as long as these credits are kept.
+
+I originally wanted to call this program 'dir2html', but found out
+that there already is a program out there with that name.
+
+Thanks to Michel Plungjan <mplungjan@epo.nl> for testing this program
+under Windows NT. (It failed.)
+
+I also sent this program out to some beta testers, but never heard of
+any of those again. It either means the program had no bugs or it
+didn't fit their needs and they threw it away ;-)
+
+Thanks to Fritz_Chwolka <Fritz_Chwolka@t-online.de> for beta testing
+version 1.2
+
+# BUG REPORT, COMMENTS ETC.
+
+It would like to hear your comments, both positive and negative.  The
+program does a satisfying job as far as myself is concerned, so if you
+want it to be developed further, you should say so.
+
+I can be reached at (and in that order please):
+
+ohei@snafu.de
+o.heidelbach@telemail.berlinet.de
+
+Please note: These addresses are for response to this program only.
+You may not send unsolicited commercial e-mail to these or legal
+action will be taken.
+

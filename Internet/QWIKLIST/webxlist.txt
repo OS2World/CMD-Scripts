@@ -1,0 +1,17 @@
+WebExplorer/WebExtra Utility 
+======================================
+
+Archive Name: webxlist.zip
+Program Description: Convert WebExplorer Quicklists to WebExtra Bookmarks
+Operating System/Version: OS/2 Warp Release 3.0, Merlin Beta
+Program Source: Uncompiled REXX Utility
+Replaces: -
+
+Your name: Dan Porter
+Your email address: innoval@ibm.net
+
+Proposed directory for placement: /os2/network/tcpip
+
+Requirements: WebExtra and the IBM WebExplorer
+
+

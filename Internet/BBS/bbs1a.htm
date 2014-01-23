@@ -1,0 +1,45 @@
+<!-- This is an alternative "BBS startup screen".
+It first gets the username/password; and then calls
+an alternate "customizable" startup page (BBS1B.HTM)
+ -- the links to BBS on this start up page will typically pass
+control to BBS.
+
+You can modify  this document as you see fit, but please take note of the
+comments about which lines should not be modified -->
+
+<HTML>
+<HEAD>
+<TITLE>The BBS</TITLE>
+<!-- If you want to "suppress url display of user:pwd, using cookies",
+     do NOT remove the next line. Our recommendation is to leave it in. -->
+<meta http-equiv="Set-Cookie:" content="BBS_INIT=SET">
+
+</HEAD>
+
+<body>
+<!-- replace date --> <!-- replace time --> <br>
+<h2> Welcome to our BBS </h2>
+
+<FORM ACTION="/bbs" METHOD="POST">
+
+<EM>Please enter your username and password:</em>
+<blockquote> <b>Username: <INPUT TYPE="text" NAME="user"  SIZE=8 MAXLENGTH=8>
+<br> <b> Password </b> <INPUT TYPE="password" NAME="pwd"  SIZE=8 MAXLENGTH=8>
+
+<!-- Modify the VALUE field of this line with the URL (absolute or relative)
+     of the "alternative" startup document.  For cookies to work properly, it must be
+     in (or under) the directory containing the current file (the one you are looking at
+     right now).
+-->
+<input type="hidden" name="altstart" value="bbs1b.htm">
+
+<!-- you can modify the VALUE field of this line -->
+<INPUT TYPE="submit" VALUE="I'm ready to browse the BBS">
+</FORM>
+
+<HR>
+
+</BODY>
+</HTML>
+
+

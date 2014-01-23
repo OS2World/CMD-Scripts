@@ -1,0 +1,56 @@
+<HTML SUBLINKS="*">
+<HEAD>
+<TITLE>HTML2IPF - What's new</TITLE>
+</HEAD>
+<BODY>
+<PRE><TT>
+---------------------------
+ html2ipf revision history
+---------------------------
+ [;] Comment
+ [*] Modified
+ [+] Added feature
+ [-] Removed feature
+ [!] Bug fix
+
+<B>0.1.1
+-----</B> 07-Apr-1997
+ [!] Ooops! A bug introduced in last minutes caused a REXX fault
+     when parsing stand-alone images (on separate pages).
+
+<B>0.1.0
+-----</B> 05-Apr-1997
+ [+] Improved table handling
+ [+] Now all &lt;A IMAGE=...&gt. tags located between &lt;A HREF=...&gt; tags
+     are treated as real image links.
+ [+] Added processing of &lt;CENTER&gt; tags, but still not too correct
+     (text is treated as pre-formatted). If you don`t like it, you can
+     disable it with -CENTER- switch.
+ [;] Found lots of GIF files on which ALCHEMY does not work correctly :-(
+     Particularily, there was lots of such GIFs in OpenGL 1.1 specs, borrowed
+     from SGI site. As a workaround you can use the "Convert to:" feature of
+     Warp4 which works pretty well, or maybe (I didn`t tried it) any other
+     converter which can produce OS/2 v1.3 (uncompressed!) bitmaps.
+     Those GIFs are monochrome with a transparent background which
+     produces a really neat INF file.
+ [+] Added some tags so that JDK 1.0.2 docs will compile without errors.
+     Note that I had to fix a lot of real errors in those HTML files, so if
+     you simply want the final INF file, I`ve uploaded it along with this
+     version to <A HREF="http://hobbes.nmsu.edu">hobbes.nmsu.edu</A>.
+ [+] Added the 'CHECK' switch so that HTML2IPF will not produce output file,
+     but only will check the HTML structure (you can enable debug output -DEBUG+
+     with this option to get a long paper with all encountered errors) and also
+     you can see which links are missing. For example, mentioned above JDK 1.0.2 
+     docs does not contain some files related to java.sun.tools.*
+ [+] Added support for paths relative to the <I>document</I> path, not to the
+     current directory.
+
+
+<B>0.0.9
+-----</B> 01-Apr-1997
+ [;]  The first public release, nothing new :-)
+</TT></PRE>
+<HR>
+<A HREF="html2ipf.html">Return to title page</A>
+</BODY>
+</HTML>

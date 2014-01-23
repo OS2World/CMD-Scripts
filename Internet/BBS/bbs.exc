@@ -1,0 +1,21 @@
+; This is a sample of a BBS "exclusion file"  list.
+; An "own directory" exclusion file is used if available, and a bbs_param
+; directory version is used if an own directory version is not available.
+;  If both exist, they are NOT additive (only the "own directory" version 
+; is used).
+;
+; Notes:
+;  >  Wildcards (the * character) can be used.
+;  > Do NOT include path information.
+;  > You can write  several (space delimited) entries on each line
+;  > You can exclude subdirectories; just put a \ before the subdirectory
+;    name (it should be a 1-level name,  relative to the "own" directory).
+;    For example, if d:\bbsfiles\dir1 has d:\bbsfiles\dir1\private as
+;    a subdirectory you wish to exclude, then the entry should be:
+;         \private
+;    and this entry should be in the bbs_param directory exclusion file,
+;    OR in d:\bbsfiles\dir1 exclusion file (but not in  the d:\bbsfiles
+;    exclusion file)
+bbs.exc bbs.fil 
+*.bat bbs.*
+
