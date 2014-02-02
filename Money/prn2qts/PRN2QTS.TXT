@@ -1,0 +1,30 @@
+PRN2QTS v1.2                                                      27-07-2010
+
+
+Quick&dirty conversion of Metastock's *.PRN to PM$tock's *.QTS file format
+
+
+Enter the symbol to be converted. Enter "RDSA" (without the quotes) to use
+the sample data files.
+
+Next, enter both the (theoretical) first and last trading days to be
+included. To use the sample files, the first date can be "20090101",
+and the last date to be included could be "20100726".
+
+
+The sample files, 2009.PRN and 2010.PRN, may be deleted. PM$tock itself is
+needed because PRN2QTS.CMD searches for PMSTOCK.INI in the same directory.
+PM$tock can be found here:
+
+   http://hobbes.nmsu.edu/pub/os2/apps/money/pmst11.zip
+
+The *.QTS file format is not documented there. PRN2QTS.CMD does not take  
+much care about file management. It tries to add new symbols to the list
+of stocks available in PM$tock. The stock quotes are not downloaded. For
+Euronext Amsterdam or Euronext Brussels a Metastock *.PRN file generator
+is:
+
+   http://hobbes.nmsu.edu/pub/os2/apps/money/ms-*.zip (now: ms-20100630.zip)
+
+All involved components should be considered as being unsupported, including
+PRN2QTS.CMD itself.

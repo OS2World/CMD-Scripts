@@ -1,0 +1,65 @@
+
+Poor Man's Stock Exchange Index Monitor, v2.0                14-03-2011
+
+Monitor.CMD displays a stock exchange index with a local time stamp, at
+least once. On all weekdays between 8:56 o'clock and 17:40 o'clock, the
+index value is displayed about each 14-16 seconds. Please do not change
+this interval to less than 10 seconds, for one because an index is also
+calculated with an interval of several seconds. An output sample, using
+real-time data of Euronext:
+
+14 Mar 2011 10:24:54 - 358,08
+14 Mar 2011 10:25:09 - 358,14
+14 Mar 2011 10:25:24 - 358,08
+14 Mar 2011 10:25:40 - 358,04
+14 Mar 2011 10:25:55 - 358,12
+14 Mar 2011 10:26:10 - 358,04
+14 Mar 2011 10:26:25 - 358,23
+14 Mar 2011 10:26:40 - 358,24
+14 Mar 2011 10:26:56 - 358,25
+14 Mar 2011 10:27:11 - 358,24
+14 Mar 2011 10:27:26 - 358,24
+14 Mar 2011 10:27:41 - 358,12
+14 Mar 2011 10:27:56 - 358,21
+14 Mar 2011 10:28:11 - 358,21
+14 Mar 2011 10:28:26 - 358,08
+14 Mar 2011 10:28:41 - 358,05
+
+Please note "real-time" is a technical description. It doesn't mean the
+data is "live" nor does it mean (of the) "real time". Available indices
+now are the AEX (Netherlands), BEL-20 (Belgium), CAC-40 (France) or the
+PSI-20 (Portugal). The data source is http://www.euronext.com
+                                               
+
+To install: the excluded utility WGet is required to download the data.
+Monitor.CMD itself is written in plain Rexx, so it should work with any
+OS/2 Rexx interpreter.
+
+To use: the default stock exchange index in use is the Dutch AEX-index.
+Manually change the ISIN-code (in line 20 of Monitor.CMD) to change the
+index in use.
+
+To uninstall: delete Monitor.CMD, and possibly its temporary file INDEX
+
+
+Adjustments: unsupported, but obviously it isn't that hard to e.g. show
+the index only when a certain index value-limit was exceeded. It's also
+easy to change the VIO output window size with e.g. a "MODE 32,256". 
+
+
+Wishlist item #1: a fine eCenter-widget displaying (at least) the value
+Wishlist item #2: error detection, like not receiving (changing) data
+Wishlist item #3: an interval automatically matching real intervals
+Wishlist item #4: an *.EXE, instead of Rexx, without requiring WGet
+Wishlist item #5: support more data sources and more indices
+Wishlist item #6: an UI, perhaps even a proper PM GUI
+Wishlist item #7: smart, soft-coded HTML parsing
+Wishlist item #8: a larger app, embedding this
+
+
+Support: none, basicly. Websites typically are subject to many changes,
+and both the data source used and Monitor.CMD are free, with a matching
+quality. It's what it is, and that's it.
+
+
+A. Doff, m1@uni-one.nl
