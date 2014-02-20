@@ -1,0 +1,345 @@
+========================================================================
+DSS_RMT.CMD v1.3 - REXX script for controlling Doodle's Screen Saver
+========================================================================
+
+
+Overview
+------------------------------------------------------------------------
+
+After more than 13 years using OS/2, I found Doodle's Screen Saver
+(DSSaver), which has exactly the features, I've been looking for.
+
+The most important features for me are
+
+- DSSaver doesn't crash my system, when it blanks the screen while i'm
+  looking TV or DVD.
+
+- DSSaver offers an API for 3rd party programs.
+
+
+DSS_RMT can be used to ..
+
+.. disable DSSaver temporary. To prevent that DSSaver will be disabled
+   forever, the user can specify a timeout to enable DSSaver again
+   automatically.
+
+.. enable DSSaver
+
+.. disable DSSaver, if certain processes are running. DSS_RMT has a
+   watchdog that queries the running processes periodically for
+   processes definied by the user.
+
+.. instruct DSSaver to blank the screen immediately
+
+
+System requirements
+------------------------------------------------------------------------
+
+- OS/2 Warp 4
+  DSS_RMT has been tested under OS/2 Warp 4 FP 10 only, but i think eCS
+  will be OK too.
+
+- Classic REXX
+  DSS_RMT has not been tested with Object REXX.
+
+- Doodle's Screen Saver
+  DSS_RMT has been tested with DSSaver 1.4 and 1.5
+
+- RXU 1.a - a rich set of Rexx functions for OS/2 API
+
+
+Optional
+
+- PMPRINTF - displays the 'screen'-output of DSS_RMT server task
+
+
+Where to get
+
+- DSSaver   http://dssaver.netlabs.org
+- RXU 1.a   http://hobbes.nmsu.edu/pub/os2/dev/rexx/rxu1a.zip
+            or search Hobbes for 'RXU'
+- PMPRINTF  http://hobbes.nmsu.edu/pub/os2/util/printer/pmprtf.zip
+            or search Hobbes for 'printf'
+
+
+
+
+Included files
+------------------------------------------------------------------------
+
+The original archive DSS_RMT_V13.ZIP includes the following files:
+
+DSS_RMT.TXT     Documentation
+DSS_RMT.CMD     The executable REXX script
+DSS_RMT.CFG     Sample configuration file
+
+
+
+Installing DSS_RMT
+------------------------------------------------------------------------
+
+To install DSS_RMT just copy DSS_RMT.CMD into a directory of your choice.
+If you want to use the process watchdog or if you want to change the
+the default values, DSS_RMT.CFG must be in the same directory.
+
+If you have installed DSS_RMT 1.2, just copy the new DSS_RMT.CMD and
+DSS_RMT.TXT over the old ones. You do not need to edit old DSS_RMT.CFG.
+If the servertask of DSS_RMT.CMD is still running, kill it by calling
+DSS_RMT.CMD -K and start the new servertask by calling DSS_RMT.CMD -S.
+
+
+
+Usage
+------------------------------------------------------------------------
+
+DSS_RMT.CMD [-S|-SFG|-K|-D|-E|-B|-Q]
+
+Options:
+
+-S      Before you can use DSS_RMT to controll DSSaver, you
+        have to start the server task of DSS_RMT.
+        Calling DSS_RMT.CMD -S will start the server task of DSS_RMT
+        in a detached session.
+
+-SFG    This option is almost the same as -S, but will start the server
+        task of DSS_RMT in a new window as a foreground session. This
+        option is mainly for debugging purposes. The window of the
+        server task will be kept open after termination.
+
+-K      Terminates the server task of DSS_RMT.
+
+-D      Request to disable DSSaver temporary
+        If DSSaver has been disabled earlier by calling DSS_RMT.CMD -D,
+        the timer for auto enable will be reset.
+
+-E      Request to enable DSSaver
+
+-Q      Displays the status of the server task
+
+-B      Blanks the screen immediately
+
+If no option is given, DSS_RMT.CMD will show a short help.
+
+
+
+
+Errorlevels
+------------------------------------------------------------------------
+
+0     No error
+
+By calling DSS_RMT.CMD with option -D, -E or -Q an errorlevel of 0 .. 7
+reflects the status of the server task and of DSSaver.
+The errorlevel is bitwise coded:
+
+      Bit 2   Bit 1   Bit 0
+0       0       0       0
+1       0       0       1
+2       0       1       0
+3       0       1       1
+4       1       0       0
+5       1       0       1
+6       1       1       0
+7       1       1       1
+
+
+      Bit 0 is set if DSSaver has been disable teporary by a request
+      with DSS_RTM.CMD -D. Calling DSS_RMT.CMD -E will reset Bit 0.
+
+      Bit 1 is set if the watchdog has detected that one or more tasks
+      defined with the keyword PROCESS are running. If none of these
+      processes are running Bit 1 will be reset.
+
+      By using SSCore.DLL version 1.4 or lower, Bit 2 is reset
+      all the time. SSCore.DLL version 1.5 has a funtion, which inform
+      about the state of the screen saver. Then Bit 2 is set if DSSaver
+      has blanked the screen.
+
+
+
+99    DSS_RMT.CMD has been called with no command line option.
+      The help screen has been displayed.
+
+100   The server task has been terminated by pressing CTRL-C.
+
+200   Error freeing SSCore.DLL
+
+244   A function called from SSCore.DLL returns an error code.
+
+245   Error reading status of server task
+
+246   Error creating semaphores
+
+247   Error loading SSCore.DLL
+      SScore.DLL is part of DSSaver and must be in a directory
+      of the LIBPATH statement.
+
+248   Timeout terminating server
+      Calling DSS_RMT.CMD -K will instruct the server task to terminate.
+      If the server task is still running after 20 seconds, the
+      errorlevel will be set to 248.
+
+249   The server task is already running.
+
+250   The server task is not running.
+
+251   Error starting server task
+      Calling DSS_RMT.CMD -S or DSS_RMT.CMD -SFG will instruct DSS_RMT
+      to start the server task. If the server task is not running within
+      20 seconds, the errorlevel will be set to 251.
+
+252   Timeout requesting mutexsemaphore \SEM32\DSS_RMT\ACCESS_CTRL.SEM
+      This semaphore is used to control communication with the server
+      task. If the request is not successful within 20 seconds, the
+      errorlevel will be set to 252.
+
+253   Error creating or opening \SEM32\DSS_RMT\ACCESS_CTRL.SEM
+      On startup DSS_RMT tries to open or to create the mentioned
+      semaphore. If opening or creating of the semaphore has been failed
+      for 20 seconds, the errorlevel will be set to 253.
+
+254   DSS_RMT.CMD has been called with an invalid or more than one
+      command line option.
+
+
+
+Files used by DSS_RMT.CMD
+------------------------------------------------------------------------
+
+DSS_RMT.PID
+
+This file will be created in the directory of DSS_RMT.CMD by the server
+task of DSS_RMT and contains the PID of the server task. DSS_RMT.PID
+will be kept open by the server task in share mode 'deny write'.
+Therefore this file can't be modified or deleted while the server task
+is running. By terminating the server task, DSS_RMT.PID will be deleted.
+
+
+DSS_RMT.CFG
+
+This file can be used to set some preferences of DSS_RMT and must be in
+the directory of DSS_RMT.CMD
+
+
+If DSS_RMT.CMD has been renamed, than the PID file will
+be <New Name>.PID and the configuration file will be <New Name>.CFG
+
+
+
+
+Configuration file DSS_RMT.CFG
+------------------------------------------------------------------------
+
+The configuration file will be read by the server task of DSS_RMT.CMD.
+After editing DSS_RMT.CFG it is a good idea to call DSS_RMT.CMD -SFG to
+check the correctness of the new DSS_RMT.CFG.
+
+The configuration file may contain empty lines. Comments must be
+preceeded by a ';'. Everything following the ';' will be ignored.
+
+The keywords are not case sensitive.
+
+
+
+PMPRINTF      [<queue>]
+
+By specifying the keyword PMPRINTF the server task of DSS_RMT is enabled
+to send the screen output to PMPRINTF. If the queue name is not
+specified, the output will be sent to the default queue of PMPRINTF.
+
+
+
+TIMEOUT_DIS   <0..999999>
+
+The keyword TIMEOUT_DIS defines the time in seconds, after which the
+server task will enable DSSaver automatically after it has been disabled
+by calling DSS_RMT.CMD -D.
+
+Setting TIMEOUT_DIS to a suitable value will prevent DSSaver to be
+disabled forever, if it is not enabled by calling DSS_RMT.CMD -E.
+
+A value of 0 will disable the auto enable feature. If TIMEOUT_DIS is not
+specified or if the given value is invalid, the default timeout is set
+to 10800 seconds = 3 hours.
+
+
+
+TIMEOUT_PROC  <1..999999>
+
+DSS_RMT.CMD is able to disable DSSaver, if certain processes are
+running. Therefore the server task has a watchdog, which queries the
+running processes periodically. TIMEOUT_PROC defines the time in
+seconds between two queries.
+
+The specified time should be shorter than the inactivity time, after
+which DSSaver will blank the screen. If TIMEOUT_PROC is not specified
+or if the given value is invalid, the default timeout ist set to
+300 seconds = 5 minutes.
+
+
+
+PROCESS       [path]<name>
+
+The watchdog of DSS_RMT.CMD will search the running processes for processes
+specified with the keyword PROCESS. If a specified process is running,
+the watchdog will disable DSSaver. DSSaver will be enabled again, if
+the specified processes has been terminated.
+
+Normally the process name is an EXE-file. This file can be specified
+with or without fully qualified path name. If the name contains spaces,
+it must be enclosed in double quotes.
+
+Examples:
+
+  PROCESS   tv.exe          ;will detect tv.exe regardless of the path
+  PROCESS   e:\tools\tv.exe ;will detect e:\tools\tv.exe but not f:\prg\tv.exe
+  PROCESS   "e:\dvd tools\tv.exe"
+  PROCESS   "clean up.exe"
+
+
+
+
+History of DSS_RMT
+------------------------------------------------------------------------
+
+v1.2    First public release.
+
+
+v1.3    DSS_RMT calls SSCore_GetInfo to determine the version of SSCore.DLL.
+
+        If DSSaver v1.5 is installed, DSS_RMT will call
+        SSCore_GetCurrentState to determine the current state of the
+        screen saver. In this case SSCore_StartSavingNow will be called
+        only, if the screen saver ist in normal state (screen is not
+        blanked).
+
+
+
+
+
+Copyright and Disclaimer
+------------------------------------------------------------------------
+
+DSS_RMT was written by Ruediger Wilke 2005. All rights reserved.
+
+DSS_RMT is freeware and as such you are permitted to use and distribute
+DSS_RMT as long as the programm or parts of it are not sold for profit
+and all files are unmodified and distributed together.
+
+DSS_RMT and its related files are provided AS IS and come with no
+warranty of any kind, either expressed or implied. In no event will the
+author be liable for any damages resulting from the use of this
+software.
+
+All trademarks and service marks are the property of their respective
+owners.
+
+
+Contacting the author
+------------------------------------------------------------------------
+
+You can contact me by e-mail: sw@yb2.de
+Please do not send me HTML-only e-mail.
+
+
+Ruediger Wilke
