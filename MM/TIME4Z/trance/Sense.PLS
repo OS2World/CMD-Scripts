@@ -1,0 +1,21 @@
+[playlist]
+numberofentries=6
+File1=http://69.80.224.62:8812
+Title1=(#1 - 10/500) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length1=-1
+File2=http://69.80.224.62:443
+Title2=(#2 - 17/250) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length2=-1
+File3=http://75.126.161.82:8003
+Title3=(#3 - 2/25) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length3=-1
+File4=http://78.129.143.124:7040
+Title4=(#4 - 9/50) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length4=-1
+File5=http://78.129.143.124:7020
+Title5=(#5 - 12/50) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length5=-1
+File6=http://64.237.52.213:63500
+Title6=(#6 - 16/50) Sense.FM - Trance, Progressive, Techno, & Breaks Web Radio 24.7.365!
+Length6=-1
+Version=2

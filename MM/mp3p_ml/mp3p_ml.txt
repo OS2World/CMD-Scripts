@@ -1,0 +1,117 @@
+ÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³  MP3PuRiSTiN RL 2000.03.20 for OS/2  ³
+³ (v0.25) (c)1999,2000 HaLPaRoTuKTioNS ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+Author: Ari Kemppainen (k3@tec.puv.fi)
+
+TOC
+
+0.1 Disclaimer and General Information
+1.0 Introductions
+2.0 Installation and Usage
+3.0 To-Do
+4.0 Contact
+5.0 Special Thanks!!!
+
+
+==================================================
+0.1 DISCLAIMER AND GENERAL INFORMATION:
+==================================================
+
+You're not probably reading this... but anyway...
+
+THIS IS AN CARDWARE UTILITY!!! Please send a postcard of your home town
+if you are using this program, thank you.
+
+DISCLAIMER:THIS SOFTWARE COMES WITH ABSOLUTELY NO WARRANTY! USE AT YOUR
+OWN RISK!
+
+
+==================================================
+1.0 INTRODUCTION
+==================================================
+
+MP3 PurISTiN is a user interface for LEECH CD-DA grabber and LAME
+(Ain't an) MP3 encoder...
+
+There are lot's of GUI Front-ends for grabbers and so on... but not
+much usefull text mode programs... That's why I wrote this one. MP3p
+suits me fine and I hope that you find this usefull also.
+
+If you don't have grabbers or encoders to produce mp3 tunes you should
+get these two at least:
+
+Leech: http://www.sprong.auc.dk/~motr96
+Lame:  http://www.sulaco.org/mp3
+
+OS/2 executables can be also found from hobbes archive
+http://hobbes.nmsu.edu
+
+
+==================================================
+2.0 INSTALLATION and USAGE:
+==================================================
+
+Just unzip this package to a directory you like...
+
+leech and lame have to be in a directory which is in "path" statement 
+otherwise this script won't work at all. 
+
+Prefer to leech and lame manuals for the installation guide and options
+they have... 
+
+Just run MP3P from a directory you want to grab and encode files...
+UI is quite selfexplaining... just try what works and what doesn't
+
+
+MP3P will ask you some questions like language...
+Then it will give you default options, they're quite good but
+if you like to change those options answer yes to that question.
+(if you answered yes there will be many questions asking about
+bitrate and quality settings. Prefer lame's docs for their purpose)
+
+...MP3P asks you after that if you want to change the filename and
+after that the cd-rom drive letter.
+
+From that list you can see how many tracks are on the cd and choose
+which tracks to encode. Before that that it ask in which directory
+should the mp3's placed...
+
+That's all... now you can sit back and relax... and wait...
+Or play some games... Some can be found from:
+http://www.geocities.com/os2games
+
+==================================================
+3.0 TO-DO
+==================================================
+
+-Rewrite whole thing...
+-Change the user interface more friendy... (like all in one screen)
+-etc...
+-Get some beer and...
+
+FEEL FREE TO MODIFY THE SOURCE CODE OF THIS SCRIPT, I EVEN RECOMMEND YOU
+TO DO SO IF YOU FIND A FEATURE MISSING AND KNOW HOW TO MAKE IT!
+Just remember to send me a copy of the modified script and some sort of 
+description of the new features or modifications...
+
+
+==================================================
+4.0 CONTACT:
+==================================================
+
+e-mail:  k3@sah.tec.puv.fi
+web:     http://www.tec.puv.fi/~k3/os2
+Snail:   Ari Kemppainen, Raastuvankatu 46BB12,FIN-65100, FINLAND
+Phone 1: +358 50 5905899
+Phone 2: +358 40 7700069
+
+==================================================
+5.0 SPECIAL THANKS
+==================================================
+
+-Thanks to Andreas Ebbert (Andreas.Ebbert@gmx.de) for making filenamechange 
+ option to this script.
+-Thanks to Przemyslaw Pawelczyk - (warpman@poczta.fm) for multi language
+ support and MP3 destination drive selection. 
+

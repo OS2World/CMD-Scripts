@@ -1,0 +1,967 @@
+<HTML>
+<HEAD>
+<TITLE>FreeDB for OS/2 CD-Player</TITLE>
+</HEAD>
+<BODY>
+<A HREF="../../index.html">-&gt;&nbsp;Home</A>
+<H1>FreeDB (CDDB) support for OS/2 CD-Player</H1>
+<P>Version: 0.44</P>
+<A HREF="#usage">-&gt;&nbsp;Quick&nbsp;start</A>
+<A HREF="#submit">-&gt;&nbsp;Submitting</A>
+<A HREF="#download">-&gt;&nbsp;Download</A>
+<A HREF="#history">-&gt;&nbsp;History</A>
+<A HREF="#issues">-&gt;&nbsp;Known&nbsp;issues</A>
+<A HREF="#reference">-&gt;&nbsp;Reference</A>
+<A HREF="#details">-&gt;&nbsp;Details</A>
+<A HREF="#contact">-&gt;&nbsp;Contact</A>
+<P><KBD>This font </KBD>indicates things you can type in.<BR>
+  <KBD><VAR>Italic </VAR></KBD>in addition indicates parameters, which have to
+  be replaced by meaningful values.</P>
+<HR>
+<A NAME="usage">
+<H2><FONT COLOR=#800080>Quick start</font></H2>
+<H3>Reqirements</H3>
+<BLOCKQUOTE>You need in addition to <A HREF="#download">this Programm</A> either
+  an <I>Internet connection</I> or a <I>local copy of the freedb database</I>.<BR>
+  In addition you need the <A HREF="http://hobbes.nmsu.edu/cgi-bin/h-browse?sh=1&dir=/pub/os2/dev/emx">EMX
+  runtime</A> version &gt;= 0.9d.<BR>
+  You can download the database for instance from <A HREF="http://www.freedb.org">www.freedb.org</A>.
+  A local CDDB server daemon is not required. Unfortunately this database is very
+  bulky. That means: it consists of several hundredthousends of files with a total
+  size of more than 1&nbsp;GB (&gt;100&nbsp;MB compressed).<BR>
+  On the other side you can use a <A HREF="http://www.freedb.org">freedb server</A>.
+  If you have a dial up connection you may want to collect the queries first and
+  execute them later, when you are online.</BLOCKQUOTE>
+<h3>Installation / configuration</h3>
+<BLOCKQUOTE>
+  <DL>
+   <DT><b>automatically:</b></DT>
+   <DD>Copy the <A HREF="#download">CMD scripts</A> and the <TT>.DLL</TT> files<A HREF="#unote1"><FONT SIZE=-1><SUP>[1]</SUP></FONT></A>
+     and optionally this documentation to some directory you like<a href="#unote2"><font size=-1><sup>[2]</sup></font></a>.<BR>
+     Execute <kbd>install.cmd</kbd> from there and follow the instructions. Note
+     that the install script is not very well testet so far.</DD>
+   <DT><b>manually, via Internet:</b></DT>
+   <DD>Copy the <a href="#download">CMD script</a> and the <tt>.DLL</tt> files<a href="#unote1"><font size=-1><sup>[1]</sup></font></a>
+     to some directory you like<a href="#unote2"><font size=-1><sup>[2]</sup></font></a>.<br>
+     Set up the CDDB server once: <KBD>CDDBMMCD&nbsp;-w&nbsp;-s<VAR>server</VAR></KBD>,
+     where <KBD><VAR>server</VAR></KBD> is the name of the CDDB server.<BR>
+     <em>Example:</em><KBD> CDDBMMCD&nbsp;-w&nbsp;-sfreedb.freedb.org </KBD><BR>
+     or <KBD>CDDBMMCD&nbsp;-w&nbsp;-shttp:\\freedb.freedb.org -P<VAR>proxyserver
+     </VAR></KBD>behind a firewall</DD>
+   <DT><b>manually, with a local database:</b></DT>
+   <DD>Copy the <a href="#download">CMD script</a> and the <tt>.DLL</tt> files<a href="#unote1"><font size=-1><sup>[1]</sup></font></a>
+     into the directory of the local CDDB database (where the folders misc, rock
+     etc. resides)<a href="#unote2"><font size=-1><sup>[2]</sup></font></a>.</DD>
+  </DL>
+</BLOCKQUOTE>
+<h3>Usage</h3>
+<BLOCKQUOTE>Use the program objects created by the install script or run <TT>CDDBMMCD</TT> manually:
+  <DL>
+   <DT><B>with a dial up connection:</B></DT>
+   <DD>with audio CD in your CD-ROM drive: <KBD>CDDBMMCD -oc</KBD><BR>
+     later, when you are online: <KBD>CDDBMMCD -oQo</KBD></DD>
+   <DT><B>otherwise:</B></DT>
+   <DD>Simply execute the script with a audio CD inside the CD-ROM.</DD>
+  </DL>
+</BLOCKQUOTE>
+<h3>Hints</h3>
+<ul>
+  <li>If the OS/2 CD player is running, the visible information is updated on
+   the next seek respectively the next media change. However, the information
+   is stored permanently in any case.</li>
+  <li>This program will remember unsuccessful queries and check them periodically.</li>
+  <li>Unfortunately the internal data of the OS/2 player is insufficient for a
+   automatic CDDB requests for each audio CD whitch had ever been inserted. So
+   you have to call the program once for every unrecognized CD.</li>
+</ul>
+<P>
+<FONT SIZE=-1>Notes:
+<OL COMPACT>
+  <LI><A NAME="unote1">Developers may already have the file <TT>GCC30M.DLL</TT>
+   (gcc 3.0 multithreaded runtime) in the libpath. In this case the file is not
+   required.</A></LI>
+<li><a name="unote2">The submit feature will <em>not</em> work on FAT volumes, i.e.
+8.3 file names.</a>
+</LI>
+</OL>
+</FONT>
+<p></P>
+</A>
+<HR>
+
+<A NAME="submit">
+<h2><FONT COLOR=#800080>Submit and update records</font></h2>
+  <p>Submitting CDDB records is somewhat different from the other stuff.
+   First of all it usually does not work in batch mode.
+   The procedure is always in three steps:</p>
+  <ol>
+    <li><P>Initiate a <em>new</em> (1) or <em>updated</em> (2) CDDB record by either
+      <br>(1) entering the disc information in the OS/2 CD-player <em>after</em> you a CDDB lookup for this CD was unsuccessful
+      or <br>(2) modifying the previously loaded information in the OS/2 CD-Player.</p>
+    </li>
+    <li><p>Create the submit records with <TT>CDDBMMCD</TT> using the <A HREF="#--op">action codes</A> <kbd>u</kbd> for new records&nbsp;(1) or <kbd>a</kbd> for updates&nbsp;(2):
+      <br><kbd>CDDBMMCD -oua</kbd>. You will be asked for the cddb category in case of new records.</p>
+      <p><font color=#FF0000>Before creating any submit record</font> be sure to enter the information in the OS/2
+       CD player according to the <A href="http://www.freedb.org/modules.php?name=Sections&sop=viewarticle&artid=26#2-2">rules
+       for cddb entries</a>. They are roughly:</p>
+      <ul>
+       <li>Enter the CD title in the form<kbd> <var>Artist</var>&nbsp;/&nbsp;<var>CD-Title
+         </var></kbd>(with spaces around the slash!).</li>
+       <li>When submitting a sampler or compilation use<kbd> Various&nbsp;/&nbsp;<var>CD-Title
+         </var></kbd>and <kbd><var>Track-Artist</var>&nbsp;/&nbsp;<var>Track-Title</var></kbd>.</li>
+       <li>Neither use uppercase only nor lowercase only.</li>
+      </ul>
+      <a name="syntax-ext"></a>
+      <p>Additionally there exists a special, <TT>CDDBMMCD</TT>-specific syntax extension to access some meta information:
+      <ul>
+       <li>You may enter the release year enclosed in square brackets at the end of the CD title:
+         <kbd><var>artist</var>&nbsp;/&nbsp;<var>disc title</var>&nbsp;[<var>year</var>]</kbd>.
+         This will be converted to <TT>DYEAR=<VAR>year</var></TT> in the xmcd file.</li>
+       <li>You may enter extended information to disc and track titles enclosed in <kbd>{}</kbd> brackets:
+         <kbd><var>title</var> {<var>extended info</var>}</kbd>.
+         This feature is turned off by default, because it makes the titles fields difficult to read in the OS/2 CD-player; see option <a href="#--ext"><kbd>--ext</kbd></a>.
+         If you want to combine this with the release year use: <kbd><var>artist</var>&nbsp;/&nbsp;<var>disc title</var>&nbsp;[<var>year</var>] {<var>extended info</var>}</kbd>.</li>
+      </ul>
+
+   <p>These meta information is always parsed when creating a submit record.</p>
+      <p>The <TT>DGENRE</TT> field of cddb protocol level 5 is not supported. However, it is kept in case of updates.</p>
+    </li>
+    <li><p>Submit the created CDDB records with <kbd>CDDBMMCD -os</kbd> or <kbd>CDDBMMCD -oS</kbd>.
+      The first one will send you an e-mail with the result of your submission without modifying the freedb database.
+      Only the latter one will really update the database.</p>
+      <P><font color=#ff0000>It is strongly recommended to perform a test submission if you use this feature first.
+      Also keep in mind that this software is still <em>beta</em>
+      and <em>you</em> are responsable for your submissions.</font>
+      So it is a good advise to view the submit records manually before you send them to a freedb server.
+      To force a resubmission use <a href="#--op"><kbd>-oU</kbd></a>.</p>
+      <p>Note that CDDB submissions to the 'official' freedb servers must use the <a href="#--server">http protocol</a>.
+      cddbp submits are always rejected.</p></li>
+  </ol>
+</A>
+<HR>
+
+<A NAME="download">
+<h2><FONT COLOR=#800080>Download</FONT></h2>
+This program is distributed under the terms of the <A HREF="gpl.txt"><I>GNU GENERAL
+PUBLIC LICENSE</I></A>.
+<P>ZIP file with source and this guide: <A HREF="cddbmmcd.zip">Version&nbsp;0.44</A></P>
+</A>
+<HR>
+
+<A NAME="history">
+<h2><FONT COLOR=#800080>History</font></h2>
+<dl>
+  <dt><B>Version 0.44</B> (19.08.2003)</dt>
+  <dt><UL>
+    <LI>Fixed some problems with the optimized lookup for the windows database version.</LI>
+    <LI>Improoved updater to decompress und untar on the fly and to handle the database type correctly.</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.43</B> (25.05.2003)</dt>
+  <dt><UL>
+    <LI>Fixed incompatibility with newer releases of the windows database version.</LI>
+    <LI>Added a faster lookup for the windows database version using a binary merge algorithm.</LI>
+    <LI>Added an updater for the windows database version (use e.g. <KBD><A HREF="#--special">--special</A>=UpdateDB,'freedb-update-20020811-20020917.tar.bz2'</KBD>).</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.42beta</B> (12.05.2003)</dt>
+  <dt><UL>
+    <LI>Fixed several bugs (Parser error at --device, error creating profile etc.).</LI>
+    <LI>Added install script.</LI>
+    <LI>Improoved the documentation.</LI>
+    <LI>Improoved the console output.</LI>
+    <LI>Added submission via http.</LI>
+    <LI>Added version key to the profile.</LI>
+    <LI>Changed the format of the additional meta-information stored in the OS/2 CD player's database.
+      The information will be silently migrated from earlier releases on the first access.</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.41beta</B> (21.12.2002)</dt>
+  <dt><UL>
+    <LI>Revisions supported.</li>
+    <LI>Work around for enhanced CD. This did not include uploads so far.</LI>
+    <LI>Fixed several problems in the program logic.</LI>
+    <LI>Changed semantics of <KBD>-w</KBD>.
+      Now it will only save the current settings without executing them.</LI>
+    <LI>Fixed data track name for CD extra upload packets.</LI>
+    <LI>Fixed title sequence in upload packets.</LI>
+    <LI>Fixed support for <TT>DYEAR=</TT>.</LI>
+    <LI>Added support for <TT>EXT</TT>* fields (enclosed in <TT>{}</TT>, only with option <TT>--ext</TT>).</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.4beta</B></dt>
+  <dt><UL>
+    <LI><em>Uploads supported</em><BR>
+     To upload cddb data simply enter the data of any unsuccessful queried CD in
+     the OS/2 CD player. <tt>CDDBMMCD</tt> will detect this automatically and create upload
+     packets on the next run.</LI>
+    <LI>Object REXX supported<BR>
+     In fact that required no changes at all. However, now it is officially supported.</LI>
+    <LI>DOS return values changed!<BR>
+     The (undocumented) returnvalues of cddbmmcd have changed.</LI>
+    <LI>Fixed problems with large CDDB records (cddbp protocol).</LI>
+    <LI>Default <tt>CDDBMMCD.INI</tt> location changed from current directory to the script's
+     path.</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.34</B></dt>
+  <dt><UL>
+    <LI>Multiple CD-ROM support</LI>
+    <LI>Fix for 16-Bit TCP/IP stack, 2nd try<BR>
+     The http protocol is still not 100% safe.</LI>
+    <LI>The username now defaults to <KBD>os2user</KBD><BR>
+     This was the most common problem, as OS/2 does not set the environmet variable
+     <KBD>USER</KBD> and the cddb server requires a username.</LI>
+    <LI>some minor bugfixes</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.33</B></dt>
+  <dt><UL>
+    <LI>Codepage translation using <A HREF="../rxmmutl/index.html">RxMMutl</A></LI>
+    <LI>http and proxy support (thanks to Mark Hale)</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.32</B></dt>
+  <dt><UL>
+    <LI>Bugfix for inexact matches</LI>
+    <LI>Fix for 16-Bit TCP/IP stack</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.31</B></dt>
+  <dt><UL>
+    <LI>CDDB server support</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.3</B></dt>
+  <dt><UL>
+    <LI>Significantly improved command line options</LI>
+    <LI>Delayed queries and retries</LI>
+    <LI>Profile for settings and state information</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.21</B></dt>
+  <dt><UL>
+    <LI>Significantly faster fuzzy search</LI>
+    <LI>Adaptation of the Win version of CDDB (untested)</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.2</B>
+  <dt><UL>
+    <LI>Change of internal structure</LI>
+    <LI>Fuzzy search implemented<BR>
+     Copied CDs have sometimes different TOC size. Furthermore, some CD-ROMs or
+     players (used for upload) are faulty at the lead out.</LI>
+  </UL></dt>
+</dl><dl>
+  <dt><B>Version 0.1</B> (first release)
+  <dt><UL>
+    <LI>Only local CDDB</LI>
+    </UL></dt>
+</dl>
+</A>
+<HR>
+
+<A NAME="issues">
+<h2><FONT COLOR=#800080>Known issues</font></h2>
+<h3>Known bugs</h3>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=3>
+ <tr valign=bottom>
+   <th align=left>Problem<HR SIZE=1></th>
+   <th align=left>Work&nbsp;around<HR SIZE=1></th>
+   <th align=left>Comment<HR SIZE=1></th>
+ </tr><tr VALIGN=BASELINE>
+   <td>The OS/2 CD-player may crash with an error message
+    if <TT>CDDBMMCD</TT> is accessing a CD device during the OS/2 player recognizes a new CD.</td>
+   <td>Restart the CD player.</td>
+   <td>This is a problem of the OS/2 CD-player and may not be fixed here.</td>
+ </tr><tr VALIGN=BASELINE>
+   <td>When the CD player's database contains a large number of entries <tt>CDDBMMCD</tt> becomes very slow.</td>
+   <td>Always start the OS/2 CD player before executing <tt>CDDBMMCD</TT>.</td>
+   <td>The problem is the way how the REXX function SysIni works.
+    It always opens and closes the file everytime it is called.
+    Only if another application holds the profile open the corresponding OS/2 API call is fast.</td>
+</tr></table>
+<h3>ToDo</h3>
+<DL>
+  <dt><B>Add meaningful icons</B></dt>
+  <dd>Since there is an installer available it should add more meaningful icons to the created objects.</dd>
+</dl><dl>
+  <dt><B>Dialog for inexact matches</B></dt>
+  <dd>Inexact matches are currently handled automatically.
+   This does what you expect in most cases.
+   But there are situations where this is not sufficient, e.g. CDs with 2 or less tracks.</dd>
+</dl><dl>
+  <dt><B>Work around for CDs with 'copy protection'</B>, which come into vogue.</dt>
+  <dd>It significantly depends on your hardware what's happening there.</dd>
+</dl><dl>
+  <dt><B>Automatic update for newly inserted CDs</B></dt>
+  <dd>It would be much more comfortable if the script need not to be invoked manually.
+   However, my knowledge about SOM ends slightly after these three letters. But
+   if somebody <A HREF="#contact">would like to do it...</A></dd>
+</dl><dl>
+  <dt><B>Handle CD categories</B></dt>
+  <dd>The cddb uses categories to classify the CDs. Unfortunately, these categories
+   are not used in a very meaningful way. So I did not implement them.
+   Only for new submissions you will be asked for it.</dd>
+</dl><dl>
+  <dt><B>Ambiguous CDDB IDs</B></dt>
+  <dd>The CDDB IDs are hashes are not necessarily unique. If somebody tells me
+   how this is handeld by the CDDB, I will implement it. This might apply to
+   the MMPM CD player, too. But this is somewhat more unlikely. However, there
+   is no help in case of the latter.</dd>
+</dl>
+</A>
+<HR>
+
+<A NAME="reference">
+<h2><FONT COLOR=#800080>Reference</font></h2>
+<P>The options apply according to the following (decreasing) precedence:
+<OL COMPACT>
+  <LI>command line options</LI>
+  <LI>options saved in the profile (<TT>CDDBMMCD.INI</TT>)</LI>
+  <LI>default values</LI>
+</OL><p></P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+  <TR VALIGN=BASELINE ALIGN=LEFT>
+   <TH>option<HR SIZE=1></TH>
+   <TH>description<HR SIZE=1></TH>
+   <TH>default<HR SIZE=1></TH>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--device"></A><KBD>-d<VAR>device</VAR></KBD> or<BR>
+     <KBD>--device=<VAR>device</VAR></KBD></TD>
+   <TD>MCI name of the CD-Audio device to query (for TOC).<BR>
+     Multiple devices may may be separated by komma.</TD>
+   <TD><KBD>cdaudio</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--local"></A><KBD>-l<VAR>path</VAR></KBD> or<BR>
+     <KBD>--local=<VAR>path</VAR></KBD></TD>
+   <TD>Path to a local CDDB. This path shoult point to the directory where the
+     subdirectories <KBD>rock</KBD> etc. are locateted. <KBD>-l-</KBD> or <KBD>--nolocal</KBD>
+     disables the use of a local CDDB.</TD>
+   <TD><KBD>.</KBD><BR>
+     current directory</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--type"></A><KBD>-t<VAR>type</VAR></KBD> or<BR>
+     <KBD>--type=<VAR>type</VAR></KBD></TD>
+   <TD>Type of the local CDDB. <KBD>S</KBD>[<KBD>tandard</KBD>] or <KBD>W</KBD>[<KBD>indows</KBD>]
+     or [<KBD>auto</KBD>].<BR>
+     see also <A HREF="#stdvswin">standard version vs. windows version</A></TD>
+   <TD><KBD>standard</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--server"></A><KBD>-s<VAR>server</VAR></KBD> or<BR>
+     <KBD>--server=<VAR>server</VAR></KBD></TD>
+   <TD>Name or IP of the CDDB server.<BR>
+     Multiple servers may be entered comma delimited (without blanks). The entries
+     have the form: [<KBD><VAR>protocol</VAR>:\\</KBD>]<KBD><VAR>server</VAR></KBD>[<KBD>:<VAR>port</VAR></KBD>]<A HREF="#onote1"><FONT SIZE=-1><SUP>[1]</SUP></FONT></A>.
+     <KBD><I6>Protocol</KBD> is one of <KBD>cddb</KBD> (default) or <KBD>http</KBD>,
+     <KBD><VAR>port</var></KBD> is by default 8880 (<KBD>cddb</KBD>) or 80 (<KBD>http</KBD>)
+     respectively. <KBD>-s</KBD> disables server queries.</TD>
+   <TD>no server</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--proxy"></A><KBD>-P<VAR>proxy</VAR></KBD> oder<BR>
+     <KBD>--proxy=<VAR>proxy</VAR></KBD></TD>
+   <TD>Name or IP of the HTTP proxy.
+     A Proxy puthentication is currenty not supported.<BR>
+     Syntax: <KBD><VAR>proxy</VAR></KBD>[<KBD>:<VAR>port</VAR></KBD>]. <KBD><VAR>Port</var></KBD>
+     defaults to 80.</TD>
+   <TD>no proxy</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--user"></A><KBD>-u<VAR>username</VAR></KBD> or<BR>
+     <KBD>--user=<VAR>username</VAR></KBD></TD>
+   <TD>Username for <KBD>cddb hello</KBD>.</TD>
+   <TD><VAR>%USER%</VAR></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--host"></A><KBD>-h<VAR>hostname</VAR></KBD> or<BR>
+     <KBD>--host=<VAR>hostname</VAR></KBD></TD>
+   <TD>Hostname for <KBD>cddb hello</KBD>.</TD>
+   <TD><VAR>%HOSTNAME%</VAR></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--email"></A><KBD>-e<VAR>email</VAR></KBD> or<BR>
+     <KBD>--email=<VAR>email</VAR></KBD></TD>
+   <TD>Your e-mail adress for submits via http protocol.</TD>
+   <TD>none</TD>
+  <!--/TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--client"></A><KBD>-c<VAR>client</VAR></KBD> or<BR>
+     <KBD>--client=<VAR>client</VAR></KBD></TD>
+   <TD>Name of the CDDB client including the version (for <KBD>cddb hello</KBD>
+     also).</TD>
+   <TD><KBD>cddbmmcd/2</KBD></TD-->
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--op"></A><KBD>-o</KBD>[<KBD>+</KBD>|<KBD>-</KBD>]<KBD><VAR>op-codes</VAR></KBD>
+     or<br> <KBD>--op=</KBD>[<KBD>+</KBD>|<KBD>-</KBD>]<KBD><VAR>op-codes</VAR></KBD></TD>
+   <TD>One or more of the following actions may be specified:
+     <TABLE BORDER=0 CELLSPACING=0>
+      <TR VALIGN=BASELINE>
+        <TD><KBD>c&nbsp;</KBD></TD>
+        <TD>Check currently inserted CD.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>C</KBD></TD>
+        <TD>Check currently inserted CD and generate query even if data is already
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>q</KBD></TD>
+        <TD>Execute CDDB query (local and/or server).</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>Q</KBD></TD>
+        <TD>Execute delayed queries.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>o</KBD></TD>
+        <TD>Retry all unsuccessful queries which are older than one month.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>O</KBD></TD>
+        <TD>Retry <em>all</em> unsuccessful queries.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>u</KBD></TD>
+        <TD>Create submit record, if one of the unsuccessful queries is entered
+         in the OS/2 CD player in the meantime.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>U</KBD></TD>
+        <TD>Force the creation of an update record for currently inserted CD.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>a</KBD></TD>
+        <TD>Automatically create update records for CDs where the information is modified.</TD>
+      <!--/TR><TR VALIGN=BASELINE>
+        <TD><KBD>A</KBD></TD>
+        <TD>force update of the currenty inserted CD</TD-->
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>R</KBD></TD>
+        <TD>Force the recreation of all pending upload records.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>s</KBD></TD>
+        <TD>Submit the previously created records to the (first) cddb server in <em>test mode</em>.
+          In case of a test submission the internal state of the cddb record is kept.
+          The test submission will be repeated on the next run of <TT>CDDBMMCD</TT>.
+          <br>This is not supported by the cddb protocol and a no-op in this case.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>S</KBD></TD>
+        <TD>Submit the previously created records to the (first) cddb server
+          <br><Font color=#ff0000>Be sure to have read the section <a href="#submit">submit and update</a> before submitting anything.</font></TD>
+      </TR>
+     </TABLE>
+     A leading <KBD>+</KBD> or <KBD>-</KBD> indicates that the following instructions
+     should be added to respectively removed from the current list. </TD>
+   <TD><KBD>cqQo</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--uploadpath"></A><KBD>-z<VAR>path</VAR></KBD> or<BR>
+     <KBD>--uploadpath=<VAR>path</VAR></KBD></TD>
+   <TD>Path for temporary storage of the upload files. This must include the
+     trailing path separator.</TD>
+   <TD><KBD>.\</KBD></TD>
+  <!--/TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--proto"></A><KBD>--proto=<VAR>level</VAR></KBD></TD>
+   <TD>Protocol level for the communication with the cddb server.</TD>
+   <TD><KBD>5</KBD></TD-->
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--verbose"></A><KBD>-v<VAR>level</VAR> </KBD>or<BR>
+     <KBD>--verbose=<VAR>level</VAR> </KBD>or<BR>
+     <KBD>-v </KBD>or <KBD>--verbose</KBD></TD>
+   <TD>Set output detail level.
+     <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+      <TR VALIGN=BASELINE>
+        <TD><KBD>0&nbsp;</KBD></TD>
+        <TD>Show fatal errors only. (These which cause the application to abort.)</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>1</KBD></TD>
+        <TD>Show all errors.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>2</KBD></TD>
+        <TD>Show warnings and errors.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>3</KBD></TD>
+        <TD>Show information messages, too. Also selected by <KBD>-v</KBD> or <KBD>--verbose</KBD>. (default)</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>4</KBD> and more&nbsp;</TD>
+        <TD>Show debug messages, too.</TD>
+      </TR>
+     </TABLE></TD>
+   <TD><KBD>2</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--write"></A><KBD>-w </KBD>or<BR>
+     <KBD>--write</KBD></TD>
+   <TD>Save all settings (unless otherwise noted) as new defaults to the profile.
+     This setting will <EM>not</em> perform any other action than updating the profile.<A HREF="#onote3"><FONT SIZE=-1><SUP>[3]</SUP></FONT></a></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--reset"></A><KBD>--reset</KBD></TD>
+   <TD>Reset all configuration options in the profile.
+     This will <EM>not</em> effect the meta information about your CDs.</TD>
+  </TR><TR VALIGN=BOTTOM ALIGN=LEFT>
+   <TH>advanced option<HR SIZE=1></TH>
+   <TH><BR>description<HR SIZE=1></TH>
+   <TH>default<HR SIZE=1></TH>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--profile"></A><KBD>-p<VAR>file</VAR> </KBD>or<BR>
+     <KBD>--profile=<VAR>file</VAR></KBD></TD>
+   <TD>Profile for <tt>CDDBMMCD</tt>. Of course, this may not be saved using <a href="#--write"><kbd>-w</kbd></a>.</TD>
+   <TD><KBD><VAR>scriptpath</VAR>\<BR>
+     CDDBMMCD.INI</KBD><A HREF="#onote2"><FONT SIZE=-1><SUP>[2]</SUP></FONT></a></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--ext"></A><KBD>--ext</KBD></TD>
+   <TD>Enable translation of extended information in the xmcd records.
+     Extended information will be appended in <kbd>{}</kbd> brackets. See <a href="#syntax-ext">syntax extensions</a>.
+     Use <kbd>--ext=0</kbd> to disable the translation explicitly.
+     <br>This option applies to the CDDB lookup and the creation of update records.
+     In the latter case the previous information from the last xmcd revision is kept.
+     Change this option with care, because if you perform a CDDB lookup with this option disabled and then
+     create the upload packet of the same CD with this option enabled the extended information get lost in the public database.</td>
+   <TD>disabled</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--codepage"></A><KBD>--codepage=<VAR>CP</VAR></KBD></TD>
+   <TD>Codepage for the cddb database and/or server.
+     All information is translated from <KBD><VAR>CP</VAR></KBD> when parsing an <tt>xmcd</tt> structure
+     and translated to <KBD><VAR>CP</VAR></KBD> when creating an upload package.</TD>
+   <TD><KBD>1004</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--fuzzy"></A><KBD>-f<VAR>threshold</VAR> </KBD>or<BR>
+     <KBD>--fuzzy=<VAR>threshold</VAR></KBD></TD>
+   <TD>Execute fuzzy search, if no exact match is found. The threshold defines
+     the number of frames which each TOC entry may deviate. <KBD>-f0</KBD> disables
+     fuzzy search. This does only apply to local database lookups.</TD>
+   <TD><KBD>41</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--windbdelta"></A><KBD>--windbdelta=<VAR>num</VAR></KBD></TD>
+   <TD>If the windows database version is selected by <A HREF="#--type"><KBD>--type</KBD></A>
+     this parameter defines the maximum hash range of one database file.
+     Example: with <KBD>--windbdelta=1</KBD> a lookup for the disc id <SAMP>e311f20f</SAMP> will search for files named
+     <SAMP>e3toe3</SAMP>, <SAMP>e2toe3</SAMP> and <SAMP>e3toe4</SAMP> but not for e.g. <SAMP>e2toe4</SAMP> or <SAMP>e0toe3</SAMP>, because they use a larger range.</TD>
+   <TD><KBD>6</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--hddvscpu"></A><KBD>--hddvscpu=<VAR>bytes</VAR></KBD></TD>
+   <TD>Threshold in bytes where the binary search algorithm of the Win database lookup turns into a linear seach.
+     Increasing this value from the default (10k) will increase the CPU load while decrease the HDD seek load and vice versa.</TD>
+   <TD><KBD>10000</KBD></TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--cdextra"></A><KBD>--cdextra=<VAR>bool</VAR></KBD></TD>
+   <TD>Enable/disable the CD-Extra work around.
+     When enabled CDDBMMCD lokks beyond the number of tracks reported by the CD-ROM manager. These are usually non-audio tracks.
+     Normally there is no reason to turn this option off.
+   </TD>
+   <TD><KBD>1 </KBD>(enabled)</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--caseadj"></A><KBD>--caseadj</KBD></TD>
+   <TD>Convert all titles to upper-/lowercase automatically before storing them in the CD player's database.
+     This is intended for CDDB records which are completely in lower- or uppercase.
+     Usually this option does it's job well.
+     But you should always have a look to the result, because on acronyms and some other stuff it is likely to fail.
+     <BR>It is a good idea to upload an update after you corrected the (wrong) information.
+     <br>This option cannot be saved permanently in the profile with <a href="#--write"><kbd>-w</kbd></a>.</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--trackfix"></A><KBD>--trackfix=<var>level</var></KBD></TD>
+   <TD>Apply fixes to each track title before storing them in the CD player's database.
+     This is intended for malformed CDDB records, most commonly compilations with various artists.
+     <br>The folowing <kbd><var>level</var></KBD> values are supported:
+     <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+      <TR VALIGN=BASELINE>
+        <TD><KBD>1&nbsp;</KBD></TD>
+        <TD>Swap artist and title and replace "<KBD> - </kbd>" by "<kbd> / </kbd>".</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>2</KBD></TD>
+        <TD>Only replace "<KBD> - </kbd>" by "<kbd> / </kbd>".</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>4</KBD></TD>
+        <TD>Strip track numbers in the form "<kbd>01 </kbd>" from the front of the track titles.</TD>
+      </TR>
+     </TABLE>
+     The different levels cannot be combined with several <kbd>--trackfix</kbd> options.
+     <BR>It is a good idea to upload an update after you corrected the (wrong) information.
+     <br>This option cannot be saved permanently in the profile with <a href="#--write"><kbd>-w</kbd></a>.</TD>
+  </TR><TR VALIGN=BASELINE>
+   <TD><A NAME="--special"></A><KBD>--special=<var>command</var></KBD></TD>
+   <TD>This option is used to take some special actions, mainly for maintance purposes.
+     When used the normal operation (<A HREF="#-op"><KBD>-o</KBD></A>) is <EM>not</EM> executed at all.
+     The <kbd><var>commands</var></KBD> may be followed by additional arguments separated with comma.
+     If the command or the arguments contain spaces the whole option must be quoted, e.g.: <SAMP>"--special=UpdateWinDB,'freedb-update-20030201-20030302.tar.bz2'"</SAMP>
+     <br>The folowing <kbd><var>commands</var></KBD> are supported:
+     <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+      <TR VALIGN=BASELINE>
+        <TD><KBD>UpdateWinDB,<WBR>'<VAR>updatefile</VAR>'</KBD></TD>
+        <TD>Merge a freedb update file into an existing instance of the windows version of the freedb database.
+          The update file may be in either <TT>.tar</TT>, <TT>.tar.gz</TT> or <TT>.tar.bz2</TT> format.
+          However, you must have the required decompression utilities installed (<TT>tar</TT>, <TT>gzip</TT>, <TT>bzip2</TT>).
+          You will find all of them at <A HREF="http://hobbes.nmsu.edu">hobbes</A>.
+          <BR>If you specify a directory (which must end with <KBD>\</KBD>) instead of an update file the decompression steps are skipped
+          and the xmcd files in the subdirectories (with the cddb category names) are used directly.
+          <BR>The update procedure is rather slow because the whole database have to be recreated.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>ResetMD5&nbsp;</KBD></TD>
+        <TD>Recalculate all stored MD5 checksums. This will prevent the creation of any upload record for now.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>ReenterUpload,<WBR>'<VAR>filename</VAR>'</KBD></TD>
+        <TD>This action will try to recreate the database state of an already submitted xmcd record.
+          This is particulary useful if a submission failed in a way that <TT>CDDBMMCD</TT> cannot detect.
+          <BR>Be careful with this option, because the exact CD length must be guessed in this case.</TD>
+      </TR><TR VALIGN=BASELINE>
+        <TD><KBD>StoreFile,<WBR>'<VAR>filename</VAR>'</KBD></TD>
+        <TD>This action will store the information from a xmcd data file in the CD-players ini and the internal database.
+          <BR>Be careful with this option, because the exact CD length must be guessed in this case.</TD>
+      </TR>
+     </TABLE>
+     This option cannot be saved permanently in the profile with <a href="#--write"><kbd>-w</kbd></a>.</TD>
+  </tr>
+</TABLE>
+<P>
+<FONT SIZE=-1>Notes:
+<OL COMPACT>
+  <LI><A NAME="onote1">Because of peculiarities of OS/2 Classic REXX it is impossible
+   to pass a URL in the command line. REXX stops at the first occurrence of <KBD>//</KBD>.
+   Hence the URL has to be entered with backslashes. This does not apply to Object
+   REXX; however, <KBD>\\</KBD> works anyway.</A></LI>
+  <LI><A NAME="onote2">This has changed with version 0.4. Previously the current
+   working directory (<KBD>.\</KBD>) was used.</A></LI>
+  <LI><A NAME="onote3">This has changed with version 0.41.
+   Previously the selected operations were executed too.</A></LI>
+</OL>
+</FONT>
+</A>
+<HR>
+
+<A NAME="details">
+<h2><FONT COLOR=#800080>Further details</font></h2>
+<h3>How CDDBMMCD works</h3>
+<OL COMPACT>
+  <LI>It opens the CDAUDIO device fetches the TOC of the currently loaded CD.
+   A possibly running playback is temporarily suspended.</LI>
+  <LI>It checks if the CD is already known.<BR>
+   If not, the CD is marked for a CDDB lookup.</LI>
+  <LI>A list of CDDB queries to execute is prepared. Besiedes the current CD this
+   contains unsuccessful queries which are more than one month ago (retry).</LI>
+  <LI>If selected, a local CDDB lookup is executed. First the CDDB disk ID is
+   calculated. Now all direct subfolders of the local CDDB path are searched
+   for matching files. If no exact match is found, a second search algorithem
+   starts: fuzzy search. All files with logically similar CD IDs are inspected
+   (hash &plusmn;10, length &plusmn;1). The TOC of each file is compared with
+   a precision of 40 frames. Different lead ins are ignored.<BR>
+   The latter only works with CDs that have at least 2 tracks.</LI>
+  <LI>If the local database lookup was unsuccessful or disabled,
+   the query is sent to the list of CDDB server(s) (if any) in order of appearance.</LI>
+  <LI>If the search was successful, the MMCD key is calculated and the Information
+   ist stored to the CDP.INI. This file is located automatically in the current
+   MMOS2 folder.</LI>
+  <LI>The database and CDP.INI is searched for CDs wich have been queried unsuccessful
+   at least once and where the information is entered manually in the meanwhile.<BR>
+   The search also checks for CDs where the stored information is modified through the OS/2 CD player since the last query.</LI>
+  <LI>For any of the matching entries of the last two steps update records are created.
+   In case of modified entries they will have a revision tag. For new entries
+   it is usually required to enter the category name. You will be asked for it.</LI>
+  <LI>The update records are sent to the cddb server.</LI>
+</OL>
+
+<A NAME="stdvswin">
+<h3>Local CDDB: standard version vs. Windows version</h3>
+<BLOCKQUOTE>
+  <P>There are two versions of the freedb. The native and a Windows version (<KBD>freedb-win*</KBD>).<BR>
+   In the original each file is one CD. The filenames are 8 digit hex numbers,
+   e.g. <KBD>d70b6b11</KBD>. It contains folders with 70000 and more files. This
+   overloads every FAT filesystem. OS/2 (with HPFS) is capable of this, but you
+   may use the Win version, too.<BR>
+   In the Win variant files with similar initial digits are consolidated. They
+   have the form <KBD>00to01</KBD> ...</P>
+  <P>
+  <TABLE BORDER=0>
+   <TR VALIGN=BASELINE>
+     <TH ALIGN=LEFT COLSPAN=2>original<HR SIZE=1></th>
+     <TH ALIGN=LEFT COLSPAN=2>Windows variant<HR SIZE=1></th>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><KBD><B>+</B></KBD></TD>
+     <TD>incremental update quite fast</TD>
+     <TD><KBD><B>-</B></KBD></TD>
+     <TD>incremental update slow<A HREF="#dnote1"><FONT SIZE=-1><SUP>[1]</SUP></FONT></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD><B>-</B></KBD></TD>
+     <TD>significant filesystem overhead<BR>
+      (even with HPFS which has 512&nbsp;bytes per allocation unit)</TD>
+     <TD><KBD><B>+</B></KBD></TD>
+     <TD>space saving</TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD><B>+</B></KBD></TD>
+     <TD>significantly faster access</TD>
+     <TD><KBD><B>-</B></KBD></TD>
+     <TD>slow access, especially in case of fuzzy searches<A HREF="#dnote2"><FONT SIZE=-1><SUP>[2]</SUP></FONT></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD COLSPAN=2></TD>
+     <TD><KBD><B>+</B></KBD></TD>
+     <TD>possible on FAT volumes</TD>
+   </TR>
+  </TABLE>
+  <P>
+  <FONT SIZE=-1>Notes:
+  <OL COMPACT>
+   <LI><A NAME="dnote1"><TT>CDDBMMCD</TT> can perform incremental updates using the <A HREF="#--special"><KBD>--special</KBD></A> option.
+     There is also an incremental update utility for Windows available. However, I don't know if this is helpful with OS/2. Maybe it
+     works using <A HREF="http://www.netlabs.org/odin">ODIN</A>.</A></LI>
+   <LI><A NAME="dnote2">Because the files of the windows database version are grouped by the hash value,
+     it is much likely that a fuzzy search will scan about 10% of the hole database.
+     I do not recomend the windows database for fuzzy searches unless you have a <EM>very fast</EM> PC.</A></LI>
+  </OL>
+  </FONT>
+</BLOCKQUOTE>
+</A>
+
+<h3>Format of the MMPM CD info file</h3>
+<BLOCKQUOTE>
+  <P> The MMPM CD player stores the information about CDs in the file CDP.INI
+   in the MMOS2 folder. This file is in binary OS/2 profile format and should
+   be accessed by the suitable profile functions.</P>
+  <P> The applications are the CD keys, calculated as follows:
+  <BLOCKQUOTE><KBD><VAR>MMSSmmss.ff</VAR>&nbsp;&nbsp;&nbsp;&nbsp;</KBD> Example:
+   <KBD>46043612.40</KBD>
+   <DL COMPACT>
+     <DT><KBD><VAR>MM</VAR></KBD></DT>
+     <DD>total length of the CD, minutes [00..99]</DD>
+     <DT><KBD><VAR>SS</VAR></KBD></DT>
+     <DD>total length of the CD, seconds, truncated [00..59]</DD>
+     <DT><KBD><VAR>mm</VAR></KBD></DT>
+     <DD>total length of the CD minus length of the last track, minutes [00..99]</DD>
+     <DT><KBD><VAR>ss</VAR></KBD></DT>
+     <DD>total length of the CD minus length of the last track, seconds [00..59]</DD>
+     <DT><KBD><VAR>ff</VAR></KBD></DT>
+     <DD>total length of the CD minus length of the last track, frames (1/75&nbsp;s)
+      [00..74]</DD>
+   </DL>
+   CDs with only one track have <KBD><VAR>mmss.ff</VAR></KBD> = <KBD>0000.00</KBD>.
+  </BLOCKQUOTE>
+  Within this applications the following values ae defined:
+  <BLOCKQUOTE>
+   <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+     <TR VALIGN=BASELINE>
+      <TD><KBD>IMMCDDiscTitle&nbsp;</KBD></TD>
+      <TD>CD title, ASCII</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>1</KBD></TD>
+      <TD>title track 1, ASCII</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>2</KBD></TD>
+      <TD>title track 2, ASCII</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD>...</TD>
+     </TR>
+   </TABLE>
+   <FONT size=-1>Note that there are other keys which are not touched by <TT>CDDBMMCD</tt>.</font>
+  </BLOCKQUOTE>
+  Beyond this builtin keys <TT>CDDBMMCD</TT> stores some additional meta information
+  here:
+  <BLOCKQUOTE>
+   <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+     <TR VALIGN=BASELINE>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>CDDBCategory&nbsp;</KBD></TD>
+      <TD>category of the cddb data. Discontinued since version 0.42, see <KBD>CDDBmeta</kbd>.</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>CDDBRevision&nbsp;</KBD></TD>
+      <TD>revision of the cddb record. Discontinued since version 0.42, see <KBD>CDDBmeta</kbd>.</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>CDDBMD5</KBD></TD>
+      <TD>MD5 checksum of the cddb record. Discontinued since version 0.42, see <KBD>CDDBmeta</kbd>.<BR>
+        This information is used to determine updates through the CD player's
+        GUI automatically. The hash is created from the information as stored
+        in the CD player's database. The CD title and the track titles are concatenated
+        with a null byte as delimiter.</TD>
+     </TR><TR VALIGN=BASELINE>
+      <TD><KBD>CDDBmeta&nbsp;</KBD></TD>
+      <TD>Summary of meta data. Since <tt>CDDBMMCD</tt> version 0.42 all of the above informations
+        is stored in one key. The format is:<br>
+        <var>MD5-Hash category revision</var><br>
+        The field delimiter is a null byte. Informations from older versions will be converted silently on demand.
+        The old information will be removed in this case.</TD>
+     </TR>
+   </TABLE>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<h3>Format of the CDDBMMCD profile</h3>
+<P>Application key: <KBD>Settings</KBD>
+<BLOCKQUOTE>
+  <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+   <TR VALIGN=BOTTOM ALIGN=LEFT>
+     <TH>Value<HR SIZE=1></TH>
+     <TH>Meaning<HR SIZE=1></TH>
+     <TH>Command line option<HR SIZE=1></TH>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDAudioDevice</KBD></TD>
+     <TD>Space separated list of CDaudio device names.</TD>
+     <TD><A HREF="#--device"><KBD>-d</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDDBservers</KBD></TD>
+     <TD>List of CDDB servers, delimited with blanks.</TD>
+     <TD><A HREF="#--server"><KBD>-s</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDDBType</KBD></TD>
+     <TD>Kind of CDDB query
+      <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+        <TR VALIGN=BASELINE>
+         <TD><KBD>L</KBD></TD>
+         <TD>local database lookup</TD>
+        </TR>
+        <TR VALIGN=BASELINE>
+         <TD><KBD>S</KBD></TD>
+         <TD>server lookup</TD>
+        </TR>
+        <TR VALIGN=BASELINE>
+         <TD><KBD>LS&nbsp;</KBD></TD>
+         <TD>both</TD>
+        </TR>
+      </TABLE>
+     </TD>
+     <TD><A HREF="#--local"><KBD>-l</KBD></A>, <A HREF="#--server"><KBD>-s</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDExtraWA</KBD></TD>
+     <TD>CD extra work around, boolean {<KBD>0</KBD>|<KBD>1</KBD>}</TD>
+     <TD><A HREF="#--cdextra"><KBD>--cdextra</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDPiniLocation</KBD>&nbsp;</TD>
+     <TD>Path to the internal database of the MMOS/2 CD player.</TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>ClientString</KBD></TD>
+     <TD>Name and version of the client program used at <KBD>cddb hello</KBD>,
+      delimited by a blank.</TD>
+     <TD><A HREF="#--client"><KBD>--client</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>Codepage</KBD></TD>
+     <TD>Codepage of xmcd records.</TD>
+     <TD><A HREF="#--codepage"><KBD>--codepage</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>EMail</KBD></TD>
+     <TD>Email address for submissions.</TD>
+     <TD><A HREF="#--email"><KBD>-e</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>EXTFields</KBD></TD>
+     <TD>Enables the bidiretional converion of the extended fields in the xmcd records, boolean {<KBD>0</KBD>|<KBD>1</KBD>}.</TD>
+     <TD><A HREF="#--ext"><KBD>-ext</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>FuzzyThreshold</KBD></TD>
+     <TD>Threshold for fuzzy search.</TD>
+     <TD><A HREF="#--fuzzy"><KBD>-f</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>HDDvsCPU</KBD></TD>
+     <TD>Threshold in bytes where the binary search algorithm of the Win database lookup turns into a linear seach.</TD>
+     <TD><A HREF="#--hddvscpu"><KBD>--hddvscpu</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>Hostname</KBD></TD>
+     <TD>Hostname used at <KBD>cddb hello</KBD>.</TD>
+     <TD><A HREF="#--host"><KBD>-h</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>LocalCDDBPath</KBD></TD>
+     <TD>Path to the local CDDB.</TD>
+     <TD><A HREF="#--local"><KBD>-l</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>LocalCDDBType</KBD></TD>
+     <TD>Type of the local CDDB.</TD>
+     <TD><A HREF="#--type"><KBD>-t</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>OperationCodes</KBD></TD>
+     <TD>List of functions to execute.</TD>
+     <TD><A HREF="#--op"><KBD>-o</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>ProtocolLevel</KBD></TD>
+     <TD>Protocol level for cddbp and http.</TD>
+     <TD><A HREF="#--proto"><KBD>-proto</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>ProxyServer</KBD></TD>
+     <TD>HTTP proxy address</TD>
+     <TD><A HREF="#--proxy"><KBD>-P</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>UploadDataPath</KBD></TD>
+     <TD>Path where the upload files for submissions are stored.</TD>
+     <TD><A HREF="#--uploadpath"><KBD>-z</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>Username</KBD></TD>
+     <TD>Username used at <KBD>cddb hello</KBD>.</TD>
+     <TD><A HREF="#--user"><KBD>-u</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>Verbose</KBD></TD>
+     <TD>Level of detail for screen output.</TD>
+     <TD><A HREF="#--verbose"><KBD>-v</KBD></A></TD>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>WinDBDelta</KBD></TD>
+     <TD>Maximum range of hash values in one file of the Win database version.</TD>
+     <TD><A HREF="#--windbdelta"><KBD>--windbdelta</KBD></A></TD>
+   </TR>
+  </TABLE>
+</BLOCKQUOTE>
+Application key: <KBD>PendingCDs</KBD>
+<BLOCKQUOTE>Here is the state information about previously checked CDs stored.
+  The name of the values is the table of contents of the CD. The assigned data
+  is the state information.
+  <P>The TOC is coded as follows:
+  <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;</B></TD>
+     <TD><I>number of audio tracks</I></TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;&nbsp;</B></TD>
+     <TD><I>total CD length in frames</I></TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;</B></TD>
+     <TD><I>first frame of track 1</I></TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;</B></TD>
+     <TD><I>first frame of track 2</I></TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD></TD>
+     <TD>...</TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;</B></TD>
+     <TD><I>first frame of track n</I></TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><B>&middot;</B></TD>
+     <TD><I>last frame of track n +1</I></TD>
+   </TR>
+  </TABLE>
+  The items are delimited with blanks.<br>
+  In case of CD Extra the number of tracks is only the number of <em>audio</em>
+  tracks. The real number of tracks is the number of words in the string -3.
+<P>The state is one of:
+  <TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+   <TR VALIGN=BASELINE>
+     <TD><KBD>1</KBD></TD>
+     <TD>CD is to be queried.</TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><KBD>2</KBD><VAR> time</VAR></TD>
+     <TD>CDDB query was unsuccsessful at <VAR>time</VAR>.<BR>
+      (unix time format = seconds since 01/01/1970)</TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><KBD>3</KBD></TD>
+     <TD>CD information successfully stored.</TD>
+   </TR>
+   <TR VALIGN=BASELINE>
+     <TD><KBD>4</KBD><VAR> filename</VAR></TD>
+     <TD>Upload packet is ready.</TD>
+   </TR>
+  </TABLE>
+</BLOCKQUOTE>
+Application key: <KBD>Internal</KBD>
+<BLOCKQUOTE>
+  <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+   <TR VALIGN=BOTTOM ALIGN=LEFT>
+     <TH>Value<HR SIZE=1></TH>
+     <TH>Meaning<HR SIZE=1></TH>
+   </TR><TR VALIGN=BASELINE>
+     <TD><KBD>CDDBMMCDVersion</KBD></TD>
+     <TD>Last used version of CDDBMMCD.<br>
+      If <KBD>CDDBMMCDVersion</KBD> is <em>less</em> than the current CDDBMMCD version,
+       the profile is migrated to the new version, if neccessary.<br>
+      If <KBD>CDDBMMCDVersion</KBD> is <em>higher</em> than the current CDDBMMCD version,
+       a warning is generated. A back conversion is not supported.
+      The application may not work as expected.</TD>
+   </TR>
+  </TABLE>
+</BLOCKQUOTE>
+</A>
+<HR>
+
+<A NAME="contact">
+<h2><FONT COLOR=#800080>Contact</font></h2>
+<P>Suggestions, help, complaints (but not too much:-): <A HREF="mailto:mueller@maazl.de">mueller@maazl.de</A></P>
+<P>Original homepage: <A HREF="http://www.maazl.de/project/cddbmmcd/index.html">http://www.maazl.de/project/cddbmmcd/index.html</A></P>
+</A>
+<HR>
+
+</BODY>
+</HTML>

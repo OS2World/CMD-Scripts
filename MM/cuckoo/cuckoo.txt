@@ -1,0 +1,36 @@
+Simple REXX script to mimic a cuckoo clock
+==========================================
+
+This very simple and straightforward REXX script shows how to create a cuckoo
+clock that beats the hours and half hours on an OS/2 machine with a SoundBlaster.
+The sound playback facility depends on the SBOS2.SYS SoundBlaster driver and the
+associated PLAYER.EXE program, but these programs can be replaced by something
+else very easily -- just look into the script!
+
+You should put the CUCKOO.CMD script in the same directory as the PLAYER.EXE
+command and the CUCKOO.RAW sound file. Then, enter
+
+[OS2 prompt] detach cuckoo
+
+or find another way to push the program into the background. Running it in a
+window is possible but will produce little output and consume more resources.
+
+The script will calculate how long it should sleep before reaching the next beat
+time and call DosSleep to be rescheduled at that time. So, it consumes *NO* CPU
+time whatsoever while waiting.
+
+Then it calculates how often it should beat, constructs a sound file that
+contains the appropriate number of beats and uses PLAYER.EXE to actually play the
+sound. OS/2 is good enough to do this without noticeable system performance
+drop. You'll hear the disk rumble a bit, though  :-)
+
+View this script as an example of how to do nice things with REXX that have
+always be hard to program on other Intel-based systems.
+
+Please enhance this script and make as many changes as possible. REXX is powerful
+enough to satisfy most of your wishes :-)
+
+
+
+Jeroen Hoppenbrouwers (hoppie@kub.nl)
+

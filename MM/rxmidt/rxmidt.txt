@@ -1,0 +1,2 @@
+One day I wrote these tiny tools which I hope will help some people like me.
+For more info about each one, see the comment at start of each script.

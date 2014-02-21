@@ -1,0 +1,189 @@
+DGDs REXX Text-Mode File Selector v1.0 (Code is stable at V1.0, 05-29-2008,
+however, several applications are still being developed. One is KMPFS10.ZIP
+on Hobbes, or later versions.)
+
+Features:
+˛ All keyboard navigation: EASILY TEN TIMES AS FAST AS MOUSING!
+˛ Navigation using the arrows keys plus page-up and page-down.
+˛ No hunting for the "." to exit a directory; left-arrow ALWAYS goes up tree.
+˛ No hunting for a directory you've JUST exited: cursor STAYS on it rather
+  than resetting to top of the list: right-arrow instantly goes back in.
+˛ Instant drive change: tap 'a'-'z', and it's shown, if available.
+˛ Most options are both programmable AND key-selectable.
+˛ Keys are mnemonic (use capitals as below), plus the standard F1 for Help.
+˛ Initial position in displayed list of: Head, Middle, or Tail.
+˛ Sorting on: Date, Extension, Name, or Size.
+˛ REXX SOURCE. Uses only OS/2 classic REXX and RexxUtil library.
+˛ Uses FULL height of current screen. (Could restrict with minor tweaks.)
+˛ Can use FULL width of current screen (40 columns for name is a good minimum).
+˛ Programmable file details, any or all of: Date, Time, Size, and Attributes,
+  in any order, with Long form having four-digit year and time with seconds.
+˛ Long file names are shortened with an obvious ellipsis marker. (Though still
+  can be ambiguous if names are long and similar. No obvious cure for it.)
+˛ Volume label and current path are displayed at bottom.
+˛ Retrieves multiple filespecs (besides all directories) with one call.
+˛ Filtering can include by Attributes.
+˛ Filtering automatically turned off when going UP tree.
+˛ "F" toggles Filtering: off to view ALL files, including system and hidden,
+    or back to as programmed.
+˛ TAGGING of files and directories with unambiguous indication.
+˛ Tag in either direction with ctrl-up or ctrl-down, moving to next in list.
+˛ Uses SysSleep to avoid hogging CPU with keyboard polling. (RexxUtil only
+  allows sleep times of whole seconds; a split-second "sleep" from another
+  library will avoid the lag in response this causes.)
+
+
+KMPFS.CMD (search for "KMPFS" on Hobbes) is an application with purpose beyond
+exercising file selector. It can be easily modified to filter for any files
+and then call any executable. -- There's a more general purpose version in
+progress, which implements command-line file associations. -- In the meantime,
+modifying KMPFS.CMD to filter for *.txt, *.doc, and various other text files,
+and calling TEDIT.EXE makes browsing through shareware documention more fun.
+
+The old "documentation" has been extracted and duplicated below for reference.
+If you see "LD4" anywhere, it has no particular meaning, started as a quick
+and dirty "look at drive" with SysFileTree(), then version 4 was merged with
+old Turbo Pascal code. If numbered by significant changes and bug fixes, it'd
+be well into three digits.
+
+>>> NOTE: filtering starts ON in applications so if you first go into
+sub-directories, you will see only sub-directories if they exist, no files!
+Puzzled even me just now, because in testing I usually went up from \OS2
+first, which turns the filter off. But the code is working -- as programmed.
+
+------------------------------------------------------------------------------
+
+Input Parameters (see further below for handling returned strings):
+
+                fs_lmar, glo_var, fs_path,  fs_flspc, fs_attr, fs_cur,
+rv= file_select(40,      glo_var, 'C:\OS2', '*.ico',  '',      'REXX.ICO',
+                'N',     'M',        'DTSAL', 1)
+                fs_sort, fs_initpos, fs_view, fs_filter
+
+fs_scol   : Start Column. Details go to left of this; names to right.
+glo_var   : Global Variable; stem into which the formatted directory is put.
+fs_path   : Path. Ensure before calling that it exists.
+fs_flspc  : File Specification(s). Space delimited, so NONE allowed IN a spec.
+fs_attr   : Attributes for search. See REXX info for SysFileTree().
+fs_cur    : Current. Will be highlighted if exists; if not, uses H, M, or T.
+fs_sort   : Sorting. First letter of: Date, Time, Extension, or Size.
+fs_initpos: Initial Position. First letter of: Head, Middle, or Tail.
+fs_view   : View details: Date, Time, Size, Attribute, Long date; sets order.
+fs_filter : Filter switch, '0' or '1' determines whether only shows specified.
+
+
+rv= get_1_directory(glo_var, 'C:\OS2\', 'rexx* *.ini', '*****', 1,         1)
+                    glo_var, g1_path,   g1_flspc,      tattr,   g1_filter, g1_dirs
+
+glo_var  : Global Variable; stem into which the formatted directory is put.
+g1_path  : Path.
+g1_flspc : File Specification(s). As above.
+tattr    : Attributes, as above.
+g1_filter: Filter switch, '1' use g1_flspc, '0' use '*.*'.
+g1_dirs  : Directories switch, '1' get directories too; '0' no directories.
+
+------------------------------------------------------------------------------
+
+Usage notes (extracted from LD4 exercise program):
+
+Variables. Need the color definitions, plus the following:
+
+parse value systextscreensize() with scry scrx
+scry= scry - 1; scrx= scrx - 1; /* adj to 0, 0 based values */
+
+numeric digits 12 /* necessary to display bytes of gigabytes */
+
+glo_var= 'dirlist.' /* MUST SPECIFY 1ST so value(glo_var) is valid for call.
+  glo_var is passed to get_1_directory, where its main purpose is ability
+  to use more than one stem variable. Originally to support multiple
+  directory lists, glo_var and the use of value() became too annoying when
+  throughout file_select(), so remains only in get_1_directory(), which
+  can be called separately if more than one (formatted) list is needed.
+*/
+
+rv= file_select(40, glo_var, 'C:\OS2', '*.ico', '', 'REXX.ICO', 'N', 'M', 'DTSAL', 1)
+/*  Provides 40 ^ columns for name in 80 col window, about minimum useful
+    for HPFS long file names. NOTE that FILE NAMES GO TO RIGHT of specified
+    column and that any DETAILS ARE PLACED TO LEFT of it (in variable order).
+*/
+say
+say ansi_clreol'===================== Returned string: ======================'
+say rv||ansi_clreol
+if pos('€', rv) > 0 then do
+say ansi_clreol'======================= Tagged files: ======================='
+/* NOTE: may be spaces in returned file name! -- Get ALL starting at 4th word!
+   Tagging is done in 3rd word having character for each file:
+   "Enter 32 ˙˙˙˙˙˙˙€€€€€˙˙˙˙˙˙˙˙ C:\OS2\REXX.ICO" < remainder is file name
+    ^key  ^index  ^character for each file in directory; blocks mark tagged
+   The file at cursor is NOT TAGGED BY <enter>; caller must decide what to do.
+   Caller must also check attributes and handle directories.
+-- NOTE THAT <enter> IS AN EXCEPTION: all other keys return just scan CODES.
+   This is to be able to able to SEE it when testing; change below.
+*/
+do loop= 1 to length(word(rv, words(rv)))
+  if substr(word(rv, words(rv)), loop, 1) = '€' then say ansi_clreol||loop' 'dirlist.loop
+end
+end
+else say ansi_clreol'============== No files were tagged ================'
+
+say ansi_clreol'========= TESTS GET_1_DIRECTORY FOR MULTIPLE LISTS ========='
+glo_var='list2.'
+rv= get_1_directory(glo_var, 'C:\OS2\', 'rexx* *.ini', '*****', 1, 1)
+do loop= 1 to rv  /* must manually skip directories... */
+  if loop > 2 & substr(list2.loop, wordindex(list2.loop, 4) + 1, 1) <> 'D' then do
+    say ansi_clreol||loop' 'list2.loop
+  end
+end
+
+>>> Summary: set up required variables as given in LD4.CMD. -- Do whatever
+else your application requires. -- Pick values for the file_select() call. A
+limitation is that if a "current file" (fs_cur, the 6th input parameter) is
+given, then the file MUST exist. Use a While loop with a Quit variable, and a
+Select to handle returned keys, one of which sets the Quit flag. The screen
+is re-drawn in such loop each time a key is returned to caller even if it's
+only discarded, but in practice isn't noticeable -- among the other flashing
+due to primitive screen handling caused by sticking to basic REXX. You must,
+however, on each loop update the fs_cur parameter to the returned file name.
+[With a deal of re-arrangement of variables, one could avoid initializing
+upon entering file_select()...]
+
+
+See my TZ.CMD in TIME4Zxx.ZIP for details in actual application. There are
+some documentation errors (elsewhere) caused by changes made to ordering
+of returned tags (now 3rd word). What's here is correct.
+
+There are also some differences between the LD4 example and TZ.CMD, mostly of
+commenting out the automatic changing of filtering when going up tree, plus
+changing so the <enter> key returns scan code like the rest.
+
+
+---------------------------- Optional ranting --------------------------------
+
+GUI file selector "dialogs" even in OS/2 strike me as mock-ups that were never
+refined by experience to make EASY, which is startling for a basic and
+frequent function. The world wide waste of time spent fumbling to find a "."
+dir just to go up the tree, or scrolling to go back into a directory that you
+just exited because the list resets to top, has to be adding up to many
+thousands of man-years -- and no relief is in sight, the first methods that
+occurred to someone are now chiseled into stone. This REXX code at least gets
+beyond Bill's "gee whiz" stage to making file selection so easy that browsing
+a drive is almost fun.
+
+Many principles here aren't just for text-mode (could be implemented with
+buttons that duplicate the key functions, WHILE also allowing the keyboard),
+but a GUI version would obscure the main point that using only the keyboard is
+STILL much faster than doing EVERYTHING with the mouse. Mousing is FINE for
+selecting AN item already visible, but turns any paging into complex eye-hand
+coordination practice to locate tiny buttons with high precision, and
+repeating the waste of time and concentration should you need to reverse even
+by one line. -- Well, that's another struggle that reasonable people seem to
+have lost, and the rest don't even know that there IS an alternative.
+
+Even where the keyboard is allowed, it's done badly, such as letter keys jump
+to the first directory that starts with that letter. My testing shows that
+page-up and page-down are never worse and nearly always much better: with
+numerous directories starting with same letter, one must still scroll.
+
+You may find drive selection with lower-case disconcerting... I do, now and
+then. Can be changed to upper-case fairly easily, with lower-case becoming
+commands. I'm leaving it as is for now because also can be convenient.

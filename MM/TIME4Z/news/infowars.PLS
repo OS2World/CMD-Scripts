@@ -1,0 +1,15 @@
+[playlist]
+NumberOfEntries=4
+File1=http://stream.infowars.com
+Title1=www.infowars.com
+Length1=-1
+File2=http://stream.infowars.com:80/listen.pls
+Title2=www.infowars.com
+Length2=-1
+File3=http://stream4.nfowars.net
+Title3=www.infowars.com
+Length3=-1
+File4=http://stream4.nfowars.net:80/listen.pls
+Title4=www.infowars.com
+Length4=-1
+Version=2

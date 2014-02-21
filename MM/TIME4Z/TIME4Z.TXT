@@ -1,0 +1,283 @@
+Time4Z is my scheduler in REXX for Dink's Z text mode MP3 player. I release
+the source code for free use and modification by anyone for use in OS/2 - eCS,
+but NO OTHER OS. With a few changes, and perhaps tweaking, the basic scheme 
+will also work with PM123. -- I prefer Z. My thanks to Dink.
+
+Version 1.0 finalizes the basic scheme (no huge bugs or inconveniences IMO!),
+adds Browse mode besides some minor features, cleans up cosmetics and code.
+
+Version 1.1 has new function from more experience with unattended operation
+(see end for description of the unique box I'm using): the Window List is
+queried every minute to check that Z is running; a new optional keyword,
+"CLEAR", frees up space by deleting older files if necessary before copying
+recorded files from temporary to permanent storage. And some minor changes.
+
+Version 1.2 has a new strategy for disk space in the "MAX" keyword, which sets
+a maximum size for all MP3s in the specified "SAVEPATH", and when saving via
+"MOVE" will delete files starting with oldest first. This fixes the somewhat
+daffy "CLEAR" method inspired by using a second HD on my dedicated recorder so
+that I didn't care if the drive filled up. Duh. The new method is handy. Been a
+delay of release because an obscure bug introduced with this method caused an
+exit if stream failed and re-start failed, but believe it's fixed.
+
+Version 1.3 wasn't released: seemingly minor changes caused HAVOC.
+
+Version 1.4 has option to copy \TZ dir to a RAMDRIVE so HD can spin down even
+when doing random streaming. A problem of missed write command when starting a
+new stream for recording is fixed ÄÄ it may have been created by an attempt to
+shorten the delay, OR due to my uplink bandwidth being taken by numerous
+torrents. Whatever the cause, may be necessary to move record start times up 
+by 1 minute to compensate. 
+
+Purpose and Features:
+- Runs Z on a schedule: automates playing and recording streams.
+- Plays random streams (or local files) for background music.
+- Can spool recorded files to a RAM drive, then move completed files to HD.
+- Displays scheduling for every minute of the day.
+- Alarm clock substitute; wake-to-music (or sound effects!).
+
+NEW in v1.0:
+- Function key access to 12 favorite streams.
+- Browse mode for easy access to files and (mainly) playlists.
+- Key to refresh stream (for stream errors that have caused Z to exit).
+- Key to re-read (changed) schedule and re-start without exiting Time4Z.
+- Optional hours:minutes form for duration.
+- Automatically sets the read-only attribute on all playlists under \TZ which
+  are NOT set when started. This would be major nuisance in other languages,
+  but turns out to require only two lines of code in OS/2 REXX!
+
+==============================================================================
+
+- INSTALLATION
+  Requires Warp 4 FP15, because that's apparently minimum for Z.
+
+  Unzip to C:\TZ. (Edit the source code if you MUST place elsewhere.)
+    Directory tree should be created automatically (using OS/2 'unzip').
+    Some sample playlists are in sub-directories.
+
+  EXAMPLE.SCH is provided to get going right away, and for documentation.
+  >>> Copy any existing TZ.SCH into working directory AND edit sched_name var.
+
+  Put Z.EXE in C:\Z28. (Again, modify source if needed.)
+
+  Run TZ.CMD from OS/2 command line, or create program object. -- With v1.4
+    option for RAMDRIVE letter if available.
+
+  It's safe to run without any set-up; worst that can happen is that the OS/2
+  command processor won't find Z.EXE, or Z won't find a playlist; they'll 
+  simply, probably invisibly, complain and exit. -- It should start streaming 
+  from the net (unless it's midnight to 8AM). Control is mostly by editing the
+  TZ.SCH text file, though a few keys have actions as noted below.
+
+==============================================================================
+
+Time4Z is best for streaming, especially recording. It can also play MP3s in a
+given directory. However, because there's no easy way in REXX to get status
+information from Z, this is open-ended control: it just sends the list to Z,
+then waits for the next event on its schedule. From version 1.1, the program
+checks every minute that "Z for named pipe" appears to be running, but this is
+the only feedback used, and it's due to frequent stream errors that cause Z to
+quit and miss programs. You can always go into the "Z for named pipe" window
+to operate Z. Doesn't look as though I'll ever get to more advanced methods.
+
+Time4Z is in daily use, and I particularly like automatic changing of streams
+on a schedule, and randomly at selected interval the rest of the time.
+
+Scheduling is by manually editing a text file of simple yet flexible format.
+For example, the line below changes to random streams (from playlists present
+in the given directory) every 7 minutes for the entire day, every day:
+    RST SMTWTFS 00:00 24:00 C:\TZ\favored 7
+action^  ^days  ^start ^duration ^lists   ^time on each stream (test value)
+The scheme inherently does "flying start", meaning an event will start at any
+time within its specified period, and end at its normal time. Other events can
+be scheduled over this without the tedium of resolving conflicts; the random
+streams specified above resume whenever nothing else is on. See TZ.SCH file
+for more information, and run TZ.CMD to _see_ this scheme displayed.
+
+A specific stream at specific time can be scheduled, and optionally recorded
+with file name created from date and time. Files are created in a common
+permanent directory, or a (temporary) directory may be individually specified
+and the file optionally moved when complete. I use a RAM drive (with RAMFS121)
+to avoid the chatter and wear of thrashing a HD. -- CLEAR and MAX keywords only
+work if MOVE is used.
+
+Playlists are easily obtained from Shoutcast.com, and other webbish places.
+There are two common problems: they're all named the same, and are not in the
+directory where you wish to save them. - NEW IN v1.0, DONE IN BROWSE MODE.
+
+>>> A 3rd problem with playlists is hardwired into Z:
+>>> For some inscrutable reason, Z IMMEDIATELY DELETES PLAYLISTS!
+>>> All playlists must be protected by setting the read-only attribute:
+>>>   In playlist directory: >attrib * +r
+>>> NOW DONE AUTOMATICALLY by TZ.CMD; just remember when using Z by itself!
+
+You may sometimes need to edit a playlist if a stream doesn't work, or has
+stopped working (perhaps only on one of multiple URLs). The format should be 
+obvious; web documentation adds little.
+
+Some sites - especiallly NPR - put a fixed "commercial" at start of the
+playlist; this can sometimes be edited out (remove "Title1" and adjust
+numbers), or <esc> sometimes gets past it. Murky area.
+
+Z by itself uses only the first listed site; try removing it, adjusting number
+listed. If you go into the Z window when it's been given a playlist having
+multiple addresses, you can hit "N" to try the next one. -- You may have to be
+QUICK before it times out and exits on the error!
+
+-----------------------------------------------------------------------------
+
+KEYBOARD OPERATION:
+
+  IF you've set up function keys in TZ.SCH, favorites will be listed to left
+    of corresponding number. (You can select any WHILE recording, but can't
+    easily RESUME unless previous stream is also on a function key. Hmm...
+    Work-around at present is to hit <backspace> to re-read schedule.)
+  H shows the Help screen (more or less, this).
+  X eXits, leaving "Z for named pipe" running (if it is); this is a feature.
+  The ` (left single quote) key tries to refresh / resume a lost stream.
+  The ~ (tilde) STOPS / erases the current action; to restore, <backspace>.
+  <backspace> re-initialize all by re-reading TZ.SCH (use also if edited)
+    [HOWEVER, from v1.4 if using RAMDRIVE option by command line parameter,
+     this doesn't re-sync from HD, must re-start program.]
+
+  <tab> goes into Browse mode if not recording:
+    <home> marks a directory to copy playlists into (default: C:\TZ\FAVORED)
+    <insert> copies a playlist (.M3U or .PLS) to current "home" dir, after
+      option to re-name; just hit <enter> to keep name.
+    <enter> selects playlist or local files for immediate play.
+    <del> IMMEDIATELY deletes a playlist (.M3U or .PLS) but NO other files.
+    \ (backslash) makes a new directory.
+    <esc> or <tab> returns to Scheduled mode.
+    <F1> help in File Selector; most important are lowercase a-z for drive
+
+  In Random STream (RST) mode only:
+    R Random new stream is picked from those in the specified directory.
+    S Stays on current stream to end of scheduled period.
+    Any other key just resets the Random STream change timer to 0.
+
+
+USING PLAYLISTS IN BROWSE MODE: <tab> to enter; <esc> or <tab> leaves it. Can
+only enter Browse Mode if NOT recording. While in Browse mode, NONE of the
+scheduling is active (you might use this "feature" to prevent scheduled events
+from running), but it will more or less resume upon return.
+
+Default "home" for playlists is "C:\TZ\FAVORED". If you wish to put playlists
+elsewhere, navigate TO a directory, but NOT INTO, and press the <home> key.
+
+Now, in your browser, go to Shoutcast.com. Click on the "listen" icon of a
+stream you want to try; browser should download a "Shoutcast-Playlist.pls"
+(and should add numbering like "(2)" if more are clicked on). Back in Time4Z,
+navigate to the download directory, select if more than one playlist is there,
+and hit <enter>. Z should start the stream. If you like it, hit <insert>, type
+a name if you wish (without extension), and <enter>. You'll get some screen
+clutter that should confirm the file was copied to the selected directory.
+
+>>> Thought the above procedure was clumsy, but recently observed the same
+problem of generic playlist names in XP with WinAmp. There MAY be a way there
+to save playlists with a true name, but if so, it's not obvious.
+
+May be handy to delete playlists from the download directory using Time4Z, as
+the read-only attribute will be set. When you delete the last playlist, a
+"fix" for a baffling unexpected glitch (bug) will move one step up the tree.
+
+Selecting with <enter> always causes current playing to stop and the new to
+start (if stream is good). The same action occurs for .MP3s or .WAVs, but
+while the File Selector procedure has capability to tag files, that'd at best
+duplicate function already in Z, besides complicate Time4Z. So the main uses
+are for playlists: to sample, rename, organize, delete, and easily select from
+a practically unlimited number of playlists in directories. -- I'm already
+noticing that my ad-hoc method of marking a "home" directory to copy files to
+is QUITE handy for sorting out files, and don't know of any OS or file manager
+that has similar function. Please STEAL this idea at least as an option!
+
+-----------------------------------------------------------------------------
+
+The file selector is general purpose and available (search KMPFS on Hobbes for
+a recent version that does a bit more than testing) to use in your own REXX
+code. A file selector is a fundamental building block, and I was NOT pleased
+with GUI implementations -- even in OS/2 WPS -- apparently this is one
+building block that programmers consider "good enough". All GUI methods to
+navigate a directory tree are annoying wastes of time, always reset the list
+to the top, which nearly always requires scrolling, particularly annoying when
+you want to return to a directory just exited. In my method, left and right
+arrow keys switch instantly back and forth between directory levels.
+
+This fairly major effort began in Turbo Pascal v5.5, converted line by line,
+both greatly simplified and painfully contorted by REXX's peculiarities. I've
+stuck to Classic Rexx to avoid various complications. REXX is one of OS/2's
+best features, and mostly been a delight to use. - Oh, now and then one
+encounters an unearthly odd "feature", and a missing quote mark can drive one
+crazy, but overall, REXX is THE language for most that a reasonable person
+would want to do, and has installable features through DLLs for the rest.
+
+I've tested by rummaging around on drives, looking into OS/2's obscure spots.
+Found a 900K Postscript file (winsock.ps) on W4 that I'd bet NO ONE has EVER
+used, probably a legacy from M$, as wasting space is their hallmark.
+
+-----------------------------------------------------------------------------
+
+Possible coming improvements:
+
+- Display is a bit crowded in 80x25. A future version might use 'mode 90, 30'
+  or more, though so far looks like requires manual re-sizing upon start-up.
+
+- A "record now" feature that will automatically create filename, really the
+  only benefit over using Z directly, so not exactly high-priority...
+
+
+NOT PLANNED:
+
+- A built-in editor for TZ.SCH. To say the least, it'd be duplicative effort
+  when TEDIT is available and adequate. A little time spent studying TEDIT's
+  help screen is worthwhile; its mark and move functions are fairly nice
+  though most other functions are a bit Byzantine... Anyway, TEDIT is quite
+  impressive especially given its size. I just wish that its key assignments
+  and basic operation weren't unique in all the world. -- And _I'm_ not going
+  to make another editor with a unique command set for a minor program!
+
+-----------------------------------------------------------------------------
+
+- FTP is surely the easiest way to file share with Windows or Linux systems,
+  and does all that I require. My router works nicely and simply using
+  FTPServer127 and NetDrive 3.0.4.
+  [ BTW, Linux pulls FTP 3-4 times as fast as Windows on same hardware. Just
+    TOO typical. Check out PCLinuxOS 2007 Final, HPFS built into the kernel! ]
+
+-----------------------------------------------------------------------------
+
+- At present recording is on a somewhat cranky 1997 Flytech point-of-sale box
+  having a P166 in 9x12x3" (225x300x75mm) into which I managed to wedge 3
+  cards in 2.5 slots (one shared ISA or PCI slot), by removing card bracket
+  and running wires for the network jack. Other cards are ISA ESS 1869 (having
+  speaker level output), and Adaptec 2906 with 25-pin SCSI connector (thought
+  would be handy for more storage). The box has no CD drive, so was originally
+  loaded from Adaptec APA-348 parallel port SCSI adapter. Boot drive is a 1G
+  Compact Flash; the thrash drive for daily recordings is a 2G WD that's spun
+  down except when copying or transferring files. System power is on a digital
+  timer, simply crashed when power goes off, but seems to not bother it. I use
+  FireFTP extension for Firefox to retrieve recordings for listening on main
+  OS/2 box, via FTPServer127. To cap off this oddity, have a matching Flytech
+  9" (225mm) black-and-white SVGA monitor, the only part of the system that I
+  bought new, and a Northgate Omnikey Ultra on which I've personally typed
+  upwards of 25 million keystrokes.
+
+  WHY? When I have a dozen NICE boxes that'd be less trouble? ... Well, the
+  small box looks cute, and when an early test showed that with OS/2 the P166
+  could handle 10 download streams at 16K bytes/S each AND play MP3s while
+  remaining fairly responsive, in contrast to XP on a 2800+, I just resolved
+  to rescue the odd little thing from the dumpster, and make it a project to
+  show that good code doesn't need fast hardware.
+
+  However, with two SCSI-1 boxes for CD and external HD, it's not exactly
+  convenient, nor smaller than a conventional box. And, since Compact Flash
+  seems fairly reliable, and the 850M free is adequate storage, I may remove
+  the internal 2G drive, and the SCSI board as well, simply not necessary.
+
+- Dec 2008: I've moved on from the cranky Flytech to several cranky portables
+  of the same vintage. Can't imagine that anyone ever uses those keyboards
+  and trackpads or trackpoints, but they're bearable infrequently. (And yet 
+  someone paid up to $5000 EACH! For such as a Sony PCG-707, the first VAIO
+  portable, though it does have a NICE 1024x768 screen.) Have yet to master 
+  APM (if it can be), so power management is turned off. It IS handy to have a
+  portable recording so that the real computer can be used to grab the files 
+  and skim through without enduring commercials or boring sections. 

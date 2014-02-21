@@ -1,0 +1,128 @@
+CD Player backup/restore
+========================
+
+
+DISCLAIMER:
+===========
+This program is free, without warranty of any kind.
+The use of this program implies that you use it at 
+your own risk and that you agree that the author
+has no warranty obligations and shall not be liable 
+for any damages arising out of your use of this 
+program, even if they have been advised of the
+possibility of such damages.
+
+
+Introduction:
+=============
+With CDP you can list, backup and restore information from the CDP.INI
+file, where The Warp4 CD-player stores CD and Track titles.
+The backup file is a readable and editable ASCII file.
+
+It is also possible to add songtitles to a backup file with an ASCII 
+editor like e(pm) or the internal editor from File Commander and restore 
+this to the CDP.INI file.
+
+
+Installation:
+=============
+CDP consists only of one OS/2 Rexx program file, CDP.CMD.
+Copy it in a directory where you want to use it or in a 
+directory in your search path.
+The CDP.INI file is searched first in the current directory
+(So you can work on a copy) and next in the the directory pointed
+to by the 'MMBASE' setting in the CONFIG.SYS.
+This is usually the \MMOS2 directory on your boot drive.
+CDP will show where it found this file.
+Other input and output files are expected and 
+created in the current directory.
+
+
+Options:
+========
+These options are available:
+
+- List all or selected CD titles
+- List all or selected CD titles with track titles
+- Save CD data in readable ASCII backup file for all or selected CD's.
+- Restore saved data back to CDP.INI file.
+
+The scope of listings can be narrowed by including 
+only CD titles containing a search string.
+
+The most important feature, for which I wrote this thing in the first place,
+is to backup CD titles in the editable ASCII form, edit the file and paste 
+track titles from another source (like the internet) into it and restore
+the result back to the Warp4 CD player ini-file.
+
+In a similar way you can exchange CD data with friends or from pc to pc.
+
+******************************************************************************
+** PLEASE NOTE: When restoring CD data, existing data for that CD is lost.  **
+** Other data than Title and Track info is not saved and thus not restored. **
+** Known other data is the last play position and Programmed Tracks         **
+******************************************************************************
+
+Usage:
+======
+
+Note: You cannot use CDP while the Warp4 CD-Player is running.
+
+CDP             Lists all Titles
+CDP string      Lists Titles containing 'string'
+CDP -l          Lists all Titles and tracks
+CDP -l string   Lists Titles containing 'string' and tracks
+CDP -x          Saves CD data for all titles to file CDP.OUT
+CDP -x string   Saves CD data for titles containing 'string' to file CDP.OUT
+CDP -a          Restores CD data from file CDP.INP
+
+Search strings are not case sensitive.
+
+As the Warp4 CD Player does not record artist names, you have no way
+of selecting on artist. To overcome this, start the CD Title with an
+abbreviation followed with an ":" for that artist.
+For example, Zappa: Does Humor Belong In Music?
+Now you can list all cd's for that particular artist with: CDP zappa:
+
+The file format for files CDP.INP and CDP.OUT is identical:
+--------------------------
+[cd code] CD Title
+ 1 Track title
+ 2 Track title
+
+[cd code] Next CD Title
+ 1 Track title
+ 2 Track title
+--------------------------
+An empty line or end-of-file marks the end of data for the CD.
+
+
+With the -a (Restore) option you have to confirm the update:
+
+Ready to write to E:\rex\cdp\cdp.ini
+Continue?  Yes, Skip, All, Quit
+
+Choose:
+ Y to update or add this CD
+ S to skip this CD
+ A to update or add this CD and all other defined cd's in the input file
+ Q to quit
+
+
+History:
+========
+In about two years working with Warp3, I typed in many CD Titles for the
+accompanying CD-Player to realize all was gone after installing Warp4.
+So I didn't bother to type in anything again... Till I recently found out
+that the Warp4 CD Player also could maintain and display Track Titles.
+If I could find a way to easily enter all those track titles I already
+own in various files. Time to play with the Rexx 'sysini' function.
+After one evening figuring out and another evening to get things right
+CDP.CMD was the result. It fits my needs, may be it fits others needs to.
+So here it is!
+
+
+==================================================
+Written by: Dirk Stuijfzand , dirksw@fcs.nl
+==================================================
+

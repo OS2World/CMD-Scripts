@@ -1,0 +1,170 @@
+(v2.60) Grin's Simple MIDi Jukeboxx
+Very small CPU overhead! REXX source!
+Requires OS/2 and MMOS/2
+
+
+
+                     Grin's Simple MIDi Jukeboxx
+                     ============================
+
+                     Version 2.60
+                     1997 February
+
+
+           This program is freeware for non-commercial environments
+
+
+
+        Hello music lovers!
+
+
+This is my attempt to stop my anger because IBM's MIDi player is
+unable to use playlists. This simple player plays all MIDi files
+in the actual directory (or anywhere if you enter it on command
+line or in a playlist file), then stops. 
+
+
+         About the REXX language
+         ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I wrote it in REXX because it's completely fits the purpose. So you
+got the sources, too. ;-) Feel free to read the code, or modify if
+you like, but please do not distribute modified versions but send
+them to me, I will distribute them if they worth it. ;-)
+
+The program uses very low CPU since it "sleeps" most of the time.
+Don't worry when you press a key and nothing happens: the program
+checks the input only in every seconds, and so refreshes the screen.
+(On my machine it uses as low as 7% or the CPU.)
+
+The program usage is in the REXX source, just check it. But you
+can simply start the program in a directory where some *.MID file
+resides.
+
+
+         The secret key
+         ~~~~~~~~~~~~~~~~
+Well, not REALLY secret. It have no button, that's all. It's the DELETE
+function. If you enter /D switch (it's called "prevent the careless user
+to run in circles and scream switch") then you can press the D key anytime
+a file plays, and after the extra-safety-check the file's gone for ever
+(or at least until the next CHKDSK/F:3). 
+
+Just listen-and-kill. :-)
+
+         
+         Some volume tricks
+         ~~~~~~~~~~~~~~~~~~~~
+
+If you're in a night family environment :) you should check the source
+for the starting volume and lower it if you're that lazy to make your
+500+ watts stereo more quiet... :-) You can set it anytime on command
+line, though.
+
+I especially wonder whether there is any soundcard able to set the
+volume in stereo. Mine (Gravis Ultrasound) seem to have a driver
+unable to do that. Others reported that theirs are also unable to
+do it. I try to detect the sound card's ability and use stereo only
+when it's supported, but... I don't _know_ that it's correct as I
+wrote it. :)
+
+
+         Usage
+         ~~~~~~~
+
+    MidPlay [<file pattern>] [@<playlist name>] [<file pattern>] [switches]
+  
+  Switches:  /?        FIRE! No? Then: HELP! (You suspected that, didn't you?)
+             /V<vol>   Set global volume (0-100)
+             /R<vol>   Set right volume (0-100, stereo capable only)
+             /L<vol>   Set left  volume (0-100, stereo capable only)
+             /S        Shuffle play - play songs in random order
+             /P        Show full path+filename of musics
+             /D        Enable (D)elete key. You can wipe off the
+                       worst musical terrors your harddisk with smile. :-)
+             /F<fname> Save internally built playlist into a file. It will
+                       contain all command-line entered file, automatically
+                       found names, etc. Good one. 
+
+You can use file patterns like names in actual directory ("YELLOW.MID"),
+full path ("C:\OOKIE\AmericanPie.Mid"), wildcards ("C:\ATS\*.mid").
+
+Playlists are simple text files containing one filename in a line,
+unlimited lines. Names could contain full path or just the name, but
+not wildcards. (You shouldn't be THAT lazy! :-))
+
+Names contain spaces ought to be surrounded by quotes. If you omit them,
+well, just try to imagine. :-) [Playlist should not care since only command
+line processing chokes on the spaces.]
+
+The order of patterns, playlists and switches are irrelevant. 
+                                                      -- Midplay of Borg
+ 
+  Examples:
+    MidPlay
+      Plays all *.MID files in the current directory
+ 
+    MidPlay /S E:\TMP\MIDI\A*.MID M:\IDI\"C64 Evergreens"\*
+      Plays the given files of the given directory, shuffled
+ 
+    MidPlay TheSatan.Mid @hellish.list /v80 /p
+      Plays the Satan's song then all files in the playlist, volume 80%,
+      and show full path and filenames
+
+
+         What's new, history, etc
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~
+Why do you ask me? Check the source! :-) 
+(You got all my sources, remember? :))
+
+
+         Standard worm...er... lawyer stuff
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The program is free if you run it in an environment where no commerce
+has gone before! :-) But since I'm a poor Hungarian guy I always
+accept donations in money, food, drink, computer parts or girls. ;-)
+You can contact me at the addresses below. (I can accept cash or 
+bankchecks only.) [Girls should be pre-validated by photograph ;->]
+
+If you're a commercial user please support me (and the development
+of several OS/2 programs) and send an amount as low as USD 10 to my
+address as a registration fee. (You can send more of course, even you
+won't, but people always hope wonders. :-))
+
+Of course you don't want to tell me that you want any guarantees from
+a FREE program, do you? But the program usually plays what it should,
+and that's more than the Warp's current players do. :) If it deletes
+your CD drive, eats your lunch or take your sister to a movie - bad 
+luck. :-> You have my full sympathy.
+
+My support is virtual. That means I support any requests unless 
+I'm swapped out because lack of time. :-)
+
+
+         Your support!
+         ~~~~~~~~~~~~~~~
+
+I'd like to hear about you! Send me a mail about how did you like
+this piece of code! 
+
+Hey!! ANYONE USES THIS DAMN PROGRAM?? :-)) Use your electronic mail features
+and sound your opinion, pal!
+
+
+Happy Jukeboxxing!
+
+
+
+         Author on the bridge!
+         ~~~~~~~~~~~~~~~~~~~~~~~
+
+      Use any of these addresses to write your ideas, opinions, etcs.
+
+
+Peter Gervai               2:370/15@fidonet           Sysop of LifeForce BBS
+Debrecen, 4026            81:436/3@OS2net
+Zsak str. 7.              grin@hajdu.hungary.net
+HUNGARY
+
+                    (Member of TeamOS/2 Hungary)   

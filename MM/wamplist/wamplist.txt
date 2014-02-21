@@ -1,0 +1,14 @@
+Archive Name: wamplist.zip
+Archive Description: Creates .MP3 playlists for warpamp player
+Operating System/Version: OS/2 Warp
+Program Source: Classic Rexx
+Replaces: N/A
+
+Your name: Stephen Hobbie
+Your email address: shobbie@ibm.net
+
+Proposed directory for placement: /pub/os2/apps/mmedia/sound/players
+
+
+Reads a list of all *.mp* files in a directory and creates a
+playlist that warpamp.exe can use.

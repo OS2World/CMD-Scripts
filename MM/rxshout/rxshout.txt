@@ -1,0 +1,24 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: rxshout.zip
+       Short Description: RxShout source client for Icecast server
+        Long Description: RxShout is a source client for a streaming server, clone of original shout utility. VBR/Reencoding (with lame)/Playlist history (XML)
+
+      Proposed directory
+           for placement: /pub/os2/apps/mmedia/sound
+
+               Your name: Andrey Vasilkin
+           Email address: digi@os2.snc.ru
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: ftp://digi.os2.snc.ru/pub/dev/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2
+ Additional requirements: 
+
+                Replaces:

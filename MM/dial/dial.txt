@@ -1,0 +1,65 @@
+Dial.cmd is a free program written by Helge Hafting.  
+Please include this text when distributing it.
+
+Dial is a phone dialling program for those that don't have
+a modem capable of doing it.  It requires os/2, rexx, and 
+mmpm with the rexx interface.  The program plays dialling 
+tones through whatever sound equipment the computer has.  
+Turn the volume up sufficiently and hold the phone near 
+the speaker.
+
+Using the program is simple, just type dial and then the
+phone number.  Alphabetic characters are converted to numbers,
+using the american conversion scheme where ABC=2, DEF=3, etc.
+Non-alphanumeric characters are ignored, this allows number 
+formats like this: (345) 56-12 679.
+The characters "*" and "#" are also transmitted, making it possible 
+to use automatic phone services.
+The comma "," is used as a pause character, it provides a pause
+of one second before the next number is dialled.  Enter several
+commas if you want a longer pause.
+
+The program support some parameters.  Parameters has to be entered
+before the phone number.  Start the parameters with a slash "/"
+and one or more parameter characters.  Supported parameters:
+D -> Don't display the characters as they are dialled.
+# -> Convert characters (ABC->2...) before displaying them.
+S -> Don't produce dialling tones.  Use it with the "#" parameter
+     in order to convert numbers.
+F -> force dialling even if the mmpm API seems to be missing.  
+     mmpm is considered detected when the MMBASE environment 
+     variable is set.  
+
+Possible uses for the program:
+
+1. Phoning someone.  Using the buttons on the phone is just as easy as 
+   using the keyboard, but the keyboard has certain advantages:
+    a. You can easily dial the same number(s) over and over again.
+       Some phones has this capability, but not all.
+    b. You can see the number, so you can edit it and be sure it is correct.
+       This is especially useful for long numbers.
+
+2. Using tone dialling when you have an old phone that use pulse dialling.
+   Useful if you need the "*" and "#" functionality.
+
+3. Using this program as the 'automatic dialling part' of a phone directory
+   program.
+
+4. Composing obscure melodies :-)
+
+Revision history:
+
+Ver 1.1:
+Added the parameters S, D, #, and F
+Added support for waiting in the middle of a phone number
+Corrected a bug translation from characters to numbers. Thanks
+to Timothy F. Sipples for providing wishes and a bug report.
+
+dial now works even if it is started from another directory, provided
+that the program isn't renamed.  The sound files still has to be in 
+the same directory as dial.cmd
+
+Ver 1.0:
+Released the program capable of playing dialling tones.
+
+

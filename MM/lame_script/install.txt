@@ -1,0 +1,38 @@
+Lame Script
+===========
+
+Description: 
+------------
+
+This REXX script encodes multiple wave files to a 
+destination directoy using the Lame encoder.
+Also the elapsed time to encode all files is displayed
+at the end of the process.
+             
+Installation:
+-------------
+
+Copy the file start160.cmd to the directory where Lame
+is installed.
+
+Usage : 
+-------
+
+start160.cmd 'source directory' 'destination directory'
+
+When there are no parameters start160.cmd will default to :
+
+DefaultSourceDir 		= 'H:\WAVE'
+DefaultDestinationDir 	= 'M:\'
+
+These directories can be changed by editing start160.cmd.
+Also the options passed to Lame can be edited.
+
+Default 160 kbits/sec and -h option for better quality.
+
+Tom
+
+tom@steensoft.demon.nl 
+
+       
+

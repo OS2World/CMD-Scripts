@@ -1,0 +1,21 @@
+[playlist]
+numberofentries=6
+File1=http://87.118.64.204:8024
+Title1=(#1 - 15/100) Discofox-radio
+Length1=-1
+File2=http://87.118.64.209:8024
+Title2=(#2 - 23/150) Discofox-radio
+Length2=-1
+File3=http://87.118.64.201:8050
+Title3=(#3 - 17/100) Discofox-Radio
+Length3=-1
+File4=http://87.118.64.197:3100
+Title4=(#4 - 120/300) Discofox-radio
+Length4=-1
+File5=http://87.118.64.213:8024
+Title5=(#5 - 114/150) Discofox-radio
+Length5=-1
+File6=http://87.118.64.211:8024
+Title6=(#6 - 96/100) Discofox-radio
+Length6=-1
+Version=2

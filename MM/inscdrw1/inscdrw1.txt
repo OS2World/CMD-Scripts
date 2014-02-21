@@ -1,0 +1,12 @@
+/--------------------------------------------------------------------/
+If a previous cdrwsel was install, You can keep the cdrwsel.ini file 
+but i suggest you to install new cdrwsel into a different directory.
+* Delete the current icon and if you are using a trash cam, don't 
+  forget to destroy the cdrwsel program icon or new creation will
+  fail. 
+  original inscdrw1.cmd works (same as under previous cdrwsel release)
+  but this update one should prevent from a possible faulse error 
+  message
+
+Regards,
+Remy     

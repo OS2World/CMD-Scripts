@@ -1,0 +1,8 @@
+(v1.00) MCIP - V1.00 - FREEWARE
+This package provides an external batch 
+processor for MCI command files.
+With this you can write batch files 
+containing commands for to control 
+multimedia devices via the Media Control
+Interface (MCI).
+Author: C.Langanke@TeamOS2.de

@@ -1,0 +1,7 @@
+(v1.00) RMMICO - FREEWARE
+This rexx script restores the diverse
+icons, which bring up MMPM.EXE for digital
+audio, digital video, compact dic play and
+midi play. These icons may be lost during
+the installation of some sound drivers.
+Author: C.Langanke@TeamOS2.de
