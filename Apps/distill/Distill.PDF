@@ -1,0 +1,829 @@
+%PDF-1.1
+%«Ïè¢
+4 0 obj
+<< /Length 5 0 R >>
+stream
+q
+endstream
+endobj
+5 0 obj
+2
+endobj
+6 0 obj
+<< /Type /Font /Name /R6 /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Length 8 0 R >>
+stream
+BT
+/R6 23.9985 Tf
+1 0 0 1 194.625 700.125 Tm
+(Poor man\251s Distiller) Tj
+ET
+endstream
+endobj
+8 0 obj
+77
+endobj
+9 0 obj
+<< /Type /Font /Name /R9 /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+10 0 obj
+<< /Length 11 0 R >>
+stream
+BT
+/R9 11.9992 Tf
+1 0 0 1 72.825 670.625 Tm
+(Life would be perfect if Adobe would only release a native OS/2 version of the Adobe Acrobat ) Tj
+1 0 0 1 72.825 657.125 Tm
+(software.  I don\251t mean the reader; I mean the software to actually create Portable Document ) Tj
+1 0 0 1 72.825 643.325 Tm
+(Format \(PDF\) files.  However, since they haven\251t, I\251ve come up with a workable solution ) Tj
+ET
+endstream
+endobj
+11 0 obj
+402
+endobj
+12 0 obj
+<< /Type /Font /Name /R12 /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+13 0 obj
+<< /Length 14 0 R >>
+stream
+BT
+/R12 11.9992 Tf
+1 0 0.333333 1 501.025 643.325 Tm
+(\(for ) Tj
+1 0 0.333333 1 72.825 629.125 Tm
+(me\)) Tj
+/R9 11.9992 Tf
+1 0 0 1 90.825 629.125 Tm
+( and I figured I\251d share it with everyone else who saw the need.) Tj
+1 0 0 1 72.825 601.825 Tm
+(There are several software packages you will need to download in order to get this to work.  All ) Tj
+1 0 0 1 72.825 588.025 Tm
+(of them are ) Tj
+/R12 11.9992 Tf
+1 0 0.333333 1 130.525 588.025 Tm
+(\(at the writing\)) Tj
+/R9 11.9992 Tf
+1 0 0 1 203.125 588.025 Tm
+( freeware so the only thing this will cost you is some download time.) Tj
+1 0 0 1 72.825 559.925 Tm
+(The most important piece of this system is ) Tj
+ET
+endstream
+endobj
+14 0 obj
+664
+endobj
+15 0 obj
+<< /Type /Font /Name /R15 /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+16 0 obj
+<< /Length 17 0 R >>
+stream
+BT
+/R15 11.9992 Tf
+1 0 0 1 279.525 559.925 Tm
+(Aladdin Ghostscript.) Tj
+/R9 11.9992 Tf
+1 0 0 1 386.825 559.925 Tm
+(  The current version is 5.01, ) Tj
+1 0 0 1 72.825 546.125 Tm
+(and can be obtained from their web page at ) Tj
+ET
+endstream
+endobj
+17 0 obj
+229
+endobj
+18 0 obj
+<< /Type /Font /Name /R18 /Subtype /Type1 /BaseFont /Courier >>
+endobj
+19 0 obj
+<< /Length 20 0 R >>
+stream
+BT
+/R18 11.9992 Tf
+1 0 0 1 283.125 546.125 Tm
+(http://www.cs.wisc.edu/~ghost/ ) Tj
+/R9 11.9992 Tf
+1 0 0 1 506.225 546.125 Tm
+( Read ) Tj
+1 0 0 1 72.825 532.625 Tm
+(the instructions carefully to install.  Rename the gsos2.exe program to simply gs.exe.) Tj
+1 0 0 1 72.825 504.925 Tm
+(The next package you will need are the ) Tj
+/R15 11.9992 Tf
+1 0 0 1 264.125 504.925 Tm
+(EMX Run time libraries.) Tj
+/R9 11.9992 Tf
+1 0 0 1 392.125 504.925 Tm
+(  You should be able to find ) Tj
+1 0 0 1 72.825 491.125 Tm
+(these at ) Tj
+/R18 11.9992 Tf
+1 0 0 1 112.125 491.125 Tm
+(http://hobbes.nmsu.edu) Tj
+/R9 11.9992 Tf
+1 0 0 1 270.525 491.125 Tm
+( in the ) Tj
+/R18 11.9992 Tf
+1 0 0 1 303.525 491.125 Tm
+(os2/unix) Tj
+/R9 11.9992 Tf
+1 0 0 1 361.125 491.125 Tm
+( libraries, usually with the name ) Tj
+/R18 11.9992 Tf
+1 0 0 1 72.825 477.625 Tm
+(emxrt.zip.) Tj
+/R9 11.9992 Tf
+1 0 0 1 144.825 477.625 Tm
+(  Again, make sure you read the instructions carefully and install the package.  ) Tj
+1 0 0 1 72.825 464.225 Tm
+(The EMX run time libraries are used by quite a few shareware and freeware programs.) Tj
+1 0 0 1 72.825 436.525 Tm
+(The next thing you will need is ) Tj
+/R15 11.9992 Tf
+1 0 0 1 225.225 436.525 Tm
+(IBM\251s Visual REXX extensions.) Tj
+/R9 11.9992 Tf
+1 0 0 1 388.525 436.525 Tm
+(  This is a freeware package ) Tj
+1 0 0 1 72.825 422.325 Tm
+(distributed through IBM\251s EWS) Tj
+/R12 11.9992 Tf
+1 0 0.333333 1 225.325 422.325 Tm
+( \(Employee Written Software\)) Tj
+/R9 11.9992 Tf
+1 0 0 1 368.325 422.325 Tm
+( program.  The package name is ) Tj
+1 0 0 1 72.825 408.525 Tm
+(usually ) Tj
+/R18 11.9992 Tf
+1 0 0 1 110.525 408.525 Tm
+(VREXX2.ZIP) Tj
+/R9 11.9992 Tf
+1 0 0 1 182.525 408.525 Tm
+( and should be available at the hobbes site mentioned above, or any site ) Tj
+1 0 0 1 72.825 395.025 Tm
+(specializing in OS/2 software.  Follow the instructions included in the package to install the ) Tj
+1 0 0 1 72.825 381.625 Tm
+(software.) Tj
+1 0 0 1 72.825 353.825 Tm
+(Next, you will need ) Tj
+/R15 11.9992 Tf
+1 0 0 1 170.525 353.825 Tm
+(Kai Uwe Rommel\251s PRINTMON program.) Tj
+/R9 11.9992 Tf
+1 0 0 1 390.125 353.825 Tm
+(  This was also available from ) Tj
+1 0 0 1 72.825 340.025 Tm
+(the hobbes site, and is also freeware.  The installation instructions are sparse.  Just copy the ) Tj
+1 0 0 1 72.825 326.625 Tm
+(PRINTMON.EXE program into a directory on your path.) Tj
+1 0 0 1 72.825 298.825 Tm
+(Next, you\251ll need the REXX program in this package, ) Tj
+/R15 11.9992 Tf
+1 0 0 1 332.625 298.825 Tm
+(Distill.CMD.) Tj
+/R9 11.9992 Tf
+1 0 0 1 397.925 298.825 Tm
+( Copy it into a directory on ) Tj
+1 0 0 1 72.825 285.025 Tm
+(your path as well.  You will need to modify the program slightly before using.  Open it in the ) Tj
+1 0 0 1 72.825 271.625 Tm
+(text editor of your choice and change the ) Tj
+/R18 11.9992 Tf
+1 0 0 1 272.125 271.625 Tm
+("gspath") Tj
+/R9 11.9992 Tf
+1 0 0 1 329.725 271.625 Tm
+( variable to reflect the drive and directory ) Tj
+1 0 0 1 72.825 258.125 Tm
+(into which you installed Ghostscript, and then modify either the ) Tj
+/R18 11.9992 Tf
+1 0 0 1 382.425 258.125 Tm
+("acdir" ) Tj
+/R9 11.9992 Tf
+1 0 0 1 440.025 258.125 Tm
+(or ) Tj
+/R18 11.9992 Tf
+1 0 0 1 453.025 258.125 Tm
+("gcdir") Tj
+/R9 11.9992 Tf
+1 0 0 1 503.425 258.125 Tm
+( ) Tj
+1 0 0 1 72.825 243.825 Tm
+(variables depending on whether you want to use, ) Tj
+/R15 11.9992 Tf
+1 0 0 1 310.425 243.825 Tm
+(GSView) Tj
+/R9 11.9992 Tf
+1 0 0 1 352.425 243.825 Tm
+( or ) Tj
+/R15 11.9992 Tf
+1 0 0 1 368.425 243.825 Tm
+(Acrobat) Tj
+/R9 11.9992 Tf
+1 0 0 1 410.425 243.825 Tm
+(, to view your PDF files.) Tj
+1 0 0 1 72.825 216.625 Tm
+(Finally, you will have to create a printer object on your desktop.  Use the latest generic ) Tj
+1 0 0 1 72.825 202.725 Tm
+(Postscript printer drivers ) Tj
+/R12 11.9992 Tf
+1 0 0.333333 1 194.525 202.725 Tm
+(\(as of this writing they are 30.514\)) Tj
+/R9 11.9992 Tf
+1 0 0 1 361.425 202.725 Tm
+(.  If you are using Warp3 I\251d suggest ) Tj
+1 0 0 1 72.825 188.925 Tm
+(upgrading to the Fixpack 26 or higher level.  You should be fine with the base level of Warp4.  ) Tj
+1 0 0 1 72.825 175.525 Tm
+(You can always get the latest printer drivers from the Master OS/2 Update Site, ) Tj
+/R18 11.9992 Tf
+1 0 0 1 72.825 163.225 Tm
+(http://www.cincyteamos2.org/masterupdate.html) Tj
+/R9 11.9992 Tf
+1 0 0 1 72.825 135.625 Tm
+(There are two ways to use Distill.CMD.  You can create a desktop object for it, then drag & ) Tj
+1 0 0 1 72.825 122.125 Tm
+(drop raw postscript files onto it.  To create a raw postscript file, have the printer object print to a ) Tj
+1 0 0 1 72.825 108.725 Tm
+(file instead of to a port.  When you print to this object, you will be prompted for a file name.  ) Tj
+1 0 0 1 72.825 95.225 Tm
+(Once the file is created, you can drag and drop that file onto the Distill object and you will be ) Tj
+1 0 0 1 72.825 81.825 Tm
+(prompted for another file name; this one will be the PDF file.) Tj
+ET
+endstream
+endobj
+20 0 obj
+4882
+endobj
+21 0 obj
+<< /Type /Font /Name /R21 /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+22 0 obj
+<< /Length 23 0 R >>
+stream
+BT
+/R21 10.0494 Tf
+1 0 0 1 304.025 29.125 Tm
+(1) Tj
+ET
+Q
+endstream
+endobj
+23 0 obj
+57
+endobj
+3 0 obj
+<<
+/Type /Page
+/MediaBox [0 0 612 792]
+/Parent 2 0 R
+/Resources << /ProcSet [/PDF /Text]
+/Font <<
+/R21 21 0 R
+/R18 18 0 R
+/R15 15 0 R
+/R12 12 0 R
+/R9 9 0 R
+/R6 6 0 R
+>>
+>>
+/Contents [
+4 0 R
+7 0 R
+10 0 R
+13 0 R
+16 0 R
+19 0 R
+22 0 R
+]
+>>
+endobj
+25 0 obj
+<< /Length 26 0 R >>
+stream
+q
+Q
+q
+W
+15.025 11.025 m
+596.725 11.025 l
+596.725 780.925 l
+15.025 780.925 l
+h
+n
+endstream
+endobj
+26 0 obj
+80
+endobj
+27 0 obj
+<< /Type /Font /Name /R27 /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+28 0 obj
+<< /Length 29 0 R >>
+stream
+BT
+/R27 11.9992 Tf
+1 0 0 1 72.825 698.325 Tm
+(I don\251t know about you.  To me, the above sounds a little too convoluted.  Instead, I\251d leave the ) Tj
+1 0 0 1 72.825 684.925 Tm
+(printer object directed to a port.  If you have a ) Tj
+ET
+endstream
+endobj
+29 0 obj
+240
+endobj
+30 0 obj
+<< /Type /Font /Name /R30 /Subtype /Type1 /BaseFont /Courier >>
+endobj
+31 0 obj
+<< /Length 32 0 R >>
+stream
+BT
+/R30 11.9992 Tf
+1 0 0 1 296.825 684.925 Tm
+(STARTUP.CMD) Tj
+/R27 11.9992 Tf
+1 0 0 1 375.925 684.925 Tm
+( file in the root directory of your ) Tj
+1 0 0 1 72.825 671.425 Tm
+(boot drive, add the following line:) Tj
+/R30 11.9992 Tf
+1 0 0 1 72.825 645.725 Tm
+(START /MIN PRINTMON LPTx "DISTILL STDIN") Tj
+/R27 11.9992 Tf
+1 0 0 1 72.825 618.125 Tm
+(where "x" is the port number to which you\251ve assigned the Postscript printer.) Tj
+1 0 0 1 72.825 591.225 Tm
+(If you do not have a ) Tj
+/R30 11.9992 Tf
+1 0 0 1 172.125 591.225 Tm
+(STARTUP.CMD) Tj
+/R27 11.9992 Tf
+1 0 0 1 251.325 591.225 Tm
+( file, create one now with the above line.  If your ) Tj
+/R30 11.9992 Tf
+1 0 0 1 72.825 577.725 Tm
+(STARTUP.CMD) Tj
+/R27 11.9992 Tf
+1 0 0 1 152.025 577.725 Tm
+( file is written in REXX instead of the standard OS/2 batch language, enclose ) Tj
+1 0 0 1 72.825 564.325 Tm
+(the above line in single quotes.) Tj
+1 0 0 1 72.825 537.425 Tm
+(The next time you print to the Postscript printer object, you will hear your disk churn a bit, and ) Tj
+1 0 0 1 72.825 523.925 Tm
+(then a window will pop up prompting you for the path and filename for the new Acrobat ) Tj
+1 0 0 1 72.825 509.625 Tm
+(document.  Enter the information and press the ) Tj
+ET
+endstream
+endobj
+32 0 obj
+1226
+endobj
+33 0 obj
+<< /Type /Font /Name /R33 /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+34 0 obj
+<< /Length 35 0 R >>
+stream
+BT
+/R33 11.9992 Tf
+1 0 0 1 301.125 509.625 Tm
+("OK") Tj
+/R27 11.9992 Tf
+1 0 0 1 333.125 509.625 Tm
+( button.  Give it a few moments ) Tj
+ET
+endstream
+endobj
+35 0 obj
+140
+endobj
+36 0 obj
+<< /Type /Font /Name /R36 /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+37 0 obj
+<< /Length 38 0 R >>
+stream
+BT
+/R36 11.9992 Tf
+1 0 0.333333 1 488.125 509.625 Tm
+(\(till you ) Tj
+1 0 0.333333 1 72.825 495.425 Tm
+(hear the disk stop churning\) ) Tj
+/R27 11.9992 Tf
+1 0 0 1 211.125 495.425 Tm
+(and you should be prompted to view your new document with ) Tj
+1 0 0 1 72.825 480.825 Tm
+(either the ) Tj
+/R33 11.9992 Tf
+1 0 0 1 120.825 480.825 Tm
+(Adobe Acrobat Reader for OS/2) Tj
+/R27 11.9992 Tf
+1 0 0 1 286.125 480.825 Tm
+( or ) Tj
+/R33 11.9992 Tf
+1 0 0 1 302.125 480.825 Tm
+(Russell Lang\251s GSView) Tj
+/R36 11.9992 Tf
+1 0 0.333333 1 421.425 480.825 Tm
+( \(depending on how ) Tj
+1 0 0.333333 1 72.825 466.625 Tm
+(you\251ve configured Distill.CMD\)) Tj
+/R27 11.9992 Tf
+1 0 0 1 225.025 466.625 Tm
+(!) Tj
+1 0 0 1 72.825 439.425 Tm
+(Please read the ) Tj
+/R30 11.9992 Tf
+1 0 0 1 147.825 439.425 Tm
+(PS2PDF.TXT) Tj
+/R27 11.9992 Tf
+1 0 0 1 219.825 439.425 Tm
+( document that comes with Ghostscript to learn about the ) Tj
+1 0 0 1 72.825 425.925 Tm
+(limitations to the PDF documents created by Ghostscript.  If you have any problems with the ) Tj
+1 0 0 1 72.825 412.525 Tm
+(Distill.CMD REXX program, please feel free to contact me.  If you have problems with any of ) Tj
+1 0 0 1 72.825 399.025 Tm
+(the other programs in this system, please refer to the tech support information from their ) Tj
+1 0 0 1 72.825 385.625 Tm
+(authors.) Tj
+1 0 0 1 72.825 357.825 Tm
+(And, of course, don\251t forget to let Adobe know how much you\251d ) Tj
+/R33 11.9992 Tf
+1 0 0 1 382.425 357.825 Tm
+(REALLY) Tj
+/R27 11.9992 Tf
+1 0 0 1 432.425 357.825 Tm
+( like a native version ) Tj
+1 0 0 1 72.825 344.025 Tm
+(of Acrobat!!) Tj
+1 0 0 1 72.825 317.125 Tm
+(Jaime A. Cruz, Jr.) Tj
+/R30 11.9992 Tf
+1 0 0 1 72.825 304.925 Tm
+(jcruz@ibm.net) Tj
+/R33 11.9992 Tf
+1 0 0 1 72.825 276.425 Tm
+(Revision History:) Tj
+ET
+1 i
+1.13988 w
+2 J
+72.825 275.225 m
+162.525 275.225 l
+S
+BT
+1 0 0 1 72.825 248.325 Tm
+(1997/06/27 -) Tj
+/R27 11.9992 Tf
+1 0 0 1 134.525 248.325 Tm
+( Samuel Audet ) Tj
+/R30 11.9992 Tf
+1 0 0 1 208.825 248.325 Tm
+(<guardia@cam.org>) Tj
+/R27 11.9992 Tf
+1 0 0 1 331.225 248.325 Tm
+( suggested verifying whether or not the ) Tj
+1 0 0 1 72.825 234.525 Tm
+(PDF file was created.  We couldn\251t find a way to tell if the file created was valid or not ) Tj
+1 0 0 1 72.825 221.025 Tm
+(\(GSOS2.EXE apparently does not pass return codes\) so I decided to give the user the option of ) Tj
+1 0 0 1 72.825 207.625 Tm
+(launching the Adobe Acrobat Reader if the PDF file was created so he can see for himself if he ) Tj
+1 0 0 1 72.825 194.125 Tm
+(was successful.) Tj
+/R33 11.9992 Tf
+1 0 0 1 72.825 165.225 Tm
+(1997/06/28 -) Tj
+/R27 11.9992 Tf
+1 0 0 1 134.525 165.225 Tm
+( There must be a bug in the REXX interpreter running under OS/2 Warp 3, because ) Tj
+1 0 0 1 72.825 151.425 Tm
+(I was certainly able to retrieve return codes from GSOS2.EXE under Warp4 running both ) Tj
+1 0 0 1 72.825 137.925 Tm
+(ObjectREXX and Classic REXX.  I\251ve modified the error code to check for the existence of the ) Tj
+1 0 0 1 72.825 124.525 Tm
+(PDF file AND a return code of zero from GSOS2.EXE.  Only then will it prompt the user ) Tj
+1 0 0 1 72.825 111.025 Tm
+(to launch Acrobat.  Also, the new code has the option of launching Russell Lang\251s GSView ) Tj
+1 0 0 1 72.825 97.625 Tm
+(program instead of Acrobat Reader.  Russell has released GSView 2.2 which works with ) Tj
+1 0 0 1 72.825 84.125 Tm
+(Aladdin\251s Ghostscript 5.01 so some users may prefer to use that instead of Acrobat Reader.) Tj
+ET
+endstream
+endobj
+38 0 obj
+3434
+endobj
+39 0 obj
+<< /Type /Font /Name /R39 /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+40 0 obj
+<< /Length 41 0 R >>
+stream
+BT
+/R39 11.9992 Tf
+1 0 0 1 72.825 747.325 Tm
+(Poor Man\251s Distiller) Tj
+ET
+endstream
+endobj
+41 0 obj
+77
+endobj
+42 0 obj
+<< /Type /Font /Name /R42 /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+43 0 obj
+<< /Length 44 0 R >>
+stream
+BT
+/R42 10.0494 Tf
+1 0 0 1 304.025 29.125 Tm
+(2) Tj
+ET
+Q
+endstream
+endobj
+44 0 obj
+57
+endobj
+24 0 obj
+<<
+/Type /Page
+/MediaBox [0 0 612 792]
+/Parent 2 0 R
+/Resources << /ProcSet [/PDF /Text]
+/Font <<
+/R42 42 0 R
+/R39 39 0 R
+/R36 36 0 R
+/R33 33 0 R
+/R30 30 0 R
+/R27 27 0 R
+>>
+>>
+/Contents [
+25 0 R
+28 0 R
+31 0 R
+34 0 R
+37 0 R
+40 0 R
+43 0 R
+]
+>>
+endobj
+46 0 obj
+<< /Length 47 0 R >>
+stream
+q
+Q
+q
+W
+15.025 11.025 m
+596.725 11.025 l
+596.725 780.925 l
+15.025 780.925 l
+h
+n
+endstream
+endobj
+47 0 obj
+80
+endobj
+48 0 obj
+<< /Type /Font /Name /R48 /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+49 0 obj
+<< /Length 50 0 R >>
+stream
+BT
+/R48 11.9992 Tf
+1 0 0 1 72.825 684.025 Tm
+(1997/07/07 -) Tj
+ET
+endstream
+endobj
+50 0 obj
+66
+endobj
+51 0 obj
+<< /Type /Font /Name /R51 /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+52 0 obj
+<< /Length 53 0 R >>
+stream
+BT
+/R51 11.9992 Tf
+1 0 0 1 134.525 684.025 Tm
+( Updated the documentation to correct some errors, and created a PDF version of ) Tj
+1 0 0 1 72.825 669.825 Tm
+(the documentation using the IBMWorks word processor and Distill.CMD) Tj
+ET
+endstream
+endobj
+53 0 obj
+234
+endobj
+54 0 obj
+<< /Type /Font /Name /R54 /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+55 0 obj
+<< /Length 56 0 R >>
+stream
+BT
+/R54 11.9992 Tf
+1 0 0.333333 1 426.425 669.825 Tm
+( \(to prove it works\).) Tj
+/R48 11.9992 Tf
+1 0 0 1 72.825 641.025 Tm
+(1997/07/26 -) Tj
+/R51 11.9992 Tf
+1 0 0 1 134.525 641.025 Tm
+( Updated the Distill.CMD program to end with a return code of \2514\251 if no input ) Tj
+1 0 0 1 72.825 626.325 Tm
+(parameter is given.  Modified the initial dialog box call to use the ) Tj
+/R48 11.9992 Tf
+1 0 0 1 390.125 626.325 Tm
+(VFileBox) Tj
+/R51 11.9992 Tf
+1 0 0 1 438.125 626.325 Tm
+( dialog instead of ) Tj
+1 0 0 1 72.825 611.725 Tm
+(the ) Tj
+/R48 11.9992 Tf
+1 0 0 1 90.525 611.725 Tm
+(VInputBox) Tj
+/R51 11.9992 Tf
+1 0 0 1 147.825 611.725 Tm
+( dialog.  Corrected a problem where the full path was not being added to the ) Tj
+1 0 0 1 72.825 597.925 Tm
+(input file name under all circumstances.) Tj
+ET
+endstream
+endobj
+56 0 obj
+795
+endobj
+57 0 obj
+<< /Type /Font /Name /R57 /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+58 0 obj
+<< /Length 59 0 R >>
+stream
+BT
+/R57 11.9992 Tf
+1 0 0 1 72.825 747.325 Tm
+(Poor Man\251s Distiller) Tj
+ET
+endstream
+endobj
+59 0 obj
+77
+endobj
+60 0 obj
+<< /Type /Font /Name /R60 /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+61 0 obj
+<< /Length 62 0 R >>
+stream
+BT
+/R60 10.0494 Tf
+1 0 0 1 304.025 29.125 Tm
+(3) Tj
+ET
+Q
+endstream
+endobj
+62 0 obj
+57
+endobj
+45 0 obj
+<<
+/Type /Page
+/MediaBox [0 0 612 792]
+/Parent 2 0 R
+/Resources << /ProcSet [/PDF /Text]
+/Font <<
+/R60 60 0 R
+/R57 57 0 R
+/R54 54 0 R
+/R51 51 0 R
+/R48 48 0 R
+>>
+>>
+/Contents [
+46 0 R
+49 0 R
+52 0 R
+55 0 R
+58 0 R
+61 0 R
+]
+>>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [
+3 0 R
+24 0 R
+45 0 R
+] /Count 3
+>>
+endobj
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R
+>>
+endobj
+63 0 obj
+<< /CreationDate (D:19970726105915)
+/Producer (Aladdin Ghostscript 5.01)
+>>
+endobj
+xref
+0 64
+0000000000 65535 f 
+0000016597 00000 n 
+0000016524 00000 n 
+0000007334 00000 n 
+0000000015 00000 n 
+0000000069 00000 n 
+0000000086 00000 n 
+0000000171 00000 n 
+0000000300 00000 n 
+0000000318 00000 n 
+0000000400 00000 n 
+0000000856 00000 n 
+0000000876 00000 n 
+0000000961 00000 n 
+0000001679 00000 n 
+0000001699 00000 n 
+0000001782 00000 n 
+0000002065 00000 n 
+0000002085 00000 n 
+0000002165 00000 n 
+0000007101 00000 n 
+0000007122 00000 n 
+0000007204 00000 n 
+0000007315 00000 n 
+0000013857 00000 n 
+0000007585 00000 n 
+0000007719 00000 n 
+0000007738 00000 n 
+0000007822 00000 n 
+0000008116 00000 n 
+0000008136 00000 n 
+0000008216 00000 n 
+0000009496 00000 n 
+0000009517 00000 n 
+0000009600 00000 n 
+0000009794 00000 n 
+0000009814 00000 n 
+0000009899 00000 n 
+0000013387 00000 n 
+0000013408 00000 n 
+0000013495 00000 n 
+0000013626 00000 n 
+0000013645 00000 n 
+0000013727 00000 n 
+0000013838 00000 n 
+0000016285 00000 n 
+0000014115 00000 n 
+0000014249 00000 n 
+0000014268 00000 n 
+0000014351 00000 n 
+0000014471 00000 n 
+0000014490 00000 n 
+0000014574 00000 n 
+0000014862 00000 n 
+0000014882 00000 n 
+0000014967 00000 n 
+0000015816 00000 n 
+0000015836 00000 n 
+0000015923 00000 n 
+0000016054 00000 n 
+0000016073 00000 n 
+0000016155 00000 n 
+0000016266 00000 n 
+0000016646 00000 n 
+trailer
+<< /Size 64 /Root 1 0 R /Info 63 0 R
+>>
+startxref
+16738
+%%EOF

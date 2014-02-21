@@ -1,0 +1,122 @@
+Poor man's Distiller
+
+Life would be perfect if Adobe would only release a native OS/2 version 
+of the Adobe Acrobat software.  I don't mean the reader; I mean the 
+software to actually create Portable Document Format (PDF) files. 
+However, since they haven't, I've come up with a workable solution (for 
+me) and I figured I'd share it with everyone else who saw the need.
+
+There are several software packages you will need to download in order 
+to get this to work.  All of them are (at the writing) freeware so the 
+only thing this will cost you is some download time.
+
+The most important piece of this system is Aladdin Ghostscript.  The 
+current version is 5.01, and can be obtained from their web page at 
+http://www.cs.wisc.edu/~ghost/  Read the instructions carefully to 
+install.  Rename the gsos2.exe program to simply gs.exe.
+
+The next package you will need are the EMX Run time libraries.  You 
+should be able to find these at http://hobbes.nmsu.edu in the os2/unix 
+libraries, usually with the name emxrt.zip.  Again, make sure you read 
+the instructions carefully and install the package.  The EMX run time 
+libraries are used by quite a few shareware and freeware programs.
+
+The next thing you will need is IBM's Visual REXX extensions.  This is a
+freeware package distributed through IBM's EWS (Employee Written 
+Software) program.  The package name is usually VREXX2.ZIP and should be
+available at the hobbes site mentioned above, or any site specializing 
+in OS/2 software.  Follow the instructions included in the package to 
+install the software.
+
+Next, you will need Kai Uwe Rommel's PRINTMON program.  This was also 
+available from the hobbes site, and is also freeware.  The installation 
+instructions are sparse.  Just copy the PRINTMON.EXE program into a 
+directory on your path.
+
+Next, you'll need the REXX program in this package, Distill.CMD. 
+Copy it into a directory on your path as well.  You will need to modify 
+the program slightly before using.  Open it in the text editor of your 
+choice and change the "gspath" variable to reflect the drive and 
+directory into which you installed Ghostscript, and then modify either 
+the "acdir" or "gcdir" variables depending on whether you want to use,
+GSView or Acrobat, to view your PDF files.
+
+Finally, you will have to create a printer object on your desktop.  Use 
+the latest generic Postscript printer drivers (as of this writing they 
+are 30.514).  If you are using Warp3 I'd suggest upgrading to the 
+Fixpack 26 or higher level.  You should be fine with the base level of 
+Warp4.  You can always get the latest printer drivers from the Master 
+OS/2 Update Site, http://www.cincyteamos2.org/masterupdate.html
+
+There are two ways to use Distill.CMD.  You can create a desktop object 
+for it, then drag & drop raw postscript files onto it.  To create a raw 
+postscript file, have the printer object print to a file instead of to a
+port.  When you print to this object, you will be prompted for a file 
+name.  Once the file is created, you can drag and drop that file onto 
+the Distill object and you will be prompted for another file name; this 
+one will be the PDF file.
+
+I don't know about you.  To me, the above sounds a little too 
+convoluted.  Instead, I'd leave the printer object directed to a port. 
+If you have a STARTUP.CMD file in the root directory of your boot drive,
+add the following line:
+
+START /MIN PRINTMON LPTx "DISTILL STDIN"
+
+where "x" is the port number to which you've assigned the Postscript 
+printer.
+
+If you do not have a STARTUP.CMD file, create one now with the above 
+line.  If your STARTUP.CMD file is written in REXX instead of the 
+standard OS/2 batch language, enclose the above line in single quotes.
+
+The next time you print to the Postscript printer object, you will hear 
+your disk churn a bit, and then a window will pop up prompting you for 
+the path and filename for the new Acrobat document.  Enter the 
+information and press the "OK" button.  Give it a few moments (till you 
+hear the disk stop churning) and you should be able to open your new 
+document with the Adobe Acrobat Reader for OS/2 or Russell Lang's 
+GSView (depending on how you've configured Distill.CMD)!
+
+Please read the PS2PDF.TXT document that comes with Ghostscript to learn
+about the limitations to the PDF documents created by Ghostscript.  If 
+you have any problems with the Distill.CMD REXX program, please feel 
+free to contact me.  If you have problems with any of the other programs
+in this system, please refer to the tech support information from their 
+authors.
+
+And, of course, don't forget to let Adobe know how much you'd REALLY 
+like a native version of Acrobat!!
+
+Jaime A. Cruz, Jr.
+jcruz@ibm.net
+
+Revision History:
+-----------------
+
+1997/06/27 - Samuel Audet <guardia@cam.org> suggested verifying whether 
+or not the PDF file was created.  We couldn't find a way to tell if the 
+file created was valid or not (GSOS2.EXE apparently does not pass return
+codes) so I decided to give the user the option of launching the Adobe 
+Acrobat Reader if the PDF file was created so he can see for himself if 
+he was successful.
+
+1997/06/28 - There must be a bug in the REXX interpreter running under 
+OS/2 Warp 3, because I was certainly able to retrieve return codes from 
+GSOS2.EXE under Warp4 running both ObjectREXX and Classic REXX.  I've 
+modified the error code to check for the existence of the PDF file AND a
+return code of zero from GSOS2.EXE.  Only then will it prompt the user 
+to launch Acrobat.  Also, the new code has the option of launching 
+Russell Lang's GSView program instead of Acrobat Reader.  Russell has 
+released GSView 2.2 which works with Aladdin's Ghostscript 5.01 so some 
+users may prefer to use that instead of Acrobat Reader.
+
+1997/07/07 - Updated the documentation to correct some errors, and 
+created a PDF version of the documentation using the IBMWorks word 
+processor and Distill.CMD (to prove it works).
+
+1997/07/26 - Updated the Distill.CMD program to end with a return code 
+of '4' if no input parameter is given.  Modified the initial dialog box
+call to use the VFileBox dialog instead of the VInputBox dialog. 
+Corrected a problem where the full path was not being added to the input
+file name under all circumstances.
