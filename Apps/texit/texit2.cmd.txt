@@ -1,0 +1,14 @@
+/* texit2.cmd -- Copyright (c) 1992 by Eberhard Mattes            */
+
+/* Remove path name and run texit.cmd */
+
+/* This procedure is intended to be run from a menu.              */
+/* There must be only one command line argument -- the file name. */
+
+parse arg '"'arg1'"' rest
+if arg1 = '' then
+  parse arg arg1 rest
+if rest = '' then
+  "call texit.cmd" filespec( 'name', arg1)
+else
+  say 'Only one command line argument supported by texit2.cmd'

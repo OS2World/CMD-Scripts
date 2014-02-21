@@ -1,0 +1,71 @@
+/* texit.cmd -- Copyright (c) 1992 by Eberhard Mattes          */
+
+/* Choose TeX format according to first line of TeX input file */
+/* Call editor if TeX has been left by answering `E'.          */
+
+call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+call SysLoadFuncs
+ver = SysOS2Ver()
+if ver >= 2 then
+  texprog = 'tex386.exe'
+else
+  texprog = 'texp.exe'
+emtexdrv = value( 'EMTEXDRV',, 'OS2ENVIRONMENT')
+if (length( emtexdrv) = 1) & (((emtexdrv >= 'a') & (emtexdrv <= 'z')) |,
+                              ((emtexdrv >= 'A') & (emtexdrv <= 'Z'))) then
+  emtexdrv = emtexdrv':'
+else
+  emtexdrv = ''
+texpath = SysSearchPath( 'PATH', texprog)
+if texpath = '' then texpath = 'texp.exe'
+format = ''; options = ''
+parse arg arg1 rest
+do while (length( arg1) >= 2) & ((substr( arg1, 1, 1) = '-') |,
+                                 (substr( arg1, 1, 1) = '/'))
+  options = options arg1
+  parse var rest arg1 rest
+end
+if (length( arg1) >= 2) & ((substr( arg1, 1, 1) = '&') |,
+                           (substr( arg1, 1, 2) = '^&')) then
+do
+  format = arg1
+  parse var rest arg1 rest
+end
+if (format = '') & (length( arg1) >= 1) & \ (substr( arg1, 1, 1) = '\') then
+do
+  input = arg1
+  fname = filespec( 'name', input)
+  parse var fname base '.' ext
+  if ext = '' then
+    input = input'.tex'
+  fname = stream( input, 'C', 'QUERY EXISTS')
+  if fname = '' then
+  do
+    fname = SysSearchPath( 'TEXINPUT', input)
+    if fname = '' then
+      fname = stream( emtexdrv'\emtex\texinput\'input, 'C', 'QUERY EXISTS')
+  end
+  if \ (fname = '') then
+  do
+    line = linein( fname)
+    call stream fname, 'C', 'CLOSE'
+    /* say 'First line =' line */
+    parse var line '%' 'Format:' format .
+    if (format = '') then
+      parse var line '%' 'format:' format .
+    if (format = '') then
+      parse var line '%' 'Format' format .
+    if (format = '') then
+      parse var line '%' 'format' format .
+    if \ (format = '') then format = '^&'format
+  end
+end
+tmpfile = SysTempFileName('texit???.cmd')
+'@'texpath '/a='tmpfile options format arg1 rest
+if \ (stream( tmpfile, 'C', 'QUERY EXISTS') = '') then
+do
+  '@call' tmpfile
+  '@del' tmpfile
+end
+
+/* End of texit.cmd */
