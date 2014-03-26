@@ -1,0 +1,121 @@
+.title Workaround for moved desktop objects at startup
+.htoc 123
+.hnumbering 123
+
+
+.. ========================================
+.1 Description of the bug
+.. ========================================
+
+After system restart all desktop objects moved by the height of the
+toolbar. For a toolbar at the top of the desktop the objects move
+upwards. For a toolbar at the bottom they move downwards.
+
+It happens with all toolbars that *reduce the workplace area*. That means
+that not only XWorkplace's XCenter (or eCenter) is affected, but also
+Warp 4's WarpCenter (or SmartCenter).
+
+I can remember that Ulrich M”ller wrote that it's an old IBM bug.
+
+
+.. ========================================
+.1 Steps to get rid of it - at least for some time
+.. ========================================
+
+Unfortunately, the described mechanism is just a workaround and has
+to be repeated from time to time.
+
+Select one of the required steps:
+
+.su V30 u
+
+
+.. ----------------------------------------
+.2 Run the included .cmd file
+.. ----------------------------------------
+
+That step is easy. Just run the included .cmd file
+*RmDesktopFolderPos.cmd* and you're done.
+It removes an erranous entry in OS2.INI for the desktop in icon
+view. I have tested it for some months now and had no side effects.
+
+The script gets the object handle for *<WP__DESKTOP>*. Therefore it
+looks up in the ini application *PM__Workplace:Location*. After that,
+the entry for the *icon view* of the decimal object handle is removed
+from *PM__Workplace:FolderPos*.
+
+.fo text
+Syntax: RmDesktopFolderPos [RUN] [QUIET]
+
+        Options (not case-sensitive):
+           RUN    don't ask at startup, only error messages
+           QUIET  no output messages, check RC for the result
+.fo on
+
+.. ----------------------------------------
+.2 Move the objects back by using the vertical scroll bar
+.. ----------------------------------------
+
+This step can not be automated. You have to move all objects back.
+It's not required to grab every object separately:
+
+.ol
+- If the vertical scroll bar at the right edge of the desktop is not
+  shown: Move one of the desktop objects upwards (for XCenter at the
+  top) until the vertical scroll bar appears.
+- Then scroll it until it disappears.
+- Maybe repeat the movement of that desktop object and the scrolling
+  until all other objects are on the right place again.
+- After that, move that object back to its correct place.
+
+
+.. ========================================
+.1 Appendix
+.. ========================================
+
+Select one of the following topics:
+
+.su V30 u
+
+.. ----------------------------------------
+.2 Author
+.. ----------------------------------------
+
+Andreas Schnellbacher
+
+[mailto:andreas.schnellbacher@web.de]
+
+.. ----------------------------------------
+.2 Copyright and license
+.. ----------------------------------------
+
+This package is freeware and comes with no license. A copyright on the
+simple REXX script is not intended.
+
+.. ----------------------------------------
+.2 Credits
+.. ----------------------------------------
+
+.ul
+- Rich Walsh for explaining the PM__Workplace:FolderPos details.
+- Paul Ratcliffe for the hint that it sometimes suffices to move all
+  (or the right) desktop object a bit.
+- Doug Bisset for pointing to PM__Workplace:FolderPos and mentioning
+  that removing the icon view entry suffices.
+
+.. ----------------------------------------
+.2 Related bug reports in the eCS bugtracker
+.. ----------------------------------------
+
+You have to login on with your eCS account first.
+
+.ul
+- [http://bugs.ecomstation.nl/view.php?id=2164]
+- [http://bugs.ecomstation.nl/view.php?id=2143]
+- [http://bugs.ecomstation.nl/view.php?id=3559]
+- [http://bugs.ecomstation.nl/view.php?id=2533]
+- [http://bugs.ecomstation.nl/view.php?id=2330]
+- [http://bugs.ecomstation.nl/view.php?id=1620]
+- [http://bugs.ecomstation.nl/view.php?id=491]
+
+
