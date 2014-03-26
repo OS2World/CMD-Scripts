@@ -1,0 +1,190 @@
+SIMPLIFIED MAN
+  V1.0
+
+  Simplified MAN is a command-line viewer for Unix-style manual (man) pages,
+  based on the standard Unix 'man' command.  It tries to be easy to install and
+  use, and emphasizes convenience over precisely duplicating man's behaviour.
+  Consequently, it does not implement some of man's more advanced features.
+
+
+WHY A SIMPLIFIED MAN?
+
+  OS/2 binaries of GNU man are available from various sources.  But they
+  typically require you to have an extensive Unix-like environment set up.
+
+  At a minimum, GNU man generally requires you to have gawk, sh, sed and groff
+  installed and working (as well as the ubiquitous EMX).  Some of these programs
+  are a major nuisance to install and configure.
+
+  By contast, Simplified MAN has considerably fewer prerequisites, all of which
+  are fairly simple to install.
+
+
+PREREQUISITES
+
+  * OS/2 with REXX support (obviously).
+
+  * The Cawf utility (installed somewhere on the PATH).  Cawf is available
+    on Hobbes:
+
+    http://hobbes.nmsu.edu/cgi-bin/h-viewer?sh=1&fname=/pub/os2/apps/wp/cawf410.zip
+
+    Cawf is a text formatter that implements a commonly-used subset of nroff
+    functionality.  It is much smaller (by several factors) and easier to set
+    up than GNU groff.
+
+    Explanation:
+
+      Unix-style man pages normally use a layout encoding that requires a troff-
+      like formatter (groff or nroff) to translate them into readable output.
+      GNU man depends on groff to do this.  However, groff is a huge software
+      package which can be very difficult get working under OS/2 (personally,
+      I've never managed it).  Cawf concentrates on implementing a useful subset
+      of nroff's capabilities; in my experience it's about 99% compatible with
+      man pages.  Consequently, it's a lot smaller and much, much easier to get
+      working.
+
+    Note that there's nothing in Simplified MAN that absolutely requires Cawf
+    instead of groff.  You can easily configure it to use groff (or any other
+    nroff/troff-compatible program) by editing MAN.CMD and changing the variable
+    'troffcmd' near the top of the file.
+
+  * The 'less' pager is recommended.  You can obtain this from Hobbes, or from
+    UnixOS2: http://www.unixos2.org/pub/unixos2/packages/
+
+    If you don't have (and don't want) less, you can use OS/2's built-in 'more'
+    pager instead.  Simply define the environment variable PAGER as follows:
+
+        SET PAGER=MORE
+
+    Note that 'more' is considerably less functional than 'less' (it doesn't
+    support backwards paging or searching, for instance).
+
+    If you have another pager you prefer to use, you can of course substitute
+    that instead.  See under ENVIRONMENT VARIABLES, below, for more information.
+
+  * If you want to be able to view compressed man pages, you must also have GNU
+    gzip installed on your PATH.  It is available from the same sites as less
+    (see above).
+
+
+
+INSTALLATION & USAGE
+
+  Simplified MAN consists of one file, MAN.CMD (a REXX script).  Simply place
+  this on your PATH, make sure Cawf is installed, and you should be ready to go.
+
+  You may want to set a MANPATH environment variable, but this is optional.
+  (Unix man expects all man pages to live under a directory on the MANPATH.
+  I've added the ability to view a man page in the current directory, or one
+  given as a literal filespec.)  See 'MANPATH' under ENVIRONMENT VARIABLES,
+  below.
+
+  The syntax is extremely simple:
+
+      man <manpage>
+
+  where <manpage> is either the literal name of a man page file, or is the name
+  of a command whose man page is installed in the MANPATH or in the current
+  working directory.
+
+  Simplified MAN does not support the section parameter.  To view man pages from
+  a specific section (in the event that identically-named man pages exist in
+  multiple sections), you will have to specify the numeric extension.  For
+  example, if you have both samba.1 and samba.5, running 'man samba' will
+  display samba.1; to display samba.5, you must run 'man samba.5' instead.
+
+
+ENVIRONMENT VARIABLES
+
+  Simplified MAN makes use of the following environment variables, if defined.
+  They are all optional.
+
+
+  MANPATH
+
+    %MANPATH% is a PATH-like environment variable, consisting of one or more
+    directory names separated by semicolons.
+
+    If the parameter passed to MAN.CMD cannot be resolved to a literal filespec,
+    Simplified MAN will search for it according to the following logic:
+
+      - [current]\[manpage].[n]
+      - [current]\[manpage].[n].gz
+      - [MANPATH]\man[n]\[manpage].[n]
+      - [MANPATH]\man[n]\[manpage].[n].gz
+      - [MANPATH]\man[n]\[manpage].gz
+      - [MANPATH]\man[n]\[manpage].man
+      - [MANPATH]\man[n]\[manpage]
+      - [MANPATH]\[manpage].[n]
+      - [MANPATH]\[manpage].[n].gz
+      - [MANPATH]\[manpage].gz
+      - [MANPATH]\[manpage].man
+      - [MANPATH]\[manpage]
+
+    Where [current] is the current directory when MAN.CMD was invoked; [MANPATH]
+    is every directory in %MANPATH%, in order; [manpage] is the parameter passed
+    to MAN.CMD; and [n] is each of the numbers 1 through 9, in order.
+
+    The first man page found according to these criteria will be displayed.
+    (Man pages with the suffix '.gz' are compressed, and will require that you
+    have gzip installed in order to view.)
+
+
+  PAGER
+
+    %PAGER% specifies the pager (program through which the output is redirected)
+    used to display the formatted man pages.  If not specified, the default is
+    'less'.
+
+    You can use any paging utility you like, as long as it supports redirection
+    from STDOUT.  If you have nothing better installed, you can set %PAGER% to
+    OS/2's built-in pager, 'more', as long as you don't mind its somewhat
+    limited functionality.
+
+
+  TERM
+
+    Both Cawf and less use make use of the %TERM% environment variable, which is
+    the standard Unix terminal type specifier.  If not defined, Simplified MAN
+    will assume the value 'os2'.
+
+
+KNOWN PROBLEMS
+
+  As Cawf is not 100% nroff-compatible, you may occasionally encounter warning
+  messages when viewing some man pages.  (The man pages for the links web
+  browser are one example.)  This is fairly rare, and the pages are usually still
+  quite readable.  This should be considered a permament restriction when using
+  Cawf as the formatter.
+
+
+LICENSE
+
+  Simplified MAN is (C) 2006 Alex Taylor.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+     1. Redistributions of source code must retain the above copyright notice,
+        this list of conditions and the following disclaimer.
+     2. Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+     3. The name of the author may not be used to endorse or promote products
+        derived from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+  IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+
+
+--
+Alex Taylor - http://www.cs-club.org/~alex
