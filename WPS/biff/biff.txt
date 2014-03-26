@@ -1,0 +1,31 @@
+biff.cmd
+
+This code will monitor pmmail inboxes for unread mail and keep a 
+xcentre REXX Gauge widget updated.
+
+Installation
+
+1) Edit the SysFileTree line in biff.cmd to point to your PMMail directory.
+
+2) Edit the SysOpenObject line in biff2.cmd to point to your PMMail directory.
+
+3) RMB on you xcentre and select 'add widget' then select 'rexx gauge'  
+
+4) Open the gauges properties
+
+5) Cut 'n paste the entire biff.cmd code into the box labeled 'gauge script'
+
+6) Cut 'n paste the entire biff2.cmd code into the box labeled 'double click action'
+
+7) change the refresh rate to something reasonable. I use 60000 = one minute
+
+8) Check OK
+
+Thats it. 
+The gauge will either show:
+
+Green if there are no unread messages 
+Yellow and the total of unread messages in all inboxes.
+Red and the total of unread messages in all inboxes at least one iof which is urgent.
+
+Double clicking the gauge will open pmmail.
