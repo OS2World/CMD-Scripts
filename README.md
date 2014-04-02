@@ -38,7 +38,8 @@ AUTHORS
 * Olexander Lebid'
 * Greg Jarvis
 * Leshek Fiedorowicz
-*  Dennis Bareis
+* Dennis Bareis
+* ...several more
 
 LINKS
 ===============
