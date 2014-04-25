@@ -1,0 +1,178 @@
+                            EditProject Version 1.00
+
+                          Makefile maintenance utility
+
+                               Bernhard Bablok
+
+                                November, 1994
+History:
+~~~~~~~
+1.00: - EditProject is now distributed separately from EPMGCC, the EPM-interface
+        to GCC.
+
+      - EditProject now supports four types of targets: simple (text-mode)
+        exe-files, PM-applications, LIB-files (archives) and DLLs.
+
+      - The following compilers are supported: GCC (emx and gcc/2), ICC and BCC.
+        The makefile extension (.emx, .gcc, .icc and .bcc) is used to determine
+        the compiler.
+
+      - Object-files are put in a subdirectory. For debug-mode, the directory
+        used is 'objD', for production-mode 'objP' is used (This might cause
+        problems on FAT-formatted drives, since GNU-make is partly case sensitive).
+
+      - The first target of the makefile is used to invoke make recursively in
+        the project directory. This is necessary because GNU-make treats
+        filenames case sensitive if they aren't in the current working
+        directory.
+
+      - To generate dependencies, include-files are now scanned recursively.
+
+      - Resource-files are scanned for the following directives/statements to
+        find dependencies: #include, RCINCLUDE, DLGINCLUDE, BITMAP, POINTER
+        and ICON. Only files in the project directory are considered.
+
+      - It is now possible to add lines at the end of the generated
+        makefile. These user added lines are preserved if the makefile is
+        regenerated using EditProject.
+
+      - The menu-item 'Save project' is now missing (due to a limitation in
+        VREXX), but since the user is prompted whether to save the makefile or
+        not if 'CANCEL' is selected, this menu-item was obsolete anyway.
+
+      - In addition, some minor bugs were corrected.
+
+0.61: - Bug fix (changing an existing makefile would change the MODE variable
+        from e.g. MODE = D to MODE = Debug)
+
+0.60: - First public release
+
+
+Legal stuff:
+~~~~~~~~~~~
+See the file license.txt.
+
+
+Requirements:
+~~~~~~~~~~~~
+EditProject requires VREXX (Visual REXX), a package of external functions adding
+"PM"-support to REXX. VREXX is IBM employee written software and available free
+of charge from various ftp-sites (look for a file called vrexx2.zip).
+
+
+Introduction:
+~~~~~~~~~~~~
+EditProject is a VREXX-script designed to maintain makefiles.  It can be used
+stand alone or together with EPMGCC, the EPM-interface to GCC.  The script
+allows you to add and delete files to be included in a project and to specify
+compile and link options.  Module definition files and resource script files can
+also be defined for the project. Dependencies to none-system include-files are
+automatically recognized.  The output of EditProject is a makefile to be used
+with GNU-make.
+
+
+Installation:
+~~~~~~~~~~~~
+Follow the instructions given in the VREXX-package to install VREXX (very
+simple). Then, copy epro.cmd to a directory in your PATH. If you made any
+changes to your config.sys, reboot your system.
+
+
+Usage:
+~~~~~
+Just type  epro  or  epro <filename>  at an OS2-prompt. A master menu with
+radio buttons pops up. Possible choices:
+
+  - Select project   Select a makefile.  ".emx" is the default extension.  Use
+                     ".gcc" as the extension for gcc/2, ".icc" to generate a
+                     makefile for IBM's ICC and ".bcc" to generate a makefile
+                     for Borland's BCC. No extension will have the same effect
+                     as ".emx".
+
+  - Select target    Choose the type of target to be generated. Possible choices
+    type             are: EXE    (simple text-mode executable)
+                          PM-EXE (PM-applications)
+                          LIB    (archives of object files)
+                          DLL    (dynamic link libraries)
+                     Note that the choice of the target type only generates the
+                     correct rule to make the target. The necessary compiler and
+                     linker options are not added automatically.
+
+  - Resource file    Specify a resource file (needed for PM-applications)
+
+  - Module           Specify a module definition file. This is necessary for
+    definition file  PM-applications and DLLs and can be used for simple
+                     executables as well.
+
+  - Add files        Add source files to the project. If fileA.c has a include
+                     statement like #include "fileB.h", then fileB.h will be
+                     included in the dependencies for fileA.o.
+                     Double click on a file or select "OK" to add a file. Select
+                     "CANCEL" to leave.
+                     The source files are displayed left of a standard file-box.
+                     Since VREXX only knows modal entry-boxes, I have to use an
+                     output-window (without paging support). If many files are
+                     added, they might not show up even though they are added.
+                     Files can only be added once.
+
+  - Delete files     Displays a listbox with all files belonging to the project.
+                     Pressing "OK" will delete the selected file from the list
+                     of files. Select "CANCEL" to leave.
+
+  - Build option     Defines debug or production mode as default mode for
+                     builds. The value can be overridden from the command line
+                     using make MODE=P ...
+
+  - Compiler options Define global, debug and production options.
+
+  - Link options     Define link options (like additional files, libraries etc.)
+
+  - Make             Invoke make with the current makefile and the build option
+                     in effect.
+
+
+Limitations:
+~~~~~~~~~~~
+Due to a bug in VREXX, only one VREXX-script can be run at a time. Under certain
+circumstances, VREXX-cleanup doesn't work as expected if a VREXX-script
+crashes. In this case the process running vrexx.exe (use PSTAT|FIND /i "vrexx")
+has to be killed manually.
+
+EditProject generates single-target makefiles. Additional targets can be added
+manually. Adding this code at the end of the makefile after the line saying
+
+# == Do not delete this line. User added code after this line is preserved. ==
+
+will preserve the code after regenerating the makefile with EditProject.
+
+I also plan to write a true PM-application overcoming most of the limitations
+set by VREXX, but this will take some time.
+
+
+Changing the code:
+~~~~~~~~~~~~~~~~~
+I have not tested EditProject with other resolutions than SVGA.  If you have
+problems with the size of the add-file box and/or delete-file box, you might try
+changing the variables
+
+   sources.diff          (the space between listed files)
+   DeleteFiles.height    (sets number of lines in delete-file listbox).
+
+Support for additional compilers can be implemented quite easily. There is an
+internal procedure called SetupRules. Modifying this routine should be enough to
+implement specific rules. Existing rules can also be changed in this way, e.g.
+if you want to include the value of MODE in the name of the target.
+
+Disclaimer:
+~~~~~~~~~~
+If you think you have found a genuine bug, or would like to make suggestions,
+contributions, or enhancements to this code please drop me a note.  Since I have
+released this code without charge, I cannot offer a warranty or customer
+support.
+
+
+11/01/94
+Bernhard Bablok
+D-82256 Fuerstenfeldbruck, Germany
+INTERNET: ua302cb@sunmail.lrz-muenchen.de
+
