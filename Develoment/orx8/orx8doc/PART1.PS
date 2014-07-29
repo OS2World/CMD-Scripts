@@ -1,0 +1,10149 @@
+%!PS-Adobe-3.0
+%%P8BIT
+%%Title: Ami Pro - PART1.SAM
+%%Creator: Adobe Printer Driver 3.0 for Windows 3.1
+%%CreationDate: 07/19/97 23:21:18
+%%BoundingBox: 18 8 593 784 
+%%Pages: (atend)
+%%PageOrder: Ascending
+%%Requirements: 
+%%DocumentNeededFonts: (atend)
+%%DocumentSuppliedFonts: (atend)
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%EndComments
+
+[{
+%%BeginFeature: *JobPatchFile 1
+
+save 
+/version23-manualfeedpatch where { pop false } { true }ifelse
+ % we don't do an explicit 'get' since product and version MAY
+ % be in systemdict or statusdict - this technique gets the lookup
+ % without failure
+statusdict begin
+  product (LaserWriter) eq        % true if LaserWriter
+  version cvr 23.0 eq             % true if version 23
+end
+and  % only install this patch if both are true
+and  % true only if patch is not installed and is for this printer
+     % save object and boolean on stack
+dup { exch restore }if
+% either true OR saveobject false
+dup
+{
+  /version23-manualfeedpatch true def
+  /oldversion23-showpage /showpage load def
+  /showpage       % this showpage will wait extra time if manualfeed is true
+  {%
+     statusdict /manualfeed known
+     {% manualfeed known in statusdict
+        statusdict /manualfeed get
+        {% if true then we loop for 5 seconds
+           usertime 5000 add       % target usertime
+           { % loop
+             dup usertime sub 0 lt
+             { exit }if
+           }loop
+           pop             % pop the usertime off the stac
+        }if
+     }if
+     oldversion23-showpage
+  }bind def
+}if
+not{ restore }if
+
+%%EndFeature
+} stopped cleartomark
+%%BeginProlog 
+%%BeginProcSet: Adobe_Win_ErrorHandler 1.0 1
+/currentpacking where{pop/oldpack currentpacking def/setpacking where{pop
+false setpacking}if}if/$brkpage 64 dict def $brkpage begin/prnt{dup type
+/stringtype ne{=string cvs}if dup length 6 mul/tx exch def/ty 10 def
+currentpoint/toy exch def/tox exch def 1 setgray newpath tox toy 2 sub moveto
+0 ty rlineto tx 0 rlineto 0 ty neg rlineto closepath fill tox toy moveto 0
+setgray show}bind def/nl{currentpoint exch pop lmargin exch moveto 0 -10
+rmoveto}def/=={/cp 0 def typeprint nl}def/typeprint{dup type exec}readonly def
+/lmargin 72 def/rmargin 72 def/tprint{dup length cp add rmargin gt{nl/cp 0 def
+}if dup length cp add/cp exch def prnt}readonly def/cvsprint{=string cvs
+tprint( )tprint}readonly def/integertype{cvsprint}readonly def/realtype{
+cvsprint}readonly def/booleantype{cvsprint}readonly def/operatortype{(--)
+tprint =string cvs tprint(-- )tprint}readonly def/marktype{pop(-mark- )tprint}
+readonly def/dicttype{pop(-dictionary- )tprint}readonly def/nulltype{pop
+(-null- )tprint}readonly def/filetype{pop(-filestream- )tprint}readonly def
+/savetype{pop(-savelevel- )tprint}readonly def/fonttype{pop(-fontid- )tprint}
+readonly def/nametype{dup xcheck not{(/)tprint}if cvsprint}readonly def
+/stringtype{dup rcheck{(\()tprint tprint(\))tprint}{pop(-string- )tprint}
+ifelse}readonly def/arraytype{dup rcheck{dup xcheck{({)tprint{typeprint}forall
+(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop(-array- )tprint}
+ifelse}readonly def/packedarraytype{dup rcheck{dup xcheck{({)tprint{typeprint}
+forall(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop
+(-packedarray- )tprint}ifelse}readonly def/courier/Courier findfont 10
+scalefont def end errordict/handleerror{systemdict begin $error begin $brkpage
+begin newerror{/newerror false store vmstatus pop pop 0 ne{grestoreall}if
+showpage initgraphics courier setfont lmargin 720 moveto(ERROR: )prnt
+errorname prnt nl(OFFENDING COMMAND: )prnt/command load prnt $error/ostack
+known{nl nl(STACK:)prnt nl nl $error/ostack get aload length{==}repeat}if
+systemdict/showpage get exec(%%[ Error: )print errorname =print
+(; OffendingCommand: )print/command load =print( ]%%)= flush}if end end end}
+dup 0 systemdict put dup 4 $brkpage put bind readonly put/currentpacking where
+{pop/setpacking where{pop oldpack setpacking}if}if
+%%EndProcSet
+%%BeginProcSet: Adobe_Res_Emul 1.0 0
+/defineresource where{pop}{userdict begin/defineresource{userdict/Resources 2
+copy known{get begin}{15 dict dup begin put}ifelse exch readonly exch
+currentdict 1 index known not{dup 30 dict def}if load 3 -1 roll 2 index put
+end}bind readonly def/findresource{userdict/Resources get exch get exch get}
+bind readonly def/resourceforall{pop pop pop pop}bind readonly def
+/resourcestatus{userdict/Resources 2 copy known{get exch 2 copy known{get exch
+known{0 -1 true}{pop pop false}ifelse}{pop pop pop false}ifelse}{pop pop false
+}ifelse}bind readonly def end}ifelse
+%%EndProcSet
+%%BeginResource: procset Adobe_Win_Driver 2.0 0
+/Adobe_Win_Driver 200 dict dup begin
+%%BeginResource: file Adobe_FatalError 2.0 0
+/PLatin1Encoding 256 array def StandardEncoding PLatin1Encoding copy pop
+PLatin1Encoding 224[/agrave/aacute/acircumflex/atilde/adieresis]putinterval
+PLatin1Encoding 232[/egrave/eacute/ecircumflex]putinterval PLatin1Encoding 242
+[/ograve/oacute/ocircumflex/otilde/odieresis]putinterval PLatin1Encoding 249[
+/ugrave/uacute/ucircumflex/udieresis]putinterval/FatalErrorIf{{initgraphics
+findfont dup length dict begin{1 index/FID ne{def}{pop pop}ifelse}forall
+/Encoding PLatin1Encoding def currentdict end/ErrFont-PLatin1 exch definefont
+pop/ErrFont-PLatin1 findfont exch scalefont setfont counttomark 3 div cvi{
+moveto show}repeat showpage quit}{cleartomark}ifelse}bind def
+%%EndResource
+/VM? {
+vmstatus exch sub exch pop gt { [
+(This job requires more memory than is ) 100 500
+(available in this printer.  Try changing performance) 100 485
+(settings or reducing the number of fonts in the document.) 100 470
+(Then print again.) 100 455
+12 /Times-Roman
+showpage true FatalErrorIf}if} bind def
+%%BeginResource: file Adobe_Win_Utils 2.0 0
+/|/def load def/,/load load |/~/exch , |/?/ifelse , |/!/pop , |/`/begin , |/^
+/index , |/@/dup , |/+/translate , |/$/roll , |/U/userdict , |/M/moveto , |/-
+/rlineto , |/&/currentdict , |/:/gsave , |/;/grestore , |/F/false , |/T/true ,
+|/N/newpath , |/E/end , |/Ac/arc , |/An/arcn , |/A/ashow , |/D/awidthshow , |
+/C/closepath , |/V/div , |/O/eofill , |/L/fill , |/I/lineto , |/-C/rcurveto ,
+|/-M/rmoveto , |/+S/scale , |/Ji/setfont , |/Lc/setlinecap , |/Lj/setlinejoin
+, |/Lw/setlinewidth , |/S/show , |/LH/showpage , |/K/stroke , |/W/widthshow ,
+|/b{bind |}bind |/L2? F/languagelevel where{! languagelevel 2 ge{! T}if}if |/g
+{@ not{U/DefIf_save save put}if U/DefIf_bool 2 ^ put}b/DefIf_El{if U
+/DefIf_bool get not @{U/DefIf_save get restore}if}b/e{DefIf_El !}b/self & |
+/reinitialize{[/TextInit/GraphInit/UtilsInit counttomark{@ where{self eq}{F}?{
+cvx exec}{!}?}repeat cleartomark}b/initialize{`{/ADO_mxRot ~ |
+/TextInitialised? F | reinitialize E}{U/Adobe_Win_Data 200 dict @ ` put
+/ADO_mxRot ~ |/TextInitialised? F | reinitialize}?}b/terminate{!{& self eq{
+exit}{E}?}loop E}b/suspend/terminate , |/resume{` Adobe_Win_Data `}b/snap{
+transform 0.25 sub round 0.25 add ~ 0.25 sub round 0.25 add ~ itransform}b
+/dsnap{dtransform round ~ round ~ idtransform}b<04>cvn{}|/setjn{{statusdict
+/jobname known{statusdict/jobname 3 -1 $ put}if}stopped cleartomark}b/solid{[]
+0 setdash}b/setdsh{0 setdash}b/sg{setgray}b/sco{setrgbcolor}b/sgco{{sg}{sco}?}
+b/colspRefresh{}b/rp{4 2 $ M 1 ^ 0 - 0 ~ - neg 0 -}b/rr{1 ^ 0 - 0 ~ - neg 0 -
+C}b
+%vmstatus ~ sub ~ ! gt { [
+%12 /Times-Roman
+%LH T FatalErrorIf}if} b
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L1 2.0 0
+L2? not g{/rf{N rp L}b/fx{1 1 dtransform @ 0 ge{1 sub 1}{1 add -0.25}? 3 -1 $
+@ 0 ge{1 sub 1}{1 add -0.25}? 3 1 $ 4 1 $ idtransform 4 -2 $ idtransform}b/BZ{
+4 -2 $ snap + +S fx rf}b/rs{N rp C K}b/rc{N rp clip N}b/ExecWMForm{!}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L2 2.0 0
+L2? g{/colspA/DeviceGray |/colspABC/DeviceRGB |/setAorABC{{colspA}{colspABC}?
+setcolorspace}b/rf/rectfill , |/fx{1 1 dtransform @ 0 ge{1 sub 0.5}{1 add -0.5
+}? 3 -1 $ @ 0 ge{1 sub 0.5}{1 add -0.5}? 3 1 $ 4 1 $ idtransform 4 -2 $
+idtransform}b/BZ{4 -2 $ snap + +S fx rf}b/rs/rectstroke , |/rc/rectclip , |
+/ExecWMForm{execform}b/UtilsInit{F setglobal}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Encoding 2.0 0
+/bullets{{/bullet}repeat}b/ANSIEncoding[/grave/acute/circumflex/tilde/macron
+/breve/dotaccent/dieresis/ring/cedilla/hungarumlaut/ogonek/caron/dotlessi 18
+bullets StandardEncoding 32 95 getinterval aload ! 3 bullets/quotesinglbase
+/florin/quotedblbase/ellipsis/dagger/daggerdbl/circumflex/perthousand/Scaron
+/guilsinglleft/OE 4 bullets/quoteleft/quoteright/quotedblleft/quotedblright
+/bullet/endash/emdash/tilde/trademark/scaron/guilsinglright/oe 2 bullets
+/Ydieresis/space/exclamdown/cent/sterling/currency/yen/brokenbar/section
+/dieresis/copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered
+/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/paragraph
+/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter
+/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis
+/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]| ANSIEncoding @ 39/quotesingle put 96/grave
+put/ANSIEncodingOld ANSIEncoding 256 array copy | ANSIEncodingOld @[138 153
+154 169 172 174 177 178 179 181 185 188 189 190 208 215 221 222 240 247 253
+254]{/bullet put @}forall 166/bar put 176/ring put
+%%EndResource
+%%BeginResource: file Adobe_Win_Text 2.0 0
+/TextInit{TextInitialised? not{/aF & |/TextInitialised? T |/fM[1 0 0 -1 0 0]|
+/mFM matrix |/iMat[1 0 0.212557 neg 1 0 0]|}if}b/xUP null |/yUP null |/uW null
+|/xSP null |/ySP null |/sW null |/copyfont{1 ^ length add dict `{1 ^/FID ne{|}
+{! !}?}forall & E}b/rF{1 copyfont @ `/Encoding ANSIEncoding &/CharStrings
+known{CharStrings/Eth known not{! ANSIEncodingOld}if}if | E definefont}b/mF{
+findfont ~{@/Encoding get @ StandardEncoding eq{! T}{ISOLatin1Encoding eq{T}{@
+` T 32 1 127{Encoding 1 ^ get StandardEncoding 3 -1 $ get eq and}for E}?}?}{F}
+?{2 ^ ~ rF}if fM 5 4 -1 $ put fM 4 0 put fM makefont aF 3 1 $ put}b/xF{
+scalefont aF 3 1 $ put}b/xMF{mFM astore makefont aF 3 1 $ put}b/xF2/scalefont
+, |/xMF2{mFM astore makefont}b/sLT{: Lw -M currentpoint snap M 0 - 0 Lc K ;}b
+/sSU{N/uW ~ |/yUP ~ |/xUP ~ |}b/sU{xUP yUP uW sLT}b/sST{N/sW ~ |/ySP ~ |/xSP ~
+|}b/sT{xSP ySP sW sLT}b/sR{: + rotate 0 0 M}b/sRxy{: matrix astore concat 0 0
+M}b/eR/; , |
+%%EndResource
+%%BeginResource: file Adobe_Win_Text_Bold 2.0 0
+/mBF{@ 2 copyfont `/FontName ~ | 0 FontMatrix idtransform ! &/PaintType known{
+PaintType 0 eq{/PaintType 2 |/StrokeWidth ~ |}{PaintType 1 eq PaintType 2 eq
+or PaintType 3 eq or &/StrokeWidth known and{StrokeWidth add/StrokeWidth ~ |}{
+!}?}?}{!}? @ & E definefont aF 3 1 $ put}b/xBF{aF ` 1 ^/FontName get 1 ^
+scalefont 3 1 $ scalefont 2 copy ~ | ~ ! | E}b/xMBF{mFM astore aF ` 1 ^
+/FontName get 1 ^ makefont 3 1 $ makefont 2 copy ~ | ~ ! | E}b/xBF2{/sB0 ~ mBF
+/sB1 sB0 3 -1 $ xBF sB1}b/xMBF2{/sB0 ~ mBF mFM astore/sB1 sB0 3 -1 $ xMBF sB1}
+b/sB{: aF currentfont get Ji @ S ; S}b/asB{: aF currentfont get Ji 3 copy A ;
+A}b/wsB{: aF currentfont get Ji 4 copy W ; W}b/awsB{: aF currentfont get Ji 6
+copy D ; D}b/sBT3{: @ S ; 1 1 -M S}b/asBT3{: 3 copy A ; 1 1 -M A}b/wsBT3{: 4
+copy W ; 1 1 -M W}b/awsBT3{: 6 copy D ; 1 1 -M D}b/mIF{iMat 4 3 -1 $ put iMat
+makefont aF 3 1 $ put}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics 2.0 0
+/SavedCTM null |/CTMsave{/SavedCTM SavedCTM currentmatrix |}b/CTMrestore{
+SavedCTM setmatrix}b/mp null |/ADO_mxRot null |/GDIHMatrix null |
+/GDIHPatternDict 22 dict | GDIHPatternDict `/PatternType 1 |/PaintType 2 |
+/Reps L2?{1}{5}? |/XStep 8 Reps mul |/YStep XStep |/BBox[0 0 XStep YStep]|
+/TilingType 1 |/PaintProc{` 1 Lw[]0 setdash PaintData , exec E}b/FGnd null |
+/BGnd null |/HS_Horizontal{horiz}b/HS_Vertical{vert}b/HS_FDiagonal{fdiag}b
+/HS_BDiagonal{biag}b/HS_Cross{horiz vert}b/HS_DiagCross{fdiag biag}b/MaxXYStep
+XStep YStep gt{XStep}{YStep}? |/horiz{Reps{0 4 M XStep 0 - 0 8 +}repeat 0 -8
+Reps mul + K}b/vert{Reps{4 0 M 0 YStep - 8 0 +}repeat 0 -8 Reps mul + K}b/biag
+{Reps{0 0 M MaxXYStep @ - 0 YStep neg M MaxXYStep @ - 0 8 +}repeat 0 -8 Reps
+mul + 0 YStep M 8 8 - K}b/fdiag{Reps{0 0 M MaxXYStep @ neg - 0 YStep M
+MaxXYStep @ neg - 0 8 +}repeat 0 -8 Reps mul + MaxXYStep @ M 8 -8 - K}b E
+/makehatch{GDIHPatternDict/PaintData 3 -1 $ put CTMsave GDIHMatrix setmatrix
+GDIHPatternDict matrix mp CTMrestore ~ U ~ 2 ^ put}b/h0{/h0/HS_Horizontal
+makehatch}b/h1{/h1/HS_Vertical makehatch}b/h2{/h2/HS_FDiagonal makehatch}b/h3{
+/h3/HS_BDiagonal makehatch}b/h4{/h4/HS_Cross makehatch}b/h5{/h5/HS_DiagCross
+makehatch}b/GDIBWPatternDict 17 dict @ `/PatternType 1 |/PaintType L2?{1}{2}?
+|/RepsV L2?{1}{6}? |/RepsH L2?{1}{5}? |/BBox[0 0 RepsH 1]|/TilingType 1 |
+/XStep 1 |/YStep 1 |/Height 8 RepsV mul |/Width 8 |/mx[Width 0 0 Height neg 0
+Height]|/FGnd null |/BGnd null |/SetBGndFGnd L2?{{BGnd null ne{BGnd aload !
+sgco BBox aload ! 2 ^ sub ~ 3 ^ sub ~ rf}if FGnd null ne{FGnd aload ! sgco}if}
+}{{}}? b/PaintProc{` SetBGndFGnd RepsH{Width Height F mx PaintData imagemask
+Width 0 +}repeat E}b E |/GDIBWPatternMx null |/pfprep{save 4 1 $
+/PatternOfTheDay 4 1 $ GDIBWPatternDict `/PaintData ~ |/BGnd ~ |/FGnd ~ | E
+CTMsave GDIBWPatternMx setmatrix GDIBWPatternDict matrix mp CTMrestore ~ !}b
+/hrf null |/prf{pfprep ~ 6 1 $ 5 hrf restore}b/GraphInit{GDIHMatrix null eq{
+/SavedCTM matrix | : ADO_mxRot concat 0 0 snap + : 0.24 @ GDIHPatternDict `
+YStep mul ~ XStep mul ~ dsnap YStep V ~ XStep V ~ E +S/GDIHMatrix matrix
+currentmatrix readonly | ; : 0.24 -0.24 +S GDIBWPatternDict ` Width Height E
+dsnap +S/GDIBWPatternMx matrix currentmatrix readonly | ; ;}if}b/cirp{360 0 An
+C}b/ellp{CTMsave + +S 0.5 0 M 0 0 0.5 360 0 An C CTMrestore}b/rrp{/rad ~ |/y2
+~ |/x2 ~ |/y1 ~ |/x1 ~ | x2 x1 add 2 V y1 M x1 y1 x1 y2 rad arct x1 y2 x2 y2
+rad arct x2 y2 x2 y1 rad arct x2 y1 x1 y1 rad arct C}b/RRp{CTMsave + +S/dyS ~
+|/dxS ~ | dxS 2 V 0 M 0 0 0 dyS 0.5 arct 0 dyS dxS dyS 0.5 arct dxS dyS dxS 0
+0.5 arct dxS 0 0 0 0.5 arct C CTMrestore}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L1 2.0 0
+L2? not g{/arct{arcto ! ! ! !}b/GDIpattfill{@ ` BGnd null ne PaintType 2 eq
+and{: BGnd aload ! sgco fEOFill{O}{L}? ; FGnd aload ! U/fGray 2 ^ put{2}{4}?
+-1 $}if E @ patterncalc : 4 ^/PaintType get 2 eq{fGray{6 -1 $ sg}{8 -3 $ sco}?
+}if fEOFill{eoclip}{clip}? N patternfill ; N}b/hrf{/fGray 1 ^ 6 eq | -4 $ N rp
+C/fEOFill F | GDIpattfill}b/hfMain{/fEOFill ~ |/fGray ~ | GDIpattfill}b/hf{T
+hfMain}b/hfW{F hfMain}b/hs{currentpoint strokepath M hfW}b/pfMain{/fEOFill ~ |
+pfprep GDIpattfill restore N}b/pf{T pfMain}b/pfW{F pfMain}b/ps{currentpoint
+strokepath M pfW}b/mpstr 1 string |/mp{~ @ length 12 add dict copy `
+/PatternCTM matrix currentmatrix |/PatternMatrix ~ |/PatWidth XStep mpstr
+length mul |/PatHeight YStep |/FontType 3 |/Encoding 256 array | 3 string 0 1
+255{Encoding ~ @ 3 ^ cvs cvn put}for !/FontMatrix matrix |/FontBBox BBox |
+/BuildChar{! @ ` XStep 0 FontBBox aload ! setcachedevice/PaintProc , E : exec
+;}b & E ~ @ 3 -1 $ definefont}b/patterncalc{` : PatternCTM setmatrix
+PatternMatrix concat BBox aload ! ! ! + pathbbox ; PatHeight V ceiling 4 1 $
+PatWidth V ceiling 4 1 $ PatHeight V floor 4 1 $ PatWidth V floor 4 1 $ 2 ^
+sub cvi abs ~ 3 ^ sub cvi abs ~ 4 2 $ PatHeight mul ~ PatWidth mul ~ E}b
+/patternfill{5 -1 $ @ ` Ji PatternCTM setmatrix PatternMatrix concat 0 2 ^ 2 ^
+M 0 1 mpstr length 1 sub{1 ^ mpstr 3 1 $ put}for ! 2 ^{currentpoint 5 ^{mpstr
+S}repeat YStep add M}repeat ! ! ! ! E}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L2 2.0 0
+L2? g{/mp/makepattern , |/hrf{6 eq setAorABC setpattern rectfill}b/hf{
+setAorABC setpattern O}b/hfW{setAorABC setpattern L}b/hs{setAorABC setpattern
+K}b/pf{pfprep setpattern O restore N}b/pfW{pfprep setpattern L restore N}b/ps{
+pfprep setpattern K restore N}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images 2.0 0
+/iw 0 |/ih 0 |/im_save 0 |/s 0 |/polarity 0 |/smoothflag 0 |/mystring 0 |/bpc
+0 |/setup1asciiproc{[currentfile mystring/readhexstring cvx/! cvx]cvx bind}b
+/setup1binaryproc{[currentfile mystring/readstring cvx/! cvx]cvx bind}b
+/setup2asciiproc{currentfile/ASCII85Decode filter/RunLengthDecode filter}b
+/setup2binaryproc{currentfile/RunLengthDecode filter}b/mycolorspace{colspABC}|
+/myimagedict{/myimagedict 10 dict | myimagedict @ `/ImageType 1 |
+/MultipleDataSource F | E}b/imageprocarray[/setup1binaryproc/setup1asciiproc
+/setup2binaryproc/setup2asciiproc]|/L2Polarity{{[1 0]}{[0 1]}?}b/Q{/im_save
+save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |/smoothflag ~ |
+snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |/iw ~ | 1 sg fx
+rf}b/X{/im_save save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |
+/smoothflag ~ | snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |
+/iw ~ |}b/Z{im_save restore}b/Y{sgco myimagedict @ `/Width iw |/Height ih |
+/Decode polarity |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |/BitsPerComponent
+1 |/Interpolate smoothflag | E imagemask}b
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images_L1 2.0 0
+L2? not g{/setup2asciiproc{[/Level2ImagesError , aload ! T FatalErrorIf}b
+/setup2binaryproc/setup2asciiproc , |/L2Polarity{}|/Y{sgco iw ih polarity[iw 0
+0 ih 0 0]s imagemask}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L1 2.0 0
+L2? not g{/testsystemdict{where{systemdict eq{T}{F}?}{F}?}b/c 1 |/colorimage
+where{! T}{F}?{/c 0 statusdict `/processcolors where{! ! processcolors}{
+/deviceinfo where{! deviceinfo/Colors known{!{deviceinfo/Colors get}}if}if}? E
+| c 0 ne{/colorimage testsystemdict/setcolortransfer testsystemdict
+/currentcolortransfer testsystemdict/currentcmykcolor testsystemdict and and
+and not{/c 0 |}if}if}if c @ 1 ne ~ @ 3 ne ~ 4 ne and and{/c 0 |}if c 1 eq g{
+/expandbw{expandfactor mul round cvi bwclut ~ get 255 V}b/doclutimage{!/bwclut
+~ | bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/expandfactor ~ |[/expandbw ,/exec , @
+currenttransfer ~]cvx bind settransfer iw ih bpc[iw 0 0 ih 0 0]s image}b}e c @
+3 eq ~ 4 eq or g{/nullproc{{}}|/concatutil{/exec , 7 -1 $/exec ,}b/defsubclut{
+1 add getinterval |}b/spconcattransfer{/Dclut ~ |/Cclut ~ |/Bclut ~ |/Aclut ~
+|/ncompute ~ , | currentcolortransfer[{Aclut ncompute}concatutil]cvx[{Bclut
+ncompute}concatutil]cvx[{Cclut ncompute}concatutil]cvx[{Dclut ncompute}
+concatutil]cvx setcolortransfer}b/setuprgbcluts{/bit3x rgbclut length 3 sub |
+/bit1x bit3x 3 idiv |/rclut rgbclut |/gclut rclut 1 bit3x defsubclut/bclut
+rclut 2 bit3x defsubclut}b}e c 3 eq g{/3compute{~ bit3x mul round cvi get 255
+V}b/doclutimage{/rgbclut ~ | ! setuprgbcluts/3compute rclut gclut bclut @
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @]cvx nullproc nullproc
+T 3 colorimage}b}e c 4 eq g{/ftoint{1 ~ sub 255 mul round cvi}b/stuffclut{
+cmykindex 3 -1 $ put}b/4compute{~ bit4x mul round cvi get 255 V}b
+/invalidcolortable? T |/computecmykclut{setuprgbcluts/bit4x rgbclut length 3
+idiv 4 mul 4 sub |/cmykclut bit4x 4 add string |/cclut cmykclut |/mclut cclut
+1 bit4x defsubclut/yclut cclut 2 bit4x defsubclut/kclut cclut 3 bit4x
+defsubclut/cmykindex 0 | 0 1 bit1x{@/cmykindex ~ bit1x ~ sub 4 mul | 3 mul @
+rclut ~ get 255 V ~ @ gclut ~ get 255 V ~ bclut ~ get 255 V setrgbcolor
+currentcmykcolor ftoint kclut stuffclut ftoint yclut stuffclut ftoint mclut
+stuffclut ftoint cclut stuffclut}for}b/doclutimage{/rgbclut ~ | !
+invalidcolortable?{computecmykclut}if/4compute cclut mclut yclut kclut
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @ @]cvx nullproc
+nullproc nullproc T 4 colorimage}b}e c 0 eq g{/a{3 mul 3 getinterval
+putinterval ~ 3 add ~ 3 copy}b/8lookup/a , |/4lookup{/byte 1 ^ | -4 bitshift a
+byte 15 and a}b/2lookup{/byte 1 ^ | -6 bitshift a byte -4 bitshift 3 and a
+byte -2 bitshift 3 and a byte 3 and a}b/colorexpand{mystringexp 0 rgbclut 3
+copy 7 -1 $/mylookup , forall ! ! ! ! ! 0 iw 3 mul getinterval}b
+/createexpandstr{/mystringexp ~ mystring length mul string |}b/doclutimage{
+/rgbclut ~ | !/mylookup bpc 8 eq{3 createexpandstr/8lookup}{bpc 4 eq{6
+createexpandstr/4lookup}{12 createexpandstr/2lookup}?}? , | iw ih 8[iw 0 0 ih
+0 0][s/exec ,/colorexpand ,/exec ,]cvx F 3 colorimage}b}e/colorimage where{! T
+}{F}? g{/do24image{iw ih 8[iw 0 0 ih 0 0]s F 3 colorimage}b}DefIf_El{
+/rgbtogray{/str ~ |/len str length |/smlen len 3 idiv |/rstr str |/gstr str 1
+len 1 sub getinterval |/bstr str 2 len 2 sub getinterval | str @ 0 1 smlen 1
+sub{@ 3 mul rstr 1 ^ get 0.3 mul gstr 2 ^ get 0.59 mul add bstr 3 -1 $ get
+0.11 mul add round cvi put @}for ! 0 smlen getinterval}b/do24image{iw ih 8[iw
+0 0 ih 0 0][s/exec ,/rgbtogray ,/exec ,]cvx bind image}b}e/doNimage{bpc 24 eq{
+do24image}{iw ih bpc[iw 0 0 ih 0 0]s image}?}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L2 2.0 0
+L2? g{/doclutimage{/rgbclut ~ | ! bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/hival ~ |[
+/Indexed colspABC hival rgbclut]setcolorspace myimagedict @ `/Width iw |
+/Height ih |/Decode[0 hival]|/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc |/Interpolate smoothflag | E image}b/doNimage{bpc 24 eq{
+colspABC}{colspA}? setcolorspace myimagedict @ `/Width iw |/Height ih |/Decode
+bpc 24 eq{[0 1 0 1 0 1]}{[0 1]}? |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc 24 eq{8}{bpc}? |/Interpolate smoothflag | E image}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Type3_Hdr 2.0 0
+/GreNewFont{10 dict @ 3 1 $ | @ ` 4 1 $/FontType 3 |/FontMatrix ~ |/FontBBox ~
+|/Encoding 256 array | 0 1 255{Encoding ~/.notdef put}for/CharProcs 256 dict |
+CharProcs/.notdef{}put/Metrics 256 dict | Metrics/.notdef 3 -1 $ put/BuildChar
+{/char ~ |/fontdict ~ |/charname fontdict/Encoding get char get | fontdict
+/Metrics get charname get aload ! setcachedevice fontdict ` Encoding char get
+CharProcs ~ get E exec}| E definefont !}|/AddChar{` Encoding 3 1 $ put
+CharProcs 3 1 $ put Metrics 3 1 $ put E}|
+%%EndResource
+%%BeginResource: file Adobe_Win_Type1_Hdr 2.0 0
+/FEbuf 2 string |/FEglyph(G  )|/FE{1 ~{@ 16 FEbuf cvrs FEglyph ~ 1 ~
+putinterval 1 ^ ~ FEglyph cvn put}for}bind |/Type1Hdr{11 dict `/FontName ~ |
+/PaintType ~ |/FontType 1 |/FontMatrix[1 3 ^ V 0 0 1 6 ^ V 0 0]| !/Encoding
+256 array 0 1 255{1 ^ ~/.notdef put}for 3 ^ 3 ^ FE | ! !/FontBBox{0 0 0 0}| &
+E currentfile eexec}bind |
+%%EndResource
+%%BeginResource: file Adobe_Win_Compat 2.0 0
+userdict/Adobe_Win_Compat 12 dict dup begin/CB{pop pop pop pop}bind def/B{pop
+pop pop pop}bind def/bd{bind def}bind def/ld{load def}bd/SS{/pagesave save def
+}bind def/RS{pagesave restore}bind def/ANSIVec[0/grave 1/acute 2/circumflex 3
+/tilde 4/macron 5/breve 6/dotaccent 7/dieresis 8/ring 9/cedilla 10
+/hungarumlaut 11/ogonek 12/caron 13/dotlessi 39/quotesingle 96/grave 124/bar
+130/quotesinglbase 131/florin 132/quotedblbase 133/ellipsis 134/dagger 135
+/daggerdbl 136/circumflex 137/perthousand 138/Scaron 139/guilsinglleft 140/OE
+145/quoteleft 146/quoteright 147/quotedblleft 148/quotedblright 149/bullet 150
+/endash 151/emdash 152/tilde 153/trademark 154/scaron 155/guilsinglright 156
+/oe 159/Ydieresis 160/space 161/exclamdown 164/currency 165/yen 166/brokenbar
+167/section 168/dieresis 169/copyright 170/ordfeminine 171/guillemotleft 172
+/logicalnot 173/hyphen 174/registered 175/macron 176/degree 177/plusminus 178
+/twosuperior 179/threesuperior 180/acute 181/mu 182/paragraph 183
+/periodcentered 184/cedilla 185/onesuperior 186/ordmasculine 187
+/guillemotright 188/onequarter 189/onehalf 190/threequarters 191/questiondown
+192/Agrave 193/Aacute 194/Acircumflex 195/Atilde 196/Adieresis 197/Aring 198
+/AE 199/Ccedilla 200/Egrave 201/Eacute 202/Ecircumflex 203/Edieresis 204
+/Igrave 205/Iacute 206/Icircumflex 207/Idieresis 208/Eth 209/Ntilde 210/Ograve
+211/Oacute 212/Ocircumflex 213/Otilde 214/Odieresis 215/multiply 216/Oslash
+217/Ugrave 218/Uacute 219/Ucircumflex 220/Udieresis 221/Yacute 222/Thorn 223
+/germandbls 224/agrave 225/aacute 226/acircumflex 227/atilde 228/adieresis 229
+/aring 230/ae 231/ccedilla 232/egrave 233/eacute 234/ecircumflex 235/edieresis
+236/igrave 237/iacute 238/icircumflex 239/idieresis 240/eth 241/ntilde 242
+/ograve 243/oacute 244/ocircumflex 245/otilde 246/odieresis 247/divide 248
+/oslash 249/ugrave 250/uacute 251/ucircumflex 252/udieresis 253/yacute 254
+/thorn 255/ydieresis]def currentdict{dup type/operatortype eq{[exch]cvx def}{
+pop pop}ifelse}forall/initialize{currentdict exch begin begin}bind def
+/terminate{pop end end}bind def/suspend/terminate load def/resume/initialize
+load def end put
+%%EndResource
+end /ProcSet defineresource pop
+%%EndResource
+%%EndProlog
+
+%%BeginSetup 
+Adobe_Win_Compat dup /initialize get exec
+[ 1.000 0 0 1.000 0 0 ] false /Adobe_Win_Driver /ProcSet findresource dup /initialize get exec
+[{0 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/JobTimeout  4 -1 roll put setuserparams}{statusdict/setjobtimeout get exec}ifelse 
+} stopped cleartomark
+[{120 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/WaitTimeout 4 -1 roll put setuserparams}{statusdict/waittimeout 3 -1 roll put}ifelse 
+} stopped cleartomark
+[{1 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/NumCopies 4
+-1 roll put setpagedevice}{userdict/#copies 3 -1 roll put}ifelse
+
+} stopped cleartomark
+[{
+%%BeginFeature: *ManualFeed False
+statusdict /manualfeed false put
+%%EndFeature
+} stopped cleartomark
+[{
+%%BeginFeature: *PageSize Letter
+letter
+%%EndFeature
+} stopped cleartomark
+1 setlinecap 1 setlinejoin 
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+%%EndSetup
+
+%%Page: 1 1
+%%BeginPageSetup
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.947 
+T 
+/Helvetica-Bold
+mF 
+/F0_75
+F0
+75 
+xF 
+F0_75
+Ji 
+365 202 M 
+0.013 0 (UTILITY ROUTINES AND UTILITY CLASSES FOR)A 
+968 295 M 
+-0.025 0 (OBJECT REXX)A 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+1016 586 M 
+0.182 0 (Rony G. Flatscher)A 
+%%IncludeFont: Helvetica
+/F3
+0.940 
+T 
+/Helvetica
+mF 
+/F3_50
+F3
+50 
+xF 
+F3_50
+Ji 
+633 679 M 
+0.158 0 (Department of Management and Information Systems)A 
+556 772 M 
+0.074 0 (Vienna University of Economics and Business Administration)A 
+362 865 M 
+0.275 0 (\2048)A 
+/F3_29
+F3
+29 
+xF 
+F3_29
+Ji 
+407 864 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+431 865 M 
+0.118 0 ( International Rexx Symposium\223, Heidelberg/Germany, April 22)A 
+F3_29
+Ji 
+1833 864 M 
+-0.124 0 (nd)A 
+F3_50
+Ji 
+1865 865 M 
+0.250 0 (-24)A 
+F3_29
+Ji 
+1938 864 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+1962 865 M 
+0.166 0 (, 1997)A 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+1073 1164 M 
+0.007 0 (ABSTRACT)A 
+F3_50
+Ji 
+225 1318 M 
+5.000 0 32 0.269 0 (Over the past years, starting out with the beta-versions of Object Rexx in 1995, various)D 
+225 1411 M 
+4.000 0 32 0.238 0 (utilities \(routines and classes\) have been devised.  Some of them proofed useful, so the)D 
+225 1504 M 
+0.134 0 (author wanted to share them with the Rexx community. )A 
+225 1644 M 
+4.000 0 32 0.201 0 (Among the utility routines one can find routines to sort collections like arrays, stems and)D 
+225 1738 M 
+3.000 0 32 0.197 0 (directories etc., but also sort by the value part of some collections, where the sort values)D 
+225 1831 M 
+34.000 0 32 0.174 0 (themselves get retrieved via dynamically invoked messages according to the)D 
+225 1924 M 
+10.000 0 32 0.162 0 (message-names passed into the routine; determine \(like with IBM's SOM\) whether an)D 
+225 2017 M 
+8.000 0 32 0.151 0 (object is a class object, an instance of a specific class and the like.  Also some basic)D 
+225 2110 M 
+0.144 0 (National Language support \(upper/lowercasing, sorting\) is documented.)A 
+225 2250 M 
+0.100 0 (.)A 
+/F3_42
+F3
+42 
+xF 
+F3_42
+Ji 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (1)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 2 2
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+161 224 M 
+-0.248 0 (1)A 
+338 224 M 
+-0.052 0 (INTRODUCTION)A 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+161 378 M 
+10.000 0 32 0.143 0 (Object Rexx was introduced as a product in the fall of 1996 with IBM's PC operating)D 
+161 471 M 
+4.000 0 32 0.195 0 (system OS/2 Warp\2404. In February 1997 a version for Windows 95 and Windows NT was)D 
+161 564 M 
+0.119 0 (introduced by IBM.)A 
+161 704 M 
+18.000 0 32 0.124 0 (Object Rexx is backwardly compatible with Rexx, but enhances the language with)D 
+161 797 M 
+6.000 0 32 0.258 0 (powerful new features, some being independent of object-orientedness, yet most of the)D 
+161 890 M 
+11.000 0 32 0.168 0 (added power can be directly attributed to the innovative and powerful object oriented)D 
+161 983 M 
+0.134 0 (concepts, introduced into the language.)A 
+161 1124 M 
+5.000 0 32 0.181 0 (In the course of working with beta-versions of Object Rexx \(started as early as in 1995\))D 
+161 1217 M 
+6.000 0 32 0.177 0 (the author devised a couple of utility functions, classes and routines which should ease)D 
+161 1310 M 
+0.146 0 (and enhance the development of Object Rexx programs.)A 
+161 1450 M 
+2.000 0 32 0.153 0 (Because of the wealth of the different utilties it became necessary to split the talk and the)D 
+161 1543 M 
+3.000 0 32 0.268 0 (paper into two parts, where the second part draws sometimes on the features of the first)D 
+161 1636 M 
+0.206 0 (one. The following Object Rexx utility modules with their public definitions are documented)A 
+161 1729 M 
+0.125 0 (in this paper:)A 
+: 0 0 2165 3232 rc %%IncludeFont: Courier
+/F4
+0.868 
+T 
+/Courier
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+180 1816 M 
+0.238 0 (get_answ.cmd           )A 
+; : 0 0 2165 3232 rc /F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+730 1816 M 
+-0.080 0 (get an option \(for command line interface, aka "CLI"\))A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 1886 M 
+0.238 0 (routine_find_file.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 1886 M 
+-0.032 0 (find a file along a path      )A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 1955 M 
+0.238 0 (routine_ok.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 1955 M 
+-0.008 0 (turn )A 
+; : 0 0 2165 3232 rc %%IncludeFont: Helvetica-Oblique
+/F7
+0.929 
+T 
+/Helvetica-Oblique
+mF 
+/F7_42
+F7
+42 
+xF 
+F7_42
+Ji 
+814 1956 M 
+-0.008 0 (.true/.false)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+1010 1955 M 
+0.014 0 ( into strings   )A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2025 M 
+0.238 0 (routine_pp.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2025 M 
+0.064 0 ("cheap pretty print"          )A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2095 M 
+0.238 0 (routine_pp_number.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2095 M 
+-0.089 0 (simple formatting of numbers)A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2165 M 
+0.238 0 (routine_strip_quote.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2165 M 
+-0.019 0 (simple strip/add quotes       )A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2234 M 
+0.238 0 (Is_Util.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2235 M 
+0.036 0 (Object Rexx test support      )A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2304 M 
+0.238 0 (nls_util.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2304 M 
+-0.140 0 (National Language support \("NLS"\), requires )A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+1566 2305 M 
+-0.065 0 (Is_util.cmd)A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2374 M 
+0.238 0 (sort_util.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2374 M 
+-0.077 0 (sort utilities for collections, requires )A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+1392 2375 M 
+-0.143 0 (nls_util.cmd)A 
+; : 0 0 2165 3232 rc F4_38
+Ji 
+180 2444 M 
+0.238 0 (rgf_util.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+730 2444 M 
+-0.147 0 (miscellaneous utilities and focal module for the following required modules:)A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+730 2497 M 
+-0.027 0 (rgf_class.cmd, )A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+1012 2496 M 
+0.324 0 ( )A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+1024 2497 M 
+-0.119 0 (routine_find_file.cmd, routine_ok.cmd, routine_pp.cmd,)A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+730 2549 M 
+-0.168 0 (routine_pp_number.cmd, routine_strip_quote)A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+1561 2549 M 
+-0.003 0 (.cmd)A 
+; : 0 0 2165 3232 rc F2_42
+Ji 
+1652 2548 M 
+-0.081 0 ( and )A 
+; : 0 0 2165 3232 rc F7_42
+Ji 
+1745 2549 M 
+-0.081 0 (sort_util.cmd)A 
+; 
+175 1810 N M 1982 2 rr : 0 sg O ; 
+175 1876 N M 1982 2 rr : 0 sg O ; 
+175 1946 N M 1982 2 rr : 0 sg O ; 
+175 2015 N M 1982 2 rr : 0 sg O ; 
+175 2085 N M 1982 2 rr : 0 sg O ; 
+175 2155 N M 1982 2 rr : 0 sg O ; 
+175 2225 N M 1982 2 rr : 0 sg O ; 
+175 2295 N M 1982 2 rr : 0 sg O ; 
+175 2364 N M 1982 2 rr : 0 sg O ; 
+175 2434 N M 1982 2 rr : 0 sg O ; 
+175 2608 N M 1982 2 rr : 0 sg O ; 
+175 1810 N M 2 800 rr : 0 sg O ; 
+2155 1810 N M 2 800 rr : 0 sg O ; 161 2681 M 
+2.000 0 32 0.103 0 (The following Object Rexx utility modules with their public definitions are documented in a)D 
+161 2774 M 
+0.173 0 (different paper)A 
+/F2_29
+F2
+29 
+xF 
+F2_29
+Ji 
+486 2773 M 
+-0.124 0 (1)A 
+502 2773 M 
+0.343 0 (\))A 
+F2_50
+Ji 
+512 2774 M 
+0.100 0 (:)A 
+: 161 2931 2015 1 rc 
+161 2931 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F2_24
+F2
+24 
+xF 
+F2_24
+Ji 
+161 2965 M 
+-0.344 0 (1)A 
+174 2965 M 
+0.008 0 (\))A 
+F2_42
+Ji 
+220 2965 M 
+0.069 0 (Cf. [Flat97].)A 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (2)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 3 3
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2229 3232 rc %%IncludeFont: Courier
+/F0
+0.868 
+T 
+/Courier
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+244 211 M 
+0.238 0 (class_rel.cmd)A 
+; : 0 0 2229 3232 rc %%IncludeFont: Helvetica
+/F2
+0.952 
+T 
+/Helvetica
+mF 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+793 211 M 
+-0.077 0 (some subclasses of )A 
+; : 0 0 2229 3232 rc %%IncludeFont: Helvetica-Oblique
+/F4
+0.929 
+T 
+/Helvetica-Oblique
+mF 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+1172 212 M 
+-0.192 0 (.Relation)A 
+; : 0 0 2229 3232 rc F0_38
+Ji 
+244 281 M 
+0.238 0 (routine_USIfy.cmd)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 281 M 
+-0.135 0 (turn string into 7-Bit alphanumeric chars with embedded blanks being)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 333 M 
+-0.168 0 (replaced with an underscore)A 
+; : 0 0 2229 3232 rc F0_38
+Ji 
+244 403 M 
+0.238 0 (class_ref.cmd)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 403 M 
+-0.112 0 (anchor/reference classes, allows for forward referencing; requires)A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+793 456 M 
+-0.098 0 (class_rel.cmd )A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+1060 455 M 
+-0.183 0 (and )A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+1141 456 M 
+-0.105 0 (Routine_USIfy.cmd)A 
+; : 0 0 2229 3232 rc F0_38
+Ji 
+244 525 M 
+0.238 0 (sgmlEntity_util.cmd)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 525 M 
+-0.065 0 (SGML-entity support to translate non 7-Bit characters according to the)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 577 M 
+-0.095 0 (codepage into SGML-entity chars; requires )A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+1599 578 M 
+-0.143 0 (nls_util.cmd)A 
+; : 0 0 2229 3232 rc F0_38
+Ji 
+244 647 M 
+0.238 0 (html_util.cmd)A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+793 647 M 
+-0.083 0 (utilities and classes for creating HTML files, lists and tables; requires)A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+793 700 M 
+-0.027 0 (class_ref.cmd, )A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+1075 700 M 
+-0.056 0 (rgf_util.cmd )A 
+; : 0 0 2229 3232 rc F2_42
+Ji 
+1303 699 M 
+-0.183 0 (and )A 
+; : 0 0 2229 3232 rc F4_42
+Ji 
+1384 700 M 
+-0.091 0 (sgmlEntity_util.cmd)A 
+; 
+239 206 N M 1982 2 rr : 0 sg O ; 
+239 271 N M 1982 2 rr : 0 sg O ; 
+239 393 N M 1982 2 rr : 0 sg O ; 
+239 515 N M 1982 2 rr : 0 sg O ; 
+239 637 N M 1982 2 rr : 0 sg O ; 
+239 759 N M 1982 2 rr : 0 sg O ; 
+239 206 N M 2 555 rr : 0 sg O ; 
+2219 206 N M 2 555 rr : 0 sg O ; /F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+225 831 M 
+21.000 0 32 0.184 0 (All of these Rexx programs)D 
+/F2_29
+F2
+29 
+xF 
+F2_29
+Ji 
+914 830 M 
+21.000 0 32 -0.124 0 (2)D 
+930 830 M 
+21.000 0 32 0.343 0 (\))D 
+F2_50
+Ji 
+940 831 M 
+21.000 0 32 0.231 0 ( are made freely available via the Internet \(e.g. cf.)D 
+225 924 M 
+8.000 0 32 0.199 0 ([W3Hobbes] or [W3RexxLA]\). In the case that a particular interesting feature of Object)D 
+225 1018 M 
+2.000 0 32 0.193 0 (Rexx is employed, it will get explained in detail. As a rule, short routines will get shown in)D 
+225 1111 M 
+0.119 0 (full source code in this paper.)A 
+225 1251 M 
+3.000 0 32 0.137 0 (Thruout this paper it is assumed that the reader is acquainted with the basic principles of)D 
+225 1344 M 
+3.000 0 32 0.220 0 (Object Rexx as layed out e.g. in the articles of [Flat96a] and [Flat96b], or in the books of)D 
+225 1437 M 
+0.142 0 ([Ende97], [TurWah97], [VeTrUr96] and [WahHolTur97].)A 
+F2_29
+Ji 
+1455 1436 M 
+-0.124 0 (3)A 
+1471 1436 M 
+0.343 0 (\))A 
+F2_50
+Ji 
+225 1577 M 
+1.000 0 32 0.233 0 (The syntax diagrams use square brackets \("[", "]"\) to denote optional arguments and curly)D 
+225 1670 M 
+3.000 0 32 0.209 0 (brackets \("{", "}"\) to indicate that a mandatory argument has to be chosen from the list of)D 
+225 1764 M 
+3.000 0 32 0.232 0 (arguments which themselves are delimited with a bar \("|"\). Three dots \("ellipsis"\) indicate)D 
+225 1857 M 
+0.143 0 (that the preceding construct may be repeated. An example:)A 
+/F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+375 1993 M 
+0.446 0 (xyz)A 
+459 1993 M 
+0.446 0 (\( arg1, )A 
+%%IncludeFont: Courier-Bold
+/F9
+0.848 
+T 
+/Courier-Bold
+mF 
+/F9_46
+F9
+46 
+xF 
+F9_46
+Ji 
+683 1993 M 
+0.446 0 ({)A 
+F0_46
+Ji 
+711 1993 M 
+0.446 0 ( arg2 )A 
+F9_46
+Ji 
+879 1993 M 
+0.446 0 (|)A 
+F0_46
+Ji 
+907 1993 M 
+0.446 0 ( arg3 )A 
+F9_46
+Ji 
+1075 1993 M 
+0.446 0 (}  [)A 
+F0_46
+Ji 
+1187 1993 M 
+0.446 0 ( , optional_arg4 )A 
+F9_46
+Ji 
+1663 1993 M 
+0.446 0 (])A 
+F0_46
+Ji 
+1691 1993 M 
+0.446 0 ( )A 
+F9_46
+Ji 
+1719 1993 M 
+0.446 0 (...)A 
+F0_46
+Ji 
+1803 1993 M 
+0.446 0 ( \))A 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+225 2113 M 
+10.000 0 32 0.410 0 (arg1 )D 
+F2_50
+Ji 
+351 2113 M 
+10.000 0 32 0.314 0 (is a mandatory argument to )D 
+F4_50
+Ji 
+1032 2113 M 
+10.000 0 32 (xyz)W 
+F2_50
+Ji 
+1107 2113 M 
+10.000 0 32 0.288 0 ( followed by a comma followed by a mandatory)D 
+225 2206 M 
+17.000 0 32 0.252 0 (argument \(either )D 
+F4_50
+Ji 
+644 2206 M 
+17.000 0 32 0.210 0 (arg2 )D 
+F2_50
+Ji 
+776 2206 M 
+17.000 0 32 0.216 0 (or )D 
+F4_50
+Ji 
+852 2206 M 
+17.000 0 32 0.237 0 (arg3)D 
+F2_50
+Ji 
+953 2206 M 
+17.000 0 32 0.177 0 (\), followed optionally by one \()D 
+F4_50
+Ji 
+1691 2206 M 
+17.000 0 32 0.237 0 (arg4)D 
+F2_50
+Ji 
+1792 2206 M 
+17.000 0 32 0.420 0 (\) or )D 
+1917 2206 M 
+17.000 0 32 0.161 0 (more optional)D 
+225 2299 M 
+0.190 0 (arguments.)A 
+: 225 2595 2015 1 rc 
+225 2595 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F2_24
+F2
+24 
+xF 
+F2_24
+Ji 
+225 2629 M 
+-0.344 0 (2)A 
+238 2629 M 
+0.008 0 (\))A 
+F2_42
+Ji 
+284 2629 M 
+0.040 0 (Please note that the term )A 
+F4_42
+Ji 
+766 2630 M 
+-0.195 0 (program)A 
+F2_42
+Ji 
+921 2629 M 
+0.018 0 ( in the context of this paper may be used interchangeably with the term)A 
+F4_42
+Ji 
+284 2708 M 
+1.000 0 32 -0.286 0 (module)D 
+F2_42
+Ji 
+420 2707 M 
+1.000 0 32 0.739 0 (. A )D 
+F4_42
+Ji 
+488 2708 M 
+1.000 0 32 -0.286 0 (module)D 
+F2_42
+Ji 
+624 2707 M 
+1.000 0 32 0.382 0 ( is a )D 
+F4_42
+Ji 
+718 2708 M 
+1.000 0 32 -0.195 0 (program)D 
+F2_42
+Ji 
+873 2707 M 
+1.000 0 32 0.014 0 (, but was intentionally created for being required by other Rexx programs)D 
+284 2785 M 
+-0.051 0 (via the )A 
+F0_46
+Ji 
+419 2786 M 
+0.446 0 (::REQUIRES)A 
+F2_42
+Ji 
+699 2785 M 
+-0.090 0 ( directive and as a rule would not be too useful to be executed on its own.)A 
+F2_24
+Ji 
+225 2887 M 
+-0.344 0 (3)A 
+238 2887 M 
+0.008 0 (\))A 
+F2_42
+Ji 
+284 2887 M 
+1.000 0 32 -0.024 0 ([W3ObjRexx] and [W3RexxLA] contain among other things articles and brief introductions into the Object)D 
+284 2965 M 
+-0.112 0 (Rexx language directly accessible via the Internet.)A 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (3)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 4 4
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+4.000 0 32 0.155 0 (All examples make sure that all public definitions \(routines and classes\) of the described)D 
+161 311 M 
+4.000 0 32 0.252 0 (module are loaded by )D 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+677 311 M 
+4.000 0 32 -0.012 0 (CALL)D 
+F0_50
+Ji 
+802 311 M 
+4.000 0 32 0.165 0 (ing it. Please note, that one usually would acquire access to)D 
+161 404 M 
+0.086 0 (those public definitions via the Object Rexx )A 
+F2_50
+Ji 
+1132 404 M 
+-0.026 0 (":: REQUIRES")A 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1470 403 M 
+-0.124 0 (4)A 
+1486 403 M 
+0.343 0 (\))A 
+F0_50
+Ji 
+1496 404 M 
+0.095 0 ( directive.)A 
+%%IncludeFont: Helvetica-Bold
+/F5
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F5_58
+F5
+58 
+xF 
+F5_58
+Ji 
+161 574 M 
+-0.248 0 (2)A 
+338 574 M 
+-0.062 0 (MODULE )A 
+%%IncludeFont: Courier-Bold
+/F7
+0.852 
+T 
+/Courier-Bold
+mF 
+/F7_54
+F7
+54 
+xF 
+F7_54
+Ji 
+605 583 M 
+-0.346 0 (GET_ANSW.CMD)A 
+F0_50
+Ji 
+161 728 M 
+0.130 0 (This module supports one single public routine)A 
+1198 728 M 
+0.100 0 (: )A 
+%%IncludeFont: Courier
+/F9
+0.848 
+T 
+/Courier
+mF 
+/F9_46
+F9
+46 
+xF 
+F9_46
+Ji 
+1226 736 M 
+0.446 0 (get_answer\(\))A 
+F0_50
+Ji 
+1562 728 M 
+0.100 0 (.)A 
+F0_29
+Ji 
+1576 727 M 
+-0.124 0 (5)A 
+1592 727 M 
+0.343 0 (\))A 
+F5_58
+Ji 
+161 921 M 
+-0.248 0 (2)A 
+193 921 M 
+-0.124 0 (.)A 
+209 921 M 
+-0.248 0 (1)A 
+338 921 M 
+-0.212 0 (Public Routine )A 
+F7_54
+Ji 
+757 930 M 
+-0.346 0 (Get_Answer\(\))A 
+F0_50
+Ji 
+161 1075 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier-Oblique
+/F11
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F11_46
+F11
+46 
+xF 
+F11_46
+Ji 
+398 1085 M 
+0.400 0 (Get_Answer\( letterString [, [upperBound] [,Force]]\))A 
+F0_50
+Ji 
+161 1215 M 
+3.000 0 32 0.282 0 (Returns what the user entered via the keyboard in a command line interface \(aka "CLI"\).)D 
+161 1308 M 
+10.000 0 32 0.160 0 (Can be either an empty string \(""\) if just the )D 
+F2_50
+Ji 
+1235 1308 M 
+10.000 0 32 -0.058 0 (ENTER )D 
+F0_50
+Ji 
+1428 1308 M 
+10.000 0 32 0.125 0 (key is pressed, or "1B"x for the)D 
+F2_50
+Ji 
+161 1401 M 
+6.000 0 32 -0.250 0 (ESCAPE )D 
+F0_50
+Ji 
+382 1401 M 
+6.000 0 32 0.227 0 (key, or a single letter from the )D 
+F2_50
+Ji 
+1104 1401 M 
+6.000 0 32 0.104 0 (letterString)D 
+F0_50
+Ji 
+1347 1401 M 
+6.000 0 32 0.233 0 ( \(key-stroke\),  or an integer number)D 
+161 1494 M 
+0.141 0 (with a value of 0 or larger, but not larger than the given )A 
+F2_50
+Ji 
+1395 1494 M 
+0.160 0 (upperBound)A 
+F0_50
+Ji 
+1669 1494 M 
+0.190 0 ( argument. )A 
+161 1635 M 
+6.000 0 32 0.237 0 (The )D 
+F2_50
+Ji 
+268 1635 M 
+6.000 0 32 -0.294 0 (BACKSPACE)D 
+F0_50
+Ji 
+571 1635 M 
+6.000 0 32 0.202 0 ( key allows for editing an entered number with more than one digit, if)D 
+F2_50
+Ji 
+161 1728 M 
+9.000 0 32 0.160 0 (upperBound)D 
+F0_50
+Ji 
+435 1728 M 
+9.000 0 32 0.137 0 ( is given. Whenever a user entry becomes unambiguous than the function)D 
+161 1821 M 
+0.134 0 (automatically ends the entry mode and returns the received value. If just the )A 
+F2_50
+Ji 
+1864 1821 M 
+-0.090 0 (ENTER)A 
+F0_50
+Ji 
+2033 1821 M 
+0.042 0 ( key is)A 
+161 1914 M 
+0.150 0 (pressed, an empty string is returned.)A 
+161 2054 M 
+0.135 0 (Arguments:)A 
+
+161 2179 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+170 2195 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F13
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F13_50
+F13
+50 
+xF 
+F13_50
+Ji 
+220 2147 M 
+1.000 0 32 0.108 0 (letterString)D 
+F0_50
+Ji 
+488 2148 M 
+1.000 0 32 0.229 0 ( - string of valid letters for the user to enter, e.g. )D 
+F2_50
+Ji 
+1577 2148 M 
+1.000 0 32 0.030 0 ("YN" )D 
+F0_50
+Ji 
+1697 2148 M 
+1.000 0 32 0.215 0 (for either the key "Y",)D 
+279 2242 M 
+0.165 0 ("y", "N" or "n".)A 
+
+161 2367 N M 9 16 - K 
+170 2383 N M 18 -35 - K F13_50
+Ji 
+220 2335 M 
+15.000 0 32 0.263 0 (upperBound )D 
+F0_50
+Ji 
+549 2336 M 
+15.000 0 32 0.223 0 (- optional positive number, the user may enter 0 thru the value of)D 
+F2_50
+Ji 
+279 2429 M 
+10.000 0 32 0.160 0 (upperBound)D 
+F0_50
+Ji 
+553 2429 M 
+10.000 0 32 0.200 0 (; e.g. if )D 
+F2_50
+Ji 
+749 2429 M 
+10.000 0 32 0.160 0 (upperBound)D 
+F0_50
+Ji 
+1023 2429 M 
+10.000 0 32 0.243 0 ( has a value of )D 
+F2_50
+Ji 
+1416 2429 M 
+10.000 0 32 0.166 0 (32 )D 
+F0_50
+Ji 
+1496 2429 M 
+10.000 0 32 0.238 0 (then the user may enter any)D 
+279 2522 M 
+0.125 0 (number between 0 and 32 inclusively.)A 
+: 161 2682 2015 1 rc 
+161 2682 N M 2014 0 - 1 Lw solid K ; /F0_24
+F0
+24 
+xF 
+F0_24
+Ji 
+161 2716 M 
+-0.344 0 (4)A 
+174 2716 M 
+0.008 0 (\))A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+220 2716 M 
+0.039 0 (Cf. [Flat96a].)A 
+F0_24
+Ji 
+161 2817 M 
+-0.344 0 (5)A 
+174 2817 M 
+0.008 0 (\))A 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+220 2818 M 
+0.239 0 (The )A 
+305 2818 M 
+-0.002 0 (code for this routine was extracted from the author's "showini.cmd"-package, a Rexx written package)A 
+220 2893 M 
+5.000 0 32 0.009 0 (to display, edit, delete, backup and restore OS/2 INI-files. The program with )D 
+1693 2893 M 
+5.000 0 32 -0.008 0 (the entire source may be)D 
+220 2968 M 
+0.012 0 (found, e.g.  )A 
+/F9_33
+F9
+33 
+xF 
+F9_33
+Ji 
+442 2979 M 
+0.233 0 (<ftp://hobbes.nmsu.edu/os2/textutil/shwini32.zip>)A 
+F2_42
+Ji 
+1422 2968 M 
+-0.104 0 ( as of 1997-06-22.)A 
+F0_42
+Ji 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (4)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 5 5
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+
+225 250 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+234 266 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F0
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+284 218 M 
+8.000 0 32 0.170 0 (Force)D 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+421 219 M 
+8.000 0 32 0.171 0 ( - forces user to enter a valid value, i.e. pressing just the )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1789 219 M 
+8.000 0 32 -0.090 0 (ENTER)D 
+F2_50
+Ji 
+1958 219 M 
+8.000 0 32 0.083 0 ( key without)D 
+343 312 M 
+0.124 0 (supplying a value is not allowed; this argument takes any argument, e.g. )A 
+F4_50
+Ji 
+1964 312 M 
+0.262 0 ("F".)A 
+F2_50
+Ji 
+225 453 M 
+0.108 0 (Example 1 \(using )A 
+F4_50
+Ji 
+627 453 M 
+0.104 0 (letterString)A 
+F2_50
+Ji 
+870 453 M 
+0.350 0 (\))A 
+887 453 M 
+0.100 0 (:)A 
+%%IncludeFont: Courier
+/F6
+0.868 
+T 
+/Courier
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+343 530 M 
+0.238 0 (CALL get_answ)A 
+825 530 M 
+0.238 0 (/* load "Get_Answ.cmd" public definitions)A 
+2025 530 M 
+0.238 0 (*/)A 
+343 606 M 
+0.238 0 (SAY "Do you want to erase drive A: ? \(Y/N\)")A 
+343 682 M 
+0.238 0 (answer = get_answer\( )A 
+%%IncludeFont: Courier-Bold
+/F8
+0.868 
+T 
+/Courier-Bold
+mF 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+826 682 M 
+0.238 0 ("YN")A 
+F6_38
+Ji 
+918 682 M 
+0.238 0 ( \))A 
+975 682 M 
+0.238 0 (/* "Y", "N", )A 
+%%IncludeFont: Courier-Oblique
+/F10
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F10_38
+F10
+38 
+xF 
+F10_38
+Ji 
+1274 684 M 
+0.200 0 (ENTER )A 
+F6_38
+Ji 
+1412 682 M 
+0.238 0 (or )A 
+F10_38
+Ji 
+1481 684 M 
+0.200 0 (ESCAPE)A 
+F6_38
+Ji 
+2025 682 M 
+0.238 0 (*/)A 
+343 722 M 
+0.238 0 (IF answer = "Y" THEN ...)A 
+F2_50
+Ji 
+225 822 M 
+0.108 0 (Example 2 \(using )A 
+F4_50
+Ji 
+627 822 M 
+0.104 0 (letterString)A 
+F2_50
+Ji 
+870 822 M 
+0.160 0 ( and )A 
+F4_50
+Ji 
+982 822 M 
+0.240 0 (Force)A 
+F2_50
+Ji 
+1111 822 M 
+0.225 0 (\):)A 
+F6_38
+Ji 
+343 900 M 
+0.238 0 (CALL get_answ)A 
+825 900 M 
+0.238 0 (/* load "Get_Answ.cmd" public definitions)A 
+2025 900 M 
+0.238 0 (*/)A 
+343 976 M 
+0.238 0 (SAY "Do you want to erase drive A: ? \(Y/N\)")A 
+343 1051 M 
+0.238 0 (answer = get_answer\( )A 
+F8_38
+Ji 
+826 1051 M 
+0.238 0 ("YN", , "F")A 
+F6_38
+Ji 
+1079 1051 M 
+0.238 0 ( \))A 
+1275 1051 M 
+0.238 0 (/* "Y", "N" or )A 
+F10_38
+Ji 
+1620 1053 M 
+0.200 0 (ESCAPE)A 
+F6_38
+Ji 
+2025 1051 M 
+0.238 0 (*/)A 
+343 1091 M 
+0.238 0 (IF answer = "Y" THEN ...)A 
+F2_50
+Ji 
+225 1192 M 
+0.108 0 (Example 3 \(using )A 
+F4_50
+Ji 
+627 1192 M 
+0.160 0 (upperBound)A 
+F2_50
+Ji 
+901 1192 M 
+0.165 0 (, i.e. a number has to be entered\):)A 
+F6_38
+Ji 
+343 1269 M 
+0.238 0 (CALL get_answ)A 
+825 1269 M 
+0.238 0 (/* load "Get_Answ.cmd" public definitions)A 
+2025 1269 M 
+0.238 0 (*/)A 
+343 1345 M 
+0.238 0 (SAY "\(1\) add user")A 
+343 1383 M 
+0.238 0 (SAY "\(2\) delete user")A 
+343 1459 M 
+0.238 0 (answer = get_answer\()A 
+F8_38
+Ji 
+803 1459 M 
+0.238 0 ( , 2 )A 
+F6_38
+Ji 
+918 1459 M 
+0.238 0 (\))A 
+975 1459 M 
+0.238 0 (/* 0, 1, 2, )A 
+F10_38
+Ji 
+1251 1461 M 
+0.200 0 (ENTER )A 
+F6_38
+Ji 
+1389 1459 M 
+0.238 0 (or )A 
+F10_38
+Ji 
+1458 1461 M 
+0.200 0 (ESCAPE)A 
+F6_38
+Ji 
+2025 1459 M 
+0.238 0 (*/)A 
+343 1499 M 
+0.238 0 (IF answer = 1 THEN ...)A 
+1125 1499 M 
+0.238 0 (/* add user)A 
+1425 1499 M 
+0.238 0 (...)A 
+2025 1499 M 
+0.238 0 (*/)A 
+F2_50
+Ji 
+225 1600 M 
+0.285 0 (Example 4 \(using )A 
+F4_50
+Ji 
+630 1600 M 
+0.104 0 (letterString)A 
+F2_50
+Ji 
+873 1600 M 
+0.560 0 ( and )A 
+F4_50
+Ji 
+987 1600 M 
+0.160 0 (upperBound)A 
+F2_50
+Ji 
+1261 1600 M 
+0.364 0 (, i.e. a letter or a number may be entered at)A 
+225 1693 M 
+0.163 0 (the same time\):)A 
+F6_38
+Ji 
+343 1770 M 
+0.238 0 (CALL get_answ)A 
+825 1770 M 
+0.238 0 (/* load "Get_Answ.cmd" public definitions)A 
+2025 1770 M 
+0.238 0 (*/)A 
+343 1846 M 
+0.238 0 (SAY "\(1\) add user")A 
+343 1884 M 
+0.238 0 (SAY "\(2\) delete user")A 
+343 1922 M 
+0.238 0 (SAY "\(Q\)quit, \(A\)bort immediately:")A 
+343 1998 M 
+0.238 0 (answer = get_answer\( )A 
+F8_38
+Ji 
+826 1998 M 
+0.238 0 ("AQ", 2 )A 
+F6_38
+Ji 
+1010 1998 M 
+0.238 0 (\))A 
+1125 1998 M 
+0.238 0 (/* 0. 1, 2, "A", "Q", )A 
+F10_38
+Ji 
+1631 2000 M 
+0.200 0 (ENTER )A 
+F6_38
+Ji 
+1769 1998 M 
+0.238 0 (or )A 
+F10_38
+Ji 
+1838 2000 M 
+0.200 0 (ESCAPE)A 
+F6_38
+Ji 
+2025 1998 M 
+0.238 0 (*/)A 
+343 2038 M 
+0.238 0 (IF answer = 1 THEN ...)A 
+1125 2038 M 
+0.238 0 (/* add user)A 
+1425 2038 M 
+0.238 0 (...)A 
+2025 2038 M 
+0.238 0 (*/)A 
+%%IncludeFont: Helvetica-Bold
+/F12
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F12_58
+F12
+58 
+xF 
+F12_58
+Ji 
+225 2168 M 
+-0.248 0 (3)A 
+402 2168 M 
+-0.062 0 (MODULE )A 
+/F8_54
+F8
+54 
+xF 
+F8_54
+Ji 
+669 2177 M 
+-0.346 0 (ROUTINE_FIND_FILE.CMD)A 
+F2_50
+Ji 
+225 2322 M 
+0.130 0 (This module supports one single public routine)A 
+1262 2322 M 
+0.100 0 (: )A 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+1290 2330 M 
+0.446 0 (find_file\(\))A 
+F2_50
+Ji 
+1598 2322 M 
+0.100 0 (.)A 
+F12_58
+Ji 
+225 2515 M 
+-0.248 0 (3)A 
+257 2515 M 
+-0.124 0 (.)A 
+273 2515 M 
+-0.248 0 (1)A 
+402 2515 M 
+-0.212 0 (Public Routine )A 
+F8_54
+Ji 
+821 2524 M 
+-0.346 0 (Find_File\(\))A 
+F2_50
+Ji 
+225 2669 M 
+0.100 0 (Usage:)A 
+/F10_46
+F10
+46 
+xF 
+F10_46
+Ji 
+461 2679 M 
+0.400 0 (Find_File)A 
+713 2679 M 
+0.400 0 (\( file_name [, [ path ] [, extensions] ] )A 
+1861 2679 M 
+0.400 0 (\))A 
+F2_50
+Ji 
+225 2809 M 
+6.000 0 32 0.243 0 (Returns the full path of the Rexx program denoted with )D 
+F4_50
+Ji 
+1524 2809 M 
+6.000 0 32 0.138 0 (file_name)D 
+F2_50
+Ji 
+1742 2809 M 
+6.000 0 32 0.267 0 (\240or empty string if not)D 
+225 2902 M 
+9.000 0 32 0.240 0 (found. If )D 
+F4_50
+Ji 
+440 2902 M 
+9.000 0 32 0.175 0 (path)D 
+F2_50
+Ji 
+538 2902 M 
+9.000 0 32 0.215 0 ( is given, the search is restricted to the given )D 
+F4_50
+Ji 
+1639 2902 M 
+9.000 0 32 0.175 0 (path)D 
+F2_50
+Ji 
+1737 2902 M 
+9.000 0 32 0.223 0 (, where each entry is)D 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (5)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 6 6
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+5.000 0 32 0.272 0 (delimited by a semi-colon. If the third optional argument )D 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+1464 218 M 
+5.000 0 32 0.100 0 (extensions)D 
+F0_50
+Ji 
+1704 218 M 
+5.000 0 32 0.300 0 ( is supplied then the)D 
+161 311 M 
+12.000 0 32 0.145 0 (routine will attempt to find the )D 
+F2_50
+Ji 
+902 311 M 
+12.000 0 32 0.138 0 (file_name)D 
+F0_50
+Ji 
+1120 311 M 
+12.000 0 32 0.177 0 ( by blindly appending each space separated)D 
+F2_50
+Ji 
+161 404 M 
+0.100 0 (extensions)A 
+F0_50
+Ji 
+401 404 M 
+0.125 0 (-item until the )A 
+F2_50
+Ji 
+717 404 M 
+0.138 0 (file_name)A 
+F0_50
+Ji 
+935 404 M 
+0.150 0 (\240is found or returns an empty string.)A 
+161 544 M 
+0.135 0 (Arguments:)A 
+
+161 670 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+170 686 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F4
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+220 638 M 
+0.150 0 (file_name)A 
+F0_50
+Ji 
+452 639 M 
+0.117 0 ( - any valid file name, e.g. )A 
+F2_50
+Ji 
+1039 639 M 
+0.122 0 ("html_util")A 
+
+161 764 N M 9 16 - K 
+170 780 N M 18 -35 - K F4_50
+Ji 
+220 732 M 
+20.000 0 32 0.362 0 (path)D 
+F0_50
+Ji 
+327 733 M 
+20.000 0 32 0.307 0 (\240- omitted or any valid path, e.g. )D 
+F2_50
+Ji 
+1192 733 M 
+20.000 0 32 0.131 0 ("c:\\tools;d:\\tmp\\rexx")D 
+F0_50
+Ji 
+1650 733 M 
+20.000 0 32 0.265 0 (; if omitted, then the)D 
+279 826 M 
+0.145 0 (environment variable )A 
+F2_50
+Ji 
+760 826 M 
+0.035 0 ("PATH" )A 
+F0_50
+Ji 
+943 826 M 
+0.135 0 (is used, prepended with a dot for the actual directory)A 
+
+161 951 N M 9 16 - K 
+170 967 N M 18 -35 - K F4_50
+Ji 
+220 919 M 
+0.280 0 (extensions)A 
+F0_50
+Ji 
+484 920 M 
+0.261 0 ( - omitted or any extension which should be appended to )A 
+F2_50
+Ji 
+1766 920 M 
+0.138 0 (file_name)A 
+F0_50
+Ji 
+1984 920 M 
+0.200 0 (\240until the)A 
+279 1014 M 
+0.100 0 (file is found, e.g. )A 
+F2_50
+Ji 
+659 1014 M 
+0.250 0 (")A 
+677 1014 M 
+0.155 0 (.cmd .erx)A 
+884 1014 M 
+0.250 0 (")A 
+F0_50
+Ji 
+902 1014 M 
+0.115 0 (; if omitted defaults to the value )A 
+F2_50
+Ji 
+1612 1014 M 
+0.131 0 (".orx\240.cmd\240.bat\240.rex\240.cls".)A 
+F0_50
+Ji 
+161 1154 M 
+0.088 0 (Example 1)A 
+398 1154 M 
+0.100 0 (:)A 
+%%IncludeFont: Courier
+/F6
+0.868 
+T 
+/Courier
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+279 1231 M 
+0.238 0 (CALL routine_find_file /* load "routine_find_file.cmd" public definitions)A 
+1961 1231 M 
+0.238 0 (*/)A 
+279 1307 M 
+0.238 0 (path = find_file\( "html_util" \))A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 1370 M 
+0.436 0 (...)A 
+338 1370 M 
+6.000 0 32 0.053 0 (looks up the present directory and all directories given in the environment variable )D 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+1806 1371 M 
+6.000 0 32 -0.387 0 ("PATH")D 
+F0_38
+Ji 
+1932 1370 M 
+6.000 0 32 0.204 0 ( for the file\(s\))D 
+F2_38
+Ji 
+338 1419 M 
+9.000 0 32 0.018 0 ("html_util", "html_util.orx", "html_util.bat", "html_util.rex" )D 
+F0_38
+Ji 
+1313 1418 M 
+9.000 0 32 0.013 0 (and )D 
+F2_38
+Ji 
+1396 1419 M 
+9.000 0 32 -0.096 0 ("html_util.cls")D 
+F0_38
+Ji 
+1620 1418 M 
+9.000 0 32 0.199 0 (. Returns first found file, if not)D 
+338 1465 M 
+0.065 0 (found an empty string instead.)A 
+F0_50
+Ji 
+161 1598 M 
+0.090 0 (Example 2:)A 
+F6_38
+Ji 
+279 1676 M 
+0.238 0 (CALL routine_find_file /* load "routine_find_file.cmd" public definitions)A 
+1961 1676 M 
+0.238 0 (*/)A 
+279 1752 M 
+0.238 0 (path = find_file\( "html_util", "d:\\apps\\os2\\rexx\\", ".orx .cls" \))A 
+F0_38
+Ji 
+279 1814 M 
+0.436 0 (...)A 
+338 1814 M 
+0.021 0 (looks whether the file )A 
+F2_38
+Ji 
+706 1815 M 
+-0.032 0 ("html_util", "html_util.orx" )A 
+F0_38
+Ji 
+1137 1814 M 
+0.218 0 (or )A 
+F2_38
+Ji 
+1182 1815 M 
+-0.096 0 ("html_util.cls")A 
+F0_38
+Ji 
+1406 1814 M 
+0.079 0 ( exists in the directory )A 
+F2_38
+Ji 
+1786 1815 M 
+0.011 0 ("d:\\apps\\os2\\rexx")A 
+F0_38
+Ji 
+2092 1814 M 
+0.436 0 (.)A 
+%%IncludeFont: Helvetica-Bold
+/F10
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F10_58
+F10
+58 
+xF 
+F10_58
+Ji 
+161 1977 M 
+-0.248 0 (4)A 
+338 1977 M 
+-0.062 0 (MODULE )A 
+%%IncludeFont: Courier-Bold
+/F12
+0.852 
+T 
+/Courier-Bold
+mF 
+/F12_54
+F12
+54 
+xF 
+F12_54
+Ji 
+605 1986 M 
+-0.346 0 (ROUTINE_OK.CMD)A 
+F0_50
+Ji 
+161 2131 M 
+0.128 0 (This module supports one single and simple public routine)A 
+1455 2131 M 
+0.100 0 (: )A 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+1483 2139 M 
+0.446 0 (OK\(\))A 
+F0_50
+Ji 
+1595 2131 M 
+0.100 0 (.)A 
+F10_58
+Ji 
+161 2324 M 
+-0.248 0 (4)A 
+193 2324 M 
+-0.124 0 (.)A 
+209 2324 M 
+-0.248 0 (1)A 
+338 2324 M 
+-0.212 0 (Public Routine )A 
+F12_54
+Ji 
+757 2333 M 
+-0.346 0 (OK\(\))A 
+F0_50
+Ji 
+161 2478 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier-Oblique
+/F15
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F15_46
+F15
+46 
+xF 
+F15_46
+Ji 
+398 2488 M 
+0.400 0 (OK\( { .true | .false } \))A 
+F0_50
+Ji 
+161 2618 M 
+2.000 0 32 0.184 0 (Returns the string )D 
+F2_50
+Ji 
+579 2618 M 
+2.000 0 32 0.250 0 (")D 
+F15_46
+Ji 
+597 2628 M 
+2.000 0 32 0.400 0 (*** not o.k. ! ***")D 
+F0_50
+Ji 
+1137 2618 M 
+2.000 0 32 0.180 0 (, if the argument is )D 
+F2_50
+Ji 
+1576 2618 M 
+2.000 0 32 0.083 0 (.false)D 
+F0_50
+Ji 
+1696 2618 M 
+2.000 0 32 0.203 0 (, the string )D 
+F6_46
+Ji 
+1952 2626 M 
+2.000 0 32 0.446 0 ("o.k.")D 
+F0_50
+Ji 
+2120 2618 M 
+2.000 0 32 0.066 0 ( in)D 
+161 2711 M 
+0.109 0 (all other cases.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (6)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 7 7
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+0.132 0 (Source code of routine:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+343 295 M 
+0.238 0 (:: ROUTINE )A 
+%%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+596 295 M 
+0.238 0 (ok)A 
+F2_38
+Ji 
+642 295 M 
+0.238 0 (                    PUBLIC               )A 
+343 333 M 
+0.238 0 (   IF ARG\(1\) = 0 THEN RETURN "*** not o.k. ! ***"     )A 
+343 371 M 
+0.238 0 (                 ELSE RETURN "o.k."                   )A 
+F0_50
+Ji 
+225 472 M 
+0.090 0 (Example 1:)A 
+F2_38
+Ji 
+343 549 M 
+0.238 0 (CALL routine_ok)A 
+975 549 M 
+0.238 0 (/* load "routine_ok.cmd" public definitions)A 
+2025 549 M 
+0.238 0 (*/)A 
+343 625 M 
+0.238 0 (SAY "our test is" ok\( .false \))A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+343 687 M 
+0.436 0 (...)A 
+402 687 M 
+-0.023 0 (yields the following output:)A 
+F2_38
+Ji 
+343 757 M 
+0.238 0 (*** not o.k. ! ***)A 
+F0_50
+Ji 
+225 858 M 
+0.090 0 (Example 2:)A 
+F2_38
+Ji 
+343 935 M 
+0.238 0 (CALL routine_ok)A 
+975 935 M 
+0.238 0 (/* load "routine_ok.cmd" public definitions)A 
+2025 935 M 
+0.238 0 (*/)A 
+343 1011 M 
+0.238 0 (tmp = SysSetObjectData\( "<WP_CLOCK>", "NOMOVE=YES" \))A 
+343 1049 M 
+0.238 0 (SAY "Making System Clock unmovable worked" ok\( tmp \))A 
+%%IncludeFont: Helvetica-Bold
+/F7
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F7_58
+F7
+58 
+xF 
+F7_58
+Ji 
+225 1180 M 
+-0.248 0 (5)A 
+402 1180 M 
+-0.062 0 (MODULE )A 
+/F4_54
+F4
+54 
+xF 
+F4_54
+Ji 
+669 1189 M 
+-0.346 0 (ROUTINE_PP.CMD)A 
+F0_50
+Ji 
+225 1333 M 
+0.128 0 (This module supports one single and simple public routine)A 
+1519 1333 M 
+0.100 0 (: )A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1547 1341 M 
+0.446 0 (PP\(\))A 
+F0_50
+Ji 
+1659 1333 M 
+0.100 0 (.)A 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1673 1332 M 
+-0.124 0 (6)A 
+1689 1332 M 
+0.343 0 (\))A 
+F7_58
+Ji 
+225 1527 M 
+-0.248 0 (5)A 
+257 1527 M 
+-0.124 0 (.)A 
+273 1527 M 
+-0.248 0 (1)A 
+402 1527 M 
+-0.212 0 (Public Routine )A 
+F4_54
+Ji 
+821 1536 M 
+-0.346 0 (PP\(\))A 
+F0_50
+Ji 
+225 1680 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier-Oblique
+/F12
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F12_46
+F12
+46 
+xF 
+F12_46
+Ji 
+461 1690 M 
+0.400 0 (pp\( someText [, [ leftBracket ] [, rightBracket ] ])A 
+1889 1690 M 
+0.400 0 ( \))A 
+F0_50
+Ji 
+225 1820 M 
+5.000 0 32 0.225 0 (Returns the string value of the given argument )D 
+%%IncludeFont: Helvetica-Oblique
+/F14
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F14_50
+F14
+50 
+xF 
+F14_50
+Ji 
+1315 1820 M 
+5.000 0 32 0.177 0 (someText,)D 
+F0_50
+Ji 
+1550 1820 M 
+5.000 0 32 0.172 0 ( enclosed in given brackets. If)D 
+225 1914 M 
+0.200 0 (the optional )A 
+F14_50
+Ji 
+500 1914 M 
+0.158 0 (leftBracket )A 
+F0_50
+Ji 
+752 1914 M 
+0.248 0 (is omitted the opening square bracket \()A 
+F14_50
+Ji 
+1626 1914 M 
+0.175 0 ("[)A 
+F0_50
+Ji 
+1658 1914 M 
+0.255 0 ("\) is used by default, if the)A 
+225 2007 M 
+0.111 0 (optional )A 
+F14_50
+Ji 
+415 2007 M 
+0.104 0 (rightBracket)A 
+F0_50
+Ji 
+683 2007 M 
+0.127 0 ( is omitted the closing square bracket \()A 
+F14_50
+Ji 
+1544 2007 M 
+0.200 0 ("]")A 
+F0_50
+Ji 
+1594 2007 M 
+0.115 0 (\) is used by default. )A 
+225 2147 M 
+0.132 0 (Source code of routine:)A 
+F2_38
+Ji 
+343 2224 M 
+0.238 0 (:: ROUTINE )A 
+F4_38
+Ji 
+596 2224 M 
+0.238 0 (PP                    )A 
+F2_38
+Ji 
+1102 2224 M 
+0.238 0 (PUBLIC             )A 
+343 2262 M 
+0.238 0 (   PARSE ARG argument, left_bracket, right_bracket)A 
+343 2338 M 
+0.238 0 (   IF left_bracket  = "" THEN left_bracket  = "["       /* default            */)A 
+343 2376 M 
+0.238 0 (   IF right_bracket = "" THEN right_bracket = "]"       /* default            */)A 
+343 2452 M 
+0.238 0 (   RETURN left_bracket || argument || right_bracket)A 
+F0_50
+Ji 
+225 2553 M 
+0.075 0 (Example:)A 
+F2_38
+Ji 
+343 2630 M 
+0.238 0 (CALL routine_pp)A 
+825 2630 M 
+0.238 0 (/* load "routine_pp.cmd" public definitions)A 
+2025 2630 M 
+0.238 0 (*/)A 
+343 2706 M 
+0.238 0 (SAY "Test:" pp\( " " \) pp\( " This is a test" \))A 
+F0_38
+Ji 
+343 2767 M 
+0.436 0 (...)A 
+402 2767 M 
+0.001 0 (yields the following output \(note the now visible blanks within the brackets\):)A 
+F2_38
+Ji 
+343 2838 M 
+0.238 0 (Test: [ ] [ This is a test])A 
+: 225 2931 2015 1 rc 
+225 2931 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F0_24
+F0
+24 
+xF 
+F0_24
+Ji 
+225 2965 M 
+-0.344 0 (6)A 
+238 2965 M 
+0.008 0 (\))A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+284 2965 M 
+0.090 0 (")A 
+/F14_42
+F14
+42 
+xF 
+F14_42
+Ji 
+299 2966 M 
+0.020 0 (PP")A 
+F0_42
+Ji 
+370 2965 M 
+-0.028 0 (\240stands for "cheap" ")A 
+/F7_42
+F7
+42 
+xF 
+F7_42
+Ji 
+748 2965 M 
+0.338 0 (p)A 
+F0_42
+Ji 
+774 2965 M 
+0.105 0 (retty )A 
+F7_42
+Ji 
+868 2965 M 
+0.338 0 (p)A 
+F0_42
+Ji 
+894 2965 M 
+0.012 0 (rint".)A 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (7)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 8 8
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+161 224 M 
+-0.248 0 (6)A 
+338 224 M 
+-0.062 0 (MODULE )A 
+%%IncludeFont: Courier-Bold
+/F2
+0.852 
+T 
+/Courier-Bold
+mF 
+/F2_54
+F2
+54 
+xF 
+F2_54
+Ji 
+605 233 M 
+-0.346 0 (ROUTINE_PP_NUMBER.CMD)A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+161 378 M 
+0.128 0 (This module supports one single and simple public routine)A 
+1455 378 M 
+0.100 0 (: )A 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+1483 386 M 
+0.446 0 (PP_Number\(\))A 
+F4_50
+Ji 
+1791 378 M 
+0.100 0 (.)A 
+/F4_29
+F4
+29 
+xF 
+F4_29
+Ji 
+1805 377 M 
+-0.124 0 (7)A 
+1821 377 M 
+0.343 0 (\))A 
+F0_58
+Ji 
+161 571 M 
+-0.248 0 (6)A 
+193 571 M 
+-0.124 0 (.)A 
+209 571 M 
+-0.248 0 (1)A 
+338 571 M 
+-0.212 0 (Public Routine )A 
+F2_54
+Ji 
+757 580 M 
+-0.346 0 (PP_Number\(\))A 
+F4_50
+Ji 
+161 725 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier-Oblique
+/F9
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F9_46
+F9
+46 
+xF 
+F9_46
+Ji 
+398 735 M 
+0.400 0 (pp_number\( someNumber)A 
+985 735 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+161 865 M 
+0.182 0 (Returns the given number edited in US-style, e.g. the number )A 
+%%IncludeFont: Helvetica-Oblique
+/F11
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F11_50
+F11
+50 
+xF 
+F11_50
+Ji 
+1545 865 M 
+0.191 0 ("123456.78" )A 
+F4_50
+Ji 
+1833 865 M 
+0.187 0 (will be returned)A 
+161 958 M 
+0.156 0 (as "123,456.78" by the routine.)A 
+161 1098 M 
+0.132 0 (Source code of routine:)A 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+279 1176 M 
+0.238 0 (:: ROUTINE )A 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+532 1176 M 
+0.238 0 (PP_Number)A 
+F6_38
+Ji 
+739 1176 M 
+0.238 0 (                    PUBLIC                         )A 
+279 1213 M 
+0.238 0 (   PARSE ARG number                                                    )A 
+279 1251 M 
+0.238 0 (                                                                       )A 
+279 1289 M 
+0.238 0 (   PARSE VAR number number "." fraction                                )A 
+279 1327 M 
+0.238 0 (                                                                       )A 
+279 1365 M 
+0.238 0 (   tmpResult = ''                                                      )A 
+279 1403 M 
+0.238 0 (   DO WHILE length\( number \) > 3                                       )A 
+279 1441 M 
+0.238 0 (      tmpResult = ',' || RIGHT\( number, 3 \) || tmpResult               )A 
+279 1479 M 
+0.238 0 (      number = LEFT\( number, LENGTH\( number \) - 3 \)                    )A 
+279 1517 M 
+0.238 0 (   END                                                                 )A 
+279 1555 M 
+0.238 0 (                                                                       )A 
+279 1593 M 
+0.238 0 (   IF fraction <> "" THEN tmpResult = tmpResult || "." || fraction     )A 
+279 1631 M 
+0.238 0 (                                                                       )A 
+279 1668 M 
+0.238 0 (   RETURN number || tmpResult                                          )A 
+F4_50
+Ji 
+161 1769 M 
+0.075 0 (Example:)A 
+F6_38
+Ji 
+279 1847 M 
+0.238 0 (CALL routine_pp_number  /* load "routine_pp_number.cmd" public definitions */)A 
+279 1922 M 
+0.238 0 (SAY "Test:" )A 
+F2_38
+Ji 
+555 1922 M 
+0.238 0 (pp_number)A 
+F6_38
+Ji 
+763 1922 M 
+0.238 0 (\( 123456.78 \) )A 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+279 1984 M 
+0.436 0 (...)A 
+338 1984 M 
+-0.023 0 (yields the following output:)A 
+/F9_38
+F9
+38 
+xF 
+F9_38
+Ji 
+279 2054 M 
+0.200 0 (Test: 123,456.78)A 
+: 161 2853 2015 1 rc 
+161 2853 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F4_24
+F4
+24 
+xF 
+F4_24
+Ji 
+161 2887 M 
+-0.344 0 (7)A 
+174 2887 M 
+0.008 0 (\))A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+220 2887 M 
+0.019 0 (The code for this routine was extracted from the )A 
+/F11_42
+F11
+42 
+xF 
+F11_42
+Ji 
+1122 2888 M 
+-0.018 0 ("DRIVE.RES")A 
+F4_42
+Ji 
+1378 2887 M 
+0.012 0 (-example of IBM's OS/2 product )A 
+F11_42
+Ji 
+1984 2888 M 
+-0.215 0 ("DrDialog")A 
+F4_42
+Ji 
+220 2965 M 
+-0.110 0 (as distributed with IBM's "Developer Connection" CD-ROM program since 1995.)A 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (8)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 9 9
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+225 224 M 
+-0.248 0 (7)A 
+402 224 M 
+-0.062 0 (MODULE )A 
+%%IncludeFont: Courier-Bold
+/F2
+0.852 
+T 
+/Courier-Bold
+mF 
+/F2_54
+F2
+54 
+xF 
+F2_54
+Ji 
+669 233 M 
+-0.346 0 (ROUTINE_STRIP_QUOTE.CMD)A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+225 378 M 
+0.128 0 (This module supports one single and simple public routine)A 
+1519 378 M 
+0.100 0 (: )A 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+1547 386 M 
+0.446 0 (Strip_Quotes)A 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+1883 382 M 
+-0.318 0 (\(\))A 
+F4_50
+Ji 
+1913 378 M 
+0.100 0 (.)A 
+F0_58
+Ji 
+225 571 M 
+-0.248 0 (7)A 
+257 571 M 
+-0.124 0 (.)A 
+273 571 M 
+-0.248 0 (1)A 
+402 571 M 
+-0.212 0 (Public Routine )A 
+F2_54
+Ji 
+821 580 M 
+-0.346 0 (Strip_Quotes\(\))A 
+F4_50
+Ji 
+225 725 M 
+0.100 0 (Usage:)A 
+F6_46
+Ji 
+461 733 M 
+0.446 0 (Strip_Quotes)A 
+%%IncludeFont: Courier-Oblique
+/F9
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F9_46
+F9
+46 
+xF 
+F9_46
+Ji 
+797 735 M 
+0.400 0 (\( string [, [ bStrip ] , [ quote ] ] )A 
+1833 735 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+225 865 M 
+9.000 0 32 0.220 0 (Returns the )D 
+%%IncludeFont: Helvetica-Oblique
+/F11
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F11_50
+F11
+50 
+xF 
+F11_50
+Ji 
+518 865 M 
+9.000 0 32 0.264 0 (string )D 
+F4_50
+Ji 
+665 865 M 
+9.000 0 32 0.195 0 (with removed enclosing quotes \()D 
+F11_50
+Ji 
+1424 865 M 
+9.000 0 32 0.239 0 (bStrip = .true)D 
+F4_50
+Ji 
+1733 865 M 
+9.000 0 32 0.305 0 (\) or returns the )D 
+F11_50
+Ji 
+2116 865 M 
+9.000 0 32 0.125 0 (string)D 
+F4_50
+Ji 
+225 958 M 
+8.000 0 32 0.245 0 (embedded with quotes \()D 
+F11_50
+Ji 
+788 958 M 
+8.000 0 32 0.193 0 (bStrip = .false)D 
+F4_50
+Ji 
+1114 958 M 
+8.000 0 32 0.287 0 (\). Optional )D 
+F11_50
+Ji 
+1378 958 M 
+8.000 0 32 0.180 0 (quote)D 
+F4_50
+Ji 
+1504 958 M 
+8.000 0 32 0.359 0 ( may be a single quote \('\) or a)D 
+225 1051 M 
+4.000 0 32 0.177 0 (double quote \("\), which serves as the default for embedding. The optional boolean value)D 
+F11_50
+Ji 
+225 1144 M 
+8.000 0 32 0.066 0 (bStrip)D 
+F4_50
+Ji 
+356 1144 M 
+8.000 0 32 0.192 0 ( defaults to )D 
+F11_50
+Ji 
+641 1144 M 
+8.000 0 32 0.190 0 (.true)D 
+F4_50
+Ji 
+742 1144 M 
+8.000 0 32 0.207 0 (, i.e. to stripping quotes from the given string. In stripping mode)D 
+F11_50
+Ji 
+225 1237 M 
+4.000 0 32 0.180 0 (quote)D 
+F4_50
+Ji 
+351 1237 M 
+4.000 0 32 0.233 0 ( is ignored; the quotes get stripped only, if the quote in position 1 of the string is a)D 
+225 1330 M 
+0.130 0 (valid quote and present as the last character of that string also.)A 
+225 1471 M 
+5.000 0 32 0.285 0 (If the string contains the surrounding quote too then Rexx' rules for escaping quotes as)D 
+225 1564 M 
+0.146 0 (part of a string are applied.)A 
+225 1704 M 
+0.132 0 (Source code of routine:)A 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+343 1781 M 
+0.238 0 (:: ROUTINE )A 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+596 1781 M 
+0.238 0 (strip_quotes )A 
+F6_38
+Ji 
+895 1781 M 
+0.238 0 (        PUBLIC)A 
+343 1819 M 
+0.238 0 (   USE ARG string, bStrip, quote)A 
+343 1895 M 
+0.238 0 (  bStrip = \( bStrip <> .false \)   /* default to stripping quotes    */)A 
+343 1971 M 
+0.238 0 (  IF bStrip THEN                  /* strip quotes                   */)A 
+343 2009 M 
+0.238 0 (  DO)A 
+343 2047 M 
+0.238 0 (     string = STRIP\( string \)     /* remove leading/trailing blanks */)A 
+343 2085 M 
+0.238 0 (     quote  = LEFT\( string, 1 \)   /* determine quote                */)A 
+343 2161 M 
+0.238 0 (     IF POS\( quote, '"' || "'" \) > 0 THEN /* check for quote        */)A 
+343 2198 M 
+0.238 0 (     DO)A 
+343 2236 M 
+0.238 0 (        IF RIGHT\( string, 1 \) = quote THEN  /* closing quote present ? */)A 
+343 2274 M 
+0.238 0 (        DO)A 
+343 2312 M 
+0.238 0 (                 /* remove surrounding quotes:    */)A 
+343 2350 M 
+0.238 0 (           string = SUBSTR\( string, 2, LENGTH\( string \) - 2 \))A 
+343 2388 M 
+0.238 0 (                 /* take care of escaped quotes:  */)A 
+343 2426 M 
+0.238 0 (           string = CHANGESTR\( quote || quote, string, quote \))A 
+343 2464 M 
+0.238 0 (        END)A 
+343 2502 M 
+0.238 0 (     END)A 
+343 2540 M 
+0.238 0 (  END)A 
+343 2578 M 
+0.238 0 (  ELSE           /* add quotes, duplicate existing quotes */)A 
+343 2616 M 
+0.238 0 (  DO)A 
+343 2653 M 
+0.238 0 (     IF \\ VAR\( "quote" \) THEN quote = '"'  /* default quote            */)A 
+343 2691 M 
+0.238 0 (           /* escape quotes */)A 
+343 2729 M 
+0.238 0 (     string = quote || CHANGESTR\( quote, string, quote || quote \) || quote      )A 
+343 2767 M 
+0.238 0 (  END)A 
+343 2805 M 
+0.238 0 (  RETURN string)A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+686 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1749 3060 M 
+-0.352 0 (9)A 
+1771 3060 M 
+0.014 0 (-)A 
+1785 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 10 10
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+0.066 0 (Examples:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+279 295 M 
+0.238 0 (CALL routine_strip_quote /* load "routine_strip_quote.cmd" public definitions */)A 
+279 371 M 
+0.238 0 (SAY strip_quotes\( "This is a text.", )A 
+%%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+1130 371 M 
+0.238 0 (.false)A 
+F2_38
+Ji 
+1268 371 M 
+0.238 0 (, "'" \) )A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 433 M 
+0.436 0 (...)A 
+338 433 M 
+-0.023 0 (yields the following output:)A 
+%%IncludeFont: Courier-Oblique
+/F7
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F7_38
+F7
+38 
+xF 
+F7_38
+Ji 
+279 503 M 
+0.200 0 ('This is a text.')A 
+F2_38
+Ji 
+279 579 M 
+0.238 0 (SAY strip_quotes\( "'This isn)A 
+F4_38
+Ji 
+923 579 M 
+0.238 0 ('')A 
+F2_38
+Ji 
+969 579 M 
+0.238 0 (t a text, is it?'", )A 
+F4_38
+Ji 
+1429 579 M 
+0.238 0 (.true)A 
+F2_38
+Ji 
+1544 579 M 
+0.238 0 ( , "'" \))A 
+F0_38
+Ji 
+279 641 M 
+0.436 0 (...)A 
+338 641 M 
+0.025 0 (yields the following output \(note quote within text\):)A 
+F7_38
+Ji 
+279 711 M 
+0.200 0 (This isn)A 
+%%IncludeFont: Courier-BoldOblique
+/F9
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F9_38
+F9
+38 
+xF 
+F9_38
+Ji 
+463 712 M 
+0.200 0 (')A 
+F7_38
+Ji 
+486 711 M 
+0.200 0 (t a text, is it?)A 
+F2_38
+Ji 
+279 788 M 
+0.238 0 (SAY strip_quotes\( "'This isn)A 
+F4_38
+Ji 
+923 788 M 
+0.238 0 ('')A 
+F2_38
+Ji 
+969 788 M 
+0.238 0 (t a text, is it?'",       , "'" \))A 
+F0_38
+Ji 
+279 849 M 
+0.436 0 (...)A 
+338 849 M 
+0.038 0 (yields the following output \(same as above, because of defaults\): )A 
+F7_38
+Ji 
+279 920 M 
+0.200 0 (This isn)A 
+F9_38
+Ji 
+463 921 M 
+0.200 0 (')A 
+F7_38
+Ji 
+486 920 M 
+0.200 0 (t a text, is it?)A 
+%%IncludeFont: Helvetica-Bold
+/F11
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F11_58
+F11
+58 
+xF 
+F11_58
+Ji 
+161 1051 M 
+-0.248 0 (8)A 
+338 1051 M 
+-0.062 0 (MODULE )A 
+/F4_54
+F4
+54 
+xF 
+F4_54
+Ji 
+605 1060 M 
+-0.346 0 (IS_UTIL.CMD)A 
+F0_50
+Ji 
+161 1205 M 
+2.000 0 32 0.174 0 (This module defines the following public routines)D 
+1257 1205 M 
+2.000 0 32 0.600 0 (: )D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1288 1213 M 
+2.000 0 32 0.446 0 (IsA\(\),)D 
+1456 1213 M 
+2.000 0 32 0.557 0 ( IsA2\(\), )D 
+1713 1213 M 
+2.000 0 32 0.446 0 (IsClassObject\(\),)D 
+161 1294 M 
+0.446 0 (IsDescendedFrom\(\), )A 
+693 1294 M 
+0.446 0 (IsInstanceOf\(\) and )A 
+1225 1294 M 
+0.446 0 (get_methods_FROM_is_util\(\).)A 
+F0_50
+Ji 
+161 1414 M 
+6.000 0 32 0.219 0 (For the purpose of enhancing any class with the appropriate Object Rexx methods, the)D 
+161 1507 M 
+52.000 0 32 0.151 0 (following "floating methods")D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+880 1506 M 
+52.000 0 32 -0.124 0 (8)D 
+896 1506 M 
+52.000 0 32 0.343 0 (\))D 
+F0_50
+Ji 
+906 1507 M 
+52.000 0 32 0.153 0 ( are defined: )D 
+F2_46
+Ji 
+1356 1515 M 
+52.000 0 32 0.446 0 (IsA,)D 
+1468 1515 M 
+52.000 0 32 0.588 0 ( IsA2, )D 
+1769 1515 M 
+52.000 0 32 0.446 0 (IsClassObject,)D 
+161 1608 M 
+22.000 0 32 0.446 0 (IsDescendedFrom, )D 
+659 1608 M 
+22.000 0 32 0.446 0 (IsInstanceOf)D 
+F0_50
+Ji 
+995 1600 M 
+22.000 0 32 0.182 0 (. Invoked methods call the appropriate routines)D 
+161 1693 M 
+4.000 0 32 0.090 0 (supplying )D 
+%%IncludeFont: Helvetica-Oblique
+/F16
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F16_50
+F16
+50 
+xF 
+F16_50
+Ji 
+391 1693 M 
+4.000 0 32 0.050 0 (self)D 
+F0_50
+Ji 
+469 1693 M 
+4.000 0 32 0.226 0 ( as their first argument; if necessary, the method argument will be given to)D 
+161 1787 M 
+7.000 0 32 0.235 0 (the routine as the second argument. In order for programs which require )D 
+F16_50
+Ji 
+1871 1787 M 
+7.000 0 32 0.068 0 (Is_Util.cmd)D 
+F0_50
+Ji 
+2119 1787 M 
+7.000 0 32 0.133 0 (\240to)D 
+161 1880 M 
+18.000 0 32 0.202 0 (access these floating methods the public routine )D 
+F2_46
+Ji 
+1378 1888 M 
+18.000 0 32 0.446 0 (get_methods_FROM_is_util\(\))D 
+F0_50
+Ji 
+2106 1880 M 
+18.000 0 32 0.333 0 ( is)D 
+161 1973 M 
+0.137 0 (defined.)A 
+F11_58
+Ji 
+161 2166 M 
+-0.248 0 (8)A 
+193 2166 M 
+-0.124 0 (.)A 
+209 2166 M 
+-0.248 0 (1)A 
+338 2166 M 
+-0.212 0 (Public Routine )A 
+F4_54
+Ji 
+757 2175 M 
+-0.346 0 (IsA\(\))A 
+F0_50
+Ji 
+161 2320 M 
+0.100 0 (Usage:)A 
+F2_46
+Ji 
+461 2328 M 
+0.446 0 (IsA)A 
+/F7_46
+F7
+46 
+xF 
+F7_46
+Ji 
+545 2330 M 
+0.400 0 (\( object, class_object)A 
+1161 2330 M 
+0.400 0 ( )A 
+1189 2330 M 
+0.400 0 ( \))A 
+F0_50
+Ji 
+161 2460 M 
+10.000 0 32 0.256 0 (Returns )D 
+F16_50
+Ji 
+362 2460 M 
+10.000 0 32 0.190 0 (.true)D 
+F0_50
+Ji 
+463 2460 M 
+10.000 0 32 0.050 0 (\240if )D 
+F16_50
+Ji 
+526 2460 M 
+10.000 0 32 0.153 0 (class_object )D 
+F0_50
+Ji 
+827 2460 M 
+10.000 0 32 0.255 0 (is a superclass of )D 
+F16_50
+Ji 
+1272 2460 M 
+10.000 0 32 0.100 0 (object)D 
+F0_50
+Ji 
+1406 2460 M 
+10.000 0 32 0.216 0 ('s class, i.e. )D 
+F16_50
+Ji 
+1710 2460 M 
+10.000 0 32 0.242 0 (object )D 
+F0_50
+Ji 
+1869 2460 M 
+10.000 0 32 0.264 0 (is a direct or)D 
+161 2553 M 
+5.000 0 32 0.202 0 (indirect instance of )D 
+F16_50
+Ji 
+611 2553 M 
+5.000 0 32 0.075 0 (class_object)D 
+F0_50
+Ji 
+887 2553 M 
+5.000 0 32 0.270 0 (, returns )D 
+F16_50
+Ji 
+1097 2553 M 
+5.000 0 32 0.083 0 (.false)D 
+F0_50
+Ji 
+1217 2553 M 
+5.000 0 32 0.290 0 (\240else. If )D 
+F16_50
+Ji 
+1405 2553 M 
+5.000 0 32 0.076 0 (class_object )D 
+F0_50
+Ji 
+1700 2553 M 
+5.000 0 32 0.218 0 (is not a class object,)D 
+161 2646 M 
+0.140 0 (then a syntax error is raised.)A 
+161 2787 M 
+0.157 0 (Remark:)A 
+461 2787 M 
+0.126 0 (Modelled after IBM's SOM )A 
+F16_50
+Ji 
+1060 2787 M 
+0.138 0 ("somIsA\(\))A 
+F0_50
+Ji 
+1279 2787 M 
+0.175 0 (".)A 
+: 161 2931 2015 1 rc 
+161 2931 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F0_24
+F0
+24 
+xF 
+F0_24
+Ji 
+161 2965 M 
+-0.344 0 (8)A 
+174 2965 M 
+0.008 0 (\))A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+220 2965 M 
+-0.010 0 (Cf. [Flat96a] and [Flat96b].)A 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (10)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 11 11
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+0.066 0 (Examples:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+343 295 M 
+0.238 0 (CALL Is_Util)A 
+825 295 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+1875 295 M 
+0.238 0 (*/)A 
+343 371 M 
+0.238 0 (tmpObject1 = .set ~ new)A 
+1125 371 M 
+0.238 0 (/* create a .set-object)A 
+1875 371 M 
+0.238 0 (*/)A 
+343 409 M 
+0.238 0 (tmpObject2 = .table ~ new)A 
+1125 409 M 
+0.238 0 (/* create a .table-object)A 
+1875 409 M 
+0.238 0 (*/)A 
+343 485 M 
+0.238 0 (SAY IsA\( tmpObject1, .set \))A 
+1125 485 M 
+0.238 0 (/* returns )A 
+%%IncludeFont: Courier-Oblique
+/F4
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+1378 487 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1875 485 M 
+0.238 0 (*/)A 
+343 525 M 
+0.238 0 (SAY IsA\( tmpObject1, .table \))A 
+1125 525 M 
+0.238 0 (/* returns .true )A 
+1875 525 M 
+0.238 0 (*/)A 
+343 563 M 
+0.238 0 (SAY IsA\( .set, .table \))A 
+1125 563 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 565 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+1875 563 M 
+0.238 0 (*/)A 
+343 603 M 
+0.238 0 (SAY IsA\( .set, .table \))A 
+1125 603 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 605 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+1875 603 M 
+0.238 0 (*/)A 
+343 643 M 
+0.238 0 (SAY IsA\( .set, tmpObject2 \))A 
+1125 643 M 
+0.238 0 (/* raises a )A 
+%%IncludeFont: Courier-Bold
+/F6
+0.868 
+T 
+/Courier-Bold
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+1401 643 M 
+0.238 0 (syntax-error)A 
+F2_38
+Ji 
+1875 643 M 
+0.238 0 (*/)A 
+%%IncludeFont: Helvetica-Bold
+/F8
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F8_58
+F8
+58 
+xF 
+F8_58
+Ji 
+225 797 M 
+-0.248 0 (8)A 
+257 797 M 
+-0.124 0 (.)A 
+273 797 M 
+-0.248 0 (2)A 
+402 797 M 
+-0.212 0 (Public Routine )A 
+/F6_54
+F6
+54 
+xF 
+F6_54
+Ji 
+821 806 M 
+-0.346 0 (IsA2\(\))A 
+F0_50
+Ji 
+225 950 M 
+0.100 0 (Usage:)A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+525 958 M 
+0.446 0 (IsA2)A 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+637 960 M 
+0.400 0 (\( [class_]object1, [class_]object2)A 
+1589 960 M 
+0.400 0 ( )A 
+1617 960 M 
+0.400 0 ( \))A 
+F0_50
+Ji 
+225 1091 M 
+7.000 0 32 0.140 0 (Works like )D 
+%%IncludeFont: Helvetica-Oblique
+/F13
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F13_50
+F13
+50 
+xF 
+F13_50
+Ji 
+485 1091 M 
+7.000 0 32 0.235 0 (IsA\(\), )D 
+F0_50
+Ji 
+627 1091 M 
+7.000 0 32 0.250 0 (except that either argument may be an object or a class object)D 
+F13_50
+Ji 
+2098 1091 M 
+7.000 0 32 0.100 0 (.)D 
+F0_50
+Ji 
+2112 1091 M 
+7.000 0 32 0.300 0 ( If an)D 
+225 1184 M 
+4.000 0 32 0.127 0 (argument is not a class object, then its class object is automatically used by sending the)D 
+225 1277 M 
+0.132 0 (passed in object the "class" message. Therefore no syntax errors will be raised.)A 
+225 1417 M 
+20.000 0 32 0.131 0 (Returns )D 
+F13_50
+Ji 
+435 1417 M 
+20.000 0 32 0.190 0 (.true)D 
+F0_50
+Ji 
+536 1417 M 
+20.000 0 32 0.050 0 (\240if )D 
+F13_50
+Ji 
+609 1417 M 
+20.000 0 32 0.157 0 (class_object2 )D 
+F0_50
+Ji 
+948 1417 M 
+20.000 0 32 0.068 0 (is identical to )D 
+F13_50
+Ji 
+1312 1417 M 
+20.000 0 32 0.084 0 (class_object1)D 
+F0_50
+Ji 
+1616 1417 M 
+20.000 0 32 0.243 0 (, or if )D 
+F13_50
+Ji 
+1803 1417 M 
+20.000 0 32 0.084 0 (class_object2)D 
+F0_50
+Ji 
+2107 1417 M 
+20.000 0 32 0.060 0 ( is a)D 
+225 1510 M 
+23.000 0 32 0.182 0 (superclass of )D 
+F13_50
+Ji 
+582 1510 M 
+23.000 0 32 0.084 0 (class_object1)D 
+F0_50
+Ji 
+886 1510 M 
+23.000 0 32 0.228 0 (, i.e. )D 
+F13_50
+Ji 
+1042 1510 M 
+23.000 0 32 0.085 0 (class_object1 )D 
+F0_50
+Ji 
+1383 1510 M 
+23.000 0 32 0.190 0 (is a direct or indirect subclass of)D 
+F13_50
+Ji 
+225 1603 M 
+0.084 0 (class_object2)A 
+F0_50
+Ji 
+529 1603 M 
+0.170 0 (, returns )A 
+F13_50
+Ji 
+728 1603 M 
+0.083 0 (.false)A 
+F0_50
+Ji 
+848 1603 M 
+0.083 0 (\240else.)A 
+225 1744 M 
+0.066 0 (Examples:)A 
+F2_38
+Ji 
+343 1821 M 
+0.238 0 (CALL Is_Util)A 
+825 1821 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+1875 1821 M 
+0.238 0 (*/)A 
+343 1897 M 
+0.238 0 (tmpObject1 = .set ~ new)A 
+1125 1897 M 
+0.238 0 (/* create a set-object)A 
+1875 1897 M 
+0.238 0 (*/)A 
+343 1935 M 
+0.238 0 (tmpObject2 = .table ~ new)A 
+1125 1935 M 
+0.238 0 (/* create a table-object)A 
+1875 1935 M 
+0.238 0 (*/)A 
+343 2011 M 
+0.238 0 (SAY IsA2\( tmpObject1, .set \))A 
+1125 2011 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2013 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1875 2011 M 
+0.238 0 (*/)A 
+343 2051 M 
+0.238 0 (SAY IsA2\( tmpObject1, tmpObject2 \)/* returns )A 
+F4_38
+Ji 
+1378 2053 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1875 2051 M 
+0.238 0 (*/)A 
+343 2091 M 
+0.238 0 (SAY IsA2\( tmpObject1, .table \))A 
+1125 2091 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2093 M 
+0.200 0 (.true )A 
+F2_38
+Ji 
+1875 2091 M 
+0.238 0 (*/)A 
+343 2131 M 
+0.238 0 (SAY IsA2\( .set, tmpObject2 \))A 
+1125 2131 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2133 M 
+0.200 0 (.true )A 
+F2_38
+Ji 
+1875 2131 M 
+0.238 0 (*/)A 
+343 2171 M 
+0.238 0 (SAY IsA2\( .set, .table \))A 
+1125 2171 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2173 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1875 2171 M 
+0.238 0 (*/)A 
+343 2211 M 
+0.238 0 (SAY IsA2\( .set, .set \))A 
+1125 2211 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2213 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1875 2211 M 
+0.238 0 (*/)A 
+343 2288 M 
+0.238 0 (SAY IsA2\( .set, .message\) )A 
+1125 2288 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1378 2290 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+1516 2288 M 
+0.238 0 ( )A 
+1875 2288 M 
+0.238 0 (*/)A 
+F8_58
+Ji 
+225 2445 M 
+-0.248 0 (8)A 
+257 2445 M 
+-0.124 0 (.)A 
+273 2445 M 
+-0.248 0 (3)A 
+402 2445 M 
+-0.212 0 (Public Routine )A 
+F6_54
+Ji 
+821 2454 M 
+-0.346 0 (IsClassObject\(\))A 
+F0_50
+Ji 
+225 2598 M 
+0.100 0 (Usage:)A 
+F2_46
+Ji 
+525 2606 M 
+0.446 0 (IsClassObject)A 
+F4_46
+Ji 
+889 2608 M 
+0.400 0 (\( object )A 
+1141 2608 M 
+0.400 0 (\))A 
+F0_50
+Ji 
+225 2738 M 
+4.000 0 32 0.131 0 (Returns )D 
+F13_50
+Ji 
+419 2738 M 
+4.000 0 32 0.190 0 (.true)D 
+F0_50
+Ji 
+520 2738 M 
+4.000 0 32 0.175 0 (\240if the single argument )D 
+F13_50
+Ji 
+1046 2738 M 
+4.000 0 32 0.100 0 (object )D 
+F0_50
+Ji 
+1198 2738 M 
+4.000 0 32 0.060 0 (is a )D 
+F13_50
+Ji 
+1298 2738 M 
+4.000 0 32 0.066 0 (class object)D 
+F0_50
+Ji 
+1564 2738 M 
+4.000 0 32 0.161 0 (, i.e. it may be used to create)D 
+225 2832 M 
+0.094 0 (instances of itself by sending it the )A 
+F13_50
+Ji 
+1004 2832 M 
+0.100 0 (new)A 
+F0_50
+Ji 
+1096 2832 M 
+0.177 0 (-message; returns )A 
+F13_50
+Ji 
+1516 2832 M 
+0.083 0 (.false)A 
+F0_50
+Ji 
+1636 2832 M 
+0.083 0 (\240else.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (11)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 12 12
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+0.066 0 (Examples:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+279 295 M 
+0.238 0 (CALL Is_Util)A 
+761 295 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+1811 295 M 
+0.238 0 (*/)A 
+279 371 M 
+0.238 0 (tmpObject1 = .set ~ new)A 
+1061 371 M 
+0.238 0 (/* create a .set-object)A 
+1811 371 M 
+0.238 0 (*/)A 
+279 447 M 
+0.238 0 (SAY IsClassObject\( .set \))A 
+1061 447 M 
+0.238 0 (/* returns )A 
+%%IncludeFont: Courier-Oblique
+/F4
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+1314 449 M 
+0.200 0 (.true )A 
+F2_38
+Ji 
+1811 447 M 
+0.238 0 (*/)A 
+279 487 M 
+0.238 0 (SAY IsClassObject\( tmpObject1 \))A 
+1061 487 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1314 489 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+1811 487 M 
+0.238 0 (*/)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+161 643 M 
+-0.248 0 (8)A 
+193 643 M 
+-0.124 0 (.)A 
+209 643 M 
+-0.248 0 (4)A 
+338 643 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F8
+0.852 
+T 
+/Courier-Bold
+mF 
+/F8_54
+F8
+54 
+xF 
+F8_54
+Ji 
+757 652 M 
+-0.346 0 (IsDescendedFrom\(\))A 
+F0_50
+Ji 
+161 797 M 
+0.100 0 (Usage:)A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+461 805 M 
+0.446 0 (IsDescendedFrom\()A 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+909 807 M 
+0.400 0 ( class_object1, class_object2)A 
+1721 807 M 
+0.400 0 ( )A 
+1749 807 M 
+0.400 0 (\))A 
+F0_50
+Ji 
+161 937 M 
+13.000 0 32 0.131 0 (Returns )D 
+%%IncludeFont: Helvetica-Oblique
+/F12
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F12_50
+F12
+50 
+xF 
+F12_50
+Ji 
+364 937 M 
+13.000 0 32 0.190 0 (.true)D 
+F0_50
+Ji 
+465 937 M 
+13.000 0 32 0.050 0 (\240if )D 
+F12_50
+Ji 
+531 937 M 
+13.000 0 32 0.075 0 (class_object)D 
+807 937 M 
+13.000 0 32 0.200 0 (2)D 
+F0_50
+Ji 
+835 937 M 
+13.000 0 32 0.160 0 ( and )D 
+F12_50
+Ji 
+973 937 M 
+13.000 0 32 0.085 0 (class_object1 )D 
+F0_50
+Ji 
+1304 937 M 
+13.000 0 32 0.114 0 (are identical, or if )D 
+F12_50
+Ji 
+1753 937 M 
+13.000 0 32 0.084 0 (class_object2)D 
+2057 937 M 
+13.000 0 32 0.100 0 ( )D 
+F0_50
+Ji 
+2084 937 M 
+13.000 0 32 0.050 0 (is a)D 
+161 1030 M 
+23.000 0 32 0.182 0 (superclass of )D 
+F12_50
+Ji 
+518 1030 M 
+23.000 0 32 0.084 0 (class_object1)D 
+F0_50
+Ji 
+822 1030 M 
+23.000 0 32 0.228 0 (, i.e. )D 
+F12_50
+Ji 
+978 1030 M 
+23.000 0 32 0.085 0 (class_object1 )D 
+F0_50
+Ji 
+1319 1030 M 
+23.000 0 32 0.190 0 (is a direct or indirect subclass of)D 
+F12_50
+Ji 
+161 1123 M 
+6.000 0 32 0.075 0 (class_object)D 
+437 1123 M 
+6.000 0 32 0.200 0 (2)D 
+F0_50
+Ji 
+465 1123 M 
+6.000 0 32 0.270 0 (, returns )D 
+F12_50
+Ji 
+677 1123 M 
+6.000 0 32 0.083 0 (.false)D 
+F0_50
+Ji 
+797 1123 M 
+6.000 0 32 0.232 0 (\240else. Raises a syntax error if the passed in objects are not)D 
+161 1216 M 
+0.064 0 (class objects.)A 
+161 1357 M 
+0.157 0 (Remark:)A 
+461 1357 M 
+0.126 0 (Modelled after IBM's SOM )A 
+F12_50
+Ji 
+1060 1357 M 
+0.204 0 ("somDescendedFrom\(\)".)A 
+F0_50
+Ji 
+161 1497 M 
+0.066 0 (Examples:)A 
+F2_38
+Ji 
+279 1574 M 
+0.238 0 (CALL Is_Util)A 
+761 1574 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+1961 1574 M 
+0.238 0 (*/)A 
+279 1650 M 
+0.238 0 (tmpObject1 = .set ~ new)A 
+1211 1650 M 
+0.238 0 (/* create a .set-object)A 
+1961 1650 M 
+0.238 0 (*/)A 
+279 1726 M 
+0.238 0 (SAY IsDescendedFrom\( tmpObject1, .set \))A 
+1211 1726 M 
+0.238 0 (/* raises a )A 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+1487 1726 M 
+0.238 0 (syntax-error)A 
+F2_38
+Ji 
+1961 1726 M 
+0.238 0 (*/)A 
+279 1764 M 
+0.238 0 (SAY IsDescendedFrom\( .table, tmpObject1 \)/* raises a )A 
+F8_38
+Ji 
+1498 1764 M 
+0.238 0 (syntax-error)A 
+F2_38
+Ji 
+1961 1764 M 
+0.238 0 (*/)A 
+279 1802 M 
+0.238 0 (SAY IsDescendedFrom\( .set, .table \))A 
+1211 1802 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1464 1804 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1961 1802 M 
+0.238 0 (*/)A 
+279 1842 M 
+0.238 0 (SAY IsDescendedFrom\( .set, .set \)  )A 
+1211 1842 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1464 1844 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1961 1842 M 
+0.238 0 (*/)A 
+279 1919 M 
+0.238 0 (SAY IsDescendedFrom\( .table, .set \))A 
+1211 1919 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1464 1921 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+1961 1919 M 
+0.238 0 (*/)A 
+F6_58
+Ji 
+161 2076 M 
+-0.248 0 (8)A 
+193 2076 M 
+-0.124 0 (.)A 
+209 2076 M 
+-0.248 0 (5)A 
+338 2076 M 
+-0.212 0 (Public Routine )A 
+F8_54
+Ji 
+757 2085 M 
+-0.346 0 (IsInstanceOf\(\))A 
+F0_50
+Ji 
+161 2229 M 
+0.100 0 (Usage:)A 
+F2_46
+Ji 
+461 2237 M 
+0.446 0 (IsInstanceOf)A 
+797 2237 M 
+0.446 0 (\()A 
+F4_46
+Ji 
+825 2239 M 
+0.400 0 ( object, class_object)A 
+1413 2239 M 
+0.400 0 ( )A 
+1441 2239 M 
+0.400 0 (\))A 
+F0_50
+Ji 
+161 2369 M 
+0.131 0 (Returns )A 
+F12_50
+Ji 
+351 2369 M 
+0.190 0 (.true)A 
+F0_50
+Ji 
+452 2369 M 
+0.050 0 (\240if )A 
+F12_50
+Ji 
+505 2369 M 
+0.100 0 (object)A 
+F0_50
+Ji 
+639 2369 M 
+0.100 0 (\240is an instance of )A 
+F12_50
+Ji 
+1030 2369 M 
+0.075 0 (class_object)A 
+F0_50
+Ji 
+1306 2369 M 
+0.170 0 (, returns )A 
+F12_50
+Ji 
+1505 2369 M 
+0.083 0 (.false)A 
+F0_50
+Ji 
+1625 2369 M 
+0.083 0 (\240else.)A 
+161 2510 M 
+0.157 0 (Remark:)A 
+461 2510 M 
+0.126 0 (Modelled after IBM's SOM )A 
+F12_50
+Ji 
+1060 2510 M 
+0.142 0 ("somInstanceOf)A 
+1416 2510 M 
+0.262 0 (\(\)".)A 
+F0_50
+Ji 
+161 2650 M 
+0.132 0 (Source code of routine:)A 
+F2_38
+Ji 
+279 2727 M 
+0.238 0 (:: ROUTINE )A 
+F8_38
+Ji 
+532 2727 M 
+0.238 0 (IsInstanceOf )A 
+F2_38
+Ji 
+831 2727 M 
+0.238 0 (                  PUBLIC )A 
+279 2765 M 
+0.238 0 (   USE ARG Object, Class_Object                  )A 
+279 2803 M 
+0.238 0 (                                                 )A 
+279 2841 M 
+0.238 0 (   RETURN \( Object ~ class = Class_Object \)      )A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (12)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 13 13
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+0.066 0 (Examples:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+343 295 M 
+0.238 0 (CALL Is_Util)A 
+825 295 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+2025 295 M 
+0.238 0 (*/)A 
+343 371 M 
+0.238 0 (tmpObject1 = .set ~ new)A 
+1275 371 M 
+0.238 0 (/* create a set-object)A 
+2025 371 M 
+0.238 0 (*/)A 
+343 447 M 
+0.238 0 (SAY IsInstanceOf\( tmpObject1, .set \))A 
+1275 447 M 
+0.238 0 (/* returns )A 
+%%IncludeFont: Courier-Oblique
+/F4
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+1528 449 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+2025 447 M 
+0.238 0 (*/)A 
+343 487 M 
+0.238 0 (SAY IsInstanceOf\( .set, .set \)       )A 
+1275 487 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1528 489 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+2025 487 M 
+0.238 0 (*/)A 
+343 527 M 
+0.238 0 (SAY IsInstanceOf\( .set, tmpObject1 \))A 
+1275 527 M 
+0.238 0 (/* returns )A 
+F4_38
+Ji 
+1528 529 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+2025 527 M 
+0.238 0 (*/)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+225 683 M 
+-0.248 0 (8)A 
+257 683 M 
+-0.124 0 (.)A 
+273 683 M 
+-0.248 0 (6)A 
+402 683 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F8
+0.852 
+T 
+/Courier-Bold
+mF 
+/F8_54
+F8
+54 
+xF 
+F8_54
+Ji 
+821 692 M 
+-0.346 0 (get_methods_FROM_is_util\(\))A 
+F0_50
+Ji 
+225 837 M 
+0.100 0 (Usage:)A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+525 845 M 
+0.446 0 (get_methods_FROM_is_util)A 
+1197 845 M 
+0.446 0 (\(\))A 
+F0_50
+Ji 
+225 977 M 
+0.137 0 (Returns the )A 
+%%IncludeFont: Helvetica-Oblique
+/F11
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F11_50
+F11
+50 
+xF 
+F11_50
+Ji 
+499 977 M 
+0.168 0 (.methods)A 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+706 976 M 
+-0.124 0 (9)A 
+722 976 M 
+0.343 0 (\))A 
+F0_50
+Ji 
+732 977 M 
+0.118 0 (\240directory containing all floating methods of )A 
+F11_50
+Ji 
+1699 977 M 
+0.036 0 (IS_Util.cmd)A 
+F0_50
+Ji 
+1955 977 M 
+0.100 0 (.)A 
+225 1117 M 
+0.132 0 (Source code of routine:)A 
+F2_38
+Ji 
+343 1194 M 
+0.238 0 (:: ROUTINE )A 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+596 1194 M 
+0.238 0 (get_methods_FROM_is_util )A 
+F2_38
+Ji 
+1171 1194 M 
+0.238 0 (PUBLIC  /* return the method-directory */)A 
+343 1232 M 
+0.238 0 (   RETURN .methods)A 
+975 1232 M 
+0.238 0 (/* returns Is_util.cmd's .method directory)A 
+2025 1232 M 
+0.238 0 (  */)A 
+F0_50
+Ji 
+225 1333 M 
+0.075 0 (Example:)A 
+F2_38
+Ji 
+343 1411 M 
+0.238 0 (CALL Is_Util)A 
+825 1411 M 
+0.238 0 (/* load "Is_Util.cmd" public definitions)A 
+2025 1411 M 
+0.238 0 (  */)A 
+343 1486 M 
+0.238 0 (tmpUtilMethods = get_methods_FROM_is_util\(\) /* get ")A 
+F4_38
+Ji 
+1539 1488 M 
+0.200 0 (.methods)A 
+F2_38
+Ji 
+1723 1486 M 
+0.238 0 (" directory)A 
+2025 1486 M 
+0.238 0 (  */)A 
+343 1564 M 
+0.238 0 (  /* create an instance of ".set" )A 
+%%IncludeFont: Courier-BoldOblique
+/F15
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F15_38
+F15
+38 
+xF 
+F15_38
+Ji 
+1125 1567 M 
+0.200 0 (enhanced with the floating methods )A 
+F2_38
+Ji 
+375 1605 M 
+0.238 0 (   )A 
+F15_38
+Ji 
+444 1608 M 
+0.200 0 (defined in Is_util.cmd:)A 
+F2_38
+Ji 
+2025 1605 M 
+0.238 0 (  */)A 
+343 1646 M 
+0.238 0 (tmpObject = .set ~ enhanced\( tmpUtilMethods \))A 
+343 1722 M 
+0.238 0 (SAY tmpObject ~ IsA\( .table \))A 
+1125 1722 M 
+0.238 0 (/* test the IsA-method \()A 
+F4_38
+Ji 
+1677 1724 M 
+0.200 0 (.true)A 
+F2_38
+Ji 
+1792 1722 M 
+0.238 0 (\))A 
+2025 1722 M 
+0.238 0 (  */)A 
+343 1762 M 
+0.238 0 (SAY tmpObject ~ IsClassObject)A 
+1125 1762 M 
+0.238 0 (/* test the IsClassObject-method \()A 
+F4_38
+Ji 
+1907 1764 M 
+0.200 0 (.false)A 
+F2_38
+Ji 
+2045 1762 M 
+0.238 0 (\)*/)A 
+F6_58
+Ji 
+225 1894 M 
+-0.248 0 (9)A 
+402 1894 M 
+-0.062 0 (MODULE )A 
+F8_54
+Ji 
+669 1903 M 
+-0.346 0 (NLS_UTIL.CMD)A 
+/F0_34
+F0
+34 
+xF 
+F0_34
+Ji 
+1053 1893 M 
+0.096 0 (10)A 
+1091 1893 M 
+-0.322 0 (\))A 
+F0_50
+Ji 
+225 2048 M 
+26.000 0 32 0.204 0 (This module requires )D 
+F11_50
+Ji 
+788 2048 M 
+26.000 0 32 0.068 0 (Is_Util.cmd)D 
+F0_50
+Ji 
+1036 2048 M 
+26.000 0 32 0.165 0 (. All documentation and examples pertaining to)D 
+F11_50
+Ji 
+225 2141 M 
+4.000 0 32 0.070 0 (NLS_UTIL.CMD)D 
+F0_50
+Ji 
+587 2141 M 
+4.000 0 32 0.112 0 ( employs the following rule: if either the )D 
+F11_50
+Ji 
+1502 2141 M 
+4.000 0 32 0.150 0 (country)D 
+F0_50
+Ji 
+1667 2141 M 
+4.000 0 32 0.187 0 (\240or )D 
+F11_50
+Ji 
+1744 2141 M 
+4.000 0 32 0.175 0 (codepage)D 
+F0_50
+Ji 
+1965 2141 M 
+4.000 0 32 0.181 0 (  arguments)D 
+225 2234 M 
+2.000 0 32 0.200 0 (are omitted from routines or methods which need them, the default )D 
+F11_50
+Ji 
+1747 2234 M 
+2.000 0 32 0.150 0 (country)D 
+F0_50
+Ji 
+1912 2234 M 
+2.000 0 32 0.223 0 ( and/or default)D 
+F11_50
+Ji 
+225 2327 M 
+3.000 0 32 0.175 0 (codepage)D 
+F0_50
+Ji 
+446 2327 M 
+3.000 0 32 0.273 0 ( values of the session the program is running in, is used instead. Note, that for)D 
+225 2420 M 
+6.000 0 32 0.178 0 (the purpose of retrieving the collating sequence table from the system \(via the RexxUtil)D 
+: 225 2517 2015 1 rc 
+225 2517 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F0_24
+F0
+24 
+xF 
+F0_24
+Ji 
+225 2551 M 
+-0.344 0 (9)A 
+238 2551 M 
+0.008 0 (\))A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+284 2551 M 
+7.000 0 32 -0.101 0 (The special variable )D 
+/F11_42
+F11
+42 
+xF 
+F11_42
+Ji 
+688 2552 M 
+7.000 0 32 -0.093 0 (.methods)D 
+F0_42
+Ji 
+860 2551 M 
+7.000 0 32 -0.070 0 ( is a directory containing all floating methods of a particular module. In)D 
+284 2629 M 
+5.000 0 32 0.044 0 (order to be able to access it from the "outside" a public routine needs to be defined, which allows for)D 
+284 2707 M 
+-0.084 0 (establishing access to it.)A 
+F0_24
+Ji 
+225 2809 M 
+-0.344 0 (10)A 
+251 2809 M 
+0.008 0 (\))A 
+F0_42
+Ji 
+284 2809 M 
+3.000 0 32 0.034 0 (Starting with the description of the public utility routines, class and its public methods, the format of the)D 
+284 2887 M 
+1.000 0 32 -0.033 0 (documentation changes in order to preserve space and to keep the attention of the reader. The overview)D 
+284 2965 M 
+-0.109 0 (part will also contain the signatures and briefly document the purpose of the public utilities.)A 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (13)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 14 14
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Oblique
+/F0
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+2.000 0 32 0.034 0 (SysGetCollate)D 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+481 218 M 
+2.000 0 32 0.180 0 (-function\) a syntax error may occur, if the given combination of country and)D 
+161 311 M 
+0.109 0 (codepage is not valid.)A 
+161 451 M 
+19.000 0 32 0.114 0 (According to IBM's online documentation of the OS/2 control program APIs as of)D 
+161 544 M 
+13.000 0 32 0.132 0 (DevCon\24012 \(January 1997 edition\) the following codepage settings and countries are)D 
+161 638 M 
+0.089 0 (available for OS/2:)A 
+/F2_29
+F2
+29 
+xF 
+F2_29
+Ji 
+574 637 M 
+-0.124 0 (11)A 
+606 637 M 
+0.343 0 (\))A 
+: 0 0 1984 3232 rc %%IncludeFont: Helvetica-Bold
+/F5
+0.952 
+T 
+/Helvetica-Bold
+mF 
+/F5_42
+F5
+42 
+xF 
+F5_42
+Ji 
+1555 771 M 
+-0.003 0 (Codepage)A 
+; : 0 0 1984 3232 rc F5_42
+Ji 
+362 841 M 
+0.002 0 (Country)A 
+; : 0 0 1984 3232 rc F5_42
+Ji 
+1040 841 M 
+0.002 0 (Country-Code)A 
+; : 0 0 1984 3232 rc /F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+1426 841 M 
+-0.092 0 (Primary)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+1716 841 M 
+-0.195 0 (Secondary)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 911 M 
+0.102 0 (Asian English                 )A 
+; : 0 0 1984 3232 rc %%IncludeFont: Courier
+/F8
+0.868 
+T 
+/Courier
+mF 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+1134 911 M 
+0.238 0 ( 099)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 911 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 911 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 980 M 
+0.180 0 (Australia                     )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 980 M 
+0.238 0 ( 061)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 980 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 980 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1050 M 
+0.191 0 (Belgium                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1050 M 
+0.238 0 ( 032)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1050 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1050 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1120 M 
+0.057 0 (Canadian French               )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1120 M 
+0.238 0 ( 002)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1120 M 
+0.238 0 ( 863)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1120 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1190 M 
+0.070 0 (Czechoslovakia                )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1190 M 
+0.238 0 ( 042)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1190 M 
+0.238 0 ( 852)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1190 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1260 M 
+0.203 0 (Denmark                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1259 M 
+0.238 0 ( 045)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1259 M 
+0.238 0 ( 865)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1259 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1329 M 
+0.191 0 (Finland                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1329 M 
+0.238 0 ( 358)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1329 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1329 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1399 M 
+0.235 0 (France                        )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1399 M 
+0.238 0 ( 033)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1399 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1399 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1469 M 
+0.224 0 (Germany                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1469 M 
+0.238 0 ( 049)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1469 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1469 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1539 M 
+0.191 0 (Hungary                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1539 M 
+0.238 0 ( 036)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1539 M 
+0.238 0 ( 852)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1539 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1609 M 
+0.201 0 (Iceland                       )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1608 M 
+0.238 0 ( 354)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1608 M 
+0.238 0 ( 850)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1608 M 
+0.238 0 ( 861     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1678 M 
+0.269 0 (Italy                         )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1678 M 
+0.238 0 ( 039)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1678 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1678 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1748 M 
+0.223 0 (Japan                         )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1748 M 
+0.238 0 ( 081)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1748 M 
+0.238 0 ( 932)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1748 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1818 M 
+0.189 0 (Japan  SAA                    )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1818 M 
+0.238 0 ( 081)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1818 M 
+0.238 0 ( 942)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1818 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1888 M 
+0.234 0 (Korea                         )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1888 M 
+0.238 0 ( 082)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1888 M 
+0.238 0 ( 934)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1888 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 1957 M 
+0.201 0 (Korea  SAA                    )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 1957 M 
+0.238 0 ( 082)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 1957 M 
+0.238 0 ( 944)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 1957 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2027 M 
+0.125 0 (Latin America                 )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2027 M 
+0.238 0 ( 003)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2027 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2027 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2097 M 
+0.124 0 (Netherlands                   )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2097 M 
+0.238 0 ( 031)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2097 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2097 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2167 M 
+0.214 0 (Norway                        )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2167 M 
+0.238 0 ( 047)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2167 M 
+0.238 0 ( 865)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2167 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2237 M 
+-0.120 0 (People's Republic of China    )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2237 M 
+0.238 0 ( 086)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2237 M 
+0.238 0 ( 936)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2237 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2306 M 
+-0.154 0 (People's Republic of China SAA)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2306 M 
+0.238 0 ( 086)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2306 M 
+0.238 0 ( 946)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2306 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2376 M 
+0.201 0 (Poland                        )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2376 M 
+0.238 0 ( 048)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2376 M 
+0.238 0 ( 852)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2376 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2446 M 
+0.190 0 (Portugal                      )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2446 M 
+0.238 0 ( 351)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2446 M 
+0.238 0 ( 860)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2446 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2516 M 
+0.223 0 (Spain                         )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2516 M 
+0.238 0 ( 034)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2516 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2516 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2586 M 
+0.201 0 (Sweden                        )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2586 M 
+0.238 0 ( 046)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2586 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2586 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2655 M 
+0.136 0 (Switzerland                   )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2655 M 
+0.238 0 ( 041)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2655 M 
+0.238 0 ( 437)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2655 M 
+0.238 0 ( 850     )A 
+; : 0 0 1984 3232 rc F2_42
+Ji 
+362 2725 M 
+0.213 0 (Taiwan                        )A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1134 2725 M 
+0.238 0 ( 088)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1452 2725 M 
+0.238 0 ( 938)A 
+; : 0 0 1984 3232 rc F8_38
+Ji 
+1712 2725 M 
+0.238 0 ( 437, 850)A 
+; 
+357 901 N M 1618 2 rr : 0 sg O ; 
+357 971 N M 1618 2 rr : 0 sg O ; 
+357 1040 N M 1618 2 rr : 0 sg O ; 
+357 1110 N M 1618 2 rr : 0 sg O ; 
+357 1180 N M 1618 2 rr : 0 sg O ; 
+357 1250 N M 1618 2 rr : 0 sg O ; 
+357 1320 N M 1618 2 rr : 0 sg O ; 
+357 1389 N M 1618 2 rr : 0 sg O ; 
+357 1459 N M 1618 2 rr : 0 sg O ; 
+357 1529 N M 1618 2 rr : 0 sg O ; 
+357 1599 N M 1618 2 rr : 0 sg O ; 
+357 1669 N M 1618 2 rr : 0 sg O ; 
+357 1738 N M 1618 2 rr : 0 sg O ; 
+357 1808 N M 1618 2 rr : 0 sg O ; 
+357 1878 N M 1618 2 rr : 0 sg O ; 
+357 1948 N M 1618 2 rr : 0 sg O ; 
+357 2017 N M 1618 2 rr : 0 sg O ; 
+357 2087 N M 1618 2 rr : 0 sg O ; 
+357 2157 N M 1618 2 rr : 0 sg O ; 
+357 2227 N M 1618 2 rr : 0 sg O ; 
+357 2297 N M 1618 2 rr : 0 sg O ; 
+357 2366 N M 1618 2 rr : 0 sg O ; 
+357 2436 N M 1618 2 rr : 0 sg O ; 
+357 2506 N M 1618 2 rr : 0 sg O ; 
+357 2576 N M 1618 2 rr : 0 sg O ; 
+357 2646 N M 1618 2 rr : 0 sg O ; 
+357 2715 N M 1618 2 rr : 0 sg O ; 
+357 2785 N M 1618 2 rr : 0 sg O ; 
+1021 767 N M 2 2020 rr : 0 sg O ; 
+1338 767 N M 2 2020 rr : 0 sg O ; 
+1656 832 N M 2 1955 rr : 0 sg O ; : 161 2853 2015 1 rc 
+161 2853 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F2_24
+F2
+24 
+xF 
+F2_24
+Ji 
+161 2887 M 
+-0.344 0 (11)A 
+187 2887 M 
+0.008 0 (\))A 
+F2_42
+Ji 
+220 2887 M 
+-0.013 0 (According to the documentation some Asian codepages are available only on Asian versions of OS/2 and)A 
+220 2965 M 
+-0.112 0 (Asian versions of hardware resp. hardware drivers.)A 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (14)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 15 15
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2047 3232 rc %%IncludeFont: Helvetica
+/F0
+0.952 
+T 
+/Helvetica
+mF 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+425 211 M 
+0.179 0 (Taiwan  SAA                   )A 
+; : 0 0 2047 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+1198 211 M 
+0.238 0 ( 088)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1516 211 M 
+0.238 0 ( 948)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1776 211 M 
+0.238 0 ( 437, 850)A 
+; : 0 0 2047 3232 rc F0_42
+Ji 
+425 281 M 
+0.247 0 (Turkey                        )A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1198 281 M 
+0.238 0 ( 090)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1516 281 M 
+0.238 0 ( 857)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1776 281 M 
+0.238 0 ( 850     )A 
+; : 0 0 2047 3232 rc F0_42
+Ji 
+425 351 M 
+0.079 0 (United Kingdom                )A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1198 351 M 
+0.238 0 ( 044)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1516 351 M 
+0.238 0 ( 437)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1776 351 M 
+0.238 0 ( 850     )A 
+; : 0 0 2047 3232 rc F0_42
+Ji 
+425 421 M 
+0.146 0 (United States                 )A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1198 421 M 
+0.238 0 ( 001)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1516 421 M 
+0.238 0 ( 437)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1776 421 M 
+0.238 0 ( 850     )A 
+; : 0 0 2047 3232 rc F0_42
+Ji 
+425 490 M 
+0.135 0 (Yugoslavia                    )A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1198 490 M 
+0.238 0 ( 038)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1516 490 M 
+0.238 0 ( 852)A 
+; : 0 0 2047 3232 rc F2_38
+Ji 
+1776 490 M 
+0.238 0 ( 850     )A 
+; 
+421 271 N M 1617 2 rr : 0 sg O ; 
+421 341 N M 1617 2 rr : 0 sg O ; 
+421 411 N M 1617 2 rr : 0 sg O ; 
+421 481 N M 1617 2 rr : 0 sg O ; 
+421 550 N M 1617 2 rr : 0 sg O ; 
+1084 202 N M 2 350 rr : 0 sg O ; 
+1402 202 N M 2 350 rr : 0 sg O ; 
+1720 202 N M 2 350 rr : 0 sg O ; /F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 623 M 
+4.000 0 32 0.235 0 (In the initialization part of )D 
+%%IncludeFont: Helvetica-Oblique
+/F5
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F5_50
+F5
+50 
+xF 
+F5_50
+Ji 
+819 623 M 
+4.000 0 32 0.058 0 (NLS_util.cmd)D 
+F0_50
+Ji 
+1117 623 M 
+4.000 0 32 0.264 0 ( a default object gets created using the session's)D 
+F5_50
+Ji 
+225 716 M 
+0.175 0 (codepage)A 
+F0_50
+Ji 
+446 716 M 
+0.160 0 (\240and )A 
+F5_50
+Ji 
+558 716 M 
+0.150 0 (country)A 
+F0_50
+Ji 
+723 716 M 
+0.090 0 (\240settings.)A 
+225 856 M 
+0.237 0 (The )A 
+F5_50
+Ji 
+326 856 M 
+0.070 0 (NLS_UTIL.CMD)A 
+F0_50
+Ji 
+688 856 M 
+0.111 0 ( module defines the following public routines)A 
+1674 856 M 
+0.100 0 (:)A 
+: 0 0 2219 3232 rc F2_38
+Ji 
+234 943 M 
+0.238 0 (GET_NLS_DEFAULT_OBJECT\(\))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 999 M 
+-0.076 0 (Returns the default )A 
+; : 0 0 2219 3232 rc /F5_42
+F5
+42 
+xF 
+F5_42
+Ji 
+912 1000 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+993 999 M 
+-0.103 0 (-object, also retrievable by sending the attribute class method)A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+547 1052 M 
+-0.193 0 (default_NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+776 1051 M 
+-0.040 0 ( directly to the class object )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+1279 1052 M 
+-0.091 0 (.NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+1372 1051 M 
+0.324 0 (.)A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1121 M 
+0.238 0 (SET_NLS_DEFAULT_OBJECT\( [country] [,codepage] \))A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1158 M 
+0.238 0 (SET_NLS_DEFAULT_OBJECT\( [NLS-object] \))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 1214 M 
+-0.031 0 (Sets the default )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+850 1215 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+931 1214 M 
+-0.101 0 (-object according to the arguments and returns the new default)A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+547 1267 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+628 1266 M 
+-0.089 0 (-object.)A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1336 M 
+0.238 0 (NLS_COLLATE\( string \))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 1392 M 
+-0.064 0 (Returns the )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+775 1393 M 
+-0.115 0 (string)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+877 1392 M 
+-0.108 0 ( argument translated according to the collating sequence of the default)A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+547 1445 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+628 1444 M 
+-0.089 0 (-object.)A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1514 M 
+0.238 0 (NLS_COMPARE\( string1, string2 \))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 1570 M 
+-0.093 0 (Returns the values -1, 0, 1 indicating whether )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+1397 1571 M 
+-0.089 0 (string1 )A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+1534 1570 M 
+-0.120 0 (is smaller, equal or larger than)A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+547 1623 M 
+-0.148 0 (string2)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+672 1622 M 
+-0.074 0 (\240according to the default )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+1130 1623 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+1211 1622 M 
+-0.089 0 (-object.)A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1692 M 
+0.238 0 (NLS_LOWER\( string \))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 1748 M 
+-0.064 0 (Returns the )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+775 1749 M 
+-0.115 0 (string)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+877 1748 M 
+-0.094 0 ( argument translated to lowercase according to the default )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+1964 1749 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+2045 1748 M 
+-0.089 0 (-object.)A 
+; : 0 0 2219 3232 rc F2_38
+Ji 
+234 1818 M 
+0.238 0 (NLS_UPPER\( string \))A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+547 1874 M 
+-0.064 0 (Returns the )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+775 1875 M 
+-0.115 0 (string)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+877 1874 M 
+-0.094 0 ( argument translated to uppercase according to the default )A 
+; : 0 0 2219 3232 rc F5_42
+Ji 
+1971 1875 M 
+-0.230 0 (NLS)A 
+; : 0 0 2219 3232 rc F0_42
+Ji 
+2052 1874 M 
+-0.089 0 (-object.)A 
+; 
+230 937 N M 1980 2 rr : 0 sg O ; 
+230 1111 N M 1980 2 rr : 0 sg O ; 
+230 1326 N M 1980 2 rr : 0 sg O ; 
+230 1504 N M 1980 2 rr : 0 sg O ; 
+230 1682 N M 1980 2 rr : 0 sg O ; 
+230 1808 N M 1980 2 rr : 0 sg O ; 
+230 1934 N M 1980 2 rr : 0 sg O ; 225 2007 M 
+3.000 0 32 0.206 0 (In addition this module defines a class )D 
+F5_50
+Ji 
+1113 2007 M 
+3.000 0 32 0.050 0 ("NLS")D 
+F0_50
+Ji 
+1246 2007 M 
+3.000 0 32 0.185 0 ( with the following public )D 
+F5_50
+Ji 
+1819 2007 M 
+3.000 0 32 0.033 0 (class )D 
+F0_50
+Ji 
+1950 2007 M 
+3.000 0 32 0.425 0 (and )D 
+F5_50
+Ji 
+2052 2007 M 
+3.000 0 32 0.100 0 (instance)D 
+F0_50
+Ji 
+225 2100 M 
+0.161 0 (methods: )A 
+: 0 0 2235 3232 rc %%IncludeFont: Helvetica-Bold
+/F8
+0.952 
+T 
+/Helvetica-Bold
+mF 
+/F8_42
+F8
+42 
+xF 
+F8_42
+Ji 
+234 2233 M 
+-0.022 0 (Class methods of class )A 
+; : 0 0 2235 3232 rc %%IncludeFont: Helvetica-BoldOblique
+/F10
+0.952 
+T 
+/Helvetica-BoldOblique
+mF 
+/F10_42
+F10
+42 
+xF 
+F10_42
+Ji 
+712 2233 M 
+(NLS)S 
+; : 0 0 2235 3232 rc F8_42
+Ji 
+796 2233 M 
+0.014 0 (:)A 
+; : 0 0 2235 3232 rc F2_38
+Ji 
+234 2303 M 
+0.238 0 (INIT         )A 
+; : 0 0 2235 3232 rc F2_38
+Ji 
+234 2341 M 
+0.238 0 (         )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2303 M 
+-0.108 0 (Creates class-level attributes and initializes them.)A 
+; : 0 0 2235 3232 rc F2_38
+Ji 
+234 2397 M 
+0.238 0 (default_NLS  )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2397 M 
+-0.067 0 (Attribute method, allows access to the class-level attribute )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1650 2398 M 
+-0.149 0 ("default_NLS")A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1909 2397 M 
+-0.144 0 ( containing the)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2449 M 
+-0.095 0 (default )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+701 2450 M 
+-0.230 0 (NLS)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+782 2449 M 
+-0.089 0 (-object.)A 
+; : 0 0 2235 3232 rc F2_38
+Ji 
+234 2519 M 
+0.238 0 (entry\( [country] [, codepage] \)                )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2575 M 
+-0.064 0 (Returns the )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+791 2576 M 
+-0.230 0 (NLS)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+873 2575 M 
+-0.075 0 (-object created for the given )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1403 2576 M 
+-0.049 0 (country )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1551 2575 M 
+-0.183 0 (and )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1633 2576 M 
+-0.237 0 (codepage )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1826 2575 M 
+-0.004 0 (or )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1875 2576 M 
+-0.169 0 (.nil)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1928 2575 M 
+-0.037 0 ( if not found)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2627 M 
+0.014 0 (\()A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+578 2628 M 
+-0.032 0 (.Directory )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+769 2627 M 
+-0.064 0 (semantics\).)A 
+; : 0 0 2235 3232 rc F2_38
+Ji 
+234 2697 M 
+0.238 0 (hasentry\( [country] [, codepage] \)  )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2753 M 
+-0.089 0 (Returns )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+721 2754 M 
+-0.008 0 (.true)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+805 2753 M 
+0.008 0 (, if for the given )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1104 2754 M 
+-0.049 0 (country )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1253 2753 M 
+-0.183 0 (and )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1334 2754 M 
+-0.237 0 (codepage )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1528 2753 M 
+-0.014 0 (a )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+1563 2754 M 
+-0.230 0 (NLS)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+1644 2753 M 
+-0.127 0 (-object is available, )A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+2010 2754 M 
+-0.063 0 (.false)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+2110 2753 M 
+-0.140 0 ( else)A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+564 2805 M 
+0.014 0 (\()A 
+; : 0 0 2235 3232 rc F5_42
+Ji 
+578 2806 M 
+-0.032 0 (.Directory )A 
+; : 0 0 2235 3232 rc F0_42
+Ji 
+769 2805 M 
+-0.064 0 (semantics\).)A 
+; 
+230 2293 N M 1996 2 rr : 0 sg O ; 
+230 2387 N M 1996 2 rr : 0 sg O ; 
+230 2509 N M 1996 2 rr : 0 sg O ; 
+230 2687 N M 1996 2 rr : 0 sg O ; F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (15)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 16 16
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2171 3232 rc %%IncludeFont: Courier
+/F0
+0.868 
+T 
+/Courier
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 211 M 
+0.238 0 (setentry\( [country] [, [codepage] [, object]] \)  )A 
+; : 0 0 2171 3232 rc %%IncludeFont: Helvetica
+/F2
+0.952 
+T 
+/Helvetica
+mF 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+500 267 M 
+-0.037 0 (Returns the entry \(the )A 
+; : 0 0 2171 3232 rc %%IncludeFont: Helvetica-Oblique
+/F4
+0.929 
+T 
+/Helvetica-Oblique
+mF 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+917 268 M 
+-0.230 0 (NLS)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+998 267 M 
+-0.065 0 (-object\) for the given )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+1391 268 M 
+-0.049 0 (country )A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1540 267 M 
+-0.183 0 (and )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+1621 268 M 
+-0.237 0 (codepage )A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1815 267 M 
+-0.010 0 (and sets it to the)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+500 319 M 
+-0.143 0 (passed in )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+690 320 M 
+-0.176 0 (object)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+801 319 M 
+0.155 0 (. If no )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+919 320 M 
+-0.176 0 (object)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1030 319 M 
+-0.082 0 ( is given, the entry is removed and the associated)A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+500 372 M 
+-0.230 0 (NLS)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+581 371 M 
+-0.086 0 (-object is returned; if no entry is available then )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+1445 372 M 
+-0.169 0 (.nil)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1498 371 M 
+0.169 0 ( \()A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+1524 372 M 
+-0.032 0 (.Directory )A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1715 371 M 
+-0.077 0 (semantics\) is returned.)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+170 441 M 
+0.238 0 (supplier)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+500 441 M 
+-0.109 0 (Returns a supplier of all )A 
+; : 0 0 2171 3232 rc F4_42
+Ji 
+950 442 M 
+-0.230 0 (NLS)A 
+; : 0 0 2171 3232 rc F2_42
+Ji 
+1031 441 M 
+-0.049 0 (-objects created so far.)A 
+; 
+166 201 N M 1997 2 rr : 0 sg O ; 
+166 431 N M 1997 2 rr : 0 sg O ; 
+166 501 N M 1997 2 rr : 0 sg O ; : 0 0 2174 3232 rc %%IncludeFont: Helvetica-Bold
+/F6
+0.952 
+T 
+/Helvetica-Bold
+mF 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+170 567 M 
+0.014 0 (Instance methods )A 
+; : 0 0 2174 3232 rc F6_42
+Ji 
+539 567 M 
+-0.009 0 (of class )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Helvetica-BoldOblique
+/F8
+0.952 
+T 
+/Helvetica-BoldOblique
+mF 
+/F8_42
+F8
+42 
+xF 
+F8_42
+Ji 
+707 567 M 
+(NLS)S 
+; : 0 0 2174 3232 rc F6_42
+Ji 
+791 567 M 
+0.014 0 (:)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 637 M 
+0.238 0 (INIT\( [ country ] [, codepage ] \))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 693 M 
+-0.120 0 (Optional )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+669 694 M 
+-0.049 0 (country )A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+818 693 M 
+-0.183 0 (and )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+899 694 M 
+-0.308 0 (codepage)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1081 693 M 
+-0.077 0 ( as supplied as arguments for the )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1711 694 M 
+0.004 0 (NEW)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1809 693 M 
+-0.071 0 (-message sent to)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 745 M 
+-0.067 0 (the class object )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+802 746 M 
+-0.091 0 (.NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+895 745 M 
+-0.079 0 (; creates and returns the appropriate )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1583 746 M 
+-0.230 0 (NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1664 745 M 
+0.039 0 (-object. If a )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1884 746 M 
+-0.230 0 (NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1965 745 M 
+-0.066 0 (-object for)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 797 M 
+-0.111 0 (the given )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+683 798 M 
+-0.102 0 (country)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+820 797 M 
+-0.081 0 ( and )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+913 798 M 
+-0.308 0 (codepage)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1095 797 M 
+-0.072 0 ( already exists, it is retrieved and returned.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 867 M 
+0.238 0 (codepage)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 867 M 
+-0.141 0 (Returns the codepage number.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 937 M 
+0.238 0 (coll_lower)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 937 M 
+-0.105 0 (Returns the significant lowercase letters for the NLS-related collating \(sorting\) sequence.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1007 M 
+0.238 0 (coll_upper)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1007 M 
+-0.106 0 (Returns the significant uppercase letters for the NLS-related collating \(sorting\) sequence.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1077 M 
+0.238 0 (collating_table)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1133 M 
+-0.077 0 (Returns all 256 characters of the )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1118 1134 M 
+-0.230 0 (NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1199 1133 M 
+-0.074 0 (-object's )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1365 1134 M 
+-0.308 0 (codepage)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1548 1133 M 
+-0.079 0 (, where those characters are)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1185 M 
+-0.134 0 (replaced with their uppercase representation which are regarded to be of equal value for)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1237 M 
+-0.111 0 (determining the collating \(sorting\) sequence of that particular )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1634 1238 M 
+-0.102 0 (country)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1771 1237 M 
+0.324 0 (.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1307 M 
+0.238 0 (country)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1307 M 
+-0.082 0 (Returns the country number.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1377 M 
+0.238 0 (dump)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1377 M 
+-0.115 0 (Dumps the lowercase, uppercase and collating sequence letters resp. letterings to)A 
+; : 0 0 2174 3232 rc /F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+502 1430 M 
+0.446 0 (.error)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+670 1429 M 
+0.324 0 (.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1499 M 
+0.238 0 (lowercase)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1499 M 
+-0.103 0 (Returns all NLS lowercase letters.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1569 M 
+0.238 0 (makestring)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1569 M 
+-0.096 0 (Returns a string representing the )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1122 1570 M 
+-0.230 0 (NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1203 1569 M 
+-0.051 0 ( object.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1639 M 
+0.238 0 (nls_collate)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1639 M 
+-0.114 0 (Returns a string translated with the appropriate collating \(sorting\) sequence.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1709 M 
+0.238 0 (nls_compare\( string1, string2 \))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1765 M 
+-0.093 0 (Returns the values -1, 0, 1 indicating whether )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+1352 1766 M 
+-0.089 0 (string1 )A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1489 1765 M 
+-0.120 0 (is smaller, equal or larger than)A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+502 1818 M 
+-0.148 0 (string2)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+627 1817 M 
+-0.065 0 (\240according to the )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+948 1818 M 
+-0.230 0 (NLS)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1029 1817 M 
+-0.095 0 (-object. [This method uses the RexxUtil supplied function)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1869 M 
+-0.178 0 (named )A 
+; : 0 0 2174 3232 rc F4_42
+Ji 
+641 1870 M 
+-0.231 0 (SysNationalLanguage\(\))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+1075 1869 M 
+0.324 0 (.])A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1939 M 
+0.238 0 (nls_lower\( string \))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 1995 M 
+-0.110 0 (Returns a NLS lowercased string.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 2065 M 
+0.238 0 (nls_upper\( string \))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 2121 M 
+-0.112 0 (Returns a NLS uppercased string.)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 2191 M 
+0.238 0 (uppercase)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+502 2191 M 
+-0.092 0 (Returns all NLS uppercase letters. )A 
+; 
+166 627 N M 1999 2 rr : 0 sg O ; 
+166 857 N M 1999 2 rr : 0 sg O ; 
+166 927 N M 1999 2 rr : 0 sg O ; 
+166 997 N M 1999 2 rr : 0 sg O ; 
+166 1067 N M 1999 2 rr : 0 sg O ; 
+166 1297 N M 1999 2 rr : 0 sg O ; 
+166 1367 N M 1999 2 rr : 0 sg O ; 
+166 1489 N M 1999 2 rr : 0 sg O ; 
+166 1559 N M 1999 2 rr : 0 sg O ; 
+166 1629 N M 1999 2 rr : 0 sg O ; 
+166 1699 N M 1999 2 rr : 0 sg O ; 
+166 1929 N M 1999 2 rr : 0 sg O ; 
+166 2055 N M 1999 2 rr : 0 sg O ; 
+166 2181 N M 1999 2 rr : 0 sg O ; 
+166 2251 N M 1999 2 rr : 0 sg O ; F2_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (16)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 17 17
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+4.000 0 32 0.212 0 (The public routines work according to the default )D 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+1357 218 M 
+4.000 0 32 -0.083 0 (NLS)D 
+F0_50
+Ji 
+1454 218 M 
+4.000 0 32 0.220 0 (-object stored with )D 
+F2_50
+Ji 
+1890 218 M 
+4.000 0 32 -0.037 0 (.NLS)D 
+F0_50
+Ji 
+2001 218 M 
+4.000 0 32 0.195 0 ( \(the class)D 
+225 311 M 
+0.113 0 (object representing the NLS-class\) in the class attribute )A 
+F2_50
+Ji 
+1471 311 M 
+0.103 0 ("default_NLS")A 
+F0_50
+Ji 
+1783 311 M 
+0.100 0 (.)A 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1797 310 M 
+-0.124 0 (12)A 
+1829 310 M 
+0.343 0 (\))A 
+F0_50
+Ji 
+1839 311 M 
+0.100 0 ( )A 
+225 451 M 
+12.000 0 32 0.216 0 (Each instance of this class will get stored with a class variable)D 
+F0_29
+Ji 
+1741 450 M 
+12.000 0 32 -0.124 0 (13)D 
+1773 450 M 
+12.000 0 32 0.343 0 (\))D 
+F0_50
+Ji 
+1783 451 M 
+12.000 0 32 0.154 0 (, which is indirectly)D 
+225 544 M 
+18.000 0 32 0.139 0 (accessible by sending the \(class\) methods )D 
+F2_50
+Ji 
+1292 544 M 
+18.000 0 32 -0.011 0 (ENTRY, HASENTRY,  )D 
+1857 544 M 
+18.000 0 32 (SETENTRY and)W 
+225 638 M 
+-0.162 0 (SUPPLIER)A 
+F0_50
+Ji 
+471 638 M 
+0.124 0 (-methods to the class object )A 
+F2_50
+Ji 
+1111 638 M 
+-0.037 0 (.NLS)A 
+F0_50
+Ji 
+1222 638 M 
+0.100 0 (.  )A 
+225 778 M 
+2.000 0 32 0.222 0 (The output of the following two examples refers to a codepage setting of "850,437" and a)D 
+225 871 M 
+0.145 0 (country code of "043" \(Austria\).)A 
+225 1011 M 
+0.090 0 (Example 1:)A 
+%%IncludeFont: Courier
+/F5
+0.868 
+T 
+/Courier
+mF 
+/F5_38
+F5
+38 
+xF 
+F5_38
+Ji 
+343 1088 M 
+0.238 0 (CALL NLS_Util)A 
+825 1088 M 
+0.238 0 (/* load "NLS_Util.cmd" and all of its definitions)A 
+2025 1088 M 
+0.238 0 (*/)A 
+343 1164 M 
+0.238 0 (.nls ~~ new\( 0, 850 \) ~~ new\( 0, 437 \))A 
+1275 1164 M 
+0.238 0 (/* create two NLS-objects)A 
+2025 1164 M 
+0.238 0 (*/)A 
+343 1202 M 
+0.238 0 (tmpSupp = .nls ~ supplier)A 
+1125 1202 M 
+0.238 0 (/* get supplier for NLS-objects)A 
+2025 1202 M 
+0.238 0 (*/)A 
+343 1278 M 
+0.238 0 (DO WHILE tmpSupp ~ AVAILABLE)A 
+343 1316 M 
+0.238 0 (   tmpSupp ~ ITEM ~ dump)A 
+1125 1316 M 
+0.238 0 (/* get object and let it dump itself)A 
+2025 1316 M 
+0.238 0 (*/)A 
+343 1354 M 
+0.238 0 (   tmpSupp ~ NEXT)A 
+343 1392 M 
+0.238 0 (END)A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+343 1453 M 
+16.000 0 32 0.178 0 (... produces the following output for codepage settings "850, 437" and country "049"; note that the)D 
+402 1500 M 
+9.000 0 32 0.108 0 (NLS-definitions for the default object \(country=0 and codepage=0\) are the same as for codepage 850)D 
+402 1548 M 
+0.021 0 (\(country= 0 and codepage=850\):)A 
+%%IncludeFont: Courier-BoldOblique
+/F8
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+343 1642 M 
+0.200 0 (NLS-object:)A 
+%%IncludeFont: Courier-Oblique
+/F10
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F10_38
+F10
+38 
+xF 
+F10_38
+Ji 
+343 1717 M 
+0.200 0 (   country: [0] codepage: [850])A 
+343 1793 M 
+0.200 0 (lowercase: [abcdefghijklmnopqrstuvwxyz\374\351\342\344\340\345\347\352\353\350\357\356\354\346\364\366\362\373\371\370\341\355\363\372\361\343\360\365\336\375])A 
+343 1831 M 
+0.200 0 (uppercase: [ABCDEFGHIJKLMNOPQRSTUVWXYZ\334\311\302\304\300\305\307\312\313\310\317\316\314\306\324\326\322\333\331\330\301\315\323\332\321\303\320\325\376\335])A 
+343 1907 M 
+0.200 0 (effect of collating table:)A 
+343 1983 M 
+0.200 0 ( low \(  1- 60\): [abcdefghijklmnopqrstuvwxyz\307\374\351\342\344\340\345\347\352\353\350\357\356\354\304\305\311\346\306\364\366\362\373\371\377\326\334\370\243\330 \341\355\363])A 
+343 2021 M 
+0.200 0 (  up \(  1- 60\): [ABCDEFGHIJKLMNOPQRSTUVWXYZCUEAAAACEEEIIIAAEAAOOOUUYOUO$O$AIO])A 
+343 2096 M 
+0.200 0 ( low \( 61- 97\): [\372\361\321\277\241\253\273\301\302\300\242\245\343\303\244\360\320\312\313\310 \315\316\317\314\323\337\324\322\365\325\336\332\333\331\375\335])A 
+343 2134 M 
+0.200 0 (  up \( 61- 97\): [UNN?!""AAA$$AA$DDEEEIIIIIOSOOOO\376UUUYY])A 
+: 225 2304 2015 1 rc 
+225 2304 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F0_24
+F0
+24 
+xF 
+F0_24
+Ji 
+225 2338 M 
+-0.344 0 (12)A 
+251 2338 M 
+0.008 0 (\))A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+284 2338 M 
+1.000 0 32 0.026 0 (If it becomes necessary that the routines use a specific NLS-object, then one merely needs to create the)D 
+284 2416 M 
+-0.088 0 (appropriate NLS-object first and have the class attribute )A 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+1327 2417 M 
+-0.149 0 ("default_NLS")A 
+F0_42
+Ji 
+1586 2416 M 
+0.042 0 ( point to it, e.g.:)A 
+F5_38
+Ji 
+284 2490 M 
+0.238 0 (.NLS ~ default_NLS = .NLS ~ new\( )A 
+1043 2490 M 
+0.238 0 (041, 437 \) /* use)A 
+1434 2490 M 
+0.238 0 ( a Swiss NLS-object instead */)A 
+F0_24
+Ji 
+225 2574 M 
+-0.344 0 (13)A 
+251 2574 M 
+0.008 0 (\))A 
+F0_42
+Ji 
+284 2574 M 
+0.081 0 (This class variable is a directory for which the methods )A 
+F2_42
+Ji 
+1318 2575 M 
+-0.067 0 (ENTRY)A 
+F0_42
+Ji 
+1460 2574 M 
+0.824 0 (, )A 
+F2_42
+Ji 
+1485 2575 M 
+-0.040 0 (HASENTRY )A 
+F0_42
+Ji 
+1725 2574 M 
+0.067 0 (and )A 
+F2_42
+Ji 
+1807 2575 M 
+0.144 0 (SETENTRY )A 
+F0_42
+Ji 
+2044 2574 M 
+-0.126 0 (have been)A 
+284 2652 M 
+9.000 0 32 -0.007 0 (specialized in order to serve the specific purpose of the NLS-class \(the key to identify NLS-objects)D 
+284 2731 M 
+3.000 0 32 -0.113 0 (uniquely is built with two strings representing a )D 
+F2_42
+Ji 
+1180 2732 M 
+3.000 0 32 -0.102 0 (country)D 
+F0_42
+Ji 
+1317 2731 M 
+3.000 0 32 -0.114 0 ( code and )D 
+F2_42
+Ji 
+1521 2732 M 
+3.000 0 32 -0.308 0 (codepage)D 
+F0_42
+Ji 
+1703 2731 M 
+3.000 0 32 -0.066 0 ( code\). In addition access to)D 
+284 2809 M 
+5.000 0 32 -0.014 0 (the )D 
+F2_42
+Ji 
+359 2810 M 
+5.000 0 32 -0.091 0 (SUPPLIER)D 
+F0_42
+Ji 
+566 2809 M 
+5.000 0 32 -0.068 0 ( method is established by defining a pass-thru method at the class level.)D 
+1961 2809 M 
+5.000 0 32 0.075 0 ( Note: it is not)D 
+284 2887 M 
+0.032 0 (possible to get direct access to that class variable from outside of the class method level, which is named)A 
+F2_42
+Ji 
+284 2966 M 
+-0.104 0 (nlsDirectory )A 
+F0_42
+Ji 
+516 2965 M 
+0.103 0 (\(cf. the )A 
+F2_42
+Ji 
+657 2966 M 
+0.042 0 (EXPOSE)A 
+F0_42
+Ji 
+830 2965 M 
+-0.076 0 (-keyword statements with some of the class method definitions\))A 
+2004 2965 M 
+0.324 0 ( )A 
+2016 2965 M 
+0.324 0 (.)A 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (17)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 18 18
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Courier-BoldOblique
+/F0
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 202 M 
+0.200 0 (NLS-object:)A 
+%%IncludeFont: Courier-Oblique
+/F2
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+279 278 M 
+0.200 0 (   country: [0] codepage: [0])A 
+279 354 M 
+0.200 0 (lowercase: [abcdefghijklmnopqrstuvwxyz\374\351\342\344\340\345\347\352\353\350\357\356\354\346\364\366\362\373\371\370\341\355\363\372\361\343\360\365\336\375])A 
+279 392 M 
+0.200 0 (uppercase: [ABCDEFGHIJKLMNOPQRSTUVWXYZ\334\311\302\304\300\305\307\312\313\310\317\316\314\306\324\326\322\333\331\330\301\315\323\332\321\303\320\325\376\335])A 
+279 468 M 
+0.200 0 (effect of collating table:)A 
+279 543 M 
+0.200 0 ( low \(  1- 60\): [abcdefghijklmnopqrstuvwxyz\307\374\351\342\344\340\345\347\352\353\350\357\356\354\304\305\311\346\306\364\366\362\373\371\377\326\334\370\243\330 \341\355\363])A 
+279 581 M 
+0.200 0 (  up \(  1- 60\): [ABCDEFGHIJKLMNOPQRSTUVWXYZCUEAAAACEEEIIIAAEAAOOOUUYOUO$O$AIO])A 
+279 657 M 
+0.200 0 ( low \( 61- 97\): [\372\361\321\277\241\253\273\301\302\300\242\245\343\303\244\360\320\312\313\310 \315\316\317\314\323\337\324\322\365\325\336\332\333\331\375\335])A 
+279 695 M 
+0.200 0 (  up \( 61- 97\): [UNN?!""AAA$$AA$DDEEEIIIIIOSOOOO\376UUUYY])A 
+F0_38
+Ji 
+279 757 M 
+0.200 0 (NLS-object:)A 
+F2_38
+Ji 
+279 832 M 
+0.200 0 (   country: [0] codepage: [437])A 
+279 908 M 
+0.200 0 (lowercase: [abcdefghijklmnopqrstuvwxyz\374\351\342\344\340\345\347\352\353\350\357\356\354\346\364\366\362\373\371\377\341\355\363\372\361])A 
+279 946 M 
+0.200 0 (uppercase: [ABCDEFGHIJKLMNOPQRSTUVWXYZ\334EA\304A\305\307EEEIII\306O\326OUUYAIOU\321])A 
+279 1022 M 
+0.200 0 (effect of collating table:)A 
+279 1098 M 
+0.200 0 ( low \(  1- 60\): [abcdefghijklmnopqrstuvwxyz\307\374\351\342\344\340\345\347\352\353\350\357\356\354\304\305\311\346\306\364\366\362\373\371\377\326\334\370\243\330\327 \341\355])A 
+279 1136 M 
+0.200 0 (  up \(  1- 60\): [ABCDEFGHIJKLMNOPQRSTUVWXYZCUEAAAACEEEIIIAAEAAOOOUUYOU$$$$$AI])A 
+279 1211 M 
+0.200 0 ( low \( 61- 69\): [\363\372\361\321\277\241\253\273\337])A 
+279 1249 M 
+0.200 0 (  up \( 61- 69\): [OUNN?!""S])A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+161 1350 M 
+0.090 0 (Example 2:)A 
+%%IncludeFont: Courier
+/F6
+0.868 
+T 
+/Courier
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+279 1428 M 
+0.238 0 (CALL NLS_Util)A 
+761 1428 M 
+0.238 0 (/* load "NLS_Util.cmd" and all of its definitions)A 
+1961 1428 M 
+0.238 0 (*/)A 
+279 1503 M 
+0.238 0 (a = "\304rger \374ber den W\366lkchen auf dem Boot.")A 
+1361 1503 M 
+0.238 0 (/* German NLS-string)A 
+1961 1503 M 
+0.238 0 (*/)A 
+279 1579 M 
+0.238 0 (SAY nls_upper\( a \))A 
+761 1579 M 
+0.238 0 (/* returns ")A 
+F2_38
+Ji 
+1037 1581 M 
+0.200 0 (\304RGER \334BER DEN W\326LKCHEN AUF DEM BOOT.)A 
+F6_38
+Ji 
+1888 1579 M 
+0.238 0 (")A 
+1961 1579 M 
+0.238 0 (*/)A 
+279 1619 M 
+0.238 0 (SAY nls_lower\( a \))A 
+761 1619 M 
+0.238 0 (/* returns ")A 
+F2_38
+Ji 
+1037 1621 M 
+0.200 0 (\344rger \374ber den w\366lkchen auf dem boot.)A 
+F6_38
+Ji 
+1888 1619 M 
+0.238 0 (")A 
+1961 1619 M 
+0.238 0 (*/)A 
+279 1659 M 
+0.238 0 (SAY nls_collate\( a \))A 
+761 1659 M 
+0.238 0 (/* returns ")A 
+F2_38
+Ji 
+1037 1661 M 
+0.200 0 (ARGER UBER DEN WOLKCHEN AUF DEM BOOT.)A 
+F6_38
+Ji 
+1888 1659 M 
+0.238 0 (")A 
+1961 1659 M 
+0.238 0 (*/)A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (18)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 19 19
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+225 224 M 
+-0.248 0 (10)A 
+402 224 M 
+-0.062 0 (MODULE )A 
+%%IncludeFont: Courier-Bold
+/F2
+0.852 
+T 
+/Courier-Bold
+mF 
+/F2_54
+F2
+54 
+xF 
+F2_54
+Ji 
+669 233 M 
+-0.346 0 (SORT_UTIL)A 
+957 233 M 
+-0.346 0 (.CMD)A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+225 378 M 
+8.000 0 32 0.157 0 (This module requires )D 
+%%IncludeFont: Helvetica-Oblique
+/F6
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+733 378 M 
+8.000 0 32 0.033 0 (NLS_Util.cmd)D 
+F4_50
+Ji 
+1039 378 M 
+8.000 0 32 0.132 0 ( and defines the following public routines)D 
+1993 378 M 
+8.000 0 32 0.100 0 (: )D 
+%%IncludeFont: Courier
+/F8
+0.848 
+T 
+/Courier
+mF 
+/F8_46
+F8
+46 
+xF 
+F8_46
+Ji 
+2029 386 M 
+8.000 0 32 0.446 0 (sort\(\),)D 
+225 479 M 
+0.446 0 (sortArray\(\),)A 
+561 479 M 
+0.446 0 ( )A 
+589 479 M 
+0.446 0 (sortStem\(\))A 
+869 479 M 
+0.446 0 (, sortCollection\(\) )A 
+F4_50
+Ji 
+1401 471 M 
+0.200 0 (and)A 
+F8_46
+Ji 
+1485 479 M 
+0.446 0 ( )A 
+1513 479 M 
+0.446 0 (BinFindArray\(\))A 
+1905 479 M 
+0.446 0 (.)A 
+F4_50
+Ji 
+225 611 M 
+5.000 0 32 0.238 0 (For the purpose of determining whether a string is smaller, equal or larger than another)D 
+225 704 M 
+1.000 0 32 0.252 0 (string this module employs \(and therefore requires\) the module )D 
+F6_50
+Ji 
+1656 704 M 
+1.000 0 32 0.033 0 (NLS_Util.cmd)D 
+F4_50
+Ji 
+1962 704 M 
+1.000 0 32 0.220 0 (, namely the)D 
+225 797 M 
+0.116 0 (public routine )A 
+F6_50
+Ji 
+538 797 M 
+0.088 0 (NLS_collate\(\))A 
+F4_50
+Ji 
+842 797 M 
+0.103 0 ( which uses the collating sequence of the default NLS-object.)A 
+F0_58
+Ji 
+225 991 M 
+-0.248 0 (10)A 
+289 991 M 
+-0.124 0 (.)A 
+305 991 M 
+-0.248 0 (1)A 
+402 991 M 
+-0.212 0 (Public Routine )A 
+F2_54
+Ji 
+821 1000 M 
+-0.346 0 (sort\(\))A 
+F4_50
+Ji 
+225 1144 M 
+0.100 0 (Usage:)A 
+F8_46
+Ji 
+525 1152 M 
+0.446 0 (sort)A 
+%%IncludeFont: Courier-Oblique
+/F10
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F10_46
+F10
+46 
+xF 
+F10_46
+Ji 
+637 1154 M 
+0.400 0 (\( CollObject [, option ])A 
+1309 1154 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+225 1284 M 
+27.000 0 32 0.125 0 (Returns a single-dimensioned array object containing all the string elements of)D 
+F6_50
+Ji 
+225 1378 M 
+1.000 0 32 0.040 0 (CollObject)D 
+F4_50
+Ji 
+456 1378 M 
+1.000 0 32 0.272 0 (\240in ascending sorted order. If option )D 
+F6_50
+Ji 
+1270 1378 M 
+1.000 0 32 0.133 0 (option)D 
+F4_50
+Ji 
+1407 1378 M 
+1.000 0 32 0.269 0 ( is given and starts with the letter ")D 
+F6_50
+Ji 
+2185 1378 M 
+1.000 0 32 -0.100 0 (D)D 
+F4_50
+Ji 
+2221 1378 M 
+1.000 0 32 0.250 0 (")D 
+225 1471 M 
+7.000 0 32 0.233 0 (then the sorting will be in descending order. )D 
+F6_50
+Ji 
+1270 1471 M 
+7.000 0 32 0.075 0 (Sort)D 
+F4_50
+Ji 
+1362 1471 M 
+7.000 0 32 0.255 0 ( first renders the )D 
+F6_50
+Ji 
+1770 1471 M 
+7.000 0 32 0.014 0 (CollObj)D 
+F4_50
+Ji 
+1934 1471 M 
+7.000 0 32 0.235 0 ( into a single)D 
+225 1564 M 
+7.000 0 32 0.214 0 (dimensioned array or produces a copy in case a single dimensional array is given and)D 
+225 1657 M 
+0.075 0 (invokes )A 
+F6_50
+Ji 
+409 1657 M 
+0.172 0 (sortArray\(\))A 
+F4_50
+Ji 
+647 1657 M 
+0.123 0 (\240to do the actual work.)A 
+225 1797 M 
+0.075 0 (Example:)A 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+343 1874 M 
+0.238 0 (CALL Sort_Util)A 
+825 1874 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+2025 1874 M 
+0.238 0 (*/)A 
+343 1950 M 
+0.238 0 (tmpObject = )A 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+619 1950 M 
+0.238 0 (.set )A 
+F8_38
+Ji 
+734 1950 M 
+0.238 0 (~ of\( "Hi", "there", "how", "are", "you?" \))A 
+343 2026 M 
+0.238 0 (tmpArr  = sort\( tmpObject \))A 
+1125 2026 M 
+0.238 0 (/* sort the strings in set)A 
+2025 2026 M 
+0.238 0 (*/)A 
+343 2064 M 
+0.238 0 (tmpArr2 = sort\( tmpObject, )A 
+F2_38
+Ji 
+964 2064 M 
+0.238 0 ("d")A 
+F8_38
+Ji 
+1033 2064 M 
+0.238 0 ( \))A 
+1125 2064 M 
+0.238 0 (/* sort the strings in set descendingly)A 
+2025 2064 M 
+0.238 0 (*/)A 
+343 2140 M 
+0.238 0 (DO i = 1 TO tmpArr ~ ITEMS)A 
+343 2178 M 
+0.238 0 (   SAY "asc:" LEFT\( tmpArr[ i ], 5 \) "| desc:" tmpArr2[ i ])A 
+1725 2178 M 
+0.238 0 (/* show items)A 
+2025 2178 M 
+0.238 0 (*/)A 
+343 2216 M 
+0.238 0 (END)A 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+343 2277 M 
+0.436 0 (...)A 
+402 2277 M 
+-0.023 0 (yields the following output:)A 
+/F10_38
+F10
+38 
+xF 
+F10_38
+Ji 
+343 2348 M 
+0.200 0 (asc: are   | desc: you?)A 
+343 2386 M 
+0.200 0 (asc: Hi    | desc: there)A 
+343 2424 M 
+0.200 0 (asc: how   | desc: how)A 
+343 2461 M 
+0.200 0 (asc: there | desc: Hi)A 
+343 2499 M 
+0.200 0 (asc: you?  | desc: are)A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (19)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 20 20
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+161 224 M 
+-0.248 0 (10)A 
+225 224 M 
+-0.124 0 (.)A 
+241 224 M 
+-0.248 0 (2)A 
+338 224 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F2
+0.852 
+T 
+/Courier-Bold
+mF 
+/F2_54
+F2
+54 
+xF 
+F2_54
+Ji 
+757 233 M 
+-0.346 0 (sortArray\(\))A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+161 378 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+461 386 M 
+0.446 0 (sortArray)A 
+%%IncludeFont: Courier-Oblique
+/F8
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F8_46
+F8
+46 
+xF 
+F8_46
+Ji 
+713 388 M 
+0.400 0 (\( array [, option ])A 
+1245 388 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+161 518 M 
+13.000 0 32 0.220 0 (Sorts the single-dimensioned )D 
+%%IncludeFont: Helvetica-Oblique
+/F10
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F10_50
+F10
+50 
+xF 
+F10_50
+Ji 
+865 518 M 
+13.000 0 32 0.366 0 (array )D 
+F4_50
+Ji 
+1008 518 M 
+13.000 0 32 0.232 0 (object in place, containing the string elements in)D 
+161 611 M 
+8.000 0 32 0.207 0 (ascending sorted order. If option )D 
+F10_50
+Ji 
+939 611 M 
+8.000 0 32 0.133 0 (option)D 
+F4_50
+Ji 
+1076 611 M 
+8.000 0 32 0.217 0 ( is given and starts with the letter ")D 
+F10_50
+Ji 
+1908 611 M 
+8.000 0 32 -0.100 0 (D)D 
+F4_50
+Ji 
+1944 611 M 
+8.000 0 32 0.265 0 (" then the)D 
+161 704 M 
+0.117 0 (sorting will be in descending order. )A 
+161 844 M 
+0.075 0 (Example:)A 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+279 922 M 
+0.238 0 (CALL Sort_Util)A 
+761 922 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+1961 922 M 
+0.238 0 (*/)A 
+279 997 M 
+0.238 0 (tmpArr = )A 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+486 997 M 
+0.238 0 (.)A 
+509 997 M 
+0.238 0 (array )A 
+F6_38
+Ji 
+647 997 M 
+0.238 0 (~ of\( "Hi", "there", "how", "are", "you?" \))A 
+279 1073 M 
+0.238 0 (CALL )A 
+F2_38
+Ji 
+394 1073 M 
+0.238 0 (sortArray)A 
+F6_38
+Ji 
+601 1073 M 
+0.238 0 ( tmpArr/* sort the strings in array)A 
+1961 1073 M 
+0.238 0 (*/)A 
+279 1149 M 
+0.238 0 (DO i = 1 TO tmpArr ~ ITEMS)A 
+279 1187 M 
+0.238 0 (   SAY tmpArr[ i ] )A 
+761 1187 M 
+0.238 0 (/* show item)A 
+1961 1187 M 
+0.238 0 (*/)A 
+279 1225 M 
+0.238 0 (END)A 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+279 1286 M 
+0.436 0 (...)A 
+338 1286 M 
+-0.023 0 (yields the following output:)A 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+279 1357 M 
+0.200 0 (are)A 
+279 1395 M 
+0.200 0 (Hi)A 
+279 1433 M 
+0.200 0 (how)A 
+279 1471 M 
+0.200 0 (there)A 
+279 1509 M 
+0.200 0 (you?)A 
+F0_58
+Ji 
+161 1663 M 
+-0.248 0 (10)A 
+225 1663 M 
+-0.124 0 (.)A 
+241 1663 M 
+-0.248 0 (3)A 
+338 1663 M 
+-0.212 0 (Public Routine )A 
+F2_54
+Ji 
+757 1672 M 
+-0.346 0 (sortStem\(\))A 
+F4_50
+Ji 
+161 1816 M 
+0.100 0 (Usage:)A 
+F6_46
+Ji 
+461 1824 M 
+0.446 0 (sortStem)A 
+F8_46
+Ji 
+685 1826 M 
+0.400 0 (\( stem )A 
+881 1826 M 
+0.400 0 ([, option ])A 
+1189 1826 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+161 1957 M 
+6.000 0 32 0.223 0 (Note: this routine works with so-called )D 
+F10_50
+Ji 
+1059 1957 M 
+6.000 0 32 0.162 0 (stem)D 
+F4_50
+Ji 
+1168 1957 M 
+6.000 0 32 0.216 0 (-"arrays")D 
+/F4_29
+F4
+29 
+xF 
+F4_29
+Ji 
+1361 1956 M 
+6.000 0 32 -0.124 0 (14)D 
+1393 1956 M 
+6.000 0 32 0.343 0 (\))D 
+F4_50
+Ji 
+1403 1957 M 
+6.000 0 32 0.289 0 ( only! Such a )D 
+F10_50
+Ji 
+1734 1957 M 
+6.000 0 32 0.350 0 (stem )D 
+F4_50
+Ji 
+1864 1957 M 
+6.000 0 32 0.150 0 (object usually)D 
+161 2050 M 
+0.170 0 (has positive integer number indices only, ranging from )A 
+F10_50
+Ji 
+1382 2050 M 
+0.150 0 (1 )A 
+F4_50
+Ji 
+1424 2050 M 
+0.184 0 (to an upper bound stored with the)A 
+161 2143 M 
+0.096 0 (stem itself at )A 
+F10_50
+Ji 
+457 2143 M 
+0.158 0 (stem.0)A 
+F4_50
+Ji 
+608 2143 M 
+0.100 0 (.)A 
+161 2283 M 
+0.266 0 (Sorts the stem-array in ascending sorted order. If option )A 
+F10_50
+Ji 
+1427 2283 M 
+0.133 0 (option)A 
+F4_50
+Ji 
+1564 2283 M 
+0.274 0 ( is given and starts with the)A 
+161 2376 M 
+0.150 0 (letter ")A 
+F10_50
+Ji 
+305 2376 M 
+-0.100 0 (D)A 
+F4_50
+Ji 
+341 2376 M 
+0.127 0 (" then the sorting will be in descending order. )A 
+: 161 2775 2015 1 rc 
+161 2775 N M 2014 0 - 1 Lw 1 Lc 1 Lj K ; /F4_24
+F4
+24 
+xF 
+F4_24
+Ji 
+161 2809 M 
+-0.344 0 (14)A 
+187 2809 M 
+0.008 0 (\))A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+220 2809 M 
+0.044 0 ("Stem-arrays" are employed by many utility functions of )A 
+/F10_42
+F10
+42 
+xF 
+F10_42
+Ji 
+1263 2810 M 
+-0.054 0 (RexxUtil.DLL )A 
+F4_42
+Ji 
+1519 2809 M 
+-0.005 0 (which is supplied with Object Rexx)A 
+2163 2809 M 
+0.324 0 (,)A 
+220 2887 M 
+9.000 0 32 -0.030 0 (e.g. the function )D 
+F10_42
+Ji 
+557 2888 M 
+9.000 0 32 -0.076 0 (SysFileTree\(\))D 
+F4_42
+Ji 
+808 2887 M 
+9.000 0 32 -0.045 0 (. The online documentation calls stems constructed in this way "stem)D 
+220 2965 M 
+-0.160 0 (variable collection".)A 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (20)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 21 21
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+0.075 0 (Example:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+343 295 M 
+0.238 0 (CALL Sort_Util)A 
+825 295 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+2025 295 M 
+0.238 0 (*/)A 
+343 371 M 
+0.238 0 (stem.1 = "Hi" )A 
+825 371 M 
+0.238 0 (/* element 1)A 
+2025 371 M 
+0.238 0 (*/)A 
+343 409 M 
+0.238 0 (stem.2 = "there")A 
+825 409 M 
+0.238 0 (/* element 2)A 
+2025 409 M 
+0.238 0 (*/)A 
+343 447 M 
+0.238 0 (stem.3 = "how")A 
+825 447 M 
+0.238 0 (/* element 3)A 
+2025 447 M 
+0.238 0 (*/)A 
+343 485 M 
+0.238 0 (stem.4 = "are")A 
+825 485 M 
+0.238 0 (/* element 4)A 
+2025 485 M 
+0.238 0 (*/)A 
+343 523 M 
+0.238 0 (stem.5 = "you?")A 
+825 523 M 
+0.238 0 (/* element 5)A 
+2025 523 M 
+0.238 0 (*/)A 
+343 561 M 
+0.238 0 (stem.0 = 5)A 
+825 561 M 
+0.238 0 (/* five elements in stem)A 
+2025 561 M 
+0.238 0 (*/)A 
+343 637 M 
+0.238 0 (CALL sortStem stem.)A 
+825 637 M 
+0.238 0 (/* sort the strings in set)A 
+2025 637 M 
+0.238 0 (*/)A 
+343 712 M 
+0.238 0 (DO i = 1 TO stem.0)A 
+343 750 M 
+0.238 0 (   SAY stem.i )A 
+825 750 M 
+0.238 0 (/* show item)A 
+2025 750 M 
+0.238 0 (*/)A 
+343 788 M 
+0.238 0 (END)A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+343 850 M 
+0.436 0 (...)A 
+402 850 M 
+-0.023 0 (yields the following output:)A 
+%%IncludeFont: Courier-Oblique
+/F5
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F5_38
+F5
+38 
+xF 
+F5_38
+Ji 
+343 920 M 
+0.200 0 (are)A 
+343 958 M 
+0.200 0 (Hi)A 
+343 996 M 
+0.200 0 (how)A 
+343 1034 M 
+0.200 0 (there)A 
+343 1072 M 
+0.200 0 (you?)A 
+%%IncludeFont: Helvetica-Bold
+/F7
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F7_58
+F7
+58 
+xF 
+F7_58
+Ji 
+225 1226 M 
+-0.248 0 (10)A 
+289 1226 M 
+-0.124 0 (.)A 
+305 1226 M 
+-0.248 0 (4)A 
+402 1226 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F9
+0.852 
+T 
+/Courier-Bold
+mF 
+/F9_54
+F9
+54 
+xF 
+F9_54
+Ji 
+821 1235 M 
+-0.346 0 (sortCollection\(\))A 
+F0_50
+Ji 
+225 1380 M 
+0.100 0 (Usage:)A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+525 1388 M 
+0.446 0 (sortCollection\( collection [, [message] [, "Descending)A 
+2037 1388 M 
+0.446 0 (" ]] \))A 
+F0_50
+Ji 
+225 1520 M 
+1.000 0 32 0.216 0 (Returns a two-dimensional array sorted ascendingly by subscript 1 and the corresponding)D 
+225 1613 M 
+3.000 0 32 0.131 0 (item of )D 
+%%IncludeFont: Helvetica-Oblique
+/F12
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F12_50
+F12
+50 
+xF 
+F12_50
+Ji 
+396 1613 M 
+3.000 0 32 0.060 0 (collection)D 
+F0_50
+Ji 
+605 1613 M 
+3.000 0 32 0.155 0 ( in subscript 2. If the optional argument )D 
+F12_50
+Ji 
+1511 1613 M 
+3.000 0 32 0.164 0 (message)D 
+F0_50
+Ji 
+1715 1613 M 
+3.000 0 32 0.130 0 ( is given, then all items)D 
+225 1706 M 
+3.000 0 32 0.133 0 (of )D 
+F12_50
+Ji 
+284 1706 M 
+3.000 0 32 0.060 0 (collection)D 
+F0_50
+Ji 
+493 1706 M 
+3.000 0 32 0.177 0 ( are first sent that message and the result gets stored in subscript 1 \(and the)D 
+225 1799 M 
+5.000 0 32 0.219 0 (item in subscript 2\). If the optional third argument starts with a ")D 
+F12_50
+Ji 
+1696 1799 M 
+5.000 0 32 -0.100 0 (D)D 
+F0_50
+Ji 
+1732 1799 M 
+5.000 0 32 0.237 0 (", then the sort will be)D 
+225 1892 M 
+0.128 0 (carried out descendingly.)A 
+225 2033 M 
+0.135 0 (Arguments:)A 
+
+225 2158 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+234 2174 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F14
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F14_50
+F14
+50 
+xF 
+F14_50
+Ji 
+284 2126 M 
+0.260 0 (collection)A 
+F0_50
+Ji 
+520 2127 M 
+0.103 0 ( - any collection of items)A 
+
+225 2252 N M 9 16 - K 
+234 2268 N M 18 -35 - K F14_50
+Ji 
+284 2220 M 
+4.000 0 32 0.137 0 (message )D 
+F0_50
+Ji 
+517 2221 M 
+4.000 0 32 0.131 0 (- optional )D 
+F12_50
+Ji 
+746 2221 M 
+4.000 0 32 0.156 0 (message )D 
+F0_50
+Ji 
+968 2221 M 
+4.000 0 32 0.130 0 (argument which gets sent to each item in )D 
+F12_50
+Ji 
+1928 2221 M 
+4.000 0 32 0.060 0 (collection)D 
+F0_50
+Ji 
+2137 2221 M 
+4.000 0 32 0.175 0 ( and)D 
+343 2314 M 
+0.130 0 (may be one of the following three types:)A 
+
+N 17 16 351 2437 ellp : 0 sg O ; 1 Lw solid K 402 2408 M 
+0.132 0 (a message object,)A 
+
+N 17 16 351 2530 ellp : 0 sg O ; K 402 2501 M 
+0.146 0 (a plain string denominating the name of the message to be sent, or)A 
+
+N 17 16 351 2623 ellp : 0 sg O ; K 402 2594 M 
+2.000 0 32 0.201 0 (a single-dimensioned array object containing the string denominating the name of)D 
+402 2687 M 
+10.000 0 32 0.207 0 (the message to be sent at subscript\2401; optionally, at subscript\2402 there may be)D 
+402 2780 M 
+30.000 0 32 0.152 0 (another array object containing additional arguments for the method at)D 
+402 2873 M 
+0.112 0 (subscript\2401.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (21)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 22 22
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 218 M 
+0.320 0 (If a )A 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+364 218 M 
+0.060 0 (collection)A 
+F0_50
+Ji 
+573 218 M 
+0.252 0 ( is a stem object and )A 
+F2_50
+Ji 
+1051 218 M 
+0.164 0 (message)A 
+F0_50
+Ji 
+1255 218 M 
+0.187 0 (\240is not given, then this routine will use the)A 
+279 311 M 
+0.114 0 (stem subscripts as the keys to sort by.)A 
+
+161 436 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+170 452 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F4
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+220 404 M 
+0.278 0 ("D[escending]")A 
+F0_50
+Ji 
+588 405 M 
+0.118 0 ( - sorts descendingly \(only first character significant\))A 
+161 546 M 
+0.090 0 (Example 1:)A 
+%%IncludeFont: Courier
+/F6
+0.868 
+T 
+/Courier
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+279 623 M 
+0.238 0 (CALL Sort_Util)A 
+761 623 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+1961 623 M 
+0.238 0 (   */)A 
+279 699 M 
+0.238 0 (tmpObj = )A 
+%%IncludeFont: Courier-Bold
+/F8
+0.868 
+T 
+/Courier-Bold
+mF 
+/F8_38
+F8
+38 
+xF 
+F8_38
+Ji 
+486 699 M 
+0.238 0 (.set )A 
+F6_38
+Ji 
+601 699 M 
+0.238 0 (~ of\( )A 
+F8_38
+Ji 
+739 699 M 
+0.238 0 ("Hi", "there", "how", "are", "you?")A 
+F6_38
+Ji 
+1544 699 M 
+0.238 0 ( \))A 
+279 775 M 
+0.238 0 (tmpArr  = sortCollection\( tmpObj \))A 
+1211 775 M 
+0.238 0 (/* sort the strings in set)A 
+1961 775 M 
+0.238 0 (   */)A 
+279 813 M 
+0.238 0 (CALL dump tmpArr,  "1 - string value")A 
+611 888 M 
+0.238 0 (/* sort collection with a message object)A 
+1961 888 M 
+0.238 0 (   */)A 
+279 926 M 
+0.238 0 (msgObj = .message ~ new\( "", "SUBSTR", "I", 3, 2 \) /* create message object */)A 
+279 964 M 
+0.238 0 (tmpArr1 = sortCollection\( tmpObj, )A 
+F8_38
+Ji 
+1061 964 M 
+0.238 0 (msgObj)A 
+F6_38
+Ji 
+1199 964 M 
+0.238 0 ( \))A 
+279 1002 M 
+0.238 0 (CALL dump tmpArr1, "2 - message object for sending '~ SUBSTR\( 3, 2 \)'")A 
+611 1078 M 
+0.238 0 (/* sort collection with arguments in array object)A 
+1961 1078 M 
+0.238 0 (   */)A 
+279 1116 M 
+0.238 0 (tmpArrObj = .array ~ of\( "SUBSTR", .array ~ of\( 3, 2 \)\) /* create array object */)A 
+279 1154 M 
+0.238 0 (tmpArr2 = sortCollection\( tmpObj, )A 
+F8_38
+Ji 
+1061 1154 M 
+0.238 0 (tmpArrObj)A 
+F6_38
+Ji 
+1269 1154 M 
+0.238 0 ( \))A 
+279 1192 M 
+0.238 0 (CALL dump tmpArr2, "3 - array object for sending '~ SUBSTR\( 3, 2 \)'")A 
+279 1268 M 
+0.238 0 (tmpArr3 = sortCollection\( tmpObj, )A 
+F8_38
+Ji 
+1061 1268 M 
+0.238 0 ("REVERSE" )A 
+F6_38
+Ji 
+1291 1268 M 
+0.238 0 (\))A 
+1361 1268 M 
+0.238 0 (/* use reversed strings)A 
+1961 1268 M 
+0.238 0 (   */)A 
+279 1306 M 
+0.238 0 (CALL dump tmpArr3, "4 - simple REVERSE-message")A 
+279 1381 M 
+0.238 0 (:: ROUTINE dump)A 
+279 1419 M 
+0.238 0 (SAY ARG\( 2 \); SAY)A 
+911 1419 M 
+0.238 0 (/* show title)A 
+1961 1419 M 
+0.238 0 (   */)A 
+279 1457 M 
+0.238 0 (DO i = 1 TO ARG\( 1 \) ~ items / 2)A 
+279 1495 M 
+0.238 0 (   SAY "index" pp\( ARG\(1\)[ i, 1 ] \) "item" pp\( ARG\( 1 \)[ i, 2 ] \))A 
+279 1533 M 
+0.238 0 (END)A 
+279 1571 M 
+0.238 0 (SAY)A 
+279 1647 M 
+0.238 0 (:: ROUTINE pp; RETURN LEFT\( "[" || ARG\( 1 \) || "]", 10 \))A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 1708 M 
+0.436 0 (...)A 
+338 1708 M 
+-0.023 0 (yields the following output:)A 
+%%IncludeFont: Courier-Oblique
+/F11
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F11_38
+F11
+38 
+xF 
+F11_38
+Ji 
+279 1779 M 
+0.200 0 (1 - string value)A 
+279 1855 M 
+0.200 0 (index [are]      item [are])A 
+279 1893 M 
+0.200 0 (index [Hi]       item [Hi])A 
+279 1930 M 
+0.200 0 (index [how]      item [how])A 
+279 1968 M 
+0.200 0 (index [there]    item [there])A 
+279 2006 M 
+0.200 0 (index [you?]     item [you?])A 
+279 2084 M 
+0.200 0 (2 - message object for )A 
+F6_38
+Ji 
+808 2082 M 
+0.238 0 (sending '~ SUBSTR\( 3, 2 \)')A 
+F11_38
+Ji 
+279 2160 M 
+0.200 0 (index [  ]       item [Hi])A 
+279 2198 M 
+0.200 0 (index [e ]       item [are])A 
+279 2236 M 
+0.200 0 (index [er]       item [there])A 
+279 2274 M 
+0.200 0 (index [u?]       item [you?])A 
+279 2312 M 
+0.200 0 (index [w ]       item [how])A 
+279 2390 M 
+0.200 0 (3 - array object for )A 
+F6_38
+Ji 
+762 2388 M 
+0.238 0 (sending '~ SUBSTR\( 3, 2 \)')A 
+F11_38
+Ji 
+279 2465 M 
+0.200 0 (index [  ]       item [Hi])A 
+279 2503 M 
+0.200 0 (index [e ]       item [are])A 
+279 2541 M 
+0.200 0 (index [er]       item [there])A 
+279 2579 M 
+0.200 0 (index [u?]       item [you?])A 
+279 2617 M 
+0.200 0 (index [w ]       item [how])A 
+279 2693 M 
+0.200 0 (4 - simple REVERSE-message)A 
+279 2769 M 
+0.200 0 (index [?uoy]     item [you?])A 
+279 2807 M 
+0.200 0 (index [era]      item [are])A 
+279 2845 M 
+0.200 0 (index [ereht]    item [there])A 
+279 2883 M 
+0.200 0 (index [iH]       item [Hi])A 
+279 2920 M 
+0.200 0 (index [woh]      item [how])A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (22)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 23 23
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+0.090 0 (Example 2:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+343 295 M 
+0.238 0 (CALL Sort_Util)A 
+825 295 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+2025 295 M 
+0.238 0 ( */)A 
+343 371 M 
+0.238 0 (stemObj.Hi)A 
+825 371 M 
+0.238 0 (= "hallo")A 
+343 409 M 
+0.238 0 (stemObj.[ "there" ])A 
+825 409 M 
+0.238 0 (= "Du")A 
+343 447 M 
+0.238 0 (stemObj.how)A 
+825 447 M 
+0.238 0 (= "wie")A 
+343 485 M 
+0.238 0 (stemObj.[ "are" ])A 
+825 485 M 
+0.238 0 (= "geht's")A 
+343 523 M 
+0.238 0 (stemObj.you)A 
+825 523 M 
+0.238 0 (= "Dir?")A 
+343 599 M 
+0.238 0 (tmpArr1 = sortCollection\( stemObj. \))A 
+343 637 M 
+0.238 0 (CALL dump tmpArr1,  "1 - stem-object without a message \(sort by subscript\)")A 
+343 712 M 
+0.238 0 (tmpArr2 = sortCollection\( stemObj. , "REVERSE" \))A 
+343 750 M 
+0.238 0 (CALL dump tmpArr2, "2 - send REVERSE-message to stem.'s items, sort by results")A 
+343 826 M 
+0.238 0 (:: ROUTINE dump)A 
+343 864 M 
+0.238 0 (SAY ARG\( 2 \); SAY)A 
+975 864 M 
+0.238 0 (/* show title)A 
+2025 864 M 
+0.238 0 (*/)A 
+343 902 M 
+0.238 0 (DO i = 1 TO ARG\( 1 \) ~ items / 2)A 
+343 940 M 
+0.238 0 (   SAY "index" pp\( ARG\(1\)[ i, 1 ] \) "item" pp\( ARG\( 1 \)[ i, 2 ] \))A 
+343 978 M 
+0.238 0 (END)A 
+343 1016 M 
+0.238 0 (SAY)A 
+343 1092 M 
+0.238 0 (:: ROUTINE pp; RETURN LEFT\( "[" || ARG\( 1 \) || "]", 10 \))A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+343 1153 M 
+0.436 0 (...)A 
+402 1153 M 
+-0.023 0 (yields the following output:)A 
+F2_38
+Ji 
+343 1224 M 
+0.238 0 (1 - stem-object without a message \(sort by subscript\))A 
+343 1299 M 
+0.238 0 (index [are]      item [geht's])A 
+343 1337 M 
+0.238 0 (index [HI]       item [hallo])A 
+343 1375 M 
+0.238 0 (index [HOW]      item [wie])A 
+343 1413 M 
+0.238 0 (index [there]    item [Du])A 
+343 1451 M 
+0.238 0 (index [YOU]      item [Dir?])A 
+343 1527 M 
+0.238 0 (2 - send REVERSE-message to stem.'s items, sort by results)A 
+343 1603 M 
+0.238 0 (index [?riD]     item [Dir?])A 
+343 1641 M 
+0.238 0 (index [eiw]      item [wie])A 
+343 1679 M 
+0.238 0 (index [ollah]    item [hallo])A 
+343 1717 M 
+0.238 0 (index [s'theg]   item [geht's])A 
+343 1754 M 
+0.238 0 (index [uD]       item [Du])A 
+%%IncludeFont: Helvetica-Bold
+/F5
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F5_58
+F5
+58 
+xF 
+F5_58
+Ji 
+225 1909 M 
+-0.248 0 (10)A 
+289 1909 M 
+-0.124 0 (.)A 
+305 1909 M 
+-0.248 0 (5)A 
+402 1909 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F7
+0.848 
+T 
+/Courier-Bold
+mF 
+/F7_46
+F7
+46 
+xF 
+F7_46
+Ji 
+821 1925 M 
+0.446 0 (binFindArray\(\))A 
+F0_50
+Ji 
+225 2062 M 
+0.100 0 (Usage:)A 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+525 2070 M 
+0.446 0 (BinFindArray\( array, searchKey [ , bReturnArray ] \))A 
+F0_50
+Ji 
+225 2202 M 
+0.273 0 (Returns the index in the one- or two-dimensional, ascendingly sorted array where the item)A 
+225 2295 M 
+9.000 0 32 0.226 0 (with the given )D 
+%%IncludeFont: Helvetica-Oblique
+/F10
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F10_50
+F10
+50 
+xF 
+F10_50
+Ji 
+575 2295 M 
+9.000 0 32 0.088 0 (searchKey)D 
+F0_50
+Ji 
+812 2295 M 
+9.000 0 32 0.201 0 ( is stored with subscript\2401; if there is no entry with the given)D 
+F10_50
+Ji 
+225 2389 M 
+1.000 0 32 0.088 0 (searchKey)D 
+F0_50
+Ji 
+462 2389 M 
+1.000 0 32 0.150 0 ( then )D 
+F10_50
+Ji 
+590 2389 M 
+1.000 0 32 0.025 0 (.nil)D 
+F0_50
+Ji 
+654 2389 M 
+1.000 0 32 0.181 0 ( is returned instead. If the optional )D 
+F10_50
+Ji 
+1435 2389 M 
+1.000 0 32 0.138 0 (bReturnArray )D 
+F0_50
+Ji 
+1749 2389 M 
+1.000 0 32 0.180 0 (is set to )D 
+F10_50
+Ji 
+1940 2389 M 
+1.000 0 32 0.190 0 (.true)D 
+F0_50
+Ji 
+2041 2389 M 
+1.000 0 32 0.155 0 (, then an)D 
+225 2482 M 
+7.000 0 32 0.227 0 (array object is returned which contains the index for the found )D 
+F10_50
+Ji 
+1695 2482 M 
+7.000 0 32 0.088 0 (searchKey)D 
+F0_50
+Ji 
+1932 2482 M 
+7.000 0 32 0.437 0 ( or )D 
+F10_50
+Ji 
+2020 2482 M 
+7.000 0 32 0.025 0 (.nil)D 
+F0_50
+Ji 
+2084 2482 M 
+7.000 0 32 0.256 0 ( \(if not)D 
+225 2575 M 
+3.000 0 32 0.262 0 (found\) in subscript\2401, and the index into the array where the item was found or the index)D 
+225 2668 M 
+0.155 0 (where the )A 
+F10_50
+Ji 
+460 2668 M 
+0.088 0 (searchKey)A 
+F0_50
+Ji 
+697 2668 M 
+0.125 0 ( should be stored at in subscript\2402.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (23)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 24 24
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+0.075 0 (Example:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+279 295 M 
+0.238 0 (CALL Sort_Util)A 
+761 295 M 
+0.238 0 (/* load "Sort_Util.cmd" and all of its definitions)A 
+1961 295 M 
+0.238 0 (*/)A 
+279 371 M 
+0.238 0 (tmpObj = )A 
+%%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+486 371 M 
+0.238 0 (.set )A 
+F2_38
+Ji 
+601 371 M 
+0.238 0 (~ of\( )A 
+F4_38
+Ji 
+739 371 M 
+0.238 0 ("Hi", "there", "how", "are", "you?")A 
+F2_38
+Ji 
+1544 371 M 
+0.238 0 ( \))A 
+279 447 M 
+0.238 0 (tmpArr = sortCollection\( tmpObj \))A 
+279 485 M 
+0.238 0 (SAY "'there' is stored at:" binFindArray\( tmpArr, "there" \))A 
+279 561 M 
+0.238 0 (tmpArr2 = binFindArray\( tmpArr, "how", .true \))A 
+279 599 M 
+0.238 0 (SAY "'how'   is stored at:" tmpArr2[ 1 ] "should be stored at:" tmpArr2[ 2 ])A 
+279 674 M 
+0.238 0 (tmpArr2 = binFindArray\( tmpArr, "oh", .true \))A 
+279 712 M 
+0.238 0 (SAY "'oh'    is stored at:" tmpArr2[ 1 ] "should be stored at:" tmpArr2[ 2 ])A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 774 M 
+0.436 0 (...)A 
+338 774 M 
+-0.023 0 (yields the following output:)A 
+F2_38
+Ji 
+279 844 M 
+0.238 0 ('there' is stored at: 4)A 
+279 882 M 
+0.238 0 ('how'   is stored at: 3 should be stored at: 3)A 
+279 920 M 
+0.238 0 ('oh'    is stored at: The NIL object should be stored at: 4)A 
+%%IncludeFont: Helvetica-Bold
+/F7
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F7_58
+F7
+58 
+xF 
+F7_58
+Ji 
+161 1051 M 
+-0.248 0 (11)A 
+338 1051 M 
+-0.062 0 (MODULE )A 
+/F4_54
+F4
+54 
+xF 
+F4_54
+Ji 
+605 1060 M 
+-0.346 0 (RGF_UTIL)A 
+861 1060 M 
+-0.346 0 (.CMD)A 
+F0_50
+Ji 
+161 1204 M 
+5.000 0 32 0.194 0 (This module defines the following public routines)D 
+1276 1204 M 
+5.000 0 32 0.600 0 (: )D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1310 1212 M 
+5.000 0 32 0.446 0 (dump\(\), )D 
+1539 1212 M 
+5.000 0 32 0.529 0 (sayDebug\(\), )D 
+1881 1212 M 
+5.000 0 32 0.446 0 (sayError\(\))D 
+F0_50
+Ji 
+161 1298 M 
+13.000 0 32 0.425 0 (and )D 
+F2_46
+Ji 
+273 1306 M 
+13.000 0 32 0.446 0 (sayLog\(\))D 
+F0_50
+Ji 
+497 1298 M 
+13.000 0 32 0.265 0 (. It requires the following modules and as a result makes their public)D 
+161 1391 M 
+12.000 0 32 0.126 0 (definitions available: )D 
+F2_46
+Ji 
+652 1399 M 
+12.000 0 32 0.446 0 (rgf_class.cmd, )D 
+1084 1399 M 
+12.000 0 32 0.489 0 (routine_find_file.cmd, )D 
+1741 1399 M 
+12.000 0 32 0.446 0 (routine_ok.cmd,)D 
+161 1492 M 
+55.000 0 32 0.446 0 (routine_pp.cmd, )D 
+664 1492 M 
+55.000 0 32 0.489 0 (routine_pp_number.cmd, )D 
+1364 1492 M 
+55.000 0 32 0.446 0 (routine_strip_quote.cmd )D 
+F0_50
+Ji 
+2091 1484 M 
+55.000 0 32 0.200 0 (and)D 
+F2_46
+Ji 
+161 1573 M 
+0.446 0 (sort_util.cmd.)A 
+F0_50
+Ji 
+161 1693 M 
+17.000 0 32 0.176 0 (Additionally, the initialization code sets up some variables with the directory object)D 
+%%IncludeFont: Helvetica-Oblique
+/F11
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F11_50
+F11
+50 
+xF 
+F11_50
+Ji 
+161 1786 M 
+0.106 0 (rgf.util)A 
+F0_50
+Ji 
+298 1786 M 
+0.111 0 (\240stored with )A 
+F11_50
+Ji 
+569 1786 M 
+0.050 0 (.local)A 
+686 1786 M 
+0.100 0 (:)A 
+: 0 0 2111 3232 rc F2_38
+Ji 
+170 1919 M 
+0.238 0 (.rgf.util ~ this_op_sys)A 
+; : 0 0 2111 3232 rc /F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+789 1920 M 
+-0.086 0 (Operating system Object Rexx is running on)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 1989 M 
+0.238 0 (.rgf.util ~ this_full_path)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 1990 M 
+-0.034 0 (Full path to )A 
+; : 0 0 2111 3232 rc /F11_42
+F11
+42 
+xF 
+F11_42
+Ji 
+1008 1991 M 
+-0.056 0 (RGF_Util.cmd)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2059 M 
+0.238 0 (.rgf.util ~ this_call_type)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2060 M 
+-0.058 0 (Call type of )A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1010 2061 M 
+-0.056 0 (RGF_Util.cmd)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2129 M 
+0.238 0 (.rgf.util ~ this_name)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2130 M 
+-0.007 0 (The string: )A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+999 2131 M 
+-0.045 0 ("RGF_Util.cmd)A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1277 2131 M 
+0.090 0 (")A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2199 M 
+0.238 0 (.rgf.util ~ debugLevel)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2200 M 
+-0.050 0 (Usually set to )A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1052 2201 M 
+-0.352 0 (0)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2339 M 
+0.238 0 (.rgf.util ~ indent)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2340 M 
+-0.057 0 (String to prepend to arguments for the ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1523 2341 M 
+-0.205 0 (sayDebug\(\))A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1738 2340 M 
+0.168 0 ("-, ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1806 2341 M 
+-0.064 0 (sayError\(\))A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1992 2340 M 
+0.052 0 ("-)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2392 M 
+-0.128 0 (and ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+885 2393 M 
+-0.172 0 (sayLog\(\))A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1047 2392 M 
+-0.129 0 ("-routines)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2462 M 
+0.238 0 (.rgf.util ~ Log)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2462 M 
+-0.103 0 (Stream object for logging purposes \(see ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1556 2463 M 
+-0.143 0 (sayLog\(\)")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1733 2463 M 
+0.014 0 (-)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1747 2462 M 
+-0.199 0 (routine)A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1874 2463 M 
+0.014 0 (\))A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1888 2462 M 
+-0.011 0 (, default:)A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+789 2515 M 
+-0.012 0 (.stdout)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2582 M 
+0.238 0 (.rgf.util ~ Error)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2582 M 
+-0.055 0 (Stream object for error messages \(see ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1530 2583 M 
+-0.045 0 (sayError\(\)"-)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1745 2582 M 
+-0.199 0 (routine)A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1872 2583 M 
+0.220 0 (\), )A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1910 2582 M 
+-0.095 0 (default:)A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+789 2635 M 
+-0.004 0 (.stderr)A 
+; : 0 0 2111 3232 rc F2_38
+Ji 
+170 2702 M 
+0.238 0 (.rgf.util ~ Debug)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2702 M 
+-0.083 0 (Stream object for debug messages \(see ")A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+1557 2703 M 
+-0.205 0 (sayDebug\(\))A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+1772 2702 M 
+-0.086 0 ("-routine\),)A 
+; : 0 0 2111 3232 rc F0_42
+Ji 
+789 2754 M 
+-0.048 0 (default: )A 
+; : 0 0 2111 3232 rc F11_42
+Ji 
+938 2755 M 
+-0.004 0 (.stderr)A 
+; 
+166 1980 N M 1936 2 rr : 0 sg O ; 
+166 2050 N M 1936 2 rr : 0 sg O ; 
+166 2120 N M 1936 2 rr : 0 sg O ; 
+166 2190 N M 1936 2 rr : 0 sg O ; 
+166 2260 N M 1936 2 rr : 0 sg O ; 
+166 2330 N M 1936 2 rr : 0 sg O ; 
+166 2452 N M 1936 2 rr : 0 sg O ; 
+166 2572 N M 1936 2 rr : 0 sg O ; 
+166 2692 N M 1936 2 rr : 0 sg O ; 
+166 2814 N M 1936 2 rr : 0 sg O ; 
+779 1915 N M 2 901 rr : 0 sg O ; F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (24)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 25 25
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+225 224 M 
+-0.248 0 (11)A 
+289 224 M 
+-0.124 0 (.)A 
+305 224 M 
+-0.248 0 (1)A 
+402 224 M 
+-0.212 0 (Public Routine )A 
+%%IncludeFont: Courier-Bold
+/F2
+0.848 
+T 
+/Courier-Bold
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+821 240 M 
+0.446 0 (dump\(\))A 
+%%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+225 378 M 
+0.100 0 (Usage:)A 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+525 386 M 
+0.446 0 (dump)A 
+%%IncludeFont: Courier-Oblique
+/F8
+0.804 
+T 
+/Courier-Oblique
+mF 
+/F8_46
+F8
+46 
+xF 
+F8_46
+Ji 
+637 388 M 
+0.400 0 (\( collObject [,)A 
+1057 388 M 
+0.400 0 ( [title] [, [stream] [, indent]]])A 
+1981 388 M 
+0.400 0 ( \))A 
+F4_50
+Ji 
+225 518 M 
+0.132 0 (Iterates over items in )A 
+%%IncludeFont: Helvetica-Oblique
+/F10
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F10_50
+F10
+50 
+xF 
+F10_50
+Ji 
+706 518 M 
+0.050 0 (collObject)A 
+F4_50
+Ji 
+926 518 M 
+0.152 0 (\240and prints them.)A 
+225 658 M 
+0.135 0 (Arguments:)A 
+
+225 783 N M 9 16 - 4 Lw 1 Lc 1 Lj solid K 
+234 799 N M 18 -35 - K %%IncludeFont: Helvetica-BoldOblique
+/F12
+0.960 
+T 
+/Helvetica-BoldOblique
+mF 
+/F12_50
+F12
+50 
+xF 
+F12_50
+Ji 
+284 751 M 
+0.214 0 (collObj)A 
+F4_50
+Ji 
+455 752 M 
+0.104 0 ( - a collection of items)A 
+
+225 878 N M 9 16 - K 
+234 894 N M 18 -35 - K F12_50
+Ji 
+284 846 M 
+0.220 0 (title)A 
+374 846 M 
+0.100 0 ( )A 
+F4_50
+Ji 
+388 847 M 
+0.110 0 (- optional title, defaulting to )A 
+F10_50
+Ji 
+1003 847 M 
+0.205 0 ("--- not given ---")A 
+F4_50
+Ji 
+1373 847 M 
+0.100 0 ( )A 
+
+225 972 N M 9 16 - K 
+234 988 N M 18 -35 - K F12_50
+Ji 
+284 940 M 
+0.008 0 (stream)A 
+F4_50
+Ji 
+448 941 M 
+0.125 0 ( - optional stream object to write item to, defaults to )A 
+F10_50
+Ji 
+1600 941 M 
+0.114 0 (.rgf.util\240~\240debug)A 
+
+225 1066 N M 9 16 - K 
+234 1082 N M 18 -35 - K F12_50
+Ji 
+284 1034 M 
+3.000 0 32 0.333 0 (indent)D 
+F4_50
+Ji 
+436 1035 M 
+3.000 0 32 0.191 0 ( - optional string to prepend items before writing them to the )D 
+F10_50
+Ji 
+1818 1035 M 
+3.000 0 32 0.200 0 (stream)D 
+F4_50
+Ji 
+1972 1035 M 
+3.000 0 32 0.192 0 (, defaults to)D 
+343 1129 M 
+0.114 0 (the string defined with )A 
+F10_50
+Ji 
+846 1129 M 
+0.097 0 (.rgf.util\240~\240indent)A 
+F4_50
+Ji 
+225 1269 M 
+0.075 0 (Example:)A 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+343 1346 M 
+0.238 0 (CALL RGF_Util)A 
+825 1346 M 
+0.238 0 (/* load "RGF_Util.cmd" public definitions)A 
+2025 1346 M 
+0.238 0 (*/)A 
+343 1422 M 
+0.238 0 (tmpObject = )A 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+619 1422 M 
+0.238 0 (.array )A 
+F6_38
+Ji 
+780 1422 M 
+0.238 0 (~ of\( "Hi", "there", "how", "are", "you?" \))A 
+343 1460 M 
+0.238 0 (CALL dump tmpObject, "Dumping the object 'tmpObject'")A 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+343 1521 M 
+0.436 0 (...)A 
+402 1521 M 
+-0.023 0 (yields the following output:)A 
+F6_38
+Ji 
+343 1592 M 
+0.238 0 (    begin of dump ...-----------------------------------------------------)A 
+343 1630 M 
+0.238 0 (    got [The Array class] title [Dumping the object 'tmpObject'] items [5])A 
+343 1706 M 
+0.238 0 (    index [1] item [Hi])A 
+343 1744 M 
+0.238 0 (    index [2] item [there])A 
+343 1782 M 
+0.238 0 (    index [3] item [how])A 
+343 1819 M 
+0.238 0 (    index [4] item [are])A 
+343 1857 M 
+0.238 0 (    index [5] item [you?])A 
+343 1895 M 
+0.238 0 (    end of dump ..--------------------------------------------------------)A 
+F0_58
+Ji 
+225 2049 M 
+-0.248 0 (11)A 
+289 2049 M 
+-0.124 0 (.)A 
+305 2049 M 
+-0.248 0 (2)A 
+402 2049 M 
+-0.212 0 (Public Routine )A 
+F2_46
+Ji 
+821 2065 M 
+0.446 0 (SayDebug)A 
+1045 2065 M 
+0.446 0 (\(\), )A 
+1157 2065 M 
+0.446 0 (SayError)A 
+1381 2065 M 
+0.446 0 (\(\))A 
+1437 2065 M 
+0.446 0 ( )A 
+F0_58
+Ji 
+1465 2049 M 
+-0.374 0 (and)A 
+F2_46
+Ji 
+1567 2065 M 
+0.446 0 ( )A 
+1595 2065 M 
+0.446 0 (SayLog)A 
+1763 2065 M 
+0.446 0 (\(\))A 
+F4_50
+Ji 
+225 2203 M 
+0.100 0 (Usage:)A 
+F6_46
+Ji 
+525 2211 M 
+0.446 0 (SayDebug)A 
+F8_46
+Ji 
+749 2213 M 
+0.400 0 (\( string )A 
+1001 2213 M 
+0.400 0 (\), SayError\( string \), SayLog\( string \))A 
+F4_50
+Ji 
+225 2343 M 
+13.000 0 32 0.064 0 (Writes )D 
+F10_50
+Ji 
+394 2343 M 
+13.000 0 32 0.125 0 (string)D 
+F4_50
+Ji 
+517 2343 M 
+13.000 0 32 0.156 0 ( \(or string representation of an object\) to the appropriate stream object,)D 
+225 2436 M 
+0.123 0 (prepending it with the )A 
+F10_50
+Ji 
+717 2436 M 
+0.097 0 (.rgf.util ~ indent)A 
+F4_50
+Ji 
+1062 2436 M 
+0.116 0 ( string. )A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (25)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 26 26
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+0.127 0 (Source code of routines:)A 
+%%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+279 295 M 
+0.238 0 (:: ROUTINE )A 
+%%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+532 295 M 
+0.238 0 (sayDebug              )A 
+F2_38
+Ji 
+1038 295 M 
+0.238 0 (PUBLIC)A 
+1211 295 M 
+0.238 0 (/* write to debug-stream)A 
+1811 295 M 
+0.238 0 (*/)A 
+279 333 M 
+0.238 0 (   PARSE ARG arg)A 
+279 371 M 
+0.238 0 (   .rgf.util ~ debug ~ lineout\( .rgf.util~indent arg \))A 
+279 447 M 
+0.238 0 (:: ROUTINE )A 
+F4_38
+Ji 
+532 447 M 
+0.238 0 (sayError              )A 
+F2_38
+Ji 
+1038 447 M 
+0.238 0 (PUBLIC)A 
+1211 447 M 
+0.238 0 (/* write to error-stream)A 
+1811 447 M 
+0.238 0 (*/)A 
+279 485 M 
+0.238 0 (   PARSE ARG arg)A 
+279 523 M 
+0.238 0 (   .rgf.util ~ error ~ lineout\( .rgf.util~indent "***" arg \))A 
+279 599 M 
+0.238 0 (:: ROUTINE )A 
+F4_38
+Ji 
+532 599 M 
+0.238 0 (sayLog                )A 
+F2_38
+Ji 
+1038 599 M 
+0.238 0 (PUBLIC)A 
+1211 599 M 
+0.238 0 (/* write to log-stream)A 
+1811 599 M 
+0.238 0 (*/)A 
+279 637 M 
+0.238 0 (   PARSE ARG arg)A 
+279 674 M 
+0.238 0 (   .rgf.util~log~lineout\( .rgf.util~indent arg \))A 
+F0_50
+Ji 
+161 775 M 
+0.077 0 (Example :)A 
+F2_38
+Ji 
+279 853 M 
+0.238 0 (CALL RGF_Util)A 
+761 853 M 
+0.238 0 (/* load "RGF_Util.cmd" public definitions)A 
+1811 853 M 
+0.238 0 (*/)A 
+279 928 M 
+0.238 0 (CALL sayDebug "This is sent to the debug stream:" .rgf.util ~ debug ~ current)A 
+279 966 M 
+0.238 0 (CALL sayError "This is sent to the error stream:" .rgf.util ~ error ~ current)A 
+279 1004 M 
+0.238 0 (CALL sayLog   "This is sent to the log   stream:" .rgf.util ~ log ~ current)A 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+279 1066 M 
+0.436 0 (...)A 
+338 1066 M 
+-0.023 0 (yields the following output:)A 
+F2_38
+Ji 
+279 1136 M 
+0.238 0 (    This is sent to the debug stream: STDERR)A 
+279 1174 M 
+0.238 0 (    *** This is sent to the error stream: STDERR)A 
+279 1212 M 
+0.238 0 (    This is sent to the log   stream: STDOUT)A 
+%%IncludeFont: Helvetica-Bold
+/F7
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F7_58
+F7
+58 
+xF 
+F7_58
+Ji 
+161 1343 M 
+-0.248 0 (12)A 
+338 1343 M 
+0.053 0 (SUMMARY)A 
+F0_50
+Ji 
+161 1496 M 
+13.000 0 32 0.224 0 (This paper discussed and documented the public routines and public classes of the)D 
+161 1589 M 
+7.000 0 32 0.237 0 (following modules in a brief manner: )D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1026 1597 M 
+7.000 0 32 0.446 0 (get_answ.cmd, )D 
+1425 1597 M 
+7.000 0 32 0.522 0 (Is_Util.cmd, )D 
+1797 1597 M 
+7.000 0 32 0.446 0 (NLS)D 
+1881 1597 M 
+7.000 0 32 0.446 0 (_Util.cmd,)D 
+161 1678 M 
+36.000 0 32 0.517 0 (RGF_Util.cmd, )D 
+590 1678 M 
+36.000 0 32 0.446 0 (routine_find_file.cmd, )D 
+1270 1678 M 
+36.000 0 32 0.508 0 (routine_ok.cmd, )D 
+1755 1678 M 
+36.000 0 32 0.446 0 (routine_pp.cmd,)D 
+161 1760 M 
+26.000 0 32 0.489 0 (routine_pp_number.cmd, )D 
+832 1760 M 
+26.000 0 32 0.446 0 (routine_strip_quote.cmd )D 
+F0_50
+Ji 
+1530 1752 M 
+26.000 0 32 0.200 0 (and)D 
+F2_46
+Ji 
+1614 1760 M 
+26.000 0 32 1.446 0 ( )D 
+1669 1760 M 
+26.000 0 32 0.446 0 (Sort_Util.cmd)D 
+F0_50
+Ji 
+2033 1752 M 
+26.000 0 32 0.410 0 (. The)D 
+161 1845 M 
+8.000 0 32 0.172 0 (source code of these utility modules should serve as the ultimate point of reference in)D 
+161 1938 M 
+0.107 0 (case of unclearity.)A 
+161 2078 M 
+14.000 0 32 0.242 0 (Additional utilities for Object Rexx programs are presented in [Flat97]. The netnews)D 
+161 2171 M 
+13.000 0 32 0.255 0 (newsgroup )D 
+F2_46
+Ji 
+435 2179 M 
+13.000 0 32 0.446 0 (<comp.lang.rexx>)D 
+F0_50
+Ji 
+883 2171 M 
+13.000 0 32 0.200 0 ( should be used for discussing issues with respect to)D 
+161 2264 M 
+0.068 0 (these utilities.)A 
+F7_58
+Ji 
+161 2434 M 
+-0.248 0 (13)A 
+338 2434 M 
+0.162 0 (REFERENCES)A 
+F0_50
+Ji 
+161 2558 M 
+0.106 0 ([Ende97])A 
+516 2558 M 
+2.000 0 32 0.086 0 (Ender T.: "Object-Oriented Programming with REXX", John Wiley & Sons,)D 
+516 2640 M 
+0.095 0 (New York et.al. 1997. )A 
+161 2745 M 
+0.161 0 ([Flat96a])A 
+516 2745 M 
+12.000 0 32 0.099 0 (Flatscher R.G.:  "Local Environment and Scopes in Object REXX", in:)D 
+516 2826 M 
+20.000 0 32 0.126 0 (Proceedings of the "7)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1055 2825 M 
+20.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1079 2826 M 
+20.000 0 32 0.120 0 ( International REXX Symposium, May 12-15,)D 
+516 2908 M 
+0.106 0 (Texas/Austin 1996", The Rexx Language Association, Raleigh N.C.  1996.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (26)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 27 27
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 212 M 
+0.161 0 ([Flat96b])A 
+579 212 M 
+2.000 0 32 0.148 0 (Flatscher R.G.:  "Object Classes, Meta Classes and Method Resolution in)D 
+579 294 M 
+2.000 0 32 0.098 0 (Object REXX", in: Proceedings of the "7)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1478 293 M 
+2.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1502 294 M 
+2.000 0 32 0.098 0 ( International REXX Symposium,)D 
+579 375 M 
+22.000 0 32 0.205 0 (May 12-15, Texas/Austin 1996", The Rexx Language  Association,)D 
+579 457 M 
+0.090 0 (Raleigh N.C.  1996.   )A 
+225 562 M 
+0.138 0 ([Flat96c])A 
+579 562 M 
+25.000 0 32 0.097 0 (Flatscher R.G.:  "ORX_ANALYZE.CMD - a Program for Analyzing)D 
+579 643 M 
+3.000 0 32 0.085 0 (Directives and Signatures of Object REXX Programs", in:  Proceedings of)D 
+579 724 M 
+6.000 0 32 0.175 0 (the "7)D 
+F0_29
+Ji 
+715 723 M 
+6.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+739 724 M 
+6.000 0 32 0.103 0 ( International REXX Symposium, May 12-15, Texas/Austin 1996",)D 
+579 806 M 
+0.102 0 (The Rexx Language Association, Raleigh N.C.  1996.)A 
+225 911 M 
+0.156 0 ([Flat97])A 
+579 911 M 
+5.000 0 32 0.076 0 (Flatscher R.G.: "Utility Routines and Utility Classes for Object Rexx, Part)D 
+579 992 M 
+21.000 0 32 0.186 0 (II", in: Proceedings of the "8)D 
+F0_29
+Ji 
+1306 991 M 
+21.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1330 992 M 
+21.000 0 32 0.147 0 ( International Rexx Symposium, April)D 
+579 1074 M 
+12.000 0 32 0.200 0 (22)D 
+F0_29
+Ji 
+635 1073 M 
+12.000 0 32 -0.124 0 (nd)D 
+F0_50
+Ji 
+668 1074 M 
+12.000 0 32 0.250 0 (-24)D 
+F0_29
+Ji 
+740 1073 M 
+12.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+764 1074 M 
+12.000 0 32 0.165 0 (, Heidelberg/Germany 1997", The Rexx Language Association,)D 
+579 1155 M 
+0.089 0 (Raleigh N.C.  1997.)A 
+225 1260 M 
+0.180 0 ([TurWah97])A 
+579 1260 M 
+5.000 0 32 0.180 0 (Turton T., Wahli U.: "Object Rexx for OS/2 Warp", Prentice-Hall, London)D 
+579 1342 M 
+0.166 0 (1997. )A 
+225 1447 M 
+0.150 0 ([VeTrUr96])A 
+579 1447 M 
+6.000 0 32 0.202 0 (Veneskey G., Trosky W., Urbaniak J.: "Object Rexx by Example", Aviar,)D 
+579 1528 M 
+0.118 0 (Pittsburgh 1996.)A 
+225 1633 M 
+9.000 0 32 0.154 0 ([WahHolTur97] Wahli U., Holder I., Turton T.: "Object REXX for Windows 95/NT, With)D 
+579 1715 M 
+0.103 0 (OODialog", Prentice Hall, London 1997.)A 
+225 1820 M 
+0.090 0 ([W3Hobbes])A 
+579 1820 M 
+0.181 0 (URL \(97-06-18\): )A 
+%%IncludeFont: Courier
+/F3
+0.848 
+T 
+/Courier
+mF 
+/F3_46
+F3
+46 
+xF 
+F3_46
+Ji 
+957 1828 M 
+0.446 0 (http://hobbes.nmsu.edu/)A 
+F0_50
+Ji 
+225 1925 M 
+0.045 0 ([W3ObjRexx])A 
+579 1925 M 
+0.181 0 (URL \(97-06-18\): )A 
+F3_46
+Ji 
+957 1933 M 
+0.446 0 (http://www2.hursley.ibm.com/orexx/)A 
+F0_50
+Ji 
+225 2030 M 
+0.037 0 ([W3Rexx])A 
+579 2030 M 
+0.181 0 (URL \(97-06-18\): )A 
+F3_46
+Ji 
+957 2038 M 
+0.446 0 (http://www2.hursley.ibm.com/rexx/)A 
+F0_50
+Ji 
+225 2135 M 
+0.015 0 ([W3RexxLA])A 
+579 2135 M 
+0.181 0 (URL \(97-06-18\): )A 
+F3_46
+Ji 
+957 2143 M 
+0.446 0 (http://www.RexxLA.org)A 
+%%IncludeFont: Helvetica-Oblique
+/F5
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F5_50
+F5
+50 
+xF 
+F5_50
+Ji 
+225 2268 M 
+0.102 0 (Additional information:)A 
+F0_50
+Ji 
+225 2374 M 
+2.000 0 32 0.186 0 (Online documentations for Object Rexx as delivered with OS/2 Warp 4 in the fall of 1996,)D 
+579 2455 M 
+0.213 0 (the Object Rexx OS/2 developer edition as supplied with IBM's "Developer)A 
+579 2537 M 
+27.000 0 32 0.156 0 (Connection" CD-ROM program between 1995 and 1997, and the)D 
+579 2618 M 
+1.000 0 32 0.230 0 (Windows 95/NT products and developer editions as of February 1997 and)D 
+579 2699 M 
+0.160 0 (June 1997.)A 
+225 2804 M 
+0.142 0 (Various postings on the internet newsgroup "comp.lang.rexx" between 1995 and 1997.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (27)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 28 28
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 212 M 
+0.068 0 (Date of Article:)A 
+516 212 M 
+0.208 0 (1997-07-19. )A 
+161 317 M 
+0.060 0 (Published in: )A 
+516 317 M 
+19.000 0 32 0.221 0 (Proceedings of the "8)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1054 316 M 
+19.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1078 317 M 
+19.000 0 32 0.154 0 ( International REXX Symposium", Heidelberg/)D 
+516 399 M 
+2.000 0 32 0.182 0 (Germany, April 22)D 
+F0_29
+Ji 
+926 398 M 
+2.000 0 32 -0.124 0 (nd)D 
+F0_50
+Ji 
+958 399 M 
+2.000 0 32 0.250 0 (-24)D 
+F0_29
+Ji 
+1031 398 M 
+2.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1055 399 M 
+2.000 0 32 0.156 0 (, 1997", The Rexx Language Association, Raleigh)D 
+516 480 M 
+0.100 0 (N.C.  1997. )A 
+161 585 M 
+0.123 0 (Presented at:)A 
+516 585 M 
+7.000 0 32 0.225 0 ("8)D 
+F0_29
+Ji 
+562 584 M 
+7.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+586 585 M 
+7.000 0 32 0.150 0 ( International Rexx Symposium", Heidelberg/Germany, April 22)D 
+F0_29
+Ji 
+2033 584 M 
+7.000 0 32 -0.124 0 (nd)D 
+F0_50
+Ji 
+2065 585 M 
+7.000 0 32 0.250 0 (-24)D 
+F0_29
+Ji 
+2138 584 M 
+7.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+2162 585 M 
+7.000 0 32 0.100 0 (,)D 
+516 667 M 
+0.180 0 (1997.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+675 3060 M 
+-0.079 0 (Utility Routines and Utility Classes for Object Rexx, page )A 
+1737 3060 M 
+-0.352 0 (28)A 
+1783 3060 M 
+0.014 0 (-)A 
+1797 3060 M 
+-0.352 0 (27)A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Trailer
+%%DocumentNeededFonts: 
+%%DocumentSuppliedFonts: 
+/Adobe_Win_Driver /ProcSet findresource dup /terminate get exec
+Adobe_Win_Compat dup /terminate get exec
+%%Pages: 28
+%%EOF
+

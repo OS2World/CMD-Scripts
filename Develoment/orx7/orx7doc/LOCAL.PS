@@ -1,0 +1,4825 @@
+%!PS-Adobe-3.0
+%%P8BIT
+%%Title: Ami Pro - LOCAL.SAM
+%%Creator: Adobe Printer Driver 3.0 for Windows 3.1
+%%CreationDate: 07/21/97 15:05:51
+%%BoundingBox: 18 8 593 784 
+%%Pages: (atend)
+%%PageOrder: Ascending
+%%Requirements: 
+%%DocumentNeededFonts: (atend)
+%%DocumentSuppliedFonts: (atend)
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%EndComments
+
+[{
+%%BeginFeature: *JobPatchFile 1
+
+save 
+/version23-manualfeedpatch where { pop false } { true }ifelse
+ % we don't do an explicit 'get' since product and version MAY
+ % be in systemdict or statusdict - this technique gets the lookup
+ % without failure
+statusdict begin
+  product (LaserWriter) eq        % true if LaserWriter
+  version cvr 23.0 eq             % true if version 23
+end
+and  % only install this patch if both are true
+and  % true only if patch is not installed and is for this printer
+     % save object and boolean on stack
+dup { exch restore }if
+% either true OR saveobject false
+dup
+{
+  /version23-manualfeedpatch true def
+  /oldversion23-showpage /showpage load def
+  /showpage       % this showpage will wait extra time if manualfeed is true
+  {%
+     statusdict /manualfeed known
+     {% manualfeed known in statusdict
+        statusdict /manualfeed get
+        {% if true then we loop for 5 seconds
+           usertime 5000 add       % target usertime
+           { % loop
+             dup usertime sub 0 lt
+             { exit }if
+           }loop
+           pop             % pop the usertime off the stac
+        }if
+     }if
+     oldversion23-showpage
+  }bind def
+}if
+not{ restore }if
+
+%%EndFeature
+} stopped cleartomark
+%%BeginProlog 
+%%BeginProcSet: Adobe_Win_ErrorHandler 1.0 1
+/currentpacking where{pop/oldpack currentpacking def/setpacking where{pop
+false setpacking}if}if/$brkpage 64 dict def $brkpage begin/prnt{dup type
+/stringtype ne{=string cvs}if dup length 6 mul/tx exch def/ty 10 def
+currentpoint/toy exch def/tox exch def 1 setgray newpath tox toy 2 sub moveto
+0 ty rlineto tx 0 rlineto 0 ty neg rlineto closepath fill tox toy moveto 0
+setgray show}bind def/nl{currentpoint exch pop lmargin exch moveto 0 -10
+rmoveto}def/=={/cp 0 def typeprint nl}def/typeprint{dup type exec}readonly def
+/lmargin 72 def/rmargin 72 def/tprint{dup length cp add rmargin gt{nl/cp 0 def
+}if dup length cp add/cp exch def prnt}readonly def/cvsprint{=string cvs
+tprint( )tprint}readonly def/integertype{cvsprint}readonly def/realtype{
+cvsprint}readonly def/booleantype{cvsprint}readonly def/operatortype{(--)
+tprint =string cvs tprint(-- )tprint}readonly def/marktype{pop(-mark- )tprint}
+readonly def/dicttype{pop(-dictionary- )tprint}readonly def/nulltype{pop
+(-null- )tprint}readonly def/filetype{pop(-filestream- )tprint}readonly def
+/savetype{pop(-savelevel- )tprint}readonly def/fonttype{pop(-fontid- )tprint}
+readonly def/nametype{dup xcheck not{(/)tprint}if cvsprint}readonly def
+/stringtype{dup rcheck{(\()tprint tprint(\))tprint}{pop(-string- )tprint}
+ifelse}readonly def/arraytype{dup rcheck{dup xcheck{({)tprint{typeprint}forall
+(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop(-array- )tprint}
+ifelse}readonly def/packedarraytype{dup rcheck{dup xcheck{({)tprint{typeprint}
+forall(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop
+(-packedarray- )tprint}ifelse}readonly def/courier/Courier findfont 10
+scalefont def end errordict/handleerror{systemdict begin $error begin $brkpage
+begin newerror{/newerror false store vmstatus pop pop 0 ne{grestoreall}if
+showpage initgraphics courier setfont lmargin 720 moveto(ERROR: )prnt
+errorname prnt nl(OFFENDING COMMAND: )prnt/command load prnt $error/ostack
+known{nl nl(STACK:)prnt nl nl $error/ostack get aload length{==}repeat}if
+systemdict/showpage get exec(%%[ Error: )print errorname =print
+(; OffendingCommand: )print/command load =print( ]%%)= flush}if end end end}
+dup 0 systemdict put dup 4 $brkpage put bind readonly put/currentpacking where
+{pop/setpacking where{pop oldpack setpacking}if}if
+%%EndProcSet
+%%BeginProcSet: Adobe_Res_Emul 1.0 0
+/defineresource where{pop}{userdict begin/defineresource{userdict/Resources 2
+copy known{get begin}{15 dict dup begin put}ifelse exch readonly exch
+currentdict 1 index known not{dup 30 dict def}if load 3 -1 roll 2 index put
+end}bind readonly def/findresource{userdict/Resources get exch get exch get}
+bind readonly def/resourceforall{pop pop pop pop}bind readonly def
+/resourcestatus{userdict/Resources 2 copy known{get exch 2 copy known{get exch
+known{0 -1 true}{pop pop false}ifelse}{pop pop pop false}ifelse}{pop pop false
+}ifelse}bind readonly def end}ifelse
+%%EndProcSet
+%%BeginResource: procset Adobe_Win_Driver 2.0 0
+/Adobe_Win_Driver 200 dict dup begin
+%%BeginResource: file Adobe_FatalError 2.0 0
+/PLatin1Encoding 256 array def StandardEncoding PLatin1Encoding copy pop
+PLatin1Encoding 224[/agrave/aacute/acircumflex/atilde/adieresis]putinterval
+PLatin1Encoding 232[/egrave/eacute/ecircumflex]putinterval PLatin1Encoding 242
+[/ograve/oacute/ocircumflex/otilde/odieresis]putinterval PLatin1Encoding 249[
+/ugrave/uacute/ucircumflex/udieresis]putinterval/FatalErrorIf{{initgraphics
+findfont dup length dict begin{1 index/FID ne{def}{pop pop}ifelse}forall
+/Encoding PLatin1Encoding def currentdict end/ErrFont-PLatin1 exch definefont
+pop/ErrFont-PLatin1 findfont exch scalefont setfont counttomark 3 div cvi{
+moveto show}repeat showpage quit}{cleartomark}ifelse}bind def
+%%EndResource
+/VM? {
+vmstatus exch sub exch pop gt { [
+(This job requires more memory than is ) 100 500
+(available in this printer.  Try changing performance) 100 485
+(settings or reducing the number of fonts in the document.) 100 470
+(Then print again.) 100 455
+12 /Times-Roman
+showpage true FatalErrorIf}if} bind def
+%%BeginResource: file Adobe_Win_Utils 2.0 0
+/|/def load def/,/load load |/~/exch , |/?/ifelse , |/!/pop , |/`/begin , |/^
+/index , |/@/dup , |/+/translate , |/$/roll , |/U/userdict , |/M/moveto , |/-
+/rlineto , |/&/currentdict , |/:/gsave , |/;/grestore , |/F/false , |/T/true ,
+|/N/newpath , |/E/end , |/Ac/arc , |/An/arcn , |/A/ashow , |/D/awidthshow , |
+/C/closepath , |/V/div , |/O/eofill , |/L/fill , |/I/lineto , |/-C/rcurveto ,
+|/-M/rmoveto , |/+S/scale , |/Ji/setfont , |/Lc/setlinecap , |/Lj/setlinejoin
+, |/Lw/setlinewidth , |/S/show , |/LH/showpage , |/K/stroke , |/W/widthshow ,
+|/b{bind |}bind |/L2? F/languagelevel where{! languagelevel 2 ge{! T}if}if |/g
+{@ not{U/DefIf_save save put}if U/DefIf_bool 2 ^ put}b/DefIf_El{if U
+/DefIf_bool get not @{U/DefIf_save get restore}if}b/e{DefIf_El !}b/self & |
+/reinitialize{[/TextInit/GraphInit/UtilsInit counttomark{@ where{self eq}{F}?{
+cvx exec}{!}?}repeat cleartomark}b/initialize{`{/ADO_mxRot ~ |
+/TextInitialised? F | reinitialize E}{U/Adobe_Win_Data 200 dict @ ` put
+/ADO_mxRot ~ |/TextInitialised? F | reinitialize}?}b/terminate{!{& self eq{
+exit}{E}?}loop E}b/suspend/terminate , |/resume{` Adobe_Win_Data `}b/snap{
+transform 0.25 sub round 0.25 add ~ 0.25 sub round 0.25 add ~ itransform}b
+/dsnap{dtransform round ~ round ~ idtransform}b<04>cvn{}|/setjn{{statusdict
+/jobname known{statusdict/jobname 3 -1 $ put}if}stopped cleartomark}b/solid{[]
+0 setdash}b/setdsh{0 setdash}b/sg{setgray}b/sco{setrgbcolor}b/sgco{{sg}{sco}?}
+b/colspRefresh{}b/rp{4 2 $ M 1 ^ 0 - 0 ~ - neg 0 -}b/rr{1 ^ 0 - 0 ~ - neg 0 -
+C}b
+%vmstatus ~ sub ~ ! gt { [
+%12 /Times-Roman
+%LH T FatalErrorIf}if} b
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L1 2.0 0
+L2? not g{/rf{N rp L}b/fx{1 1 dtransform @ 0 ge{1 sub 1}{1 add -0.25}? 3 -1 $
+@ 0 ge{1 sub 1}{1 add -0.25}? 3 1 $ 4 1 $ idtransform 4 -2 $ idtransform}b/BZ{
+4 -2 $ snap + +S fx rf}b/rs{N rp C K}b/rc{N rp clip N}b/ExecWMForm{!}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L2 2.0 0
+L2? g{/colspA/DeviceGray |/colspABC/DeviceRGB |/setAorABC{{colspA}{colspABC}?
+setcolorspace}b/rf/rectfill , |/fx{1 1 dtransform @ 0 ge{1 sub 0.5}{1 add -0.5
+}? 3 -1 $ @ 0 ge{1 sub 0.5}{1 add -0.5}? 3 1 $ 4 1 $ idtransform 4 -2 $
+idtransform}b/BZ{4 -2 $ snap + +S fx rf}b/rs/rectstroke , |/rc/rectclip , |
+/ExecWMForm{execform}b/UtilsInit{F setglobal}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Encoding 2.0 0
+/bullets{{/bullet}repeat}b/ANSIEncoding[/grave/acute/circumflex/tilde/macron
+/breve/dotaccent/dieresis/ring/cedilla/hungarumlaut/ogonek/caron/dotlessi 18
+bullets StandardEncoding 32 95 getinterval aload ! 3 bullets/quotesinglbase
+/florin/quotedblbase/ellipsis/dagger/daggerdbl/circumflex/perthousand/Scaron
+/guilsinglleft/OE 4 bullets/quoteleft/quoteright/quotedblleft/quotedblright
+/bullet/endash/emdash/tilde/trademark/scaron/guilsinglright/oe 2 bullets
+/Ydieresis/space/exclamdown/cent/sterling/currency/yen/brokenbar/section
+/dieresis/copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered
+/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/paragraph
+/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter
+/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis
+/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]| ANSIEncoding @ 39/quotesingle put 96/grave
+put/ANSIEncodingOld ANSIEncoding 256 array copy | ANSIEncodingOld @[138 153
+154 169 172 174 177 178 179 181 185 188 189 190 208 215 221 222 240 247 253
+254]{/bullet put @}forall 166/bar put 176/ring put
+%%EndResource
+%%BeginResource: file Adobe_Win_Text 2.0 0
+/TextInit{TextInitialised? not{/aF & |/TextInitialised? T |/fM[1 0 0 -1 0 0]|
+/mFM matrix |/iMat[1 0 0.212557 neg 1 0 0]|}if}b/xUP null |/yUP null |/uW null
+|/xSP null |/ySP null |/sW null |/copyfont{1 ^ length add dict `{1 ^/FID ne{|}
+{! !}?}forall & E}b/rF{1 copyfont @ `/Encoding ANSIEncoding &/CharStrings
+known{CharStrings/Eth known not{! ANSIEncodingOld}if}if | E definefont}b/mF{
+findfont ~{@/Encoding get @ StandardEncoding eq{! T}{ISOLatin1Encoding eq{T}{@
+` T 32 1 127{Encoding 1 ^ get StandardEncoding 3 -1 $ get eq and}for E}?}?}{F}
+?{2 ^ ~ rF}if fM 5 4 -1 $ put fM 4 0 put fM makefont aF 3 1 $ put}b/xF{
+scalefont aF 3 1 $ put}b/xMF{mFM astore makefont aF 3 1 $ put}b/xF2/scalefont
+, |/xMF2{mFM astore makefont}b/sLT{: Lw -M currentpoint snap M 0 - 0 Lc K ;}b
+/sSU{N/uW ~ |/yUP ~ |/xUP ~ |}b/sU{xUP yUP uW sLT}b/sST{N/sW ~ |/ySP ~ |/xSP ~
+|}b/sT{xSP ySP sW sLT}b/sR{: + rotate 0 0 M}b/sRxy{: matrix astore concat 0 0
+M}b/eR/; , |
+%%EndResource
+%%BeginResource: file Adobe_Win_Text_Bold 2.0 0
+/mBF{@ 2 copyfont `/FontName ~ | 0 FontMatrix idtransform ! &/PaintType known{
+PaintType 0 eq{/PaintType 2 |/StrokeWidth ~ |}{PaintType 1 eq PaintType 2 eq
+or PaintType 3 eq or &/StrokeWidth known and{StrokeWidth add/StrokeWidth ~ |}{
+!}?}?}{!}? @ & E definefont aF 3 1 $ put}b/xBF{aF ` 1 ^/FontName get 1 ^
+scalefont 3 1 $ scalefont 2 copy ~ | ~ ! | E}b/xMBF{mFM astore aF ` 1 ^
+/FontName get 1 ^ makefont 3 1 $ makefont 2 copy ~ | ~ ! | E}b/xBF2{/sB0 ~ mBF
+/sB1 sB0 3 -1 $ xBF sB1}b/xMBF2{/sB0 ~ mBF mFM astore/sB1 sB0 3 -1 $ xMBF sB1}
+b/sB{: aF currentfont get Ji @ S ; S}b/asB{: aF currentfont get Ji 3 copy A ;
+A}b/wsB{: aF currentfont get Ji 4 copy W ; W}b/awsB{: aF currentfont get Ji 6
+copy D ; D}b/sBT3{: @ S ; 1 1 -M S}b/asBT3{: 3 copy A ; 1 1 -M A}b/wsBT3{: 4
+copy W ; 1 1 -M W}b/awsBT3{: 6 copy D ; 1 1 -M D}b/mIF{iMat 4 3 -1 $ put iMat
+makefont aF 3 1 $ put}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics 2.0 0
+/SavedCTM null |/CTMsave{/SavedCTM SavedCTM currentmatrix |}b/CTMrestore{
+SavedCTM setmatrix}b/mp null |/ADO_mxRot null |/GDIHMatrix null |
+/GDIHPatternDict 22 dict | GDIHPatternDict `/PatternType 1 |/PaintType 2 |
+/Reps L2?{1}{5}? |/XStep 8 Reps mul |/YStep XStep |/BBox[0 0 XStep YStep]|
+/TilingType 1 |/PaintProc{` 1 Lw[]0 setdash PaintData , exec E}b/FGnd null |
+/BGnd null |/HS_Horizontal{horiz}b/HS_Vertical{vert}b/HS_FDiagonal{fdiag}b
+/HS_BDiagonal{biag}b/HS_Cross{horiz vert}b/HS_DiagCross{fdiag biag}b/MaxXYStep
+XStep YStep gt{XStep}{YStep}? |/horiz{Reps{0 4 M XStep 0 - 0 8 +}repeat 0 -8
+Reps mul + K}b/vert{Reps{4 0 M 0 YStep - 8 0 +}repeat 0 -8 Reps mul + K}b/biag
+{Reps{0 0 M MaxXYStep @ - 0 YStep neg M MaxXYStep @ - 0 8 +}repeat 0 -8 Reps
+mul + 0 YStep M 8 8 - K}b/fdiag{Reps{0 0 M MaxXYStep @ neg - 0 YStep M
+MaxXYStep @ neg - 0 8 +}repeat 0 -8 Reps mul + MaxXYStep @ M 8 -8 - K}b E
+/makehatch{GDIHPatternDict/PaintData 3 -1 $ put CTMsave GDIHMatrix setmatrix
+GDIHPatternDict matrix mp CTMrestore ~ U ~ 2 ^ put}b/h0{/h0/HS_Horizontal
+makehatch}b/h1{/h1/HS_Vertical makehatch}b/h2{/h2/HS_FDiagonal makehatch}b/h3{
+/h3/HS_BDiagonal makehatch}b/h4{/h4/HS_Cross makehatch}b/h5{/h5/HS_DiagCross
+makehatch}b/GDIBWPatternDict 17 dict @ `/PatternType 1 |/PaintType L2?{1}{2}?
+|/RepsV L2?{1}{6}? |/RepsH L2?{1}{5}? |/BBox[0 0 RepsH 1]|/TilingType 1 |
+/XStep 1 |/YStep 1 |/Height 8 RepsV mul |/Width 8 |/mx[Width 0 0 Height neg 0
+Height]|/FGnd null |/BGnd null |/SetBGndFGnd L2?{{BGnd null ne{BGnd aload !
+sgco BBox aload ! 2 ^ sub ~ 3 ^ sub ~ rf}if FGnd null ne{FGnd aload ! sgco}if}
+}{{}}? b/PaintProc{` SetBGndFGnd RepsH{Width Height F mx PaintData imagemask
+Width 0 +}repeat E}b E |/GDIBWPatternMx null |/pfprep{save 4 1 $
+/PatternOfTheDay 4 1 $ GDIBWPatternDict `/PaintData ~ |/BGnd ~ |/FGnd ~ | E
+CTMsave GDIBWPatternMx setmatrix GDIBWPatternDict matrix mp CTMrestore ~ !}b
+/hrf null |/prf{pfprep ~ 6 1 $ 5 hrf restore}b/GraphInit{GDIHMatrix null eq{
+/SavedCTM matrix | : ADO_mxRot concat 0 0 snap + : 0.24 @ GDIHPatternDict `
+YStep mul ~ XStep mul ~ dsnap YStep V ~ XStep V ~ E +S/GDIHMatrix matrix
+currentmatrix readonly | ; : 0.24 -0.24 +S GDIBWPatternDict ` Width Height E
+dsnap +S/GDIBWPatternMx matrix currentmatrix readonly | ; ;}if}b/cirp{360 0 An
+C}b/ellp{CTMsave + +S 0.5 0 M 0 0 0.5 360 0 An C CTMrestore}b/rrp{/rad ~ |/y2
+~ |/x2 ~ |/y1 ~ |/x1 ~ | x2 x1 add 2 V y1 M x1 y1 x1 y2 rad arct x1 y2 x2 y2
+rad arct x2 y2 x2 y1 rad arct x2 y1 x1 y1 rad arct C}b/RRp{CTMsave + +S/dyS ~
+|/dxS ~ | dxS 2 V 0 M 0 0 0 dyS 0.5 arct 0 dyS dxS dyS 0.5 arct dxS dyS dxS 0
+0.5 arct dxS 0 0 0 0.5 arct C CTMrestore}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L1 2.0 0
+L2? not g{/arct{arcto ! ! ! !}b/GDIpattfill{@ ` BGnd null ne PaintType 2 eq
+and{: BGnd aload ! sgco fEOFill{O}{L}? ; FGnd aload ! U/fGray 2 ^ put{2}{4}?
+-1 $}if E @ patterncalc : 4 ^/PaintType get 2 eq{fGray{6 -1 $ sg}{8 -3 $ sco}?
+}if fEOFill{eoclip}{clip}? N patternfill ; N}b/hrf{/fGray 1 ^ 6 eq | -4 $ N rp
+C/fEOFill F | GDIpattfill}b/hfMain{/fEOFill ~ |/fGray ~ | GDIpattfill}b/hf{T
+hfMain}b/hfW{F hfMain}b/hs{currentpoint strokepath M hfW}b/pfMain{/fEOFill ~ |
+pfprep GDIpattfill restore N}b/pf{T pfMain}b/pfW{F pfMain}b/ps{currentpoint
+strokepath M pfW}b/mpstr 1 string |/mp{~ @ length 12 add dict copy `
+/PatternCTM matrix currentmatrix |/PatternMatrix ~ |/PatWidth XStep mpstr
+length mul |/PatHeight YStep |/FontType 3 |/Encoding 256 array | 3 string 0 1
+255{Encoding ~ @ 3 ^ cvs cvn put}for !/FontMatrix matrix |/FontBBox BBox |
+/BuildChar{! @ ` XStep 0 FontBBox aload ! setcachedevice/PaintProc , E : exec
+;}b & E ~ @ 3 -1 $ definefont}b/patterncalc{` : PatternCTM setmatrix
+PatternMatrix concat BBox aload ! ! ! + pathbbox ; PatHeight V ceiling 4 1 $
+PatWidth V ceiling 4 1 $ PatHeight V floor 4 1 $ PatWidth V floor 4 1 $ 2 ^
+sub cvi abs ~ 3 ^ sub cvi abs ~ 4 2 $ PatHeight mul ~ PatWidth mul ~ E}b
+/patternfill{5 -1 $ @ ` Ji PatternCTM setmatrix PatternMatrix concat 0 2 ^ 2 ^
+M 0 1 mpstr length 1 sub{1 ^ mpstr 3 1 $ put}for ! 2 ^{currentpoint 5 ^{mpstr
+S}repeat YStep add M}repeat ! ! ! ! E}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L2 2.0 0
+L2? g{/mp/makepattern , |/hrf{6 eq setAorABC setpattern rectfill}b/hf{
+setAorABC setpattern O}b/hfW{setAorABC setpattern L}b/hs{setAorABC setpattern
+K}b/pf{pfprep setpattern O restore N}b/pfW{pfprep setpattern L restore N}b/ps{
+pfprep setpattern K restore N}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images 2.0 0
+/iw 0 |/ih 0 |/im_save 0 |/s 0 |/polarity 0 |/smoothflag 0 |/mystring 0 |/bpc
+0 |/setup1asciiproc{[currentfile mystring/readhexstring cvx/! cvx]cvx bind}b
+/setup1binaryproc{[currentfile mystring/readstring cvx/! cvx]cvx bind}b
+/setup2asciiproc{currentfile/ASCII85Decode filter/RunLengthDecode filter}b
+/setup2binaryproc{currentfile/RunLengthDecode filter}b/mycolorspace{colspABC}|
+/myimagedict{/myimagedict 10 dict | myimagedict @ `/ImageType 1 |
+/MultipleDataSource F | E}b/imageprocarray[/setup1binaryproc/setup1asciiproc
+/setup2binaryproc/setup2asciiproc]|/L2Polarity{{[1 0]}{[0 1]}?}b/Q{/im_save
+save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |/smoothflag ~ |
+snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |/iw ~ | 1 sg fx
+rf}b/X{/im_save save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |
+/smoothflag ~ | snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |
+/iw ~ |}b/Z{im_save restore}b/Y{sgco myimagedict @ `/Width iw |/Height ih |
+/Decode polarity |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |/BitsPerComponent
+1 |/Interpolate smoothflag | E imagemask}b
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images_L1 2.0 0
+L2? not g{/setup2asciiproc{[/Level2ImagesError , aload ! T FatalErrorIf}b
+/setup2binaryproc/setup2asciiproc , |/L2Polarity{}|/Y{sgco iw ih polarity[iw 0
+0 ih 0 0]s imagemask}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L1 2.0 0
+L2? not g{/testsystemdict{where{systemdict eq{T}{F}?}{F}?}b/c 1 |/colorimage
+where{! T}{F}?{/c 0 statusdict `/processcolors where{! ! processcolors}{
+/deviceinfo where{! deviceinfo/Colors known{!{deviceinfo/Colors get}}if}if}? E
+| c 0 ne{/colorimage testsystemdict/setcolortransfer testsystemdict
+/currentcolortransfer testsystemdict/currentcmykcolor testsystemdict and and
+and not{/c 0 |}if}if}if c @ 1 ne ~ @ 3 ne ~ 4 ne and and{/c 0 |}if c 1 eq g{
+/expandbw{expandfactor mul round cvi bwclut ~ get 255 V}b/doclutimage{!/bwclut
+~ | bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/expandfactor ~ |[/expandbw ,/exec , @
+currenttransfer ~]cvx bind settransfer iw ih bpc[iw 0 0 ih 0 0]s image}b}e c @
+3 eq ~ 4 eq or g{/nullproc{{}}|/concatutil{/exec , 7 -1 $/exec ,}b/defsubclut{
+1 add getinterval |}b/spconcattransfer{/Dclut ~ |/Cclut ~ |/Bclut ~ |/Aclut ~
+|/ncompute ~ , | currentcolortransfer[{Aclut ncompute}concatutil]cvx[{Bclut
+ncompute}concatutil]cvx[{Cclut ncompute}concatutil]cvx[{Dclut ncompute}
+concatutil]cvx setcolortransfer}b/setuprgbcluts{/bit3x rgbclut length 3 sub |
+/bit1x bit3x 3 idiv |/rclut rgbclut |/gclut rclut 1 bit3x defsubclut/bclut
+rclut 2 bit3x defsubclut}b}e c 3 eq g{/3compute{~ bit3x mul round cvi get 255
+V}b/doclutimage{/rgbclut ~ | ! setuprgbcluts/3compute rclut gclut bclut @
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @]cvx nullproc nullproc
+T 3 colorimage}b}e c 4 eq g{/ftoint{1 ~ sub 255 mul round cvi}b/stuffclut{
+cmykindex 3 -1 $ put}b/4compute{~ bit4x mul round cvi get 255 V}b
+/invalidcolortable? T |/computecmykclut{setuprgbcluts/bit4x rgbclut length 3
+idiv 4 mul 4 sub |/cmykclut bit4x 4 add string |/cclut cmykclut |/mclut cclut
+1 bit4x defsubclut/yclut cclut 2 bit4x defsubclut/kclut cclut 3 bit4x
+defsubclut/cmykindex 0 | 0 1 bit1x{@/cmykindex ~ bit1x ~ sub 4 mul | 3 mul @
+rclut ~ get 255 V ~ @ gclut ~ get 255 V ~ bclut ~ get 255 V setrgbcolor
+currentcmykcolor ftoint kclut stuffclut ftoint yclut stuffclut ftoint mclut
+stuffclut ftoint cclut stuffclut}for}b/doclutimage{/rgbclut ~ | !
+invalidcolortable?{computecmykclut}if/4compute cclut mclut yclut kclut
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @ @]cvx nullproc
+nullproc nullproc T 4 colorimage}b}e c 0 eq g{/a{3 mul 3 getinterval
+putinterval ~ 3 add ~ 3 copy}b/8lookup/a , |/4lookup{/byte 1 ^ | -4 bitshift a
+byte 15 and a}b/2lookup{/byte 1 ^ | -6 bitshift a byte -4 bitshift 3 and a
+byte -2 bitshift 3 and a byte 3 and a}b/colorexpand{mystringexp 0 rgbclut 3
+copy 7 -1 $/mylookup , forall ! ! ! ! ! 0 iw 3 mul getinterval}b
+/createexpandstr{/mystringexp ~ mystring length mul string |}b/doclutimage{
+/rgbclut ~ | !/mylookup bpc 8 eq{3 createexpandstr/8lookup}{bpc 4 eq{6
+createexpandstr/4lookup}{12 createexpandstr/2lookup}?}? , | iw ih 8[iw 0 0 ih
+0 0][s/exec ,/colorexpand ,/exec ,]cvx F 3 colorimage}b}e/colorimage where{! T
+}{F}? g{/do24image{iw ih 8[iw 0 0 ih 0 0]s F 3 colorimage}b}DefIf_El{
+/rgbtogray{/str ~ |/len str length |/smlen len 3 idiv |/rstr str |/gstr str 1
+len 1 sub getinterval |/bstr str 2 len 2 sub getinterval | str @ 0 1 smlen 1
+sub{@ 3 mul rstr 1 ^ get 0.3 mul gstr 2 ^ get 0.59 mul add bstr 3 -1 $ get
+0.11 mul add round cvi put @}for ! 0 smlen getinterval}b/do24image{iw ih 8[iw
+0 0 ih 0 0][s/exec ,/rgbtogray ,/exec ,]cvx bind image}b}e/doNimage{bpc 24 eq{
+do24image}{iw ih bpc[iw 0 0 ih 0 0]s image}?}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L2 2.0 0
+L2? g{/doclutimage{/rgbclut ~ | ! bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/hival ~ |[
+/Indexed colspABC hival rgbclut]setcolorspace myimagedict @ `/Width iw |
+/Height ih |/Decode[0 hival]|/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc |/Interpolate smoothflag | E image}b/doNimage{bpc 24 eq{
+colspABC}{colspA}? setcolorspace myimagedict @ `/Width iw |/Height ih |/Decode
+bpc 24 eq{[0 1 0 1 0 1]}{[0 1]}? |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc 24 eq{8}{bpc}? |/Interpolate smoothflag | E image}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Type3_Hdr 2.0 0
+/GreNewFont{10 dict @ 3 1 $ | @ ` 4 1 $/FontType 3 |/FontMatrix ~ |/FontBBox ~
+|/Encoding 256 array | 0 1 255{Encoding ~/.notdef put}for/CharProcs 256 dict |
+CharProcs/.notdef{}put/Metrics 256 dict | Metrics/.notdef 3 -1 $ put/BuildChar
+{/char ~ |/fontdict ~ |/charname fontdict/Encoding get char get | fontdict
+/Metrics get charname get aload ! setcachedevice fontdict ` Encoding char get
+CharProcs ~ get E exec}| E definefont !}|/AddChar{` Encoding 3 1 $ put
+CharProcs 3 1 $ put Metrics 3 1 $ put E}|
+%%EndResource
+%%BeginResource: file Adobe_Win_Type1_Hdr 2.0 0
+/FEbuf 2 string |/FEglyph(G  )|/FE{1 ~{@ 16 FEbuf cvrs FEglyph ~ 1 ~
+putinterval 1 ^ ~ FEglyph cvn put}for}bind |/Type1Hdr{11 dict `/FontName ~ |
+/PaintType ~ |/FontType 1 |/FontMatrix[1 3 ^ V 0 0 1 6 ^ V 0 0]| !/Encoding
+256 array 0 1 255{1 ^ ~/.notdef put}for 3 ^ 3 ^ FE | ! !/FontBBox{0 0 0 0}| &
+E currentfile eexec}bind |
+%%EndResource
+%%BeginResource: file Adobe_Win_Compat 2.0 0
+userdict/Adobe_Win_Compat 12 dict dup begin/CB{pop pop pop pop}bind def/B{pop
+pop pop pop}bind def/bd{bind def}bind def/ld{load def}bd/SS{/pagesave save def
+}bind def/RS{pagesave restore}bind def/ANSIVec[0/grave 1/acute 2/circumflex 3
+/tilde 4/macron 5/breve 6/dotaccent 7/dieresis 8/ring 9/cedilla 10
+/hungarumlaut 11/ogonek 12/caron 13/dotlessi 39/quotesingle 96/grave 124/bar
+130/quotesinglbase 131/florin 132/quotedblbase 133/ellipsis 134/dagger 135
+/daggerdbl 136/circumflex 137/perthousand 138/Scaron 139/guilsinglleft 140/OE
+145/quoteleft 146/quoteright 147/quotedblleft 148/quotedblright 149/bullet 150
+/endash 151/emdash 152/tilde 153/trademark 154/scaron 155/guilsinglright 156
+/oe 159/Ydieresis 160/space 161/exclamdown 164/currency 165/yen 166/brokenbar
+167/section 168/dieresis 169/copyright 170/ordfeminine 171/guillemotleft 172
+/logicalnot 173/hyphen 174/registered 175/macron 176/degree 177/plusminus 178
+/twosuperior 179/threesuperior 180/acute 181/mu 182/paragraph 183
+/periodcentered 184/cedilla 185/onesuperior 186/ordmasculine 187
+/guillemotright 188/onequarter 189/onehalf 190/threequarters 191/questiondown
+192/Agrave 193/Aacute 194/Acircumflex 195/Atilde 196/Adieresis 197/Aring 198
+/AE 199/Ccedilla 200/Egrave 201/Eacute 202/Ecircumflex 203/Edieresis 204
+/Igrave 205/Iacute 206/Icircumflex 207/Idieresis 208/Eth 209/Ntilde 210/Ograve
+211/Oacute 212/Ocircumflex 213/Otilde 214/Odieresis 215/multiply 216/Oslash
+217/Ugrave 218/Uacute 219/Ucircumflex 220/Udieresis 221/Yacute 222/Thorn 223
+/germandbls 224/agrave 225/aacute 226/acircumflex 227/atilde 228/adieresis 229
+/aring 230/ae 231/ccedilla 232/egrave 233/eacute 234/ecircumflex 235/edieresis
+236/igrave 237/iacute 238/icircumflex 239/idieresis 240/eth 241/ntilde 242
+/ograve 243/oacute 244/ocircumflex 245/otilde 246/odieresis 247/divide 248
+/oslash 249/ugrave 250/uacute 251/ucircumflex 252/udieresis 253/yacute 254
+/thorn 255/ydieresis]def currentdict{dup type/operatortype eq{[exch]cvx def}{
+pop pop}ifelse}forall/initialize{currentdict exch begin begin}bind def
+/terminate{pop end end}bind def/suspend/terminate load def/resume/initialize
+load def end put
+%%EndResource
+end /ProcSet defineresource pop
+%%EndResource
+%%EndProlog
+
+%%BeginSetup 
+Adobe_Win_Compat dup /initialize get exec
+[ 1.000 0 0 1.000 0 0 ] false /Adobe_Win_Driver /ProcSet findresource dup /initialize get exec
+[{0 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/JobTimeout  4 -1 roll put setuserparams}{statusdict/setjobtimeout get exec}ifelse 
+} stopped cleartomark
+[{120 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/WaitTimeout 4 -1 roll put setuserparams}{statusdict/waittimeout 3 -1 roll put}ifelse 
+} stopped cleartomark
+[{1 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/NumCopies 4
+-1 roll put setpagedevice}{userdict/#copies 3 -1 roll put}ifelse
+
+} stopped cleartomark
+[{
+%%BeginFeature: *ManualFeed False
+statusdict /manualfeed false put
+%%EndFeature
+} stopped cleartomark
+[{
+%%BeginFeature: *PageSize Letter
+letter
+%%EndFeature
+} stopped cleartomark
+1 setlinecap 1 setlinejoin 
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+%%EndSetup
+
+%%Page: 1 1
+%%BeginPageSetup
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.947 
+T 
+/Helvetica-Bold
+mF 
+/F0_75
+F0
+75 
+xF 
+F0_75
+Ji 
+499 202 M 
+-0.055 0 (LOCAL ENVIRONMENT AND SCOPES IN )A 
+968 295 M 
+-0.025 0 (OBJECT REXX)A 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+1016 586 M 
+0.182 0 (Rony G. Flatscher)A 
+%%IncludeFont: Helvetica
+/F3
+0.940 
+T 
+/Helvetica
+mF 
+/F3_50
+F3
+50 
+xF 
+F3_50
+Ji 
+633 679 M 
+0.158 0 (Department of Management and Information Systems)A 
+556 772 M 
+0.074 0 (Vienna University of Economics and Business Administration)A 
+456 865 M 
+0.275 0 (\2047)A 
+/F3_29
+F3
+29 
+xF 
+F3_29
+Ji 
+501 864 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+525 865 M 
+0.113 0 ( International Rexx Symposium\223, Austin/Texas, May 13)A 
+F3_29
+Ji 
+1748 864 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+1771 865 M 
+0.250 0 (-15)A 
+F3_29
+Ji 
+1844 864 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+1868 865 M 
+0.166 0 (, 1996)A 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+1073 1164 M 
+0.007 0 (ABSTRACT)A 
+F3_50
+Ji 
+343 1318 M 
+21.000 0 32 0.102 0 (Object Rexx extends Rexx with additional concepts of scopes. Firstmost the)D 
+225 1411 M 
+6.000 0 32 0.204 0 (developers refer to the scope in which an individual object is executing in and describe)D 
+225 1504 M 
+0.157 0 (\204scope\223 in the online manual \(version 16th February, 96\) as:)A 
+343 1644 M 
+0.239 0 (\204A scope is the methods and object variables defined in a single class. Only methods)A 
+225 1738 M 
+6.000 0 32 0.148 0 (defined in a particular scope can access object variables within that scope. This means)D 
+225 1831 M 
+8.000 0 32 0.282 0 (that object variables in a subclass can have the same names as object variables in a)D 
+225 1924 M 
+0.128 0 (superclass, because the object variables are at different scopes.\223)A 
+343 2064 M 
+6.000 0 32 0.110 0 (This scope is relevant in discussing the possibilities of concurrent access to object)D 
+225 2157 M 
+0.127 0 (variables, if multiple methods are supposed to execute in parallel for the same object.)A 
+343 2297 M 
+4.000 0 32 0.204 0 (But looking closer at Object Rexx it turns out that there are many more \(non-object)D 
+225 2390 M 
+2.000 0 32 0.182 0 (related\) scopes available which are worthwhile to explore: scopes of procedures, routines)D 
+225 2484 M 
+0.170 0 (and methods.)A 
+343 2624 M 
+13.000 0 32 0.236 0 (In addition to the scopes related to a single program the concept of the \204local)D 
+225 2717 M 
+4.000 0 32 0.157 0 (environment\223 adds another dimension to the discussion of scopes: the local environment)D 
+225 2810 M 
+0.097 0 (itself and the visibility - and therefore accessibility of classes and routines.)A 
+/F3_42
+F3
+42 
+xF 
+F3_42
+Ji 
+679 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1668 3060 M 
+-0.352 0 (1)A 
+1690 3060 M 
+0.014 0 (-)A 
+1704 3060 M 
+-0.352 0 (16)A 
+1750 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 2 2
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+161 224 M 
+-0.248 0 (1)A 
+279 224 M 
+0.018 0 (SCOPES OF TRADITIONAL REXX PROGRAMS)A 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+279 378 M 
+1.000 0 32 0.237 0 (In traditional Rexx \(abbreviated T-Rexx\) the scope \(also named)D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1705 378 M 
+1.000 0 32 1.100 0 ( )D 
+1721 378 M 
+1.000 0 32 0.178 0 (\204standard scope\223)D 
+F2_50
+Ji 
+2100 378 M 
+1.000 0 32 0.437 0 (\) of)D 
+161 471 M 
+4.000 0 32 0.211 0 (variables and labels is global, i.e. variables and labels are visible and accessible thruout)D 
+161 564 M 
+0.158 0 (the entire Rexx program.)A 
+279 704 M 
+6.000 0 32 0.172 0 (If the definition of a label is immediately followed by a \204)D 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+1564 712 M 
+6.000 0 32 0.446 0 (PROCEDURE)D 
+F2_50
+Ji 
+1816 704 M 
+6.000 0 32 0.190 0 (\223-statement and)D 
+161 797 M 
+2.000 0 32 0.150 0 (this label gets )D 
+F6_46
+Ji 
+489 805 M 
+2.000 0 32 0.446 0 (CALL)D 
+F2_50
+Ji 
+601 797 M 
+2.000 0 32 0.227 0 (ed, then T-Rexx defines a separate scope for variables at the entry of)D 
+161 890 M 
+2.000 0 32 0.129 0 (that label \()D 
+F4_50
+Ji 
+400 890 M 
+2.000 0 32 0.194 0 (\204procedure scope\223)D 
+F2_50
+Ji 
+811 890 M 
+2.000 0 32 0.136 0 (\). This in effect hides all variables of the caller from the code)D 
+161 983 M 
+14.000 0 32 0.195 0 (constituting a procedure or a function, yet, labels remain still visible. Therefore it is)D 
+161 1077 M 
+18.000 0 32 0.160 0 (possible to change the flow of control by )D 
+F6_46
+Ji 
+1215 1085 M 
+18.000 0 32 0.446 0 (CALL)D 
+F2_50
+Ji 
+1327 1077 M 
+18.000 0 32 0.292 0 (ing or )D 
+F6_46
+Ji 
+1504 1085 M 
+18.000 0 32 0.446 0 (SIGNAL)D 
+F2_50
+Ji 
+1672 1077 M 
+18.000 0 32 0.142 0 (ling any label in the)D 
+161 1170 M 
+0.213 0 (T-Rexx-program.)A 
+: 0 0 2106 3232 rc /F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+170 1303 M 
+0.238 0 (/* */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1353 M 
+0.238 0 (a = 1)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1402 M 
+0.238 0 (b = 2)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1452 M 
+0.238 0 (SAY a      /* displays "1" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1501 M 
+0.238 0 (SAY b      /* displays "2" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1601 M 
+0.238 0 (CALL proc1)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1650 M 
+0.238 0 (SAY a      /* displays "4" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1700 M 
+0.238 0 (SAY b      /* displays "5" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1799 M 
+0.238 0 (CALL proc2)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1848 M 
+0.238 0 (SAY a      /* displays "4" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1898 M 
+0.238 0 (SAY b      /* displays "2" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 1948 M 
+0.238 0 (EXIT)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2047 M 
+0.238 0 (PROC1 :   )A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2096 M 
+0.238 0 (  a = 4)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2146 M 
+0.238 0 (  b = 5)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2196 M 
+0.238 0 (  RETURN)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2295 M 
+0.238 0 (    /* local scope with access to global "b" */)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2344 M 
+0.238 0 (PROC2 : PROCEDURE EXPOSE b)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2394 M 
+0.238 0 (  a = 1)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2443 M 
+0.238 0 (  b = 2)A 
+; : 0 0 2106 3232 rc F6_38
+Ji 
+170 2493 M 
+0.238 0 (  RETURN)A 
+; : 0 0 2106 3232 rc 
+166 2537 N M 1941 75 rr : 0.824 sg O ; ; : 0 0 2106 3232 rc 170 2543 M 
+0.127 0 (Figure 1: T-Rexx global and local scopes)A 
+; 
+165 1298 N M 1941 2 rr : 0 sg O ; 
+165 1346 N M 1941 2 rr : 0 sg O ; 
+165 1346 N M 1941 2 rr : 0 sg O ; 
+165 1395 N M 1941 2 rr : 0 sg O ; 
+165 1395 N M 1941 2 rr : 0 sg O ; 
+165 1445 N M 1941 2 rr : 0 sg O ; 
+165 1445 N M 1941 2 rr : 0 sg O ; 
+165 1495 N M 1941 2 rr : 0 sg O ; 
+165 1495 N M 1941 2 rr : 0 sg O ; 
+165 1544 N M 1941 2 rr : 0 sg O ; 
+165 1544 N M 1941 2 rr : 0 sg O ; 
+165 1594 N M 1941 2 rr : 0 sg O ; 
+165 1594 N M 1941 2 rr : 0 sg O ; 
+165 1643 N M 1941 2 rr : 0 sg O ; 
+165 1643 N M 1941 2 rr : 0 sg O ; 
+165 1693 N M 1941 2 rr : 0 sg O ; 
+165 1693 N M 1941 2 rr : 0 sg O ; 
+165 1742 N M 1941 2 rr : 0 sg O ; 
+165 1742 N M 1941 2 rr : 0 sg O ; 
+165 1792 N M 1941 2 rr : 0 sg O ; 
+165 1792 N M 1941 2 rr : 0 sg O ; 
+165 1842 N M 1941 2 rr : 0 sg O ; 
+165 1842 N M 1941 2 rr : 0 sg O ; 
+165 1891 N M 1941 2 rr : 0 sg O ; 
+165 1891 N M 1941 2 rr : 0 sg O ; 
+165 1941 N M 1941 2 rr : 0 sg O ; 
+165 1941 N M 1941 2 rr : 0 sg O ; 
+165 1990 N M 1941 2 rr : 0 sg O ; 
+165 1990 N M 1941 2 rr : 0 sg O ; 
+165 2040 N M 1941 2 rr : 0 sg O ; 
+165 2040 N M 1941 2 rr : 0 sg O ; 
+165 2090 N M 1941 2 rr : 0 sg O ; 
+165 2090 N M 1941 2 rr : 0 sg O ; 
+165 2139 N M 1941 2 rr : 0 sg O ; 
+165 2139 N M 1941 2 rr : 0 sg O ; 
+165 2189 N M 1941 2 rr : 0 sg O ; 
+165 2189 N M 1941 2 rr : 0 sg O ; 
+165 2238 N M 1941 2 rr : 0 sg O ; 
+165 2238 N M 1941 2 rr : 0 sg O ; 
+165 2288 N M 1941 2 rr : 0 sg O ; 
+165 2288 N M 1941 2 rr : 0 sg O ; 
+165 2337 N M 1941 2 rr : 0 sg O ; 
+165 2337 N M 1941 2 rr : 0 sg O ; 
+165 2387 N M 1941 2 rr : 0 sg O ; 
+165 2387 N M 1941 2 rr : 0 sg O ; 
+165 2437 N M 1941 2 rr : 0 sg O ; 
+165 2437 N M 1941 2 rr : 0 sg O ; 
+165 2486 N M 1941 2 rr : 0 sg O ; 
+165 2486 N M 1941 2 rr : 0 sg O ; 
+165 2536 N M 1941 2 rr : 0 sg O ; 
+165 2536 N M 1941 2 rr : 0 sg O ; 
+165 2610 N M 1941 2 rr : 0 sg O ; 
+165 1298 N M 2 1314 rr : 0 sg O ; 
+2105 1298 N M 1 1314 rr : 0 sg O ; 279 2679 M 
+3.000 0 32 0.167 0 (If the programmer so desires, it is possible to allow access to some variables of the)D 
+161 2772 M 
+17.000 0 32 0.252 0 (caller from within the called procedure/function by using the )D 
+F6_46
+Ji 
+1658 2780 M 
+17.000 0 32 0.588 0 (EXPOSE )D 
+F2_50
+Ji 
+1872 2772 M 
+17.000 0 32 0.231 0 (keyword and)D 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+665 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1654 3060 M 
+-0.352 0 (2)A 
+1677 3060 M 
+0.014 0 (-)A 
+1691 3060 M 
+-0.352 0 (16)A 
+1737 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 3 3
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+7.000 0 32 0.180 0 (denominating those variables which should get incorporated into the procedure\222s scope)D 
+225 311 M 
+0.128 0 (and thereby becoming accessible again.)A 
+343 451 M 
+10.000 0 32 0.175 0 (Figure 1 depicts the scopes of T-Rexx programs, procedure )D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1777 459 M 
+10.000 0 32 0.446 0 (PROC1 )D 
+F0_50
+Ji 
+1955 451 M 
+10.000 0 32 0.145 0 (changes the)D 
+225 544 M 
+1.000 0 32 0.138 0 (values of the globally visible variables \204)D 
+F2_46
+Ji 
+1101 552 M 
+1.000 0 32 0.446 0 (a)D 
+F0_50
+Ji 
+1129 544 M 
+1.000 0 32 0.214 0 (\223 and \204)D 
+F2_46
+Ji 
+1277 552 M 
+1.000 0 32 0.446 0 (b)D 
+F0_50
+Ji 
+1305 544 M 
+1.000 0 32 0.170 0 (\223. By contrast )D 
+F2_46
+Ji 
+1619 552 M 
+1.000 0 32 0.446 0 (PROC2 )D 
+F0_50
+Ji 
+1788 544 M 
+1.000 0 32 0.228 0 (creates a procedure)D 
+225 638 M 
+7.000 0 32 0.147 0 (scope allowing access to the global variable \204)D 
+F2_46
+Ji 
+1284 646 M 
+7.000 0 32 0.446 0 (b)D 
+F0_50
+Ji 
+1312 638 M 
+7.000 0 32 0.145 0 (\223 \(via the )D 
+F2_46
+Ji 
+1543 646 M 
+7.000 0 32 0.588 0 (EXPOSE )D 
+F0_50
+Ji 
+1747 638 M 
+7.000 0 32 0.140 0 (keyword\): changes to)D 
+225 731 M 
+0.140 0 (variable \204)A 
+F2_46
+Ji 
+432 739 M 
+0.446 0 (a)A 
+F0_50
+Ji 
+460 731 M 
+0.136 0 (\223 remain local, changes to variable \204)A 
+F2_46
+Ji 
+1257 739 M 
+0.446 0 (b)A 
+F0_50
+Ji 
+1285 731 M 
+0.096 0 (\223 occur globally in this case.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+225 901 M 
+-0.248 0 (2)A 
+343 901 M 
+0.063 0 (OBJECT REXX)A 
+225 1072 M 
+-0.248 0 (2)A 
+257 1072 M 
+-0.124 0 (.)A 
+273 1072 M 
+-0.248 0 (1)A 
+343 1072 M 
+-0.183 0 (Local Environment)A 
+F0_50
+Ji 
+343 1226 M 
+20.000 0 32 0.204 0 (The session in which an Object Rexx program executes constitutes a )D 
+%%IncludeFont: Helvetica-Oblique
+/F6
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+2119 1226 M 
+20.000 0 32 0.091 0 (\204local)D 
+225 1319 M 
+2.000 0 32 0.187 0 (environment\223)D 
+F0_50
+Ji 
+519 1319 M 
+2.000 0 32 0.146 0 ( in the sense that any Rexx program loaded by another Rexx program \(via a)D 
+F2_46
+Ji 
+225 1420 M 
+1.000 0 32 0.446 0 (CALL)D 
+F0_50
+Ji 
+337 1412 M 
+1.000 0 32 0.240 0 (-statement or a )D 
+F2_46
+Ji 
+694 1420 M 
+1.000 0 32 0.446 0 (::REQUIRES)D 
+F0_50
+Ji 
+974 1412 M 
+1.000 0 32 0.147 0 ( directive\) is mereley added to the session\222s memory. All)D 
+225 1505 M 
+7.000 0 32 0.229 0 (the Rexx programs build a tree whereby the root is simply the very first Rexx program)D 
+225 1598 M 
+12.000 0 32 0.239 0 (invoked. Keeping all Rexx programs which form an application in memory allows for)D 
+225 1691 M 
+0.109 0 (passing objects effectively by reference.)A 
+343 1832 M 
+6.000 0 32 0.134 0 (Routines and classes with the attribute \204)D 
+F2_46
+Ji 
+1271 1840 M 
+6.000 0 32 0.446 0 (PUBLIC)D 
+F0_50
+Ji 
+1439 1832 M 
+6.000 0 32 0.215 0 (\223 are brought into the scope of the)D 
+225 1925 M 
+5.000 0 32 0.131 0 (calling Rexx program \()D 
+F6_50
+Ji 
+743 1925 M 
+5.000 0 32 0.216 0 (\204program scope\223)D 
+F0_50
+Ji 
+1118 1925 M 
+5.000 0 32 0.228 0 (\) right after a )D 
+F2_46
+Ji 
+1439 1933 M 
+5.000 0 32 0.446 0 (CALL )D 
+F0_50
+Ji 
+1584 1925 M 
+5.000 0 32 0.155 0 (to an external Rexx program)D 
+225 2018 M 
+0.174 0 (returns or right after a )A 
+F2_46
+Ji 
+724 2026 M 
+0.446 0 (::)A 
+780 2026 M 
+0.446 0 (REQUIRES)A 
+F0_50
+Ji 
+1004 2018 M 
+0.119 0 (-directive has been resolved. Only those public routines)A 
+225 2111 M 
+9.000 0 32 0.167 0 (and classes of \204children\223 are added to the program scope of the caller, which are not)D 
+225 2204 M 
+11.000 0 32 0.200 0 (already defined there. Therefore it is not possible that called/required Rexx programs)D 
+225 2297 M 
+0.113 0 (override routines and classes of the caller itself.)A 
+343 2437 M 
+6.000 0 32 0.140 0 (In the case that several Rexx \204children\223 contain public routines and classes by the)D 
+225 2530 M 
+6.000 0 32 0.140 0 (same name those prevail, which are nearest to the caller with respect to the number of)D 
+225 2624 M 
+6.000 0 32 0.239 0 (Rexx program \204nodes\223 in between and in case of a tie, the program scope of the Rexx)D 
+225 2717 M 
+18.000 0 32 0.156 0 (program is used which was called last. See figure 2 demonstrating the effects of)D 
+F2_46
+Ji 
+225 2818 M 
+0.446 0 (::REQUIRE)A 
+F0_50
+Ji 
+477 2810 M 
+0.125 0 (-directives and )A 
+F2_46
+Ji 
+818 2818 M 
+0.446 0 (CALL)A 
+F0_50
+Ji 
+930 2810 M 
+0.159 0 (-statements \(output in figure 3\).)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+679 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1668 3060 M 
+-0.352 0 (3)A 
+1690 3060 M 
+0.014 0 (-)A 
+1704 3060 M 
+-0.352 0 (16)A 
+1750 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 4 4
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2110 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 211 M 
+0.238 0 (/* main.cmd */)A 
+; : 0 0 2110 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 310 M 
+0.238 0 (SAY)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 360 M 
+0.238 0 (SAY "in MAIN.CMD \(executing\) ...")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 409 M 
+0.238 0 (CALL hi     /* call routine named HI \(in PROC2.CMD\) */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 459 M 
+0.238 0 (CALL proc3.cmd)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 509 M 
+0.238 0 (CALL hi     /* call routine named HI \(in PROC3.CMD\) */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 558 M 
+0.238 0 (CALL proc4.cmd)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 608 M 
+0.238 0 (CALL hi     /* call routine named HI \(in PROC4.CMD\) */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 657 M 
+0.238 0 (CALL hi     /* call routine named HI \(in PROC4.CMD\) */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 707 M 
+0.238 0 (SAY "leaving MAIN.CMD.")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 806 M 
+0.238 0 (:: REQUIRES proc1.cmd  /* load PROC1.CMD into local environment */)A 
+; : 0 0 2110 3232 rc F0_38
+Ji 
+170 905 M 
+0.238 0 (/* proc1.cmd */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1004 M 
+0.238 0 (SAY)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1054 M 
+0.238 0 (SAY "in PROC1.CMD \(initializing\) ...")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1104 M 
+0.238 0 (CALL hi         /* local routine prevails        */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1153 M 
+0.238 0 (SAY "... leaving PROC1.CMD.")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1252 M 
+0.238 0 (:: REQUIRES proc2    /* load PROC2.CMD into local environment */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1352 M 
+0.238 0 (:: ROUTINE hi      /* non-public ! */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1401 M 
+0.238 0 (  SAY "... in routine 'HI' of PROC1.CMD \(private!\)")A 
+; : 0 0 2110 3232 rc F0_38
+Ji 
+170 1500 M 
+0.238 0 (/* proc2.cmd */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1599 M 
+0.238 0 (SAY)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1649 M 
+0.238 0 (SAY "in PROC2.CMD \(initializing\) ...")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1699 M 
+0.238 0 (CALL hi         /* local routine prevails        */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1748 M 
+0.238 0 (SAY "... leaving PROC2.CMD.")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1847 M 
+0.238 0 (:: ROUTINE hi  PUBLIC)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1897 M 
+0.238 0 (  SAY "... in routine 'HI' of PROC2.CMD, which is public")A 
+; : 0 0 2110 3232 rc F0_38
+Ji 
+170 1996 M 
+0.238 0 (/* proc3.cmd */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2095 M 
+0.238 0 (SAY "in PROC3.CMD \(initializing\) ...")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2145 M 
+0.238 0 (CALL hi         /* local routine prevails        */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2194 M 
+0.238 0 (SAY "... leaving PROC3.CMD.")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2294 M 
+0.238 0 (:: ROUTINE hi  PUBLIC)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2343 M 
+0.238 0 (  SAY "... in routine 'HI' of PROC3.CMD, which is public")A 
+; : 0 0 2110 3232 rc F0_38
+Ji 
+170 2442 M 
+0.238 0 (/* proc4.cmd */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2542 M 
+0.238 0 (SAY "in PROC4.CMD \(initializing\) ...")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2591 M 
+0.238 0 (CALL hi         /* local routine prevails        */)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2641 M 
+0.238 0 (SAY "... leaving PROC4.CMD.")A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2740 M 
+0.238 0 (:: ROUTINE hi  PUBLIC)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2789 M 
+0.238 0 (  SAY "... in routine 'HI' of PROC4.CMD, which is public")A 
+; 
+166 2833 N M 1944 75 rr : 0.882 sg O ; : 0 0 2110 3232 rc %%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+170 2839 M 
+0.137 0 (Figure 2: Requiring and calling Object Rexx programs \(code\))A 
+; 
+165 206 N M 1945 2 rr : 0 sg O ; 
+165 254 N M 1945 2 rr : 0 sg O ; 
+165 254 N M 1945 2 rr : 0 sg O ; 
+165 304 N M 1945 2 rr : 0 sg O ; 
+165 304 N M 1945 2 rr : 0 sg O ; 
+165 353 N M 1945 2 rr : 0 sg O ; 
+165 353 N M 1945 2 rr : 0 sg O ; 
+165 403 N M 1945 2 rr : 0 sg O ; 
+165 403 N M 1945 2 rr : 0 sg O ; 
+165 452 N M 1945 2 rr : 0 sg O ; 
+165 452 N M 1945 2 rr : 0 sg O ; 
+165 502 N M 1945 2 rr : 0 sg O ; 
+165 502 N M 1945 2 rr : 0 sg O ; 
+165 551 N M 1945 2 rr : 0 sg O ; 
+165 551 N M 1945 2 rr : 0 sg O ; 
+165 601 N M 1945 2 rr : 0 sg O ; 
+165 601 N M 1945 2 rr : 0 sg O ; 
+165 651 N M 1945 2 rr : 0 sg O ; 
+165 651 N M 1945 2 rr : 0 sg O ; 
+165 700 N M 1945 2 rr : 0 sg O ; 
+165 700 N M 1945 2 rr : 0 sg O ; 
+165 750 N M 1945 2 rr : 0 sg O ; 
+165 750 N M 1945 2 rr : 0 sg O ; 
+165 799 N M 1945 2 rr : 0 sg O ; 
+165 799 N M 1945 2 rr : 0 sg O ; 
+165 849 N M 1945 2 rr : 0 sg O ; 
+166 849 N M 1943 2 rr : 0 sg O ; 
+166 899 N M 1943 2 rr : 0 sg O ; 
+165 899 N M 1945 2 rr : 0 sg O ; 
+165 948 N M 1945 2 rr : 0 sg O ; 
+165 948 N M 1945 2 rr : 0 sg O ; 
+165 998 N M 1945 2 rr : 0 sg O ; 
+165 998 N M 1945 2 rr : 0 sg O ; 
+165 1047 N M 1945 2 rr : 0 sg O ; 
+165 1047 N M 1945 2 rr : 0 sg O ; 
+165 1097 N M 1945 2 rr : 0 sg O ; 
+165 1097 N M 1945 2 rr : 0 sg O ; 
+165 1146 N M 1945 2 rr : 0 sg O ; 
+165 1146 N M 1945 2 rr : 0 sg O ; 
+165 1196 N M 1945 2 rr : 0 sg O ; 
+165 1196 N M 1945 2 rr : 0 sg O ; 
+165 1246 N M 1945 2 rr : 0 sg O ; 
+165 1246 N M 1945 2 rr : 0 sg O ; 
+165 1295 N M 1945 2 rr : 0 sg O ; 
+165 1295 N M 1945 2 rr : 0 sg O ; 
+165 1345 N M 1945 2 rr : 0 sg O ; 
+165 1345 N M 1945 2 rr : 0 sg O ; 
+165 1394 N M 1945 2 rr : 0 sg O ; 
+165 1394 N M 1945 2 rr : 0 sg O ; 
+165 1444 N M 1945 2 rr : 0 sg O ; 
+166 1444 N M 1943 2 rr : 0 sg O ; 
+166 1494 N M 1943 2 rr : 0 sg O ; 
+165 1494 N M 1945 2 rr : 0 sg O ; 
+165 1543 N M 1945 2 rr : 0 sg O ; 
+165 1543 N M 1945 2 rr : 0 sg O ; 
+165 1593 N M 1945 2 rr : 0 sg O ; 
+165 1593 N M 1945 2 rr : 0 sg O ; 
+165 1642 N M 1945 2 rr : 0 sg O ; 
+165 1642 N M 1945 2 rr : 0 sg O ; 
+165 1692 N M 1945 2 rr : 0 sg O ; 
+165 1692 N M 1945 2 rr : 0 sg O ; 
+165 1741 N M 1945 2 rr : 0 sg O ; 
+165 1741 N M 1945 2 rr : 0 sg O ; 
+165 1791 N M 1945 2 rr : 0 sg O ; 
+165 1791 N M 1945 2 rr : 0 sg O ; 
+165 1841 N M 1945 2 rr : 0 sg O ; 
+165 1841 N M 1945 2 rr : 0 sg O ; 
+165 1890 N M 1945 2 rr : 0 sg O ; 
+165 1890 N M 1945 2 rr : 0 sg O ; 
+165 1940 N M 1945 2 rr : 0 sg O ; 
+166 1940 N M 1943 2 rr : 0 sg O ; 
+166 1989 N M 1943 2 rr : 0 sg O ; 
+165 1989 N M 1945 2 rr : 0 sg O ; 
+165 2039 N M 1945 2 rr : 0 sg O ; 
+165 2039 N M 1945 2 rr : 0 sg O ; 
+165 2089 N M 1945 2 rr : 0 sg O ; 
+165 2089 N M 1945 2 rr : 0 sg O ; 
+165 2138 N M 1945 2 rr : 0 sg O ; 
+165 2138 N M 1945 2 rr : 0 sg O ; 
+165 2188 N M 1945 2 rr : 0 sg O ; 
+165 2188 N M 1945 2 rr : 0 sg O ; 
+165 2237 N M 1945 2 rr : 0 sg O ; 
+165 2237 N M 1945 2 rr : 0 sg O ; 
+165 2287 N M 1945 2 rr : 0 sg O ; 
+165 2287 N M 1945 2 rr : 0 sg O ; 
+165 2336 N M 1945 2 rr : 0 sg O ; 
+165 2336 N M 1945 2 rr : 0 sg O ; 
+165 2386 N M 1945 2 rr : 0 sg O ; 
+166 2386 N M 1943 2 rr : 0 sg O ; 
+166 2436 N M 1943 2 rr : 0 sg O ; 
+165 2436 N M 1945 2 rr : 0 sg O ; 
+165 2485 N M 1945 2 rr : 0 sg O ; 
+165 2485 N M 1945 2 rr : 0 sg O ; 
+165 2535 N M 1945 2 rr : 0 sg O ; 
+165 2535 N M 1945 2 rr : 0 sg O ; 
+165 2584 N M 1945 2 rr : 0 sg O ; 
+165 2584 N M 1945 2 rr : 0 sg O ; 
+165 2634 N M 1945 2 rr : 0 sg O ; 
+165 2634 N M 1945 2 rr : 0 sg O ; 
+165 2684 N M 1945 2 rr : 0 sg O ; 
+165 2684 N M 1945 2 rr : 0 sg O ; 
+165 2733 N M 1945 2 rr : 0 sg O ; 
+165 2733 N M 1945 2 rr : 0 sg O ; 
+165 2783 N M 1945 2 rr : 0 sg O ; 
+165 2783 N M 1945 2 rr : 0 sg O ; 
+165 2832 N M 1945 2 rr : 0 sg O ; 
+165 2832 N M 1945 2 rr : 0 sg O ; 
+165 2906 N M 1945 2 rr : 0 sg O ; 
+165 206 N M 2 645 rr : 0 sg O ; 
+2108 206 N M 2 645 rr : 0 sg O ; 
+165 899 N M 2 547 rr : 0 sg O ; 
+2108 899 N M 2 547 rr : 0 sg O ; 
+165 1494 N M 2 448 rr : 0 sg O ; 
+2108 1494 N M 2 448 rr : 0 sg O ; 
+165 1989 N M 2 399 rr : 0 sg O ; 
+2108 1989 N M 2 399 rr : 0 sg O ; 
+165 2436 N M 2 472 rr : 0 sg O ; 
+2108 2436 N M 2 472 rr : 0 sg O ; /F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+665 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1654 3060 M 
+-0.352 0 (4)A 
+1677 3060 M 
+0.014 0 (-)A 
+1691 3060 M 
+-0.352 0 (16)A 
+1737 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 5 5
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2171 3232 rc %%IncludeFont: Courier
+/F0
+0.868 
+T 
+/Courier
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+234 211 M 
+0.238 0 (in PROC2.CMD \(initializing\) ...)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 261 M 
+0.238 0 (... in routine 'HI' of PROC2.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 310 M 
+0.238 0 (... leaving PROC2.CMD.)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 409 M 
+0.238 0 (in PROC1.CMD \(initializing\) ...)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 459 M 
+0.238 0 (... in routine 'HI' of PROC1.CMD \(private!\))A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 509 M 
+0.238 0 (... leaving PROC1.CMD.)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 608 M 
+0.238 0 (in MAIN.CMD \(executing\) ...)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 657 M 
+0.238 0 (... in routine 'HI' of PROC2.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 707 M 
+0.238 0 (in PROC3.CMD \(initializing\) ...)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 757 M 
+0.238 0 (... in routine 'HI' of PROC3.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 806 M 
+0.238 0 (... leaving PROC3.CMD.)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 856 M 
+0.238 0 (... in routine 'HI' of PROC3.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 905 M 
+0.238 0 (in PROC4.CMD \(initializing\) ...)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 955 M 
+0.238 0 (... in routine 'HI' of PROC4.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 1004 M 
+0.238 0 (... leaving PROC4.CMD.)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 1054 M 
+0.238 0 (... in routine 'HI' of PROC4.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 1104 M 
+0.238 0 (... in routine 'HI' of PROC4.CMD, which is public)A 
+; : 0 0 2171 3232 rc F0_38
+Ji 
+234 1153 M 
+0.238 0 (leaving MAIN.CMD.)A 
+; : 0 0 2171 3232 rc 
+230 1247 N M 1942 74 rr : 0.824 sg O ; ; : 0 0 2171 3232 rc %%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+234 1253 M 
+0.139 0 (Figure 3: Requiring and calling Object Rexx programs \(output\))A 
+; 
+229 206 N M 1942 2 rr : 0 sg O ; 
+229 1246 N M 1942 2 rr : 0 sg O ; 
+229 1319 N M 1942 2 rr : 0 sg O ; 
+229 206 N M 2 1115 rr : 0 sg O ; 
+2170 206 N M 1 1115 rr : 0 sg O ; %%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+225 1407 M 
+-0.248 0 (2)A 
+257 1407 M 
+-0.124 0 (.)A 
+273 1407 M 
+-0.248 0 (3)A 
+343 1407 M 
+-0.124 0 (Environment Symbols)A 
+F2_50
+Ji 
+343 1560 M 
+3.000 0 32 0.193 0 (Environment symbols allow programmers to access directory entries in Object Rexx)D 
+225 1654 M 
+10.000 0 32 0.096 0 (supplied directories like )D 
+/F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+791 1662 M 
+10.000 0 32 0.446 0 (.LOCAL)D 
+F2_50
+Ji 
+959 1654 M 
+10.000 0 32 0.437 0 ( or )D 
+F0_46
+Ji 
+1053 1662 M 
+10.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F2_50
+Ji 
+1389 1654 M 
+10.000 0 32 0.131 0 (, without the need to know in which)D 
+225 1747 M 
+1.000 0 32 0.236 0 (particular directory to look. Some maintenance directories are not even named and hence)D 
+225 1840 M 
+7.000 0 32 0.113 0 (not directly accessible to programmers. E.g. all class objects defined in Rexx programs)D 
+225 1933 M 
+0.106 0 (are directly accessible via environment symbols only.)A 
+343 2073 M 
+0.119 0 (An example for utilizing the session directory denominated by \204)A 
+F0_46
+Ji 
+1740 2081 M 
+0.446 0 (.LOCAL)A 
+F2_50
+Ji 
+1908 2073 M 
+0.225 0 (\223:)A 
+343 2213 M 
+0.100 0 (  )A 
+F0_46
+Ji 
+371 2221 M 
+0.446 0 (.local ~ rgf.test = )A 
+931 2221 M 
+0.446 0 ("This is some string.")A 
+1547 2221 M 
+0.446 0 ( )A 
+F2_50
+Ji 
+343 2354 M 
+1.000 0 32 0.258 0 (The easiest way to retrieve the directory entry for \204)D 
+F0_46
+Ji 
+1480 2362 M 
+1.000 0 32 0.446 0 (RGF.TEST)D 
+F2_50
+Ji 
+1704 2354 M 
+1.000 0 32 0.312 0 (\223 is by usage of another)D 
+225 2447 M 
+10.000 0 32 0.143 0 (environment symbol: by simply prepending a dot to the entry name, i.e. \204)D 
+F0_46
+Ji 
+1956 2455 M 
+10.000 0 32 0.446 0 (.RGF.TEST)D 
+F2_50
+Ji 
+2208 2447 M 
+10.000 0 32 0.225 0 (\223.)D 
+225 2540 M 
+0.076 0 (Alternatively \204)A 
+F0_46
+Ji 
+529 2548 M 
+0.446 0 (.local ~ entry\(')A 
+977 2548 M 
+0.446 0 (RGF.TEST')A 
+1229 2548 M 
+0.446 0 (\))A 
+F2_50
+Ji 
+1257 2540 M 
+0.105 0 (\223 would work also.)A 
+343 2680 M 
+4.000 0 32 0.182 0 (Please note, environment symbols are )D 
+%%IncludeFont: Helvetica-Oblique
+/F7
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F7_50
+F7
+50 
+xF 
+F7_50
+Ji 
+1234 2680 M 
+4.000 0 32 0.150 0 (not )D 
+F2_50
+Ji 
+1322 2680 M 
+4.000 0 32 0.176 0 (variables and they )D 
+F7_50
+Ji 
+1757 2680 M 
+4.000 0 32 0.162 0 (must)D 
+F2_50
+Ji 
+1866 2680 M 
+4.000 0 32 0.225 0 ( start with a dot!)D 
+225 2773 M 
+0.122 0 (They are a valid means of accessing entries of Object Rexx administered directories.)A 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+679 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1668 3060 M 
+-0.352 0 (5)A 
+1690 3060 M 
+0.014 0 (-)A 
+1704 3060 M 
+-0.352 0 (16)A 
+1750 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 6 6
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 218 M 
+1.000 0 32 0.140 0 (This brings us to the rules which Object Rexx follows in order to resolve environment)D 
+161 311 M 
+0.093 0 (symbols:)A 
+161 451 M 
+0.200 0 (1)A 
+189 451 M 
+0.350 0 (\))A 
+279 451 M 
+2.000 0 32 0.164 0 (Object Rexx searches an unnamed program specific directory - let us call it \204source\223)D 
+279 544 M 
+0.104 0 (- for an entry, if this fails it)A 
+161 685 M 
+0.200 0 (2)A 
+189 685 M 
+0.350 0 (\))A 
+279 685 M 
+0.252 0 (searches the directory \204source\223 of the Rexx programs incorporated via \204)A 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1878 693 M 
+0.446 0 (::REQUIRES)A 
+F0_50
+Ji 
+2158 685 M 
+0.350 0 (\223)A 
+279 778 M 
+0.114 0 (directives or )A 
+F2_46
+Ji 
+564 786 M 
+0.446 0 (CALL)A 
+F0_50
+Ji 
+676 778 M 
+0.092 0 (-statements recursively, if this fails it)A 
+161 918 M 
+0.200 0 (3)A 
+189 918 M 
+0.350 0 (\))A 
+279 918 M 
+0.127 0 (searches the session wide available and named directory \204)A 
+F2_46
+Ji 
+1584 926 M 
+0.446 0 (.LOCAL)A 
+F0_50
+Ji 
+1752 918 M 
+0.060 0 (\223, if this fails it)A 
+161 1058 M 
+0.200 0 (4)A 
+189 1058 M 
+0.350 0 (\))A 
+279 1058 M 
+1.000 0 32 0.167 0 (searches the operating system wide available and named directory \204)D 
+F2_46
+Ji 
+1808 1066 M 
+1.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F0_50
+Ji 
+2144 1058 M 
+1.000 0 32 0.225 0 (\223,)D 
+279 1151 M 
+0.037 0 (if this fails it)A 
+161 1292 M 
+0.200 0 (5)A 
+189 1292 M 
+0.350 0 (\))A 
+279 1292 M 
+0.129 0 (searches another unnamed directory - let us call it \204bottom\223 -, now if this fails)A 
+161 1432 M 
+0.200 0 (6)A 
+189 1432 M 
+0.350 0 (\))A 
+279 1432 M 
+0.231 0 (Object Rexx will return the environment symbol as a string constant, with all letters in)A 
+279 1525 M 
+0.165 0 (uppercase.)A 
+279 1665 M 
+10.000 0 32 0.241 0 (Rules 1\) and 2\) are needed for making it possible e.g. to address class objects)D 
+161 1758 M 
+0.118 0 (defined in Rexx programs, like)A 
+F2_46
+Ji 
+279 1894 M 
+0.446 0 (anObject = .MyClass ~ new)A 
+F0_50
+Ji 
+279 2014 M 
+8.000 0 32 0.185 0 (where \204)D 
+F2_46
+Ji 
+455 2022 M 
+8.000 0 32 0.446 0 (.MYCLASS)D 
+F0_50
+Ji 
+679 2014 M 
+8.000 0 32 0.163 0 (\223 is an environment symbol relating to a class object which may)D 
+161 2108 M 
+7.000 0 32 0.190 0 (have been defined via a directive like \204)D 
+F2_46
+Ji 
+1068 2116 M 
+7.000 0 32 0.446 0 (::CLASS MyClass)D 
+F0_50
+Ji 
+1495 2108 M 
+7.000 0 32 0.203 0 (\223. Rule 2 follows the program)D 
+161 2201 M 
+0.097 0 (scopes in that Object Rexx tries to find such public class objects in leaf Rexx programs.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.940 
+T 
+/Helvetica-Bold
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+161 2353 M 
+0.120 0 (The Directory \204)A 
+%%IncludeFont: Courier-Bold
+/F6
+0.848 
+T 
+/Courier-Bold
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+524 2361 M 
+0.446 0 (.LOCAL)A 
+F4_50
+Ji 
+692 2353 M 
+(\223)S 
+F0_50
+Ji 
+279 2493 M 
+3.000 0 32 0.187 0 (For every separate session \(operating system process\) the Rexx interpreter creates)D 
+161 2586 M 
+3.000 0 32 0.253 0 (a directory object accessible via the environment symbol named \204)D 
+F2_46
+Ji 
+1652 2594 M 
+3.000 0 32 0.446 0 (.LOCAL)D 
+F0_50
+Ji 
+1820 2586 M 
+3.000 0 32 0.264 0 (\223. This directory)D 
+161 2679 M 
+14.000 0 32 0.234 0 (allows for storing and retrieving objects for)D 
+%%IncludeFont: Helvetica-Oblique
+/F8
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+1192 2679 M 
+14.000 0 32 0.240 0 ( all )D 
+F0_50
+Ji 
+1299 2679 M 
+14.000 0 32 0.241 0 (Rexx programs loaded into the local)D 
+161 2772 M 
+0.133 0 (environment of that particular session.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+665 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1654 3060 M 
+-0.352 0 (6)A 
+1677 3060 M 
+0.014 0 (-)A 
+1691 3060 M 
+-0.352 0 (16)A 
+1737 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 7 7
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 218 M 
+8.000 0 32 -0.083 0 (As )D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+423 226 M 
+8.000 0 32 0.446 0 (.LOCAL)D 
+F0_50
+Ji 
+591 218 M 
+8.000 0 32 0.172 0 ( is visible to all executing Rexx-programs, it becomes possible to pass)D 
+225 311 M 
+20.000 0 32 0.221 0 (objects \(data\) between Rexx programs and even between )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1692 311 M 
+20.000 0 32 0.150 0 (different)D 
+F0_50
+Ji 
+1874 311 M 
+20.000 0 32 0.158 0 ( directives \(i.e.)D 
+F2_46
+Ji 
+225 412 M 
+0.446 0 (::ROUTINE)A 
+F0_50
+Ji 
+477 404 M 
+0.210 0 (- and)A 
+F2_46
+Ji 
+592 412 M 
+0.446 0 ( ::METHOD)A 
+F0_50
+Ji 
+844 404 M 
+0.126 0 (-directives\).)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.940 
+T 
+/Helvetica-Bold
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+225 556 M 
+0.120 0 (The Directory \204)A 
+%%IncludeFont: Courier-Bold
+/F8
+0.848 
+T 
+/Courier-Bold
+mF 
+/F8_46
+F8
+46 
+xF 
+F8_46
+Ji 
+588 564 M 
+0.446 0 (.ENVIRONMENT)A 
+F6_50
+Ji 
+924 556 M 
+(\223)S 
+F0_50
+Ji 
+343 697 M 
+1.000 0 32 0.139 0 (In the system there exists one directory object which gets created by Object Rexx on)D 
+225 790 M 
+32.000 0 32 0.195 0 (startup of the system and is accessible via the environment symbol named)D 
+225 883 M 
+9.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 891 M 
+9.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F0_50
+Ji 
+578 883 M 
+9.000 0 32 0.165 0 (\223. Most of the documented Object Rexx classes are accessible via this)D 
+225 976 M 
+0.136 0 (directory. )A 
+343 1116 M 
+6.000 0 32 0.080 0 (Like )D 
+F2_46
+Ji 
+455 1124 M 
+6.000 0 32 0.446 0 (.LOCAL)D 
+F0_50
+Ji 
+623 1116 M 
+6.000 0 32 0.112 0 ( it allows for exchanging objects among Object Rexx programs, in this)D 
+225 1209 M 
+0.138 0 (case even across session \(process\) borders! )A 
+343 1349 M 
+23.000 0 32 0.293 0 (Once objects are stored in the )D 
+F2_46
+Ji 
+1171 1357 M 
+23.000 0 32 0.522 0 (.ENVIRONMENT )D 
+F0_50
+Ji 
+1559 1349 M 
+23.000 0 32 0.181 0 (directory all session related)D 
+225 1443 M 
+10.000 0 32 0.191 0 (information is kept, so the object is guaranteed to have its valid working environment)D 
+225 1536 M 
+8.000 0 32 0.207 0 (present \(e.g. routines and other classes of the program scope where the object stems)D 
+225 1629 M 
+1.000 0 32 0.158 0 (from\). Therefore objects placed into the )D 
+F2_46
+Ji 
+1124 1637 M 
+1.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F0_50
+Ji 
+1460 1629 M 
+1.000 0 32 0.159 0 (-directory should be removed once)D 
+225 1722 M 
+0.141 0 (they are not needed anymore, so the garbage collecting system can reclaim the space.)A 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+225 1880 M 
+-0.248 0 (2)A 
+257 1880 M 
+-0.124 0 (.)A 
+273 1880 M 
+-0.248 0 (6)A 
+343 1880 M 
+-0.156 0 (Scopes of Object Rexx Programs and Directives)A 
+F0_50
+Ji 
+343 2034 M 
+4.000 0 32 0.181 0 (The T-Rexx scopes remain valid for Object Rexx programs as long as there are no)D 
+225 2127 M 
+1.000 0 32 0.181 0 (directives defined with them. Directives, which are led in by two consecutive colons \(\204)D 
+F2_46
+Ji 
+2135 2135 M 
+1.000 0 32 0.446 0 (::)D 
+F0_50
+Ji 
+2191 2127 M 
+1.000 0 32 0.266 0 (\223\),)D 
+225 2220 M 
+0.102 0 (allow for defining:)A 
+225 2360 M 
+0.350 0 (-)A 
+343 2360 M 
+0.153 0 (the merging of additional Rexx programs \(\204)A 
+F2_46
+Ji 
+1297 2368 M 
+0.446 0 (::Requires)A 
+F0_50
+Ji 
+1577 2360 M 
+0.266 0 (\223\),)A 
+225 2500 M 
+0.350 0 (-)A 
+343 2500 M 
+0.177 0 (routines \(\204)A 
+F2_46
+Ji 
+570 2508 M 
+0.446 0 (::Routine)A 
+F0_50
+Ji 
+822 2500 M 
+0.266 0 (\223\),)A 
+225 2640 M 
+0.350 0 (-)A 
+343 2640 M 
+0.205 0 (methods \(\204)A 
+F2_46
+Ji 
+584 2648 M 
+0.446 0 (::Method)A 
+F0_50
+Ji 
+808 2640 M 
+0.214 0 (\223\), and)A 
+225 2781 M 
+0.350 0 (-)A 
+343 2781 M 
+0.110 0 (classes \(\204)A 
+F2_46
+Ji 
+558 2789 M 
+0.446 0 (::Class)A 
+F0_50
+Ji 
+754 2781 M 
+0.266 0 (\223\).)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+679 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1668 3060 M 
+-0.352 0 (7)A 
+1690 3060 M 
+0.014 0 (-)A 
+1704 3060 M 
+-0.352 0 (16)A 
+1750 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 8 8
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 218 M 
+4.000 0 32 0.083 0 (Every single directive gets its own, individual scope, as if every single directive was)D 
+161 311 M 
+4.000 0 32 0.142 0 (an Object Rexx program of its own. This has the effect, that previously defined variables)D 
+161 404 M 
+0.143 0 (or labels \(!\) of the Rexx program in question are not available anymore.)A 
+279 544 M 
+0.177 0 (On the other hand, because directives have their own scope, the basic T-Rexx scope)A 
+161 638 M 
+5.000 0 32 0.206 0 (rules apply for them. With other words, it is possible and very feasible to define \204global\223)D 
+161 731 M 
+0.107 0 (variables and labels )A 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+619 731 M 
+0.033 0 (within)A 
+F0_50
+Ji 
+747 731 M 
+0.095 0 ( the scope of a directive, only visible from within it. )A 
+279 871 M 
+1.000 0 32 0.177 0 (Coding of Rexx-statements is possible within the directives )D 
+%%IncludeFont: Courier
+/F4
+0.848 
+T 
+/Courier
+mF 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+1612 879 M 
+1.000 0 32 0.446 0 (::ROUTINE)D 
+F0_50
+Ji 
+1864 871 M 
+1.000 0 32 0.360 0 ( and )D 
+F4_46
+Ji 
+1979 879 M 
+1.000 0 32 0.446 0 (:METHOD)D 
+F0_50
+Ji 
+161 964 M 
+0.080 0 (only.)A 
+%%IncludeFont: Courier-Bold
+/F6
+0.848 
+T 
+/Courier-Bold
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+161 1124 M 
+0.446 0 (::REQUIRES)A 
+%%IncludeFont: Helvetica-Bold
+/F8
+0.940 
+T 
+/Helvetica-Bold
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+441 1116 M 
+0.090 0 ( Directive)A 
+F0_50
+Ji 
+279 1256 M 
+2.000 0 32 0.140 0 (When the Object Rexx interpreter first parses a Rexx program, it will check the code)D 
+161 1349 M 
+0.096 0 (for syntactical errors and collect all directives. Then it will:)A 
+161 1490 M 
+0.200 0 (1)A 
+189 1490 M 
+0.350 0 (\))A 
+F4_46
+Ji 
+279 1498 M 
+6.000 0 32 0.446 0 (CALL)D 
+F0_50
+Ji 
+391 1490 M 
+6.000 0 32 0.293 0 ( \(!\) the Rexx program\(s\) denoted by the )D 
+F4_46
+Ji 
+1340 1498 M 
+6.000 0 32 0.446 0 (::REQUIRES)D 
+F0_50
+Ji 
+1620 1490 M 
+6.000 0 32 0.225 0 ( directive\(s\) in the order)D 
+279 1583 M 
+0.170 0 (they appear,)A 
+161 1723 M 
+0.200 0 (2)A 
+189 1723 M 
+0.350 0 (\))A 
+279 1723 M 
+0.084 0 (initialize the defined classes in the )A 
+F2_50
+Ji 
+1052 1723 M 
+0.071 0 (called )A 
+F0_50
+Ji 
+1197 1723 M 
+0.165 0 (Rexx program,)A 
+161 1863 M 
+0.200 0 (3)A 
+189 1863 M 
+0.350 0 (\))A 
+279 1863 M 
+0.133 0 (passing control to the very first statement in the Rexx program.)A 
+279 2003 M 
+7.000 0 32 0.139 0 (This resolution will work recursively on all required Rexx programs. The result are)D 
+161 2097 M 
+0.138 0 (program scopes for all Rexx programs involved.)A 
+279 2237 M 
+14.000 0 32 0.258 0 (The same steps are taken at the moment an external Rexx program is called)D 
+161 2330 M 
+0.038 0 (explicitly with a )A 
+F4_46
+Ji 
+509 2338 M 
+0.446 0 (CALL)A 
+F0_50
+Ji 
+621 2330 M 
+0.166 0 (-statement. )A 
+F6_46
+Ji 
+161 2490 M 
+0.446 0 (::ROUTINE)A 
+F8_50
+Ji 
+413 2482 M 
+0.090 0 ( Directive)A 
+F0_50
+Ji 
+279 2622 M 
+7.000 0 32 -0.125 0 (A )D 
+F4_46
+Ji 
+333 2630 M 
+7.000 0 32 0.446 0 (::Routine)D 
+F0_50
+Ji 
+585 2622 M 
+7.000 0 32 0.136 0 (-directive defines a procedure or a function, which gets added to the)D 
+161 2715 M 
+7.000 0 32 0.193 0 (program scope and may be therefore called from )D 
+F2_50
+Ji 
+1321 2715 M 
+7.000 0 32 0.133 0 (any)D 
+F0_50
+Ji 
+1402 2715 M 
+7.000 0 32 0.178 0 ( part of an Object Rexx program,)D 
+161 2808 M 
+3.000 0 32 0.230 0 (even from within directives. If the attribute \204)D 
+F4_46
+Ji 
+1146 2816 M 
+3.000 0 32 0.446 0 (PUBLIC)D 
+F0_50
+Ji 
+1314 2808 M 
+3.000 0 32 0.252 0 (\223 is given, then parent Rexx programs)D 
+161 2902 M 
+0.156 0 (may get these routines added to their program scopes too.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+665 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1654 3060 M 
+-0.352 0 (8)A 
+1677 3060 M 
+0.014 0 (-)A 
+1691 3060 M 
+-0.352 0 (16)A 
+1737 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 9 9
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 218 M 
+3.000 0 32 0.230 0 (The routine constitutes its own scope \(\204)D 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+1240 218 M 
+3.000 0 32 0.219 0 (routine scope)D 
+F0_50
+Ji 
+1546 218 M 
+3.000 0 32 0.270 0 (\223\) working to the T-Rexx rules,)D 
+225 311 M 
+9.000 0 32 0.161 0 (i.e. it may have \204global\223 variables and labels which may serve as targets for )D 
+%%IncludeFont: Courier
+/F4
+0.848 
+T 
+/Courier
+mF 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+2042 319 M 
+9.000 0 32 0.446 0 (CALL)D 
+F0_50
+Ji 
+2154 311 M 
+9.000 0 32 0.250 0 (- or)D 
+F4_46
+Ji 
+225 412 M 
+20.000 0 32 0.446 0 (SIGNAL)D 
+F0_50
+Ji 
+393 404 M 
+20.000 0 32 0.268 0 (-statements. Like in a normal program it is possible to use the keywords)D 
+F4_46
+Ji 
+225 505 M 
+0.446 0 (PROCEDURE )A 
+F0_50
+Ji 
+505 497 M 
+0.175 0 (and )A 
+F4_46
+Ji 
+603 505 M 
+0.446 0 (EXPOSE )A 
+F0_50
+Ji 
+799 497 M 
+0.088 0 (with labels within a routine definition.)A 
+343 638 M 
+30.000 0 32 0.213 0 (Figure 2 demonstrates the effect of )D 
+F4_46
+Ji 
+1320 646 M 
+30.000 0 32 0.446 0 (::REQUIRES)D 
+F0_50
+Ji 
+1600 638 M 
+30.000 0 32 0.144 0 (-directives intermixed with)D 
+F4_46
+Ji 
+225 739 M 
+7.000 0 32 0.446 0 (CALL)D 
+F0_50
+Ji 
+337 731 M 
+7.000 0 32 0.230 0 (-statements. )D 
+F4_46
+Ji 
+636 739 M 
+7.000 0 32 0.446 0 (MAIN.CMD)D 
+F0_50
+Ji 
+860 731 M 
+7.000 0 32 0.277 0 ( requires)D 
+F4_46
+Ji 
+1064 739 M 
+7.000 0 32 0.446 0 ( PROC1.CMD)D 
+F0_50
+Ji 
+1351 731 M 
+7.000 0 32 0.254 0 (, which defines a local routine named)D 
+225 824 M 
+-0.100 0 (\221)A 
+F4_46
+Ji 
+236 832 M 
+0.446 0 (Hi)A 
+F0_50
+Ji 
+292 824 M 
+0.146 0 (\222 and requires )A 
+F4_46
+Ji 
+611 832 M 
+0.446 0 (PROC2.CMD)A 
+F0_50
+Ji 
+863 824 M 
+0.140 0 ( in turn, which defines a public routine by the same name \221)A 
+F4_46
+Ji 
+2158 832 M 
+0.446 0 (Hi)A 
+F0_50
+Ji 
+2214 824 M 
+(\222.)S 
+F4_46
+Ji 
+225 925 M 
+14.000 0 32 0.446 0 (PROC3.CMD)D 
+F0_50
+Ji 
+477 917 M 
+14.000 0 32 0.360 0 ( and )D 
+F4_46
+Ji 
+618 925 M 
+14.000 0 32 0.446 0 (PROC4.CMD)D 
+F0_50
+Ji 
+870 917 M 
+14.000 0 32 0.148 0 ( both contain a public routine \221)D 
+F4_46
+Ji 
+1623 925 M 
+14.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+1679 917 M 
+14.000 0 32 0.154 0 (\222 and will get called by)D 
+F4_46
+Ji 
+225 1018 M 
+0.446 0 (MAIN.CMD)A 
+F0_50
+Ji 
+449 1010 M 
+0.117 0 ( once the initialisation phase has terminated.)A 
+343 1150 M 
+3.000 0 32 0.254 0 (Figure 3 shows the generated output from which it becomes clear how the program)D 
+225 1243 M 
+0.345 0 (scope for )A 
+F4_46
+Ji 
+448 1251 M 
+0.446 0 (MAIN.CMD)A 
+F0_50
+Ji 
+672 1243 M 
+0.266 0 ( with respect to the routines named \221)A 
+F4_46
+Ji 
+1485 1251 M 
+0.446 0 (Hi)A 
+F0_50
+Ji 
+1541 1243 M 
+0.257 0 (\222 is setup in the different stages)A 
+225 1337 M 
+3.000 0 32 0.265 0 (of execution. The Rexx code before the first directive in all programs starting with \204)D 
+F4_46
+Ji 
+2110 1345 M 
+3.000 0 32 0.446 0 (PROC)D 
+F0_50
+Ji 
+2222 1337 M 
+3.000 0 32 0.350 0 (\223)D 
+225 1430 M 
+0.260 0 (serves in effect as initialisation code for the appropriate programs. This effect can be seen)A 
+225 1523 M 
+2.000 0 32 0.117 0 (if looking for the routine \221)D 
+F4_46
+Ji 
+783 1531 M 
+2.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+839 1523 M 
+2.000 0 32 0.080 0 (\222 of )D 
+F4_46
+Ji 
+924 1531 M 
+2.000 0 32 0.446 0 (PROC4)D 
+F0_50
+Ji 
+1064 1523 M 
+2.000 0 32 0.128 0 (: the very first time the code before the first directive)D 
+225 1616 M 
+13.000 0 32 0.288 0 (is run; the second time that routine is called only the \221)D 
+F4_46
+Ji 
+1560 1624 M 
+13.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+1616 1616 M 
+13.000 0 32 0.342 0 (\222 routine in )D 
+F4_46
+Ji 
+1904 1624 M 
+13.000 0 32 0.612 0 (PROC4 )D 
+F0_50
+Ji 
+2086 1616 M 
+13.000 0 32 0.157 0 (will be)D 
+225 1709 M 
+0.133 0 (executed.)A 
+343 1849 M 
+3.000 0 32 0.150 0 (As long as )D 
+F4_46
+Ji 
+601 1857 M 
+3.000 0 32 0.446 0 (PROC3 )D 
+F0_50
+Ji 
+772 1849 M 
+3.000 0 32 0.425 0 (and )D 
+F4_46
+Ji 
+874 1857 M 
+3.000 0 32 0.446 0 (PROC4 )D 
+F0_50
+Ji 
+1045 1849 M 
+3.000 0 32 0.203 0 (are not called the routine \221)D 
+F4_46
+Ji 
+1641 1857 M 
+3.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+1697 1849 M 
+3.000 0 32 0.280 0 (\222 of )D 
+F4_46
+Ji 
+1785 1857 M 
+3.000 0 32 0.446 0 (PROC2 )D 
+F0_50
+Ji 
+1956 1849 M 
+3.000 0 32 0.146 0 (will be used.)D 
+F4_46
+Ji 
+225 1950 M 
+4.000 0 32 0.446 0 (PROC1)D 
+F0_50
+Ji 
+365 1942 M 
+4.000 0 32 -0.025 0 (\222s \221)D 
+F4_46
+Ji 
+430 1950 M 
+4.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+486 1942 M 
+4.000 0 32 0.112 0 (\222 routine is private to )D 
+F4_46
+Ji 
+970 1950 M 
+4.000 0 32 0.446 0 (PROC1 )D 
+F0_50
+Ji 
+1142 1942 M 
+4.000 0 32 0.147 0 (hence not visible to )D 
+F4_46
+Ji 
+1603 1950 M 
+4.000 0 32 0.446 0 (MAIN)D 
+F0_50
+Ji 
+1715 1942 M 
+4.000 0 32 0.100 0 (. )D 
+F4_46
+Ji 
+1747 1950 M 
+4.000 0 32 0.446 0 (PROC3 )D 
+F0_50
+Ji 
+1919 1942 M 
+4.000 0 32 0.142 0 (then replaces)D 
+225 2035 M 
+4.000 0 32 0.300 0 (the \221)D 
+F4_46
+Ji 
+325 2043 M 
+4.000 0 32 0.446 0 (Hi)D 
+F0_50
+Ji 
+381 2035 M 
+4.000 0 32 0.280 0 (\222 routine of )D 
+F4_46
+Ji 
+644 2043 M 
+4.000 0 32 0.446 0 (PROC2 )D 
+F0_50
+Ji 
+816 2035 M 
+4.000 0 32 0.400 0 (in )D 
+F4_46
+Ji 
+874 2043 M 
+4.000 0 32 0.446 0 (MAIN)D 
+F0_50
+Ji 
+986 2035 M 
+4.000 0 32 0.277 0 (\222s program scope and in turn gets replaced by )D 
+F4_46
+Ji 
+2063 2043 M 
+4.000 0 32 0.446 0 (PROC4)D 
+F0_50
+Ji 
+2203 2035 M 
+4.000 0 32 -0.050 0 (\222s)D 
+225 2129 M 
+0.127 0 (routine \221)A 
+F4_46
+Ji 
+404 2137 M 
+0.446 0 (Hi)A 
+F0_50
+Ji 
+460 2129 M 
+(\222.)S 
+%%IncludeFont: Courier-Bold
+/F6
+0.848 
+T 
+/Courier-Bold
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+225 2289 M 
+0.446 0 (::METHOD )A 
+%%IncludeFont: Helvetica-Bold
+/F8
+0.940 
+T 
+/Helvetica-Bold
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+477 2281 M 
+0.088 0 (Directive)A 
+F0_50
+Ji 
+343 2421 M 
+11.000 0 32 0.487 0 (The )D 
+F4_46
+Ji 
+456 2429 M 
+11.000 0 32 0.557 0 (::METHOD )D 
+F0_50
+Ji 
+720 2421 M 
+11.000 0 32 0.218 0 (directive defines a method consisting of Rexx statements, which)D 
+225 2514 M 
+15.000 0 32 0.168 0 (implement a particular \204behavior\223 of a class. The method constitutes its own scope)D 
+225 2607 M 
+11.000 0 32 0.350 0 (\(\204)D 
+F2_50
+Ji 
+259 2607 M 
+11.000 0 32 0.162 0 (method scope)D 
+F0_50
+Ji 
+586 2607 M 
+11.000 0 32 0.132 0 (\223\) working to the T-Rexx rules, i.e. it may have \204global\223 variables and)D 
+225 2700 M 
+12.000 0 32 0.147 0 (labels which may serve as targets for )D 
+F4_46
+Ji 
+1151 2708 M 
+12.000 0 32 0.446 0 (CALL)D 
+F0_50
+Ji 
+1263 2700 M 
+12.000 0 32 0.220 0 (- or )D 
+F4_46
+Ji 
+1377 2708 M 
+12.000 0 32 0.446 0 (SIGNAL)D 
+F0_50
+Ji 
+1545 2700 M 
+12.000 0 32 0.141 0 (-statements. Like in a normal)D 
+225 2793 M 
+7.000 0 32 0.167 0 (program it is possible to use the keywords )D 
+F4_46
+Ji 
+1233 2801 M 
+7.000 0 32 0.546 0 (PROCEDURE )D 
+F0_50
+Ji 
+1521 2793 M 
+7.000 0 32 0.175 0 (and )D 
+F4_46
+Ji 
+1626 2801 M 
+7.000 0 32 0.446 0 (EXPOSE )D 
+F0_50
+Ji 
+1829 2793 M 
+7.000 0 32 0.187 0 (for )D 
+F2_50
+Ji 
+1909 2793 M 
+7.000 0 32 0.214 0 (labels )D 
+F0_50
+Ji 
+2062 2793 M 
+7.000 0 32 0.062 0 (within a)D 
+225 2887 M 
+0.130 0 (method definition.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+679 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1668 3060 M 
+-0.352 0 (9)A 
+1690 3060 M 
+0.014 0 (-)A 
+1704 3060 M 
+-0.352 0 (16)A 
+1750 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 10 10
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 218 M 
+6.000 0 32 0.185 0 (In addition it is possible for a method to gain access to the object variables of the)D 
+161 311 M 
+17.000 0 32 0.278 0 (class it belongs to by using the )D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+984 319 M 
+17.000 0 32 0.588 0 (EXPOSE )D 
+F0_50
+Ji 
+1198 311 M 
+17.000 0 32 0.118 0 (keyword )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1416 311 M 
+17.000 0 32 0.118 0 (immediately)D 
+F0_50
+Ji 
+1684 311 M 
+17.000 0 32 0.431 0 ( after the )D 
+F2_46
+Ji 
+1951 319 M 
+17.000 0 32 0.446 0 (::MET)D 
+2091 319 M 
+17.000 0 32 0.446 0 (HOD)D 
+F0_50
+Ji 
+161 404 M 
+0.129 0 (directive, denoting the names of the object variables the method needs access to. )A 
+279 544 M 
+3.000 0 32 0.198 0 (As methods merely define the blueprint for the behavior of all objects of a particular)D 
+161 638 M 
+17.000 0 32 0.122 0 (class, the scope determining which methods may access which object variables at)D 
+161 731 M 
+9.000 0 32 0.123 0 (object-runtime is called \204)D 
+F4_50
+Ji 
+733 731 M 
+9.000 0 32 0.108 0 (object scope)D 
+F0_50
+Ji 
+1024 731 M 
+9.000 0 32 0.097 0 (\223. It is this scope which the online help of Object)D 
+161 824 M 
+0.121 0 (Rexx is referring to.)A 
+279 964 M 
+3.000 0 32 0.300 0 (It is interesting to note that methods may be defined )D 
+F4_50
+Ji 
+1487 964 M 
+3.000 0 32 0.237 0 (outside )D 
+F0_50
+Ji 
+1667 964 M 
+3.000 0 32 0.226 0 (of a class' context, i.e.)D 
+161 1057 M 
+0.260 0 (before a class directive is encountered. In this case the Object Rexx interpreter gathers all)A 
+161 1150 M 
+19.000 0 32 0.200 0 (\204floating\223 methods into a directory and makes it available to the program via the)D 
+161 1243 M 
+8.000 0 32 0.255 0 (environment symbol \204)D 
+F2_46
+Ji 
+660 1251 M 
+8.000 0 32 0.446 0 (.METHODS)D 
+F0_50
+Ji 
+884 1243 M 
+8.000 0 32 0.280 0 (\223 \(which gets stored in the unnamed \204source\223 directory,)D 
+161 1337 M 
+1.000 0 32 0.236 0 (see above\). Therefore )D 
+F4_50
+Ji 
+675 1337 M 
+1.000 0 32 0.150 0 (every)D 
+F0_50
+Ji 
+798 1337 M 
+1.000 0 32 0.195 0 ( Rexx program defining floating methods has its own, specific)D 
+161 1430 M 
+20.000 0 32 0.196 0 (directory of floating methods which may be retrieved via the environment symbol)D 
+161 1523 M 
+8.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 1531 M 
+8.000 0 32 0.446 0 (.METHODS)D 
+F0_50
+Ji 
+402 1523 M 
+8.000 0 32 0.235 0 (\223. If floating methods are used e.g. to enhance a class\222 object instance with)D 
+161 1616 M 
+16.000 0 32 0.181 0 (additional instance methods, they define their own scope, with the pseudo variable)D 
+161 1709 M 
+0.350 0 (\204)A 
+F2_46
+Ji 
+178 1717 M 
+0.446 0 (super)A 
+F0_50
+Ji 
+318 1709 M 
+0.119 0 (\223 pointing to the original class methods and object variables.)A 
+279 1849 M 
+4.000 0 32 0.276 0 (Figure 4 shows a little program which has floating methods defined. The enhanced)D 
+161 1942 M 
+4.000 0 32 0.127 0 (object receives these floating methods as instance methods, which in turn form a unique)D 
+161 2035 M 
+2.000 0 32 0.116 0 (object scope, totally isolated from the object scope of the instance methods at the level of)D 
+161 2129 M 
+1.000 0 32 0.400 0 (the )D 
+F2_46
+Ji 
+247 2137 M 
+1.000 0 32 0.446 0 (.Test1)D 
+F0_50
+Ji 
+415 2129 M 
+1.000 0 32 0.208 0 (-class. This is to say, if a particular object is executing within a floating method)D 
+161 2222 M 
+5.000 0 32 0.132 0 (it has access to a different object scope \(different object variables\) than when executing)D 
+161 2315 M 
+5.000 0 32 0.191 0 (within the methods defined for the )D 
+F2_46
+Ji 
+962 2323 M 
+5.000 0 32 0.446 0 (.Test1)D 
+F0_50
+Ji 
+1130 2315 M 
+5.000 0 32 0.159 0 (-class, which has its own unique set of object)D 
+161 2408 M 
+0.105 0 (variables.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+654 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1643 3060 M 
+-0.352 0 (10)A 
+1689 3060 M 
+0.014 0 (-)A 
+1703 3060 M 
+-0.352 0 (16)A 
+1749 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 11 11
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+234 211 M 
+0.238 0 (/* meth.cmd */)A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+234 310 M 
+0.238 0 (anObject = .test1 ~ new)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 360 M 
+0.238 0 (anObject ~ one)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 409 M 
+0.238 0 (anObject ~ two)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 459 M 
+0.238 0 (anObject ~ showVar1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 509 M 
+0.238 0 (SAY COPIES\( "-", 50 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 608 M 
+0.238 0 (anObject = .test1 ~ )A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+694 608 M 
+0.238 0 (ENHANCED)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+878 608 M 
+0.238 0 (\( .methods \)    )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 657 M 
+0.238 0 (anObject ~ one)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 707 M 
+0.238 0 (anObject ~ two)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 757 M 
+0.238 0 (anObject ~ showVar1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 856 M 
+0.238 0 (:: ROUTINE pp)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 905 M 
+0.238 0 (  RETURN "[" || ARG\( 1 \) || "]")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1004 M 
+0.238 0 (/* ----------------- floating methods ------------------- */)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+234 1054 M 
+0.238 0 (:: METHOD one)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1104 M 
+0.238 0 (  EXPOSE var1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1203 M 
+0.238 0 (  IF \\ VAR\( "VAR1" \) THEN var1 = "---")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1252 M 
+0.238 0 (  SAY "floating.ONE -    var1:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1302 M 
+0.238 0 (  var1 = "floating.1")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1352 M 
+0.238 0 (  SAY "floating.ONE - var1-method:" pp\( self ~ var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1401 M 
+0.238 0 (  self ~ one:super)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+234 1500 M 
+0.238 0 (:: METHOD two)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1550 M 
+0.238 0 (  EXPOSE var1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1649 M 
+0.238 0 (  SAY "floating.TWO -    var1:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1699 M 
+0.238 0 (  var1 = "floating.2")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1748 M 
+0.238 0 (  SAY "floating.TWO - var1-method:" pp\( self ~ var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 1798 M 
+0.238 0 (  self ~ two:super  )A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+234 1897 M 
+0.238 0 (:: METHOD var1 ATTRIBUTE)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2046 M 
+0.238 0 (/* ----------------- class with methods ----------------- */)A 
+; 
+230 2090 N M 1944 50 rr : 0.937 sg O ; : 0 0 2174 3232 rc %%IncludeFont: Courier-BoldOblique
+/F4
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+234 2095 M 
+0.200 0 (:: CLASS test1)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+234 2194 M 
+0.238 0 (:: METHOD one)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2244 M 
+0.238 0 (  EXPOSE var1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2343 M 
+0.238 0 (  IF \\ VAR\( "VAR1" \) THEN var1 = "???")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2393 M 
+0.238 0 (  SAY "Test1.ONE -      var1:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2442 M 
+0.238 0 (  var1 = "Test1.1")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2492 M 
+0.238 0 (  SAY "Test1.ONE -    var1-new:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2542 M 
+0.238 0 (  SAY)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+234 2641 M 
+0.238 0 (:: METHOD two)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2690 M 
+0.238 0 (  EXPOSE var1)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2789 M 
+0.238 0 (  SAY "Test1.TWO -      var1:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2839 M 
+0.238 0 (  var1 = "Test1.2")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2889 M 
+0.238 0 (  SAY "Test1.TWO -    var1-new:" pp\( var1 \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+234 2938 M 
+0.238 0 (  SAY)A 
+; 
+229 206 N M 1945 2 rr : 0 sg O ; 
+229 254 N M 1945 2 rr : 0 sg O ; 
+229 254 N M 1945 2 rr : 0 sg O ; 
+229 304 N M 1945 2 rr : 0 sg O ; 
+229 304 N M 1945 2 rr : 0 sg O ; 
+229 353 N M 1945 2 rr : 0 sg O ; 
+229 353 N M 1945 2 rr : 0 sg O ; 
+229 403 N M 1945 2 rr : 0 sg O ; 
+229 403 N M 1945 2 rr : 0 sg O ; 
+229 452 N M 1945 2 rr : 0 sg O ; 
+229 452 N M 1945 2 rr : 0 sg O ; 
+229 502 N M 1945 2 rr : 0 sg O ; 
+229 502 N M 1945 2 rr : 0 sg O ; 
+229 551 N M 1945 2 rr : 0 sg O ; 
+229 551 N M 1945 2 rr : 0 sg O ; 
+229 601 N M 1945 2 rr : 0 sg O ; 
+229 601 N M 1945 2 rr : 0 sg O ; 
+229 651 N M 1945 2 rr : 0 sg O ; 
+229 651 N M 1945 2 rr : 0 sg O ; 
+229 700 N M 1945 2 rr : 0 sg O ; 
+229 700 N M 1945 2 rr : 0 sg O ; 
+229 750 N M 1945 2 rr : 0 sg O ; 
+229 750 N M 1945 2 rr : 0 sg O ; 
+229 799 N M 1945 2 rr : 0 sg O ; 
+229 799 N M 1945 2 rr : 0 sg O ; 
+229 849 N M 1945 2 rr : 0 sg O ; 
+229 849 N M 1945 2 rr : 0 sg O ; 
+229 899 N M 1945 2 rr : 0 sg O ; 
+229 899 N M 1945 2 rr : 0 sg O ; 
+229 948 N M 1945 2 rr : 0 sg O ; 
+229 948 N M 1945 2 rr : 0 sg O ; 
+229 998 N M 1945 2 rr : 0 sg O ; 
+229 998 N M 1945 2 rr : 0 sg O ; 
+229 1047 N M 1945 2 rr : 0 sg O ; 
+229 1047 N M 1945 2 rr : 0 sg O ; 
+229 1097 N M 1945 2 rr : 0 sg O ; 
+229 1097 N M 1945 2 rr : 0 sg O ; 
+229 1146 N M 1945 2 rr : 0 sg O ; 
+229 1146 N M 1945 2 rr : 0 sg O ; 
+229 1196 N M 1945 2 rr : 0 sg O ; 
+229 1196 N M 1945 2 rr : 0 sg O ; 
+229 1246 N M 1945 2 rr : 0 sg O ; 
+229 1246 N M 1945 2 rr : 0 sg O ; 
+229 1295 N M 1945 2 rr : 0 sg O ; 
+229 1295 N M 1945 2 rr : 0 sg O ; 
+229 1345 N M 1945 2 rr : 0 sg O ; 
+229 1345 N M 1945 2 rr : 0 sg O ; 
+229 1394 N M 1945 2 rr : 0 sg O ; 
+229 1394 N M 1945 2 rr : 0 sg O ; 
+229 1444 N M 1945 2 rr : 0 sg O ; 
+229 1444 N M 1945 2 rr : 0 sg O ; 
+229 1494 N M 1945 2 rr : 0 sg O ; 
+229 1494 N M 1945 2 rr : 0 sg O ; 
+229 1543 N M 1945 2 rr : 0 sg O ; 
+229 1543 N M 1945 2 rr : 0 sg O ; 
+229 1593 N M 1945 2 rr : 0 sg O ; 
+229 1593 N M 1945 2 rr : 0 sg O ; 
+229 1642 N M 1945 2 rr : 0 sg O ; 
+229 1642 N M 1945 2 rr : 0 sg O ; 
+229 1692 N M 1945 2 rr : 0 sg O ; 
+229 1692 N M 1945 2 rr : 0 sg O ; 
+229 1741 N M 1945 2 rr : 0 sg O ; 
+229 1741 N M 1945 2 rr : 0 sg O ; 
+229 1791 N M 1945 2 rr : 0 sg O ; 
+229 1791 N M 1945 2 rr : 0 sg O ; 
+229 1841 N M 1945 2 rr : 0 sg O ; 
+229 1841 N M 1945 2 rr : 0 sg O ; 
+229 1890 N M 1945 2 rr : 0 sg O ; 
+229 1890 N M 1945 2 rr : 0 sg O ; 
+229 1940 N M 1945 2 rr : 0 sg O ; 
+229 1940 N M 1945 2 rr : 0 sg O ; 
+229 1989 N M 1945 2 rr : 0 sg O ; 
+229 1989 N M 1945 2 rr : 0 sg O ; 
+229 2039 N M 1945 2 rr : 0 sg O ; 
+229 2039 N M 1945 2 rr : 0 sg O ; 
+229 2089 N M 1945 2 rr : 0 sg O ; 
+229 2089 N M 1945 2 rr : 0 sg O ; 
+229 2138 N M 1945 2 rr : 0 sg O ; 
+229 2138 N M 1945 2 rr : 0 sg O ; 
+229 2188 N M 1945 2 rr : 0 sg O ; 
+229 2188 N M 1945 2 rr : 0 sg O ; 
+229 2237 N M 1945 2 rr : 0 sg O ; 
+229 2237 N M 1945 2 rr : 0 sg O ; 
+229 2287 N M 1945 2 rr : 0 sg O ; 
+229 2287 N M 1945 2 rr : 0 sg O ; 
+229 2336 N M 1945 2 rr : 0 sg O ; 
+229 2336 N M 1945 2 rr : 0 sg O ; 
+229 2386 N M 1945 2 rr : 0 sg O ; 
+229 2386 N M 1945 2 rr : 0 sg O ; 
+229 2436 N M 1945 2 rr : 0 sg O ; 
+229 2436 N M 1945 2 rr : 0 sg O ; 
+229 2485 N M 1945 2 rr : 0 sg O ; 
+229 2485 N M 1945 2 rr : 0 sg O ; 
+229 2535 N M 1945 2 rr : 0 sg O ; 
+229 2535 N M 1945 2 rr : 0 sg O ; 
+229 2584 N M 1945 2 rr : 0 sg O ; 
+229 2584 N M 1945 2 rr : 0 sg O ; 
+229 2634 N M 1945 2 rr : 0 sg O ; 
+229 2634 N M 1945 2 rr : 0 sg O ; 
+229 2684 N M 1945 2 rr : 0 sg O ; 
+229 2684 N M 1945 2 rr : 0 sg O ; 
+229 2733 N M 1945 2 rr : 0 sg O ; 
+229 2733 N M 1945 2 rr : 0 sg O ; 
+229 2783 N M 1945 2 rr : 0 sg O ; 
+229 2783 N M 1945 2 rr : 0 sg O ; 
+229 2832 N M 1945 2 rr : 0 sg O ; 
+229 2832 N M 1945 2 rr : 0 sg O ; 
+229 2882 N M 1945 2 rr : 0 sg O ; 
+229 2882 N M 1945 2 rr : 0 sg O ; 
+229 2931 N M 1945 2 rr : 0 sg O ; 
+229 2931 N M 1945 2 rr : 0 sg O ; 
+229 2981 N M 1945 2 rr : 0 sg O ; 
+229 206 N M 2 2777 rr : 0 sg O ; 
+2171 206 N M 2 2777 rr : 0 sg O ; %%IncludeFont: Helvetica
+/F6
+0.952 
+T 
+/Helvetica
+mF 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+667 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1656 3060 M 
+-0.352 0 (11)A 
+1702 3060 M 
+0.014 0 (-)A 
+1716 3060 M 
+-0.352 0 (16)A 
+1762 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 12 12
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2110 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 261 M 
+0.238 0 (:: METHOD ShowVar1)A 
+; : 0 0 2110 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 310 M 
+0.238 0 (  EXPOSE var1)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 409 M 
+0.238 0 (  SAY "Test1.Show -     var1:" pp\( var1 \))A 
+; : 0 0 2110 3232 rc F0_38
+Ji 
+170 509 M 
+0.238 0 (:: METHOD var1 ATTRIBUTE)A 
+; 
+166 602 N M 1944 137 rr : 0.882 sg O ; : 0 0 2110 3232 rc %%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+170 608 M 
+6.000 0 32 0.242 0 (Figure 4: Floating methods, a class with methods and enhancing an object instance)D 
+; : 0 0 2110 3232 rc F4_50
+Ji 
+170 670 M 
+0.111 0 (with floating methods)A 
+; 
+165 204 N M 1945 2 rr : 0 sg O ; 
+165 254 N M 1945 2 rr : 0 sg O ; 
+165 254 N M 1945 2 rr : 0 sg O ; 
+165 304 N M 1945 2 rr : 0 sg O ; 
+165 304 N M 1945 2 rr : 0 sg O ; 
+165 353 N M 1945 2 rr : 0 sg O ; 
+165 353 N M 1945 2 rr : 0 sg O ; 
+165 403 N M 1945 2 rr : 0 sg O ; 
+165 403 N M 1945 2 rr : 0 sg O ; 
+165 452 N M 1945 2 rr : 0 sg O ; 
+165 452 N M 1945 2 rr : 0 sg O ; 
+165 502 N M 1945 2 rr : 0 sg O ; 
+165 502 N M 1945 2 rr : 0 sg O ; 
+165 551 N M 1945 2 rr : 0 sg O ; 
+166 551 N M 1943 2 rr : 0 sg O ; 
+166 601 N M 1943 2 rr : 0 sg O ; 
+165 601 N M 1945 2 rr : 0 sg O ; 
+165 737 N M 1945 2 rr : 0 sg O ; 
+165 204 N M 2 350 rr : 0 sg O ; 
+2108 204 N M 2 350 rr : 0 sg O ; 
+165 601 N M 2 138 rr : 0 sg O ; 
+2108 601 N M 2 138 rr : 0 sg O ; : 0 0 2110 3232 rc F2_38
+Ji 
+170 800 M 
+0.238 0 (Test1.ONE -      var1: [???])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 849 M 
+0.238 0 (Test1.ONE -    var1-new: [Test1.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 948 M 
+0.238 0 (Test1.TWO -      var1: [Test1.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 998 M 
+0.238 0 (Test1.TWO -    var1-new: [Test1.2])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1097 M 
+0.238 0 (Test1.Show -     var1: [Test1.2])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1147 M 
+0.238 0 (--------------------------------------------------)A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1196 M 
+0.238 0 (floating.ONE -    var1: [---])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1246 M 
+0.238 0 (floating.ONE - var1-method: [floating.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1296 M 
+0.238 0 (Test1.ONE -      var1: [???])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1345 M 
+0.238 0 (Test1.ONE -    var1-new: [Test1.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1444 M 
+0.238 0 (floating.TWO -    var1: [floating.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1494 M 
+0.238 0 (floating.TWO - var1-method: [floating.2])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1543 M 
+0.238 0 (Test1.TWO -      var1: [Test1.1])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1593 M 
+0.238 0 (Test1.TWO -    var1-new: [Test1.2])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1692 M 
+0.238 0 (Test1.Show -     var1: [Test1.2])A 
+; 
+166 1786 N M 1944 136 rr : 0.882 sg O ; : 0 0 2110 3232 rc F4_50
+Ji 
+170 1792 M 
+4.000 0 32 0.182 0 (Figure 5: The object scope for floating methods is different to the object scope of the)D 
+; : 0 0 2110 3232 rc F4_50
+Ji 
+170 1854 M 
+0.145 0 (class .Test1 \(output\))A 
+; 
+165 794 N M 1945 2 rr : 0 sg O ; 
+165 1785 N M 1945 2 rr : 0 sg O ; 
+165 1920 N M 1945 2 rr : 0 sg O ; 
+165 794 N M 2 1128 rr : 0 sg O ; 
+2108 794 N M 2 1128 rr : 0 sg O ; F4_50
+Ji 
+279 1990 M 
+4.000 0 32 0.269 0 (There is an attribute method defined for the floating methods and one for the class)D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+161 2091 M 
+6.000 0 32 0.446 0 (.Test1)D 
+F4_50
+Ji 
+329 2083 M 
+6.000 0 32 0.216 0 (. Both of these object variables exist at )D 
+%%IncludeFont: Helvetica-Oblique
+/F7
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F7_50
+F7
+50 
+xF 
+F7_50
+Ji 
+1256 2083 M 
+6.000 0 32 0.245 0 (different )D 
+F4_50
+Ji 
+1459 2083 M 
+6.000 0 32 0.191 0 (object scopes, hence they may)D 
+161 2176 M 
+0.130 0 (store different values. The output is given in figure 5.)A 
+/F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+161 2336 M 
+0.446 0 ( ::CLASS )A 
+%%IncludeFont: Helvetica-Bold
+/F10
+0.940 
+T 
+/Helvetica-Bold
+mF 
+/F10_50
+F10
+50 
+xF 
+F10_50
+Ji 
+413 2328 M 
+0.088 0 (Directive)A 
+F4_50
+Ji 
+279 2469 M 
+1.000 0 32 0.375 0 (A )D 
+F2_46
+Ji 
+328 2477 M 
+1.000 0 32 0.446 0 (::CLASS)D 
+F4_50
+Ji 
+524 2469 M 
+1.000 0 32 0.252 0 (-directive merely defines the properties of a class and serves as the \204glue)D 
+161 2562 M 
+4.000 0 32 0.159 0 (point\223 for all immediately following )D 
+F2_46
+Ji 
+951 2570 M 
+4.000 0 32 0.446 0 (::Method)D 
+F4_50
+Ji 
+1175 2562 M 
+4.000 0 32 0.169 0 (-directives, which implement the behavior of)D 
+161 2655 M 
+5.000 0 32 0.206 0 (the methods themselves. All the methods at the instance level with their )D 
+F7_50
+Ji 
+1834 2655 M 
+5.000 0 32 0.211 0 (instance )D 
+F4_50
+Ji 
+2041 2655 M 
+5.000 0 32 0.100 0 (object)D 
+161 2748 M 
+1.000 0 32 0.179 0 (variables define a separate object scope, as well as all the methods at the class level with)D 
+161 2841 M 
+0.141 0 (their )A 
+F7_50
+Ji 
+273 2841 M 
+0.033 0 (class )A 
+F4_50
+Ji 
+401 2841 M 
+0.102 0 (object variables.)A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+654 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1643 3060 M 
+-0.352 0 (12)A 
+1689 3060 M 
+0.014 0 (-)A 
+1703 3060 M 
+-0.352 0 (16)A 
+1749 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 13 13
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 218 M 
+5.000 0 32 0.175 0 (Looking at the class hierarchy, as a matter of fact, each single class forms its own)D 
+225 311 M 
+1.000 0 32 0.159 0 (object scope, defining the methods and object variables level by level. So if an instance of)D 
+225 404 M 
+5.000 0 32 0.197 0 (a class gets asynchronous messages - e.g. by using the )D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1542 412 M 
+5.000 0 32 0.446 0 (START)D 
+F0_50
+Ji 
+1682 404 M 
+5.000 0 32 0.281 0 (-method of )D 
+F2_46
+Ji 
+1948 412 M 
+5.000 0 32 0.571 0 (.Object )D 
+F0_50
+Ji 
+2178 404 M 
+5.000 0 32 0.112 0 (- it)D 
+225 497 M 
+5.000 0 32 0.215 0 (becomes possible that different messages at different object scopes \(e.g. different class)D 
+225 590 M 
+0.127 0 (levels\) execute concurrently without problems on the same object.)A 
+343 731 M 
+0.120 0 (If a )A 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+427 731 M 
+0.128 0 (second )A 
+F0_50
+Ji 
+603 731 M 
+0.142 0 (method should get invoked at an object scope in which another method is)A 
+225 824 M 
+4.000 0 32 0.243 0 (already running on the )D 
+F4_50
+Ji 
+758 824 M 
+4.000 0 32 0.370 0 (same )D 
+F0_50
+Ji 
+900 824 M 
+4.000 0 32 0.204 0 (object, the second method will have to wait by default until)D 
+225 917 M 
+17.000 0 32 0.185 0 (the first method finishes. This way Object Rexx by default prevents methods from)D 
+225 1010 M 
+2.000 0 32 0.127 0 (changing object variables of the same object concurrently, which usually is undesired and)D 
+225 1103 M 
+30.000 0 32 0.254 0 (sometimes dangerous. If the programmer wishes, that some methods execute)D 
+225 1196 M 
+2.000 0 32 0.298 0 (concurrently at the same object scope for the same object, he or she can do so by either)D 
+225 1289 M 
+7.000 0 32 0.120 0 (using the )D 
+F2_46
+Ji 
+457 1297 M 
+7.000 0 32 0.446 0 (UNGUARDED )D 
+F0_50
+Ji 
+744 1289 M 
+7.000 0 32 0.183 0 (attribute for the appropriate method directive or use the keyword)D 
+225 1383 M 
+0.104 0 (instruction )A 
+F2_46
+Ji 
+468 1391 M 
+0.446 0 (GUARD ON)A 
+F0_50
+Ji 
+692 1383 M 
+0.100 0 (/)A 
+F2_46
+Ji 
+706 1391 M 
+0.446 0 (OFF)A 
+F0_50
+Ji 
+790 1383 M 
+0.100 0 (.)A 
+343 1523 M 
+5.000 0 32 0.129 0 (Another side effect of object scopes is the ability for programmers to define names)D 
+225 1616 M 
+0.180 0 (for object variables which may already have been used someplace up in the hierarchy tree)A 
+225 1709 M 
+0.121 0 (without interfering with them.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+667 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1656 3060 M 
+-0.352 0 (13)A 
+1702 3060 M 
+0.014 0 (-)A 
+1716 3060 M 
+-0.352 0 (16)A 
+1762 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 14 14
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2110 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.857 
+T 
+/Courier-Bold
+mF 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+170 211 M 
+-0.158 0 (/* test_scope.cmd */)A 
+; : 0 0 2110 3232 rc %%IncludeFont: Courier
+/F2
+0.857 
+T 
+/Courier
+mF 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+170 319 M 
+-0.158 0 (anObject = .Test2 ~ new\( "one", "two" \))A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 373 M 
+-0.158 0 (msg = anObject ~ start\( "work1" \)    /* object scope of .Test2 */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 426 M 
+-0.158 0 (msg = anObject ~ start\( "work0" \)    /* object scope of .Test1 */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 480 M 
+-0.158 0 (CALL SysSleep 1                      /* sleep a bit            */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 534 M 
+-0.158 0 (anObject ~ work2                     /* object scope of .Test2 */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 588 M 
+-0.158 0 (SAY "program ended.")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 641 M 
+-0.158 0 (EXIT)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 749 M 
+-0.158 0 (/* ----------------- class with methods ----------------- */)A 
+; 
+166 797 N M 1944 54 rr : 0.937 sg O ; : 0 0 2110 3232 rc %%IncludeFont: Courier-BoldOblique
+/F4
+0.810 
+T 
+/Courier-BoldOblique
+mF 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+170 803 M 
+-0.200 0 (:: CLASS Test1)A 
+; : 0 0 2110 3232 rc F0_42
+Ji 
+170 910 M 
+-0.158 0 (:: METHOD work0)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 964 M 
+-0.158 0 (  SAY "in Test1::work0 \(object scope of class .Test1\)")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1018 M 
+-0.158 0 (  var1 = "in work2")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1071 M 
+-0.158 0 (  SAY "in Test1::work0, leaving.")A 
+; 
+166 1173 N M 1944 55 rr : 0.937 sg O ; : 0 0 2110 3232 rc F4_42
+Ji 
+170 1179 M 
+-0.200 0 (:: CLASS Test2 SUBCLASS Test1)A 
+; : 0 0 2110 3232 rc F0_42
+Ji 
+170 1286 M 
+-0.158 0 (:: METHOD init)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1340 M 
+-0.158 0 (  EXPOSE var1 var2   /* define instance object variables   */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1394 M 
+-0.158 0 (  USE ARG var1, var2 /* assign arguments as values      */)A 
+; : 0 0 2110 3232 rc F0_42
+Ji 
+170 1501 M 
+-0.158 0 (:: METHOD work1 )A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+570 1501 M 
+-0.158 0 (    /* UNGUARDED  */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1555 M 
+-0.158 0 (  EXPOSE var1)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1663 M 
+-0.158 0 (  var1 = "in work1")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1716 M 
+-0.158 0 (  SAY "in Test2::work1 \(object scope of class .Test2\)")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1770 M 
+-0.158 0 (  DO 5)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1824 M 
+-0.158 0 (   SAY "in Test2::work1, sleeping a second ...")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1878 M 
+-0.158 0 (   CALL SysSleep 1  /* wait 1 second            */)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1931 M 
+-0.158 0 (  END)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 1985 M 
+-0.158 0 (  SAY "in Test2::work1, slept 5 times, just woke up !")A 
+; : 0 0 2110 3232 rc F0_42
+Ji 
+170 2093 M 
+-0.158 0 (:: METHOD work2)A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 2200 M 
+-0.158 0 (  SAY "in Test2::work2 \(object scope of class .Test2\)")A 
+; : 0 0 2110 3232 rc F2_42
+Ji 
+170 2254 M 
+-0.158 0 (  SAY "in Test2::work2, leaving.")A 
+; 
+166 2355 N M 1944 75 rr : 0.882 sg O ; : 0 0 2110 3232 rc %%IncludeFont: Helvetica
+/F6
+0.940 
+T 
+/Helvetica
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+170 2361 M 
+0.132 0 (Figure 6: Object Scope and Concurrency)A 
+; 
+165 206 N M 1945 2 rr : 0 sg O ; 
+165 258 N M 1945 2 rr : 0 sg O ; 
+165 258 N M 1945 2 rr : 0 sg O ; 
+165 312 N M 1945 2 rr : 0 sg O ; 
+165 312 N M 1945 2 rr : 0 sg O ; 
+165 366 N M 1945 2 rr : 0 sg O ; 
+165 366 N M 1945 2 rr : 0 sg O ; 
+165 419 N M 1945 2 rr : 0 sg O ; 
+165 419 N M 1945 2 rr : 0 sg O ; 
+165 473 N M 1945 2 rr : 0 sg O ; 
+165 473 N M 1945 2 rr : 0 sg O ; 
+165 527 N M 1945 2 rr : 0 sg O ; 
+165 527 N M 1945 2 rr : 0 sg O ; 
+165 581 N M 1945 2 rr : 0 sg O ; 
+165 581 N M 1945 2 rr : 0 sg O ; 
+165 634 N M 1945 2 rr : 0 sg O ; 
+165 634 N M 1945 2 rr : 0 sg O ; 
+165 688 N M 1945 2 rr : 0 sg O ; 
+165 688 N M 1945 2 rr : 0 sg O ; 
+165 742 N M 1945 2 rr : 0 sg O ; 
+165 742 N M 1945 2 rr : 0 sg O ; 
+165 796 N M 1945 2 rr : 0 sg O ; 
+165 796 N M 1945 2 rr : 0 sg O ; 
+165 849 N M 1945 2 rr : 0 sg O ; 
+165 849 N M 1945 2 rr : 0 sg O ; 
+165 903 N M 1945 2 rr : 0 sg O ; 
+165 903 N M 1945 2 rr : 0 sg O ; 
+165 957 N M 1945 2 rr : 0 sg O ; 
+165 957 N M 1945 2 rr : 0 sg O ; 
+165 1011 N M 1945 2 rr : 0 sg O ; 
+165 1011 N M 1945 2 rr : 0 sg O ; 
+165 1064 N M 1945 2 rr : 0 sg O ; 
+165 1064 N M 1945 2 rr : 0 sg O ; 
+165 1118 N M 1945 2 rr : 0 sg O ; 
+165 1118 N M 1945 2 rr : 0 sg O ; 
+165 1172 N M 1945 2 rr : 0 sg O ; 
+165 1172 N M 1945 2 rr : 0 sg O ; 
+165 1226 N M 1945 2 rr : 0 sg O ; 
+165 1226 N M 1945 2 rr : 0 sg O ; 
+165 1279 N M 1945 2 rr : 0 sg O ; 
+165 1279 N M 1945 2 rr : 0 sg O ; 
+165 1333 N M 1945 2 rr : 0 sg O ; 
+165 1333 N M 1945 2 rr : 0 sg O ; 
+165 1387 N M 1945 2 rr : 0 sg O ; 
+165 1387 N M 1945 2 rr : 0 sg O ; 
+165 1441 N M 1945 2 rr : 0 sg O ; 
+165 1441 N M 1945 2 rr : 0 sg O ; 
+165 1494 N M 1945 2 rr : 0 sg O ; 
+165 1494 N M 1945 2 rr : 0 sg O ; 
+165 1548 N M 1945 2 rr : 0 sg O ; 
+165 1548 N M 1945 2 rr : 0 sg O ; 
+165 1602 N M 1945 2 rr : 0 sg O ; 
+165 1602 N M 1945 2 rr : 0 sg O ; 
+165 1656 N M 1945 2 rr : 0 sg O ; 
+165 1656 N M 1945 2 rr : 0 sg O ; 
+165 1709 N M 1945 2 rr : 0 sg O ; 
+165 1709 N M 1945 2 rr : 0 sg O ; 
+165 1763 N M 1945 2 rr : 0 sg O ; 
+165 1763 N M 1945 2 rr : 0 sg O ; 
+165 1817 N M 1945 2 rr : 0 sg O ; 
+165 1817 N M 1945 2 rr : 0 sg O ; 
+165 1871 N M 1945 2 rr : 0 sg O ; 
+165 1871 N M 1945 2 rr : 0 sg O ; 
+165 1924 N M 1945 2 rr : 0 sg O ; 
+165 1924 N M 1945 2 rr : 0 sg O ; 
+165 1978 N M 1945 2 rr : 0 sg O ; 
+165 1978 N M 1945 2 rr : 0 sg O ; 
+165 2032 N M 1945 2 rr : 0 sg O ; 
+165 2032 N M 1945 2 rr : 0 sg O ; 
+165 2086 N M 1945 2 rr : 0 sg O ; 
+165 2086 N M 1945 2 rr : 0 sg O ; 
+165 2139 N M 1945 2 rr : 0 sg O ; 
+165 2139 N M 1945 2 rr : 0 sg O ; 
+165 2193 N M 1945 2 rr : 0 sg O ; 
+165 2193 N M 1945 2 rr : 0 sg O ; 
+165 2247 N M 1945 2 rr : 0 sg O ; 
+165 2247 N M 1945 2 rr : 0 sg O ; 
+165 2301 N M 1945 2 rr : 0 sg O ; 
+166 2301 N M 1943 2 rr : 0 sg O ; 
+166 2354 N M 1943 2 rr : 0 sg O ; 
+165 2354 N M 1945 2 rr : 0 sg O ; 
+165 2428 N M 1945 2 rr : 0 sg O ; 
+165 206 N M 2 2097 rr : 0 sg O ; 
+2108 206 N M 2 2097 rr : 0 sg O ; 
+165 2354 N M 2 76 rr : 0 sg O ; 
+2108 2354 N M 2 76 rr : 0 sg O ; F6_50
+Ji 
+279 2498 M 
+4.000 0 32 0.258 0 (Figure 7 demonstrates the output of the Object Rexx program in figure 6 executing)D 
+161 2591 M 
+16.000 0 32 0.231 0 (concurrently methods of )D 
+%%IncludeFont: Helvetica-Oblique
+/F8
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+762 2591 M 
+16.000 0 32 0.245 0 (different )D 
+F6_50
+Ji 
+975 2591 M 
+16.000 0 32 0.215 0 (object scopes for the )D 
+F8_50
+Ji 
+1519 2591 M 
+16.000 0 32 0.370 0 (same )D 
+F6_50
+Ji 
+1673 2591 M 
+16.000 0 32 0.157 0 (object. While method)D 
+161 2684 M 
+7.000 0 32 0.350 0 (\204)D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+178 2692 M 
+7.000 0 32 0.446 0 (work1)D 
+F6_50
+Ji 
+318 2684 M 
+7.000 0 32 0.191 0 (\223, defined at the object scope of class )D 
+F2_46
+Ji 
+1221 2692 M 
+7.000 0 32 0.446 0 (.Test2)D 
+F6_50
+Ji 
+1389 2684 M 
+7.000 0 32 0.144 0 (, is asynchroneously executing for)D 
+161 2777 M 
+13.000 0 32 0.131 0 (object \204)D 
+F2_46
+Ji 
+339 2785 M 
+13.000 0 32 0.446 0 (anObject)D 
+F6_50
+Ji 
+563 2777 M 
+13.000 0 32 0.204 0 (\223, method \204)D 
+F2_46
+Ji 
+833 2785 M 
+13.000 0 32 0.446 0 (work0)D 
+F6_50
+Ji 
+973 2777 M 
+13.000 0 32 0.125 0 (\223 defined in the superclass )D 
+F2_46
+Ji 
+1639 2785 M 
+13.000 0 32 0.446 0 (.Test1 )D 
+F6_50
+Ji 
+1848 2777 M 
+13.000 0 32 0.125 0 (is able to run)D 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+654 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1643 3060 M 
+-0.352 0 (14)A 
+1689 3060 M 
+0.014 0 (-)A 
+1703 3060 M 
+-0.352 0 (16)A 
+1749 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 15 15
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 218 M 
+1.000 0 32 0.209 0 (concurrently. Method \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+729 226 M 
+1.000 0 32 0.446 0 (work2)D 
+F0_50
+Ji 
+869 218 M 
+1.000 0 32 0.193 0 (\223 defined at the object scope of class )D 
+F2_46
+Ji 
+1710 226 M 
+1.000 0 32 0.446 0 (.Test2 )D 
+F0_50
+Ji 
+1907 218 M 
+1.000 0 32 0.131 0 (is blocked until)D 
+225 311 M 
+0.212 0 (method \204)A 
+F2_46
+Ji 
+424 319 M 
+0.446 0 (work1)A 
+F0_50
+Ji 
+564 311 M 
+0.113 0 (\223 executing in the same object scope finishes.)A 
+: 0 0 2174 3232 rc /F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+234 445 M 
+-0.158 0 (in Test2::work1 \(object scope of class .Test2\))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 498 M 
+-0.158 0 (in Test2::work1, sleeping a second ...)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 552 M 
+-0.158 0 (in Test1::work0 \(object scope of class .Test1\))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 606 M 
+-0.158 0 (in Test1::work0, leaving.)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 660 M 
+-0.158 0 (in Test2::work1, sleeping a second ...)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 713 M 
+-0.158 0 (in Test2::work1, sleeping a second ...)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 767 M 
+-0.158 0 (in Test2::work1, sleeping a second ...)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 821 M 
+-0.158 0 (in Test2::work1, sleeping a second ...)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 875 M 
+-0.158 0 (in Test2::work1, slept 5 times, just woke up !)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 928 M 
+-0.158 0 (in Test2::work2 \(object scope of class .Test2\))A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 982 M 
+-0.158 0 (in Test2::work2, leaving.)A 
+; : 0 0 2174 3232 rc F2_42
+Ji 
+234 1036 M 
+-0.158 0 (program ended.)A 
+; 
+230 1137 N M 1944 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc 234 1143 M 
+0.145 0 (Figure 7: Object Scope and Concurrency \(output\))A 
+; 
+229 439 N M 1945 2 rr : 0 sg O ; 
+229 1136 N M 1945 2 rr : 0 sg O ; 
+229 1210 N M 1945 2 rr : 0 sg O ; 
+229 439 N M 2 773 rr : 0 sg O ; 
+2171 439 N M 2 773 rr : 0 sg O ; %%IncludeFont: Helvetica-Bold
+/F5
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F5_58
+F5
+58 
+xF 
+F5_58
+Ji 
+225 1310 M 
+-0.248 0 (3)A 
+343 1310 M 
+0.053 0 (SUMMARY)A 
+F0_50
+Ji 
+343 1463 M 
+10.000 0 32 0.220 0 (This paper discussed various ascpects of scopes as present in Object Rexx. As)D 
+225 1556 M 
+0.149 0 (many of these scopes do not have names so far, the author attempted to coin some:)A 
+225 1697 M 
+0.350 0 (-)A 
+%%IncludeFont: Helvetica-Oblique
+/F7
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F7_50
+F7
+50 
+xF 
+F7_50
+Ji 
+343 1697 M 
+4.000 0 32 0.128 0 (Standard scope)D 
+F0_50
+Ji 
+699 1697 M 
+4.000 0 32 0.113 0 (: scope rules as established in T-Rexx which determine the visibility)D 
+343 1790 M 
+2.000 0 32 0.211 0 (of variables and labels in a plain Rexx program, i.e. in a program not containing any)D 
+343 1883 M 
+0.086 0 (directives.)A 
+225 2023 M 
+0.350 0 (-)A 
+F7_50
+Ji 
+343 2023 M 
+1.000 0 32 0.136 0 (Procedure scope)D 
+F0_50
+Ji 
+724 2023 M 
+1.000 0 32 0.139 0 (: determines the visibility of variables within called labels, which use)D 
+343 2116 M 
+0.150 0 (the )A 
+F2_46
+Ji 
+427 2124 M 
+0.446 0 (PROCEDURE )A 
+F0_50
+Ji 
+707 2116 M 
+0.118 0 (keyword.)A 
+225 2256 M 
+0.350 0 (-)A 
+F7_50
+Ji 
+343 2256 M 
+9.000 0 32 0.230 0 (Program scope)D 
+F0_50
+Ji 
+694 2256 M 
+9.000 0 32 0.191 0 (: determines which routines and classes are visible to a particular)D 
+343 2349 M 
+0.165 0 (Rexx program.)A 
+225 2490 M 
+0.350 0 (-)A 
+F7_50
+Ji 
+343 2490 M 
+14.000 0 32 0.184 0 (Routine scope)D 
+F0_50
+Ji 
+679 2490 M 
+14.000 0 32 0.204 0 (: determines the visibility of variables and labels within a routine)D 
+343 2583 M 
+0.104 0 (directive. It follows the T-Rexx scope rules.)A 
+225 2723 M 
+0.350 0 (-)A 
+F7_50
+Ji 
+343 2723 M 
+13.000 0 32 0.245 0 (Method scope)D 
+F0_50
+Ji 
+673 2723 M 
+13.000 0 32 0.238 0 (: determines the visibility of variables and labels within a method)D 
+343 2816 M 
+0.168 0 (directive. It follows the T-Rexx scope rules. In addition methods gain access to object)A 
+343 2909 M 
+0.127 0 (variables according to the object scope the method is running in.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+667 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1656 3060 M 
+-0.352 0 (15)A 
+1702 3060 M 
+0.014 0 (-)A 
+1716 3060 M 
+-0.352 0 (16)A 
+1762 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 16 16
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 218 M 
+0.350 0 (-)A 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+279 218 M 
+15.000 0 32 0.183 0 (Object scope)D 
+F0_50
+Ji 
+588 218 M 
+15.000 0 32 0.203 0 (: determines which methods may directly access the same object)D 
+279 311 M 
+10.000 0 32 0.229 0 (variables, where object variables may be defined for instance, class and floating)D 
+279 404 M 
+11.000 0 32 0.098 0 (methods. Every class constitutes its own object scope. All methods of the same)D 
+279 497 M 
+11.000 0 32 0.279 0 (object scope are by default prevented from executing concurrently for the )D 
+F2_50
+Ji 
+2052 497 M 
+11.000 0 32 0.187 0 (same)D 
+F0_50
+Ji 
+279 590 M 
+0.132 0 (object, unless the programmer specifies otherwise.)A 
+279 731 M 
+3.000 0 32 0.147 0 (The environment symbols allow for retrieving objects stored in different Object Rexx)D 
+161 824 M 
+1.000 0 32 0.208 0 (supplied directories, the two most important being )D 
+%%IncludeFont: Courier
+/F4
+0.848 
+T 
+/Courier
+mF 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+1293 832 M 
+1.000 0 32 0.446 0 (.LOCAL)D 
+F0_50
+Ji 
+1461 824 M 
+1.000 0 32 0.360 0 ( and )D 
+F4_46
+Ji 
+1576 832 M 
+1.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F0_50
+Ji 
+1912 824 M 
+1.000 0 32 0.100 0 (. )D 
+F4_46
+Ji 
+1941 832 M 
+1.000 0 32 0.446 0 (.LOCAL)D 
+F0_50
+Ji 
+2109 824 M 
+1.000 0 32 0.333 0 ( is)D 
+161 917 M 
+6.000 0 32 0.267 0 (meant for storing or exchanging objects \(data\) among Object Rexx programs executing)D 
+161 1010 M 
+11.000 0 32 0.244 0 (within the same session and thus defining the \204local environment\223. )D 
+F4_46
+Ji 
+1763 1018 M 
+11.000 0 32 0.446 0 (.ENVIRONMENT)D 
+F0_50
+Ji 
+2099 1010 M 
+11.000 0 32 0.333 0 ( is)D 
+161 1103 M 
+1.000 0 32 0.243 0 (meant for retrieving class objects and exchanging objects \(data\) across session \(process\))D 
+161 1196 M 
+0.118 0 (boundaries, i.e. on a global basis.)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+161 1366 M 
+-0.248 0 (4)A 
+279 1366 M 
+0.050 0 (ACKNOWLEDGEMENTS)A 
+F0_50
+Ji 
+279 1520 M 
+9.000 0 32 0.219 0 (The author wishes to thank Rick McGuire, one of the former lead developers for)D 
+161 1613 M 
+17.000 0 32 0.253 0 (Object Rexx, for his great hints and explanations given on the Internet-newsgroup)D 
+161 1706 M 
+0.350 0 (\204)A 
+F4_46
+Ji 
+178 1714 M 
+0.446 0 (comp.lang.rexx)A 
+F0_50
+Ji 
+570 1706 M 
+0.156 0 (\223 thru the past years.)A 
+F6_58
+Ji 
+161 1876 M 
+-0.248 0 (5)A 
+279 1876 M 
+0.162 0 (REFERENCES)A 
+F0_50
+Ji 
+279 2030 M 
+1.000 0 32 0.232 0 (Online documentations of various beta versions of Object Rexx \(the version used for)D 
+161 2123 M 
+0.176 0 (this paper stems from February 16th, 1996\).)A 
+279 2263 M 
+0.132 0 (Various postings on the internet newsgroup \204)A 
+F4_46
+Ji 
+1277 2271 M 
+0.446 0 (comp.lang.rexx)A 
+F0_50
+Ji 
+1669 2263 M 
+0.200 0 (\223, 1995-1996.)A 
+279 2403 M 
+0.105 0 (Cowlishaw, M.F.: \204The REXX Language\223, Prentice-Hall \(Second edition\), 1990..)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+654 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1643 3060 M 
+-0.352 0 (16)A 
+1689 3060 M 
+0.014 0 (-)A 
+1703 3060 M 
+-0.352 0 (16)A 
+1749 3060 M 
+-0.084 0 ( \(final\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 17 17
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 218 M 
+0.068 0 (Date of Article:)A 
+675 218 M 
+0.200 0 ( 1996-05-30. )A 
+343 358 M 
+2.000 0 32 0.214 0 (Published in: Proceedings of the "7)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1137 357 M 
+2.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1161 358 M 
+2.000 0 32 0.164 0 ( International REXX Symposium", Texas/Austin,)D 
+225 451 M 
+0.175 0 (May 12)A 
+F0_29
+Ji 
+390 450 M 
+-0.093 0 (th)A 
+F0_50
+Ji 
+414 451 M 
+0.250 0 (-15)A 
+F0_29
+Ji 
+487 450 M 
+-0.093 0 (th)A 
+F0_50
+Ji 
+511 451 M 
+0.108 0 (, 1996, The Rexx Language Association, Raleigh N.C.  1996. )A 
+343 592 M 
+16.000 0 32 0.196 0 (Presented at: "7)D 
+F0_29
+Ji 
+735 591 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+759 592 M 
+16.000 0 32 0.164 0 ( International REXX Symposium", Texas/Austin, May 12)D 
+F0_29
+Ji 
+2104 591 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+2128 592 M 
+16.000 0 32 0.250 0 (-15)D 
+F0_29
+Ji 
+2201 591 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+2225 592 M 
+16.000 0 32 0.100 0 (,)D 
+225 685 M 
+0.119 0 (1996, The Rexx Language Association.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+667 3060 M 
+-0.109 0 (Local Environment and Scopes in Object Rexx, page )A 
+1656 3060 M 
+-0.352 0 (17)A 
+1702 3060 M 
+0.014 0 (-)A 
+1716 3060 M 
+-0.352 0 (16)A 
+1762 3060 M 
+0.056 0 ( \(rgf\))A 
+
+225 3045 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Trailer
+%%DocumentNeededFonts: 
+%%DocumentSuppliedFonts: 
+/Adobe_Win_Driver /ProcSet findresource dup /terminate get exec
+Adobe_Win_Compat dup /terminate get exec
+%%Pages: 17
+%%EOF
+

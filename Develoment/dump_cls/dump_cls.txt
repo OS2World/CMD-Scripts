@@ -1,0 +1,39 @@
+program:   dump_cls.cmd
+type:      Object REXX, REXXSAA 6.0, all platforms
+purpose:   collection of useful routines for Object REXX programs
+version:   1.00.00
+date:      1999-06-24
+changed:   -
+
+author:    Rony G. Flatscher
+           Rony.Flatscher@wu-wien.ac.at
+           (Wirtschaftsuniversitaet Wien, University of Economics and Business
+           Administration, Vienna/Austria/Europe)
+
+needs:     "rgf_util.cmd" from the "orx8.zip"-package (cf. ::REQUIRES-directive below)
+
+usage (1): dump_cls
+           ... displays the present Object Rexx class hierarchy.
+
+usage (2): dump_cls FILE_TO_CALL [ARGS]
+           ... calls the given file with optional arguments and
+               reports the classes and the methods defined by it.
+
+comments:  -
+
+Standard disclaimer (sometimes larger than the entire program! :) :
+
+All rights reserved and copyrighted 1999 by the author, no guarantee that
+it works without errors, etc.  etc.
+
+You are granted the right to use this module under the condition that you don't
+charge money for this module (as you didn't write it in the first place) or
+modules directly derived from this module, that you document the original author
+(to give appropriate credit) with the original name of the module and that you
+make the unaltered, original source-code of this module available on demand.  If
+that holds, you may even bundle this module (either in source or compiled form)
+with commercial software.
+
+If you find an error, please send me the description (preferably a *very* short
+example); I'll try to fix it and re-release it to the net.
+*/

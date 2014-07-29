@@ -1,0 +1,7464 @@
+%!PS-Adobe-3.0
+%%P8BIT
+%%Title: Ami Pro - CLASS.SAM
+%%Creator: Adobe Printer Driver 3.0 for Windows 3.1
+%%CreationDate: 07/21/97 15:06:50
+%%BoundingBox: 18 8 593 784 
+%%Pages: (atend)
+%%PageOrder: Ascending
+%%Requirements: 
+%%DocumentNeededFonts: (atend)
+%%DocumentSuppliedFonts: (atend)
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%EndComments
+
+[{
+%%BeginFeature: *JobPatchFile 1
+
+save 
+/version23-manualfeedpatch where { pop false } { true }ifelse
+ % we don't do an explicit 'get' since product and version MAY
+ % be in systemdict or statusdict - this technique gets the lookup
+ % without failure
+statusdict begin
+  product (LaserWriter) eq        % true if LaserWriter
+  version cvr 23.0 eq             % true if version 23
+end
+and  % only install this patch if both are true
+and  % true only if patch is not installed and is for this printer
+     % save object and boolean on stack
+dup { exch restore }if
+% either true OR saveobject false
+dup
+{
+  /version23-manualfeedpatch true def
+  /oldversion23-showpage /showpage load def
+  /showpage       % this showpage will wait extra time if manualfeed is true
+  {%
+     statusdict /manualfeed known
+     {% manualfeed known in statusdict
+        statusdict /manualfeed get
+        {% if true then we loop for 5 seconds
+           usertime 5000 add       % target usertime
+           { % loop
+             dup usertime sub 0 lt
+             { exit }if
+           }loop
+           pop             % pop the usertime off the stac
+        }if
+     }if
+     oldversion23-showpage
+  }bind def
+}if
+not{ restore }if
+
+%%EndFeature
+} stopped cleartomark
+%%BeginProlog 
+%%BeginProcSet: Adobe_Win_ErrorHandler 1.0 1
+/currentpacking where{pop/oldpack currentpacking def/setpacking where{pop
+false setpacking}if}if/$brkpage 64 dict def $brkpage begin/prnt{dup type
+/stringtype ne{=string cvs}if dup length 6 mul/tx exch def/ty 10 def
+currentpoint/toy exch def/tox exch def 1 setgray newpath tox toy 2 sub moveto
+0 ty rlineto tx 0 rlineto 0 ty neg rlineto closepath fill tox toy moveto 0
+setgray show}bind def/nl{currentpoint exch pop lmargin exch moveto 0 -10
+rmoveto}def/=={/cp 0 def typeprint nl}def/typeprint{dup type exec}readonly def
+/lmargin 72 def/rmargin 72 def/tprint{dup length cp add rmargin gt{nl/cp 0 def
+}if dup length cp add/cp exch def prnt}readonly def/cvsprint{=string cvs
+tprint( )tprint}readonly def/integertype{cvsprint}readonly def/realtype{
+cvsprint}readonly def/booleantype{cvsprint}readonly def/operatortype{(--)
+tprint =string cvs tprint(-- )tprint}readonly def/marktype{pop(-mark- )tprint}
+readonly def/dicttype{pop(-dictionary- )tprint}readonly def/nulltype{pop
+(-null- )tprint}readonly def/filetype{pop(-filestream- )tprint}readonly def
+/savetype{pop(-savelevel- )tprint}readonly def/fonttype{pop(-fontid- )tprint}
+readonly def/nametype{dup xcheck not{(/)tprint}if cvsprint}readonly def
+/stringtype{dup rcheck{(\()tprint tprint(\))tprint}{pop(-string- )tprint}
+ifelse}readonly def/arraytype{dup rcheck{dup xcheck{({)tprint{typeprint}forall
+(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop(-array- )tprint}
+ifelse}readonly def/packedarraytype{dup rcheck{dup xcheck{({)tprint{typeprint}
+forall(})tprint}{([)tprint{typeprint}forall(])tprint}ifelse}{pop
+(-packedarray- )tprint}ifelse}readonly def/courier/Courier findfont 10
+scalefont def end errordict/handleerror{systemdict begin $error begin $brkpage
+begin newerror{/newerror false store vmstatus pop pop 0 ne{grestoreall}if
+showpage initgraphics courier setfont lmargin 720 moveto(ERROR: )prnt
+errorname prnt nl(OFFENDING COMMAND: )prnt/command load prnt $error/ostack
+known{nl nl(STACK:)prnt nl nl $error/ostack get aload length{==}repeat}if
+systemdict/showpage get exec(%%[ Error: )print errorname =print
+(; OffendingCommand: )print/command load =print( ]%%)= flush}if end end end}
+dup 0 systemdict put dup 4 $brkpage put bind readonly put/currentpacking where
+{pop/setpacking where{pop oldpack setpacking}if}if
+%%EndProcSet
+%%BeginProcSet: Adobe_Res_Emul 1.0 0
+/defineresource where{pop}{userdict begin/defineresource{userdict/Resources 2
+copy known{get begin}{15 dict dup begin put}ifelse exch readonly exch
+currentdict 1 index known not{dup 30 dict def}if load 3 -1 roll 2 index put
+end}bind readonly def/findresource{userdict/Resources get exch get exch get}
+bind readonly def/resourceforall{pop pop pop pop}bind readonly def
+/resourcestatus{userdict/Resources 2 copy known{get exch 2 copy known{get exch
+known{0 -1 true}{pop pop false}ifelse}{pop pop pop false}ifelse}{pop pop false
+}ifelse}bind readonly def end}ifelse
+%%EndProcSet
+%%BeginResource: procset Adobe_Win_Driver 2.0 0
+/Adobe_Win_Driver 200 dict dup begin
+%%BeginResource: file Adobe_FatalError 2.0 0
+/PLatin1Encoding 256 array def StandardEncoding PLatin1Encoding copy pop
+PLatin1Encoding 224[/agrave/aacute/acircumflex/atilde/adieresis]putinterval
+PLatin1Encoding 232[/egrave/eacute/ecircumflex]putinterval PLatin1Encoding 242
+[/ograve/oacute/ocircumflex/otilde/odieresis]putinterval PLatin1Encoding 249[
+/ugrave/uacute/ucircumflex/udieresis]putinterval/FatalErrorIf{{initgraphics
+findfont dup length dict begin{1 index/FID ne{def}{pop pop}ifelse}forall
+/Encoding PLatin1Encoding def currentdict end/ErrFont-PLatin1 exch definefont
+pop/ErrFont-PLatin1 findfont exch scalefont setfont counttomark 3 div cvi{
+moveto show}repeat showpage quit}{cleartomark}ifelse}bind def
+%%EndResource
+/VM? {
+vmstatus exch sub exch pop gt { [
+(This job requires more memory than is ) 100 500
+(available in this printer.  Try changing performance) 100 485
+(settings or reducing the number of fonts in the document.) 100 470
+(Then print again.) 100 455
+12 /Times-Roman
+showpage true FatalErrorIf}if} bind def
+%%BeginResource: file Adobe_Win_Utils 2.0 0
+/|/def load def/,/load load |/~/exch , |/?/ifelse , |/!/pop , |/`/begin , |/^
+/index , |/@/dup , |/+/translate , |/$/roll , |/U/userdict , |/M/moveto , |/-
+/rlineto , |/&/currentdict , |/:/gsave , |/;/grestore , |/F/false , |/T/true ,
+|/N/newpath , |/E/end , |/Ac/arc , |/An/arcn , |/A/ashow , |/D/awidthshow , |
+/C/closepath , |/V/div , |/O/eofill , |/L/fill , |/I/lineto , |/-C/rcurveto ,
+|/-M/rmoveto , |/+S/scale , |/Ji/setfont , |/Lc/setlinecap , |/Lj/setlinejoin
+, |/Lw/setlinewidth , |/S/show , |/LH/showpage , |/K/stroke , |/W/widthshow ,
+|/b{bind |}bind |/L2? F/languagelevel where{! languagelevel 2 ge{! T}if}if |/g
+{@ not{U/DefIf_save save put}if U/DefIf_bool 2 ^ put}b/DefIf_El{if U
+/DefIf_bool get not @{U/DefIf_save get restore}if}b/e{DefIf_El !}b/self & |
+/reinitialize{[/TextInit/GraphInit/UtilsInit counttomark{@ where{self eq}{F}?{
+cvx exec}{!}?}repeat cleartomark}b/initialize{`{/ADO_mxRot ~ |
+/TextInitialised? F | reinitialize E}{U/Adobe_Win_Data 200 dict @ ` put
+/ADO_mxRot ~ |/TextInitialised? F | reinitialize}?}b/terminate{!{& self eq{
+exit}{E}?}loop E}b/suspend/terminate , |/resume{` Adobe_Win_Data `}b/snap{
+transform 0.25 sub round 0.25 add ~ 0.25 sub round 0.25 add ~ itransform}b
+/dsnap{dtransform round ~ round ~ idtransform}b<04>cvn{}|/setjn{{statusdict
+/jobname known{statusdict/jobname 3 -1 $ put}if}stopped cleartomark}b/solid{[]
+0 setdash}b/setdsh{0 setdash}b/sg{setgray}b/sco{setrgbcolor}b/sgco{{sg}{sco}?}
+b/colspRefresh{}b/rp{4 2 $ M 1 ^ 0 - 0 ~ - neg 0 -}b/rr{1 ^ 0 - 0 ~ - neg 0 -
+C}b
+%vmstatus ~ sub ~ ! gt { [
+%12 /Times-Roman
+%LH T FatalErrorIf}if} b
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L1 2.0 0
+L2? not g{/rf{N rp L}b/fx{1 1 dtransform @ 0 ge{1 sub 1}{1 add -0.25}? 3 -1 $
+@ 0 ge{1 sub 1}{1 add -0.25}? 3 1 $ 4 1 $ idtransform 4 -2 $ idtransform}b/BZ{
+4 -2 $ snap + +S fx rf}b/rs{N rp C K}b/rc{N rp clip N}b/ExecWMForm{!}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Utils_L2 2.0 0
+L2? g{/colspA/DeviceGray |/colspABC/DeviceRGB |/setAorABC{{colspA}{colspABC}?
+setcolorspace}b/rf/rectfill , |/fx{1 1 dtransform @ 0 ge{1 sub 0.5}{1 add -0.5
+}? 3 -1 $ @ 0 ge{1 sub 0.5}{1 add -0.5}? 3 1 $ 4 1 $ idtransform 4 -2 $
+idtransform}b/BZ{4 -2 $ snap + +S fx rf}b/rs/rectstroke , |/rc/rectclip , |
+/ExecWMForm{execform}b/UtilsInit{F setglobal}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Encoding 2.0 0
+/bullets{{/bullet}repeat}b/ANSIEncoding[/grave/acute/circumflex/tilde/macron
+/breve/dotaccent/dieresis/ring/cedilla/hungarumlaut/ogonek/caron/dotlessi 18
+bullets StandardEncoding 32 95 getinterval aload ! 3 bullets/quotesinglbase
+/florin/quotedblbase/ellipsis/dagger/daggerdbl/circumflex/perthousand/Scaron
+/guilsinglleft/OE 4 bullets/quoteleft/quoteright/quotedblleft/quotedblright
+/bullet/endash/emdash/tilde/trademark/scaron/guilsinglright/oe 2 bullets
+/Ydieresis/space/exclamdown/cent/sterling/currency/yen/brokenbar/section
+/dieresis/copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered
+/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/paragraph
+/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter
+/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis
+/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]| ANSIEncoding @ 39/quotesingle put 96/grave
+put/ANSIEncodingOld ANSIEncoding 256 array copy | ANSIEncodingOld @[138 153
+154 169 172 174 177 178 179 181 185 188 189 190 208 215 221 222 240 247 253
+254]{/bullet put @}forall 166/bar put 176/ring put
+%%EndResource
+%%BeginResource: file Adobe_Win_Text 2.0 0
+/TextInit{TextInitialised? not{/aF & |/TextInitialised? T |/fM[1 0 0 -1 0 0]|
+/mFM matrix |/iMat[1 0 0.212557 neg 1 0 0]|}if}b/xUP null |/yUP null |/uW null
+|/xSP null |/ySP null |/sW null |/copyfont{1 ^ length add dict `{1 ^/FID ne{|}
+{! !}?}forall & E}b/rF{1 copyfont @ `/Encoding ANSIEncoding &/CharStrings
+known{CharStrings/Eth known not{! ANSIEncodingOld}if}if | E definefont}b/mF{
+findfont ~{@/Encoding get @ StandardEncoding eq{! T}{ISOLatin1Encoding eq{T}{@
+` T 32 1 127{Encoding 1 ^ get StandardEncoding 3 -1 $ get eq and}for E}?}?}{F}
+?{2 ^ ~ rF}if fM 5 4 -1 $ put fM 4 0 put fM makefont aF 3 1 $ put}b/xF{
+scalefont aF 3 1 $ put}b/xMF{mFM astore makefont aF 3 1 $ put}b/xF2/scalefont
+, |/xMF2{mFM astore makefont}b/sLT{: Lw -M currentpoint snap M 0 - 0 Lc K ;}b
+/sSU{N/uW ~ |/yUP ~ |/xUP ~ |}b/sU{xUP yUP uW sLT}b/sST{N/sW ~ |/ySP ~ |/xSP ~
+|}b/sT{xSP ySP sW sLT}b/sR{: + rotate 0 0 M}b/sRxy{: matrix astore concat 0 0
+M}b/eR/; , |
+%%EndResource
+%%BeginResource: file Adobe_Win_Text_Bold 2.0 0
+/mBF{@ 2 copyfont `/FontName ~ | 0 FontMatrix idtransform ! &/PaintType known{
+PaintType 0 eq{/PaintType 2 |/StrokeWidth ~ |}{PaintType 1 eq PaintType 2 eq
+or PaintType 3 eq or &/StrokeWidth known and{StrokeWidth add/StrokeWidth ~ |}{
+!}?}?}{!}? @ & E definefont aF 3 1 $ put}b/xBF{aF ` 1 ^/FontName get 1 ^
+scalefont 3 1 $ scalefont 2 copy ~ | ~ ! | E}b/xMBF{mFM astore aF ` 1 ^
+/FontName get 1 ^ makefont 3 1 $ makefont 2 copy ~ | ~ ! | E}b/xBF2{/sB0 ~ mBF
+/sB1 sB0 3 -1 $ xBF sB1}b/xMBF2{/sB0 ~ mBF mFM astore/sB1 sB0 3 -1 $ xMBF sB1}
+b/sB{: aF currentfont get Ji @ S ; S}b/asB{: aF currentfont get Ji 3 copy A ;
+A}b/wsB{: aF currentfont get Ji 4 copy W ; W}b/awsB{: aF currentfont get Ji 6
+copy D ; D}b/sBT3{: @ S ; 1 1 -M S}b/asBT3{: 3 copy A ; 1 1 -M A}b/wsBT3{: 4
+copy W ; 1 1 -M W}b/awsBT3{: 6 copy D ; 1 1 -M D}b/mIF{iMat 4 3 -1 $ put iMat
+makefont aF 3 1 $ put}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics 2.0 0
+/SavedCTM null |/CTMsave{/SavedCTM SavedCTM currentmatrix |}b/CTMrestore{
+SavedCTM setmatrix}b/mp null |/ADO_mxRot null |/GDIHMatrix null |
+/GDIHPatternDict 22 dict | GDIHPatternDict `/PatternType 1 |/PaintType 2 |
+/Reps L2?{1}{5}? |/XStep 8 Reps mul |/YStep XStep |/BBox[0 0 XStep YStep]|
+/TilingType 1 |/PaintProc{` 1 Lw[]0 setdash PaintData , exec E}b/FGnd null |
+/BGnd null |/HS_Horizontal{horiz}b/HS_Vertical{vert}b/HS_FDiagonal{fdiag}b
+/HS_BDiagonal{biag}b/HS_Cross{horiz vert}b/HS_DiagCross{fdiag biag}b/MaxXYStep
+XStep YStep gt{XStep}{YStep}? |/horiz{Reps{0 4 M XStep 0 - 0 8 +}repeat 0 -8
+Reps mul + K}b/vert{Reps{4 0 M 0 YStep - 8 0 +}repeat 0 -8 Reps mul + K}b/biag
+{Reps{0 0 M MaxXYStep @ - 0 YStep neg M MaxXYStep @ - 0 8 +}repeat 0 -8 Reps
+mul + 0 YStep M 8 8 - K}b/fdiag{Reps{0 0 M MaxXYStep @ neg - 0 YStep M
+MaxXYStep @ neg - 0 8 +}repeat 0 -8 Reps mul + MaxXYStep @ M 8 -8 - K}b E
+/makehatch{GDIHPatternDict/PaintData 3 -1 $ put CTMsave GDIHMatrix setmatrix
+GDIHPatternDict matrix mp CTMrestore ~ U ~ 2 ^ put}b/h0{/h0/HS_Horizontal
+makehatch}b/h1{/h1/HS_Vertical makehatch}b/h2{/h2/HS_FDiagonal makehatch}b/h3{
+/h3/HS_BDiagonal makehatch}b/h4{/h4/HS_Cross makehatch}b/h5{/h5/HS_DiagCross
+makehatch}b/GDIBWPatternDict 17 dict @ `/PatternType 1 |/PaintType L2?{1}{2}?
+|/RepsV L2?{1}{6}? |/RepsH L2?{1}{5}? |/BBox[0 0 RepsH 1]|/TilingType 1 |
+/XStep 1 |/YStep 1 |/Height 8 RepsV mul |/Width 8 |/mx[Width 0 0 Height neg 0
+Height]|/FGnd null |/BGnd null |/SetBGndFGnd L2?{{BGnd null ne{BGnd aload !
+sgco BBox aload ! 2 ^ sub ~ 3 ^ sub ~ rf}if FGnd null ne{FGnd aload ! sgco}if}
+}{{}}? b/PaintProc{` SetBGndFGnd RepsH{Width Height F mx PaintData imagemask
+Width 0 +}repeat E}b E |/GDIBWPatternMx null |/pfprep{save 4 1 $
+/PatternOfTheDay 4 1 $ GDIBWPatternDict `/PaintData ~ |/BGnd ~ |/FGnd ~ | E
+CTMsave GDIBWPatternMx setmatrix GDIBWPatternDict matrix mp CTMrestore ~ !}b
+/hrf null |/prf{pfprep ~ 6 1 $ 5 hrf restore}b/GraphInit{GDIHMatrix null eq{
+/SavedCTM matrix | : ADO_mxRot concat 0 0 snap + : 0.24 @ GDIHPatternDict `
+YStep mul ~ XStep mul ~ dsnap YStep V ~ XStep V ~ E +S/GDIHMatrix matrix
+currentmatrix readonly | ; : 0.24 -0.24 +S GDIBWPatternDict ` Width Height E
+dsnap +S/GDIBWPatternMx matrix currentmatrix readonly | ; ;}if}b/cirp{360 0 An
+C}b/ellp{CTMsave + +S 0.5 0 M 0 0 0.5 360 0 An C CTMrestore}b/rrp{/rad ~ |/y2
+~ |/x2 ~ |/y1 ~ |/x1 ~ | x2 x1 add 2 V y1 M x1 y1 x1 y2 rad arct x1 y2 x2 y2
+rad arct x2 y2 x2 y1 rad arct x2 y1 x1 y1 rad arct C}b/RRp{CTMsave + +S/dyS ~
+|/dxS ~ | dxS 2 V 0 M 0 0 0 dyS 0.5 arct 0 dyS dxS dyS 0.5 arct dxS dyS dxS 0
+0.5 arct dxS 0 0 0 0.5 arct C CTMrestore}b
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L1 2.0 0
+L2? not g{/arct{arcto ! ! ! !}b/GDIpattfill{@ ` BGnd null ne PaintType 2 eq
+and{: BGnd aload ! sgco fEOFill{O}{L}? ; FGnd aload ! U/fGray 2 ^ put{2}{4}?
+-1 $}if E @ patterncalc : 4 ^/PaintType get 2 eq{fGray{6 -1 $ sg}{8 -3 $ sco}?
+}if fEOFill{eoclip}{clip}? N patternfill ; N}b/hrf{/fGray 1 ^ 6 eq | -4 $ N rp
+C/fEOFill F | GDIpattfill}b/hfMain{/fEOFill ~ |/fGray ~ | GDIpattfill}b/hf{T
+hfMain}b/hfW{F hfMain}b/hs{currentpoint strokepath M hfW}b/pfMain{/fEOFill ~ |
+pfprep GDIpattfill restore N}b/pf{T pfMain}b/pfW{F pfMain}b/ps{currentpoint
+strokepath M pfW}b/mpstr 1 string |/mp{~ @ length 12 add dict copy `
+/PatternCTM matrix currentmatrix |/PatternMatrix ~ |/PatWidth XStep mpstr
+length mul |/PatHeight YStep |/FontType 3 |/Encoding 256 array | 3 string 0 1
+255{Encoding ~ @ 3 ^ cvs cvn put}for !/FontMatrix matrix |/FontBBox BBox |
+/BuildChar{! @ ` XStep 0 FontBBox aload ! setcachedevice/PaintProc , E : exec
+;}b & E ~ @ 3 -1 $ definefont}b/patterncalc{` : PatternCTM setmatrix
+PatternMatrix concat BBox aload ! ! ! + pathbbox ; PatHeight V ceiling 4 1 $
+PatWidth V ceiling 4 1 $ PatHeight V floor 4 1 $ PatWidth V floor 4 1 $ 2 ^
+sub cvi abs ~ 3 ^ sub cvi abs ~ 4 2 $ PatHeight mul ~ PatWidth mul ~ E}b
+/patternfill{5 -1 $ @ ` Ji PatternCTM setmatrix PatternMatrix concat 0 2 ^ 2 ^
+M 0 1 mpstr length 1 sub{1 ^ mpstr 3 1 $ put}for ! 2 ^{currentpoint 5 ^{mpstr
+S}repeat YStep add M}repeat ! ! ! ! E}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Graphics_L2 2.0 0
+L2? g{/mp/makepattern , |/hrf{6 eq setAorABC setpattern rectfill}b/hf{
+setAorABC setpattern O}b/hfW{setAorABC setpattern L}b/hs{setAorABC setpattern
+K}b/pf{pfprep setpattern O restore N}b/pfW{pfprep setpattern L restore N}b/ps{
+pfprep setpattern K restore N}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images 2.0 0
+/iw 0 |/ih 0 |/im_save 0 |/s 0 |/polarity 0 |/smoothflag 0 |/mystring 0 |/bpc
+0 |/setup1asciiproc{[currentfile mystring/readhexstring cvx/! cvx]cvx bind}b
+/setup1binaryproc{[currentfile mystring/readstring cvx/! cvx]cvx bind}b
+/setup2asciiproc{currentfile/ASCII85Decode filter/RunLengthDecode filter}b
+/setup2binaryproc{currentfile/RunLengthDecode filter}b/mycolorspace{colspABC}|
+/myimagedict{/myimagedict 10 dict | myimagedict @ `/ImageType 1 |
+/MultipleDataSource F | E}b/imageprocarray[/setup1binaryproc/setup1asciiproc
+/setup2binaryproc/setup2asciiproc]|/L2Polarity{{[1 0]}{[0 1]}?}b/Q{/im_save
+save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |/smoothflag ~ |
+snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |/iw ~ | 1 sg fx
+rf}b/X{/im_save save | imageprocarray ~ get/s ~ , | L2Polarity/polarity ~ |
+/smoothflag ~ | snap +/dx 2 ^ |/dy 1 ^ | +S/mystring ~ string |/bpc ~ |/ih ~ |
+/iw ~ |}b/Z{im_save restore}b/Y{sgco myimagedict @ `/Width iw |/Height ih |
+/Decode polarity |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |/BitsPerComponent
+1 |/Interpolate smoothflag | E imagemask}b
+%%EndResource
+%%BeginResource: file Adobe_Win_BW_Images_L1 2.0 0
+L2? not g{/setup2asciiproc{[/Level2ImagesError , aload ! T FatalErrorIf}b
+/setup2binaryproc/setup2asciiproc , |/L2Polarity{}|/Y{sgco iw ih polarity[iw 0
+0 ih 0 0]s imagemask}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L1 2.0 0
+L2? not g{/testsystemdict{where{systemdict eq{T}{F}?}{F}?}b/c 1 |/colorimage
+where{! T}{F}?{/c 0 statusdict `/processcolors where{! ! processcolors}{
+/deviceinfo where{! deviceinfo/Colors known{!{deviceinfo/Colors get}}if}if}? E
+| c 0 ne{/colorimage testsystemdict/setcolortransfer testsystemdict
+/currentcolortransfer testsystemdict/currentcmykcolor testsystemdict and and
+and not{/c 0 |}if}if}if c @ 1 ne ~ @ 3 ne ~ 4 ne and and{/c 0 |}if c 1 eq g{
+/expandbw{expandfactor mul round cvi bwclut ~ get 255 V}b/doclutimage{!/bwclut
+~ | bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/expandfactor ~ |[/expandbw ,/exec , @
+currenttransfer ~]cvx bind settransfer iw ih bpc[iw 0 0 ih 0 0]s image}b}e c @
+3 eq ~ 4 eq or g{/nullproc{{}}|/concatutil{/exec , 7 -1 $/exec ,}b/defsubclut{
+1 add getinterval |}b/spconcattransfer{/Dclut ~ |/Cclut ~ |/Bclut ~ |/Aclut ~
+|/ncompute ~ , | currentcolortransfer[{Aclut ncompute}concatutil]cvx[{Bclut
+ncompute}concatutil]cvx[{Cclut ncompute}concatutil]cvx[{Dclut ncompute}
+concatutil]cvx setcolortransfer}b/setuprgbcluts{/bit3x rgbclut length 3 sub |
+/bit1x bit3x 3 idiv |/rclut rgbclut |/gclut rclut 1 bit3x defsubclut/bclut
+rclut 2 bit3x defsubclut}b}e c 3 eq g{/3compute{~ bit3x mul round cvi get 255
+V}b/doclutimage{/rgbclut ~ | ! setuprgbcluts/3compute rclut gclut bclut @
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @]cvx nullproc nullproc
+T 3 colorimage}b}e c 4 eq g{/ftoint{1 ~ sub 255 mul round cvi}b/stuffclut{
+cmykindex 3 -1 $ put}b/4compute{~ bit4x mul round cvi get 255 V}b
+/invalidcolortable? T |/computecmykclut{setuprgbcluts/bit4x rgbclut length 3
+idiv 4 mul 4 sub |/cmykclut bit4x 4 add string |/cclut cmykclut |/mclut cclut
+1 bit4x defsubclut/yclut cclut 2 bit4x defsubclut/kclut cclut 3 bit4x
+defsubclut/cmykindex 0 | 0 1 bit1x{@/cmykindex ~ bit1x ~ sub 4 mul | 3 mul @
+rclut ~ get 255 V ~ @ gclut ~ get 255 V ~ bclut ~ get 255 V setrgbcolor
+currentcmykcolor ftoint kclut stuffclut ftoint yclut stuffclut ftoint mclut
+stuffclut ftoint cclut stuffclut}for}b/doclutimage{/rgbclut ~ | !
+invalidcolortable?{computecmykclut}if/4compute cclut mclut yclut kclut
+spconcattransfer iw ih bpc[iw 0 0 ih 0 0][s/exec ,/@ , @ @]cvx nullproc
+nullproc nullproc T 4 colorimage}b}e c 0 eq g{/a{3 mul 3 getinterval
+putinterval ~ 3 add ~ 3 copy}b/8lookup/a , |/4lookup{/byte 1 ^ | -4 bitshift a
+byte 15 and a}b/2lookup{/byte 1 ^ | -6 bitshift a byte -4 bitshift 3 and a
+byte -2 bitshift 3 and a byte 3 and a}b/colorexpand{mystringexp 0 rgbclut 3
+copy 7 -1 $/mylookup , forall ! ! ! ! ! 0 iw 3 mul getinterval}b
+/createexpandstr{/mystringexp ~ mystring length mul string |}b/doclutimage{
+/rgbclut ~ | !/mylookup bpc 8 eq{3 createexpandstr/8lookup}{bpc 4 eq{6
+createexpandstr/4lookup}{12 createexpandstr/2lookup}?}? , | iw ih 8[iw 0 0 ih
+0 0][s/exec ,/colorexpand ,/exec ,]cvx F 3 colorimage}b}e/colorimage where{! T
+}{F}? g{/do24image{iw ih 8[iw 0 0 ih 0 0]s F 3 colorimage}b}DefIf_El{
+/rgbtogray{/str ~ |/len str length |/smlen len 3 idiv |/rstr str |/gstr str 1
+len 1 sub getinterval |/bstr str 2 len 2 sub getinterval | str @ 0 1 smlen 1
+sub{@ 3 mul rstr 1 ^ get 0.3 mul gstr 2 ^ get 0.59 mul add bstr 3 -1 $ get
+0.11 mul add round cvi put @}for ! 0 smlen getinterval}b/do24image{iw ih 8[iw
+0 0 ih 0 0][s/exec ,/rgbtogray ,/exec ,]cvx bind image}b}e/doNimage{bpc 24 eq{
+do24image}{iw ih bpc[iw 0 0 ih 0 0]s image}?}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Co_Images_L2 2.0 0
+L2? g{/doclutimage{/rgbclut ~ | ! bpc @ 8 eq{! 255}{4 eq{15}{3}?}?/hival ~ |[
+/Indexed colspABC hival rgbclut]setcolorspace myimagedict @ `/Width iw |
+/Height ih |/Decode[0 hival]|/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc |/Interpolate smoothflag | E image}b/doNimage{bpc 24 eq{
+colspABC}{colspA}? setcolorspace myimagedict @ `/Width iw |/Height ih |/Decode
+bpc 24 eq{[0 1 0 1 0 1]}{[0 1]}? |/ImageMatrix[iw 0 0 ih 0 0]|/DataSource s |
+/BitsPerComponent bpc 24 eq{8}{bpc}? |/Interpolate smoothflag | E image}b}e
+%%EndResource
+%%BeginResource: file Adobe_Win_Type3_Hdr 2.0 0
+/GreNewFont{10 dict @ 3 1 $ | @ ` 4 1 $/FontType 3 |/FontMatrix ~ |/FontBBox ~
+|/Encoding 256 array | 0 1 255{Encoding ~/.notdef put}for/CharProcs 256 dict |
+CharProcs/.notdef{}put/Metrics 256 dict | Metrics/.notdef 3 -1 $ put/BuildChar
+{/char ~ |/fontdict ~ |/charname fontdict/Encoding get char get | fontdict
+/Metrics get charname get aload ! setcachedevice fontdict ` Encoding char get
+CharProcs ~ get E exec}| E definefont !}|/AddChar{` Encoding 3 1 $ put
+CharProcs 3 1 $ put Metrics 3 1 $ put E}|
+%%EndResource
+%%BeginResource: file Adobe_Win_Type1_Hdr 2.0 0
+/FEbuf 2 string |/FEglyph(G  )|/FE{1 ~{@ 16 FEbuf cvrs FEglyph ~ 1 ~
+putinterval 1 ^ ~ FEglyph cvn put}for}bind |/Type1Hdr{11 dict `/FontName ~ |
+/PaintType ~ |/FontType 1 |/FontMatrix[1 3 ^ V 0 0 1 6 ^ V 0 0]| !/Encoding
+256 array 0 1 255{1 ^ ~/.notdef put}for 3 ^ 3 ^ FE | ! !/FontBBox{0 0 0 0}| &
+E currentfile eexec}bind |
+%%EndResource
+%%BeginResource: file Adobe_Win_Compat 2.0 0
+userdict/Adobe_Win_Compat 12 dict dup begin/CB{pop pop pop pop}bind def/B{pop
+pop pop pop}bind def/bd{bind def}bind def/ld{load def}bd/SS{/pagesave save def
+}bind def/RS{pagesave restore}bind def/ANSIVec[0/grave 1/acute 2/circumflex 3
+/tilde 4/macron 5/breve 6/dotaccent 7/dieresis 8/ring 9/cedilla 10
+/hungarumlaut 11/ogonek 12/caron 13/dotlessi 39/quotesingle 96/grave 124/bar
+130/quotesinglbase 131/florin 132/quotedblbase 133/ellipsis 134/dagger 135
+/daggerdbl 136/circumflex 137/perthousand 138/Scaron 139/guilsinglleft 140/OE
+145/quoteleft 146/quoteright 147/quotedblleft 148/quotedblright 149/bullet 150
+/endash 151/emdash 152/tilde 153/trademark 154/scaron 155/guilsinglright 156
+/oe 159/Ydieresis 160/space 161/exclamdown 164/currency 165/yen 166/brokenbar
+167/section 168/dieresis 169/copyright 170/ordfeminine 171/guillemotleft 172
+/logicalnot 173/hyphen 174/registered 175/macron 176/degree 177/plusminus 178
+/twosuperior 179/threesuperior 180/acute 181/mu 182/paragraph 183
+/periodcentered 184/cedilla 185/onesuperior 186/ordmasculine 187
+/guillemotright 188/onequarter 189/onehalf 190/threequarters 191/questiondown
+192/Agrave 193/Aacute 194/Acircumflex 195/Atilde 196/Adieresis 197/Aring 198
+/AE 199/Ccedilla 200/Egrave 201/Eacute 202/Ecircumflex 203/Edieresis 204
+/Igrave 205/Iacute 206/Icircumflex 207/Idieresis 208/Eth 209/Ntilde 210/Ograve
+211/Oacute 212/Ocircumflex 213/Otilde 214/Odieresis 215/multiply 216/Oslash
+217/Ugrave 218/Uacute 219/Ucircumflex 220/Udieresis 221/Yacute 222/Thorn 223
+/germandbls 224/agrave 225/aacute 226/acircumflex 227/atilde 228/adieresis 229
+/aring 230/ae 231/ccedilla 232/egrave 233/eacute 234/ecircumflex 235/edieresis
+236/igrave 237/iacute 238/icircumflex 239/idieresis 240/eth 241/ntilde 242
+/ograve 243/oacute 244/ocircumflex 245/otilde 246/odieresis 247/divide 248
+/oslash 249/ugrave 250/uacute 251/ucircumflex 252/udieresis 253/yacute 254
+/thorn 255/ydieresis]def currentdict{dup type/operatortype eq{[exch]cvx def}{
+pop pop}ifelse}forall/initialize{currentdict exch begin begin}bind def
+/terminate{pop end end}bind def/suspend/terminate load def/resume/initialize
+load def end put
+%%EndResource
+end /ProcSet defineresource pop
+%%EndResource
+%%EndProlog
+
+%%BeginSetup 
+Adobe_Win_Compat dup /initialize get exec
+[ 1.000 0 0 1.000 0 0 ] false /Adobe_Win_Driver /ProcSet findresource dup /initialize get exec
+[{0 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/JobTimeout  4 -1 roll put setuserparams}{statusdict/setjobtimeout get exec}ifelse 
+} stopped cleartomark
+[{120 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/WaitTimeout 4 -1 roll put setuserparams}{statusdict/waittimeout 3 -1 roll put}ifelse 
+} stopped cleartomark
+[{1 
+/languagelevel where{pop languagelevel}{1}ifelse 2 ge{1 dict dup/NumCopies 4
+-1 roll put setpagedevice}{userdict/#copies 3 -1 roll put}ifelse
+
+} stopped cleartomark
+[{
+%%BeginFeature: *ManualFeed False
+statusdict /manualfeed false put
+%%EndFeature
+} stopped cleartomark
+[{
+%%BeginFeature: *PageSize Letter
+letter
+%%EndFeature
+} stopped cleartomark
+1 setlinecap 1 setlinejoin 
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+%%EndSetup
+
+%%Page: 1 1
+%%BeginPageSetup
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.947 
+T 
+/Helvetica-Bold
+mF 
+/F0_75
+F0
+75 
+xF 
+F0_75
+Ji 
+486 191 M 
+-0.025 0 (OBJECT CLASSES, META CLASSES AND)A 
+766 284 M 
+-0.068 0 (METHOD RESOLUTION IN)A 
+968 377 M 
+-0.025 0 (OBJECT REXX)A 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+1016 668 M 
+0.182 0 (Rony G. Flatscher)A 
+%%IncludeFont: Helvetica
+/F3
+0.940 
+T 
+/Helvetica
+mF 
+/F3_50
+F3
+50 
+xF 
+F3_50
+Ji 
+633 761 M 
+0.158 0 (Department of Management and Information Systems)A 
+556 854 M 
+0.074 0 (Vienna University of Economics and Business Administration)A 
+456 948 M 
+0.275 0 (\2047)A 
+/F3_29
+F3
+29 
+xF 
+F3_29
+Ji 
+501 947 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+525 948 M 
+0.113 0 ( International Rexx Symposium\223, Austin/Texas, May 13)A 
+F3_29
+Ji 
+1748 947 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+1771 948 M 
+0.250 0 (-15)A 
+F3_29
+Ji 
+1844 947 M 
+-0.093 0 (th)A 
+F3_50
+Ji 
+1868 948 M 
+0.166 0 (, 1996)A 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+1073 1247 M 
+0.007 0 (ABSTRACT)A 
+F3_50
+Ji 
+343 1400 M 
+4.000 0 32 0.206 0 (Object Rexx allows for defining Classes in a wide variety of ways. There are single)D 
+225 1493 M 
+22.000 0 32 0.230 0 (and multiple inheritance available as well as the possibility to define one\222s own)D 
+225 1587 M 
+0.116 0 (metaclasses to be used in the process of defining class hierarchies.)A 
+343 1727 M 
+18.000 0 32 0.105 0 (Definition of classes is possible via hardcoded \204directives\223 or at runtime, fully)D 
+225 1820 M 
+9.000 0 32 0.247 0 (dynamically! In addition one can define methods, which are not attached to a specific)D 
+225 1913 M 
+2.000 0 32 0.242 0 (class, either hardcoded via directives or dynamically at runtime. These \204floating\223 methods)D 
+225 2006 M 
+0.112 0 (can be attached to individual objects and if so, define their own object scope.)A 
+343 2146 M 
+0.140 0 (Classes and methods offer interesting properties which are worthwile to get explored,)A 
+225 2239 M 
+4.000 0 32 0.141 0 (including the ability of Object Rexx to define classes capable of interacting with SOM- or)D 
+225 2333 M 
+0.080 0 (DSOM-objects.)A 
+/F3_42
+F3
+42 
+xF 
+F3_42
+Ji 
+468 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1878 3050 M 
+-0.352 0 (1)A 
+1901 3050 M 
+0.014 0 (-)A 
+1915 3050 M 
+-0.352 0 (23)A 
+1961 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 2 2
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+161 213 M 
+-0.248 0 (1)A 
+279 213 M 
+-0.013 0 (CLASSIFICATION TREE, INSTANTIATION AND INHERITANCE)A 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+279 367 M 
+4.000 0 32 0.212 0 (Derived from classification trees in biology software technology adopted the idea of)D 
+161 460 M 
+13.000 0 32 0.309 0 (organizing \204chunks of code\223 in form of a tree. Code and the data to go with it get)D 
+161 553 M 
+7.000 0 32 0.125 0 (encapsulated and are called classes, which get inserted at the appropriate place in the)D 
+161 646 M 
+0.082 0 (classification tree.)A 
+279 787 M 
+1.000 0 32 0.230 0 (In a true object oriented environment every class inherits all parent classes up to the)D 
+161 880 M 
+2.000 0 32 0.231 0 (root, which is usually called the class \204)D 
+%%IncludeFont: Courier
+/F4
+0.848 
+T 
+/Courier
+mF 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+1032 888 M 
+2.000 0 32 0.446 0 (Object)D 
+F2_50
+Ji 
+1200 880 M 
+2.000 0 32 0.360 0 (\223. The class \204)D 
+F4_46
+Ji 
+1500 888 M 
+2.000 0 32 0.446 0 (Object)D 
+F2_50
+Ji 
+1668 880 M 
+2.000 0 32 0.325 0 (\223, being the root of the)D 
+161 973 M 
+10.000 0 32 0.144 0 (classification tree, of course has no superclass. The Object Rexx classification tree is)D 
+161 1066 M 
+0.119 0 (shown in figure 1.)A 
+: 0 0 2174 3232 rc /F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+170 1199 M 
+0.238 0 (Object ........................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1249 M 
+0.238 0 (    Alarm ........................................ The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1298 M 
+0.238 0 (    Array ........................................ The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1348 M 
+0.238 0 (    )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier-Oblique
+/F7
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F7_38
+F7
+38 
+xF 
+F7_38
+Ji 
+262 1350 M 
+0.200 0 (Class ........................................ The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1400 M 
+0.238 0 (    Directory .................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1449 M 
+0.238 0 (    DSOMServerProxy .............................. The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1499 M 
+0.238 0 (    Envelope ..................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1548 M 
+0.238 0 (    List ......................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1598 M 
+0.238 0 (    Message ...................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1648 M 
+0.238 0 (    Method ....................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1697 M 
+0.238 0 (    Monitor ...................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1747 M 
+0.238 0 (    )A 
+; : 0 0 2174 3232 rc F7_38
+Ji 
+262 1749 M 
+0.200 0 (M_SOMProxy ................................... The M_SOMProxy class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1798 M 
+0.238 0 (    Queue ........................................ The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1848 M 
+0.238 0 (    Relation ..................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1898 M 
+0.238 0 (        Bag ...................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1947 M 
+0.238 0 (    RX_QUEUE ..................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1997 M 
+0.238 0 (    sender ....................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2046 M 
+0.238 0 (    server ....................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2096 M 
+0.238 0 (    SOMProxy ..................................... The M_SOMProxy class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2146 M 
+0.238 0 (    Stem ......................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2195 M 
+0.238 0 (    Stream ....................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2245 M 
+0.238 0 (    Stream_Supplier .............................. The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2294 M 
+0.238 0 (    String ....................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2344 M 
+0.238 0 (    Supplier ..................................... The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2393 M 
+0.238 0 (    Table ........................................ The Class class)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2443 M 
+0.238 0 (        Set ...................................... The Class class)A 
+; 
+166 2536 N M 2008 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc 170 2542 M 
+0.109 0 (Figure 1: Object Rexx' classification tree)A 
+; 
+165 1194 N M 2009 2 rr : 0 sg O ; 
+165 1242 N M 2009 2 rr : 0 sg O ; 
+165 1242 N M 2009 2 rr : 0 sg O ; 
+165 1292 N M 2009 2 rr : 0 sg O ; 
+165 1292 N M 2009 2 rr : 0 sg O ; 
+165 1341 N M 2009 2 rr : 0 sg O ; 
+165 1341 N M 2009 2 rr : 0 sg O ; 
+165 1393 N M 2009 2 rr : 0 sg O ; 
+165 1393 N M 2009 2 rr : 0 sg O ; 
+165 1442 N M 2009 2 rr : 0 sg O ; 
+165 1442 N M 2009 2 rr : 0 sg O ; 
+165 1492 N M 2009 2 rr : 0 sg O ; 
+165 1492 N M 2009 2 rr : 0 sg O ; 
+165 1542 N M 2009 2 rr : 0 sg O ; 
+165 1542 N M 2009 2 rr : 0 sg O ; 
+165 1591 N M 2009 2 rr : 0 sg O ; 
+165 1591 N M 2009 2 rr : 0 sg O ; 
+165 1641 N M 2009 2 rr : 0 sg O ; 
+165 1641 N M 2009 2 rr : 0 sg O ; 
+165 1690 N M 2009 2 rr : 0 sg O ; 
+165 1690 N M 2009 2 rr : 0 sg O ; 
+165 1740 N M 2009 2 rr : 0 sg O ; 
+165 1740 N M 2009 2 rr : 0 sg O ; 
+165 1792 N M 2009 2 rr : 0 sg O ; 
+165 1792 N M 2009 2 rr : 0 sg O ; 
+165 1841 N M 2009 2 rr : 0 sg O ; 
+165 1841 N M 2009 2 rr : 0 sg O ; 
+165 1891 N M 2009 2 rr : 0 sg O ; 
+165 1891 N M 2009 2 rr : 0 sg O ; 
+165 1940 N M 2009 2 rr : 0 sg O ; 
+165 1940 N M 2009 2 rr : 0 sg O ; 
+165 1990 N M 2009 2 rr : 0 sg O ; 
+165 1990 N M 2009 2 rr : 0 sg O ; 
+165 2040 N M 2009 2 rr : 0 sg O ; 
+165 2040 N M 2009 2 rr : 0 sg O ; 
+165 2089 N M 2009 2 rr : 0 sg O ; 
+165 2089 N M 2009 2 rr : 0 sg O ; 
+165 2139 N M 2009 2 rr : 0 sg O ; 
+165 2139 N M 2009 2 rr : 0 sg O ; 
+165 2188 N M 2009 2 rr : 0 sg O ; 
+165 2188 N M 2009 2 rr : 0 sg O ; 
+165 2238 N M 2009 2 rr : 0 sg O ; 
+165 2238 N M 2009 2 rr : 0 sg O ; 
+165 2287 N M 2009 2 rr : 0 sg O ; 
+165 2287 N M 2009 2 rr : 0 sg O ; 
+165 2337 N M 2009 2 rr : 0 sg O ; 
+165 2337 N M 2009 2 rr : 0 sg O ; 
+165 2387 N M 2009 2 rr : 0 sg O ; 
+165 2387 N M 2009 2 rr : 0 sg O ; 
+165 2436 N M 2009 2 rr : 0 sg O ; 
+165 2436 N M 2009 2 rr : 0 sg O ; 
+165 2486 N M 2009 2 rr : 0 sg O ; 
+165 2486 N M 2009 2 rr : 0 sg O ; 
+165 2535 N M 2009 2 rr : 0 sg O ; 
+165 2535 N M 2009 2 rr : 0 sg O ; 
+165 2609 N M 2009 2 rr : 0 sg O ; 
+165 1194 N M 2 1417 rr : 0 sg O ; 
+2171 1194 N M 2 1417 rr : 0 sg O ; 279 2679 M 
+2.000 0 32 0.206 0 (A class may be )D 
+%%IncludeFont: Helvetica-Oblique
+/F9
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F9_50
+F9
+50 
+xF 
+F9_50
+Ji 
+643 2679 M 
+2.000 0 32 0.107 0 (instantiated )D 
+F2_50
+Ji 
+916 2679 M 
+2.000 0 32 0.164 0 (which means that an individual \204object\223 is created which)D 
+161 2772 M 
+1.000 0 32 0.292 0 (uses the \204infrastructure\223 laid out in the class \(code and data\), i.e. it is able to store data in)D 
+161 2865 M 
+16.000 0 32 0.252 0 (\204object variables\223 and use the functions \(called \204methods\223\) defined in the class for)D 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+455 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1865 3050 M 
+-0.352 0 (2)A 
+1888 3050 M 
+0.014 0 (-)A 
+1901 3050 M 
+-0.352 0 (23)A 
+1948 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 3 3
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 207 M 
+2.000 0 32 0.213 0 (manipulating the object variables. Each object is uniquely identified and insulated from all)D 
+225 300 M 
+5.000 0 32 0.189 0 (other objects, so it becomes even possible to instantiate several, individual objects from)D 
+225 394 M 
+0.150 0 (the )A 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+309 394 M 
+0.187 0 (same)A 
+F0_50
+Ji 
+432 394 M 
+0.042 0 ( class.)A 
+343 534 M 
+10.000 0 32 0.188 0 (Methods are invoked by sending objects messages which carry the name of the)D 
+225 627 M 
+10.000 0 32 0.215 0 (desired methods. The object invokes the appropriate method defined with the class it)D 
+225 720 M 
+2.000 0 32 0.211 0 (belongs to. If a method cannot be found within the class the object was instantiated from,)D 
+225 813 M 
+1.000 0 32 0.138 0 (then the search for an appropriate method proceeds sequentially thru those classes which)D 
+225 906 M 
+2.000 0 32 0.141 0 (are on the route to the root \(these classes are called \204superclasses\223\). The first superclass)D 
+225 999 M 
+0.178 0 (to contain the searched method is then used to carry out the message. Methods defined in)A 
+225 1093 M 
+0.128 0 (superclasses are therefore said to be \204inherited\223 by all subclasses.)A 
+343 1233 M 
+1.000 0 32 0.137 0 (If the classes are laid out \204well\223 an extraordinary amount of reusage can be achieved)D 
+225 1326 M 
+6.000 0 32 0.241 0 (by grouping tightly coupled functionality into separate classes. If the need of enhancing)D 
+225 1419 M 
+9.000 0 32 0.200 0 (the functionality of a class arises this may be done by subclassing it and adding new)D 
+225 1512 M 
+4.000 0 32 0.143 0 (methods and/or intercepting methods which are implemented in the superclass. Methods)D 
+225 1605 M 
+8.000 0 32 0.175 0 (of a subclass may invoke any method in its superclass\(es\) by sending the appropriate)D 
+225 1698 M 
+1.000 0 32 0.223 0 (message, possibly giving a class-selector to determine which class should be used as the)D 
+225 1792 M 
+0.143 0 (starting point for the method resolution.)A 
+343 1932 M 
+6.000 0 32 0.194 0 (Subclasses are sometimes referred to as \204specialisations\223 of their own superclass.)D 
+225 2025 M 
+17.000 0 32 0.276 0 (By the same token a superclass may be called as a \204generalisation\223 of all of its)D 
+225 2118 M 
+0.072 0 (subclasses.)A 
+343 2258 M 
+5.000 0 32 0.230 0 (Figure 2 demonstrates a little Object Rexx program which defines the class \204)D 
+%%IncludeFont: Courier
+/F4
+0.848 
+T 
+/Courier
+mF 
+/F4_46
+F4
+46 
+xF 
+F4_46
+Ji 
+2110 2266 M 
+5.000 0 32 0.446 0 (Test)D 
+F0_50
+Ji 
+2222 2258 M 
+5.000 0 32 0.350 0 (\223)D 
+225 2351 M 
+1.000 0 32 0.212 0 (with a single method named \204)D 
+F4_46
+Ji 
+889 2359 M 
+1.000 0 32 0.446 0 (HI)D 
+F0_50
+Ji 
+945 2351 M 
+1.000 0 32 0.209 0 (\223 which in turn gets activated if an instance \(object\) of this)D 
+225 2444 M 
+0.155 0 (class receives the message \204)A 
+F4_46
+Ji 
+874 2452 M 
+0.446 0 (HI)A 
+F0_50
+Ji 
+930 2444 M 
+0.217 0 (\223. The class \204)A 
+F4_46
+Ji 
+1222 2452 M 
+0.446 0 (Test)A 
+F0_50
+Ji 
+1334 2444 M 
+0.167 0 (\223 is a subclass of the root class \204)A 
+F4_46
+Ji 
+2054 2452 M 
+0.446 0 (Object)A 
+F0_50
+Ji 
+2222 2444 M 
+0.350 0 (\223)A 
+225 2538 M 
+0.140 0 (and therefore inherits all of its methods. One of the methods defined with class \204)A 
+F4_46
+Ji 
+2004 2546 M 
+0.446 0 (Object)A 
+F0_50
+Ji 
+2172 2538 M 
+0.087 0 (\223 is)A 
+225 2631 M 
+10.000 0 32 0.106 0 (called \204)D 
+F4_46
+Ji 
+397 2639 M 
+10.000 0 32 0.446 0 (DEFAULTNAME)D 
+F0_50
+Ji 
+705 2631 M 
+10.000 0 32 0.233 0 (\223 and returns a human readable string describing the type of the)D 
+225 2724 M 
+27.000 0 32 0.160 0 (object. Because of this an instance of class \204)D 
+F4_46
+Ji 
+1435 2732 M 
+27.000 0 32 0.446 0 (Test)D 
+F0_50
+Ji 
+1547 2724 M 
+27.000 0 32 0.206 0 (\223 understands the message)D 
+225 2817 M 
+6.000 0 32 0.350 0 (\204)D 
+F4_46
+Ji 
+242 2825 M 
+6.000 0 32 0.446 0 (DEFAULTNAME)D 
+F0_50
+Ji 
+550 2817 M 
+6.000 0 32 0.157 0 (\223 sent to it by forwarding it to its superclass, where it is defined. Figure 3)D 
+225 2910 M 
+0.123 0 (shows the output.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+468 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1878 3050 M 
+-0.352 0 (3)A 
+1901 3050 M 
+0.014 0 (-)A 
+1915 3050 M 
+-0.352 0 (23)A 
+1961 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 4 4
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2175 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 201 M 
+0.238 0 (/* test.cmd */)A 
+; : 0 0 2175 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 312 M 
+0.238 0 (anObject = .Test ~ )A 
+; : 0 0 2175 3232 rc F0_38
+Ji 
+607 312 M 
+0.238 0 (new  )A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+722 312 M 
+0.238 0 (/* create an instance \(object\)  */)A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+170 424 M 
+0.238 0 (/* send it messages & display result    */)A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+170 480 M 
+0.238 0 (SAY anObject ~ )A 
+; : 0 0 2175 3232 rc F0_38
+Ji 
+515 480 M 
+0.238 0 (hi               )A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+906 480 M 
+0.238 0 (/* send it "HI"         */)A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+170 536 M 
+0.238 0 (SAY anObject ~ )A 
+; : 0 0 2175 3232 rc F0_38
+Ji 
+515 536 M 
+0.238 0 (defaultname      )A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+906 536 M 
+0.238 0 (/* send it "DEFAULTNAME"*/)A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+170 647 M 
+0.238 0 (/* ----------------- class with methods --------------- */)A 
+; 
+166 694 N M 2001 60 rr : 0.937 sg O ; : 0 0 2175 3232 rc F0_38
+Ji 
+170 703 M 
+0.238 0 (:: CLASS Test   )A 
+; : 0 0 2175 3232 rc %%IncludeFont: Courier-BoldOblique
+/F4
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+538 706 M 
+0.200 0 (SUBCLASS )A 
+; : 0 0 2175 3232 rc F0_38
+Ji 
+745 703 M 
+0.238 0 (Object)A 
+; : 0 0 2175 3232 rc F0_38
+Ji 
+170 818 M 
+0.238 0 (:: METHOD hi)A 
+; : 0 0 2175 3232 rc F2_38
+Ji 
+170 873 M 
+0.238 0 (   RETURN "hiii there, here we are !")A 
+; 
+166 976 N M 2001 81 rr : 0.882 sg O ; : 0 0 2175 3232 rc %%IncludeFont: Helvetica
+/F6
+0.940 
+T 
+/Helvetica
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+170 985 M 
+0.131 0 (Figure 2: Defining a class, use inherited method from superclass "Object" too)A 
+; 
+165 195 N M 2002 2 rr : 0 sg O ; 
+165 246 N M 2002 2 rr : 0 sg O ; 
+165 246 N M 2002 2 rr : 0 sg O ; 
+165 302 N M 2002 2 rr : 0 sg O ; 
+165 302 N M 2002 2 rr : 0 sg O ; 
+165 358 N M 2002 2 rr : 0 sg O ; 
+165 358 N M 2002 2 rr : 0 sg O ; 
+165 414 N M 2002 2 rr : 0 sg O ; 
+165 414 N M 2002 2 rr : 0 sg O ; 
+165 470 N M 2002 2 rr : 0 sg O ; 
+165 470 N M 2002 2 rr : 0 sg O ; 
+165 526 N M 2002 2 rr : 0 sg O ; 
+165 526 N M 2002 2 rr : 0 sg O ; 
+165 581 N M 2002 2 rr : 0 sg O ; 
+165 581 N M 2002 2 rr : 0 sg O ; 
+165 637 N M 2002 2 rr : 0 sg O ; 
+165 637 N M 2002 2 rr : 0 sg O ; 
+165 693 N M 2002 2 rr : 0 sg O ; 
+165 693 N M 2002 2 rr : 0 sg O ; 
+165 752 N M 2002 2 rr : 0 sg O ; 
+165 752 N M 2002 2 rr : 0 sg O ; 
+165 808 N M 2002 2 rr : 0 sg O ; 
+165 808 N M 2002 2 rr : 0 sg O ; 
+165 864 N M 2002 2 rr : 0 sg O ; 
+165 864 N M 2002 2 rr : 0 sg O ; 
+165 919 N M 2002 2 rr : 0 sg O ; 
+165 919 N M 2002 2 rr : 0 sg O ; 
+165 975 N M 2002 2 rr : 0 sg O ; 
+165 975 N M 2002 2 rr : 0 sg O ; 
+165 1055 N M 2002 2 rr : 0 sg O ; 
+165 195 N M 2 862 rr : 0 sg O ; 
+2165 195 N M 2 862 rr : 0 sg O ; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1121 M 
+0.238 0 (hiii there, here we are !)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1171 M 
+0.238 0 (a TEST)A 
+; 
+166 1264 N M 2008 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc F6_50
+Ji 
+170 1270 M 
+0.138 0 (Figure 3: Defining a class, use inherited method from superclass "Object" too \(output\))A 
+; 
+165 1116 N M 2009 2 rr : 0 sg O ; 
+165 1263 N M 2009 2 rr : 0 sg O ; 
+165 1337 N M 2009 2 rr : 0 sg O ; 
+165 1116 N M 2 223 rr : 0 sg O ; 
+2171 1116 N M 2 223 rr : 0 sg O ; F6_50
+Ji 
+279 1407 M 
+4.000 0 32 0.164 0 (Methods defined for instances of a class are called \204instance methods\223, their object)D 
+161 1500 M 
+0.117 0 (variables are called \204instance object variables\223.)A 
+%%IncludeFont: Helvetica-Bold
+/F8
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F8_58
+F8
+58 
+xF 
+F8_58
+Ji 
+161 1670 M 
+-0.248 0 (2)A 
+279 1670 M 
+0.051 0 ( METACLASSES AND INHERITANCE)A 
+F6_50
+Ji 
+279 1823 M 
+6.000 0 32 0.155 0 (So far we have been able to define a sort of blueprint for the object variables and)D 
+161 1916 M 
+0.099 0 (methods for instances of any class in the Object Rexx classification tree.)A 
+F8_58
+Ji 
+161 2074 M 
+-0.248 0 (2)A 
+193 2074 M 
+-0.124 0 (.)A 
+209 2074 M 
+-0.248 0 (1)A 
+279 2074 M 
+-0.200 0 (Class Objects)A 
+F6_50
+Ji 
+279 2228 M 
+3.000 0 32 0.181 0 (As in Smalltalk Object Rexx adds the ability to interact with the )D 
+%%IncludeFont: Helvetica-Oblique
+/F10
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F10_50
+F10
+50 
+xF 
+F10_50
+Ji 
+1722 2228 M 
+3.000 0 32 0.042 0 (classes)D 
+F6_50
+Ji 
+1889 2228 M 
+3.000 0 32 0.195 0 ( themselves,)D 
+161 2321 M 
+30.000 0 32 0.110 0 (by making them accessible as )D 
+F10_50
+Ji 
+995 2321 M 
+30.000 0 32 0.083 0 (plain )D 
+F6_50
+Ji 
+1145 2321 M 
+30.000 0 32 0.115 0 (objects called \204class objects\223. For every)D 
+161 2414 M 
+13.000 0 32 0.175 0 (class-definition Object Rexx will create exactly )D 
+F10_50
+Ji 
+1284 2414 M 
+13.000 0 32 0.200 0 (one)D 
+F6_50
+Ji 
+1368 2414 M 
+13.000 0 32 0.272 0 ( instance of the class \204)D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1937 2422 M 
+13.000 0 32 0.446 0 (Class)D 
+F6_50
+Ji 
+2077 2414 M 
+13.000 0 32 0.412 0 (\223 by)D 
+161 2507 M 
+1.000 0 32 0.139 0 (default, hence the name \204class objects\223. In addition it is possible to define \204class methods\223)D 
+161 2600 M 
+0.112 0 (and \204class object variables\223 for every class object.)A 
+279 2741 M 
+3.000 0 32 0.244 0 (Thruout this paper and the Object Rexx documentation the term \204object\223 is used for)D 
+161 2834 M 
+5.000 0 32 0.213 0 (instances of any class. The term \204class object\223 is used for instances of the Object Rexx)D 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+455 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1865 3050 M 
+-0.352 0 (4)A 
+1888 3050 M 
+0.014 0 (-)A 
+1901 3050 M 
+-0.352 0 (23)A 
+1948 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 5 5
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 207 M 
+13.000 0 32 0.221 0 (class \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+384 215 M 
+13.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+524 207 M 
+13.000 0 32 0.225 0 (\223 only, which get automatically created by the runtime system as noted)D 
+225 300 M 
+0.150 0 (above.)A 
+343 441 M 
+0.168 0 (Any object may get access to its \204class object\223 by sending itself the message \204)A 
+F2_46
+Ji 
+2082 449 M 
+0.446 0 (CLASS)A 
+F0_50
+Ji 
+2222 441 M 
+0.350 0 (\223)A 
+225 534 M 
+8.000 0 32 0.101 0 (which is defined with the Object Rexx class \204)D 
+F2_46
+Ji 
+1280 542 M 
+8.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1448 534 M 
+8.000 0 32 0.116 0 (\223. This way )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1729 534 M 
+8.000 0 32 0.025 0 (all )D 
+F0_50
+Ji 
+1801 534 M 
+8.000 0 32 0.100 0 (objects instantiated)D 
+225 627 M 
+7.000 0 32 0.174 0 (from a certain class will get access to that very same class object! Another way to get)D 
+225 720 M 
+2.000 0 32 0.156 0 (access to a specific class object is via an environment symbol which is created by merely)D 
+225 813 M 
+6.000 0 32 0.261 0 (prepending the class name with a dot. E.g. \204)D 
+F2_46
+Ji 
+1260 821 M 
+6.000 0 32 0.446 0 (.array)D 
+F0_50
+Ji 
+1428 813 M 
+6.000 0 32 0.273 0 (\223 will return the class object for the)D 
+225 906 M 
+0.078 0 (class \204)A 
+F2_46
+Ji 
+370 914 M 
+0.446 0 (Array)A 
+F0_50
+Ji 
+510 906 M 
+0.225 0 (\223.)A 
+343 1047 M 
+13.000 0 32 0.207 0 (Once a reference is established to a class object any messages sent to it get)D 
+225 1140 M 
+1.000 0 32 0.236 0 (resolved in the usual way. That is to say, if a class object does not contain a method for a)D 
+225 1233 M 
+0.198 0 (message sent to it, the class objects of its superclasses will get searched for up to the root)A 
+225 1326 M 
+4.000 0 32 0.150 0 (of the classifcation tree, i.e. the object class for the class \204)D 
+F2_46
+Ji 
+1557 1334 M 
+4.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1725 1326 M 
+4.000 0 32 0.189 0 (\223. The interesting point)D 
+225 1419 M 
+8.000 0 32 0.105 0 (here is that the class object of class \204)D 
+F2_46
+Ji 
+1113 1427 M 
+8.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1281 1419 M 
+8.000 0 32 0.115 0 (\223 is an instance of the Object Rexx class)D 
+225 1512 M 
+5.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 1520 M 
+5.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+382 1512 M 
+5.000 0 32 0.234 0 (\223 itself, hence method resolution will )D 
+F4_50
+Ji 
+1227 1512 M 
+5.000 0 32 0.125 0 (continue)D 
+F0_50
+Ji 
+1417 1512 M 
+5.000 0 32 0.245 0 ( into the class methods of the class)D 
+225 1605 M 
+0.350 0 (\204)A 
+F2_46
+Ji 
+242 1613 M 
+0.446 0 (Class)A 
+F0_50
+Ji 
+382 1605 M 
+0.225 0 (\223!)A 
+343 1745 M 
+0.210 0 (With other words there exists a )A 
+F4_50
+Ji 
+1050 1745 M 
+0.133 0 (second)A 
+F0_50
+Ji 
+1212 1745 M 
+0.199 0 ( hierarchy tree specifically for the resolution of)A 
+F4_50
+Ji 
+225 1839 M 
+14.000 0 32 0.188 0 (class methods)D 
+F0_50
+Ji 
+561 1839 M 
+14.000 0 32 0.222 0 ( \(methods of class objects\) ending in the Object Rexx class \204)D 
+F2_46
+Ji 
+2068 1847 M 
+14.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+2208 1839 M 
+14.000 0 32 0.225 0 (\223.)D 
+225 1932 M 
+20.000 0 32 0.225 0 (\(Because \204)D 
+F2_46
+Ji 
+489 1940 M 
+20.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+629 1932 M 
+20.000 0 32 0.205 0 (\223 is a subclass of \204)D 
+F2_46
+Ji 
+1136 1940 M 
+20.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1304 1932 M 
+20.000 0 32 0.254 0 (\223 one more method resolution will be)D 
+225 2025 M 
+8.000 0 32 0.196 0 (undertaken, ultimately ending in the class object for \204)D 
+F2_46
+Ji 
+1467 2033 M 
+8.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1635 2025 M 
+8.000 0 32 0.225 0 (\223; so one may conclude a)D 
+225 2118 M 
+0.116 0 (circular relationship between the class objects for \204)A 
+F2_46
+Ji 
+1351 2126 M 
+0.446 0 (Object)A 
+F0_50
+Ji 
+1519 2118 M 
+0.214 0 (\223 and \204)A 
+F2_46
+Ji 
+1665 2126 M 
+0.446 0 (Class)A 
+F0_50
+Ji 
+1805 2118 M 
+0.266 0 (\223.\))A 
+343 2258 M 
+10.000 0 32 0.260 0 (The program in figure 4 exploits the concept of class object variables and class)D 
+225 2351 M 
+1.000 0 32 0.241 0 (methods. The class object variable \204)D 
+F2_46
+Ji 
+1039 2359 M 
+1.000 0 32 0.446 0 (myBabies)D 
+F0_50
+Ji 
+1263 2351 M 
+1.000 0 32 0.288 0 (\223 is an instance of class \204)D 
+F2_46
+Ji 
+1827 2359 M 
+1.000 0 32 0.446 0 (Set)D 
+F0_50
+Ji 
+1911 2351 M 
+1.000 0 32 0.360 0 (\223 used to store)D 
+225 2444 M 
+6.000 0 32 0.247 0 (all instances of class \204)D 
+F2_46
+Ji 
+744 2452 M 
+6.000 0 32 0.446 0 (someTest)D 
+F0_50
+Ji 
+968 2444 M 
+6.000 0 32 0.271 0 (\223 within the class object. The class method \204)D 
+F2_46
+Ji 
+1998 2452 M 
+6.000 0 32 0.446 0 (addToSet)D 
+F0_50
+Ji 
+2222 2444 M 
+6.000 0 32 0.350 0 (\223)D 
+225 2538 M 
+7.000 0 32 0.194 0 (adds the object it gets to \204)D 
+F2_46
+Ji 
+845 2546 M 
+7.000 0 32 0.446 0 (myBabies)D 
+F0_50
+Ji 
+1069 2538 M 
+7.000 0 32 0.177 0 (\223, the attribute class method \204)D 
+F2_46
+Ji 
+1757 2546 M 
+7.000 0 32 0.446 0 (myBabies)D 
+F0_50
+Ji 
+1981 2538 M 
+7.000 0 32 0.191 0 (\223 allows for)D 
+225 2631 M 
+9.000 0 32 0.185 0 (setting and retrieving the class variable object itself. The instance method \204)D 
+F2_46
+Ji 
+1992 2639 M 
+9.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+2104 2631 M 
+9.000 0 32 0.158 0 (\223 gets)D 
+225 2724 M 
+2.000 0 32 0.131 0 (called whenever a \204)D 
+F2_46
+Ji 
+667 2732 M 
+2.000 0 32 0.446 0 (NEW)D 
+F0_50
+Ji 
+751 2724 M 
+2.000 0 32 0.189 0 (\223 message is sent for creating an object. The \204)D 
+F2_46
+Ji 
+1795 2732 M 
+2.000 0 32 0.446 0 (someTest)D 
+F0_50
+Ji 
+2019 2724 M 
+2.000 0 32 0.125 0 (\223 instance)D 
+225 2817 M 
+11.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 2825 M 
+11.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+354 2817 M 
+11.000 0 32 0.197 0 (\223 method will establish access to its class object \(via sending itself the \204)D 
+F2_46
+Ji 
+2082 2825 M 
+11.000 0 32 0.446 0 (CLASS)D 
+F0_50
+Ji 
+2222 2817 M 
+11.000 0 32 0.350 0 (\223)D 
+225 2910 M 
+19.000 0 32 0.243 0 (message\) and send the class object the message \204)D 
+F2_46
+Ji 
+1517 2918 M 
+19.000 0 32 0.446 0 (addToSet)D 
+F0_50
+Ji 
+1741 2910 M 
+19.000 0 32 0.245 0 (\223 using itself as the)D 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+468 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1878 3050 M 
+-0.352 0 (5)A 
+1901 3050 M 
+0.014 0 (-)A 
+1915 3050 M 
+-0.352 0 (23)A 
+1961 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 6 6
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 207 M 
+6.000 0 32 0.209 0 (argument. Finally in the initialisation part of that program three instances of \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1934 215 M 
+6.000 0 32 0.446 0 (someTest)D 
+F0_50
+Ji 
+2158 207 M 
+6.000 0 32 0.350 0 (\223)D 
+161 300 M 
+0.210 0 (are created by using cascading messages \(with two twiddles\) and then retrieving the class)A 
+161 394 M 
+16.000 0 32 0.182 0 (object variable \204)D 
+F2_46
+Ji 
+549 402 M 
+16.000 0 32 0.446 0 (myBabies)D 
+F0_50
+Ji 
+773 394 M 
+16.000 0 32 0.236 0 (\223 and sending it the \204)D 
+F2_46
+Ji 
+1314 402 M 
+16.000 0 32 0.446 0 (Set)D 
+F0_50
+Ji 
+1398 394 M 
+16.000 0 32 0.209 0 (\223-message \204)D 
+F2_46
+Ji 
+1683 402 M 
+16.000 0 32 0.446 0 (ITEMS)D 
+F0_50
+Ji 
+1823 394 M 
+16.000 0 32 0.256 0 (\223 to return the)D 
+161 487 M 
+0.137 0 (number of items presently in the set.)A 
+: 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+170 620 M 
+0.238 0 (/* SomeTest.CMD */)A 
+; : 0 0 2174 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 719 M 
+0.238 0 (.SomeTest )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+400 719 M 
+0.238 0 (~~ new ~~ new ~~ new)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+860 719 M 
+0.238 0 (  /* create 3 instances   */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 769 M 
+0.238 0 (SAY .SomeTest ~ myBabies ~ items        /* shows "3"    */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 918 M 
+0.238 0 (/* ----------------- class with methods --------------- */)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 967 M 
+0.238 0 (:: CLASS SomeTest)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1066 M 
+0.238 0 (/* -------- class methods -------- */)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1116 M 
+0.238 0 (:: METHOD init )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier-BoldOblique
+/F7
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F7_38
+F7
+38 
+xF 
+F7_38
+Ji 
+515 1119 M 
+0.200 0 (CLASS )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier-Oblique
+/F9
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F9_38
+F9
+38 
+xF 
+F9_38
+Ji 
+653 1118 M 
+0.200 0 (   )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+722 1116 M 
+0.238 0 (/* class method                 */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1168 M 
+0.238 0 (   EXPOSE myBabies      /* class object variable        */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1268 M 
+0.238 0 (   myBabies = .set ~ new        /* create a "Set"-object*/)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1367 M 
+0.238 0 (:: METHOD addToSet )A 
+; : 0 0 2174 3232 rc F7_38
+Ji 
+607 1370 M 
+0.200 0 (CLASS        )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+906 1367 M 
+0.238 0 (/* class method         */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1419 M 
+0.238 0 (   EXPOSE myBabies)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1469 M 
+0.238 0 (   USE ARG aBaby                /* get instance         */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1568 M 
+0.238 0 (   myBabies ~ put\( aBaby \)      /* put instance into set*/)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1667 M 
+0.238 0 (:: METHOD myBabies )A 
+; : 0 0 2174 3232 rc F7_38
+Ji 
+607 1670 M 
+0.200 0 (CLASS )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+745 1667 M 
+0.238 0 (ATTRIBUTE)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+952 1667 M 
+0.238 0 (      /* class method */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1769 M 
+0.238 0 (/* -------- instance method ------ */)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 1819 M 
+0.238 0 (:: METHOD init )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+515 1819 M 
+0.238 0 (                 /* called via NEW       */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1868 M 
+0.238 0 (   myClassObject = self )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+722 1868 M 
+0.238 0 (~ )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+768 1868 M 
+0.238 0 (class )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+906 1868 M 
+0.238 0 (/* get class object     */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1918 M 
+0.238 0 (   myClassObject )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+561 1918 M 
+0.238 0 (~ )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+607 1918 M 
+0.238 0 (addToSet\( self \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+975 1918 M 
+0.238 0 (     /* save object  */)A 
+; 
+166 2011 N M 2008 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc 170 2017 M 
+0.112 0 (Figure 4: Using class methods and class object variable)A 
+; 
+165 615 N M 2009 2 rr : 0 sg O ; 
+165 663 N M 2009 2 rr : 0 sg O ; 
+165 663 N M 2009 2 rr : 0 sg O ; 
+165 712 N M 2009 2 rr : 0 sg O ; 
+165 712 N M 2009 2 rr : 0 sg O ; 
+165 762 N M 2009 2 rr : 0 sg O ; 
+165 762 N M 2009 2 rr : 0 sg O ; 
+165 812 N M 2009 2 rr : 0 sg O ; 
+165 812 N M 2009 2 rr : 0 sg O ; 
+165 861 N M 2009 2 rr : 0 sg O ; 
+165 861 N M 2009 2 rr : 0 sg O ; 
+165 911 N M 2009 2 rr : 0 sg O ; 
+165 911 N M 2009 2 rr : 0 sg O ; 
+165 960 N M 2009 2 rr : 0 sg O ; 
+165 960 N M 2009 2 rr : 0 sg O ; 
+165 1010 N M 2009 2 rr : 0 sg O ; 
+165 1010 N M 2009 2 rr : 0 sg O ; 
+165 1060 N M 2009 2 rr : 0 sg O ; 
+165 1060 N M 2009 2 rr : 0 sg O ; 
+165 1109 N M 2009 2 rr : 0 sg O ; 
+165 1109 N M 2009 2 rr : 0 sg O ; 
+165 1162 N M 2009 2 rr : 0 sg O ; 
+165 1162 N M 2009 2 rr : 0 sg O ; 
+165 1211 N M 2009 2 rr : 0 sg O ; 
+165 1211 N M 2009 2 rr : 0 sg O ; 
+165 1261 N M 2009 2 rr : 0 sg O ; 
+165 1261 N M 2009 2 rr : 0 sg O ; 
+165 1310 N M 2009 2 rr : 0 sg O ; 
+165 1310 N M 2009 2 rr : 0 sg O ; 
+165 1360 N M 2009 2 rr : 0 sg O ; 
+165 1360 N M 2009 2 rr : 0 sg O ; 
+165 1412 N M 2009 2 rr : 0 sg O ; 
+165 1412 N M 2009 2 rr : 0 sg O ; 
+165 1462 N M 2009 2 rr : 0 sg O ; 
+165 1462 N M 2009 2 rr : 0 sg O ; 
+165 1512 N M 2009 2 rr : 0 sg O ; 
+165 1512 N M 2009 2 rr : 0 sg O ; 
+165 1561 N M 2009 2 rr : 0 sg O ; 
+165 1561 N M 2009 2 rr : 0 sg O ; 
+165 1611 N M 2009 2 rr : 0 sg O ; 
+165 1611 N M 2009 2 rr : 0 sg O ; 
+165 1660 N M 2009 2 rr : 0 sg O ; 
+165 1660 N M 2009 2 rr : 0 sg O ; 
+165 1713 N M 2009 2 rr : 0 sg O ; 
+165 1713 N M 2009 2 rr : 0 sg O ; 
+165 1762 N M 2009 2 rr : 0 sg O ; 
+165 1762 N M 2009 2 rr : 0 sg O ; 
+165 1812 N M 2009 2 rr : 0 sg O ; 
+165 1812 N M 2009 2 rr : 0 sg O ; 
+165 1862 N M 2009 2 rr : 0 sg O ; 
+165 1862 N M 2009 2 rr : 0 sg O ; 
+165 1911 N M 2009 2 rr : 0 sg O ; 
+165 1911 N M 2009 2 rr : 0 sg O ; 
+165 1961 N M 2009 2 rr : 0 sg O ; 
+165 1961 N M 2009 2 rr : 0 sg O ; 
+165 2010 N M 2009 2 rr : 0 sg O ; 
+165 2010 N M 2009 2 rr : 0 sg O ; 
+165 2084 N M 2009 2 rr : 0 sg O ; 
+165 615 N M 2 1471 rr : 0 sg O ; 
+2171 615 N M 2 1471 rr : 0 sg O ; %%IncludeFont: Helvetica-Bold
+/F11
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F11_58
+F11
+58 
+xF 
+F11_58
+Ji 
+161 2172 M 
+-0.248 0 (2)A 
+193 2172 M 
+-0.124 0 (.)A 
+209 2172 M 
+-0.248 0 (2)A 
+279 2172 M 
+-0.248 0 (Metaclasses)A 
+F0_50
+Ji 
+279 2325 M 
+9.000 0 32 0.227 0 (The class \204)D 
+F2_46
+Ji 
+544 2333 M 
+9.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+684 2325 M 
+9.000 0 32 0.245 0 (\223 is special in another way too: its instance methods are at the)D 
+%%IncludeFont: Helvetica-Oblique
+/F13
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F13_50
+F13
+50 
+xF 
+F13_50
+Ji 
+161 2418 M 
+2.000 0 32 0.155 0 (same time)D 
+F0_50
+Ji 
+395 2418 M 
+2.000 0 32 0.145 0 ( its own class methods! This perceived circularity is necessary in order to close)D 
+161 2512 M 
+0.107 0 (in on the class object for the class \204)A 
+F2_46
+Ji 
+946 2520 M 
+0.446 0 (Class)A 
+F0_50
+Ji 
+1086 2512 M 
+0.083 0 (\223 itself.)A 
+279 2652 M 
+8.000 0 32 0.198 0 (As class objects are instances of the class \204)D 
+F2_46
+Ji 
+1319 2660 M 
+8.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1459 2652 M 
+8.000 0 32 0.203 0 (\223 all instance methods of class)D 
+161 2745 M 
+3.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 2753 M 
+3.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+318 2745 M 
+3.000 0 32 0.193 0 (\223 are available via inheritance. Therefore )D 
+F13_50
+Ji 
+1253 2745 M 
+3.000 0 32 (all)W 
+F0_50
+Ji 
+1303 2745 M 
+3.000 0 32 0.171 0 ( classes have the instance methods of)D 
+161 2838 M 
+7.000 0 32 0.078 0 (class \204)D 
+F2_46
+Ji 
+313 2846 M 
+7.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+453 2838 M 
+7.000 0 32 0.177 0 (\223 available as \204class methods\223. Of course this is true for the class \204)D 
+F2_46
+Ji 
+2018 2846 M 
+7.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+2158 2838 M 
+7.000 0 32 0.350 0 (\223)D 
+161 2931 M 
+0.042 0 (itself.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+455 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1865 3050 M 
+-0.352 0 (6)A 
+1888 3050 M 
+0.014 0 (-)A 
+1901 3050 M 
+-0.352 0 (23)A 
+1948 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 7 7
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 207 M 
+6.000 0 32 0.184 0 (A class whose instance methods are its own class methods is called a metaclass.)D 
+225 300 M 
+1.000 0 32 0.221 0 (Therefore the Object Rexx class \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+982 308 M 
+1.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1122 300 M 
+1.000 0 32 0.225 0 (\223 )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+1154 300 M 
+1.000 0 32 -0.050 0 (is)D 
+F0_50
+Ji 
+1190 300 M 
+1.000 0 32 0.196 0 ( a metaclass. Any subclass of a metaclass is a)D 
+225 394 M 
+5.000 0 32 0.151 0 (metaclass itself. Instances of metaclasses may be called generically \204metaclass objects\223)D 
+225 487 M 
+7.000 0 32 0.127 0 (\(so the term \204class objects\223 and \204metaclass objects\223 could be intermixed\) . By contrast,)D 
+225 580 M 
+0.121 0 (non-metaclasses are called \204object classes\223.)A 
+343 720 M 
+2.000 0 32 0.217 0 (In Object Rexx there is a )D 
+F4_50
+Ji 
+922 720 M 
+2.000 0 32 0.128 0 (second )D 
+F0_50
+Ji 
+1100 720 M 
+2.000 0 32 0.196 0 (metaclass defined \(besides the class \204)D 
+F2_46
+Ji 
+1965 728 M 
+2.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+2105 720 M 
+2.000 0 32 0.200 0 (\223\): the)D 
+225 813 M 
+33.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 821 M 
+33.000 0 32 0.446 0 (M_SOMProxy)D 
+F0_50
+Ji 
+522 813 M 
+33.000 0 32 0.214 0 (\223 class. This metaclass is used for creating objects representing)D 
+225 906 M 
+16.000 0 32 0.210 0 (\(D\)SOM-objects from the predefined class \204)D 
+F2_46
+Ji 
+1278 914 M 
+16.000 0 32 0.446 0 (SOMProxy)D 
+F0_50
+Ji 
+1502 906 M 
+16.000 0 32 0.195 0 (\223, thereby allowing for sending)D 
+225 999 M 
+5.000 0 32 0.112 0 (messages to \(D\)SOM-objects. Because Object Rexx\222 class \204)D 
+F2_46
+Ji 
+1600 1007 M 
+5.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1740 999 M 
+5.000 0 32 0.181 0 (\223 is part of the picture)D 
+225 1093 M 
+1.000 0 32 0.101 0 (via the classification tree\222s root \204)D 
+F2_46
+Ji 
+945 1101 M 
+1.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1113 1093 M 
+1.000 0 32 0.121 0 (\223 it becomes possible to subclass \(D\)SOM-classes)D 
+225 1186 M 
+0.120 0 (in terms of Object Rexx and use them as Rexx classes from then on.)A 
+343 1326 M 
+5.000 0 32 0.175 0 (Additionally, by subclassing class \204)D 
+F2_46
+Ji 
+1139 1334 M 
+5.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1279 1326 M 
+5.000 0 32 0.260 0 (\223 it becomes possible to define one\222s own)D 
+225 1419 M 
+10.000 0 32 0.206 0 (metaclasses. Added class methods and class object variables are only available from)D 
+225 1512 M 
+11.000 0 32 0.174 0 (within the metaclass object of that metaclass. On the other hand the added instance)D 
+225 1605 M 
+7.000 0 32 0.114 0 (methods become part of the class methods of all classes which use this newly created)D 
+225 1698 M 
+3.000 0 32 0.137 0 (metaclass for their own creation. This may be done by using the \204)D 
+F2_46
+Ji 
+1715 1706 M 
+3.000 0 32 0.446 0 (METACLASS)D 
+F0_50
+Ji 
+1967 1698 M 
+3.000 0 32 0.142 0 (\223 attribute in)D 
+225 1792 M 
+4.000 0 32 0.150 0 (the )D 
+F2_46
+Ji 
+313 1800 M 
+4.000 0 32 0.446 0 (::CLASS)D 
+F0_50
+Ji 
+509 1792 M 
+4.000 0 32 0.164 0 (-directive for those classes. In case a class omits the \204)D 
+F2_46
+Ji 
+1756 1800 M 
+4.000 0 32 0.446 0 (METACLASS)D 
+F0_50
+Ji 
+2008 1792 M 
+4.000 0 32 0.158 0 (\223 attribute,)D 
+225 1885 M 
+0.107 0 (by default the metaclass of its parent class is used.)A 
+343 2025 M 
+9.000 0 32 0.249 0 (The rightmost column in figure 1 displays the metaclasses for the classes of the)D 
+225 2118 M 
+0.076 0 (Object Rexx classification tree.)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+225 2276 M 
+-0.248 0 (2)A 
+257 2276 M 
+-0.124 0 (.)A 
+273 2276 M 
+-0.248 0 (3)A 
+343 2276 M 
+-0.228 0 ( Multiple Inheritance)A 
+F0_50
+Ji 
+343 2430 M 
+9.000 0 32 0.111 0 (In contrast to Smalltalk Object Rexx allows for defining classes which have )D 
+F4_50
+Ji 
+2124 2430 M 
+9.000 0 32 0.275 0 (more)D 
+F0_50
+Ji 
+225 2523 M 
+2.000 0 32 0.360 0 (than )D 
+F4_50
+Ji 
+340 2523 M 
+2.000 0 32 0.425 0 (one )D 
+F0_50
+Ji 
+441 2523 M 
+2.000 0 32 0.245 0 (class as their superclass. In object oriented terms this feature is called \204multiple)D 
+225 2616 M 
+3.000 0 32 0.202 0 (inheritance\223. This way it becomes possible to )D 
+F4_50
+Ji 
+1264 2616 M 
+3.000 0 32 0.268 0 (combine )D 
+F0_50
+Ji 
+1472 2616 M 
+3.000 0 32 0.207 0 (different classes to form the basis)D 
+225 2709 M 
+0.103 0 (for a new class.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+468 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1878 3050 M 
+-0.352 0 (7)A 
+1901 3050 M 
+0.014 0 (-)A 
+1915 3050 M 
+-0.352 0 (23)A 
+1961 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 8 8
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 207 M 
+4.000 0 32 0.183 0 (Methods are resolved by searching first the superclass and its ancestors and if this)D 
+161 300 M 
+19.000 0 32 0.236 0 (fails \(the method was not found\), the classes \(and their ancestors\) given on the)D 
+161 394 M 
+0.350 0 (\204)A 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+178 402 M 
+0.446 0 (INHERIT)A 
+F0_50
+Ji 
+374 394 M 
+0.266 0 (\223-attribute are used as starting points for extending the search in the given order.)A 
+161 487 M 
+7.000 0 32 0.200 0 (Sending the \204)D 
+F2_46
+Ji 
+475 495 M 
+7.000 0 32 0.446 0 (SUPERCLASSES)D 
+F0_50
+Ji 
+811 487 M 
+7.000 0 32 0.243 0 (\223-method of the class \204)D 
+F2_46
+Ji 
+1342 495 M 
+7.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1482 487 M 
+7.000 0 32 0.204 0 (\223 to the class object will show)D 
+161 580 M 
+0.128 0 (this order for all immediate superclasses.)A 
+279 720 M 
+22.000 0 32 0.279 0 (Figure 5 shows three classes, named \204)D 
+F2_46
+Ji 
+1280 728 M 
+22.000 0 32 0.446 0 (RelTablelike)D 
+F0_50
+Ji 
+1616 720 M 
+22.000 0 32 0.475 0 (\223, \204)D 
+F2_46
+Ji 
+1701 728 M 
+22.000 0 32 0.446 0 (RelBijective)D 
+F0_50
+Ji 
+2038 720 M 
+22.000 0 32 0.410 0 (\223 and)D 
+161 813 M 
+0.350 0 (\204)A 
+F2_46
+Ji 
+178 821 M 
+0.446 0 (RelDirlike)A 
+F0_50
+Ji 
+458 813 M 
+0.225 0 (\223.)A 
+279 953 M 
+1.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+296 961 M 
+1.000 0 32 0.446 0 (RelTablelike)D 
+F0_50
+Ji 
+633 953 M 
+1.000 0 32 0.167 0 (\223 is a specialized form of the Object Rexx supplied class \204)D 
+F2_46
+Ji 
+1920 961 M 
+1.000 0 32 0.446 0 (Relation)D 
+F0_50
+Ji 
+2144 953 M 
+1.000 0 32 0.225 0 (\223,)D 
+161 1047 M 
+4.000 0 32 0.277 0 (which allows among other things to get an item for a given index, or to determine which)D 
+161 1140 M 
+0.277 0 (index refers to a certain item \(which was not possible with the Object Rexx \204)A 
+F2_46
+Ji 
+1858 1148 M 
+0.446 0 (Table)A 
+F0_50
+Ji 
+1998 1140 M 
+0.222 0 (\223 class\).)A 
+161 1233 M 
+7.000 0 32 0.254 0 (The only restriction defined in \204)D 
+F2_46
+Ji 
+888 1241 M 
+7.000 0 32 0.446 0 (RelTablelike)D 
+F0_50
+Ji 
+1224 1233 M 
+7.000 0 32 0.280 0 (\223 deals with the method of putting a new)D 
+161 1326 M 
+0.270 0 (item into the relation \(there are two methods defined for this behavior in class \204)A 
+F2_46
+Ji 
+1920 1334 M 
+0.446 0 (Relation)A 
+F0_50
+Ji 
+2144 1326 M 
+0.225 0 (\223,)A 
+161 1419 M 
+7.000 0 32 0.162 0 (namely \204)D 
+F2_46
+Ji 
+361 1427 M 
+7.000 0 32 0.446 0 (PUT)D 
+F0_50
+Ji 
+445 1419 M 
+7.000 0 32 0.357 0 (\223 and \204)D 
+F2_46
+Ji 
+606 1427 M 
+7.000 0 32 0.446 0 ([]=)D 
+F0_50
+Ji 
+690 1419 M 
+7.000 0 32 0.197 0 (\223\), thereby assuring the table-property that there exists one item)D 
+161 1512 M 
+6.000 0 32 0.200 0 (only with a specific index. To make sure that an index does not contain more than one)D 
+161 1605 M 
+1.000 0 32 0.245 0 (item, by default the index is deleted, before the original \204)D 
+F2_46
+Ji 
+1428 1613 M 
+1.000 0 32 0.446 0 (PUT)D 
+F0_50
+Ji 
+1512 1605 M 
+1.000 0 32 0.263 0 (\223-method of class \204)D 
+F2_46
+Ji 
+1934 1613 M 
+1.000 0 32 0.446 0 (Relation)D 
+F0_50
+Ji 
+2158 1605 M 
+1.000 0 32 0.350 0 (\223)D 
+161 1698 M 
+0.118 0 (adds the item to the relation itself.)A 
+: 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+170 1832 M 
+0.238 0 (/* multi_inh.cmd */)A 
+; : 0 0 2174 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 1931 M 
+0.238 0 (aClassObject = .RelTablelike ~ )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+883 1931 M 
+0.238 0 (subclass)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+1067 1931 M 
+0.238 0 (\( "<Table & Directory Like>" \))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1981 M 
+0.238 0 (SAY aClassObject                        /* show Defaultname     */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2080 M 
+0.238 0 (aClassObject ~ )A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+515 2080 M 
+0.238 0 (inherit)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+676 2080 M 
+0.238 0 (\( .RelDirlike \)   /* additional inheritance       */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2129 M 
+0.238 0 (anObject = aClassObject ~ new           /* create instance      */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2179 M 
+0.238 0 (SAY anObject                            /* show Defaultname     */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2278 M 
+0.238 0 (anObject ~ Tyrol = "some country in Austria"    /* add an item  */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2328 M 
+0.238 0 (SAY anObject ~ Tyrol                            /* display entry*/)A 
+; 
+166 2471 N M 2008 50 rr : 0.937 sg O ; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2476 M 
+0.238 0 (:: CLASS RelTablelike       SUBCLASS Relation       PUBLIC)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2576 M 
+0.238 0 (:: METHOD "[]=")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+515 2576 M 
+0.238 0 (                 /* override             */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2625 M 
+0.238 0 (   FORWARD MESSAGE \( "PUT" \)    /* let PUT do the work  */)A 
+; : 0 0 2174 3232 rc F4_38
+Ji 
+170 2724 M 
+0.238 0 (:: METHOD "PUT")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+515 2724 M 
+0.238 0 (                 /* override             */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2774 M 
+0.238 0 (   USE ARG item , index)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2823 M 
+0.238 0 (   self ~ remove\( index \)       /* remove index & associated item   */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2873 M 
+0.238 0 (   FORWARD CLASS \(super\)        /* now do the PUT !     */)A 
+; 
+165 1826 N M 2009 2 rr : 0 sg O ; 
+165 1875 N M 2009 2 rr : 0 sg O ; 
+165 1875 N M 2009 2 rr : 0 sg O ; 
+165 1924 N M 2009 2 rr : 0 sg O ; 
+165 1924 N M 2009 2 rr : 0 sg O ; 
+165 1974 N M 2009 2 rr : 0 sg O ; 
+165 1974 N M 2009 2 rr : 0 sg O ; 
+165 2023 N M 2009 2 rr : 0 sg O ; 
+165 2023 N M 2009 2 rr : 0 sg O ; 
+165 2073 N M 2009 2 rr : 0 sg O ; 
+165 2073 N M 2009 2 rr : 0 sg O ; 
+165 2122 N M 2009 2 rr : 0 sg O ; 
+165 2122 N M 2009 2 rr : 0 sg O ; 
+165 2172 N M 2009 2 rr : 0 sg O ; 
+165 2172 N M 2009 2 rr : 0 sg O ; 
+165 2222 N M 2009 2 rr : 0 sg O ; 
+165 2222 N M 2009 2 rr : 0 sg O ; 
+165 2271 N M 2009 2 rr : 0 sg O ; 
+165 2271 N M 2009 2 rr : 0 sg O ; 
+165 2321 N M 2009 2 rr : 0 sg O ; 
+165 2321 N M 2009 2 rr : 0 sg O ; 
+165 2370 N M 2009 2 rr : 0 sg O ; 
+165 2370 N M 2009 2 rr : 0 sg O ; 
+165 2420 N M 2009 2 rr : 0 sg O ; 
+165 2420 N M 2009 2 rr : 0 sg O ; 
+165 2470 N M 2009 2 rr : 0 sg O ; 
+165 2470 N M 2009 2 rr : 0 sg O ; 
+165 2519 N M 2009 2 rr : 0 sg O ; 
+165 2519 N M 2009 2 rr : 0 sg O ; 
+165 2569 N M 2009 2 rr : 0 sg O ; 
+165 2569 N M 2009 2 rr : 0 sg O ; 
+165 2618 N M 2009 2 rr : 0 sg O ; 
+165 2618 N M 2009 2 rr : 0 sg O ; 
+165 2668 N M 2009 2 rr : 0 sg O ; 
+165 2668 N M 2009 2 rr : 0 sg O ; 
+165 2717 N M 2009 2 rr : 0 sg O ; 
+165 2717 N M 2009 2 rr : 0 sg O ; 
+165 2767 N M 2009 2 rr : 0 sg O ; 
+165 2767 N M 2009 2 rr : 0 sg O ; 
+165 2817 N M 2009 2 rr : 0 sg O ; 
+165 2817 N M 2009 2 rr : 0 sg O ; 
+165 2866 N M 2009 2 rr : 0 sg O ; 
+165 2866 N M 2009 2 rr : 0 sg O ; 
+165 2916 N M 2009 2 rr : 0 sg O ; 
+165 2916 N M 2009 2 rr : 0 sg O ; 
+165 2965 N M 2009 2 rr : 0 sg O ; 
+165 1826 N M 2 1141 rr : 0 sg O ; 
+2171 1826 N M 2 1141 rr : 0 sg O ; /F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+455 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1865 3050 M 
+-0.352 0 (8)A 
+1888 3050 M 
+0.014 0 (-)A 
+1901 3050 M 
+-0.352 0 (23)A 
+1948 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 9 9
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+
+230 195 N M 2007 50 rr : 0.937 sg O ; : 0 0 2237 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+234 201 M 
+0.238 0 (:: CLASS RelBijective   SUBCLASS Relation       PUBLIC)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 300 M 
+0.238 0 (:: METHOD "[]=")A 
+; : 0 0 2237 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+579 300 M 
+0.238 0 (                 /* override             */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 349 M 
+0.238 0 (   FORWARD MESSAGE \( "PUT" \)    /* let PUT do the work  */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 448 M 
+0.238 0 (:: METHOD  PUT )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+579 448 M 
+0.238 0 (                 /* override             */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 498 M 
+0.238 0 (   USE ARG item , index)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 548 M 
+0.238 0 (   self ~ remove\( index \)       /* remove index         */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 597 M 
+0.238 0 (                   /* remove item \(with another index\): */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 647 M 
+0.238 0 (   self ~ removeitem\( item , self ~ index\( item  \) \)   )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 696 M 
+0.238 0 (   FORWARD CLASS \(super\)        /* let super do the PUT !           */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 796 M 
+0.238 0 (/* .directory-like, because of enhancing with SETENTRY, ENTRY, HASENTRY */)A 
+; 
+230 839 N M 2007 51 rr : 0.937 sg O ; : 0 0 2237 3232 rc F0_38
+Ji 
+234 845 M 
+0.238 0 (:: CLASS RelDirlike         MIXINCLASS Relation     PUBLIC)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 944 M 
+0.238 0 (:: METHOD  ENTRY)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+602 944 M 
+0.238 0 (        /* returns the item associated with index   */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 994 M 
+0.238 0 (   USE ARG index)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1043 M 
+0.238 0 (   RETURN self ~ at\( TRANSLATE\( index \) \)       /* use uppercase    */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1143 M 
+0.238 0 (:: METHOD  SETENTRY)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+671 1143 M 
+0.238 0 (     /* "name" is used as index                  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1192 M 
+0.238 0 (   USE ARG name, value                                              )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1242 M 
+0.238 0 (   self ~ PUT\( value, TRANSLATE\( name  \) \)      /*  uppercase it    */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1341 M 
+0.238 0 (:: METHOD  UNKNOWN)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+648 1341 M 
+0.238 0 (      /* define an unknown method                 */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1391 M 
+0.238 0 (   USE ARG messageName, messageArgs)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1490 M 
+0.238 0 (   IF RIGHT\( messageName, 1 \) = "=" THEN        /* setentry method  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1539 M 
+0.238 0 (   DO                   /* remove trailing "=" from message name    */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1589 M 
+0.238 0 (      index = LEFT\( messageName, LENGTH\( messageName \) - 1 \) )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1638 M 
+0.238 0 (      FORWARD MESSAGE \( "SETENTRY" \) ARRAY \( index, messageArgs[ 1 ] \)  )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1688 M 
+0.238 0 (   END)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1738 M 
+0.238 0 (   ELSE                                         /* entry method */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1787 M 
+0.238 0 (      FORWARD MESSAGE \( "ENTRY" \)    ARRAY \( messageName \))A 
+; 
+230 1831 N M 2007 75 rr : 0.882 sg O ; : 0 0 2237 3232 rc %%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+234 1837 M 
+0.132 0 (Figure 5: An example for multiple inheritance)A 
+; 
+229 194 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 789 N M 2008 2 rr : 0 sg O ; 
+229 789 N M 2008 2 rr : 0 sg O ; 
+229 838 N M 2008 2 rr : 0 sg O ; 
+229 838 N M 2008 2 rr : 0 sg O ; 
+229 888 N M 2008 2 rr : 0 sg O ; 
+229 888 N M 2008 2 rr : 0 sg O ; 
+229 937 N M 2008 2 rr : 0 sg O ; 
+229 937 N M 2008 2 rr : 0 sg O ; 
+229 987 N M 2008 2 rr : 0 sg O ; 
+229 987 N M 2008 2 rr : 0 sg O ; 
+229 1037 N M 2008 2 rr : 0 sg O ; 
+229 1037 N M 2008 2 rr : 0 sg O ; 
+229 1086 N M 2008 2 rr : 0 sg O ; 
+229 1086 N M 2008 2 rr : 0 sg O ; 
+229 1136 N M 2008 2 rr : 0 sg O ; 
+229 1136 N M 2008 2 rr : 0 sg O ; 
+229 1185 N M 2008 2 rr : 0 sg O ; 
+229 1185 N M 2008 2 rr : 0 sg O ; 
+229 1235 N M 2008 2 rr : 0 sg O ; 
+229 1235 N M 2008 2 rr : 0 sg O ; 
+229 1285 N M 2008 2 rr : 0 sg O ; 
+229 1285 N M 2008 2 rr : 0 sg O ; 
+229 1334 N M 2008 2 rr : 0 sg O ; 
+229 1334 N M 2008 2 rr : 0 sg O ; 
+229 1384 N M 2008 2 rr : 0 sg O ; 
+229 1384 N M 2008 2 rr : 0 sg O ; 
+229 1433 N M 2008 2 rr : 0 sg O ; 
+229 1433 N M 2008 2 rr : 0 sg O ; 
+229 1483 N M 2008 2 rr : 0 sg O ; 
+229 1483 N M 2008 2 rr : 0 sg O ; 
+229 1532 N M 2008 2 rr : 0 sg O ; 
+229 1532 N M 2008 2 rr : 0 sg O ; 
+229 1582 N M 2008 2 rr : 0 sg O ; 
+229 1582 N M 2008 2 rr : 0 sg O ; 
+229 1632 N M 2008 2 rr : 0 sg O ; 
+229 1632 N M 2008 2 rr : 0 sg O ; 
+229 1681 N M 2008 2 rr : 0 sg O ; 
+229 1681 N M 2008 2 rr : 0 sg O ; 
+229 1731 N M 2008 2 rr : 0 sg O ; 
+229 1731 N M 2008 2 rr : 0 sg O ; 
+229 1780 N M 2008 2 rr : 0 sg O ; 
+229 1780 N M 2008 2 rr : 0 sg O ; 
+229 1830 N M 2008 2 rr : 0 sg O ; 
+229 1830 N M 2008 2 rr : 0 sg O ; 
+229 1904 N M 2008 2 rr : 0 sg O ; 
+229 194 N M 2 1712 rr : 0 sg O ; 
+2235 194 N M 2 1712 rr : 0 sg O ; F4_50
+Ji 
+343 1973 M 
+2.000 0 32 0.350 0 (\204)D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+360 1981 M 
+2.000 0 32 0.446 0 (RelBijective)D 
+F4_50
+Ji 
+696 1973 M 
+2.000 0 32 0.276 0 (\223 is another variant of a relation which makes sure that an index has)D 
+225 2067 M 
+15.000 0 32 0.256 0 (just one entry \(making it tablelike\) and that an item occurs just once in the entire)D 
+225 2160 M 
+0.063 0 (collection.)A 
+343 2300 M 
+2.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+360 2308 M 
+2.000 0 32 0.446 0 (RelDirlike)D 
+F4_50
+Ji 
+640 2300 M 
+2.000 0 32 0.259 0 (\223 is a class which implements the three methods directories possess in)D 
+225 2393 M 
+20.000 0 32 0.214 0 (order to allow for conveniently using strings as indices: \204)D 
+F2_46
+Ji 
+1657 2401 M 
+20.000 0 32 0.446 0 (ENTRY)D 
+F4_50
+Ji 
+1797 2393 M 
+20.000 0 32 0.225 0 (\223, \204)D 
+F2_46
+Ji 
+1879 2401 M 
+20.000 0 32 0.446 0 (SETENTRY)D 
+F4_50
+Ji 
+2103 2393 M 
+20.000 0 32 0.410 0 (\223 and)D 
+225 2486 M 
+2.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 2494 M 
+2.000 0 32 0.446 0 (UNKNOWN)D 
+F4_50
+Ji 
+438 2486 M 
+2.000 0 32 0.215 0 (\223. The logic is simple: any message not understood \(not found in the class or its)D 
+225 2579 M 
+7.000 0 32 0.188 0 (ancestors\) is intercepted via the \204)D 
+F2_46
+Ji 
+1003 2587 M 
+7.000 0 32 0.446 0 (UNKNOWN)D 
+F4_50
+Ji 
+1199 2579 M 
+7.000 0 32 0.253 0 (\223-method. The message name is uppercased)D 
+225 2672 M 
+5.000 0 32 0.151 0 (and interpreted as a string index. If this message contains a trailing equal sign \(\204)D 
+F2_46
+Ji 
+2078 2680 M 
+5.000 0 32 0.446 0 (=)D 
+F4_50
+Ji 
+2106 2672 M 
+5.000 0 32 0.100 0 (\223\) it is)D 
+225 2765 M 
+1.000 0 32 0.230 0 (assumed that the programmer wants to add an item associated with an uppercased string)D 
+225 2859 M 
+3.000 0 32 0.179 0 (\(the name of the method\), otherwise it is assumed that the programmers want to retrieve)D 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+468 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1878 3050 M 
+-0.352 0 (9)A 
+1901 3050 M 
+0.014 0 (-)A 
+1915 3050 M 
+-0.352 0 (23)A 
+1961 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 10 10
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 207 M 
+6.000 0 32 0.176 0 (the item associated with the uppercased string \(the name of the method\). In the former)D 
+161 300 M 
+3.000 0 32 0.145 0 (case the \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+388 308 M 
+3.000 0 32 0.446 0 (SETENTRY)D 
+F0_50
+Ji 
+612 300 M 
+3.000 0 32 0.186 0 (\223-method is run; in the latter the \204)D 
+F2_46
+Ji 
+1365 308 M 
+3.000 0 32 0.446 0 (ENTRY)D 
+F0_50
+Ji 
+1505 300 M 
+3.000 0 32 0.170 0 (\223-method, exactly the way the)D 
+161 394 M 
+0.071 0 (Object Rexx class \204)A 
+F2_46
+Ji 
+593 402 M 
+0.446 0 (Directory)A 
+F0_50
+Ji 
+845 394 M 
+0.155 0 (\223 behaves.)A 
+279 534 M 
+7.000 0 32 0.283 0 (The program creates a new class \(\204)D 
+F2_46
+Ji 
+1117 542 M 
+7.000 0 32 0.571 0 (<Table & Directory Like>)D 
+F0_50
+Ji 
+1813 534 M 
+7.000 0 32 0.300 0 (\223\) at runtime by)D 
+161 627 M 
+0.096 0 (subclassing \204)A 
+F2_46
+Ji 
+454 635 M 
+0.446 0 (RelTablelike)A 
+F0_50
+Ji 
+790 627 M 
+0.248 0 (\223. This is done by sending the method \204)A 
+F2_46
+Ji 
+1664 635 M 
+0.446 0 (SUBCLASS)A 
+F0_50
+Ji 
+1888 627 M 
+0.253 0 (\223 to the class)A 
+161 720 M 
+3.000 0 32 0.226 0 (object. The next step is to add multiple inheritance to that freshly created class object by)D 
+161 813 M 
+5.000 0 32 0.195 0 (issuing an \204)D 
+F2_46
+Ji 
+429 821 M 
+5.000 0 32 0.446 0 (INHERIT)D 
+F0_50
+Ji 
+625 813 M 
+5.000 0 32 0.177 0 (\223 message denominating the additional superclass \204)D 
+F2_46
+Ji 
+1806 821 M 
+5.000 0 32 0.446 0 (RelDirlike)D 
+F0_50
+Ji 
+2086 813 M 
+5.000 0 32 0.162 0 (\223 as)D 
+161 906 M 
+25.000 0 32 0.222 0 (an argument. From this moment on methods are looked up not only in class)D 
+161 999 M 
+4.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 1007 M 
+4.000 0 32 0.446 0 (RelTablelike)D 
+F0_50
+Ji 
+514 999 M 
+4.000 0 32 0.336 0 (\223, but in \204)D 
+F2_46
+Ji 
+727 1007 M 
+4.000 0 32 0.446 0 (RelDirlike)D 
+F0_50
+Ji 
+1007 999 M 
+4.000 0 32 0.276 0 (\223 too. This new class now behaves like a table )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+2091 999 M 
+4.000 0 32 0.200 0 (and)D 
+F0_50
+Ji 
+161 1093 M 
+9.000 0 32 0.131 0 (like a directory, yet all methods of the class \204)D 
+F2_46
+Ji 
+1232 1101 M 
+9.000 0 32 0.446 0 (Relation)D 
+F0_50
+Ji 
+1456 1093 M 
+9.000 0 32 0.131 0 (\223 are available too, notably the)D 
+161 1186 M 
+2.000 0 32 0.228 0 (ability to query an index for an existing item. Figure 6 shows the output of our example in)D 
+161 1279 M 
+0.150 0 (figure 5.)A 
+: 0 0 2174 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 1412 M 
+0.238 0 (The <Table & Directory Like> class)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1462 M 
+0.238 0 (a <Table & Directory Like>)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1511 M 
+0.238 0 (some country in Austria)A 
+; 
+166 1605 N M 2008 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc 170 1611 M 
+0.143 0 (Figure 6: An example for multiple inheritance \(output\))A 
+; 
+165 1407 N M 2009 2 rr : 0 sg O ; 
+165 1604 N M 2009 2 rr : 0 sg O ; 
+165 1604 N M 2009 2 rr : 0 sg O ; 
+165 1677 N M 2009 2 rr : 0 sg O ; 
+165 1407 N M 2 273 rr : 0 sg O ; 
+2171 1407 N M 2 273 rr : 0 sg O ; 279 1747 M 
+0.144 0 (To create class \204)A 
+F2_46
+Ji 
+651 1755 M 
+0.446 0 (<Table & Directory Like>)A 
+F0_50
+Ji 
+1324 1747 M 
+0.085 0 (\223 via a directive would look like:)A 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+300 1882 M 
+-0.158 0 (::CLASS "<Table & Directory Like>" SUBCLASS RelTablelike INHERIT RelDirlike)A 
+F0_50
+Ji 
+279 1998 M 
+1.000 0 32 0.170 0 (Should the programmer wish to add the directorylike functionality of \204)D 
+F2_46
+Ji 
+1821 2006 M 
+1.000 0 32 0.446 0 (RelDirlike)D 
+F0_50
+Ji 
+2101 1998 M 
+1.000 0 32 0.187 0 (\223 to)D 
+161 2091 M 
+11.000 0 32 0.190 0 (the \204)D 
+F2_46
+Ji 
+273 2099 M 
+11.000 0 32 0.446 0 (RelBijective)D 
+F0_50
+Ji 
+609 2091 M 
+11.000 0 32 0.101 0 (\223 class all that is necessary is sending the \204)D 
+F2_46
+Ji 
+1663 2099 M 
+11.000 0 32 0.446 0 (INHERIT)D 
+F0_50
+Ji 
+1859 2091 M 
+11.000 0 32 0.187 0 (\223 message or)D 
+161 2184 M 
+0.140 0 (using the \204)A 
+F2_46
+Ji 
+396 2192 M 
+0.446 0 (INHERIT)A 
+F0_50
+Ji 
+592 2184 M 
+0.110 0 (\223 attribute in the class directive.)A 
+279 2324 M 
+17.000 0 32 0.144 0 (Note that the class directive for \204)D 
+F2_46
+Ji 
+1103 2332 M 
+17.000 0 32 0.446 0 (RelDirlike)D 
+F0_50
+Ji 
+1383 2324 M 
+17.000 0 32 0.287 0 (\223 uses \204)D 
+F2_46
+Ji 
+1586 2332 M 
+17.000 0 32 0.446 0 (MIXINCLASS)D 
+F0_50
+Ji 
+1866 2324 M 
+17.000 0 32 0.203 0 (\223 rather than)D 
+161 2417 M 
+21.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 2425 M 
+21.000 0 32 0.446 0 (SUBCLASS)D 
+F0_50
+Ji 
+402 2417 M 
+21.000 0 32 0.257 0 (\223 to determine that its parent class is the class \204)D 
+F2_46
+Ji 
+1670 2425 M 
+21.000 0 32 0.446 0 (Relation)D 
+F0_50
+Ji 
+1894 2417 M 
+21.000 0 32 0.254 0 (\223. By using)D 
+161 2510 M 
+10.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 2518 M 
+10.000 0 32 0.446 0 (MIXINCLASS)D 
+F0_50
+Ji 
+458 2510 M 
+10.000 0 32 0.184 0 (\223 the programmer indicates to the runtime system that this class may be)D 
+161 2603 M 
+5.000 0 32 0.178 0 (used as an additional superclass for classes which descend from the same \204)D 
+1921 2603 M 
+5.000 0 32 0.077 0 (baseclass)D 
+2144 2603 M 
+5.000 0 32 0.225 0 (\223.)D 
+161 2697 M 
+0.173 0 (The baseclass in turn is defined to be the first class in the superclass ancestors which was)A 
+161 2790 M 
+12.000 0 32 0.322 0 (not created with the \204)D 
+F2_46
+Ji 
+683 2798 M 
+12.000 0 32 0.446 0 (MIXINCLASS)D 
+F0_50
+Ji 
+963 2790 M 
+12.000 0 32 0.265 0 (\223-attribute but with the \204)D 
+F2_46
+Ji 
+1532 2798 M 
+12.000 0 32 0.446 0 (SUBCLASS)D 
+F0_50
+Ji 
+1756 2790 M 
+12.000 0 32 0.202 0 (\223-attribute instead.)D 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (10)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 11 11
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 207 M 
+0.185 0 (Therefore only classes descending from the Object Rexx Class \204)A 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1662 215 M 
+0.446 0 (Relation)A 
+F0_50
+Ji 
+1886 207 M 
+0.170 0 (\223 may utilize the)A 
+225 300 M 
+0.078 0 (class \204)A 
+F2_46
+Ji 
+370 308 M 
+0.446 0 (RelDirlike)A 
+F0_50
+Ji 
+650 300 M 
+0.120 0 (\223 as an additional superclass for multiple inheritance.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+225 470 M 
+-0.248 0 (3)A 
+343 470 M 
+0.066 0 (CREATING CLASSES)A 
+F0_50
+Ji 
+343 624 M 
+0.114 0 (There are two ways to create Object Rexx classes:)A 
+225 764 M 
+0.350 0 (-)A 
+343 764 M 
+0.096 0 (statically via directive statements or)A 
+225 904 M 
+0.350 0 (-)A 
+343 904 M 
+0.088 0 (dynamically via messages to class objects.)A 
+343 1045 M 
+39.000 0 32 0.191 0 (Figure 5 demonstrates both possibilities, creating classes via directives)D 
+225 1138 M 
+20.000 0 32 0.350 0 (\(\204)D 
+F2_46
+Ji 
+259 1146 M 
+20.000 0 32 0.446 0 (RelTablelike)D 
+F0_50
+Ji 
+595 1138 M 
+20.000 0 32 0.225 0 (\223, \204)D 
+F2_46
+Ji 
+677 1146 M 
+20.000 0 32 0.446 0 (RelBijective)D 
+F0_50
+Ji 
+1013 1138 M 
+20.000 0 32 0.214 0 (\223 and \204)D 
+F2_46
+Ji 
+1199 1146 M 
+20.000 0 32 0.446 0 (RelDirlike)D 
+F0_50
+Ji 
+1479 1138 M 
+20.000 0 32 0.150 0 (\223\) and dynamically \(\204)D 
+F2_46
+Ji 
+1995 1146 M 
+20.000 0 32 0.446 0 (<Table &)D 
+225 1239 M 
+2.000 0 32 0.446 0 (Directory Like>)D 
+F0_50
+Ji 
+647 1231 M 
+2.000 0 32 0.196 0 (\223\). In essence the methods defined with the Object Rexx class \204)D 
+F2_46
+Ji 
+2082 1239 M 
+2.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+2222 1231 M 
+2.000 0 32 0.350 0 (\223)D 
+225 1324 M 
+0.135 0 (are used for the purpose of creating classes on the fly.)A 
+343 1464 M 
+8.000 0 32 0.135 0 (As a matter of fact, once the runtime system of Object Rexx has been initialized,)D 
+225 1557 M 
+10.000 0 32 0.102 0 (Object Rexx itself uses messages of the \204)D 
+F2_46
+Ji 
+1219 1565 M 
+10.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1359 1557 M 
+10.000 0 32 0.103 0 (\223 class to turn e.g. class directives of)D 
+225 1650 M 
+1.000 0 32 0.197 0 (parsed Object Rexx programs into full fledged class objects. While initialising Object Rexx)D 
+225 1744 M 
+10.000 0 32 0.184 0 (creates an instance for the class \204)D 
+F2_46
+Ji 
+1039 1752 M 
+10.000 0 32 0.446 0 (Class)D 
+F0_50
+Ji 
+1179 1744 M 
+10.000 0 32 0.164 0 (\223 which gets used for creating all other Rexx)D 
+225 1837 M 
+0.103 0 (supplied class objects, thereby creating the classification tree.)A 
+343 1977 M 
+11.000 0 32 0.125 0 (Classes are built from class directives right after the interpreter has successfully)D 
+225 2070 M 
+4.000 0 32 0.176 0 (parsed an Object Rexx program source and )D 
+%%IncludeFont: Helvetica-Oblique
+/F6
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+1244 2070 M 
+4.000 0 32 0.190 0 (after)D 
+F0_50
+Ji 
+1345 2070 M 
+4.000 0 32 0.215 0 ( all the \204)D 
+F2_46
+Ji 
+1537 2078 M 
+4.000 0 32 0.446 0 (::REQUIRES)D 
+F0_50
+Ji 
+1817 2070 M 
+4.000 0 32 0.135 0 (\223-directives \(if any\))D 
+225 2163 M 
+0.130 0 (have been resolved \(recursively if necessary\).)A 
+343 2303 M 
+7.000 0 32 0.187 0 (The parent class objects of the new classes to be built are used for creating new)D 
+225 2397 M 
+7.000 0 32 0.171 0 (class objects by sending the \204)D 
+F2_46
+Ji 
+921 2405 M 
+7.000 0 32 0.446 0 (SUBCLASS)D 
+F0_50
+Ji 
+1145 2397 M 
+7.000 0 32 0.400 0 (\223 \(or \204)D 
+F2_46
+Ji 
+1284 2405 M 
+7.000 0 32 0.446 0 (MIXINCLASS)D 
+F0_50
+Ji 
+1564 2397 M 
+7.000 0 32 0.182 0 (\223\) message to the superclass)D 
+225 2490 M 
+0.069 0 (class object.)A 
+343 2630 M 
+8.000 0 32 0.127 0 ( During the creation process the new class object gets the \(class\) method \204)D 
+F2_46
+Ji 
+2110 2638 M 
+8.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+2222 2630 M 
+8.000 0 32 0.350 0 (\223)D 
+225 2723 M 
+6.000 0 32 0.171 0 (sent. Note, that at this particular point multiple inheritance is )D 
+F6_50
+Ji 
+1633 2723 M 
+6.000 0 32 0.150 0 (not )D 
+F0_50
+Ji 
+1723 2723 M 
+6.000 0 32 0.150 0 (setup yet, hence class)D 
+225 2816 M 
+15.000 0 32 0.147 0 (method resolutions within the class method \204)D 
+F2_46
+Ji 
+1308 2824 M 
+15.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+1420 2816 M 
+15.000 0 32 0.160 0 (\223 will only go up to its immediate)D 
+225 2909 M 
+0.139 0 (superclass. This is of interest )A 
+F6_50
+Ji 
+888 2909 M 
+0.075 0 (only)A 
+F0_50
+Ji 
+980 2909 M 
+0.150 0 (, if the programmer was to override the superclass\222 class)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (11)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 12 12
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+161 207 M 
+2.000 0 32 0.212 0 (method \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+362 215 M 
+2.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+474 207 M 
+2.000 0 32 0.161 0 (\223 with an own class method. If he/she wishes to do so it is recommended to)D 
+161 300 M 
+12.000 0 32 0.265 0 (forward the class method \204)D 
+F2_46
+Ji 
+805 308 M 
+12.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+917 300 M 
+12.000 0 32 0.284 0 (\223 up to the superclass so it is able to do its part of)D 
+161 394 M 
+0.175 0 (initialisation. Once the class was setup successfully \(upon returning from the class method)A 
+161 487 M 
+12.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 495 M 
+12.000 0 32 0.446 0 (INIT)D 
+F0_50
+Ji 
+290 487 M 
+12.000 0 32 0.169 0 (\223\) multiple inheritance - if defined for that class - is incorporated via \204)D 
+F2_46
+Ji 
+1963 495 M 
+12.000 0 32 0.446 0 (INHERIT)D 
+F0_50
+Ji 
+2159 487 M 
+12.000 0 32 0.350 0 (\223)D 
+161 580 M 
+0.145 0 (messages by the runtime system and thereafter available for method resolution.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+161 750 M 
+-0.248 0 (4)A 
+279 750 M 
+0.012 0 (DEFINING AND ASSIGNING METHODS)A 
+F0_50
+Ji 
+279 903 M 
+3.000 0 32 0.232 0 (As has been seen in the figures \(e.g. figure 5\) methods may be defined statically in)D 
+161 997 M 
+0.148 0 (the source of an Object Rexx program by means of the \204)A 
+F2_46
+Ji 
+1414 1005 M 
+0.446 0 (::METHOD)A 
+F0_50
+Ji 
+1638 997 M 
+0.116 0 (\223 directive.)A 
+F4_58
+Ji 
+161 1155 M 
+-0.248 0 (4)A 
+193 1155 M 
+-0.124 0 (.)A 
+209 1155 M 
+-0.248 0 (1)A 
+279 1155 M 
+-0.220 0 (Defining Methods Dynamically)A 
+F0_50
+Ji 
+279 1308 M 
+5.000 0 32 0.171 0 (To define a method dynamically it is necessary to create an instance of the Object)D 
+161 1401 M 
+2.000 0 32 0.145 0 (Rexx class \204)D 
+F2_46
+Ji 
+439 1409 M 
+2.000 0 32 0.446 0 (Method)D 
+F0_50
+Ji 
+607 1401 M 
+2.000 0 32 0.305 0 (\223 by sending the message \204)D 
+F2_46
+Ji 
+1228 1409 M 
+2.000 0 32 0.446 0 (NEW)D 
+F0_50
+Ji 
+1312 1401 M 
+2.000 0 32 0.248 0 (\223 to the method class object giving the)D 
+161 1494 M 
+5.000 0 32 0.208 0 (name of the method and the Rexx source code as arguments. The initialisation process)D 
+161 1588 M 
+0.111 0 (will parse the source code and if successful will return a method object.)A 
+F4_58
+Ji 
+161 1746 M 
+-0.248 0 (4)A 
+193 1746 M 
+-0.124 0 (.)A 
+209 1746 M 
+-0.248 0 (2)A 
+279 1746 M 
+-0.290 0 (Assigning Methods)A 
+F0_50
+Ji 
+279 1899 M 
+5.000 0 32 0.216 0 (If methods are defined statically via directives those preceeding the very first class)D 
+161 1992 M 
+18.000 0 32 0.153 0 (directive are collected by Object Rexx and put into a directory accessible via the)D 
+161 2085 M 
+0.155 0 (environment symbol \204)A 
+F2_46
+Ji 
+642 2093 M 
+0.446 0 (.methods)A 
+F0_50
+Ji 
+866 2085 M 
+0.153 0 (\223 by that Object Rexx program. Because such methods are)A 
+161 2179 M 
+0.141 0 (not assigned to a class, they may be regarded as \204floating\223 methods.)A 
+: 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F6
+0.868 
+T 
+/Courier-Bold
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+170 2312 M 
+0.238 0 (/* def_meth.cmd */)A 
+; : 0 0 2174 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 2411 M 
+0.238 0 (Object1 = .Test ~ new)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2510 M 
+0.238 0 (/* add floating method to object:                               */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2560 M 
+0.238 0 (Object1 ~ )A 
+; : 0 0 2174 3232 rc F6_38
+Ji 
+400 2560 M 
+0.238 0 (setmethod)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+607 2560 M 
+0.238 0 (\( "method1", .methods ~ entry\( method1 \)\))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2609 M 
+0.238 0 (Object1 ~ method1                       /* separate object scope*/)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2659 M 
+0.238 0 (SAY)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2709 M 
+0.238 0 (/* add method to class object:                                  */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2758 M 
+0.238 0 (RexxCode = "EXPOSE variable                     ;" ,)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2808 M 
+0.238 0 (           "IF \\ VAR\( 'variable' \) THEN         ;" ,)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2857 M 
+0.238 0 (           "   variable = )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier-BoldOblique
+/F9
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F9_38
+F9
+38 
+xF 
+F9_38
+Ji 
+768 2860 M 
+0.200 0 ('value from RexxCode')A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+1251 2857 M 
+0.238 0 ( ;" ,)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2910 M 
+0.238 0 (           "SAY 'RexxCode:' variable            ;" ,)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2959 M 
+0.238 0 (           "SAY 'self:' self 'super:' super      ")A 
+; 
+165 2307 N M 2009 2 rr : 0 sg O ; 
+165 2355 N M 2009 2 rr : 0 sg O ; 
+165 2355 N M 2009 2 rr : 0 sg O ; 
+165 2404 N M 2009 2 rr : 0 sg O ; 
+165 2404 N M 2009 2 rr : 0 sg O ; 
+165 2454 N M 2009 2 rr : 0 sg O ; 
+165 2454 N M 2009 2 rr : 0 sg O ; 
+165 2504 N M 2009 2 rr : 0 sg O ; 
+165 2504 N M 2009 2 rr : 0 sg O ; 
+165 2553 N M 2009 2 rr : 0 sg O ; 
+165 2553 N M 2009 2 rr : 0 sg O ; 
+165 2603 N M 2009 2 rr : 0 sg O ; 
+165 2603 N M 2009 2 rr : 0 sg O ; 
+165 2652 N M 2009 2 rr : 0 sg O ; 
+165 2652 N M 2009 2 rr : 0 sg O ; 
+165 2702 N M 2009 2 rr : 0 sg O ; 
+165 2702 N M 2009 2 rr : 0 sg O ; 
+165 2751 N M 2009 2 rr : 0 sg O ; 
+165 2751 N M 2009 2 rr : 0 sg O ; 
+165 2801 N M 2009 2 rr : 0 sg O ; 
+165 2801 N M 2009 2 rr : 0 sg O ; 
+165 2851 N M 2009 2 rr : 0 sg O ; 
+165 2851 N M 2009 2 rr : 0 sg O ; 
+165 2903 N M 2009 2 rr : 0 sg O ; 
+165 2903 N M 2009 2 rr : 0 sg O ; 
+165 2953 N M 2009 2 rr : 0 sg O ; 
+165 2953 N M 2009 2 rr : 0 sg O ; 
+165 3002 N M 2009 2 rr : 0 sg O ; 
+165 2307 N M 2 697 rr : 0 sg O ; 
+2171 2307 N M 2 697 rr : 0 sg O ; /F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (12)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 13 13
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2237 3232 rc %%IncludeFont: Courier
+/F0
+0.868 
+T 
+/Courier
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+234 250 M 
+0.238 0 (.Test ~ )A 
+; : 0 0 2237 3232 rc %%IncludeFont: Courier-Bold
+/F2
+0.868 
+T 
+/Courier-Bold
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+418 250 M 
+0.238 0 (define)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+556 250 M 
+0.238 0 (\( "method2", RexxCode \)   /* add method to class  */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 300 M 
+0.238 0 (Object2 = .Test ~ new                   /* new object gets it   */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 349 M 
+0.238 0 (Object2 ~ method2                       /* .Test object scope   */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 399 M 
+0.238 0 (SAY)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 498 M 
+0.238 0 (/*  defining a floating method: */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 548 M 
+0.238 0 (:: METHOD method1)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 597 M 
+0.238 0 (   EXPOSE variable)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 696 M 
+0.238 0 (   IF \\ VAR\( 'variable' \) THEN)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 746 M 
+0.238 0 (      variable = )A 
+; : 0 0 2237 3232 rc %%IncludeFont: Courier-BoldOblique
+/F4
+0.789 
+T 
+/Courier-BoldOblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+625 749 M 
+0.200 0 ('value from method1')A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 798 M 
+0.238 0 (   SAY 'METHOD1:' variable)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 848 M 
+0.238 0 (   SAY 'self:' self 'super:' super)A 
+; 
+230 941 N M 2007 51 rr : 0.937 sg O ; : 0 0 2237 3232 rc F2_38
+Ji 
+234 947 M 
+0.238 0 (:: CLASS Test)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1046 M 
+0.238 0 (:: METHOD init)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1096 M 
+0.238 0 (   EXPOSE variable)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1146 M 
+0.238 0 (   variable = )A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+556 1149 M 
+0.200 0 ('value from .Test')A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1198 M 
+0.238 0 (   SAY 'class Test, method INIT, variable set to:' variable)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1248 M 
+0.238 0 (   SAY 'self:' self 'super:' super)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1297 M 
+0.238 0 (   SAY)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1347 M 
+0.238 0 (:: METHOD setmethod)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+671 1347 M 
+0.238 0 (             /* allow for using SETMETHOD */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1396 M 
+0.238 0 (   FORWARD CLASS \( super \))A 
+; 
+230 1440 N M 2007 75 rr : 0.882 sg O ; : 0 0 2237 3232 rc %%IncludeFont: Helvetica
+/F6
+0.940 
+T 
+/Helvetica
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+234 1446 M 
+0.080 0 (Figure 7: Assigning methods with SETMETHOD and DEFINE)A 
+; 
+229 194 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 792 N M 2008 2 rr : 0 sg O ; 
+229 792 N M 2008 2 rr : 0 sg O ; 
+229 841 N M 2008 2 rr : 0 sg O ; 
+229 841 N M 2008 2 rr : 0 sg O ; 
+229 891 N M 2008 2 rr : 0 sg O ; 
+229 891 N M 2008 2 rr : 0 sg O ; 
+229 940 N M 2008 2 rr : 0 sg O ; 
+229 940 N M 2008 2 rr : 0 sg O ; 
+229 990 N M 2008 2 rr : 0 sg O ; 
+229 990 N M 2008 2 rr : 0 sg O ; 
+229 1040 N M 2008 2 rr : 0 sg O ; 
+229 1040 N M 2008 2 rr : 0 sg O ; 
+229 1089 N M 2008 2 rr : 0 sg O ; 
+229 1089 N M 2008 2 rr : 0 sg O ; 
+229 1139 N M 2008 2 rr : 0 sg O ; 
+229 1139 N M 2008 2 rr : 0 sg O ; 
+229 1191 N M 2008 2 rr : 0 sg O ; 
+229 1191 N M 2008 2 rr : 0 sg O ; 
+229 1241 N M 2008 2 rr : 0 sg O ; 
+229 1241 N M 2008 2 rr : 0 sg O ; 
+229 1290 N M 2008 2 rr : 0 sg O ; 
+229 1290 N M 2008 2 rr : 0 sg O ; 
+229 1340 N M 2008 2 rr : 0 sg O ; 
+229 1340 N M 2008 2 rr : 0 sg O ; 
+229 1390 N M 2008 2 rr : 0 sg O ; 
+229 1390 N M 2008 2 rr : 0 sg O ; 
+229 1439 N M 2008 2 rr : 0 sg O ; 
+229 1439 N M 2008 2 rr : 0 sg O ; 
+229 1513 N M 2008 2 rr : 0 sg O ; 
+229 194 N M 2 1321 rr : 0 sg O ; 
+2235 194 N M 2 1321 rr : 0 sg O ; F6_50
+Ji 
+343 1583 M 
+11.000 0 32 0.198 0 (All method directives following a class directive are assigned to the immediately)D 
+225 1676 M 
+0.114 0 (preceeding class directive, thereby forming the methods a class will gain.)A 
+343 1816 M 
+4.000 0 32 0.296 0 (In addition there are many ways to add methods to a class object \(cf. the methods)D 
+225 1909 M 
+5.000 0 32 0.350 0 (\204)D 
+/F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+242 1917 M 
+5.000 0 32 0.446 0 (DEFINE)D 
+F6_50
+Ji 
+410 1909 M 
+5.000 0 32 0.225 0 (\223, \204)D 
+F0_46
+Ji 
+477 1917 M 
+5.000 0 32 0.446 0 (MIXINCLASS)D 
+F6_50
+Ji 
+757 1909 M 
+5.000 0 32 0.357 0 (\223 and \204)D 
+F0_46
+Ji 
+914 1917 M 
+5.000 0 32 0.446 0 (SUBCLASS)D 
+F6_50
+Ji 
+1138 1909 M 
+5.000 0 32 0.135 0 (\223 of the Object Rexx class \204)D 
+F0_46
+Ji 
+1772 1917 M 
+5.000 0 32 0.446 0 (Class)D 
+F6_50
+Ji 
+1912 1909 M 
+5.000 0 32 0.250 0 (\223\) and even to)D 
+225 2002 M 
+2.000 0 32 0.176 0 (individual objects \(cf. the method \204)D 
+F0_46
+Ji 
+1000 2010 M 
+2.000 0 32 0.446 0 (SETMETHOD)D 
+F6_50
+Ji 
+1252 2002 M 
+2.000 0 32 0.200 0 (\223 of class \204)D 
+F0_46
+Ji 
+1491 2010 M 
+2.000 0 32 0.446 0 (Object)D 
+F6_50
+Ji 
+1659 2002 M 
+2.000 0 32 0.214 0 (\223 and \204)D 
+F0_46
+Ji 
+1809 2010 M 
+2.000 0 32 0.446 0 (ENHANCED)D 
+F6_50
+Ji 
+2033 2002 M 
+2.000 0 32 0.195 0 (\223 of class)D 
+225 2095 M 
+0.350 0 (\204)A 
+F0_46
+Ji 
+242 2103 M 
+0.446 0 (Class)A 
+F6_50
+Ji 
+382 2095 M 
+0.266 0 (\223\).)A 
+343 2235 M 
+5.000 0 32 0.237 0 (Figure 7 shows a program which adds the floating method \204)D 
+F0_46
+Ji 
+1721 2243 M 
+5.000 0 32 0.446 0 (METHOD1)D 
+F6_50
+Ji 
+1917 2235 M 
+5.000 0 32 0.383 0 (\223 to the )D 
+%%IncludeFont: Helvetica-Oblique
+/F9
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F9_50
+F9
+50 
+xF 
+F9_50
+Ji 
+2105 2235 M 
+5.000 0 32 0.100 0 (object)D 
+F6_50
+Ji 
+225 2329 M 
+1.000 0 32 0.210 0 (\204Object1\223 only. Because producing one-off-objects \(objects which possess methods which)D 
+225 2422 M 
+4.000 0 32 0.157 0 (are not defined with the appropriate class object\) might be dangerous in some situations)D 
+225 2515 M 
+2.000 0 32 0.390 0 (the \204)D 
+F0_46
+Ji 
+329 2523 M 
+2.000 0 32 0.446 0 (SETMETHOD)D 
+F6_50
+Ji 
+581 2515 M 
+2.000 0 32 0.302 0 (\223 method of class \204)D 
+F0_46
+Ji 
+1006 2523 M 
+2.000 0 32 0.446 0 (Object)D 
+F6_50
+Ji 
+1174 2515 M 
+2.000 0 32 0.273 0 (\223 is defined to be private. A private method can)D 
+225 2608 M 
+1.000 0 32 0.131 0 (only be invoked by sending it to itself, therefore a public \204)D 
+F0_46
+Ji 
+1503 2616 M 
+1.000 0 32 0.446 0 (SETMETHOD)D 
+F6_50
+Ji 
+1755 2608 M 
+1.000 0 32 0.150 0 (\223 method was defined)D 
+225 2701 M 
+1.000 0 32 0.118 0 (for class \204)D 
+F0_46
+Ji 
+445 2709 M 
+1.000 0 32 0.446 0 (.Test)D 
+F6_50
+Ji 
+585 2701 M 
+1.000 0 32 0.136 0 (\223 which forwards this message to its own superclass, effectively resending)D 
+225 2794 M 
+4.000 0 32 0.271 0 (itself the message but taking care that a superclass method \(from class \204)D 
+F0_46
+Ji 
+1899 2802 M 
+4.000 0 32 0.446 0 (Object)D 
+F6_50
+Ji 
+2067 2794 M 
+4.000 0 32 0.316 0 (\223 in this)D 
+225 2887 M 
+0.109 0 (case\) is chosen.)A 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (13)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 14 14
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2174 3232 rc %%IncludeFont: Courier
+/F0
+0.868 
+T 
+/Courier
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 201 M 
+0.238 0 (class Test, method INIT, variable set to: )A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F2
+0.868 
+T 
+/Courier-Bold
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+1136 201 M 
+0.238 0 (value from .Test)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 250 M 
+0.238 0 (self: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+308 250 M 
+0.238 0 (a TEST)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+446 250 M 
+0.238 0 ( super: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+630 250 M 
+0.238 0 (The Object class)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 349 M 
+0.238 0 (METHOD1: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+377 349 M 
+0.238 0 (value from method1)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 399 M 
+0.238 0 (self: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+308 399 M 
+0.238 0 (a TEST)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+446 399 M 
+0.238 0 ( super: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+630 399 M 
+0.238 0 (The TEST class)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 498 M 
+0.238 0 (class Test, method INIT, variable set to: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+1136 498 M 
+0.238 0 (value from .Test)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 548 M 
+0.238 0 (self: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+308 548 M 
+0.238 0 (a TEST)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+446 548 M 
+0.238 0 ( super: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+630 548 M 
+0.238 0 (The Object class)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 647 M 
+0.238 0 (RexxCode: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+400 647 M 
+0.238 0 (value from .Test)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 696 M 
+0.238 0 (self: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+308 696 M 
+0.238 0 (a TEST)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+446 696 M 
+0.238 0 ( super: )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+630 696 M 
+0.238 0 (The Object class)A 
+; 
+166 790 N M 2008 75 rr : 0.882 sg O ; : 0 0 2174 3232 rc %%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+170 796 M 
+0.109 0 (Figure 8: Object scope of methods assigned with SETMETHOD and DEFINE \(output\))A 
+; 
+165 195 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 862 N M 2009 2 rr : 0 sg O ; 
+165 195 N M 2 670 rr : 0 sg O ; 
+2171 195 N M 2 670 rr : 0 sg O ; %%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+161 962 M 
+-0.248 0 (5)A 
+279 962 M 
+0.068 0 (OBJECT SCOPES)A 
+F4_50
+Ji 
+279 1115 M 
+3.000 0 32 0.286 0 (If looking at the output in figure 8 it becomes clear that the )D 
+%%IncludeFont: Helvetica-Oblique
+/F8
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+1634 1115 M 
+3.000 0 32 0.108 0 (object scope)D 
+F4_50
+Ji 
+1919 1115 M 
+3.000 0 32 0.245 0 ( \(Flatscher,)D 
+161 1209 M 
+10.000 0 32 0.250 0 (1996\) is )D 
+F8_50
+Ji 
+375 1209 M 
+10.000 0 32 0.150 0 (different)D 
+F4_50
+Ji 
+557 1209 M 
+10.000 0 32 0.350 0 ( for method \204)D 
+/F0_46
+F0
+46 
+xF 
+F0_46
+Ji 
+875 1217 M 
+10.000 0 32 0.446 0 (METHOD1)D 
+F4_50
+Ji 
+1071 1209 M 
+10.000 0 32 0.346 0 (\223 and method \204)D 
+F0_46
+Ji 
+1431 1217 M 
+10.000 0 32 0.446 0 (METHOD2)D 
+F4_50
+Ji 
+1627 1209 M 
+10.000 0 32 0.277 0 (\223. This can be seen by)D 
+161 1302 M 
+9.000 0 32 0.186 0 (looking at the different value of the pseudo variable \204)D 
+F0_46
+Ji 
+1414 1310 M 
+9.000 0 32 0.446 0 (super)D 
+F4_50
+Ji 
+1554 1302 M 
+9.000 0 32 0.131 0 (\223 which points to the class)D 
+161 1395 M 
+1.000 0 32 0.264 0 (object \(towards the root of the class tree\) in which method resolution proceeds by default.)D 
+161 1488 M 
+4.000 0 32 0.198 0 (Another clue is watching the value of the object variable \204variable\223 which is different too,)D 
+161 1581 M 
+0.117 0 (because the object variables reside in different object scopes .)A 
+279 1721 M 
+6.000 0 32 0.122 0 (Adding methods to )D 
+F8_50
+Ji 
+730 1721 M 
+6.000 0 32 0.090 0 (instances )D 
+F4_50
+Ji 
+963 1721 M 
+6.000 0 32 0.091 0 (\(with )D 
+F0_46
+Ji 
+1089 1729 M 
+6.000 0 32 0.446 0 (SETMETHOD )D 
+F4_50
+Ji 
+1375 1721 M 
+6.000 0 32 0.216 0 (or )D 
+F0_46
+Ji 
+1440 1729 M 
+6.000 0 32 0.446 0 (ENHANCED)D 
+F4_50
+Ji 
+1664 1721 M 
+6.000 0 32 0.102 0 (\) always causes these)D 
+161 1814 M 
+11.000 0 32 0.118 0 (methods to execute within their own, )D 
+F8_50
+Ji 
+1054 1814 M 
+11.000 0 32 0.183 0 (separated)D 
+F4_50
+Ji 
+1278 1814 M 
+11.000 0 32 0.146 0 ( object scope together with the object)D 
+161 1908 M 
+14.000 0 32 0.267 0 (variables they define; the pseudo variable \204)D 
+F0_46
+Ji 
+1210 1916 M 
+14.000 0 32 0.446 0 (super)D 
+F4_50
+Ji 
+1350 1908 M 
+14.000 0 32 0.284 0 (\223 points to the class object of the)D 
+161 2001 M 
+5.000 0 32 0.141 0 (instance rather than to the class object\222s superclass which would be the class object for)D 
+161 2094 M 
+0.078 0 (class \204)A 
+F0_46
+Ji 
+306 2102 M 
+0.446 0 (Object)A 
+F4_50
+Ji 
+474 2094 M 
+0.124 0 (\223 in this particular example.)A 
+279 2234 M 
+26.000 0 32 0.177 0 (Adding methods to )D 
+F8_50
+Ji 
+791 2234 M 
+26.000 0 32 0.135 0 (class objects )D 
+F4_50
+Ji 
+1145 2234 M 
+26.000 0 32 0.258 0 (\(with )D 
+F0_46
+Ji 
+1293 2242 M 
+26.000 0 32 0.446 0 (DEFINE)D 
+F4_50
+Ji 
+1460 2234 M 
+26.000 0 32 0.100 0 (, )D 
+F0_46
+Ji 
+1514 2242 M 
+26.000 0 32 0.557 0 (SUBCLASS )D 
+F4_50
+Ji 
+1793 2234 M 
+26.000 0 32 0.216 0 (or )D 
+F0_46
+Ji 
+1878 2242 M 
+26.000 0 32 0.446 0 (MIXINCLASS)D 
+F4_50
+Ji 
+2158 2234 M 
+26.000 0 32 0.350 0 (\))D 
+161 2327 M 
+5.000 0 32 0.198 0 (incorporates these methods and the object variables these methods may define into the)D 
+161 2420 M 
+3.000 0 32 0.220 0 (object scope of the )D 
+F8_50
+Ji 
+611 2420 M 
+3.000 0 32 0.150 0 (class object)D 
+F4_50
+Ji 
+877 2420 M 
+3.000 0 32 1.100 0 ( )D 
+F8_50
+Ji 
+895 2420 M 
+3.000 0 32 0.033 0 (itself)D 
+F4_50
+Ji 
+998 2420 M 
+3.000 0 32 0.210 0 (. Instances created thereafter will have these added)D 
+161 2513 M 
+6.000 0 32 0.184 0 (methods available at the class\222 object scope! As an example see \204)D 
+F0_46
+Ji 
+1698 2521 M 
+6.000 0 32 0.446 0 (METHOD2)D 
+F4_50
+Ji 
+1894 2513 M 
+6.000 0 32 0.187 0 (\223 which gets)D 
+161 2607 M 
+11.000 0 32 0.179 0 (defined at runtime for the class object of the class \204)D 
+F0_46
+Ji 
+1409 2615 M 
+11.000 0 32 0.446 0 (Test)D 
+F4_50
+Ji 
+1521 2607 M 
+11.000 0 32 0.148 0 (\223 and is available for object)D 
+161 2700 M 
+7.000 0 32 0.350 0 (\204)D 
+F0_46
+Ji 
+178 2708 M 
+7.000 0 32 0.446 0 (Object2)D 
+F4_50
+Ji 
+374 2700 M 
+7.000 0 32 0.165 0 (\223 in figure 7 and 8, which got instantiated right after adding that new instance)D 
+161 2793 M 
+5.000 0 32 0.217 0 (method. Looking at the value of the pseudo variable \204)D 
+F0_46
+Ji 
+1396 2801 M 
+5.000 0 32 0.446 0 (super)D 
+F4_50
+Ji 
+1536 2793 M 
+5.000 0 32 0.186 0 (\223 reveals that the next class)D 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (14)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 15 15
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 207 M 
+5.000 0 32 0.175 0 (object to look up messages would be the one representing the class \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1831 215 M 
+5.000 0 32 0.446 0 (Object)D 
+F0_50
+Ji 
+1999 207 M 
+5.000 0 32 0.155 0 (\223, because)D 
+225 300 M 
+0.072 0 (this is \204)A 
+F2_46
+Ji 
+384 308 M 
+0.446 0 (Test)A 
+F0_50
+Ji 
+496 300 M 
+0.100 0 (\223\222s superclass.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+225 470 M 
+-0.248 0 (6)A 
+343 470 M 
+-0.043 0 (INTERFACING WITH SOM)A 
+F0_50
+Ji 
+343 624 M 
+3.000 0 32 0.169 0 (As Object Rexx is fully SOM enabled it is a simple task to utilize SOM or DSOM for)D 
+225 717 M 
+15.000 0 32 0.189 0 (that matter. One merely needs to define one Object Rexx class using the attribute)D 
+225 810 M 
+11.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 818 M 
+11.000 0 32 0.446 0 (EXTERNAL)D 
+F0_50
+Ji 
+466 810 M 
+11.000 0 32 0.210 0 (\223 indicating that access to SOM is desired and which class to use. At this)D 
+225 903 M 
+6.000 0 32 0.233 0 (moment the SOM environment becomes accessible and may be used e.g. to query the)D 
+225 997 M 
+4.000 0 32 0.128 0 (SOM interface repository which contains all SOM classes, their methods, arguments and)D 
+225 1090 M 
+4.000 0 32 0.278 0 (return values. It is easy to determine which part of the interface definitions one wants to)D 
+225 1183 M 
+0.087 0 (inspect.)A 
+: 0 0 2237 3232 rc %%IncludeFont: Courier-Bold
+/F6
+0.868 
+T 
+/Courier-Bold
+mF 
+/F6_38
+F6
+38 
+xF 
+F6_38
+Ji 
+234 1316 M 
+0.238 0 (/* querying the SOM interface repository with Object REXX */)A 
+; : 0 0 2237 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+234 1366 M 
+0.238 0 (aRepository = )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+556 1366 M 
+0.238 0 (.somClassMgrObject ~ _get_somInterfaceRepository)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1465 M 
+0.238 0 (SAY "repository:" pp\(aRepository\) "of class:" pp\(aRepository ~ class\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1514 M 
+0.238 0 (SAY)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1614 M 
+0.238 0 (aContainer = aRepository ~ )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+855 1614 M 
+0.238 0 (contents)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1039 1614 M 
+0.238 0 (\( "InterFaceDef", .true \))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1663 M 
+0.238 0 (SAY "aContainer:" pp\( aContainer \) "items" pp\( aContainer ~ items \))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1762 M 
+0.238 0 (i = 0)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1812 M 
+0.238 0 (length = LENGTH\( aContainer ~ items \))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1862 M 
+0.238 0 (DO anItem OVER aContainer       /* loop over array */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1911 M 
+0.238 0 (   i = i + 1)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1961 M 
+0.238 0 (   SAY RIGHT\( i, length\) "id:" LEFT\( pp\( anItem ~ )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+1384 1961 M 
+0.238 0 (_get_id)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1545 1961 M 
+0.238 0 (\), 35 \),)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2010 M 
+0.238 0 (      "name:" pp\( anItem ~ )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+855 2010 M 
+0.238 0 (_get_name)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1062 2010 M 
+0.238 0 ( \))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2060 M 
+0.238 0 (   anItem ~ )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+510 2060 M 
+0.238 0 (somFree)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+671 2060 M 
+0.238 0 (             /* free SOM object in hand        */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2109 M 
+0.238 0 (END)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2209 M 
+0.238 0 (aRepository ~ )A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+556 2209 M 
+0.238 0 (somFree)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+717 2209 M 
+0.238 0 (           /* free the repository SOM object */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2308 M 
+0.238 0 (:: ROUTINE pp; RETURN "[" || arg\( 1 \) || "]")A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2407 M 
+0.238 0 (/* --------------- class to get access to SOM ---------- */)A 
+; : 0 0 2237 3232 rc F6_38
+Ji 
+234 2457 M 
+0.238 0 (::CLASS Test                      PUBLIC  EXTERNAL        'SOM SOMObject')A 
+; 
+230 2500 N M 2007 75 rr : 0.882 sg O ; : 0 0 2237 3232 rc 234 2506 M 
+0.122 0 (Figure 9: Accessing the SOM interface repository and querying it)A 
+; 
+229 1311 N M 2008 2 rr : 0 sg O ; 
+229 1359 N M 2008 2 rr : 0 sg O ; 
+229 1359 N M 2008 2 rr : 0 sg O ; 
+229 1409 N M 2008 2 rr : 0 sg O ; 
+229 1409 N M 2008 2 rr : 0 sg O ; 
+229 1458 N M 2008 2 rr : 0 sg O ; 
+229 1458 N M 2008 2 rr : 0 sg O ; 
+229 1508 N M 2008 2 rr : 0 sg O ; 
+229 1508 N M 2008 2 rr : 0 sg O ; 
+229 1557 N M 2008 2 rr : 0 sg O ; 
+229 1557 N M 2008 2 rr : 0 sg O ; 
+229 1607 N M 2008 2 rr : 0 sg O ; 
+229 1607 N M 2008 2 rr : 0 sg O ; 
+229 1656 N M 2008 2 rr : 0 sg O ; 
+229 1656 N M 2008 2 rr : 0 sg O ; 
+229 1706 N M 2008 2 rr : 0 sg O ; 
+229 1706 N M 2008 2 rr : 0 sg O ; 
+229 1756 N M 2008 2 rr : 0 sg O ; 
+229 1756 N M 2008 2 rr : 0 sg O ; 
+229 1805 N M 2008 2 rr : 0 sg O ; 
+229 1805 N M 2008 2 rr : 0 sg O ; 
+229 1855 N M 2008 2 rr : 0 sg O ; 
+229 1855 N M 2008 2 rr : 0 sg O ; 
+229 1904 N M 2008 2 rr : 0 sg O ; 
+229 1904 N M 2008 2 rr : 0 sg O ; 
+229 1954 N M 2008 2 rr : 0 sg O ; 
+229 1954 N M 2008 2 rr : 0 sg O ; 
+229 2004 N M 2008 2 rr : 0 sg O ; 
+229 2004 N M 2008 2 rr : 0 sg O ; 
+229 2053 N M 2008 2 rr : 0 sg O ; 
+229 2053 N M 2008 2 rr : 0 sg O ; 
+229 2103 N M 2008 2 rr : 0 sg O ; 
+229 2103 N M 2008 2 rr : 0 sg O ; 
+229 2152 N M 2008 2 rr : 0 sg O ; 
+229 2152 N M 2008 2 rr : 0 sg O ; 
+229 2202 N M 2008 2 rr : 0 sg O ; 
+229 2202 N M 2008 2 rr : 0 sg O ; 
+229 2251 N M 2008 2 rr : 0 sg O ; 
+229 2251 N M 2008 2 rr : 0 sg O ; 
+229 2301 N M 2008 2 rr : 0 sg O ; 
+229 2301 N M 2008 2 rr : 0 sg O ; 
+229 2351 N M 2008 2 rr : 0 sg O ; 
+229 2351 N M 2008 2 rr : 0 sg O ; 
+229 2400 N M 2008 2 rr : 0 sg O ; 
+229 2400 N M 2008 2 rr : 0 sg O ; 
+229 2450 N M 2008 2 rr : 0 sg O ; 
+229 2450 N M 2008 2 rr : 0 sg O ; 
+229 2499 N M 2008 2 rr : 0 sg O ; 
+229 2499 N M 2008 2 rr : 0 sg O ; 
+229 2573 N M 2008 2 rr : 0 sg O ; 
+229 1311 N M 2 1264 rr : 0 sg O ; 
+2235 1311 N M 2 1264 rr : 0 sg O ; 343 2643 M 
+25.000 0 32 0.127 0 (Object Rexx uses and supplies the class definitions found in the program)D 
+225 2736 M 
+4.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+242 2744 M 
+4.000 0 32 0.446 0 (DLFClass.CMD)D 
+F0_50
+Ji 
+578 2736 M 
+4.000 0 32 0.231 0 (\223 for dealing with SOM datatypes. This file may be found in Object Rexx\222)D 
+225 2829 M 
+0.163 0 (home directory.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (15)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 16 16
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 207 M 
+4.000 0 32 0.246 0 (The program in figure 9 gets access to the SOM environment by defining the class)D 
+161 300 M 
+0.350 0 (\204)A 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+178 308 M 
+0.446 0 (Test)A 
+F0_50
+Ji 
+290 300 M 
+0.279 0 (\223 for representing the SOM class object \204)A 
+F2_46
+Ji 
+1199 308 M 
+0.446 0 (SOMObject)A 
+F0_50
+Ji 
+1451 300 M 
+0.221 0 (\223. Classes which represent other)A 
+161 394 M 
+3.000 0 32 0.148 0 (classes are called \204proxies\223. A proxy object forwards messages it does not understand to)D 
+161 487 M 
+11.000 0 32 0.202 0 (the object it represents. Figure 10 shows part of the possible results of querying the)D 
+161 580 M 
+0.110 0 (installed SOM-repository.)A 
+: 0 0 2110 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 713 M 
+0.238 0 (repository: [a Repository] of class: [The SOMProxy class])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 812 M 
+0.238 0 (aContainer: [an Array] items [374])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 862 M 
+0.238 0 (  1 id: [::SOMObject]                       name: [SOMObject])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 912 M 
+0.238 0 (  2 id: [::Sockets]                         name: [Sockets])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 961 M 
+0.238 0 (  3 id: [::AnyNetSockets]                   name: [AnyNetSockets])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1011 M 
+0.238 0 (  4 id: [::Contained]                       name: [Contained])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1060 M 
+0.238 0 (  5 id: [::AttributeDef]                    name: [AttributeDef])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1110 M 
+0.238 0 (  6 id: [::BOA]                             name: [BOA])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1159 M 
+0.238 0 (  7 id: [::SOMEEvent]                       name: [SOMEEvent])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1209 M 
+0.238 0 (  8 id: [::SOMEClientEvent]                 name: [SOMEClientEvent])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1259 M 
+0.238 0 (  9 id: [::Context]                         name: [Context])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1308 M 
+0.238 0 ( 10 id: [::ConstantDef]                     name: [ConstantDef])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1358 M 
+0.238 0 ( 11 id: [::Container]                       name: [Container])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1407 M 
+0.238 0 ( 12 id: [::SOMPEncoderDecoderAbstract]      name: [SOMPEncoderDecoderAbstract])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1457 M 
+0.238 0 ( 13 id: [::SOMPAttrEncoderDecoder]          name: [SOMPAttrEncoderDecoder])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1507 M 
+0.238 0 ( 14 id: [::SOMEEMan]                        name: [SOMEEMan])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1556 M 
+0.238 0 ( 15 id: [::SOMEEMRegisterData]              name: [SOMEEMRegisterData])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1606 M 
+0.238 0 ( 16 id: [::ExceptionDef]                    name: [ExceptionDef])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1655 M 
+0.238 0 ( 17 id: [::SOMPMediaInterfaceAbstract]      name: [SOMPMediaInterfaceAbstract])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1705 M 
+0.238 0 ( 18 id: [::SOMPFileMediaAbstract]           name: [SOMPFileMediaAbstract])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1754 M 
+0.238 0 ( 19 id: [::SOMPAsciiMediaInterface]         name: [SOMPAsciiMediaInterface])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1804 M 
+0.238 0 ( 20 id: [::SOMPBinaryFileMedia]             name: [SOMPBinaryFileMedia])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1854 M 
+0.238 0 ( 21 id: [::SOMPIOGroupMgrAbstract]          name: [SOMPIOGroupMgrAbstract])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1903 M 
+0.238 0 ( 22 id: [::SOMPAscii]                       name: [SOMPAscii])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 1953 M 
+0.238 0 ( 23 id: [::SOMPBinary]                      name: [SOMPBinary])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2002 M 
+0.238 0 ( 24 id: [::ImplementationDef]               name: [ImplementationDef])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2052 M 
+0.238 0 ( 25 id: [::ImplRepository]                  name: [ImplRepository])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2102 M 
+0.238 0 ( 26 id: [::InterfaceDef]                    name: [InterfaceDef])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2151 M 
+0.238 0 ( 27 id: [::SOMPKeyedSet]                    name: [SOMPKeyedSet])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2201 M 
+0.238 0 ( 28 id: [::SOMPIOGroup]                     name: [SOMPIOGroup])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2250 M 
+0.238 0 ( 29 id: [::IPXSockets]                      name: [IPXSockets])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2300 M 
+0.238 0 ( 30 id: [::dictKeyCharPjw]                  name: [dictKeyCharPjw])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2349 M 
+0.238 0 ( 31 id: [::SOMRLinearizable]                name: [SOMRLinearizable])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2399 M 
+0.238 0 ( 32 id: [::somf_MCollectible]               name: [somf_MCollectible])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2449 M 
+0.238 0 ( 33 id: [::somf_MLinkable]                  name: [somf_MLinkable])A 
+; : 0 0 2110 3232 rc F2_38
+Ji 
+170 2498 M 
+0.238 0 ( ------------------------------ cut ------------------------------------)A 
+; 
+166 2542 N M 1944 75 rr : 0.882 sg O ; : 0 0 2110 3232 rc 170 2548 M 
+0.133 0 (Figure 10: Accessing the SOM interface repository and querying it \(output\))A 
+; 
+165 708 N M 1945 2 rr : 0 sg O ; 
+165 2541 N M 1945 2 rr : 0 sg O ; 
+165 2615 N M 1945 2 rr : 0 sg O ; 
+165 708 N M 2 1909 rr : 0 sg O ; 
+2108 708 N M 2 1909 rr : 0 sg O ; /F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (16)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 17 17
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica-Bold
+/F0
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F0_58
+F0
+58 
+xF 
+F0_58
+Ji 
+225 213 M 
+-0.248 0 (7)A 
+343 213 M 
+-0.008 0 (INTERFACING WITH THE WORKPLACE SHELL)A 
+%%IncludeFont: Helvetica
+/F2
+0.940 
+T 
+/Helvetica
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+343 367 M 
+9.000 0 32 0.122 0 (Because OS/2\222s Workplace Shell is a user interface framework built with SOM, it)D 
+225 460 M 
+0.122 0 (becomes possible for Object Rexx programs to interact with WPS-objects by sending them)A 
+225 553 M 
+11.000 0 32 0.300 0 (the appropriate )D 
+%%IncludeFont: Helvetica-Oblique
+/F4
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+602 553 M 
+11.000 0 32 -0.300 0 (WPS)D 
+F2_50
+Ji 
+715 553 M 
+11.000 0 32 0.215 0 (-messages. As with SOM classes it is possible to specialise the)D 
+225 646 M 
+0.152 0 (behavior of WPS-classes by subclassing them and adding/overriding the desired methods.)A 
+225 739 M 
+4.000 0 32 0.316 0 (This way )D 
+F4_50
+Ji 
+447 739 M 
+4.000 0 32 0.191 0 (other )D 
+F2_50
+Ji 
+580 739 M 
+4.000 0 32 0.193 0 (WPS objects and WPS aware programs may start to utilize WPS-objects)D 
+225 833 M 
+8.000 0 32 0.258 0 (which in fact were created by Object Rexx and have Rexx code running in them! The)D 
+225 926 M 
+12.000 0 32 0.125 0 (Object Rexx developer even supplied a DLL to make interaction with the WPS even)D 
+225 1019 M 
+13.000 0 32 0.162 0 (simpler, by allowing direct reference via Object Rexx without the need to define the)D 
+225 1112 M 
+0.350 0 (\204)A 
+%%IncludeFont: Courier
+/F6
+0.848 
+T 
+/Courier
+mF 
+/F6_46
+F6
+46 
+xF 
+F6_46
+Ji 
+242 1120 M 
+0.446 0 (EXTERNAL)A 
+F2_50
+Ji 
+466 1112 M 
+0.110 0 (\223 attribute on class directives.)A 
+343 1252 M 
+5.000 0 32 0.277 0 (Figure 11 shows an example Rick McGuire once posted in the internet newsgroup)D 
+225 1345 M 
+6.000 0 32 0.350 0 (\204)D 
+F6_46
+Ji 
+242 1353 M 
+6.000 0 32 0.446 0 (comp.lang.rexx)D 
+F2_50
+Ji 
+634 1345 M 
+6.000 0 32 0.149 0 (\223 which implements a password protected WPS-folder in )D 
+F4_50
+Ji 
+1946 1345 M 
+6.000 0 32 0.083 0 (Object)D 
+F2_50
+Ji 
+2091 1345 M 
+6.000 0 32 0.100 0 ( )D 
+F4_50
+Ji 
+2111 1345 M 
+6.000 0 32 0.025 0 (Rexx)D 
+F2_50
+Ji 
+2225 1345 M 
+6.000 0 32 0.100 0 (!)D 
+225 1438 M 
+18.000 0 32 0.221 0 (This is done by specialising the WPS-folder object class with features \(behaviors\))D 
+225 1532 M 
+0.113 0 (described in terms of Object Rexx.)A 
+343 1672 M 
+0.090 0 (The logic is fairly simple:)A 
+225 1812 M 
+0.350 0 (-)A 
+343 1812 M 
+7.000 0 32 0.221 0 (class \204)D 
+F6_46
+Ji 
+496 1820 M 
+7.000 0 32 0.446 0 (VXPWPrompts)D 
+F2_50
+Ji 
+804 1812 M 
+7.000 0 32 0.234 0 (\223 handles input/output thru an OS/2 window \(used later on for)D 
+343 1905 M 
+0.098 0 (setting the password\) with the help of VX-Rexx in this example,)A 
+225 2045 M 
+0.350 0 (-)A 
+343 2045 M 
+2.000 0 32 0.078 0 (class \204)D 
+F6_46
+Ji 
+490 2053 M 
+2.000 0 32 0.446 0 (WPLockFolder)D 
+F2_50
+Ji 
+826 2045 M 
+2.000 0 32 0.171 0 (\223 subclasses the WPS-folder class object and merely \204catches\223)D 
+343 2138 M 
+1.000 0 32 0.152 0 (those WPS-messages \(starting with the string \204)D 
+F6_46
+Ji 
+1398 2146 M 
+1.000 0 32 0.446 0 (wp)D 
+F2_50
+Ji 
+1454 2138 M 
+1.000 0 32 0.135 0 (\223\) directed to the WPS-folder which)D 
+343 2232 M 
+4.000 0 32 0.253 0 (it is interested in; the two most important messages are of course the creation of a)D 
+343 2325 M 
+1.000 0 32 0.233 0 (password protected folder \(\204)D 
+F6_46
+Ji 
+975 2333 M 
+1.000 0 32 0.446 0 (INIT)D 
+F2_50
+Ji 
+1087 2325 M 
+1.000 0 32 0.258 0 (\223\) and opening \(\204)D 
+F6_46
+Ji 
+1464 2333 M 
+1.000 0 32 0.446 0 (wpOpen)D 
+F2_50
+Ji 
+1632 2325 M 
+1.000 0 32 0.250 0 (\223\) of such folders; note that)D 
+343 2418 M 
+22.000 0 32 0.350 0 (\204)D 
+F6_46
+Ji 
+360 2426 M 
+22.000 0 32 0.446 0 (WPLockFolder)D 
+F2_50
+Ji 
+696 2418 M 
+22.000 0 32 0.219 0 (\223 uses multiple inheritance to gain access to the functionality)D 
+343 2511 M 
+0.187 0 (\(behavior\) the \204)A 
+F6_46
+Ji 
+685 2519 M 
+0.446 0 (VXPWPrompts)A 
+F2_50
+Ji 
+993 2511 M 
+0.096 0 (\223 class defines.)A 
+225 2651 M 
+0.350 0 (-)A 
+343 2651 M 
+0.078 0 (class \204)A 
+F6_46
+Ji 
+488 2659 M 
+0.446 0 (SMPPWChange)A 
+F2_50
+Ji 
+796 2651 M 
+0.136 0 (\223 is used to place an icon in the password protected folder, which)A 
+343 2744 M 
+15.000 0 32 0.163 0 (- if opened \(double-clicked\) by the user - causes the password change dialog)D 
+343 2837 M 
+2.000 0 32 0.195 0 (\(associated via multiple inheritance with the \204)D 
+F6_46
+Ji 
+1359 2845 M 
+2.000 0 32 0.446 0 (WPLockFolder)D 
+F2_50
+Ji 
+1695 2837 M 
+2.000 0 32 0.208 0 (\223 object\) to be displayed)D 
+343 2930 M 
+0.145 0 (by sending the appropriate message to the password protected folder object.)A 
+/F2_42
+F2
+42 
+xF 
+F2_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (17)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 18 18
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 201 M 
+0.238 0 (/* */)A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 250 M 
+0.238 0 (call RXFuncAdd "VRLoadFuncs", "VROBJ", "VRLoadFuncs")A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 300 M 
+0.238 0 (call VRLoadFuncs)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 349 M 
+0.238 0 (environment['WPLOCKFOLDER'] = .WPLockFolder)A 
+; 
+166 443 N M 2008 50 rr : 0.937 sg O ; : 0 0 2174 3232 rc F0_38
+Ji 
+170 448 M 
+0.238 0 (::CLASS VXPWPrompts mixinclass object)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 498 M 
+0.238 0 (::METHOD init)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 548 M 
+0.238 0 ( expose buttons. default esc)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 597 M 
+0.238 0 (  self~init:super                      /* let super class initialize.       */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 647 M 
+0.238 0 (  self~initButtons)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 746 M 
+0.238 0 (::METHOD initButtons)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 796 M 
+0.238 0 ( expose buttons. default esc)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 845 M 
+0.238 0 (  default = 1                          /* Set up some default values for    */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 895 M 
+0.238 0 (  esc = 2                              /* the VX-REXX windows....           */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 944 M 
+0.238 0 (  buttons.0 = 2)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 994 M 
+0.238 0 (  buttons.default = 'Ok')A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1043 M 
+0.238 0 (  buttons.esc     = 'Cancel')A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1143 M 
+0.238 0 (::METHOD displayPrompt)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1192 M 
+0.238 0 ( expose buttons. default esc)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1242 M 
+0.238 0 ( use arg prompt, title)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1291 M 
+0.238 0 (                                       /* Display Password prompt           */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1341 M 
+0.238 0 (  rc = VRPrompt\('', prompt, 'ENTERPW', title, 'BUTTONS.', default, esc\))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1391 M 
+0.238 0 (  if rc = esc then                     /* cancel requested?                 */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1440 M 
+0.238 0 (   return .nil                         /* Yup, indicate no PW entered       */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1490 M 
+0.238 0 (  else)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1539 M 
+0.238 0 (   return enterPw                      /* Return entered PW.                */)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 1638 M 
+0.238 0 (::METHOD displayError)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1688 M 
+0.238 0 ( expose buttons. default esc)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1738 M 
+0.238 0 ( use arg title)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1787 M 
+0.238 0 (                                       /* Display error message for         */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1837 M 
+0.238 0 (                                       /*incorrect PW                       */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1886 M 
+0.238 0 (  )A 
+; : 0 0 2174 3232 rc /F2_33
+F2
+33 
+xF 
+F2_33
+Ji 
+216 1891 M 
+0.233 0 (return VRMessage\('', 'Incorrect Password Entered !!', title, 'E', 'BUTTONS.', default, esc\))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 1986 M 
+0.238 0 (/* ********************************************************** */)A 
+; 
+166 2029 N M 2008 51 rr : 0.937 sg O ; : 0 0 2174 3232 rc F0_38
+Ji 
+170 2035 M 
+0.238 0 (::CLASS WPLockFolder subclass WPFolder INHERIT VXPWPrompts)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 2085 M 
+0.238 0 (::METHOD wpclsQueryTitle CLASS)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2134 M 
+0.238 0 (  return 'LockFolder')A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 2233 M 
+0.238 0 (::METHOD init)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2283 M 
+0.238 0 ( expose password)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2333 M 
+0.238 0 (  self~init:super                      /* let superclass initialize 1t      */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2382 M 
+0.238 0 (                                       /* Create object to allow PW Change  */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2432 M 
+0.238 0 (  .smpPwChange~new\('Change Password', 'ICONFILE=C:\\OBJREXX\\PMREXX.ICO', self, 1\))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2481 M 
+0.238 0 (  if \\var\('PASSWORD'\) Then            /* PW initialized via SetupString?    */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 2531 M 
+0.238 0 (    password = ''                     /* Nope, give default ''              */)A 
+; 
+165 195 N M 2009 2 rr : 0 sg O ; 
+165 243 N M 2009 2 rr : 0 sg O ; 
+165 243 N M 2009 2 rr : 0 sg O ; 
+165 293 N M 2009 2 rr : 0 sg O ; 
+165 293 N M 2009 2 rr : 0 sg O ; 
+165 342 N M 2009 2 rr : 0 sg O ; 
+165 342 N M 2009 2 rr : 0 sg O ; 
+165 392 N M 2009 2 rr : 0 sg O ; 
+165 392 N M 2009 2 rr : 0 sg O ; 
+165 442 N M 2009 2 rr : 0 sg O ; 
+165 442 N M 2009 2 rr : 0 sg O ; 
+165 491 N M 2009 2 rr : 0 sg O ; 
+165 491 N M 2009 2 rr : 0 sg O ; 
+165 541 N M 2009 2 rr : 0 sg O ; 
+165 541 N M 2009 2 rr : 0 sg O ; 
+165 590 N M 2009 2 rr : 0 sg O ; 
+165 590 N M 2009 2 rr : 0 sg O ; 
+165 640 N M 2009 2 rr : 0 sg O ; 
+165 640 N M 2009 2 rr : 0 sg O ; 
+165 690 N M 2009 2 rr : 0 sg O ; 
+165 690 N M 2009 2 rr : 0 sg O ; 
+165 739 N M 2009 2 rr : 0 sg O ; 
+165 739 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 838 N M 2009 2 rr : 0 sg O ; 
+165 838 N M 2009 2 rr : 0 sg O ; 
+165 888 N M 2009 2 rr : 0 sg O ; 
+165 888 N M 2009 2 rr : 0 sg O ; 
+165 937 N M 2009 2 rr : 0 sg O ; 
+165 937 N M 2009 2 rr : 0 sg O ; 
+165 987 N M 2009 2 rr : 0 sg O ; 
+165 987 N M 2009 2 rr : 0 sg O ; 
+165 1037 N M 2009 2 rr : 0 sg O ; 
+165 1037 N M 2009 2 rr : 0 sg O ; 
+165 1086 N M 2009 2 rr : 0 sg O ; 
+165 1086 N M 2009 2 rr : 0 sg O ; 
+165 1136 N M 2009 2 rr : 0 sg O ; 
+165 1136 N M 2009 2 rr : 0 sg O ; 
+165 1185 N M 2009 2 rr : 0 sg O ; 
+165 1185 N M 2009 2 rr : 0 sg O ; 
+165 1235 N M 2009 2 rr : 0 sg O ; 
+165 1235 N M 2009 2 rr : 0 sg O ; 
+165 1285 N M 2009 2 rr : 0 sg O ; 
+165 1285 N M 2009 2 rr : 0 sg O ; 
+165 1334 N M 2009 2 rr : 0 sg O ; 
+165 1334 N M 2009 2 rr : 0 sg O ; 
+165 1384 N M 2009 2 rr : 0 sg O ; 
+165 1384 N M 2009 2 rr : 0 sg O ; 
+165 1433 N M 2009 2 rr : 0 sg O ; 
+165 1433 N M 2009 2 rr : 0 sg O ; 
+165 1483 N M 2009 2 rr : 0 sg O ; 
+165 1483 N M 2009 2 rr : 0 sg O ; 
+165 1532 N M 2009 2 rr : 0 sg O ; 
+165 1532 N M 2009 2 rr : 0 sg O ; 
+165 1582 N M 2009 2 rr : 0 sg O ; 
+165 1582 N M 2009 2 rr : 0 sg O ; 
+165 1632 N M 2009 2 rr : 0 sg O ; 
+165 1632 N M 2009 2 rr : 0 sg O ; 
+165 1681 N M 2009 2 rr : 0 sg O ; 
+165 1681 N M 2009 2 rr : 0 sg O ; 
+165 1731 N M 2009 2 rr : 0 sg O ; 
+165 1731 N M 2009 2 rr : 0 sg O ; 
+165 1780 N M 2009 2 rr : 0 sg O ; 
+165 1780 N M 2009 2 rr : 0 sg O ; 
+165 1830 N M 2009 2 rr : 0 sg O ; 
+165 1830 N M 2009 2 rr : 0 sg O ; 
+165 1880 N M 2009 2 rr : 0 sg O ; 
+165 1880 N M 2009 2 rr : 0 sg O ; 
+165 1929 N M 2009 2 rr : 0 sg O ; 
+165 1929 N M 2009 2 rr : 0 sg O ; 
+165 1979 N M 2009 2 rr : 0 sg O ; 
+165 1979 N M 2009 2 rr : 0 sg O ; 
+165 2028 N M 2009 2 rr : 0 sg O ; 
+165 2028 N M 2009 2 rr : 0 sg O ; 
+165 2078 N M 2009 2 rr : 0 sg O ; 
+165 2078 N M 2009 2 rr : 0 sg O ; 
+165 2127 N M 2009 2 rr : 0 sg O ; 
+165 2127 N M 2009 2 rr : 0 sg O ; 
+165 2177 N M 2009 2 rr : 0 sg O ; 
+165 2177 N M 2009 2 rr : 0 sg O ; 
+165 2227 N M 2009 2 rr : 0 sg O ; 
+165 2227 N M 2009 2 rr : 0 sg O ; 
+165 2276 N M 2009 2 rr : 0 sg O ; 
+165 2276 N M 2009 2 rr : 0 sg O ; 
+165 2326 N M 2009 2 rr : 0 sg O ; 
+165 2326 N M 2009 2 rr : 0 sg O ; 
+165 2375 N M 2009 2 rr : 0 sg O ; 
+165 2375 N M 2009 2 rr : 0 sg O ; 
+165 2425 N M 2009 2 rr : 0 sg O ; 
+165 2425 N M 2009 2 rr : 0 sg O ; 
+165 2475 N M 2009 2 rr : 0 sg O ; 
+165 2475 N M 2009 2 rr : 0 sg O ; 
+165 2524 N M 2009 2 rr : 0 sg O ; 
+165 2524 N M 2009 2 rr : 0 sg O ; 
+165 2574 N M 2009 2 rr : 0 sg O ; 
+165 2574 N M 2009 2 rr : 0 sg O ; 
+165 2623 N M 2009 2 rr : 0 sg O ; 
+165 2623 N M 2009 2 rr : 0 sg O ; 
+165 2673 N M 2009 2 rr : 0 sg O ; 
+165 195 N M 2 2480 rr : 0 sg O ; 
+2171 195 N M 2 2480 rr : 0 sg O ; %%IncludeFont: Helvetica
+/F5
+0.952 
+T 
+/Helvetica
+mF 
+/F5_42
+F5
+42 
+xF 
+F5_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (18)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 19 19
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2237 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+234 201 M 
+0.238 0 (::METHOD wpOpen)A 
+; : 0 0 2237 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+234 250 M 
+0.238 0 ( expose password)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 300 M 
+0.238 0 ( use arg handleContainer, view, params)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 349 M 
+0.238 0 ( if password == '' then                /* no password set?                  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 399 M 
+0.238 0 (   return self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+579 399 M 
+0.238 0 (wpOpen:super)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+855 399 M 
+0.238 0 (\(handleContainer, view, params\) /* go ahead and open this*/)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 448 M 
+0.238 0 (                                       /* Ask user for password.            */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 498 M 
+0.238 0 (  enterpw = self~displayPrompt\('Enter Password ...','Locked Folder Password'\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 548 M 
+0.238 0 (  if password = enterPw then Do        /* Was correct password entered      */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 597 M 
+0.238 0 (                                       /*Yup, forward to WPFolder top Open  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 647 M 
+0.238 0 (   return self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+579 647 M 
+0.238 0 (wpOpen:super)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+855 647 M 
+0.238 0 (\(handleContainer, view, params\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 696 M 
+0.238 0 (  End)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 746 M 
+0.238 0 (  else Do                              /* Incorrect pw entered.             */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 796 M 
+0.238 0 (   reply .false                        /* Return failure, and return to WPS */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 845 M 
+0.238 0 (   guard off)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 895 M 
+0.238 0 (   self~displayError\('LockFolder Error' password\) /* Now display error to user. */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 944 M 
+0.238 0 (  End)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1043 M 
+0.238 0 (::METHOD wpSetup)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1093 M 
+0.238 0 ( use arg setupString)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1143 M 
+0.238 0 ( strLength = .WPDLFULong~new\(256\)      /* Will allow for up to 256 cahr PW  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1192 M 
+0.238 0 (                                       /* Get INOUT String parm             */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1242 M 
+0.238 0 ( str = .WPDLFString~new~~_set_maxSize\(strLength\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1291 M 
+0.238 0 (                                       /* see if setup strings has PW       */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1341 M 
+0.238 0 ( if self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+441 1341 M 
+0.238 0 (wpScanSetupString)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+832 1341 M 
+0.238 0 (\(setupString, 'PASSWORD', str, strLength\)  then)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1391 M 
+0.238 0 (   self~password = str~asString        /* Yup, set password.                */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1440 M 
+0.238 0 (                                       )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1490 M 
+0.238 0 ( return self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+533 1490 M 
+0.238 0 (wpSetup:super)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+832 1490 M 
+0.238 0 (\(setupString\)/* Superclass does remainder.        */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 1589 M 
+0.238 0 (::METHOD scrollTitle unguarded )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+947 1589 M 
+0.238 0 (        /* unguarded, want to rn concurrently*/)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1638 M 
+0.238 0 ( title = self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+556 1638 M 
+0.238 0 (wpQueryTitle)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+832 1638 M 
+0.238 0 (             /* Get current title                 */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1688 M 
+0.238 0 ( do 2                                  /* Will scroll twice.                */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1738 M 
+0.238 0 (   do i = 1 to title~length            /* For length of title.              */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1787 M 
+0.238 0 (                                       /* display 1st 1 chars of title      */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1837 M 
+0.238 0 (      self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+487 1837 M 
+0.238 0 (wpSetTitle)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+717 1837 M 
+0.238 0 (\(right\(left\(title, i\), title~length\)\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1886 M 
+0.238 0 (   end                                 /* iincrement i.                     */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1936 M 
+0.238 0 ( end)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 2035 M 
+0.238 0 (::METHOD password ATTRIBUTE)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+855 2035 M 
+0.238 0 (            /* set/retrieve methods for password */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 2134 M 
+0.238 0 (::METHOD wpSaveState)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+694 2134 M 
+0.238 0 (                   /* Save the password data            */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2184 M 
+0.238 0 ( self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+372 2184 M 
+0.238 0 (wpSaveString)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+648 2184 M 
+0.238 0 (\(self~)A 
+; : 0 0 2237 3232 rc %%IncludeFont: Courier-Oblique
+/F4
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+786 2186 M 
+0.200 0 (somGetClassName)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1131 2184 M 
+0.238 0 (, 1, self~password\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2236 M 
+0.238 0 ( return self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+533 2236 M 
+0.238 0 (wpSaveState:super )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+947 2236 M 
+0.238 0 (        /* Let parent save any state.        */)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+234 2335 M 
+0.238 0 (::METHOD wpRestoreState)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2384 M 
+0.238 0 ( self~initButtons                      /* make sure OREXX side initialized. */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2434 M 
+0.238 0 ( size = .WPDLFULong~new                /* Get DLFUlong for size query.      */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2483 M 
+0.238 0 (                                       /* Retrive size of string for restor */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2533 M 
+0.238 0 ( self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+372 2533 M 
+0.238 0 (wpRestoreString)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+717 2533 M 
+0.238 0 (\(self~)A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+855 2535 M 
+0.200 0 (somGetClassName)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1200 2533 M 
+0.238 0 (, 1, .nil, size\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2585 M 
+0.238 0 (                                       /* Create DLFString large enough to  */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2634 M 
+0.238 0 (                                       /*  contain the string, plus NULL    */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2684 M 
+0.238 0 ( str = .WPDLFString~new~~_set_maxSize\(size+1\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2733 M 
+0.238 0 (                                       /* Now get saved password.           */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2783 M 
+0.238 0 ( self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+372 2783 M 
+0.238 0 (wpRestoreString)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+717 2783 M 
+0.238 0 (\(self~)A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+855 2785 M 
+0.200 0 (somGetClassName)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+1200 2783 M 
+0.238 0 (, 1, str, size\))A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2835 M 
+0.238 0 ( self~password = str~asString          /* Save password state value.        */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2884 M 
+0.238 0 (                                       /* let parent restore state.         */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2934 M 
+0.238 0 ( return self~)A 
+; : 0 0 2237 3232 rc F0_38
+Ji 
+533 2934 M 
+0.238 0 (wpRestoreState:super)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+993 2934 M 
+0.238 0 (\(arg\(1\)\))A 
+; 
+229 194 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 243 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 293 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 342 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 392 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 442 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 491 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 541 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 590 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 640 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 690 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 739 N M 2008 2 rr : 0 sg O ; 
+229 789 N M 2008 2 rr : 0 sg O ; 
+229 789 N M 2008 2 rr : 0 sg O ; 
+229 838 N M 2008 2 rr : 0 sg O ; 
+229 838 N M 2008 2 rr : 0 sg O ; 
+229 888 N M 2008 2 rr : 0 sg O ; 
+229 888 N M 2008 2 rr : 0 sg O ; 
+229 937 N M 2008 2 rr : 0 sg O ; 
+229 937 N M 2008 2 rr : 0 sg O ; 
+229 987 N M 2008 2 rr : 0 sg O ; 
+229 987 N M 2008 2 rr : 0 sg O ; 
+229 1037 N M 2008 2 rr : 0 sg O ; 
+229 1037 N M 2008 2 rr : 0 sg O ; 
+229 1086 N M 2008 2 rr : 0 sg O ; 
+229 1086 N M 2008 2 rr : 0 sg O ; 
+229 1136 N M 2008 2 rr : 0 sg O ; 
+229 1136 N M 2008 2 rr : 0 sg O ; 
+229 1185 N M 2008 2 rr : 0 sg O ; 
+229 1185 N M 2008 2 rr : 0 sg O ; 
+229 1235 N M 2008 2 rr : 0 sg O ; 
+229 1235 N M 2008 2 rr : 0 sg O ; 
+229 1285 N M 2008 2 rr : 0 sg O ; 
+229 1285 N M 2008 2 rr : 0 sg O ; 
+229 1334 N M 2008 2 rr : 0 sg O ; 
+229 1334 N M 2008 2 rr : 0 sg O ; 
+229 1384 N M 2008 2 rr : 0 sg O ; 
+229 1384 N M 2008 2 rr : 0 sg O ; 
+229 1433 N M 2008 2 rr : 0 sg O ; 
+229 1433 N M 2008 2 rr : 0 sg O ; 
+229 1483 N M 2008 2 rr : 0 sg O ; 
+229 1483 N M 2008 2 rr : 0 sg O ; 
+229 1532 N M 2008 2 rr : 0 sg O ; 
+229 1532 N M 2008 2 rr : 0 sg O ; 
+229 1582 N M 2008 2 rr : 0 sg O ; 
+229 1582 N M 2008 2 rr : 0 sg O ; 
+229 1632 N M 2008 2 rr : 0 sg O ; 
+229 1632 N M 2008 2 rr : 0 sg O ; 
+229 1681 N M 2008 2 rr : 0 sg O ; 
+229 1681 N M 2008 2 rr : 0 sg O ; 
+229 1731 N M 2008 2 rr : 0 sg O ; 
+229 1731 N M 2008 2 rr : 0 sg O ; 
+229 1780 N M 2008 2 rr : 0 sg O ; 
+229 1780 N M 2008 2 rr : 0 sg O ; 
+229 1830 N M 2008 2 rr : 0 sg O ; 
+229 1830 N M 2008 2 rr : 0 sg O ; 
+229 1880 N M 2008 2 rr : 0 sg O ; 
+229 1880 N M 2008 2 rr : 0 sg O ; 
+229 1929 N M 2008 2 rr : 0 sg O ; 
+229 1929 N M 2008 2 rr : 0 sg O ; 
+229 1979 N M 2008 2 rr : 0 sg O ; 
+229 1979 N M 2008 2 rr : 0 sg O ; 
+229 2028 N M 2008 2 rr : 0 sg O ; 
+229 2028 N M 2008 2 rr : 0 sg O ; 
+229 2078 N M 2008 2 rr : 0 sg O ; 
+229 2078 N M 2008 2 rr : 0 sg O ; 
+229 2127 N M 2008 2 rr : 0 sg O ; 
+229 2127 N M 2008 2 rr : 0 sg O ; 
+229 2177 N M 2008 2 rr : 0 sg O ; 
+229 2177 N M 2008 2 rr : 0 sg O ; 
+229 2229 N M 2008 2 rr : 0 sg O ; 
+229 2229 N M 2008 2 rr : 0 sg O ; 
+229 2278 N M 2008 2 rr : 0 sg O ; 
+229 2278 N M 2008 2 rr : 0 sg O ; 
+229 2328 N M 2008 2 rr : 0 sg O ; 
+229 2328 N M 2008 2 rr : 0 sg O ; 
+229 2377 N M 2008 2 rr : 0 sg O ; 
+229 2377 N M 2008 2 rr : 0 sg O ; 
+229 2427 N M 2008 2 rr : 0 sg O ; 
+229 2427 N M 2008 2 rr : 0 sg O ; 
+229 2477 N M 2008 2 rr : 0 sg O ; 
+229 2477 N M 2008 2 rr : 0 sg O ; 
+229 2526 N M 2008 2 rr : 0 sg O ; 
+229 2526 N M 2008 2 rr : 0 sg O ; 
+229 2578 N M 2008 2 rr : 0 sg O ; 
+229 2578 N M 2008 2 rr : 0 sg O ; 
+229 2627 N M 2008 2 rr : 0 sg O ; 
+229 2627 N M 2008 2 rr : 0 sg O ; 
+229 2677 N M 2008 2 rr : 0 sg O ; 
+229 2677 N M 2008 2 rr : 0 sg O ; 
+229 2727 N M 2008 2 rr : 0 sg O ; 
+229 2727 N M 2008 2 rr : 0 sg O ; 
+229 2776 N M 2008 2 rr : 0 sg O ; 
+229 2776 N M 2008 2 rr : 0 sg O ; 
+229 2828 N M 2008 2 rr : 0 sg O ; 
+229 2828 N M 2008 2 rr : 0 sg O ; 
+229 2877 N M 2008 2 rr : 0 sg O ; 
+229 2877 N M 2008 2 rr : 0 sg O ; 
+229 2927 N M 2008 2 rr : 0 sg O ; 
+229 2927 N M 2008 2 rr : 0 sg O ; 
+229 2977 N M 2008 2 rr : 0 sg O ; 
+229 194 N M 2 2785 rr : 0 sg O ; 
+2235 194 N M 2 2785 rr : 0 sg O ; %%IncludeFont: Helvetica
+/F6
+0.952 
+T 
+/Helvetica
+mF 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (19)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 20 20
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+
+166 195 N M 2008 50 rr : 0.937 sg O ; : 0 0 2174 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 201 M 
+0.238 0 (::CLASS SMPPWChange subclass WPAbstract)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+170 250 M 
+0.238 0 (::METHOD wpOpen)A 
+; : 0 0 2174 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 300 M 
+0.238 0 ( use arg handleContainer, view, params)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 349 M 
+0.238 0 ( if view \\= 2  & view \\= 3 then Do     /* Opening Default view? Dbl-click   */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 399 M 
+0.238 0 (   lockf = self~)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+538 399 M 
+0.238 0 (wpQueryFolder          )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+1067 399 M 
+0.238 0 (/* Get our conatining lock folder    */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 448 M 
+0.238 0 (                                       /* Ask for new password              */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 498 M 
+0.238 0 (   newpw = lockf~displayPrompt\('Enter New Password', 'New LockFolder Password'\))A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 548 M 
+0.238 0 (   if newpw \\= .nil Then Do            /* Get a new password?               */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 597 M 
+0.238 0 (     lockf~password = newpw            /* Yup, set new pw.                  */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 647 M 
+0.238 0 (     lockF~)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+423 647 M 
+0.238 0 (wpSaveImmediate    )A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+860 647 M 
+0.238 0 (         /* Save object state \(PW\)            */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 696 M 
+0.238 0 (   End)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 746 M 
+0.238 0 (   return 0)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 796 M 
+0.238 0 ( End)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 845 M 
+0.238 0 ( else                                  /* Forward wpOpen to super class to handle. */)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+170 895 M 
+0.238 0 (   return self~)A 
+; : 0 0 2174 3232 rc F0_38
+Ji 
+515 895 M 
+0.238 0 (wpOpen:super)A 
+; : 0 0 2174 3232 rc F2_38
+Ji 
+791 895 M 
+0.238 0 (\(handleContainer, view, params\))A 
+; 
+166 988 N M 2008 199 rr : 0.882 sg O ; : 0 0 2174 3232 rc %%IncludeFont: Helvetica
+/F4
+0.940 
+T 
+/Helvetica
+mF 
+/F4_50
+F4
+50 
+xF 
+F4_50
+Ji 
+170 994 M 
+5.000 0 32 0.248 0 (Figure 11: Password Protected Folder in Object Rexx \(source: Rick McGuire, posted in)D 
+; : 0 0 2174 3232 rc F4_50
+Ji 
+170 1056 M 
+3.000 0 32 0.221 0 (the internet newsgroup on "Date: 10 Aug 1995 22:18:09 GMT", "Subject: Re: A practical)D 
+; : 0 0 2174 3232 rc F4_50
+Ji 
+170 1118 M 
+0.134 0 (example of ORexx?"\))A 
+; 
+165 194 N M 2009 2 rr : 0 sg O ; 
+165 243 N M 2009 2 rr : 0 sg O ; 
+165 243 N M 2009 2 rr : 0 sg O ; 
+165 293 N M 2009 2 rr : 0 sg O ; 
+165 293 N M 2009 2 rr : 0 sg O ; 
+165 342 N M 2009 2 rr : 0 sg O ; 
+165 342 N M 2009 2 rr : 0 sg O ; 
+165 392 N M 2009 2 rr : 0 sg O ; 
+165 392 N M 2009 2 rr : 0 sg O ; 
+165 442 N M 2009 2 rr : 0 sg O ; 
+165 442 N M 2009 2 rr : 0 sg O ; 
+165 491 N M 2009 2 rr : 0 sg O ; 
+165 491 N M 2009 2 rr : 0 sg O ; 
+165 541 N M 2009 2 rr : 0 sg O ; 
+165 541 N M 2009 2 rr : 0 sg O ; 
+165 590 N M 2009 2 rr : 0 sg O ; 
+165 590 N M 2009 2 rr : 0 sg O ; 
+165 640 N M 2009 2 rr : 0 sg O ; 
+165 640 N M 2009 2 rr : 0 sg O ; 
+165 690 N M 2009 2 rr : 0 sg O ; 
+165 690 N M 2009 2 rr : 0 sg O ; 
+165 739 N M 2009 2 rr : 0 sg O ; 
+165 739 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 789 N M 2009 2 rr : 0 sg O ; 
+165 838 N M 2009 2 rr : 0 sg O ; 
+165 838 N M 2009 2 rr : 0 sg O ; 
+165 888 N M 2009 2 rr : 0 sg O ; 
+165 888 N M 2009 2 rr : 0 sg O ; 
+165 937 N M 2009 2 rr : 0 sg O ; 
+165 937 N M 2009 2 rr : 0 sg O ; 
+165 987 N M 2009 2 rr : 0 sg O ; 
+165 987 N M 2009 2 rr : 0 sg O ; 
+165 1185 N M 2009 2 rr : 0 sg O ; 
+165 194 N M 2 993 rr : 0 sg O ; 
+2171 194 N M 2 993 rr : 0 sg O ; F4_50
+Ji 
+279 1255 M 
+4.000 0 32 0.142 0 (All WPS-messages not intercepted by the Object Rexx program are handled by the)D 
+161 1348 M 
+10.000 0 32 0.181 0 (appropriate WPS classes due to the OO-method resolution. This example shows how)D 
+161 1441 M 
+6.000 0 32 0.183 0 (powerful true object orientation \(in this case inheritance\) is, even more, how impressive)D 
+161 1534 M 
+7.000 0 32 0.127 0 (the object oriented features of Object Rexx are! It should also demonstrate how Object)D 
+161 1627 M 
+0.229 0 (Rexx extends the notion of scripting into the object oriented world by allowing it to be used)A 
+161 1720 M 
+0.126 0 (as a scripting language for object oriented systems.)A 
+%%IncludeFont: Helvetica-Bold
+/F6
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F6_58
+F6
+58 
+xF 
+F6_58
+Ji 
+161 1890 M 
+-0.248 0 (8)A 
+279 1890 M 
+-0.038 0 (TWO LITTLE UTILITIES RELATED TO CLASSES: ISA AND ISCLASS)A 
+F4_50
+Ji 
+279 2044 M 
+9.000 0 32 0.174 0 (While developing Object Rexx programs many times it becomes necessary to be)D 
+161 2137 M 
+0.138 0 (able to tell whether an object is of a specific class \(or its superclasses\), and at times it may)A 
+161 2230 M 
+0.146 0 (become important to learn at runtime whether an object in hand is a )A 
+%%IncludeFont: Helvetica-Oblique
+/F8
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F8_50
+F8
+50 
+xF 
+F8_50
+Ji 
+1680 2230 M 
+0.066 0 (class object)A 
+F4_50
+Ji 
+1942 2230 M 
+0.100 0 (.)A 
+279 2370 M 
+1.000 0 32 0.248 0 (Figure 12 depicts two routines where \204)D 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1142 2378 M 
+1.000 0 32 0.446 0 (IsA)D 
+F4_50
+Ji 
+1226 2370 M 
+1.000 0 32 0.264 0 (\223 determines whether an object \(or a class)D 
+161 2463 M 
+10.000 0 32 0.207 0 (object\) belongs to the class of the object given as the second argument. The routine)D 
+161 2557 M 
+1.000 0 32 0.350 0 (\204)D 
+F2_46
+Ji 
+178 2565 M 
+1.000 0 32 0.446 0 (IsClass)D 
+F4_50
+Ji 
+374 2557 M 
+1.000 0 32 0.156 0 (\223 determines whether an object is in effect a class object by attempting to send it)D 
+161 2650 M 
+0.110 0 (messages which allow for determining this fact.)A 
+/F4_42
+F4
+42 
+xF 
+F4_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (20)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 21 21
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+343 207 M 
+11.000 0 32 0.283 0 (There are also two floating methods defined, which may be used to be defined)D 
+225 300 M 
+14.000 0 32 0.143 0 (dynamically to classes and which allow for using the message form \204)D 
+%%IncludeFont: Courier
+/F2
+0.848 
+T 
+/Courier
+mF 
+/F2_46
+F2
+46 
+xF 
+F2_46
+Ji 
+1903 308 M 
+14.000 0 32 0.446 0 (self ~ IsA\()D 
+225 402 M 
+0.446 0 (otherClass \))A 
+F0_50
+Ji 
+561 394 M 
+0.214 0 (\223 and \204)A 
+F2_46
+Ji 
+707 402 M 
+0.446 0 (self ~ IsClass)A 
+F0_50
+Ji 
+1099 394 M 
+0.225 0 (\223.)A 
+: 0 0 2237 3232 rc %%IncludeFont: Courier-Bold
+/F4
+0.868 
+T 
+/Courier-Bold
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+234 527 M 
+0.238 0 (/* IsA_IsClass.cmd */)A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+234 626 M 
+0.238 0 (:: METHOD IsA  )A 
+; : 0 0 2237 3232 rc /F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+579 626 M 
+0.238 0 (                   /* see routine for description */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 676 M 
+0.238 0 (   USE ARG SuperClassID)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 725 M 
+0.238 0 (   RETURN isA\(self, SuperClassID\) /* call routine to do the work */)A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+234 824 M 
+0.238 0 (:: METHOD IsClass )A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+648 824 M 
+0.238 0 (                /* see routine for description */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 874 M 
+0.238 0 (   RETURN isClass\(self\)           /* call routine to do the work */)A 
+; : 0 0 2237 3232 rc F4_38
+Ji 
+234 973 M 
+0.238 0 (:: ROUTINE IsA                   PUBLIC)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1023 M 
+0.238 0 (   USE ARG SubClass, SuperClassID, internal_flag)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1122 M 
+0.238 0 (   /* execute on very first invocation only \("internal_flag" is undefined\),)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1172 M 
+0.238 0 (      make sure to turn an object argument into its own class object for)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1221 M 
+0.238 0 (      testing     */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1320 M 
+0.238 0 (   IF internal_flag <> .true THEN       /* check for class objects            */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1370 M 
+0.238 0 (   DO)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1419 M 
+0.238 0 (       IF \\IsClass\(SubClass\)     THEN SubClass     = SubClass ~ class)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1519 M 
+0.238 0 (       IF \\IsClass\(SuperClassID\) THEN SuperClassID = SuperClassID ~ class ~ ID)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1568 M 
+0.238 0 (                                 ELSE SuperClassID = SuperClassID ~         ID)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1618 M 
+0.238 0 (   END)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1717 M 
+0.238 0 (   IF SubClass~ID = SuperClassID THEN   /* o.k., same class                   */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1767 M 
+0.238 0 (      RETURN .true)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1866 M 
+0.238 0 (   DO SuperClass OVER SubClass~SUPERCLASSES    /* test immediate superclasses */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1915 M 
+0.238 0 (      IF SuperClass~ID = SuperClassID THEN)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 1965 M 
+0.238 0 (         RETURN .true)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2014 M 
+0.238 0 (   END)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2114 M 
+0.238 0 (   /* not found, maybe one of the superclasses preceding the immediate ones ? */)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2163 M 
+0.238 0 (   DO SuperClass OVER SubClass~SUPERCLASSES)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2213 M 
+0.238 0 (      IF IsA\(SuperClass, SuperClassID, .true\) THEN)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2262 M 
+0.238 0 (         RETURN .true)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2312 M 
+0.238 0 (   END)A 
+; : 0 0 2237 3232 rc F2_38
+Ji 
+234 2411 M 
+0.238 0 (   RETURN .false                        /* nope                               */)A 
+; 
+229 522 N M 2008 2 rr : 0 sg O ; 
+229 570 N M 2008 2 rr : 0 sg O ; 
+229 570 N M 2008 2 rr : 0 sg O ; 
+229 619 N M 2008 2 rr : 0 sg O ; 
+229 619 N M 2008 2 rr : 0 sg O ; 
+229 669 N M 2008 2 rr : 0 sg O ; 
+229 669 N M 2008 2 rr : 0 sg O ; 
+229 719 N M 2008 2 rr : 0 sg O ; 
+229 719 N M 2008 2 rr : 0 sg O ; 
+229 768 N M 2008 2 rr : 0 sg O ; 
+229 768 N M 2008 2 rr : 0 sg O ; 
+229 818 N M 2008 2 rr : 0 sg O ; 
+229 818 N M 2008 2 rr : 0 sg O ; 
+229 867 N M 2008 2 rr : 0 sg O ; 
+229 867 N M 2008 2 rr : 0 sg O ; 
+229 917 N M 2008 2 rr : 0 sg O ; 
+229 917 N M 2008 2 rr : 0 sg O ; 
+229 966 N M 2008 2 rr : 0 sg O ; 
+229 966 N M 2008 2 rr : 0 sg O ; 
+229 1016 N M 2008 2 rr : 0 sg O ; 
+229 1016 N M 2008 2 rr : 0 sg O ; 
+229 1066 N M 2008 2 rr : 0 sg O ; 
+229 1066 N M 2008 2 rr : 0 sg O ; 
+229 1115 N M 2008 2 rr : 0 sg O ; 
+229 1115 N M 2008 2 rr : 0 sg O ; 
+229 1165 N M 2008 2 rr : 0 sg O ; 
+229 1165 N M 2008 2 rr : 0 sg O ; 
+229 1214 N M 2008 2 rr : 0 sg O ; 
+229 1214 N M 2008 2 rr : 0 sg O ; 
+229 1264 N M 2008 2 rr : 0 sg O ; 
+229 1264 N M 2008 2 rr : 0 sg O ; 
+229 1314 N M 2008 2 rr : 0 sg O ; 
+229 1314 N M 2008 2 rr : 0 sg O ; 
+229 1363 N M 2008 2 rr : 0 sg O ; 
+229 1363 N M 2008 2 rr : 0 sg O ; 
+229 1413 N M 2008 2 rr : 0 sg O ; 
+229 1413 N M 2008 2 rr : 0 sg O ; 
+229 1462 N M 2008 2 rr : 0 sg O ; 
+229 1462 N M 2008 2 rr : 0 sg O ; 
+229 1512 N M 2008 2 rr : 0 sg O ; 
+229 1512 N M 2008 2 rr : 0 sg O ; 
+229 1561 N M 2008 2 rr : 0 sg O ; 
+229 1561 N M 2008 2 rr : 0 sg O ; 
+229 1611 N M 2008 2 rr : 0 sg O ; 
+229 1611 N M 2008 2 rr : 0 sg O ; 
+229 1661 N M 2008 2 rr : 0 sg O ; 
+229 1661 N M 2008 2 rr : 0 sg O ; 
+229 1710 N M 2008 2 rr : 0 sg O ; 
+229 1710 N M 2008 2 rr : 0 sg O ; 
+229 1760 N M 2008 2 rr : 0 sg O ; 
+229 1760 N M 2008 2 rr : 0 sg O ; 
+229 1809 N M 2008 2 rr : 0 sg O ; 
+229 1809 N M 2008 2 rr : 0 sg O ; 
+229 1859 N M 2008 2 rr : 0 sg O ; 
+229 1859 N M 2008 2 rr : 0 sg O ; 
+229 1909 N M 2008 2 rr : 0 sg O ; 
+229 1909 N M 2008 2 rr : 0 sg O ; 
+229 1958 N M 2008 2 rr : 0 sg O ; 
+229 1958 N M 2008 2 rr : 0 sg O ; 
+229 2008 N M 2008 2 rr : 0 sg O ; 
+229 2008 N M 2008 2 rr : 0 sg O ; 
+229 2057 N M 2008 2 rr : 0 sg O ; 
+229 2057 N M 2008 2 rr : 0 sg O ; 
+229 2107 N M 2008 2 rr : 0 sg O ; 
+229 2107 N M 2008 2 rr : 0 sg O ; 
+229 2156 N M 2008 2 rr : 0 sg O ; 
+229 2156 N M 2008 2 rr : 0 sg O ; 
+229 2206 N M 2008 2 rr : 0 sg O ; 
+229 2206 N M 2008 2 rr : 0 sg O ; 
+229 2256 N M 2008 2 rr : 0 sg O ; 
+229 2256 N M 2008 2 rr : 0 sg O ; 
+229 2305 N M 2008 2 rr : 0 sg O ; 
+229 2305 N M 2008 2 rr : 0 sg O ; 
+229 2355 N M 2008 2 rr : 0 sg O ; 
+229 2355 N M 2008 2 rr : 0 sg O ; 
+229 2404 N M 2008 2 rr : 0 sg O ; 
+229 2404 N M 2008 2 rr : 0 sg O ; 
+229 2454 N M 2008 2 rr : 0 sg O ; 
+229 522 N M 2 1934 rr : 0 sg O ; 
+2235 522 N M 2 1934 rr : 0 sg O ; /F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (21)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 22 22
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+: 0 0 2173 3232 rc %%IncludeFont: Courier-Bold
+/F0
+0.868 
+T 
+/Courier-Bold
+mF 
+/F0_38
+F0
+38 
+xF 
+F0_38
+Ji 
+170 201 M 
+0.238 0 (:: ROUTINE IsClass               PUBLIC)A 
+; : 0 0 2173 3232 rc %%IncludeFont: Courier
+/F2
+0.868 
+T 
+/Courier
+mF 
+/F2_38
+F2
+38 
+xF 
+F2_38
+Ji 
+170 250 M 
+0.238 0 (   USE ARG object)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 349 M 
+0.238 0 (   /* if argument is a plain object NOMETHOD will be raised  */)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 399 M 
+0.238 0 (   SIGNAL ON  NOMETHOD NAME nomethod_IsClass)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 448 M 
+0.238 0 (   tmp =  object ~ QUERYMIXINCLASS      /* try class' method QUERYMIXINCLASS  */)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 548 M 
+0.238 0 (   /* take care of the case that we have an object of type .directory in hand)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 597 M 
+0.238 0 (      which has an interesting UNKNOWN method implemented                     */)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 647 M 
+0.238 0 (   SIGNAL ON  NOMETHOD NAME nomethod_IsClass2)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 696 M 
+0.238 0 (   object ~ ENTRY\( "id" \)               /* use a .directory instance method   */)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 796 M 
+0.238 0 (   RETURN .false        /* testing a directorylike object !                   */)A 
+; : 0 0 2173 3232 rc %%IncludeFont: Courier-Oblique
+/F4
+0.816 
+T 
+/Courier-Oblique
+mF 
+/F4_38
+F4
+38 
+xF 
+F4_38
+Ji 
+170 897 M 
+0.200 0 (NOMETHOD_IsClass:   )A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+630 895 M 
+0.238 0 (    /* not a class object, method QUERYMIXINCLASS unknown */)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 946 M 
+0.238 0 (   RETURN .false)A 
+; : 0 0 2173 3232 rc F4_38
+Ji 
+170 1048 M 
+0.200 0 (NOMETHOD_IsClass2:     )A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+699 1046 M 
+0.238 0 ( /* a class object, does not understand the directory message*/)A 
+; : 0 0 2173 3232 rc F2_38
+Ji 
+170 1097 M 
+0.238 0 (   RETURN .true)A 
+; 
+166 1191 N M 2007 136 rr : 0.882 sg O ; : 0 0 2173 3232 rc %%IncludeFont: Helvetica
+/F6
+0.940 
+T 
+/Helvetica
+mF 
+/F6_50
+F6
+50 
+xF 
+F6_50
+Ji 
+170 1197 M 
+1.000 0 32 0.261 0 (Figure 12: Determining whether \(class\) object is of a specific kind and/or if object in hand)D 
+; : 0 0 2173 3232 rc F6_50
+Ji 
+170 1259 M 
+0.064 0 (is a class object)A 
+; 
+165 194 N M 2008 2 rr : 0 sg O ; 
+165 243 N M 2008 2 rr : 0 sg O ; 
+165 243 N M 2008 2 rr : 0 sg O ; 
+165 293 N M 2008 2 rr : 0 sg O ; 
+165 293 N M 2008 2 rr : 0 sg O ; 
+165 342 N M 2008 2 rr : 0 sg O ; 
+165 342 N M 2008 2 rr : 0 sg O ; 
+165 392 N M 2008 2 rr : 0 sg O ; 
+165 392 N M 2008 2 rr : 0 sg O ; 
+165 442 N M 2008 2 rr : 0 sg O ; 
+165 442 N M 2008 2 rr : 0 sg O ; 
+165 491 N M 2008 2 rr : 0 sg O ; 
+165 491 N M 2008 2 rr : 0 sg O ; 
+165 541 N M 2008 2 rr : 0 sg O ; 
+165 541 N M 2008 2 rr : 0 sg O ; 
+165 590 N M 2008 2 rr : 0 sg O ; 
+165 590 N M 2008 2 rr : 0 sg O ; 
+165 640 N M 2008 2 rr : 0 sg O ; 
+165 640 N M 2008 2 rr : 0 sg O ; 
+165 690 N M 2008 2 rr : 0 sg O ; 
+165 690 N M 2008 2 rr : 0 sg O ; 
+165 739 N M 2008 2 rr : 0 sg O ; 
+165 739 N M 2008 2 rr : 0 sg O ; 
+165 789 N M 2008 2 rr : 0 sg O ; 
+165 789 N M 2008 2 rr : 0 sg O ; 
+165 838 N M 2008 2 rr : 0 sg O ; 
+165 838 N M 2008 2 rr : 0 sg O ; 
+165 888 N M 2008 2 rr : 0 sg O ; 
+165 888 N M 2008 2 rr : 0 sg O ; 
+165 940 N M 2008 2 rr : 0 sg O ; 
+165 940 N M 2008 2 rr : 0 sg O ; 
+165 989 N M 2008 2 rr : 0 sg O ; 
+165 989 N M 2008 2 rr : 0 sg O ; 
+165 1039 N M 2008 2 rr : 0 sg O ; 
+165 1039 N M 2008 2 rr : 0 sg O ; 
+165 1090 N M 2008 2 rr : 0 sg O ; 
+165 1090 N M 2008 2 rr : 0 sg O ; 
+165 1140 N M 2008 2 rr : 0 sg O ; 
+165 1140 N M 2008 2 rr : 0 sg O ; 
+165 1190 N M 2008 2 rr : 0 sg O ; 
+165 1190 N M 2008 2 rr : 0 sg O ; 
+165 1325 N M 2008 2 rr : 0 sg O ; 
+165 194 N M 2 1133 rr : 0 sg O ; 
+2171 194 N M 2 1133 rr : 0 sg O ; %%IncludeFont: Helvetica-Bold
+/F8
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F8_58
+F8
+58 
+xF 
+F8_58
+Ji 
+161 1425 M 
+-0.248 0 (9)A 
+279 1425 M 
+0.039 0 (CONCLUSIONS)A 
+F6_50
+Ji 
+279 1578 M 
+17.000 0 32 0.226 0 (This paper attempted to discuss various aspects of classes, metaclasses and)D 
+161 1672 M 
+16.000 0 32 0.268 0 (method resolutions as implemented by Object Rexx. Due to a true object oriented)D 
+161 1765 M 
+0.208 0 (implementation of the language all the benefits object oriented systems may be capable of)A 
+161 1858 M 
+2.000 0 32 0.262 0 (taking advantage of are available to programmers of Object Rexx. Because the language)D 
+161 1951 M 
+6.000 0 32 0.147 0 (has been kept as simple as possible, yet became extremely powerful in terms of object)D 
+161 2044 M 
+2.000 0 32 0.208 0 (orientation it has the potential of revolutionizing scripting languages with respect to object)D 
+161 2137 M 
+0.129 0 (oriented systems.)A 
+279 2277 M 
+0.165 0 (It is therefore a logical choice for IBM that Object Rexx is being used as the preferred)A 
+161 2370 M 
+6.000 0 32 0.224 0 (scripting language for OpenDoc\222s \204open scripting architecture\223 \(abbrev. OSA\) in its own)D 
+161 2464 M 
+0.125 0 (OpenDoc implementations.)A 
+279 2604 M 
+3.000 0 32 0.135 0 (If the language gets ported to the various Unix flavors \(most notable Linux and AIX\))D 
+161 2697 M 
+11.000 0 32 0.143 0 (enhanced with a standard class for utilizing \(TCP/IP\) sockets it may even be a stark)D 
+161 2790 M 
+3.000 0 32 0.116 0 (contender with Unix scripting languages like Perl, Python or TcL, allowing Object Rexx to)D 
+/F6_42
+F6
+42 
+xF 
+F6_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (22)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 23 23
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+225 207 M 
+12.000 0 32 0.131 0 (become an industry wide scripting standard. As a matter of fact in this case even a)D 
+%%IncludeFont: Helvetica-Oblique
+/F2
+0.940 
+T 
+/Helvetica-Oblique
+mF 
+/F2_50
+F2
+50 
+xF 
+F2_50
+Ji 
+225 300 M 
+0.135 0 (network)A 
+F0_50
+Ji 
+401 300 M 
+0.122 0 ( scripting language.)A 
+343 441 M 
+15.000 0 32 0.192 0 (Object Rexx in any case allows for utilizing all CORBA services via the SOM)D 
+225 534 M 
+13.000 0 32 0.240 0 (interface, adding additional potential to the language. The moment Java classes get)D 
+225 627 M 
+15.000 0 32 0.137 0 (SOMified \(or \204CORBAfied\223\) it became possible to utilize Object Rexx as a scripting)D 
+225 720 M 
+0.119 0 (language for Java applets and applications also.)A 
+343 860 M 
+9.000 0 32 0.159 0 (Given such potential developments Object Rexx would be able to become a true)D 
+225 953 M 
+0.139 0 (universal scripting language in the IT-market.)A 
+%%IncludeFont: Helvetica-Bold
+/F4
+0.948 
+T 
+/Helvetica-Bold
+mF 
+/F4_58
+F4
+58 
+xF 
+F4_58
+Ji 
+225 1123 M 
+-0.248 0 (10)A 
+343 1123 M 
+0.050 0 (ACKNOWLEDGEMENTS)A 
+F0_50
+Ji 
+343 1277 M 
+9.000 0 32 0.219 0 (The author wishes to thank Rick McGuire, one of the former lead developers for)D 
+225 1370 M 
+17.000 0 32 0.253 0 (Object Rexx, for his great hints and explanations given on the Internet-newsgroup)D 
+225 1463 M 
+3.000 0 32 0.211 0 (\204comp.lang.rexx\223 thru the past years, and Christian Michel the present lead developer for)D 
+225 1556 M 
+0.102 0 (the Object Rexx project.)A 
+F4_58
+Ji 
+225 1726 M 
+-0.248 0 (11)A 
+343 1726 M 
+0.162 0 (REFERENCES)A 
+F0_50
+Ji 
+343 1880 M 
+7.000 0 32 0.190 0 (Online documentations of various beta versions of Object Rexx \(the latest version)D 
+225 1973 M 
+0.174 0 (used for this paper stems from February 16th, 1996\).)A 
+343 2113 M 
+0.147 0 (Various postings on the internet newsgroup \204comp.lang.rexx\223, 1995-1996.)A 
+343 2253 M 
+2.000 0 32 0.215 0 (Flatscher, R.G.: \204Local Environment and Scopes in Object Rexx\223, in: Proceedings of)D 
+225 2347 M 
+17.000 0 32 0.175 0 (the "7)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+372 2346 M 
+17.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+396 2347 M 
+17.000 0 32 0.149 0 ( International REXX Symposium, May 12-15, Texas/Austin 1996", The Rexx)D 
+225 2440 M 
+0.096 0 (Language Association, Raleigh N.C.  1996. )A 
+343 2580 M 
+9.000 0 32 0.171 0 (Goldberg, A., Robson, D.: \204Smalltalk-80 - The Language and its Implementation\223,)D 
+225 2673 M 
+0.088 0 (Reading: Addison Wesley, 1983..)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+456 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1866 3050 M 
+-0.352 0 (23)A 
+1913 3050 M 
+0.014 0 (-)A 
+1926 3050 M 
+-0.352 0 (23)A 
+1973 3050 M 
+0.056 0 ( \(rgf\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Page: 24 24
+%%BeginPageSetup
+/mysetup [ 0.240 0 0 -0.240 18.000 783.840 ] | 
+userdict begin /pagesave save def end mysetup concat colspRefresh
+%%EndPageSetup
+
+%%IncludeFont: Helvetica
+/F0
+0.940 
+T 
+/Helvetica
+mF 
+/F0_50
+F0
+50 
+xF 
+F0_50
+Ji 
+279 207 M 
+0.068 0 (Date of Article:)A 
+611 207 M 
+0.200 0 ( 1996-05-30. )A 
+279 348 M 
+2.000 0 32 0.214 0 (Published in: Proceedings of the "7)D 
+/F0_29
+F0
+29 
+xF 
+F0_29
+Ji 
+1073 347 M 
+2.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+1097 348 M 
+2.000 0 32 0.164 0 ( International REXX Symposium", Texas/Austin,)D 
+161 441 M 
+0.175 0 (May 12)A 
+F0_29
+Ji 
+326 440 M 
+-0.093 0 (th)A 
+F0_50
+Ji 
+350 441 M 
+0.250 0 (-15)A 
+F0_29
+Ji 
+423 440 M 
+-0.093 0 (th)A 
+F0_50
+Ji 
+447 441 M 
+0.108 0 (, 1996, The Rexx Language Association, Raleigh N.C.  1996. )A 
+279 581 M 
+16.000 0 32 0.196 0 (Presented at: "7)D 
+F0_29
+Ji 
+671 580 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+695 581 M 
+16.000 0 32 0.164 0 ( International REXX Symposium", Texas/Austin, May 12)D 
+F0_29
+Ji 
+2040 580 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+2064 581 M 
+16.000 0 32 0.250 0 (-15)D 
+F0_29
+Ji 
+2137 580 M 
+16.000 0 32 -0.093 0 (th)D 
+F0_50
+Ji 
+2161 581 M 
+16.000 0 32 0.100 0 (,)D 
+161 674 M 
+0.119 0 (1996, The Rexx Language Association.)A 
+/F0_42
+F0
+42 
+xF 
+F0_42
+Ji 
+443 3050 M 
+-0.096 0 (Object Classes, Meta Classes and Method Resolution in Object Rexx, page )A 
+1853 3050 M 
+-0.352 0 (24)A 
+1899 3050 M 
+0.014 0 (-)A 
+1913 3050 M 
+-0.352 0 (23)A 
+1959 3050 M 
+-0.084 0 ( \(final\))A 
+
+225 3035 N M 1950 2 rr : 0 sg O ; 
+LH 
+pagesave restore
+%%PageTrailer
+
+%%Trailer
+%%DocumentNeededFonts: 
+%%DocumentSuppliedFonts: 
+/Adobe_Win_Driver /ProcSet findresource dup /terminate get exec
+Adobe_Win_Compat dup /terminate get exec
+%%Pages: 24
+%%EOF
+

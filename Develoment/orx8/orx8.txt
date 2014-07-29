@@ -1,0 +1,17 @@
+orx8.zip, 97-07-21
+
+Contains Object Rexx utilities in the form of source code.
+
+Documentation in the separate package "orx8doc.zip" which
+contains two postscript files (part1.ps, part2.ps) documenting
+the functions. These two papers were written for RexxLA (Rexx
+Language Association, http://www.RexxLA.org) to be included in
+the proceedings for the "8th International Rexx Symposium" which
+took place in Heidelberg/Germany in April 1997.
+
+Please post questions and discussion items in the Internet newsgroup
+"comp.lang.rexx", which gets monitored by the author. Thanks.
+
+Rony G. Flatscher
+Vienna/Austria/Europe, July 1997
+

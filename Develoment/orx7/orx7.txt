@@ -1,0 +1,39 @@
+orx7.zip, 97-07-21
+
+Contains Object Rexx programs to analyze Object Rexx programs. :)
+
+NEEDS: orx8.zip (contains the required utility package rgf_util.cmd)
+
+The following programs of this package are available with source code:
+
+   orx_analyze_ascii.cmd
+   orx_analyze_html.cmd
+
+---
+
+Documentation is stored in the separate package "orx7doc.zip" which contains
+the following three postscript files:
+
+     local.ps ...... explains Object Rexx' concept of "environment", full
+                     title: "Local Environment and Scopes in Object Rexx"
+
+     class.ps ...... explains Object Rexx' implementation of classes, full
+                     title: "Object Classes, Meta Classes and Method 
+                     Resolution in Object Rexx"
+
+     analyze.ps .... documents ORX_Analyze.cmd and the usage of
+                     orx_analyze_ascii.cmd and orx_analyze_html.cmd, full
+                     title: "ORX_Analyze.cmd - A Program for Analyzing
+                     Directives and Signatures of Object Rexx Programs"
+
+These three papers were written for RexxLA (Rexx Language Association,
+http://www.RexxLA.org) to be included in the proceedings for the "7th
+International Rexx Symposium" which took place in Austin/Texas/USA in May
+1996.
+
+Please post questions and discussion items in the Internet newsgroup
+"comp.lang.rexx", which gets monitored by the author. Thanks.
+
+Rony G. Flatscher
+Vienna/Austria/Europe, July 1997
+

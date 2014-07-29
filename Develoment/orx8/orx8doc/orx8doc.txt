@@ -1,0 +1,20 @@
+orx8doc.zip, 97-07-21
+
+Contains the documentation for "orx8.zip" in postscript form (formatted
+for letter sized paper). Either copy it to a postscript printer or
+view/print it with Ghostscript and Aladdin Postscript.
+
+---
+
+Documentation for "orx8.zip" which contains two postscript files (part1.ps,
+part2.ps) documenting the functions. These two papers were written for RexxLA
+(Rexx Language Association, http://www.RexxLA.org) to be included in the
+proceedings for the "8th International Rexx Symposium" which took place in
+Heidelberg/Germany in April 1997.
+
+Please post questions and discussion items in the Internet newsgroup
+"comp.lang.rexx", which gets monitored by the author. Thanks.
+
+Rony G. Flatscher
+Vienna/Austria/Europe, July 1997
+
