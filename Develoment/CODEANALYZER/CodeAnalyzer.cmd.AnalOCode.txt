@@ -1,0 +1,500 @@
+Analysis of program D:\source\VisProSource\CodeAnalyzer\CodeAnalyzer.cmd
+at 17 Sep 2003 08:57:22
+ 
+Duplicate Labels on Lines:
+   There are no duplicate labels.
+ 
+List of SIGNALs used
+In subroutine ProgramBegan  a SIGNAL to label GENERICERROR  is turned ON in line 20.
+In subroutine ProgramBegan  a SIGNAL to label GENERICERROR  is turned ON in line 20.
+In subroutine ProgramBegan  a SIGNAL  is turned ON in line 22.
+In subroutine ProgramBegan  a SIGNAL  is turned ON in line 23.
+In subroutine LOADMYDLL  a SIGNAL to label LOADDLLERROR  is turned ON in line 2080.
+In subroutine LOADMYDLL  a SIGNAL to label LOADDLLERROR  is turned ON in line 2080.
+In subroutine SUBROUTINEANALYZER SIGNAL used in line 3254. 
+In subroutine TEST4COUNTSTR  a SIGNAL to label TEST4COUNTSTRERROR  is turned ON in line 3527.
+In subroutine TEST4COUNTSTR  a SIGNAL to label TEST4COUNTSTRERROR  is turned ON in line 3527.
+In subroutine TEST4SYSSTEMSORT  a SIGNAL to label TEST4SYSSTEMSORTERROR  is turned ON in line 3541.
+In subroutine TEST4SYSSTEMSORT  a SIGNAL to label TEST4SYSSTEMSORTERROR  is turned ON in line 3541.
+ 
+All Recognized Function and Subroutine References
+ Line Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA
+00027 FUNCTION   6  14 LOADMYDLL                 "Internal"           15   28 |
+00042 FUNCTION   6  18 TEST4COUNTSTR             "Internal"           19   20 |
+00059 FUNCTION   6  21 TEST4SYSSTEMSORT          "Internal"           22   23 |
+00091 FUNCTION   4  11 DATATYPE                  "BI Library"         12   21 |
+00095 FUNCTION   4   8 STRIP                     "BI Library"          9   12 |
+00102 FUNCTION   4   9 STREAM                    "BI Library"         10   32 |
+00109 FUNCTION   4   9 STREAM                    "BI Library"         10   24 |
+00116 FUNCTION   5   9 QUOTE                     "Internal"           10   11 |
+00119 FUNCTION   7  19 SYSFILEDELETE             "REXXUTIL Library"   20   24 |
+00121 FUNCTION   6   9 MAIN                      "Internal"           10   13 |
+00122 FUNCTION   6   9 BEEP                      "BI Library"         10   17 |
+00123 FUNCTION   6   9 BEEP                      "BI Library"         10   16 |
+00124 FUNCTION   6   9 BEEP                      "BI Library"         10   17 |
+00145 FUNCTION  10  12 POS                       "BI Library"         13   24 |
+00162 FUNCTION   9  11 ARG                       "BI Library"         12   14 |
+00163 FUNCTION   9  11 ARG                       "BI Library"         12   14 |
+00182 FUNCTION  13  18 LENGTH                    "BI Library"         19   26 |
+00185 FUNCTION  10  16 OVERLAY                   "BI Library"         17   50 |
+00201 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00202 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00205 FUNCTION  13  18 SUBSTR                    "BI Library"         19   67 |
+00207 FUNCTION   8  14 OVERLAY                   "BI Library"         15   69 |
+00236 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+00237 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+00238 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+00239 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+00240 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+00245 FUNCTION   4   9 SUBSTR                    "BI Library"         10   28 |
+00248 FUNCTION   4  11 DATATYPE                  "BI Library"         12   18 |
+00263 FUNCTION  10  15 SUBSTR                    "BI Library"         16   32 |
+00264 FUNCTION   4   7 LEFT                      "BI Library"          8   17 |
+00268 FUNCTION   6  20 FINDPARENTHESES           "Internal"           21   28 |
+00284 FUNCTION  22  27 SUBSTR                    "BI Library"         28   59 |
+00295 FUNCTION  13  18 SUBSTR                    "BI Library"         19   35 |
+00299 FUNCTION   7  15 TRANSLATE                 "BI Library"         16   19 |
+00302 FUNCTION   6  19 SIGNALANALYSIS            "Internal"           20   63 |
+00316 FUNCTION  12  15 LEFT                      "BI Library"         16   21 |
+00359 FUNCTION   9  11 POS                       "BI Library"         12   22 |
+00360 FUNCTION   9  11 POS                       "BI Library"         12   22 |
+00364 FUNCTION   9  17 TRANSLATE                 "BI Library"         18   32 |
+00367 FUNCTION  21  26 LENGTH                    "BI Library"         27   33 |
+00368 FUNCTION  16  21 LENGTH                    "BI Library"         22   36 | FUNCTION  23  27 STRIP                     "BI Library"         28   35 |
+00371 FUNCTION   9  15 OVERLAY                   "BI Library"         16   34 |
+00375 FUNCTION  21  26 LENGTH                    "BI Library"         27   33 |
+00376 FUNCTION  16  21 LENGTH                    "BI Library"         22   36 | FUNCTION  23  27 STRIP                     "BI Library"         28   35 |
+00383 FUNCTION  21  26 LENGTH                    "BI Library"         27   33 |
+00384 FUNCTION  16  21 LENGTH                    "BI Library"         22   36 | FUNCTION  23  27 STRIP                     "BI Library"         28   35 |
+00389 FUNCTION  24  29 LENGTH                    "BI Library"         30   36 |
+00393 FUNCTION   6  20 MATCHSUBROUTINE           "Internal"           21   32 |
+00474 FUNCTION   4   8 STRIP                     "BI Library"          9   14 |
+00481 FUNCTION   8  16 TRANSLATE                 "BI Library"         17   32 |
+00483 FUNCTION  11  13 POS                       "BI Library"         14   27 |
+00485 FUNCTION   6  25 FINDCALLINSTRUCTIONS      "Internal"           26   77 |
+00509 FUNCTION  13  15 POS                       "BI Library"         16   31 |
+00511 FUNCTION   6  19 SIGNALANALYSIS            "Internal"           20   82 |
+00541 FUNCTION  11  13 POS                       "BI Library"         14   33 |
+00546 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   51 |
+00547 FUNCTION   4   9 SUBSTR                    "BI Library"         10   29 |
+00549 FUNCTION   6  21 FUNCTIONANALYSIS          "Internal"           22   49 |
+00584 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00585 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00586 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00588 FUNCTION  13  17 STRIP                     "BI Library"         18   26 |
+00589 FUNCTION  13  15 POS                       "BI Library"         16   29 |
+00600 FUNCTION  14  19 LENGTH                    "BI Library"         20   28 |
+00601 FUNCTION  13  17 RIGHT                     "BI Library"         18   39 |
+00630 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00631 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00632 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+00637 FUNCTION  11  18 COUNTSTR                  "BI Library"         19   31 |
+00641 FUNCTION  12  14 POS                       "BI Library"         15   27 |
+00644 FUNCTION  10  14 STRIP                     "BI Library"         15   22 |
+00645 FUNCTION   9  13 STRIP                     "BI Library"         14   30 |
+00646 FUNCTION   9  13 STRIP                     "BI Library"         14   29 |
+00647 FUNCTION   9  14 LENGTH                    "BI Library"         15   22 |
+00648 FUNCTION   9  14 LENGTH                    "BI Library"         15   21 |
+00649 FUNCTION  21  29 TRANSLATE                 "BI Library"         30   36 |
+00655 FUNCTION   9  17 TRANSLATE                 "BI Library"         18   24 |
+00688 FUNCTION  12  14 POS                       "BI Library"         15   34 |
+00695 FUNCTION   6  19 FINDDIRECTIVES            "Internal"           20   52 |
+00705 FUNCTION   6  15 FINDLABELS                "Internal"           16   48 |
+00726 FUNCTION   8  10 MAX                       "BI Library"         11   38 | FUNCTION  17  22 LENGTH                    "BI Library"         23   37 |
+00732 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+00734 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+00738 FUNCTION  17  21 STRIP                     "BI Library"         22   41 |
+00739 FUNCTION  17  21 STRIP                     "BI Library"         22   41 |
+00743 FUNCTION  17  25 TRANSLATE                 "BI Library"         26   40 |
+00747 FUNCTION  17  21 STRIP                     "BI Library"         22   41 |
+00748 FUNCTION  17  21 STRIP                     "BI Library"         22   41 |
+00752 FUNCTION  17  25 TRANSLATE                 "BI Library"         26   40 |
+00755 FUNCTION  23  26 LEFT                      "BI Library"         27   42 |
+00756 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+00758 FUNCTION   7  11 RIGHT                     "BI Library"         12   37 | FUNCTION  39  43 RIGHT                     "BI Library"         44   69 | FUNCTION  71  74 LEFT                      "BI Library"         75   94 |
+00759 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+00768 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+00771 FUNCTION   6  11 STREAM                    "BI Library"         12   26 |
+00797 FUNCTION  10  12 ARG                       "BI Library"         13   15 |
+00798 FUNCTION  10  12 ARG                       "BI Library"         13   15 |
+00799 FUNCTION  10  12 ARG                       "BI Library"         13   15 |
+00801 FUNCTION   4  11 DATATYPE                  "BI Library"         12   23 |
+00808 FUNCTION   7   9 POS                       "BI Library"         10   25 |
+00812 FUNCTION  11  15 RIGHT                     "BI Library"         16   26 |
+00819 FUNCTION   7   9 POS                       "BI Library"         10   25 |
+00823 FUNCTION  11  15 RIGHT                     "BI Library"         16   26 |
+00836 FUNCTION   6  16 SYSSTEMSORT               "REXXUTIL Library"   17   40 |
+00843 FUNCTION  16  20 STRIP                     "BI Library"         21   34 |
+00849 FUNCTION  16  20 STRIP                     "BI Library"         21   34 |
+00850 FUNCTION  16  21 SUBSTR                    "BI Library"         22   70 |
+00890 FUNCTION   8  10 ARG                       "BI Library"         11   13 |
+00895 FUNCTION   9  16 COUNTSTR                  "BI Library"         17   26 |
+00897 FUNCTION   7   9 POS                       "BI Library"         10   25 |
+00899 FUNCTION  11  15 RIGHT                     "BI Library"         16   26 |
+00905 FUNCTION   9  16 COUNTSTR                  "BI Library"         17   19 |
+00907 FUNCTION   7   9 POS                       "BI Library"         10   12 |
+00909 FUNCTION  11  15 RIGHT                     "BI Library"         16   26 |
+00922 FUNCTION   6  16 SYSSTEMSORT               "REXXUTIL Library"   17   40 |
+00968 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+00969 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+00970 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+00971 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+00973 FUNCTION   9  16 COUNTSTR                  "BI Library"         17   39 |
+00977 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   54 |
+00983 FUNCTION  11  13 POS                       "BI Library"         14   42 |
+00986 FUNCTION  12  17 SUBSTR                    "BI Library"         18   35 |
+01014 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   36 |
+01017 FUNCTION  12  18 REVERSE                   "BI Library"         19   26 |
+01019 FUNCTION  12  18 REVERSE                   "BI Library"         19   25 |
+01021 FUNCTION   4  12 TRANSLATE                 "BI Library"         13   19 |
+01027 FUNCTION  12  17 LENGTH                    "BI Library"         18   24 |
+01043 FUNCTION   6  20 MATCHSUBROUTINE           "Internal"           21   32 |
+01052 FUNCTION   6  20 FINDPARENTHESES           "Internal"           21   28 |
+01163 FUNCTION  27  34 FILESPEC                  "BI Library"         35   64 |
+01164 FUNCTION  27  34 FILESPEC                  "BI Library"         35   63 |
+01165 FUNCTION  27  34 FILESPEC                  "BI Library"         35   63 |
+01166 FUNCTION  27  33 LASTPOS                   "BI Library"         34   56 |
+01168 FUNCTION  27  31 STRIP                     "BI Library"         32   64 |
+01171 FUNCTION  20  25 STREAM                    "BI Library"         26   64 |
+01172 FUNCTION  20  25 STREAM                    "BI Library"         26   63 |
+01173 FUNCTION  20  25 CHARIN                    "BI Library"         26   67 |
+01174 FUNCTION  20  25 STREAM                    "BI Library"         26   59 |
+01181 FUNCTION  24  26 POS                       "BI Library"         27   74 |
+01182 FUNCTION  24  26 POS                       "BI Library"         27   74 |
+01192 FUNCTION  19  23 STRIP                     "BI Library"         24   62 | FUNCTION  25  34 SOURCELINE                "BI Library"         35   61 |
+01201 FUNCTION  18  22 WORDS                     "BI Library"         23   41 |
+01207 FUNCTION  42  46 RIGHT                     "BI Library"         47  100 |
+01223 FUNCTION  30  42 SYSGETMESSAGE             "REXXUTIL Library"   43   73 |
+01238 FUNCTION  26  28 POS                       "BI Library"         29   52 |
+01239 FUNCTION  26  28 POS                       "BI Library"         29   77 |
+01241 FUNCTION  22  28 OVERLAY                   "BI Library"         29  121 |
+01246 FUNCTION  26  28 POS                       "BI Library"         29   52 |
+01247 FUNCTION  26  28 POS                       "BI Library"         29   77 |
+01249 FUNCTION  22  28 OVERLAY                   "BI Library"         29  121 |
+01254 FUNCTION  22  30 TRANSLATE                 "BI Library"         31   74 |
+01255 FUNCTION  22  26 STRIP                     "BI Library"         27   53 | FUNCTION  28  32 SPACE                     "BI Library"         33   52 |
+01257 FUNCTION  25  29 WORDS                     "BI Library"         30   49 |
+01258 FUNCTION  20  23 WORD                      "BI Library"         24   58 |
+01259 FUNCTION   4  12 TRANSLATE                 "BI Library"         13   30 | FUNCTION  48  56 TRANSLATE                 "BI Library"         57   74 | FUNCTION  92 100 TRANSLATE                 "BI Library"        101  118 | FUNCTION 136 144 TRANSLATE                 "BI Library"        145  162 | FUNCTION 180 188 TRANSLATE                 "BI Library"        189  206 | FUNCTION 224 232 TRANSLATE                 "BI Library"        233  250 | FUNCTION 268 276 TRANSLATE                 "BI Library"        277  294 | FUNCTION 312 320 TRANSLATE                 "BI Library"        321  338 | FUNCTION 356 364 TRANSLATE                 "BI Library"        365  382 | FUNCTION 400 408 TRANSLATE                 "BI Library"        409  426 | FUNCTION 444 452 TRANSLATE                 "BI Library"        453  470 | FUNCTION 488 496 TRANSLATE                 "BI Library"        497  514 | FUNCTION 532 540 TRANSLATE                 "BI Library"        541  558 | FUNCTION 576 584 TRANSLATE                 "BI Library"        585  602 | FUNCTION 620 628 TRANSLATE                 "BI Library"        629  646 | FUNCTION 664 672 TRANSLATE                 "BI Library"        673  690 | FUNCTION 708 716 TRANSLATE                 "BI Library"        717  734 | FUNCTION 752 760 TRANSLATE                 "BI Library"        761  778 | FUNCTION 796 803 DATATYPE                  "BI Library"        804  825 |
+01279 FUNCTION  20  25 SYMBOL                    "BI Library"         26   43 |
+01283 FUNCTION  34  38 VALUE                     "BI Library"         39   56 |
+01285 FUNCTION  34  38 VALUE                     "BI Library"         39   56 |
+01289 FUNCTION   4   6 POS                       "BI Library"          7   28 |
+01291 FUNCTION  20  25 SYMBOL                    "BI Library"         26   43 |
+01293 FUNCTION   6  13 DATATYPE                  "BI Library"         14   37 |
+01296 FUNCTION  34  38 VALUE                     "BI Library"         39   56 |
+01298 FUNCTION  34  38 VALUE                     "BI Library"         39   56 |
+01302 FUNCTION   4   9 LENGTH                    "BI Library"         10   27 |
+01322 FUNCTION  36  44 CONDITION                 "BI Library"         45   49 |
+01324 FUNCTION  37  45 CONDITION                 "BI Library"         46   50 |
+01325 FUNCTION  37  45 CONDITION                 "BI Library"         46   50 |
+01326 FUNCTION  32  40 CONDITION                 "BI Library"         41   45 |
+01347 FUNCTION  10  21 VPMESSAGEBOX              "VPREXX Library"     22   47 |
+01351 FUNCTION   6  21 SYSDUMPVARIABLES          "REXXUTIL Library"   22   37 |
+01352 FUNCTION   6  11 STREAM                    "BI Library"         12   39 |
+01363 FUNCTION   6  14 CONDITION                 "BI Library"         15   19 |
+02075 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+02076 FUNCTION  12  14 ARG                       "BI Library"         15   17 |
+02084     CALL   6  15 RXFUNCDROP                "BI Library"         17   24 |
+02085 FUNCTION   9  17 RXFUNCADD                 "BI Library"         18   40 |
+02092     CALL   6  15 RXFUNCDROP                "BI Library"         17   24 |
+02178     CALL   6   9 TIME                      "BI Library"         11   13 |
+02180 FUNCTION   6   8 ARG                       "BI Library"          9   11 |
+02183 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+02184 FUNCTION   7  13 LINEOUT                   "BI Library"         14   37 | FUNCTION  24  27 DATE                      "BI Library"         28   29 | FUNCTION  31  34 TIME                      "BI Library"         35   36 |
+02186 FUNCTION   6  18 READRAWSOURCE             "Internal"           19   22 |
+02193 FUNCTION   6  30 MAPNMASKCOMMENTSNLITERALS "Internal"           31   40 |
+02200 FUNCTION   6  30 MAPNMASKCOMMENTSNLITERALS "Internal"           31   40 |
+02214 FUNCTION  14  18 RIGHT                     "BI Library"         19   27 |
+02215 FUNCTION  14  18 RIGHT                     "BI Library"         19   27 |
+02216 FUNCTION  14  18 RIGHT                     "BI Library"         19   27 |
+02219 FUNCTION   6  21 MAKELOGICALLINES          "Internal"           22   23 |
+02229 FUNCTION   6  30 MAPNMASKCOMMENTSNLITERALS "Internal"           31   49 |
+02236 FUNCTION   6  30 MAPNMASKCOMMENTSNLITERALS "Internal"           31   49 |
+02264 FUNCTION   6  26 FINDLABELSNDIRECTIVES     "Internal"           27   28 |
+02271 FUNCTION   6  23 LOADKNOWNFUNCTIONS        "Internal"           24   25 |
+02278 FUNCTION   6  26 LOADDEFAULTCONDITIONS     "Internal"           27   28 |
+02285 FUNCTION   6  26 FINDCALLS2SUBROUTINES     "Internal"           27   28 |
+02292 FUNCTION   6  19 WRITEFREFTABLE            "Internal"           20   21 |
+02299 FUNCTION   6  23 SUBROUTINEANALYZER        "Internal"           24   27 |
+02306 FUNCTION  21  24 TIME                      "BI Library"         25   31 |
+02344 FUNCTION   9  13 STRIP                     "BI Library"         14   21 |
+02345 FUNCTION   9  13 STRIP                     "BI Library"         14   28 |
+02346 FUNCTION   9  13 STRIP                     "BI Library"         14   28 |
+02356 FUNCTION   4   8 RIGHT                     "BI Library"          9   17 |
+02359 FUNCTION   7  30 REBUILDALINECONTINUATION  "Internal"           31   33 |
+02360 FUNCTION   4   7 WORD                      "BI Library"          8   14 |
+02373 FUNCTION  13  16 WORD                      "BI Library"         17   23 |
+02377 FUNCTION   4   6 POS                       "BI Library"          7   33 |
+02378 FUNCTION   6  26 REBUILDALINESEMICOLON     "Internal"           27   36 |
+02388 FUNCTION  25  29 STRIP                     "BI Library"         30   41 |
+02390 FUNCTION  25  29 STRIP                     "BI Library"         30   41 |
+02473 FUNCTION   8  10 ARG                       "BI Library"         11   13 |
+02474 FUNCTION   8  10 ARG                       "BI Library"         11   13 |
+02475 FUNCTION   8  10 ARG                       "BI Library"         11   13 |
+02516 FUNCTION   6  28 TABULATECOMMENTSNQUOTES   "Internal"           29   36 |
+02523 FUNCTION  11  15 RIGHT                     "BI Library"         16   28 |
+02602 FUNCTION   6  24 REBUILDALINECOMMENT       "Internal"           25   41 |
+02607 FUNCTION  21  25 RIGHT                     "BI Library"         26   42 |
+02617 FUNCTION  25  30 SUBSTR                    "BI Library"         31   75 |
+02621 FUNCTION   6  22 CLEARCOMMENTBLOCK         "Internal"           23   39 |
+02644 FUNCTION   6  17 FINDLITERALS              "Internal"           18   35 |
+02662 FUNCTION   6  24 CLEARLITERALSTRINGS       "Internal"           25   32 |
+02743 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+02744 FUNCTION  11  13 ARG                       "BI Library"         14   16 |
+02746 FUNCTION  11  15 STRIP                     "BI Library"         16   24 |
+02747 FUNCTION  11  15 STRIP                     "BI Library"         16   29 |
+02748 FUNCTION  11  15 STRIP                     "BI Library"         16   28 |
+02749 FUNCTION  11  16 LENGTH                    "BI Library"         17   25 |
+02750 FUNCTION  11  16 LENGTH                    "BI Library"         17   24 |
+02760 FUNCTION   5   8 WORD                      "BI Library"          9   19 |
+02761 FUNCTION   4   7 WORD                      "BI Library"          8   18 |
+02764 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   21 |
+02765 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   26 |
+02778 FUNCTION   9  17 TRANSLATE                 "BI Library"         18   25 |
+02780 FUNCTION  12  16 STRIP                     "BI Library"         17   33 |
+02885 FUNCTION   4   9 RANDOM                    "BI Library"         10   20 |
+02896 FUNCTION   6   8 ARG                       "BI Library"          9   11 |
+02899 FUNCTION   4   8 LINES                     "BI Library"          9   12 |
+02901 FUNCTION   5  10 LINEIN                    "BI Library"         11   14 |
+02902 FUNCTION   5   9 STRIP                     "BI Library"         10   12 |
+02912 FUNCTION   6  11 STREAM                    "BI Library"         12   27 |
+02937 FUNCTION   9  11 ARG                       "BI Library"         12   14 |
+02938 FUNCTION   9  11 ARG                       "BI Library"         12   14 |
+02949 FUNCTION   4  10 LASTPOS                   "BI Library"         11   28 | FUNCTION  32  37 LENGTH                    "BI Library"         38   51 |
+02954 FUNCTION   4   6 POS                       "BI Library"          7   18 |
+02956 FUNCTION   4  10 LASTPOS                   "BI Library"         11   22 | FUNCTION  26  31 LENGTH                    "BI Library"         32   39 |
+02961 FUNCTION   4   6 POS                       "BI Library"          7   18 |
+02983 FUNCTION  10  12 ARG                       "BI Library"         13   15 |
+02994 FUNCTION  11  17 LASTPOS                   "BI Library"         18   37 | FUNCTION  23  27 STRIP                     "BI Library"         28   36 |
+03004 FUNCTION  11  15 STRIP                     "BI Library"         16   24 |
+03005 FUNCTION  11  15 STRIP                     "BI Library"         16   24 |
+03006 FUNCTION   4   8 RIGHT                     "BI Library"          9   19 |
+03031 FUNCTION  10  12 ARG                       "BI Library"         13   15 |
+03039 FUNCTION  11  18 COUNTSTR                  "BI Library"         19   28 |
+03042 FUNCTION  15  17 POS                       "BI Library"         18   33 |
+03074 FUNCTION  14  18 STRIP                     "BI Library"         19   27 |
+03076 FUNCTION  14  18 STRIP                     "BI Library"         19   27 |
+03096 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03097 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03098 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03099 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03100 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03101 FUNCTION  14  16 ARG                       "BI Library"         17   19 |
+03106 FUNCTION   4   9 SUBSTR                    "BI Library"         10   29 |
+03109 FUNCTION   4  11 DATATYPE                  "BI Library"         12   18 |
+03131 FUNCTION  13  18 SUBSTR                    "BI Library"         19   41 |
+03135 FUNCTION   7  15 TRANSLATE                 "BI Library"         16   19 |
+03160 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03162 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03169 FUNCTION   5   8 WORD                      "BI Library"          9   19 |
+03170 FUNCTION   4   7 WORD                      "BI Library"          8   18 |
+03173 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   21 |
+03174 FUNCTION  10  18 TRANSLATE                 "BI Library"         19   26 |
+03177 FUNCTION   4   6 POS                       "BI Library"          7   25 |
+03178 FUNCTION  28  31 WORD                      "BI Library"         32   42 |
+03184 FUNCTION  50  53 WORD                      "BI Library"         54   64 |
+03185 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03189 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03191 FUNCTION   6  11 STREAM                    "BI Library"         12   26 |
+03239 FUNCTION   6   8 ARG                       "BI Library"          9   11 |
+03247 FUNCTION   8  10 MAX                       "BI Library"         11   38 | FUNCTION  17  22 LENGTH                    "BI Library"         23   37 |
+03271 FUNCTION   8  10 MAX                       "BI Library"         11   34 | FUNCTION  17  22 LENGTH                    "BI Library"         23   33 |
+03272 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03274 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03283 FUNCTION  16  19 LEFT                      "BI Library"         20   35 |
+03284 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03287 FUNCTION   7  11 RIGHT                     "BI Library"         12   37 | FUNCTION  39  42 LEFT                      "BI Library"         43   62 |
+03288 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03294 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03299 FUNCTION  12  19 FILESPEC                  "BI Library"         20   30 |
+03301 FUNCTION  12  20 TRANSLATE                 "BI Library"         21   30 |
+03304 FUNCTION   4  12 TRANSLATE                 "BI Library"         13   27 |
+03305 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03307 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03314 FUNCTION   8  10 MAX                       "BI Library"         11   40 | FUNCTION  17  22 LENGTH                    "BI Library"         23   39 |
+03317 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03318 FUNCTION   7  12 CENTER                    "BI Library"         13   56 |
+03319 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03320 FUNCTION   7  12 CENTER                    "BI Library"         13   28 | FUNCTION  34  39 CENTER                    "BI Library"         40   54 |
+03321 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03322 FUNCTION   7  10 LEFT                      "BI Library"         11   24 | FUNCTION  30  33 LEFT                      "BI Library"         34   47 |
+03323 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03336 FUNCTION   7  10 LEFT                      "BI Library"         11   20 |
+03338 FUNCTION   7  10 LEFT                      "BI Library"         11   30 |
+03339 FUNCTION   8  14 LINEOUT                   "BI Library"         15   23 |
+03344 FUNCTION   7  12 CENTER                    "BI Library"         13   26 | FUNCTION  32  37 CENTER                    "BI Library"         38   51 |
+03345 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03352 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03353 FUNCTION   7  12 CENTER                    "BI Library"         13   56 |
+03354 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03355 FUNCTION   7  12 CENTER                    "BI Library"         13   28 | FUNCTION  34  39 CENTER                    "BI Library"         40   61 |
+03356 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03357 FUNCTION   7  10 LEFT                      "BI Library"         11   24 | FUNCTION  30  33 LEFT                      "BI Library"         34   47 |
+03358 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03371 FUNCTION   7  10 LEFT                      "BI Library"         11   20 |
+03373 FUNCTION   7  10 LEFT                      "BI Library"         11   30 |
+03374 FUNCTION   8  14 LINEOUT                   "BI Library"         15   23 |
+03379 FUNCTION   8  13 CENTER                    "BI Library"         14   27 | FUNCTION  33  38 CENTER                    "BI Library"         39   52 |
+03380 FUNCTION   8  14 LINEOUT                   "BI Library"         15   23 |
+03385 FUNCTION   6  11 STREAM                    "BI Library"         12   26 |
+03410 FUNCTION   8  10 ARG                       "BI Library"         11   13 |
+03432 FUNCTION  11  13 POS                       "BI Library"         14   37 |
+03433 FUNCTION  11  13 POS                       "BI Library"         14   37 |
+03444 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   54 |
+03452 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   54 |
+03462 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   54 |
+03470 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   54 |
+03483 FUNCTION   7  14 COUNTSTR                  "BI Library"         15   26 |
+03485 FUNCTION   9  11 POS                       "BI Library"         12   29 |
+03487 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   52 |
+03495 FUNCTION   7  14 COUNTSTR                  "BI Library"         15   26 |
+03497 FUNCTION   9  11 POS                       "BI Library"         12   29 |
+03499 FUNCTION  11  15 RIGHT                     "BI Library"         16   24 | FUNCTION  35  39 RIGHT                     "BI Library"         40   52 |
+03510 FUNCTION   6  16 SYSSTEMSORT               "REXXUTIL Library"   17   42 |
+03529 FUNCTION   6  13 COUNTSTR                  "BI Library"         14   24 |
+03545 FUNCTION   6  16 SYSSTEMSORT               "REXXUTIL Library"   17   22 |
+03569 FUNCTION   8  10 MAX                       "BI Library"         11   38 | FUNCTION  17  22 LENGTH                    "BI Library"         23   37 |
+03570 FUNCTION   8  10 MAX                       "BI Library"         11   38 | FUNCTION  17  22 LENGTH                    "BI Library"         23   37 |
+03573 FUNCTION   8  10 MAX                       "BI Library"         11   25 |
+03575 FUNCTION  29  32 LEFT                      "BI Library"         33   43 | FUNCTION  45  48 LEFT                      "BI Library"         49   61 |
+03581 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03583 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03585 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03589 FUNCTION   7  11 RIGHT                     "BI Library"         12   32 |
+03592 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03593 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03594 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03595 FUNCTION  11  14 LEFT                      "BI Library"         15   34 |
+03596 FUNCTION  11  14 LEFT                      "BI Library"         15   34 |
+03597 FUNCTION  11  15 RIGHT                     "BI Library"         16   33 |
+03598 FUNCTION  11  15 RIGHT                     "BI Library"         16   34 |
+03601 FUNCTION   4   9 LENGTH                    "BI Library"         10   14 |
+03602 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03606 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03608 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03610 FUNCTION   7  13 LINEOUT                   "BI Library"         14   22 |
+03614 FUNCTION   7  11 RIGHT                     "BI Library"         12   32 |
+03617 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03618 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03619 FUNCTION  11  15 RIGHT                     "BI Library"         16   32 |
+03620 FUNCTION  11  14 LEFT                      "BI Library"         15   34 |
+03621 FUNCTION  11  14 LEFT                      "BI Library"         15   34 |
+03622 FUNCTION  11  15 RIGHT                     "BI Library"         16   33 |
+03623 FUNCTION  11  15 RIGHT                     "BI Library"         16   34 |
+03626 FUNCTION   4   9 LENGTH                    "BI Library"         10   14 |
+03627 FUNCTION   6  12 LINEOUT                   "BI Library"         13   21 |
+03630 FUNCTION   6  11 STREAM                    "BI Library"         12   26 |
+ 
+All Unrecognized Function and Subroutine References
+ Line Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA | Ref_Type Beg End NAME                      SOURCE             BegA EndA
+ 
+Routines Never Explictily Referenced
+ Line  ROUTINE                  
+000132 CHANGE                   
+ 
+            Subroutine Reference Map 1:            
+         ROUTINE          -          CALLED          
+_________________________   _________________________
+ProgramBegan              - LOADMYDLL
+                          - MAIN
+                          - QUOTE
+                          - TEST4COUNTSTR
+                          - TEST4SYSSTEMSORT
+.........................   .........................
+FINDCALLINSTRUCTIONS      - FINDPARENTHESES
+                          - MATCHSUBROUTINE
+                          - SIGNALANALYSIS
+.........................   .........................
+FINDCALLS2SUBROUTINES     - FINDCALLINSTRUCTIONS
+                          - FUNCTIONANALYSIS
+                          - SIGNALANALYSIS
+.........................   .........................
+FINDLABELSNDIRECTIVES     - FINDDIRECTIVES
+                          - FINDLABELS
+.........................   .........................
+FUNCTIONANALYSIS          - FINDPARENTHESES
+                          - MATCHSUBROUTINE
+.........................   .........................
+MAIN                      - FINDCALLS2SUBROUTINES
+                          - FINDLABELSNDIRECTIVES
+                          - LOADDEFAULTCONDITIONS
+                          - LOADKNOWNFUNCTIONS
+                          - MAKELOGICALLINES
+                          - MAPNMASKCOMMENTSNLITERALS
+                          - READRAWSOURCE
+                          - SUBROUTINEANALYZER
+                          - WRITEFREFTABLE
+.........................   .........................
+MAKELOGICALLINES          - REBUILDALINECONTINUATION
+                          - REBUILDALINESEMICOLON
+.........................   .........................
+MAPNMASKCOMMENTSNLITERALS - CLEARCOMMENTBLOCK
+                          - CLEARLITERALSTRINGS
+                          - FINDLITERALS
+                          - REBUILDALINECOMMENT
+                          - TABULATECOMMENTSNQUOTES
+.........................   .........................
+ 
+            Subroutine Reference Map 2:            
+         ROUTINE          -       WAS CALLED BY      
+_________________________   _________________________
+CLEARCOMMENTBLOCK         - MAPNMASKCOMMENTSNLITERALS
+.........................   .........................
+CLEARLITERALSTRINGS       - MAPNMASKCOMMENTSNLITERALS
+.........................   .........................
+FINDCALLINSTRUCTIONS      - FINDCALLS2SUBROUTINES
+.........................   .........................
+FINDCALLS2SUBROUTINES     - MAIN
+.........................   .........................
+FINDDIRECTIVES            - FINDLABELSNDIRECTIVES
+.........................   .........................
+FINDLABELS                - FINDLABELSNDIRECTIVES
+.........................   .........................
+FINDLABELSNDIRECTIVES     - MAIN
+.........................   .........................
+FINDLITERALS              - MAPNMASKCOMMENTSNLITERALS
+.........................   .........................
+FINDPARENTHESES           - FINDCALLINSTRUCTIONS
+                          - FUNCTIONANALYSIS
+.........................   .........................
+FUNCTIONANALYSIS          - FINDCALLS2SUBROUTINES
+.........................   .........................
+LOADDEFAULTCONDITIONS     - MAIN
+.........................   .........................
+LOADKNOWNFUNCTIONS        - MAIN
+.........................   .........................
+LOADMYDLL                 - ProgramBegan
+.........................   .........................
+MAIN                      - ProgramBegan
+.........................   .........................
+MAKELOGICALLINES          - MAIN
+.........................   .........................
+MAPNMASKCOMMENTSNLITERALS - MAIN
+.........................   .........................
+MATCHSUBROUTINE           - FINDCALLINSTRUCTIONS
+                          - FUNCTIONANALYSIS
+.........................   .........................
+QUOTE                     - ProgramBegan
+.........................   .........................
+READRAWSOURCE             - MAIN
+.........................   .........................
+REBUILDALINECOMMENT       - MAPNMASKCOMMENTSNLITERALS
+.........................   .........................
+REBUILDALINECONTINUATION  - MAKELOGICALLINES
+.........................   .........................
+REBUILDALINESEMICOLON     - MAKELOGICALLINES
+.........................   .........................
+SIGNALANALYSIS            - FINDCALLINSTRUCTIONS
+                          - FINDCALLS2SUBROUTINES
+.........................   .........................
+SUBROUTINEANALYZER        - MAIN
+.........................   .........................
+TABULATECOMMENTSNQUOTES   - MAPNMASKCOMMENTSNLITERALS
+.........................   .........................
+TEST4COUNTSTR             - ProgramBegan
+.........................   .........................
+TEST4SYSSTEMSORT          - ProgramBegan
+.........................   .........................
+WRITEFREFTABLE            - MAIN
+.........................   .........................

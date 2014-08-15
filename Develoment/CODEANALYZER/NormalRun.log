@@ -1,0 +1,19 @@
+[D:\source\VisProSource\CodeAnalyzer]CodeAnalyzer.cmd CodeAnalyzer.cmd
+If it ain't nailed down, they meant you to take it.  If someone accidentally lef
+t nails in it, that's why you brought the crowbar.
+Read 3633 lines from source file, D:\source\VisProSource\CodeAnalyzer\CodeAnalyz
+er.cmd.
+Finished finding comments in source.
+Finished finding literals in source.
+Finished making 3141 logical lines.
+Finished finding comments in logical lines.
+Finished finding literals in logical lines.
+Finished finding labels and directives.
+Finished loading table of known functions.
+Finished loading table of default conditions.
+Finished finding calls to subroutines.
+Finished writing function references table.
+Finished with the subroutine analyzer.
+Analysis took 48.180000 seconds
+
+[D:\source\VisProSource\CodeAnalyzer]
