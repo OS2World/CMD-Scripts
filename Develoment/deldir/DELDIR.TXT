@@ -1,0 +1,14 @@
+/***********************************************************************/
+/*DELDIR - starts at the current directory and deletes all files and   */
+/*subdirectories in the target, then it deletes the target directory.  */
+/*                                                                     */
+/*This program supports HPFS long file names.  Simply type in the      */
+/*long directory name without quotes. For example this command:        */
+/*           DELDIR os!2 2.0 desktop                                   */
+/*will delete the desktop directory structure.                         */
+/*                                                                     */
+/*                                                                     */
+/* Written by Mark Polly - Progressive Insurance.                      */
+/*            July 2, 1992                                             */
+/*                                                                     */
+/***********************************************************************/

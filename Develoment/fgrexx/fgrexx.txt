@@ -1,0 +1,4 @@
+/* fgrexx.cmd, v1.0 1999-05-28, A.Koos */ 
+/* Makes himself(more exactly:the parent cmd.exe) to be the foreground process. */
+/* Uses the 'go.exe' by Carsten Wimmer.The go.exe must be in the same dir as    */
+/* fgrexx.cmd.Tested on Warp 4 in OREXX. Contact: akoos@mvm.hu                  */

@@ -1,0 +1,4 @@
+(v1.00) file2dat - File date to REXX date
+Determine how many seconds ago a file was
+created.  REXX script.  Free.
+Rick Curry, RCC, <trindflo@fishnet.net>

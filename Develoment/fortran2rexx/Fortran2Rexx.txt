@@ -1,0 +1,18 @@
+To install place the DLL along your libpath.  This is the REXXLIB dll from Quercus.  This is not a public version of the dll and may only be used with this program.
+
+Place the program Fortran2Rexx.cmd where ever convenient.
+
+To run enter something like -  Fortran2Rexx  MYSOURCE.f 
+
+Requires REXXLIB.DLL
+
+See the comments at the start of the program for notes on logic and limitations.  Executing the program from the command line without parameters will provide a brief text help.
+
+Please help improve this program.  I have not addressed many, many itmes that should and could be handled.  This merely does enough for me to get to where I needed to be.
+
+If you use the code please give credit where credit is due.
+
+
+Doug Rickman
+August 24, 2000
+doug@hotrocks.msfc.nasa.gov

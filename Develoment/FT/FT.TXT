@@ -1,0 +1,108 @@
+***************************************************************************
+FT.CMD - File Type Modifier
+
+Version 1.0
+
+Copyright (c) Lachlan O'Dea 1994
+***************************************************************************
+
+Description:
+
+FT.CMD allows the modification of a file's type Extended Attribute (EA).
+The type EA tells OS/2 what kind of data the application holds and what
+applications can access the file.
+
+FT accepts all normal OS/2 wildcards in the file specification and can
+optionally search subdirectories for matching files. This allows the easy
+modification of many files with one command.
+
+When specifying a file type, you don't have to type the full name. FT will
+match what you enter with the types defined on your system. If more than
+one type matches, FT will display a list of the matching types, from which
+you can choose the one you want.
+
+It is also possible to specify a type as "default". This moves it to the
+front of a file's type list. This _usually_ has the effect of making the
+application associated with that type the default on the file's open menu.
+I say usually because if all types are deleted, "Settings" seems to become
+the default.
+
+
+Usage:
+
+FT [FileSpec] [/a "Type" "Type"...] [/r "Type" "Type"...] [/d "Type"] [Options]
+
+  FileSpec is any normal filename, including * and ?
+  /a Specifies the types to be added to the file
+  /r Specifies the types to removed from the file
+  /d Specifies the type to be made default
+  Options:
+    /l Lists the types associated with the file after adding/removing
+    /s Search subdirectories for matching files also
+
+  When specifying a type, you only need to enter the first few letters. FT
+  will match what you enter with the list of types in your system. If more
+  than one type will match (eg "Bi" matches both "Bitmap" and "Binary Data")
+  then FT displays a numbered list of the matching types. Make a selection
+  by entering a number. If you enter 0 for none, than that type is ignored.
+
+  If the list of matching types is long, FT will pause the display. Pressing
+  "U" will display the previous screen, "D" the next screen and Enter will
+  allow you to enter a choice.
+
+eg:
+  FT C:\*.WAV /a "Digital Audio" /s /l
+  Adds the type "Digital Audio" to all .WAVs on drive C and lists the results
+  for each file
+
+  FT * /a "My WP Document" /r "Plain Text"
+  Adds the type "My WP Document" and removes "Plain Text" from all files in
+  the current directory
+
+  FT AFile.Ext /a "B"
+  Adds a type starting with B to AFile.Ext. If more than one type starts with
+  B, then FT will ask you to choose one.
+
+
+Installation:
+  Just stick FT.CMD somewhere in your path. FT is a Rexx routine so your
+  system must have Rexx installed.
+
+Notes and Limitations:
+
+* All types must be enclosed in quotation marks and are case sensitive
+* The /l option lists the types in the order they appear in the EAs, so the
+  default type is first in the list
+* If you try to add a type already present, or remove a type not present,
+  no action is taken
+* When specifying a default type, that type must already be associated with
+  the file, otherwise no action is taken. You can simply specify the
+  type in the "/a" parameter of the same command to ensure this.
+* As any type you specify is matched with the types defined in the system,
+  FT does not allow you to add or remove other type names. The types OS/2
+  knows about are in the PMWP_ASSOC_TYPE entry in OS2.INI. These include
+  the standard types (OS/2 Command File, Plain Text, Icon, etc) as well as
+  any belonging to other applications (123 Spreadsheet, etc). If anyone
+  knows of a better way to find the "defined" types, please let me know, 
+  as I think it's better not to use OS/2's INI entires if possible.
+* I've tested FT as best I can, but I can give no guarantees as to its
+  reliability. In particular, the settings notebook has some unusual
+  behaviour which FT does not account for. If the file has no type entries
+  in its EAs, then settings seems to report a default type (usually
+  "Plain Text") as present. Also, if settings are used to remove all a
+  file's types, then a single entry "Reserved" appears in the EAs. FT
+  can't do anyting with this type as it isn't in OS2.INI (see above). If
+  anyone knows how the settings notebook works with respect to EAs, please
+  let me know.
+
+
+Miscellaneous:
+
+You can copy FT as much as you want.
+
+I'm not very experienced with Rexx, so the program can probably use some
+major improvements.
+
+If you have any suggestions/comments, please mail me at:
+  drizzt@yoyo.cc.monash.edu.au
+
