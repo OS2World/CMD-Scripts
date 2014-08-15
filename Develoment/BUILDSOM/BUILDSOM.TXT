@@ -1,0 +1,149 @@
+
+
+         BuildSOM v1.0
+
+
+         INTRODUCTION
+         ------------
+
+
+         BuildSOM is a REXX program that will create OS/2 WPS objects.
+         Currently, the program supports only program and folder objects.
+         To build your WPS objects, create a file that contains the
+         definitions for the objects and run BuildSOM against that file.
+         The syntax is:
+
+                     BuildSOM <defnfile>
+
+         BuildSOM provides four primary value-added facilities over an
+         equivalent REXX program.
+
+         1)!!!!!!BuildSOM will automatically handle the nesting of objects
+         within folders.  (For you SysCreateObject programmers, the location
+         is derived).
+
+         2)!!!!!!The code will verify the existence of program executables
+         and the working directory for program objects before creating
+         the WPS objects.  Additionally, those executables in the path
+         do not have to be fully qualified.  BuildSOM will search the path
+         to find the full pathname of the program.
+
+         3)!!!!!!Since BuildSOM is a two-pass program, ALL folder and
+         program objects are verified before any objects are created.  This
+         makes cleanup a lot easier than debugging a series of REXX
+         SysCreateObject calls.
+
+         4)!!!!!!The defintions file is syntactically easier than a REXX
+         program with the equivalent statements.
+
+
+
+         DEFINTIONS FILE
+         ---------------
+
+
+         The defintions file is a series of statements that create a
+         program or folder object.  The syntax is:
+
+               CREATE { FOLDER | PROGRAM } ["Title"] [objectid]
+                  BEGIN
+                  [setup1]
+                  [setup2]
+                     .
+                     .
+                     .
+                  END
+
+
+         Note that the title must be enclosed in double quotes and connot
+         contain any quotes.  The object ID is optional.  The setup is
+         additional statements that define the executable file, the working
+         directory, the icon, etc associated with the WPS object that is
+         being created.  A list of those follow:
+
+               ICON
+               EXE
+               PARM
+               DIR
+               SESSION
+
+                 .
+                 .
+                 .
+
+         Note that the BEGIN/END pair is required, even if there are no
+         setup values.  I will improve the parser in subsequent versions
+         to remove this restriction.
+
+         The nesting of objects within a folder is handled by enclosing
+         the defintions for contained objects in curly braces, much like
+         a C program.  The following example creates a folder with a
+         full screen OS/2 command session and a windowed OS/2 command
+         session in it.
+
+            CREATE FOLDER "Quick Command Lines"
+               BEGIN
+               END
+               {
+               CREATE PROGRAM "Windowed OS/2 Session"
+                  BEGIN
+                  EXE    *
+                  DIR    C:\
+                  SESS   OS2WINDOW
+                  END
+               CREATE PROGRAM "Full Screen OS/2 Session"
+                  BEGIN
+                  EXE    *
+                  DIR    C:\
+                  SESS   OS2FULLSCREEN
+                  END
+               }
+
+
+
+         QUIRKS, THOUGHTS, ETC
+         ---------------------
+
+         The program assumes that the objects created are on the desktop
+         or nested under the desktop.  There is no support in this
+         release of starting the hierarchy in another folder.
+
+         I have noticed that if the executable is specified as '*', you
+         MUST have a SESS qualifier to make the object create complete.
+
+         If you create an environment variable called 'ICONS' that contains
+         a list of directories that contain icon files, then this code will
+         search those directories to fully qualify the icon name.
+
+
+         REGISTRATION
+         ------------
+
+         This is shareware, not freeware.   If you use this program in a
+         "production" environment, please register it with us.  The
+         registration is $25.  Feel free to upload this code and
+         documentation whereever you like,  but DO NOT upload any modified
+         code.  Please send any correspondence to:
+
+
+               Hilbert Computing
+               1022 N. Cooper
+               Olathe, KS  66061
+               Attn: Gary Murphy
+
+               BBS:  (913) 829-2450  8N1 9600
+               Voice:(913) 780-5051
+
+
+
+         FUTURE ENHANCEMENTS
+         -------------------
+
+         Better documentation
+
+         Add support for more object types (e.g. shadows and printers)
+
+         Add UPDATE to the CREATE statements
+
+         Add OPTIONS to turn on and off program name resolution
+

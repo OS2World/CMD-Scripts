@@ -1,0 +1,11 @@
+-- Rexx Package
+-- Checkfunc is a handy routine to help you develop correct
+-- and portable REXX code. It contains a mini-parser for REXX
+-- that finds all the function calls and variables
+-- in a program and lists them out for you to see.
+
+checkfunc.html    -- documentation
+checkfunc.changes -- summary of changes
+checkfunc.rex     -- the code
+cf.x              -- an X2 macro to call it
+cfedit.x          -- an X2 macro to work with the output

@@ -1,0 +1,217 @@
+INTRODUCTION
+============
+
+CmdLine is a pair of REXX library function that I wrote to implement the 
+OS/2 command line features in REXX.
+
+It's features are almost identical to the OS/2 command line when KEYS ON
+is in effect.  It has additional functions that many OS/2 REXX programers
+may find useful.  In fact, it has most of the features needed to create a
+complete full screen data entry application.
+
+CmdLine is not a small, tight program.  It's intended to be a full
+featured implementation of the OS/2 command line.  It is over 400 lines
+of REXX code.
+
+If there are features that are missing, or are substantially different
+than the OS/2 command line, please notify me and I will attemp to
+implement them.
+
+All suggestions, complaints, contributions, etc. are welcome.  Direct 
+them to: acrosby@comp.uark.edu.  You are free to use this code in your
+programs.  Please give credit where credit is due.
+
+OVERVIEW
+--------
+
+CmdLine may be included in your source file or as called as an external
+procedure.  Some of it's features are not available as an external
+procedure.
+
+CmdLine provides an input parser for REXX that supplies the same features
+as the OS/2 command line.  This includes allowing you to use the left and
+right arrow keys, up and down arrows for accessing the history list, and
+F1 to match commands in the history list.  Additionally, CmdLine allows
+hidden input for passwords, calls that don't update the history list,
+calls that don't access the history list, and combinations of the above.
+
+SYNTAX
+------
+
+value=CmdLine([option [,option]...])
+
+where options are zero or more of:
+
+   Hidden    : Characters are displayed as "*", no history, not kept.
+   Forget    : Do not add the result of this call to the history list.
+   Nohistory : Do not allow access to the history list.
+   Clear     : Reset the history list with this call (no input action
+               made.) Also clears any predefined keys!
+   Insert    : Set insert mode ON.
+   Overwrite : Set overwrite mode OFF.
+   Required  : Makes null responses invalid for this request.
+   Valid     : Next parameter specifies the valid charachters. (No
+               translation is done), no history, not kept.
+   Upper     : Translate input to upper case, no history, not kept.
+   Lower     : Translate input to lower case, no history, not kept.
+               (If both upper and lower are selected, whichever is 
+               selected LAST is performed.)
+   Width     : Next parameter specifies the maximum width of input, no
+               history, not kept.
+   Autoskip  : If input has a width, do not wait for enter when field is
+               full.
+   X         : Initial X (row) position for field
+   Y         : Initial Y (column) position for field
+   Tag       : Tag value to be displayed in front of field.
+
+CmdLine returns either a null string or the value entered by the user.  If
+the field is REQUIRED, a valid value must be entered.
+
+Only the first letter of the string is necessary, and case is ignored.
+Options may be specified in any combination, though _reset_ will always
+return without obtaining any user input.
+
+If CmdLine is an INTERNAL function (included within your sourcefile), it
+will maintain a command line history in the stem variable history.  This
+stem variable is also used to store the current INSERT state and the
+default mapping for any extended keys.
+
+Valid, upper, lower, and hidden all also set FORGET and NOHISTORY.
+
+Options that require a parameter can either be seperated by periods or by
+an equal sign.
+
+Keys used by CmdLine:
+
+       [Up]     Cycle to the previous entry in the history list
+       [Down]   Cycle to the next entry in the history list
+       [Left]   Move the cursor to the left
+       [Right]  Move the cursor to the right
+       [ESC]    Clear the input line
+       [Home]   Moves the cursor to the beginning of the input line
+       [End]    Moves the cursor to the end of the input line
+       [^Home]  Erases from the cursor to the beginning of the input line
+       [^End]   Erases from the cursor to the end of the input line
+       [Ins]    Toggles Insert/Typeover mode
+       [Del]    Deletes character under the cursor
+       [Bkspc]  Deletes the charcter in front of the cursor
+       [^Left]  Moves to the beginning of the previous word
+       [^Right] Moves to the beginning of the next word
+
+DEFINING EXTENDED KEYS
+----------------------
+
+This feature only works if CmdLine is an INTERNAL function.
+
+Extended keys may be defined by obtaining the code returned as the second
+key by SysGetKey when that key is pressed.  The program SHOWCODE.CMD is
+included to demonstrate how to obtain these codes.  Place commands such
+as:
+
+history.key.60="go" /* Definition for F2 */
+
+in your program.  You cannot redefine keys that are already used by
+CmdLine.
+
+Extended keys definitions are only available when history is available.
+
+COMMAND HISTORY
+---------------
+
+CmdLine keeps a history of the input it has processed similiar to that
+at the OS/2 prompt when KEYS=ON is in effect.  A minor difference is that
+CmdLine will not add a command to the history if it is the same as the 
+last command issued.
+
+Input identified as "hidden", "upper", "lower", or with a "verify" string
+will not be added to the history list, and will not have access to the
+input entered previously.
+
+SAMPLE PROGRAMS:
+================
+
+There are several sample programs in this archive that use CmdLine.
+They are:
+
+EXAMPLE1.CMD   An OS/2 style command line
+EXAMPLE2.CMD   An OS/2 command line with a Unix-style prompt
+DATA.CMD       A sample Data Entry screen written with CmdLine that shows
+               some of it's more powerful features.
+
+USING CmdLine IN YOUR PROGRAMS:
+===============================
+
+You can use CmdLine in your programs as either an internal or external
+procedure.  I strongly reccomend including the procedure in your source
+as an internal procedure, so that you can have access to command history.
+You are free to use and modify the code, all I ask is that you give 
+credit where credit is due.
+
+You can use CmdLine in your programs simply by including the
+
+CmdLine is intended as a generic method for obtaining input from the
+keyboard in an OS/2 REXX program.  CmdLine provides input prompts in
+your programs all the features of having KEYS=ON at the OS/2 prompt.
+Additionally, it can be used to have hidden or validated input.
+
+CmdLine uses an exposed stem variable "!history" to keep the history
+list and various settings, such as insert mode.  You can assign initial
+values to this variable.
+
+The values used are:
+
+       !history.0      The number of inputs stored
+       !history.1...n  The text of the inputs stored, chronologically
+       !history.insert The current insert state (1=on, 0=off)
+       !history.key.nn The text to be substituted when an extended key is
+                       pressed.
+
+It isn't necessary to initialize any of these values. 
+
+CmdLine() accepts input at the current cursor location.  If you desire to
+have a prompt on the same line as the input field, use 
+Call Charout, "prompt" as the line just before the call.
+
+EXAMPLE 1:  Uses CmdLine to make a simple command processor:
+
+/* EXAMPLE1
+
+   Uses CmdLine() to make a simple OS/2 command line emulator. 
+*/
+"@echo off"
+
+do forever
+   Call Charout, "["directory()"]"
+   CmdLine()
+end
+return
+
+EXAMPLE 2: A simple command processor with a Unix style prompt.
+
+/* EXAMPLE2
+
+   A Unix-ish prompt with CmdLine()
+*/
+"@echo off"
+
+!history.0=0
+do forever
+   Call Charout, "%"!history.0+1" "
+   CmdLine()
+end
+return
+
+EXAMPLE 3: Uses CmdLine to request value up to 4 char wide.
+
+/* EXAMPLE3
+
+*/
+
+word=CmdLine("Width",4)
+
+/* Request a password of uppercase letters and numbers up to 8 chars long.
+       Entering a value is required. */
+
+password=CmdLine("H","R","U","W",8,"V",xrange("A","Z")||"0123456789")
+
+

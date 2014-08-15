@@ -1,0 +1,100 @@
+CMD2Java.CMD v2.0.0
+===================
+
+Rexx2Nrx uses *.BAT files and Java-options, which won't work with OS/2.
+CMD2Java creates *.CMD versions of all Rexx2Nrx *.BAT files required to
+convert Rexx applications to Java classes. 
+
+
+TestFile.CMD
+============
+
+Assuming a working Rexx2Nrx installation, this file can be used to test
+the files created by CMD2Java by executing:
+
+   Rexx2Nrx.CMD TestFile
+   java TestFile.class
+
+Please note that Java v1.2+ is not required to execute this class file,
+so eComStation's default Java v1.1.8 can be used to execute this file.
+
+If the file TestFile.CMD cannot be found in the current directory, then
+CMD2Java.CMD won't display how to use this sample.
+
+
+Installation
+============
+
+Save CMD2Java.CMD in your Rexx2Nrx directory. Execute CMD2Java.CMD once
+in that directory. CMD2Java verifies the CLASSPATH environment variable
+and tries to find a Java-version which is at least version 1.2. 
+
+You may delete CMD2Java.CMD, CMD2Java.TXT (this file), TestFile.CMD and
+all *.BAT files of Rexx2Nrx which are now "replaced" by *.CMD files:
+
+   NETREXXC.BAT
+   NRC.BAT
+   REXX2NRX.BAT
+   REX_NRX.BAT
+   REX_PARS.BAT
+   REX_TYPE.BAT
+
+
+It is possible to execute CMD2Java.CMD more than once, but it will fail
+if at least one of the new files already exists. Delete all created new 
+CMD files before executing CMD2Java.CMD again. No files are overwritten
+by CMD2Java.CMD itself. CMD2Java.CMD also doesn't change your setup.
+
+
+Requirements
+============
+
+Rexx, RexxUtil.DLL, Java v1.2+, NetRexx v2.0.5+ and Rexx2Nrx v4.0.1+.
+
+
+Errors
+======
+
+ - Execute CMD2Java.CMD in the Rexx2Nrx-directory
+
+This is the directory where the file Rexx2Nrx.jar is already installed.
+All other Rexx2Nrx files may be required too.
+
+ - File NetRexxC.jar not found in <DIRECTORY>
+ - File Rexx2Nrx.jar not found in <DIRECTORY>
+
+The CLASSPATH environment variable doesn't match the current situation.
+Update the CLASSPATH, or copy/move files to the right directory.
+
+ - Add the full file specification of NetRexxC.jar to the CLASSPATH
+ - Add the full file specification of Rexx2Nrx.jar to the CLASSPATH
+   
+Install NetRexx or Rexx2Nrx properly, or update the CLASSPATH setting.
+
+ - Java-version is not at least 1.2
+ 
+The system reported an unexpected Java version. Java v1.2 or newer is a
+requirement. Optionally edit CMD2Java.CMD to bypass/remove the test. It
+should work with a default eComStation v1.2 install.
+
+ - No directory entered
+ - <DIRECTORY> is not a valid full path of a directory
+
+Enter a valid full path, like: C:\PROGRAMS\JAVA142
+
+ - File JAVA.EXE not found in <DIRECTORY>
+
+Enter a directory where Java v1.2 can be found, or repair your system's
+setting.
+
+ - File <FILE> already exists
+
+CMD2Java.CMD won't overwrite existing files. Delete the files manually. 
+The files which CMD2Java.CMD tries to create are, in reversed order:
+
+   NETREXXC.CMD
+   NRC.CMD   
+   REX_TYPE.CMD
+   REX_PARS.CMD
+   REX_NRX.CMD
+   REXX2NRX.CMD

@@ -1,0 +1,359 @@
+<title>Checkfunc - Function analysis of a REXX program</title>
+
+<h1>Checkfunc - Function analysis of a REXX program</h1>
+
+<p>
+Toby Thurston --- 12 Aug 2004
+
+<p>
+Checkfunc is a handy routine to help you develop correct and
+portable REXX code.  It contains a mini-parser for REXX that finds
+all the variables and function calls in a program and lists them out
+for you to see.  The output listing shows
+
+<ol>
+<li>Three different classes of BIFs used
+       and highlights any that are overriden by internal functions
+
+<li>Internal functions
+
+<li>Duplicate (and therefore unreachable) labels
+
+<li>Rexxutil common functions
+
+<li>Rexxutil OS/2 only functions
+
+<li>Rexxutil Windows only functions
+
+<li>Rexxutil Version 2 functions
+
+<li>External functions
+        and checks to see that the external function exists and that
+        you have the case of it correctly in your program.
+        This matters if you want to write code for Windows-like
+        systems and Unix-like systems.
+
+        <p>
+        In a call like:  <tt>x = myfunc(a,b,c)</tt>,
+        REXX takes the "myfunc" token, uppercases it to MYFUNC and
+        looks for an internal label with the same name.  If it fails
+        to find one it will search externally for a MYFUNC.cmd or
+        MYFUNC.rexx etc.
+
+        <p>
+        On Windows and similar file systems where the case of a
+        filename is not significant it doesn't matter if you func is
+        called MYFUNC.REXX or MyFunc.ReXx, but on Unix it does.
+
+        <p>
+        In general it is more efficient to put the name of the
+        function call in 'quotes' and to get the case exactly right.
+        If the name is in 'quotes' REXX will not spend time looking
+        for an internal function first.  So in general we prefer to
+        write the above as:  <tt>x = 'myfunc'(a,b,c)</tt>.
+        However I have to admit that it makes for less readable
+        code, and the performance gain is minimal on any modern
+        system.
+
+<li>External commands, such as system commands or application
+commands if your REXX program is an application macro.
+
+<li>Simple variables
+
+<li>Compound variables
+
+</ol>
+
+<p>Checkfunc is <b>not</b> a syntax checker.  In order to keep it
+small, I assume that your Rexx code is syntactically correct.  In
+fact I assume it can be run through the Object Rexx tokenizer
+program (rexxc.exe) without errors.   Checkfunc will probably break
+on Rexx programs that do not tokenize correctly.
+
+<p>I have tested checkfunc using Regina 3.2 on Windows and IBM
+Object Rexx 2.1.3 on Windows and Linux.  For Regina on Windows
+you'll need to have Patrick McPhee's "regutil" implementation of
+rexxutil.dll.
+
+<p>I welcome <a href="contact.html">feedback</a> about the
+usefulness of checkfunc.rex, bug reports, and suggestions for
+improvement.
+
+<p>
+Checkfunc is designed to be used from the command line.  Like this:
+
+<pre>
+        [rexx] checkfunc infile [outfile] [-d] [-h]
+</pre>
+<ul>
+<li>If either file has spaces in the name, put the name in "quotes".
+
+<li>You cannot omit the name of the infile.
+
+<li>If you omit outfile the output goes to 'stdout'
+
+<li>If you add the -d switch then a list of tokens representing the
+  input is written to 'stderr'.  Since the list is generally long,
+  you probably will want to redirect the output to a file with
+  "2>file" on the end of the command line.
+
+<li>The -h switch gives a very short help.
+
+<li>You can put the switches at the end, in the middle, or before
+the names, but if you specify both names they must be in the order
+shown above.
+
+</ul>
+
+<p>
+Checkfunc also comes with a couple of X2 macros to integrate it into
+X2. cf.x looks for a file name on the current line (such as in the
+checkfunc.list file in this package) and calls checkfunc on that
+file, then edits the output.
+
+<p>
+cfedit.x is an "overloading" of the openfile command designed to
+help you work with the output of checkfunc in X2.  If you assign
+this macro to the key you normally use for "openfile" (Ctrl-P by
+default), then you can edit the source file directly from the
+checkfunc output.
+
+<p>
+Having assigned: <tt>c-p = 'macro cfedit'</tt> and then recompiled
+your profile, you can edit the output, then move your cursor to any line
+starting with a number (and therefore referring to a source line)
+and press c-p to open the source file at the exact line.
+
+<p>
+If you are in the "external function" section then you can edit the
+external programs from the "Function found" lines.
+
+<p>
+Here is an example output file.
+
+<hr><pre>
+Function analysis of C:\00\rexx\checkfunc.rex
+
+BIFs Used
+---------
+CHAROUT: (1)
+   153 else call charout 'stderr', s'0d'x
+
+COPIES: (1)
+   492 call lineout out, copies('-',length(description))
+
+DELWORD: (1)
+   471 s = delword(s,j,1)
+
+LEFT: (4)
+    38 if left(source.1,2) <> '/*'
+   152 if debug? then call lineout 'stderr', left(token t_value,72) s p
+   451 t_value = left(t_value,length(t_value)-1)
+   485 type.name.? = left(type,3)
+
+LENGTH: (3)
+    17 s_len.i = length(source.i)
+   451 t_value = left(t_value,length(t_value)-1)
+   492 call lineout out, copies('-',length(description))
+
+LINEIN: (1)
+    16 source.i = strip(linein(in))
+
+</pre>
+<pre>
+
+LINEOUT: (40)
+    19 if in <> '' then call lineout in
+   152 if debug? then call lineout 'stderr', left(token t_value,72) s p
+   188 call lineout out, 'Function analysis of' stream(in,'c','query exists')
+   189 call lineout out, ' '
+   197 call lineout out, 'Internal functions'
+   198 call lineout out, '------------------'
+   204 call lineout out, bif': ('count.bif')'
+   205 call lineout out, right(?,6) source.?
+   206 call lineout out, ' '
+   210 call lineout out, right(ref,6) source.ref
+   213 call lineout out, '      | Direct call to BIF bypasses internal function |'
+   214 call lineout out, '      +-----------------------------------------------+'
+   217 call lineout out, ' '
+   219 if i=1 then call lineout out, "None."
+   220 call lineout out, ' '
+   225 call lineout out, 'Duplicate (and therefore unreachable) labels'
+   226 call lineout out, '--------------------------------------------'
+   230 call lineout out, label':'
+   231 call lineout out, right(ref,6) source.ref
+   233 if i = 1 then call lineout out, 'None.'
+   234 call lineout out, ' '
+   249 call lineout out, 'External functions'
+   250 call lineout out, '------------------'
+   258 call lineout out, f':'
+   271 then call lineout out, '  "No external function found in PATH"'
+   275 then call lineout out, '  Function found:' temp.1
+   276 else call lineout out, '  Function found:' temp.1 '"<-- Case of name differs from call"'
+   283 call lineout out, right(ref,6) type source.ref
+   285 call lineout out, ' '
+   287 if none? then call lineout out, "None."
+   292 if out <> '' then call lineout out
+   491 call lineout out, description
+   492 call lineout out, copies('-',length(description))
+   499 call lineout out, bif': ('count.bif')'
+   503 call lineout out, right(ref,6) source.ref
+   506 call lineout out, '      | Overridden by internal function |'
+   507 call lineout out, '      +---------------------------------+'
+   510 call lineout out, ' '
+   512 if none? then call lineout out, "None."
+   513 call lineout out, ' '
+</pre>
+<pre>
+
+LINES: (1)
+    15 do i = 1 while lines(in) > 0
+
+RIGHT: (6)
+   205 call lineout out, right(?,6) source.?
+   210 call lineout out, right(ref,6) source.ref
+   231 call lineout out, right(ref,6) source.ref
+   283 call lineout out, right(ref,6) type source.ref
+   449 if right(t_value,1) = '.'
+   503 call lineout out, right(ref,6) source.ref
+
+RXFUNCADD: (1)
+    47 call rxfuncadd "SYSLOADFUNCS", "rexxutil", "SYSLOADFUNCS"
+
+SPACE: (5)
+   143 then duplicate_labels = space(duplicate_labels last_value':'s)
+   146 labels = space(labels last_value)
+   261 ? = 'SYSSEARCHPATH'('PATH',space(f''word(rexx_entensions,j)))
+   478 return space(subword(s,2))
+   486 if ?=1 then func_list = space(func_list name)
+
+STREAM: (2)
+    54 then if stream(out,'c','query exists') <> ''
+   188 call lineout out, 'Function analysis of' stream(in,'c','query exists')
+
+STRIP: (1)
+    16 source.i = strip(linein(in))
+
+SUBSTR: (10)
+   336 c = substr(source.s,p,1)
+   352 if c = '/' & substr(source.s,p,1) = '*'    /* start a comment */
+   363 c1 = substr(source.s,p,1)    /*                      |  */
+   368 c2 = substr(source.s,p,1)
+   382 c = substr(source.s,p,1)
+   387 if substr(source.s,p,1) <> c then leave/* isn't escaped */
+   401 c = substr(source.s,p,1)
+   416 c = substr(source.s,p,1)
+   431 c = substr(source.s,p,1)
+   439 c2 = substr(source.s,p+1,1)
+
+SUBWORD: (3)
+   475 s = subword(s,1,i) key subword(s,1+i)
+   475 s = subword(s,1,i) key subword(s,1+i)
+   478 return space(subword(s,2))
+
+TRANSLATE: (5)
+   376 type = translate(c,typeset,charset)
+   402 type = translate(c,typeset,charset)
+   407 t_value = translate(t_value)
+   417 type = translate(c,typeset,charset)
+   432 type = translate(c,typeset,charset)
+
+VERIFY: (1)
+   345 if verify(c,':.(') = 0
+
+WORD: (9)
+   201 bif = word(labels,i)
+   229 parse value word(duplicate_labels,i) with label ':' ref
+   255 f = word(func_list,i)
+   261 ? = 'SYSSEARCHPATH'('PATH',space(f''word(rexx_entensions,j)))
+   469 if word(s,i) >> word(s,j) then do
+   469 if word(s,i) >> word(s,j) then do
+   470 key = word(s,j)
+   472 do until word(s,i) <<= key
+   495 bif = word(list,i)
+
+WORDPOS: (2)
+   211 if type = 'LIT' & wordpos(bif,bif_names)>0
+   504 if type = 'SYM' & wordpos(bif,labels)>0
+
+WORDS: (6)
+   200 do i = 1 to words(labels)
+   228 do i = 1 to words(duplicate_labels)
+   254 do i = 1 to words(func_list)
+   260 do j = 1 to 1+words(rexx_entensions) /* +1 to allow for no ext  */
+   467 do j = 2 to words(s)
+   494 do i = 1 to words(list)
+
+</pre>
+<pre>
+
+Internal functions
+------------------
+ADD_FUNCTION: (2)
+   480 add_function: procedure expose (token_vars)
+
+   134 then call add_function last_token, last_value, s
+   138 then call add_function token, t_value, s
+
+GET_TOKEN: (1)
+   325 get_token: procedure expose s_lines s p source. s_len. charset typeset t_value
+
+   123 token = get_token()
+
+LIST_FUNCS: (5)
+   489 list_funcs: procedure expose (token_vars) source. labels out
+
+   193 call list_funcs bif_names, 'BIFs Used'
+   239 call list_funcs ru_core, 'Rexxutil common functions'
+   240 call list_funcs ru_os2, 'Rexxutil OS/2 only functions'
+   241 call list_funcs ru_win, 'Rexxutil Windows only functions'
+   242 call list_funcs ru_ver2, 'Rexxutil Version 2 functions'
+
+WORD_SORT: (3)
+   464 word_sort: procedure         /* optimal insertion sort with words */
+
+   199 labels = word_sort(labels)
+   227 duplicate_labels = word_sort(duplicate_labels)
+   253 func_list = word_sort(func_list)
+
+</pre>
+<pre>
+
+Duplicate (and therefore unreachable) labels
+--------------------------------------------
+None.
+
+Rexxutil common functions
+-------------------------
+SYSFILEDELETE: (1)
+    55 then call 'SYSFILEDELETE' out
+
+SYSFILETREE: (1)
+   273 call 'SYSFILETREE' ?, 'temp', 'FO'
+
+SYSSEARCHPATH: (1)
+   261 ? = 'SYSSEARCHPATH'('PATH',space(f''word(rexx_entensions,j)))
+
+SYSLOADFUNCS: (1)
+    48 call 'SYSLOADFUNCS'
+
+</pre>
+<pre>
+
+Rexxutil OS/2 only functions
+----------------------------
+None.
+
+Rexxutil Windows only functions
+-------------------------------
+None.
+
+Rexxutil Version 2 functions
+----------------------------
+None.
+
+External functions
+------------------
+None.
+
+</pre>

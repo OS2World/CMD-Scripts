@@ -1,0 +1,508 @@
+#  컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+#
+#   Gary Murphy desktop.  Last updated 10/26/1992
+#
+#  컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+#
+#  Set the path for the icons
+#
+   env icons d:\icons
+
+   create program "OS/2 Window:0" uwpsp_os2win0
+      begin
+      exe     *
+      session os2win
+      end
+   create program "OS/2 Window:1" uwpsp_os2win1
+      begin
+      exe     *
+      session os2win
+      end
+   create program "OS/2 FullScreen:0" uwpsp_os2vio0
+      begin
+      exe     *
+      session os2fullscreen
+      end
+   create program "OS/2 FullScreen:1" uwpsp_os2vio1
+      begin
+      exe     *
+      session os2fullscreen
+      end
+   create folder "Supplimental^Information" uwpsf_suppinfo
+      begin
+      icon  infomatn.ico
+      end
+      {
+      create program "OS/2 Tips" uwpsp_info_os2tips
+         begin
+         exe  view.exe
+         parm os2tips.inf
+         end
+      create program "Forum Browse Reference" uwpsp_info_forbrows
+         begin
+         exe  view.exe
+         parm forbrows.inf
+         dir  d:\forbrows
+         end
+      create program "Snap Dump Reference" uwpsp_info_snapdump
+         begin
+         exe  view.exe
+         parm snapdump.inf
+         dir  d:\products\book
+         end
+      create program "PM Comm Reference" uwpsp_info_pmcomm
+         begin
+         exe  view.exe
+         parm pmcomm.inf
+         dir  d:\pmcomm
+         end
+      create program "Theseus Reference" uwpsp_info_theseus
+         begin
+         exe  view.exe
+         parm theseus.inf
+         dir  d:\theseus
+         end
+      create program "X Server Reference" uwpsp_info_xserver
+         begin
+         exe  view.exe
+         parm os2x.inf
+         dir  c:\tcpip
+         end
+      #
+      #  Applications Development Reference
+      #
+      create program "PM Hints" uwpsp_info_pmhints
+         begin
+         exe  view.exe
+         parm pmhints.inf
+         end
+      create program "PM Reference" uwpsp_info_pmref
+         begin
+         exe  view.exe
+         parm pmref
+         end
+      create program "Information Presentation Facility Reference" uwpsp_info_ipfc20
+         begin
+         exe  view.exe
+         parm ipfc20
+         end
+      create program "Development Tools Reference" uwpsp_info_devltools
+         begin
+         exe  view.exe
+         parm toolinfo.inf
+         end
+      create program "PM Hooks and Graphics Orders" uwpsp_info_pmhooks
+         begin
+         exe  view.exe
+         parm toolinfo.inf
+         end
+      create program "System Object Model Reference" uwpsp_info_somref
+         begin
+         exe  view.exe
+         parm som.inf
+         end
+      create program "Control Program Reference" uwpsp_info_guiref
+         begin
+         exe  view.exe
+         parm guiref20.inf
+         end
+      create program "IBM C/Set 2 Reference" uwpsp_info_cset2
+         begin
+         exe  view.exe
+         parm dde4help.inf
+         end
+      #
+      #  Remote books
+      #
+      create program "OS/2 Tools" uwpsp_info_tools
+         begin
+         exe  view.exe
+         parm tools.inf
+         dir  r:\books
+         end
+      create program "OS/2 Tips &^Techniques" uwpsp_info_tnt
+         begin
+         exe  view.exe
+         parm os2tnt.inf
+         dir  r:\books
+         end
+      create program "OS/2 v2.0 Information and^Planning Guide" uwpsp_info_infoguid
+         begin
+         exe  view.exe
+         parm infoguid.inf
+         dir  r:\books
+         end
+      create program "PS/2 Assistant" uwpsp_info_ps2asst
+         begin
+         exe  view.exe
+         parm ps2a_ttl+ps2a_gen+ps2a_tec+ps2a_tsp+ps2a_svc+ps2a_mkt
+         dir  r:\ps2asst
+         end
+      }
+   create folder "File Cabinet" uwpsf_filecab
+      begin
+      icon filemgr.ico
+      end
+      {
+      create folder "Utilities" uwpsf_utilities
+         begin
+         end
+         {
+         create program "Chron v3.0.1" uwpsp_chron
+            begin
+            exe   chron.exe
+            end
+         create program "Seek & Scan" uwpsp_pmseek
+            begin
+            exe   pmseek.exe
+            end
+         create program "System Editor" uwpsp_e
+            begin
+            exe   e.exe
+            end
+         create program "Theseus" uwpsp_theseus
+            begin
+            exe   d:\theseus\theseus2.exe
+            dir   d:\theseus
+            end
+         create program "Pulse" uwpsp_pulse
+            begin
+            exe   pulse.exe
+            end
+         create program "Diskette Copy" uwpsp_dskcpy
+            begin
+            exe   pmdskcpy.exe
+            end
+         create program "INI^Edit" uwpsp_iniedit
+            begin
+            exe   iniedit.exe
+            end
+         create program "Icon Editor" uwpsp_iconedit1
+            begin
+            exe   iconedit.exe
+            dir   d:\icons
+            end
+         create program "Contrast" uwpsp_contrast
+            begin
+            exe   contrast.exe
+            end
+         create program "Clock" uwpsp_clock
+            begin
+            exe   clock.exe
+            icon  clock.ico
+            end
+         create program "PM Spy^16-bit" uwpsp_spy16
+            begin
+            exe   spy.exe
+            end
+         create program "PM Spy^32-bit" uwpsp_spy32
+            begin
+            exe   pmspy.exe
+            end
+         create program "PM Tree" uwpsp_pmtree
+            begin
+            exe   pmtree.exe
+            end
+         create program "ASCII Chart" uwpsp_pmasc
+            begin
+            exe   pmasc.exe
+            end
+         create program "File Browser" uwpsp_pmview
+            begin
+            exe   pmview.exe
+            end
+         create program "Host <--> PC^File Transfer" uwpsp_pmft2
+            begin
+            exe   pmft.exe
+            end
+         }
+      create folder "Applications" uwpsf_applications
+         begin
+         end
+         {
+         create folder "Forum Browse" uwpsf_forbrowsfolder
+            begin
+            icon binoculr.ico
+            end
+            {
+            create program "OS/2 Forum^Browse" uwpsp_forbrows
+               begin
+               exe   d:\ForBrows\ForBrows.exe
+               dir   d:\ForBrows
+               end
+            create program "Logon IBMLink" uwpsp_logonlink
+               begin
+               exe   ibmlink.cmd
+               parm  (logon
+               sess  os2fullscreen
+               icon  logon.ico
+               end
+            create program "Logoff IBMLink" uwpsp_logofflink
+               begin
+               exe   ibmlink.cmd
+               parm  (logoff
+               sess  os2fullscreen
+               icon  logoff.ico
+               end
+            create program "Forum Browse Reference" uwpsp_view_forbrows
+               begin
+               exe  view.exe
+               parm forbrows.inf
+               dir  d:\forbrows
+               end
+            }
+         create program "Describe 3.0^16-bit" uwpsp_describe16
+            begin
+            exe   d:\describe\describe.exe
+            dir   d:\doc
+            end
+         create program "Excel 4.0" uwpsp_excel
+            begin
+            exe   d:\excel\excel.exe
+            dir   d:\wksheet
+            end
+         }
+      create folder "Communications" uwpsf_communications
+         begin
+         icon pcplus.ico
+         end
+         {
+         create folder "Communications^Manager" uwpsf_commmgrfolder
+            begin
+            icon commun.ico
+            end
+            {
+            create folder "User Profile Management Services" uwpsf_upmsvcs
+               begin
+               end
+               {
+               create program "User Profile Management" uwpsp_upm
+                  begin
+                  exe   c:\muglib\upmaccts.exe
+                  dir   c:\muglib
+                  end
+               create program "Logon" uwpsp_logon
+                  begin
+                  exe   c:\muglib\logon.exe
+                  dir   c:\muglib
+                  end
+               create program "Logoff" uwpsp_logoff
+                  begin
+                  exe   c:\muglib\logoff.exe
+                  dir   c:\muglib
+                  end
+               }
+            create folder "Extended Services" uwpsf_esfolder
+               begin
+               end
+               {
+#              create program "Basic Configuration and Installation" uwpsp_escfg
+#                 begin
+#                 exe  escfg.cmd
+#                 dir  c:\os2\install
+#                 icon escfg.ico
+#                 end
+#              create program "Add Or Remove Features" uwpsp_reinst
+#                 begin
+#                 exe  reinst.cmd
+#                 dir  c:\os2\install
+#                 icon addfeat.ico
+#                 end
+#              create program "View Install History" uwpsp_vhistlog
+#                 begin
+#                 exe  viewlog.cmd
+#                 dir  c:\os2\install
+#                 icon vhistlog.ico
+#                 end
+#              create program "Create Custom Install Diskettes" uwpsp_custbld
+#                 begin
+#                 exe  custbld.cmd
+#                 dir  c:\os2\install
+#                 icon custinst.ico
+#                 end
+#              create program "View Custom Build History" uwpsp_vcustbld
+#                 begin
+#                 exe  viewblog.cmd
+#                 dir  c:\os2\install
+#                 icon vhistlog.ico
+#                 end
+               create program "Extended Services Command Reference" uwpsp_escmdref1
+                  begin
+                  exe  view.exe
+                  parm escmdref.inf
+                  end
+               }
+            create program "Display SNA Config Log" uwpsp_vsnaconfig
+               begin
+               exe  appnlog2.exe
+               parm [Enter configuration log (.LOG) file name]
+               dir  c:\cmlib
+               icon vhistlog.ico
+               end
+            create program "SNA Network Definition Configuration" uwpsp_appnc2
+               begin
+               exe  appnc2.exe
+               parm [Enter Network Definition (.NDF) file name]
+               dir  c:\cmlib
+               icon netdef.ico
+               end
+            create program "Verify SNA Network Definitions" uwpsp_verifyns
+               begin
+               exe  verifyns.cmd
+               parm [Enter Network Definition (.NDF) file name]
+               dir  c:\cmlib
+               icon verdefn.ico
+               end
+            create program "Communications Manager" uwpsp_commmgr
+               begin
+               exe  startcm.cmd
+               dir  c:\cmlib
+               sess os2fullscreen
+               icon cm2.ico
+               end
+            }
+         create program "Host <--> PC^File Transfer" uwpsp_pmft
+            begin
+            exe   pmft.exe
+            end
+         create program "PM Comm v1.11" uwpsp_pmcomm
+            begin
+            exe   d:\pmcomm\pmcomm32.exe
+            dir   d:\pmcomm
+            icon  pmcomscr.ico
+            end
+         create program "Prodigy" uwpsp_prodigy
+            begin
+            exe   d:\prodigy\prodigy.exe
+            dir   d:\prodigy
+            icon  prodigy.ico
+            end
+         create program "SprintMail" uwpsp_smail
+            begin
+            exe   d:\sprmail\sprmail.com
+            dir   d:\sprmail
+            icon  sprint.ico
+            end
+         create program "Pull SprintMail" uwpsp_pullsmail
+            begin
+            exe   d:\sprmail\mail.exe
+            dir   d:\sprmail
+            icon  sprint.ico
+            end
+         create folder "TCP/IP" uwpsf_tcpip
+            begin
+            icon tcpfold.ico
+            end
+            {
+            create program "TCP/IP^Initialization" uwpsp_tcpinit
+               begin
+               exe   tcpinit.cmd
+               icon  tcpinit.ico
+               end
+            create program "Telnet^[ts54sys1:0]" uwpsp_telnet0
+               begin
+               exe   vt220.exe
+               parms ts54sys1
+               icon  telnet.ico
+               end
+            create program "Telnet^[ts54sys1:1]" uwpsp_telnet1
+               begin
+               exe   vt220.exe
+               parms ts54sys1
+               icon  telnet.ico
+               end
+            create program "Telnet^[ts54sys1:2]" uwpsp_telnet2
+               begin
+               exe   vt220.exe
+               parms ts54sys1
+               icon  telnet.ico
+               end
+            create program "Telnet ANSI^[No Host]" uwpsp_ansi
+               begin
+               exe   vt220.exe
+               icon  telnet.ico
+               end
+            create program "PM Ping" uwpsp_pmping
+               begin
+               exe   pmping.exe
+               end
+            create program "FTP/PM" uwpsp_ftppm
+               begin
+               exe   ftppm.exe
+               end
+            create program "X-Server" uwpsp_xserver
+               begin
+               exe   pmx.exe
+               end
+            create program "TCP/IP Install" uwpsp_icat
+               begin
+               exe   icat.exe
+               end
+            }
+         }
+      create folder "32-bit Development" uwpsf_32bitdev
+         begin
+         end
+         {
+         create folder "Resource Toolkit" uwpsf_reskit
+            begin
+            end
+            {
+            create program "Icon Editor" uwpsp_res_icon
+               begin
+               exe  iconedit.exe
+               dir  d:\ibmc\source
+               end
+            create program "Dialog Box Editor" uwpsp_res_dlgbox
+               begin
+               exe  dlgedit.exe
+               dir  d:\ibmc\source
+               end
+            create program "Font Editor" uwpsp_res_fontedit
+               begin
+               exe  fontedit.exe
+               dir  d:\ibmc\source
+               end
+            }
+         create folder "AMIS" uwpsf_amis
+            begin
+            icon folder.ico
+            end
+            {
+            create program "AMIS Development" uwpsp_amisdev
+               begin
+               exe   *
+               parms $ profile ibmc am1
+               dir   d:\ibmc\source
+               sess  os2fullscreen
+               end
+            create program "AMIS Bugs" uwpsp_amisbugs
+               begin
+               exe   kedit.exe
+               parms am1.bug
+               dir   d:\ibmc\source
+               icon  bugs.ico
+               end
+            }
+         create folder "REXX" uwpsf_rexx
+            begin
+            icon folder.ico
+            end
+            {
+            create program "REXX Development" uwpsp_rexxdev
+               begin
+               exe   *
+               parms $ profile rexx
+               dir   d:\rexx
+               sess  os2full
+               end
+            create program "BuildSOM Development" uwpsp_buildsom
+               begin
+               exe   *
+               parms $ profile rexx
+               dir   d:\rexx
+               sess  os2full
+               end
+            }
+         }
+      }

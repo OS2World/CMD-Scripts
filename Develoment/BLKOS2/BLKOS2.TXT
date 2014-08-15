@@ -1,0 +1,845 @@
+BLKOS2.DOC FOR BETA VERSION 0.7
+May 17, 1993.
+
+KUTEK/OMNIBUS SYSTEMS
+PO BOX 261
+FORKED RIVER, NJ  08731-0261
+
+This material is copyright(c) C>BLACK,B.STONE,KUTEK 1992,1993
+all rights reserved-.
+
+THIS IS A PRELIMINARY BETA VERSION .It MAY NOT BE BUNDLED OR SOLD.
+
+YOU MAY UPLOAD THIS PACKAGE TO OTHER CONTACT POINTS AS LONG 
+AS NO FEE IS CHARGED FOR ACCESS to the files outside of normal subscriptions
+to those contact points.
+
+You may modify this code for your own use but YOU MAY NOT UPLOAD
+ modifications as part of this package.ONLY the authors are authorized 
+to distribute modifications to this package.
+
+REGISTRATION FOR INDIVIDUALS IN NON-ORGANIZATIONAL ENVIRONMENT:
+The registration for BLKOS2 is a one time fee of $3.00(three) US for this and all future 
+versions which is to help defray the cost of obtaining OS2 development tools so that we
+can offer some of the best priced os2 SW around.We have VERY radical ideas 
+concerning SW pricing which we KNOW users will like.
+
+CONTACT KUTEK FOR USE IN ORGANIZATIONAL SETTINGS.
+
+FEATURES:
+---REXX INTERPRET function with command line editing and history
+
+---expanded history functions
+
+---expanded command line editing functions
+
+---file name completion
+
+---run any command or program  on selectable groups of objects
+
+---global and local object searches(across entire system) and operations
+
+---manipulate the WPS directly from the command line to open filelist views of folders,
+start objects or open settings views.
+
+---attribute selector allows locating files on basis of date ,file attribute, time or 
+size in a very flexible way
+
+---full alias facility that gives hot key like access to your entire system.Both  named
+and key aliases are supported.
+
+---use all constucts of os2 batch language, os2 commands, external commands or 
+functions and all rexx constucts within a single rexx alias.
+
+---recursive directory delete, quick dir change and dir stack functions.
+
+---manage files using a text based search mode that simplfies finding what you want 
+anywhere on your system.
+
+ADDITIONAL FEATURES COMING VERY SOON
+
+the object configurator is an integral part of BLKOS2 that allows the easy configuration 
+of os2, win or dos sessions. It can immediately create or modify objects without the 
+necessity of writing rexx wps scripts and it creates a database of your objects so that 
+they  can be recreated at any time on any os2 equipped system.The presence of 
+BLKOS2 on the target system is NOT required for the object recreation process.
+The OBJECT CONFIGURATOR will soon be integrated into blkos2 and released 
+when tested.There is no additional fee for registered individual users of BLKOS2.
+
+It is also our plan to integrate the capabilities gained through Dave Boll's RXU10
+rexx utility package into blkos2(esp making it multithreaded).
+
+
+****READ THE UTILITY .CMD FILES THEMSELVES FOR INFO ON THE UTILITIES*****
+d.cmd  dd.cmd and in.cmd
+
+
+BACK UP YOUR SYSTEM BEFORE USING THIS PROGRAM!!!
+WE WILL NOT BE HELD RESPONSIBLE FOR ANY DATA 
+LOSS OR OTHER DAMAGE TO YOUR SYSTEM-
+THOUGH OUR TESTING DEMONSTRATES THAT IT IS SAFE,USE 
+AT YOUR OWN RISK !!!!!!
+
+the pgm runs as a shell on top of the command line ,intercepts
+keystrokes and performs specified actions .
+The prgram has a full alias facility which can use OS2 , os2
+batch(CMD), or REXX commands freely in combination in
+your aliases.There are no limits on the size of
+an alias.BLKOS2 also allows various flexible search and
+run functions as well as control over the WPS from the command line.
+You need to have some  knowledge of rexx in order to use blkos2 
+most effectively-refer to the online rexx docs.
+INSTALLATION:
+You must have REXX installed on your os2 system.
+Blackstone requires the rexx updates in any of the following forms:
+rexx20.zip, the service pak, or os2 2.1
+The rexxutil functions will be automatically loaded if they are not active.
+
+Modify the pather variable(in CAPS) at the top of the BLKOS2.CMD
+file to specify the locaton of blackstone's auxiliary work files
+.keeping all of the blackstone files in one dir is a good idea.
+Place blkos2's directory  in your dpath and path statements.
+Create  an os2 session object(windowed or FS,FS is faster,windowed
+is more flexible)
+and place the following in the parameter line:  /k blkos2.cmd.
+use 25 line video mode.You'll have to live with our ansi choices for the
+time being-make sure ansi is ON.The menus are intentionally 
+minimalist.
+You can also  change the runworkplace = CMD.exe
+to runworkplace=<path>BLKOS2.cmd and it will load
+automatically in all of your OS2 sessions as the shell.
+
+add the following line to your STARTUP.CMD:
+
+del pather\history\* /n
+replacing pather with it's setting and enclosing the above in single 
+quotes if your STARTUP.CMD  is a REXX file.
+
+It is advisable to use a session hotkey facility such as QWIKSWCH
+to switch easily between windows.
+Modify the limtt var for the desired number of lines in the command history
+buffer and set the logon parameter to 1 if you want the log to be 
+active as default-you can switch it  on or off at any time from the 
+keyboard.see below.Note that only those commands or input issued directly through
+BLKOS2 appear in the log.
+
+SETTING THE PROMPT COLOR:
+in the configure block the prpt variable sets the prompt color.Use standard
+ansi foreground color designators ie:31 -> red,32 -> green,33 -> yellow,
+34-> blu,35->mag,36->cyan,37->white
+
+SETTING THE SKIP VARIABLE: 
+slow drives like cdroms can really bog down
+a global search and by setting the skip variable in the configure block (at the top of
+the blkos2.cmd file )you can exclude such drives from global searches. the skip variable 
+is a space delimited string of drive specs in single quotes
+EXAMPLE to exclude drives c x and w set 
+
+SKIP='C: X: W:'             quotes,colons,spaces, and capitalization REQUIRED
+
+SETTING HOW BLKOS2 DOES IT'S SEARCHES IN THE SELECTOR:
+BLKOS2 is set up to search the entirety of the current drive if no drive
+or directory is entered in a select term(see below). If you prefer that it 
+only search the current directory and below thus giving a smaller pick
+list display then set  TOTDRV=0 in the configure block at the top of the BLKOS2.CMD
+file.HITTING ALT-S AT ANY TIME FROM THE MAIN PROMPT FLIPS THE 
+SEARCH MODE
+
+PLACING THE BLKOS2 WINDOW:
+Keep the"collapsed"  window as a strip sized window at the bottom-
+you can immediatly go to maximized by hitting ALT and ENTER in 
+sequence.This will allow you to easily see a WPS file list that BLKOS2
+brings up-they do not come to the front of the os2 session window.
+Fixate the window size by left clicking on the title bar once while 
+holding down shift.
+
+EXITING BLKOS2 WITHOUT CLOSING THE OS2 SESSION:
+Blkos2 can be exited at any time by typing exit on the command line and
+invoking the rexx interpret function(see below.). The session will remain open
+at the OS2 default command processor prompt.
+
+
+SPECIAL KEYS FROM THE MAIN PROMPT:
+
+ALT-S: switches the search mode(entire drive or current dir and below)
+
+F1: brings up help
+
+F2- STARTS ALIAS CREATION MODE -just follow the on screen instructions.
+aliases can be saved to a permanent MASTER.ALS file found in
+blackstones dir and they will automatiaclly be reloaded when it
+is restarted.Aliases can be of any length and any rexx or cmd contruct
+can be used in them. external OS2 functions are used via a call 
+statement within quotes as in rexx.You do not use the comment to 
+specify that you are using rexx, just type in your instructions.
+The parameter variables are x.2 x.3.x.4.....x.n.These refer to parameters
+on the command line when the alias is issued as in %X parameters
+except that you can have an arbitrary number of them without using 
+shift.NOTE:  YOU START WITH x.2 FOR THE FIRST PARAMETER,x.3 
+FOR THE SECOND etc-THE x's MUST BE LOWER CASE.
+
+If you are having trouble running an OS2 instruction,try putting it
+in quotes(not it's variables) or using the call statement(in quotes)
+Note: reusing an alias key erases the original.
+You can create key or character aliases.The alias creation process will 
+call epm as it's editor.key aliases only have a number as an identifier so
+you need to input the key combination into the comment so that you'll 
+remember it.
+Follow the instructions after pressing F2 to complete alias 
+creation/activation.
+
+F3-- reloads the permanent aliases from the master.als file.
+ some sample aliases are included.Sometimes the comments are not 
+displayed correctly when using the F4 function,exit the F4 function
+by hitting ESC and then hit press F3 a couple of times.
+
+F4--displays a selector list for the active aliases.use as a reference
+of what is currently active or start an alias directly by highlighting it
+and pressing enter. curently,aliases that require parameters must be
+started from the command line .
+
+F5--brings the line constructed  with the selector to the command line for
+further editing before execution.Press F5 BEFORE enter or CTRL-F1
+when using the selector from the main prompt.This is useful for adding eg a file name
+to a long dir path found with the selector.
+
+F6--rename an alias in the master file-type the alias key and then hit F6;
+follow on screen instructions
+
+F7--remove an alias from memory-input the alias key and then hit F7
+
+F8--remove an alias from the master file -input  the alias key and hit F8
+
+NOTE: for key aliases you input the hexx number you see on the
+alias list in the first column in the above 3 functions.
+
+F9--places a command from the history box onto the command line
+for editing
+
+F10-places whatever is on the command line into the history buffer.
+useful if you forget to do something and don't want to retype what 
+has already been entered.
+
+F11--char string search in file list. after placing a search string on the
+CL hit F11 before hitting enter.This searches through a drive's filelist
+for any occurrences of the search string and displays in a pick list.
+This is different than the normal file search in that it is doing a TEXT
+search of the FILELIST for ANY occurences ANYWHERE of the 
+specified pattern.The 2 styles of search should allow you to find 
+almost anything quickly and easily.When used without the attribute 
+function this applies to all search terms on the command line. To
+specify its use only for certain terms see attribute select below.
+
+F12- starts a utility called keyhex which gives the hex representation
+for the next key pressed after F12.single byte chars are 2 digits and
+double are 4. observe the key alias funtion to see how they can be
+ used.Also refer to the master select statement in the program body.
+
+THE INTERPRET REXX FUNCTION:
+ALT - ~(the key above tab and to the left of one) hit this after typing in
+a short one line rexx pgm to have it immedately interpreted and run.
+this is like the rexxtry command but better as you have history and line 
+editing available.separate statements that would appear on different
+lines in a normal rexx pgm by semicolons.A do loop must be a
+complete do loop on a single line-it cannot span multiple line entries
+Example: type
+
+s=sysfiletree('c:\',stem,bs);do i=1 to stem.0;say stem.i;end
+
+and hit alt - ~. the rexx file listing for the c drive will display.
+
+Use ALT-~ to try out rexx commands or to verify syntax , usage,
+or function.
+
+
+THE SELECTOR FUNCTION:
+The selector function allows you to operate on groups of files with
+a single command, or to operate on a file or dir whose name is only
+partially specified or whose location is unknown.
+you do not issue a separate command in blkos2 for filename
+completion or the select function.Type your command and preface
+any item with a [ for the select to be activated. If you know
+that a variable refers to a dir then put a [ at the end of it and only
+dirs will be searched for/displayed for that variable/pattern.
+
+example
+type copy  [c:co  [d:ab[
+
+to select and complete and copy  
+c:\low\higher\higherstill\conflagration.exe to
+the directory d:\top\lower\lowerstill\stilllower\absolutezero
+chose from the displayed list.
+all commands and aliases can use this feature.
+
+SELECTOR LIST CONTROLS:
+left arrow- tag entry and move scroll bar downward
+right arrow-untag highlighted entry
+up arrow-move scrollbar up
+down arrow-scrollbar down
+page up-previous page
+page down-next page
+
+CTRL-up arrow: tags all entries
+
+CTRL-down arrow-untags all entries
+
+CTRL left arrow:scroll file list left
+
+CTRL-right arrow:scroll file list right
+
+HOME AND END-go to the beginning or end of the 
+displayed select list respectively
+
+ALT left arrow- flips tags
+
+a selected file listing will appear green.
+
+THE WHERE FUNCTION:
+a [  BEFORE a filespec alone on the command linel  is the WHERE function
+or SELECT TO RUN- function -highlight an entry and hit enter if an 
+exe and that pgm will run, or use it to locate a file to route to the command line
+
+a [  AFTER a filespec will search only for Directories matching the pattern
+
+
+EXAMPLE [f:cm displays all files in current dir and below starting with
+the letters "cm".
+
+example: [*.sys displays all SYS files
+example:[ba[ searches for directories beginning with letters "ba"
+example:[ba*.cmd  searches for all CMD files beginning with  the letters
+ba
+Searches are not case sensitive.
+
+THE GLOBAL SYSTEM WIDE WHERE FUNCTION:
+
+the [[ (two unshifted brackets-> key to right of p) before a term or filespec is 
+the ALL DRIVE GLOBAL SEARCH/SELECT
+this will search all of your available hard drives for files matching the 
+input pattern,as above and is used in the same way as the [
+
+example:[[*.exe lists all executables on your entire system.
+
+
+DO NOT LEAVE A SPACE BETWEEN THE BRACKETS AND THE
+FILE SPEC IN THE ABOVE.
+
+A line at the command prompt  can have any number of terms to 
+complete or select BUT ONLY ONE TERM CAN HAVE MULTIPLE
+SELECTIONS.
+EXAMPLE:
+copy [*.cmd   [[xcv[
+select EITHER multiple .cmds OR multiple dirs starting with letters
+ xcv BUT NOT BOTH.In the first case multiple
+files are copied to one dir; in  the second case one file is copied to 
+multiple
+dirs. One line can have ANY number of filename complete searches 
+as long as only one  term has multiple selections.
+
+GENERATING A "LIST OF FILES"  FILE  FOR INPUT TO A COMMAND 
+THAT USES SUCH:
+
+some programs accept a file name for a file that contains a list 
+of file specs upon which that program should operate.When available
+generating such a list is desirable rather than using select to run 
+the pgm or command multiple times as the setup time for the 
+pgm/command is not repeatedly incurred.Any term on which you
+can use select can be made to generate a unique file list for that term
+and the filename and path is automatically passed to the command.
+The following is the command format for one such pgm-PKZIP from the pkzip docs:
+
+PKZIP Usage: PKZIP (-b[path]) (options) zipfile (@list) (files..)
+
+note the @list term.
+
+let us assume we want to select files from the c:\ directory to 
+be placed in a zip file named Zippy.Note that the special 
+character @ is required to specify to pkzip which term is the
+listfile name.This is the BLKOS2 command line specification.
+
+<command/pgm name>  ]<special character >[<search pattern
+
+EXAMPLE: pkzip -r -p -ex zippy ]@[c:*
+
+choose from the select list and then press enter and the
+command or pgm will be activated with the proper input list.
+
+NOTE:even if the pgm does not require a special character
+the ] is necessary to activate the list generate function.
+Multiple terms on the command line can have unique lists.
+
+example   doodad ]&[*.exe  /c /d  ]%[com   is entirely legal,
+a list is generated for each selected terms and passed
+to the command.
+
+The list generator is usable at any time select alone or
+in combination with attribute select(see below)  is appropriate.
+
+NOTE: the file lists generated are not deleted to avoid  waiting while the delete occurs.
+This is relatively unimporatnt as the lists are usually small in size and the file 
+names are used repeatedly so they are always being cyled at each use. In any case
+all of the list files are erased at boot.You can also wite an alias to delete these if they 
+bother you.When blkos2 is made multithreaded using the RXU10 function package
+this issue will disappear as the delete will be done in the background.
+
+RECURSIVE SELECT WITHOUT ENTERING THE MENU:
+when you know that you want to operate on all files(or dirs) in a particular place then
+you can bypass the selector menu by using the following yet still have all those files
+or directories  processed.
+To process all files files matching the file spec in the  specified dirs and below
+append  [[ to the end of the file spec.To process all dirs matching the spec and below 
+append \[[ to the end of the dir spec.
+
+EXAMPLE: we want to erase all *.exe files from c:\os2  and all sub dirs immediately 
+without the pick list.
+type del [c:os2\*.exe[[
+
+EXAMPLE: we want to view the dir list for all dirs in c:\os2.NOTE:we can do this directly
+with dir  /s but this illustrates how \[[ functions and is used with pgms that don't
+have /s switches ie that don't recurse into sub dirs.
+
+dir [:os2\[[
+
+AN IMPORTANT NOTE ABOUT LONG FILE NAMES:
+Blkos2 will handle long file names in all operations except  as a search critria.
+That is,     -> copy ["i want a bug fixer"                   is ILLEGAL.
+
+This is relatively unimportant for  searching  since generally a
+fragment of the first word will find the object.Once a long file name is found by the
+selector it is wrapped in quotes and correctly passed to the command line.
+Long file names in quotes on the cl that are not part of a select term are treated
+as a single word and are always correctly passed to a command. IT IS ALSO POSSIBLE
+to use the ? WILDCARD IN PLACE OF SPACES AND THE SELECT FUNCTION CAN 
+THEN BE USED IN THE NORMAL WAY.
+
+thus copy [i?want?a?bug?        is LEGAL->note: no quotes.
+
+
+THE ATTRIBUTE FUNCTIONS:
+
+TERMINOLOGY: ATTRIBUTE as used herein refers to any of these
+file characteristics:date, time; file attributes(archive, readonly, hidden,
+directory, system) and the file size.
+
+The ATTRIBUTE SELECTOR is a filter function that lets you easily 
+specify selection criteria of the above attributes in the select list.
+Files which match the selection criteria are displayed in the select list.
+It is like a bandpass filter where the upper and lower limits are 
+independently settable , and there is additionally an equality function 
+and a band reject function.
+
+FORMAT OF THE DISPLAYED INFO: when in the attribute mode the 
+time date field of the select list is in sorting format as follows
+93/04/01/13/10     which corresponds to
+year(last 2 digits)/month/day/hour(24hour format)/minute.
+
+FORMAT OF THE INPUT INFO:
+
+DATES are input as 930401 (6digits)  corresponding in this
+case to April 1,1993
+TIMES are input as 2110 (4 digits)  coressponding to  9:10 PM
+or 0820 corresponding to 8:20 AM
+SIZES are 7 digit decimal numbers
+FILE ATTRIBUTES:the letters a,d,h,r,s for archive,directory,hidden,
+readonly,system respectively.
+
+
+SELECTING WITH ATTRIBUTE SPECIFICATION:
+type your command line using any select terms as usual.Instead 
+of hitting Enter, press CTRL and F1 simultaneously. The following 
+menu appears:
+
+
+                            SEARCH PATTERN co
+
+  ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+  ºDate  (low):         (high):                                              º
+  ºTime  (low):         (high):                                             º
+  ºSize  (low):         (high):                                              º
+  ºÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ-º
+  ºAttributes:                                                                   º
+  ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+IMMEDIATELY hit tab to bring the cursor to the first date field or shift tab to 
+start at the attributes field
+
+KEY CONTROL:
+TAB:moves forward through the menu
+Shift-TAB: moves backwards through the menu
+delete, <-, ->, backdelete are all active.
+
+You activate a search criteria by placing an entry in the 
+appropriate field using  the above described date time size attribute formats.
+
+1)entries in the low fields activate the greater/later than function.
+2)entries in the high field activate the less/earlier than function.
+3)entries in both fields activate the range("bandpass") function.
+4)an entry in the low field followed by an '=' activates the equal function.
+5)Entries in both high and low fields with the low field entry suffixed by
+an uncapitalized 'i' activates the 'EVERYTHING BUT'("band reject"){i for inverse}
+function.
+6)activate the "strict earlier than" function by inputting a low date suffixed by an 'e'
+and a low time. see below for definition of this function.
+7)activate the "strict later than " function by inputting a low date suffixed by an 'l'(ell)
+and a low date. see below.
+8)File attributes:attributes are input as a single string of letters
+such as "adh".
+searches on this criteria come in 2 varieties.Inputting
+any , singly or in combination, of  a,d,h,r,s activates a 
+search for files with at least that attribute/attribute combination.suffixing the string with 
+a  '/m' initiates  the MATCH attribute function-ONLY files with
+EXACTLY those attributes are displayed.
+
+EXAMPLE: we want to find all .exe files on drive C created
+between 01/01/93 and 04/01/93, and between the hours of 
+3PM and 9PM having a size of less than 500k and having  only the readonly
+file attribute(match).
+
+Start this search by typing [c:*.exe and hit CTRL-F1.Hit tab and fill in the
+input list as follows:
+
+        SEARCH PATTERN *.exe     <<-- note: this line only displays the search pattern-no
+                                                                  input here.
+
+ ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ ºDate  (low):930101         (high):930401                       º
+ ºTime  (low):1500             (high):2100                          º
+ ºSize  (low):                        (high):500000                    º
+ ºÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄº
+ ºAttributes: r/m                                                             º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+press enter to start the search and the select list will appear in a few
+seconds.
+
+A NOTE ABOUT THE ENDPOINTS:in the range select the relations are
+greater than or equal to, and less than or equal to.The 'everything but'
+function is a simple logical inversion of those functions and thus the 
+endpoints are not included(ie the = is lost).
+
+IMPORTANT NOTE: specifying a low date and a low time alone does NOT give
+you a pure "later than" function such as all files created after 
+4pm ,04/10/93, Rather, it gives all files created on this and all subsequent days
+which were made later than the hour 4PM on each of 
+those days.Use the strict later/earlier than functions to perform this type
+of  search.(see above)
+
+
+INITIATING TERM BY TERM F11 TYPE SEARCHES: as mentioned above,
+if you press f11 without entering the attribute function then ALL selects
+on the Command line use the F11 style search. To choose  F11 searches for
+specific terms enter the attribute selector after composing the command 
+line(press CTRL-F1 instead of Enter),press f11 for terms you want the f11 search
+for while at the attribute menu for that term and hit enter-do this also if you enter
+attribute criteria.
+
+NOTE: you can always move on from the attribute input list menu
+by presing enter even if no fields have been filled-this will then result
+in a normal non attribute selector function, with f11 type search if it was 
+pressed for that term.
+
+
+WORKPLACE SHELL FROM THE COMMAND LINE:
+
+
+ALT-ENTER-- from either selector or command line will open a 
+WPS folder filelist( FULL PATH ON CL IS NECESSARY ) or start a PGM OBJECT.
+to use from cl-input path of folder or pgm (including extension
+for pgms to start) and hit ALT ENTER.THE window will not come to the
+foreground if an exe-program objects are started minimized.
+-chose from os2 tasklist.Note there is nothing we can do about this-it is
+a characteristic of the rexxutil function used to start the object.
+Append a SPACE and an s (uncapitalized)
+TO THE DIR/FILESPEC to open the settings view(the book) for the
+selected objects.You can open as many file lists or setting views at 
+one time as you desire.
+
+EXAMPLE:   f:\os s  hit ALT- ENTER  opens os2 settings view
+EXAMPLE:  [*.exe    select and hit alt- enter starts the chosen pgm(s)
+EXAMPLE:  [c:os     and select opens the wps filelist for C:\OS2
+you can also press alt enter first and then enter alone after selecting
+for the same effect.Multiple selections to start pgms or open folders
+can be made from the selector pick list.Tag all items you want opened
+and hit alt-enter.
+EXAMPLE: <objid> and alt enter starts object objid.NOTE: THE OBJECT
+ID MUST BE SURROUNDED BY BRACKETS AS SHOWN;OBJECT IDs
+ARE ALSO CASE SENSITIVE.
+EXAMPLE: <WP_START>       and alt enter opens the startup folder
+EXAMPLE <WP_START>  s     and alt enter opens the startup folder
+settings view.
+
+
+CURSOR FUNCTIONS 
+ generally standard except that SHIFT-TAB is a
+true back tab of 8 spaces-tabs do not insert spaces.
+generally the cursor movement keys are congruent with the OS2
+command line cursor movement/ editing keys and the 4OS2 key 
+ functions with minor diffrerences in the ctrl key usage as below.
+
+ALT-INS switches the type mode until the next time alt ins is issued.
+Used to go from insert to overstrike or vice versa
+
+CURSOR MOVEMENT AND EDITING KEYS:
+
+ctrl ->:  move right one word
+ctrl <-:  move left one word
+ctrl home: letters on CL from beginning to cursor position are deleted
+ctrl end: letters on command line from cursor position to end are deleted
+alt <-: deletes  previous word -4os2 style
+alt->:  deletes next word -4os2 style
+all other keys(arrows,home, end, page up,page down,delete,backspace)
+are standard
+
+
+HISTORY FUNCTIONS:
+The computer will beep when the latest entry in the history list is brought to the
+command line-this way you know that you have cycled through the entire history list.
+
+PAGE UP  at the command line brings up the history list.The list is set
+for 1000 LINES.Actually you can set it to ANY size you want.
+scroll and select as in the selector.NOTE: in general all
+windows in BLKOS2 will function the same way and use the same keys.
+UP ARROW from the command line recalls the history directly to 
+the command line without displaying the history list box..
+
+placing a letter or two on the CL and calling history will
+list only those commands that match the typed pattern;This works for
+both the UP ARROW  and PAGE UP keys.The commands are listed in
+LIFO order.
+
+ESC key exits most functions.
+
+**************MISC FUNCTION KEYS:******************
+
+QUICKLY SWITCHING DIRECTORIES AND THE DIRECTORY "STACK":
+
+Actually it's not a stack so much as a history list of dirs.
+To go immediately from directory A to directory B and have dir A placed in the
+directory history for immediate recall type B's  full  path on the command line
+and hit CTRL and-DOWN ARROW) simultaneously.You will immediately be in B
+and dir A will be in the DIR HISTORY list.To recall a directory(ie move back to it)
+you hit CTRL and UP ARROW ONCE.To see subsequent directories in the history  list
+you continue hitting the up arrow alone until you reach the dir you want and then hit enter
+to go there, or escape to abort. NOTE: you MUST hit ALT- right arrow to get a dir into
+the history list -they are never placed there automatically.
+
+
+ENTER-- initiates action on file/pgm higlighted in select list or starts a
+highlighted exe or initiates a command line action.
+
+CTRL-ENTER-allows a statement on the CL to be interpreted as an
+os2 command rather than an alias of the same name(key)
+EXAMPLE: dir on cl followed by ctrl-enter gives  an os2 dir  listing rather
+than eg activating an alias named 'dir'.
+
+
+CTRL-TAB ---QUICK FILENAME COMPLETION:
+hitting CTRL-TAB after a filespec fragment is typed will present in
+sequence complete filespec matches to the pattern immediately to the
+left of the cursor FROM THE CURRENT directory.Useful anywhere on the command line.
+example: type dir o and hit CTRL- TAB to generate the line
+DIR C:\OS2.
+form of the filespec is the same as for selector, no [ are used.
+
+
+CTRL-F2: switches the log to file function on or off.When set  on, all
+commands from all blkos2 sessions are  logged to a file in the
+pather\history directory named blk.log. The entries are in the folllowing
+format:
+<session id number> <time> <date> <command>
+
+to find out what the session id is for a session type(while in that session)
+
+say idd 
+
+and hit ALT -`(the rexx interpret function). The number 
+displayed is the session id
+You can set the logging function default on or off by setting the
+variable logon in the configure block  at the top of the
+blkos2.cmd file to 1 or 0 respectively.It is recommended that 
+you set this on and activate os2 undelete so that you can 
+recover anything you might accidentally lose or until you 
+are comfortable with the safety of BLKOS2.
+
+GENERAL INFO:
+file specs are in the form X:filename.ext- wildcards allowed.names are
+completed by the select function .Generallythe  first \ is not used in blkos2 functions.
+example: copy [c:os2\mdos\vcdrom.sys
+
+see the sample master.als for parameter usage note  parameter index
+is  +1 above what a % parm would be eg %1 would be x.2  so the first parameter
+used is x.2
+
+
+
+NOTE:ALIASES IN THIS SHELL CANNOT  BE CALLED BY OTHER 
+PROGRAMS OR BATCH FILES, but they can refer to themselves.
+
+USE OF SAMPLE ALIASES:
+NOTE: ALIASES ARE CASE SENSITIVE.
+
+
+t alias
+ALARM.CMD is a simple chron program that will issue an alarm or
+start a pgm  or issue a command at a set time--resolution of the 
+timer is about +-20 seconds-this alias starts ALARM.CMD
+t <time> < command> <parms>
+example t 123800 start /c /b pkzip zip c:\os2\*.* starts zip process at
+12:38:00 PM +-20 sec
+
+SHOW alias ---lists the lines of an alias on the screen
+show <alias key>
+EXAMPLE show show
+
+e alias
+e ( [ )filename(fragment)>
+
+starts epm to edit a(perhaps SELECTed) file
+
+d alias
+d <dir name fragment>
+auto dir name complete qd.cmd
+example d wi   to switche to \os2\mdos\winos2 directory 
+DO NOT USE D.CMD WITH THE SELECTOR use CDD below.
+
+refr  alias- to start online rexx reference
+
+refc alias to start command reference
+
+put alias
+ALT-p- to write a comment to an object 's ea's- this will be seen in the
+comment field in the object's settings book.Use GET.CMD  to
+view the comments or look at them in the settings view notebook.
+This function will be integrated into the selector list for easy use-
+the comments will be viewable directly in the selector object listing.
+
+rec(ursive) alias: works just like 4os2 global-command operateds on current directory
+and all subs.
+EXAMPLE: rec copy *.exe c:\exes  copies all *.exe files in the current dir and all sub dirs
+to c:\exes.
+
+cdd alias:
+input a full path to the dir you want to switch to or use the selector
+example
+cdd c:\os2\mdos
+cdd   [c:md and select as usual.
+
+u5 alias:
+usage U5 <zip path and name> or  U5{ [[ or [ }<zip spearch spec>   for the selector.
+
+this is a quick 'n dirty facility for easily unarchiving all your archived dls to
+quickly view or test/use the pgms therein. It handles arc , zip, arj,self extracting exe,and
+lhz files from one facility and with one command line. all you enter is the archive file
+path and name and U5 does the rest.the file is copied to a sub directory created in the
+dir where the archive is located, the files are unarchived therein, an option to start a
+dos session is presented-if you say no(type n) then the os2 session is available(blkos2
+is started as the command proc) and a wps directory list is opened.When you have 
+finished working with the archive type exit at the command line and hit enter .
+the temporary dir and all files therein are removed and the wps folder list is closed.
+Note that if you have a session set to the path of that temporary fiolder then the
+folder itself will not be removed.The folder is named the same as the archive file minus
+it's extension.
+
+this alias must have  dd.cmd  and the archivers available to it(place the archivers in 
+your path-use os2 versions where available such as info zip for pkzip). You need to 
+ edit U5.CMD so that the dearchiver's names match those on YOUR system.
+lines with /?******?/ denote those you must edit-make sure the command line is 
+appropriate for  the archiver versions you are using.
+
+U5.CMD can also be used stand alone in the WPS as a drag and drop dearchiver.
+attach an icon and just drop an archive on it to unarchive as above-a commandline
+ session is automatically started.
+
+NOTE ON DD.CMD AND U5: there is apparently a bug in os2 that sometimes causes a
+dir to be non deleteable.Check that you have no sessions pointing to this undeleteable
+folder-if you do then it is probably not the os2 bug stopping you. If there are no
+such sessions then the dir will be removable on the next reboot- just use dd.cmd 
+to get rid of it. We know this is an OS2 bug because not even  RD will delete such
+a "stuck" folder.
+
+lst    ([)<file spec>
+display a (perhaps selected) text or binary file on the screen.hit  x to exit, and  u
+to move to previous page, any other key to go to the next page.
+
+cl    <no parameters>
+You must have  KILLEM.EXE in your path-this cmd closes ALL open sessions of 
+any type.
+
+alt-z: this alias opens a desktop folder or standard OS2 object without having to 
+capitalize or bracket the object id or type the WP_ prefix.Works on those os2 
+objects with objid  of form <WP_START>
+example: type start and hit alt-z to open the  <WP_START>(startup) folder.
+type dalarm to start <WP_ALARM>. see the ini.rc file in  the  \os2 for the standard os2
+object ids for the applets etc.
+
+fo: format a disk.
+usage fo <drive spec>
+examle    fo a:
+
+
+
+If the shell dies history and temporary aliases ARE SAVED for
+each session and a restart reloads that session's history and temporary
+ aliases.You may or may
+not be able to issue a CTRL- C to a program or command to stop it
+-doing it with zip will stop the zip process,trying to stop a dir 
+command will kill the shell-in general .CMD files are stoppable.
+
+ALL HISTORY AND TEMPORARY ALIASES ARE PERMANENTLY LOST 
+ON A REBOOT.IF YOU WANT TO SAVE THESE THEN DO NOT MODIFY
+YOUR STARTUP.CMD FILE AS INSTRUCTED ABOVE.
+
+PLEASE PAY PARTICULAR ATTENTION TO MEMORY USAGE IN THE
+SESSIONS WHERE BLKOS2 IS RUNNING>USE OS2MEMU-
+we are interested in whether there is unreasonable growth in use of
+memory.
+
+SPECIAL NOTE: there is a bug in OS2 rexx that does not allow the release 
+of memory committed to a so called stem variable.The drop function nor any other 
+nulling operation will release this memory.For this reason the session may show 
+a large memory usage after a global search. Until IBM fixes rexx the only thing to 
+do to get the memory back is to shut and then restart the blkos2 session.This is 
+the best that can be done without IBM fixing this bug in rexx .It affects all  OS2 REXX
+pgms that never terminate or do so infrequently.BLKOS@ uses the same stem 
+variables in it's operation and once maxed out will not get any larger in memory.
+In any case use of BLKOS2 for most operations reults in memory usage generally 
+under 500 KB.
+
+
+PLEASE ROUTE (RECEIVER ONLY) ANY COMMENTS TO
+CHARLENE BLACK at ->18 ON RIME (RELAYNET)
+
+or contact us via US mail at the abocve address.
+
+DEVELOPMENT IS CONTINUING AND ADDITIONAL FEATURES 
+ARE PLANNED-Send suggestions for features-we'll
+add them for you.planned additional features include global
+history,multithreading using the rxu10 functions, the absolutely
+essential colorized directories,sorting, a directory size calculator.
+and others..BLKOS2 is used
+by us on a daily basis and has been found to be very free of bugs 
+thus far.
+
+The object configurator will be sent later when it has been 
+integrated into Blackstone.If you would like the current ,still very
+useful  standalone pgm, send C>BLACK a note.
+
+We hope that  this program makes life at the OS2 
+command line simpler and more convenient for you.
+
+Thank You for Testing BLACKSTONE.
+
+CHARLENE BLACK                                       BILL STONE
+
+
+ACKNOWLEDGEMENTs: VERY SPECIAL THANKS to our BETA TESTERS
+who shall for the time being go unnamed, for their support and suggestions.
+
+Thanks to Ken Arway for the BLKOS2 icon design.
+
+
+                             /****REXX RULES !!!!***/
+
+This material is copyright(c) C>BLACK,B.STONE,KUTEK 1992,1993
+all rights reserved.
+

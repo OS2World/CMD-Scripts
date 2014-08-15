@@ -1,0 +1,44 @@
+CGIParse
+--------
+
+This script is a REXX procedure that facilitates variable handling when writing
+CGI programs in REXX. I will not elaborate much on it except how to use it. The
+script has been in use for a long time on several sites I programmed, so it's
+considered (by me) to be fairly bug free.
+
+How to use
+----------
+
+CGIParse works transparently with both <FORM METHOD="post" ...> and
+<FORM METHOD="get" ...>. Paste the REXX procedures in the 'CGIParse.cmd' file
+into your own REXX CGI script, and put a call to 'CGIParse' somewhere in the
+beginning of your script like this:
+
+call CGIParse
+
+This will extract all CGI variables into REXX variables whose name begins with
+'cgi.'. Consider the folowing example, you have a form with the folowing input
+field:
+
+<INPUT TYPE="text" NAME="varname">
+
+When the form is submitted and the CGIParse function is called the value of the
+form variable 'varname' can be accessed through the REXX variable 'cgi.varname'
+
+How does it work
+----------------
+
+Check out the REXX code yourself.
+
+Who made it
+-----------
+
+I'm Sacha Prins, and I can be reached via email: sacha@prins.net.
+
+Think of me if you use this script.
+
+Disclaimer
+----------
+
+I take no responsibility.
+

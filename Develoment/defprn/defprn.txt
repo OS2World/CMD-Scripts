@@ -1,0 +1,8 @@
+Description:
+A REXX script which determines the default printer port
+
+License
+AS IS
+
+Author:
+Lee S. Fields

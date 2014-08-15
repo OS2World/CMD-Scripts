@@ -1,0 +1,54 @@
+Summary of changes 2004-08-31 Version 1.04a
+
+- Call 'NAME' correctly flagged as bypassing internal function
+  when 'name:' label exists in source.
+
+Summary of changes 2004-08-13 Version 1.04
+
+- Corrected tokenization of operators, so that (for example) '=-' parses
+  as two separate operators
+
+- Fixed bug detecting function calls in "numeric digits" clause.
+
+- Fixed bug skipping label name after "signal"
+
+- Allow switches anywhere on cmd line invocation
+
+- Highlight special variables (RESULT, RC, and SIGL) in the output
+
+- Corrected detection of constant symbols in stems
+
+- Corrected interpretation of repetitor and conditionals on DO keywords
+
+- Added list of RxSock functions & special variables ERRNO and H_ERRNO
+
+- Minor tidy up of code
+
+
+Summary of changes 2004-08-04 Version 1.03
+
+- Error messages about bad files now go to STDERR instead of STDOUT
+
+- Additional check to avoid compiled/tokenized Rexx files
+
+- support Object Rexx ::requires directives, and look for external
+  functions in modules imported with ::requires
+
+- recognize Object Rexx ::routine directives as internal functions
+
+- removed spinner that counted lines processed during tokenization
+
+- recognize Rexx keyword instructions properly, including SIGNAL etc
+
+- added lists of simple and compound variables to output
+
+- recognize binary and hexadecimal strings properly, so that
+  trailing 'b' and 'x' are not interepreted as variables
+
+- corrected tokenization of numbers, so that constant symbols
+  like 1e6 or 3D are not interpreted as variables
+
+- recognize different classes of BIFs (core, modern, & exotic)
+
+- avoid listing duplicate lines in the output when the same BIF
+  occurs more than once in a line
