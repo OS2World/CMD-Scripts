@@ -1,0 +1,15 @@
+Enclosed is a REXX script to create a LaunchPad Template from which
+you can then use drag-and-drop to create new LaunchPads at will.
+You only have to run the script once, and it will create a template
+in your template folder, or on your Desktop if you don't have a template
+folder.  The script is very simple, but everyone keeps asking how to
+do this, so I decided to write one and upload it.
+
+For this script to work, you must have REXX support installed.  You can
+install REXX support with Selective Install.
+
+Simple as it is, please do not distribute this program without
+including this file (README) or the comment block in the REXX script.
+
+Andrew J. Korty
+korty@physics.purdue.edu

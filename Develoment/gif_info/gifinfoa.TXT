@@ -1,0 +1,317 @@
+25 Feb 1999. Daniel Hellerstein (danielh@econ.ag.gov)
+
+This contains a detailed descripton of the "older" GIF_INFO procedure
+(that is contained in GIFINFOa.RXX). Although not as powerful as the
+procedures contained in PARSEGIF, it does NOT require REXXLIB or 
+
+
+
+                        ---------------------------
+1. Basic Usage.
+
+GIF_INFO is called as:
+
+     stuff=GIFINFO(gif_file,imgnum,infotype,seperator)
+
+Parameters:
+
+    GIF_FILE: Required. A fully qualified file name.
+                  OR
+              The contents of a gif_file (say, as read with 
+                  gif_file=charin(afile,1,chars(afile))
+               
+
+         nth: # of image, etc. to get information about. If not specified,
+              a value of 1 is assumed.
+
+    infotype: Space delimited list of keywords that select what information to
+              retrieve. If not specified, an error check is assumed.
+
+   seperator: Optional. Seperator string to use when more then one item in
+              infotype list. If not specified, a '0d0a'x (cr-lf) string is
+              used to seperate items returned by GIF_INFO.
+
+Returns:
+  Depends on values of nth and infotype. In general, in case of error a 
+  null string is returned -- you can examine a gif files for errors
+  by calling gif_info with an infotype of ERROR.
+
+
+Technical info:  For gif89a specs, please see
+                 http://member.aol.com/royalef/gif89a.txt
+
+                  ------------------------
+
+2. Description of INFOTYPES.
+
+INFOTYPES is a space delimited list of keywords. For each keyword,
+a seperate "line" of values is returned (where "line" is defined
+by the "sepeartor" variable).
+
+INFOTYPES can include any combination of the following "keywords":
+  ERROR
+  #IMGS     #CMTS      #APPS    #GCS   #PTS 
+  DEF_SIZE  BKG_COLOR  DEF_CT
+  CT       INTER       SIZE     POS    TRANSP   DELAY 
+  APP_ID   APP_AUTH    IMG      CMT    PT       APP
+  LS_DESCRIPTOR        GC_DESCRIPTOR  IMG_DESCRIPTOR   
+  CMT_DESCRIPTOR       PT_DESCRIPTOR
+
+These keywords get at most, but not all, of the information fields stored
+in a GIF file.  If you need more obscure stuff (such as the "disposition" 
+information), you can use the _DESCRIPTOR keywords and parse it your self; or 
+contact me and I'll modify the program!
+
+
+2a. Detailed descriptions of keywords:
+
+
+i) Status information
+
+  ERROR: report error information. 
+         If no error, return: OK block1 .. blockm
+         Otherwise, return: ERROR  err_message.
+         Careful practice suggests doing a
+                status=gif_info(giffile,1,'ERROR')
+         as a first call, and cheking for ERROR.
+
+         The block1 ... blockm are codes describing the order of the 
+         m GIF blocks that comprise the GIF file.  
+         Values for these "block1.. blockm" can be:
+                LSD : logical screen descriptor (must be first)
+                GCE : Graphical control extension
+                 ID : Image data descriptor
+                 CE : Comment extension
+                PTE : Plain text extension
+                APE : Application extension
+                 00 : A 0 block id was encountered and ignored.
+                TRM : Terminator (must be last)
+
+ii) Summary of the contents of the GIF file.
+
+  #IMGS: number of images
+  #CMTS: number of comments
+  #APPS: number of application blocks
+   #GCS: number of graphical control blocks
+   #PTS: number of plain text blocks
+
+
+iii) Global  parameters. 
+  DEF_SIZE:  default size. Example: 50 100
+  BKG_COLOR: Background color index - used for portions of "logical screen"
+             not covered by one of the images (rarely used)
+  DEF_CT:   Default color table (nth ignored), an n x 3 bytes array, with
+               n      : # of values in color table (should be a multiple of 2)
+               3 bytes: RGB color values
+            Note that occasionally, a GIF file will not contain a default color table.
+
+iv) Information specific to the nth image:
+
+    CT:  Color table,   n x 3 bytes
+           n=# of values in color table (should be a multiple of 2)
+           3 bytes: RGB color values
+         Typically, these "local" CTs are NOT specified (a return of '' usually
+         does NOT signify an error).
+         
+  INTER: Interlaced flag for the nth image:1 = yes, 0=no
+
+v) These may apply to the nth image or nth plain-text block
+
+     SIZE: Size: width height. Example: 100 50 
+      POS: Position: left top: Example: 0 0. This is an offset from the upper left corner
+           of the "logical screen", with 0 meaning "no offset"
+   TRANSP: Transparent color index (-1 if not set). Example: 0
+    DELAY: Delay in 1/100ths seconds (-1 if not set). Example: 50
+
+vi) Information on "application" blocks
+
+  APP_ID: nth application id.  8 bytes, usually text. Example: Netscape
+APP_AUTH: nth application authorization. 3 bytes, "authoriztion" code. 
+            Example: 2.0
+
+
+vii) Data fields.
+   IMG:  nth (LZW compressed) image data
+         To actually use this, you'll have to LZW decompress it. 
+    CMT: nth comment. Usually a simple text message.
+     PT: nth plaintext data. Often a simple text message. Plain text
+         is not commonly used.
+    APP: nth application data
+
+viii) These are "blocks" extracted from the gif file -- they are useful
+      for building new gif files (say, extracting one image from an animated gif)
+  
+  LS_DESCRIPTOR:  Logical screen descriptor (one per GIF file)
+  GC_DESCRIPTOR:  nth Grapical screen descriptor.  
+ IMG_DESCRIPTOR:  nth Image descriptor 
+ CMT_DESCRIPTOR:  nth comment descriptor 
+  PT_DESCRIPTOR:  nth plain text descriptor
+
+The nth GC_DESCRIPTOR is the "nth" occurence of a Graphics Control
+Descriptor (a GCD). Among other information, a GCD contains information on
+image transparency and delay.  However, the "transparency" and "delay" of the
+nth image (as obtained using the TRANSP and DELAY keywords) are NOT necessarily
+from the "nth" GCD.  Instead, they are from the "graphics control block 
+associated with the nth image" -- which is the most last specified GCD prior to
+the nth image.
+
+Restating: although there is typically one graphics control descriptor per image,
+this is not a requirement.  In a multiple image GIF file, some images may 
+NOT be preceeded by a graphics control descriptor, in which case the number of 
+graphics control descriptors will be less then the number of images.
+
+Also note that GIF files should end with a terminator whose hex value is 3b
+(i.e.; term='3b'x).
+
+                  ------------------------
+3. Notes.
+
+ *   Due to the complexity of information returned:
+        The following keywords should not be used in a single call to GIF_INFO:
+             xx_DESCRIPTOR, DEF_CT, CT, IMG, CMT ,PT, APP
+         where xx is LS, GC, IMG, CMT, or PT.
+
+     When using one of these keywords,  safe practices is to call it
+     by itself (with no other keywords).  Or, you can include it as the
+     last keyword in the list of keywords.
+
+    If you are adventurous, you can call use more then one of these keywords
+    in a given call to GIF_INFO; but BE SURE YOUR SEPERATOR DOES NOT APPEAR IN 
+    ANY OF THESE DATA FIELDS!  Since "0d0a" may appear in the data fields (such
+    as in a color table), this is not a trivial requirement.
+
+  *  As noted, the IMAGE data returned is compressed. If someone would like to
+     provide some LZW decompression code (the GIF version of LZW is somewhat
+     different than standard LZW) I'll be happy to include it (remember, 
+     this is freeware, so the nasty copyright business should not be a 
+     problem).
+   
+                        ---------------------------
+
+4. Sample Program:
+
+  You can use this to extract information from one (or several) .GIF files. Just
+  be sure that GIF_INFO.CMD is in the same directory.
+
+  Note: the following is a copy of the contents of the GETGINFO.CMD file packaged
+        with this document.
+
+/***************************************************/
+/* Sample program that uses GIF_INFO.CMD to retrieve information from a gif file */
+parse arg giffile               /* see if user provided gif name */
+
+foo=rxfuncquery('sysloadfuncs')     /* load rexxutil library */
+if foo=1 then do
+  call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+  call SysLoadFuncs
+end
+
+if giffile='' then do                /* no, so ask for one */
+  call charout, " Enter gif file(s): "
+  pull giffile
+  if words(giffile)>0 then do
+      say "Please enter just one file name (* can be used as a wildcard)"
+      exit
+  end /* do */
+end
+
+if giffile='' then exit
+if pos('.',giffile)=0 then giffile=giffile'.gif'  /* add the extension? */
+
+if pos('*',giffile)>0 then do                     /* ? then use multiple files */
+    oo=sysfiletree(giffile,fils,'FO')
+end /* do */
+else do
+   fils.0=1 ; fils.1=giffile
+end
+
+say "Information on  " fils.0 " GIF files. "
+
+
+/* Display information on each GIF file */
+
+do ll=1 to fils.0
+  if ll>1 then do
+      call charout, " ---------------------  Hit ENTER to continue"
+       pull .
+  end /* do */
+  say " File # " ll ' : ' fils.ll
+
+  ok=strip(gif_info(fils.ll,1,'ERROR'))   /* is it an okay gif file ? */
+  if abbrev(ok,'ERROR')=1 then do
+      say "ERROR. " ok
+     iterate
+  end
+
+/* get some global information */
+  sns=gif_info(fils.ll,1,'#IMGS #CMTS #PTS #APPS  DEF_SIZE DEF_CT',',')
+  parse var sns ni','nc','np','na','wd ht','ct
+  say ' # of images=' ni ', #comments=' nc ', #plaintext='np ', #apps='na 
+  say " Dimensions: " wd ht
+  ff=length(ct)/2
+  say " Length of color table: " ff
+
+/* write out comments */
+  do ll2=1 to nc
+      acmt=gif_info(fils.ll,ll2,'CMT')
+      say ' Comment #'ll2 ':' acmt
+  end /* do */
+
+/* write out application block data */
+  do ll2=1 to na
+       acmt=gif_info(fils.ll,ll2,'APP_ID ')
+       say 'Application # 'll2 ': ID='left(acmt,8) ,
+           ', Auth (in hex)=' c2x(right(acmt,3))
+  end /* do */
+
+/* information on the images */
+  do ll2=1 to ni
+      acmt=gif_info(fils.ll,ll2,'DELAY TRANSP SIZE POS IMG',' ')
+      say ' Image# 'll2 ': Delay='word(acmt,1) ', Transp='word(acmt,2) ,
+           ' Wd Ht= ' subword(acmt,3,2) ', Pos= ' subword(acmt,5,2) ,
+           ' Bytes='||length(subword(acmt,7))
+  end /* do */
+  
+
+end             /* get next gif file? */
+
+exit
+
+
+
+
+
+                        ---------------------------
+
+ Basic copyright and it's never our fault disclaimer:
+
+  Copyright 1998 by Daniel Hellerstein. Permission to use this program
+  for any purpose is hereby granted without fee, provided that
+  the author's name not be used in advertising or publicity
+  pertaining to distribution of the software without specific written
+  prior permision.
+
+  This includes the right to subset and reuse the code, with proper attribution, 
+ and subject to the proviso:
+
+      We, the authors of GIFINFOa and any potentially affiliated institutions,
+      disclaim any and all liability for damages due to the use, misuse, or
+      failure of the product or subsets of the product.
+
+    THIS SOFTWARE PACKAGE IS PROVIDED "AS IS" WITHOUT EXPRESS
+    OR IMPLIED WARRANTY.
+    THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE PACKAGE,
+    INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.
+    IN NO  EVENT SHALL THE AUTHOR (Daniel Hellerstein) OR ANY PERSON OR
+    INSTITUTION ASSOCIATED WITH THIS PRODUCT BE LIABLE FOR ANY
+    SPECIAL,INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+    RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+    OF CONTRACT,NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+    IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE PACKAGE.
+
+
+   GIFINFOa was developed on the personal time of Daniel Hellerstein,
+   and is not supported, approved, or in any way an official product
+   of my employer (USDA/ERS).
+
+

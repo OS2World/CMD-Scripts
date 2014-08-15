@@ -1,0 +1,28 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: Indtr100.zip
+       Short Description: REXX Command Formatter - Indenter
+        Long Description: Formats OS/2 REXX command files to indent Do / End structures.
+                          Copyrighted Freeware.
+
+      Proposed directory
+           for placement: /pub/os2/dev/rexx
+
+               Your name: Casey Bralla
+           Email address: Indenter@NerdWorld.org
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.nerdworld.org/indenter.html
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 (any)
+ Additional requirements:
+
+                Replaces: (none)
+
+
+

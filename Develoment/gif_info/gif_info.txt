@@ -1,0 +1,31 @@
+           Archive Name:  GIF_INFO.ZIP 1.01
+       Short Description:   A REXX procedure for extracting information from GIF files.
+        Long Description:  
+
+GIF_INFO is an OS/2 REXX procedure that will extract information from a GIF file.
+This information includes the height, width and color table information for
+the "global" image as well as for each (of possibly several) images in 
+an animated GIF file. GIF_INFO can also be used to extract comments, "application
+blocks", and "plain text" blocks from GIF files.
+
+GIF_INFO is freeware; with the usual "use at your own risk" disclaimer.
+
+      Proposed directory
+           for placement:  /pub/os2/dev/rexx
+
+               Your name:  Daniel Hellerstein
+           Email address:  danielh@econ.ag.gov
+    Program contact name:  (same)
+   Program contact email:  (same)
+             Program URL:  (none) 
+
+      Would you like the
+     contact information
+                included?  yes
+
+Operating System/Version:  OS/2 3.0 and above 
+ Additional requirements:  none
+
+                Replaces:  GIF_INFO.ZIP -- this is a maintenance release
+
+

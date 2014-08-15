@@ -1,0 +1,347 @@
+25 Feb 1999. Daniel Hellerstein (danielh@econ.ag.gov)
+
+                            PARSEGIF
+            Procedures to extract information from a  gif file.
+
+This is the documentation for the procedures contained in PARSEGIF.RXX.
+
+Note that to use these procedures, you must have RXGDUTIL and
+REXXLIB.  If you don't have (or can't get) these procedures,
+you can try GIFINFOa; which is less powerful but does not
+require RXGDUTIL and REXXLIB.
+
+
+Notes: 
+ * In the descriptions below:
+   > ABLOCK is an actual string of bytes; as pulled from gif file,
+       or suitable for writing to a gif file.
+   > CT_NAME is a string containing the name of the "matrix of 
+       color table values" stem variable.
+       You MUST set it's value before calling procedures that
+       use it.  For example:   ct_name='MY_CT.'
+       (note that you MUST include the . at the end of the stem name)
+   > STUFF is a space or comma delimited list of variables returned
+       by one of these procedures.
+   > IMG_NAME is a string containing the name of a "matrix of pixels"
+       stem avariable.
+       You MUST set it's value before calling procedures that
+       use it.  For example:   imgt_name='IMG_NAME.'
+       (note that you MUST include the . at the end of the stem name)
+
+ *  Use read_gif_block to read  various "blocks" from a GIF file, 
+    these blocks may then be used as input to the other 
+    For example: 
+                 ablock=read_gif_block(a_gif_file,1,'LSD')
+                 ablock=read_gif_block(a_gif_file,3,"IMG")
+                 ablock=read_gif_block(gifstring,imgnum,'GCE',1)
+    
+ * Several of these procedures work with color tables. Color tables
+   are stored in stem variables, which have the structure:
+        ct.0 = # of colors
+        ct.!r.n = red value for color n
+        ct.!g.n = green value for color n
+        ct.!b.n = blue value for color n
+    where n =0 ... (ctable.0-1), and ct is the "color table name".
+   
+    Prior to calling a color table using/returning procedure,
+    the "color table name" must be defined. 
+    To do this, just set:
+         CT_NAME='a_color_table_name.'
+    For example:
+         CT_NAME='MY_CT.'
+         MY_CT.=0
+    Note that you MUST include the . after the actual name. Use of MY_CT.=0
+    (to set the default value of the MY_CT. "tail" values) is strictly optional.
+    
+    Example:
+         CT_NAME='IMG3_CT.'
+         IMG_NAME='IMG_PIX.'
+         ablock=read_gif_block(gif_file,3,'IMG')
+         stuff=READ_IMAGE_BLOCK(ablock,0)
+         (the IMG3_CT. stem variable will contain the local color table
+          for the 3rd image of gif_file, assuming one exists).
+
+ *  Several of these procedures work with a matrix of pixel values.
+    As with color tables, these are stored in stem variables, which
+    requires one to assign a value to the IMG_NAME variable. For
+    example:
+          IMG_NAME='img1.'
+          img1.=0
+    Note that you MUST include the . after the actual name. 
+
+   The structure of this stem variable is (assuming a stem name of img1):
+      img1.!rows = # rows
+      img1.!cols = # cols
+   and each row of the image is in:
+      img1.0
+        ...
+      img1.nrr
+   where:
+      nrr=# rows-1  
+      and each "row" is a string of length img1.!cols.  
+          Each character in this string corresponds (is the d2c) for
+          a pixel value.  
+    Thus, to get the pixel value of the 5 column of the 10th row:
+                avalue=c2d(substr(img1.10,5,1)) 
+ 
+List of Procedures:
+ ablock=READ_GIF_BLOCK(giffile,imgnum,infotype,is_string)
+ ablock=MAKE_ANIMATION_BLOCK(iter) 
+  niter=READ_ANIMATION_BLOCK(ablock)
+ ablock=MAKE_COMMENT_BLOCK(a_comment)
+  stuff=READ_COMMENT_BLOCK(ablock)
+ ablock=MAKE_GCE_BLOCK(tcflag,tcindex,delay,disposal,useinlag)
+  stuff=READ_GCE_BLOCK(ablock)
+ ablock=MAKE_IMAGE_BLOCK(lpos,tpos,wid,hei,lct,lctsize,inter,sort,imgdata)
+  stuff=READ_IMAGE_BLOCK(ablock,to_matrix)
+ ablock=MAKE_LSD_BLOCK(width,height,gcflag,colres,sort,bkgcolor,aspect,gcsize)
+  stuff=READ_LSD_BLOCK(ablock)
+ ablock=MAKE_PTE_BLOCK(tgleft,tgtop,tgwidth,tgheight,ccwidth,ccheight,tfore,tback,amess)
+  stuff=READ_PTE_BLOCK(ablock)
+ ablock=MAKE_TERMINATOR_BLOCK()
+
+
+Description of procedures:
+
+ablock=read_gif_block(giffile,imgnum,infotype,is_string)
+    Pull a "block" from a gif file.
+
+   Where:
+        giffile : A file name OR a string containing the contents of a gif file
+        nth  : Get block associated with this image, comment, or app block.
+        infotype : Type of block to get
+        is_string: If 1, then GIFFILE argument is a string, otherwise it's
+                   a file name (which read_gif_block will read)
+   Values of infotype:
+        IMG  -- get the nth "image descriptor" of the imgnum image.
+                To examine: use READ_IMG_BLOCK
+        CMT  -- get the nth "comment extension". 
+                To examine: use READ_COMMENT_BLOCK
+        ACE  -- get the "application control extension" for the nth application.
+                To examine: use READ_ANIMATION_BLOCK  -- but this is only
+                useful if it's an "animation" block.
+        LSD  -- get the "logical control descriptor", including the "GIF89a"
+                (or "GIF87a") header (nth is ignored -- there is only one
+                LSD per file). Note that the LSD is REQUIRED -- all gif files
+                must have start with an LSD. 
+                To examine: use  READ_LSD_BLOCK.
+        GCE  -- get the nth "graphic control extension". 
+                To examine: use READ_GCE_BLOCK.
+        PTE --  get the nth "plain text extension".
+        LST  -- return a spaced delimited list of INFOTYPE codes.
+
+  Note that LST is different -- it returns a string. 
+  Several additional codes may appear in this "LST" of blocks.
+       00 = a '00'x block (a harmless error)
+      TRM = terminator -- should ALWAYS be the last code in LST
+
+  Note: if an error occurs, ablock will be a string starting with "ERROR",
+        and followed by a short error message.
+
+ablock=MAKE_ANIMATION_BLOCK(iter) 
+      Create an "animation" applications block.
+
+      Where:
+          iter= # of iterations
+
+
+stuff=READ_ANIMATION_BLOCK(ablock(
+     Extract # iterations from a "netscape" animation applications 
+     control extension (ACE) block.
+
+     You can parse stuff with:
+        parse var stuff appname','niters
+     Where
+        appname = name of applicaton block
+        niters  = if "NETSCAPE" is the appname, then this is the # of iterations
+                  Otherwise, niters=''                                                        
+
+ablock=MAKE_COMMENT_BLOCK(a_comment)
+   Make a comment block.
+
+   Where:
+        a_comment = A string containing your comment. Can be any length,
+                    and contain CRLFs.
+
+stuff=READ_COMMENT_BLOCK(ablock)
+   Extract comment from a comment block.
+
+   The comment is the only item returned in stuff.
+
+ablock=MAKE_GCE_BLOCK(tcflag,tcindex,delay,disposal,useinlag)
+   Make a "graphics control extension" block
+
+   Where:
+        tcflag  = transparent color index flag. If not 1, transparent
+                  color still written (Tcindex), but will be ignored by
+                  image dipslay programs.
+        tcindex = index of the transparent color.
+        delay = Delay time (1/100 ths seconds) -- wait this time AFTER
+                displaying image
+        dispoal = Disposal method (after delay is over, or userinput taken)
+                    0=no action, 1=retain image
+                    2=set to background  3=restore to previous
+        useinflag = User input flag (1=yes)
+
+stuff=READ_GCE_BLOCK(ablock)
+  Obtain information from a graphics control extension block.
+ 
+  To get the actual variables, use:
+     parse var stuff  disposal usrinflag tcflag delay tcindex
+
+  Where the variables are as defined in MAKE_GCE_BLOCK.
+
+ablock=MAKE_IMAGE_BLOCK(lpos,tpos,wid,hei,lct,lctsize,inter,sort,imgdata)
+    Create an "image descriptor" box.
+
+    Where:
+        lpos = column number of the left edge of the image (wrt to
+               logical screen)
+        tpos = row number of the right edge of the image 
+        wid= image width in pixels
+        hei= image height in pixels
+        lct = local color table flag -- set to 1 if a color table 
+              to create a local color table
+              If LCT=1, then you must "setup the ct_name color table"
+              before calling MAKE_IMAGE_BLOCK
+      lctsize= size of local color table. if no specified, ct_name.0 is used.
+                If LCT=0, lctsize will still be written (even though
+                no color table is written). This is sort of pointless,
+                but does seem to be a sop.
+         inter = interlace flag 
+          sort = if 1, indicates that the color table is sorted, with most
+                 used color at top. 
+      imgdata= If specifed, this should contain:
+                   the actual lzw-compressed image data, (including the 
+                   "lzw" starting byte)
+               If not specified, or if equal to 0, then
+                    MAKE_IMAGE_BLOCK will use the contents of the stem variable
+                    declared by the IMG_NAME variable (see description above)
+                    
+    Note: when using a stem variable as the contents of the gif
+          image (when imgdata=0), the !cols and !rows "tails" will
+          NOT be used -- instead, the width and height variables (specified
+          in the argument list) are used. 
+          Of course, one would typically make sure that these were equal...
+
+stuff=READ_IMAGE_BLOCK(ablock,to_matrix)
+    Pull information out of an "image descriptor" block
+
+    Where:
+       ablock =an image descriptor block; say as retrieved with read_gif_block
+       tempfile =  If missing or 0, then
+                     ignore
+                   If 1, then  
+                      write the pixel values of the image to "IMG_NAME"
+                      stem variable (see the introductory notes for details).
+                      A temporary file, with a name like $TMPnnnn.TMP, 
+                      will be temporarily created.
+                   If a file name, then
+                      Same as 1, but use this filename (instead of a
+                      $TMPnnnn.TMP file name) for the temporary file.
+              
+    The actual information is then obtained by using:
+         parse var stuff lpos tpos width hei lct interl sort ',' imgdata
+        (see MAKE_IMAGE_BLOCK for a description of these variables).
+     and (if to_matrix is appropriately specified)
+        by examining the stem variable named by IMG_NAME.
+
+    Notes:
+         * be SURE to include a ',' before the imgdata (in the parse)
+         * if there is any chance the image block includes a local color
+           table, be sure to set the value of the CT_NAME variable
+           before calling READ_IMAGE_BLOCK
+         * if you specify to_matrix, be sure to set the value of the
+           IMG_NAME variable before calling READ_IMAGE_BLOCK.
+
+
+ablock=MAKE_LSD_BLOCK(width,height,gcflag,colres,sort,bkgcolor,aspect,gcsize)
+      Make a logical screen descriptor  block -- including the "GIF89a"
+      header (the first 6 six characters in a gif file).
+
+      Where:
+          width = "logical screen" width (in pixels)
+          height= "logical screen" height (in pixels)
+          gcflag= set to 1 if a global color table is to be created.
+                 If GCFLAG=1, then you must "setup the ct_name color table"
+                 beforecalling MAKE_LSD_BLOCK
+          colres=2**(colres+1)= color resolution of image creater(rarely used)
+          sort = if 1, indicates that the color table is sorted, with most
+                 used color at top. 
+          bkgcolor = background color index (rarely used)
+          aspect = height to width aspect (rarely used)
+          gcsize= size of color table. if no specified, ct_name.0 is used.
+                 
+
+stuff=READ_LSD_BLOCK(ablock)
+  Pull information from an logical screen descriptor block
+
+    Ablock is an logical screen descriptor block; say as 
+    retrieved with read_gif_block.
+     
+    The actual information is then obtained by using:
+        parse var st width height gcflag colres sort bkgcolor aspect
+
+     Where the variables are as defined in MAKE_LSD_BLOCK
+
+ablock=MAKE_PTE_BLOCK(tgleft,tgtop,tgwidth,tgheight,ccwidth,ccheight,tfore,tback,amess)
+   Create a "plain text" extensions block
+
+   Where:
+        tgleft = pixel column number of left of text grid
+        tgtop  = pixel row number of top of text grid
+       tgwidth = width of text grid in pixels
+      tgheight = height of text grid in pixels
+      ccwidth  = width of each cell in pixels
+      ccheight = height of each cell in pixels
+      tfore    = text foreground color table index (into global color table)
+      tback    = text background color table index (into global color table)
+       amess   = message string
+
+stuff=READ_PTE_BLOCK(ablock)
+   Pull information from a plain text extension block.
+
+   The actual information can be obtained using:
+      parse stuff  tgleft tgtop tgwidth tgheight ccwidth ccheight tfore tback ',' ptext
+   Where the variables are as defined in MAKE_PTE_BLOCK
+        
+
+ablock=MAKE_TERMINATOR_BLOCK()
+   Create a "terminator" block.
+   No arguments are required (this is simple a constant equal to '3b'x.
+
+
+                        ---------------------------
+
+ Basic copyright and it's never our fault disclaimer:
+
+  Copyright 1998 by Daniel Hellerstein. Permission to use this program
+  for any purpose is hereby granted without fee, provided that
+  the author's name not be used in advertising or publicity
+  pertaining to distribution of the software without specific written
+  prior permision.
+
+  This includes the right to subset and reuse the code, with proper attribution, 
+ and subject to the proviso:
+
+      We, the authors of PARSEGIF and any potentially affiliated institutions,
+      disclaim any and all liability for damages due to the use, misuse, or
+      failure of the product or subsets of the product.
+
+    THIS SOFTWARE PACKAGE IS PROVIDED "AS IS" WITHOUT EXPRESS
+    OR IMPLIED WARRANTY.
+    THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE PACKAGE,
+    INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.
+    IN NO  EVENT SHALL THE AUTHOR (Daniel Hellerstein) OR ANY PERSON OR
+    INSTITUTION ASSOCIATED WITH THIS PRODUCT BE LIABLE FOR ANY
+    SPECIAL,INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+    RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+    OF CONTRACT,NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+    IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE PACKAGE.
+
+
+   PARSEGIF was developed on the personal time of Daniel Hellerstein,
+   and is not supported, approved, or in any way an official product
+   of my employer (USDA/ERS).
+
+

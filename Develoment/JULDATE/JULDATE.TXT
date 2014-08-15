@@ -1,0 +1,103 @@
+The following programs provide routines to convert
+Gregorian and Julian Calendar dates into Julian Days,
+and back again.  The algorithms are adapted to Rexx
+from 'Numerical Recipes In C', Cambridge Press.
+This is a very useful book, and I highly recommend it.
+
+The routines are provided as-is.
+
+Package contents:
+
+  juldate.cmd - Standard Rexx - includes sample 'main'
+ ojuldate.cmd - Object rexx version of juldate.cmd
+ ojultest.cmd -  A small test program, demonstrating ojuldate
+
+Samples include determining DST/STD time dates, and Leap Year.
+Usage of the routines is demonstrated in the packages.
+
+Copyleft 1996,1997 Kurt Spaugh, Fort Lauderdale, FL 
+
+I have not found any problems with the algorithms to date.
+That means you probably will...Remember Murphy's Corollary:
+"The probability of finding a defect in software is directly
+proportional to length of time since the last defect was found"
+
+There is no such thing as Defect-Free software.
+
+Historically, the calendar is a contrivance for predicting
+events future, as well as reckoning the past. The most
+notable events are the equinoxes and solstices. In an ideal
+calendar, these would always occur on the same date. In a 
+simple world, it's nice to know when to plant and harvest.
+
+The obvious choice for telling time is the passage of solar
+days.  Unfortunately, Solar days do not agree with sidereal
+days. Any of the important events above, occur when the
+earth is precisely in the same position relative to the sun
+that it was a year before. But what is a year? Counting
+by solar days (the earth's rotation), really has no bearing
+on the time it takes to orbit the Sun. The result is that
+any calendar based on Solar days is a fraction less/more than
+than the actual time passed. 365 days is just too short,
+but 366 days is way too long. Using either, the equinoxes
+and solsitices would move backward/forward through the calendar.
+As a result, we would soon be seeing 'Spring' in December.
+To compensate, the leap year was invented, where the the year
+has one extra day.
+
+The Julian Calendar, named for Julius Caesar, had leap years
+in every year divisible by four. This resulted in too many
+Leap days, causing excessive drift in the calendar days of the
+Autumnal and Vernal Equinoxes. Having a direct effect on the
+date of the 'Movable Feasts', the Roman Church was concerned.
+Pope Paul III commissioned  Father Christopher Clavius S.J.,
+a noted mathematician to study the problem. The result is the
+Gregorian Calendar, named for Pope Gregory XIII, who instituted
+the result of Clavius' research on Thursday, October 4, 1582. Thus,
+Thursday, October 4, 1582 was followed by Friday, October 15, 1582.
+The eleven day jump, corrected the accumulated error of the Julian
+calendar since its adoption in 45 B.C.
+
+In the Gregorian Calendar, Century years are not leap years unless
+they are divisible by 400. So 2000 is a leap year but 1900 is not.
+
+The 'Julian Day' is not related to either Calendar. It was, however,
+devised in 1582 by Joseph Scaliger. It is a means of reckoning
+time between widely spaced astronomical events, and is used today
+by all astronomers. Julian Days are counted from 1/1/4713 B.C.
+The Julian period is  7980 years, the LCM of the lunar cycle(19 years),
+the solar cycle(28 years),and the Roman Indiction cycle(15 years).
+The last concurrence of all three was in 4713 B.C. The Julian Day also 
+begins at noon, a convenience for astronomers, so that the day will not
+change during their night-time working hours.
+
+A proper julian date is of the form dd.ff, where 'dd' is the Julian 
+day number and 'ff' is the fraction of the day. The next millenium
+begins at  2451910.5, which is midnight, December 31, 2000.
+
+The algorithms here omit the time of day, and for sanities sake
+choose to assume that you are always working in the afternoon.
+Should you choose to be more precise, or reconcile with GMT or 
+Naval Observatory time, Don't forget to account for the time of
+day.
+
+The US Naval Observatory cesium clock time is available by modem
+at 1-202-653-0351 (1200,7,Even,1). It transmits a string like:
+  "50706 257 13:21:00 UTC" 
+   xxxxx ddd hh:mm:ss TZ
+
+xxxxx = Julian Day - 2,400,000
+        Note that until 12:00:00 UTC, that value would be 5075!
+
+ddd   = The day of the year (Jan. 1 = 1)
+
+hh:mm:ss = hours:minutes:Seconds
+
+If you are an astronomer, and choose to use the enclosed algorithms
+to predict an appointment with a telescope on a gregorian date,
+it is up to you to incorporate time of day into the jul2greg()
+function. For the rest of us 245076 began at Midnight!.
+
+Have fun...
+
+kurt spaugh@bellsouth.net

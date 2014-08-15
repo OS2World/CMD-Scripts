@@ -1,0 +1,29 @@
+GETOBJ v1.11
+
+REQUIRES: WPTOOLS.DLL
+
+GETOBJ creates a list containing 
+the data for all objects in a folder 
+(and it's sub folder) for example 
+your desktop folder. 
+For each object the title, the class, 
+the setup string and the location is 
+shown.                
+
+GETOBJ can also create a REXX program 
+with SysCreateObject calls to recreate 
+the objects.                                         
+
+GETOBJ needs the DLL WPTOOLS.DLL. 
+This DLL is included in this package.
+
+New in v1.11:
+- new WPTOOLS.DLL necessary for WARP 4
+  (from WPTOOLS19.DLL)
+- bug corrections and a work around 
+  for a bug in Object REXX 
+
+Freeware, uploaded by the author.
+
+Bernd Schemmer
+EMail: 100104.613@compuserve.com

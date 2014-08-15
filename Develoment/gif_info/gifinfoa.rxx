@@ -1,0 +1,455 @@
+/**************************
+25 Feb 1999.
+This contains an "older"  version of the GIF_INFO procedures.
+It is NOT as powerful as the PARSEGIF procedures, but does NOT
+require REXXLIB and RXGDUTIL.
+
+And although it might be confusing, in the documentation that follows
+this procedure is referred to as GIF_INFO.....
+
+                -------------------------------------
+
+GIF_INFO is called as:
+
+     stuff=GIF_INFO(gif_file,imgnum,infotype,seperator)
+
+Parameters:
+
+    GIF_FILE: Required. A fully qualified file name.
+                  OR
+              The contents of a gif_file (say, as read with 
+                  gif_file=charin(afile,1,chars(afile))
+
+         nth: # of image, etc. to get information about. If not specified,
+              a value of 1 is assumed.
+
+    infotype: Space delimited list of keywords that select what information to
+              retrieve. If not specified, an error check is assumed.
+
+   seperator: Optional. Seperator string to use when more then one item in
+              infotype list. If not specified, a '0d0a'x (cr-lf) string is
+              used.
+
+Returns:
+  Depends on values of nth and infotype. In general, in case of error a 
+  null string is returned -- you can examine a gif files for errors
+  by calling gif_info with an infotype of ERROR.
+
+For details, see GIFINFOa.DOC.
+
+Technical info:  For gif89a specs, please see
+                 http://member.aol.com/royalef/gif89a.txt
+
+*/
+
+gif_info:
+parse  upper arg afile,nth,infos,seperator
+
+if infos='' then INFOS='ERROR'
+if nth='' then nth=1
+if length(seperator)=0 then seperator='0d0a'x
+
+chkerr=0
+if wordpos('ERROR',infos)>0 then chkerr=1
+
+
+archy='LSD'
+chewerr=0
+
+foo=rxfuncquery('sysloadfuncs') /* need rexxutil library */
+if foo=1 then do
+  call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+  call SysLoadFuncs
+end
+if rxfuncquery('sysloadfuncs')=1 then do
+   if chkerr=0  then return ''
+   return 'Error Can not find RexxUtil'
+end /* do */
+
+
+/********** not supported yet 
+if is_string=1 then do   
+   ain=afile
+   filesize=length(ain)
+say " filesize " filesize
+******************/
+
+ fqn=stream(afile,'c','query exists')
+ if fqn='' then do
+    if chkerr=0 then return ''
+    return 'ERROR no such file: ' afile
+ end
+ oo=stream(afile,'c','close')
+ filesize=chars(afile)
+ ain=charin(fqn,1,filesize)
+ oo=stream(afile,'c','close')
+
+gifver=left(ain,6)
+
+if abbrev(translate(gifver),'GIF8')=0 then do
+  if chkerr=0 then return ''
+  return 'ERROR bad gif identifier: ' gifver
+end
+
+do ii=1 to words(infos)
+   reslist.ii=''
+end /* do */
+reslist.0=words(infos)
+
+
+l1=substr(ain,7,2)
+g_width=c2d(reverse(l1))
+l2=substr(ain,9,2)
+g_height=c2d(reverse(l2))
+
+bkg_color=substr(ain,12,1)
+
+l3=substr(ain,11,1)
+ctable0=x2b(c2x(l3))
+
+global_color_flag=left(ctable0,1)
+
+ct1=right(ctable0,3)
+ct1=right(ct1,8,0)
+ct1=x2d(b2x(ct1))
+numcolors=2**(ct1+1)
+
+iat=13          /* 11 bytes used for intro info */
+
+gcolortable=''
+if global_color_flag=1 then do
+   gcolortable=substr(ain,iat+1,3*numcolors)
+   iat=iat+(3*numcolors)  /* iat is the Last byte used */
+end
+
+if nth=0 then do        /* perhaps return some info */
+   nn=wordpos('CT',infos)
+   if nn>0 then reslist.nn=gcolortable
+   nn=wordpos('SIZE',infos)
+   if nn>0 then reslist.nn=g_width' 'g_height
+end /* do */
+
+nn=wordpos('DEF_CT',infos)
+  if nn>0 then reslist.nn=gcolortable
+nn=wordpos('DEF_SIZE',infos)
+  if nn>0 then reslist.nn=g_width' 'g_height
+
+nn=wordpos('BKG_COLOR',INFOS)
+  if nn>0 then reslist.nn=bkg_color
+
+nn=wordpos('LS_DESCRIPTOR',infos)
+  if nn>0 then reslist.nn=substr(ain,1,iat)
+
+
+desc.1='2c'x   /*'image' */
+desc.2='21'x  /*'extension'*/
+desc.3='3b'x   /*trailer' */
+
+ext.1='f9'x ; /*graphic control'*/
+ext.2='fe'x ; /*'comment'*/
+ext.3='01'x ; /*'plain text'*/
+ext.4='ff'x ; /*application'*/
+
+nimgs=0         /* set counters */
+ngcs=0
+ncmts=0
+napps=0
+nptxts=0
+delay=-1              /* defaults changable by gc block */
+tc_flag=0
+
+
+do forever              /* ------------ scan the gif file */
+iat=iat+1       
+blockid=substr(ain,iat,1)       /* get next block type */
+iat_b=iat               /* iat at beginning of this block */
+
+select
+
+   when blockid='00'x then do  /* ignore this relatively harmless error */
+       ares=''
+       ARCHY=archy' 00'
+   end /* do */
+
+   when blockid=desc.1 then do  /* it's an image */
+      nimgs=nimgs+1
+      call do_image
+      ares=result
+      archy=archy' ID'
+/* info wanted? */
+      if nimgs=nth then do      /* check this image */
+           nn=wordpos('IMG_DESCRIPTOR',infos)
+             if nn>0 then reslist.nn=substr(ain,iat_b,(1+iat-iat_b))
+           nn=wordpos('POS',infos)
+             if nn>0 then reslist.nn=lcl_left' 'lcl_top
+           nn=wordpos('SIZE',infos)
+             if nn>0 then reslist.nn=lcl_width' 'lcl_height
+           nn=wordpos('CT',infos)
+             if nn>0 then reslist.nn=acolortable
+           nn=wordpos('INTER',infos)
+             if nn>0 then reslist.nn=lcl_interlace
+           nn=wordpos('IMG',infos)
+             if nn>0 then reslist.nn=img_data
+           nn=wordpos('TRANSP',infos)
+           if nn>0 then do
+               if tc_flag=0 then
+                  reslist.nn=-1
+               else
+                  reslist.nn=tc_index
+           end /* do */
+           nn=wordpos('DELAY',infos)
+             if nn>0 then reslist.nn=delay
+
+       end              /* this set of infos */   
+
+   end /* do */
+
+   when blockid=desc.2 then  do      /* extension */
+       iat=iat+1                /* get extention type */
+       extype=substr(ain,iat,1)
+
+       select                   /* several types of "extensions */
+
+          when extype=ext.1 then do     /*graphics control */
+            ngcs=ngcs+1
+            call graphics_control
+            ares=result
+            archy=archy' GCE'
+            nn=wordpos('GC_DESCRIPTOR',infos)
+              if nn>0 & nth=ngcs then reslist.nn=substr(ain,iat_b,(1+iat-iat_b))
+
+          end
+          when extype=ext.3  then do    /*plain text */
+              nptxts=nptxts+1
+              call plain_text  
+              ares=result
+              archy=archy' PTE'
+              if nptxts=nth then do      /* check this image */
+                 nn=wordpos('PT_DESCRIPTOR',infos)
+                    if nn>0 then reslist.nn=substr(ain,iat_b,(1+iat-iat_b))
+                 nn=wordpos('POS',infos)
+                 if nn>0 then reslist.nn=pt_left' 'pt_top
+                 nn=wordpos('SIZE',infos)
+                 if nn>0 then reslist.nn=pt_width' 'pt_height
+                 nn=wordpos('PT',infos) 
+                 reslist.nn=pt_data
+                 nn=wordpos('TRANSP',infos)
+                 if nn>0 then do
+                    if tc_flag=0 then
+                          reslist.nn=-1
+                     else
+                        reslist.nn=tc_index
+                 end /* do */
+                 nn=wordpos('DELAY',infos)
+                  if nn>0 then reslist.nn=delay
+              end
+          end /* plain text */
+
+          when extype=ext.2 then do     /*comment */
+             ncmts=ncmts+1
+             call is_comment
+             ares=result
+             archy=archy' CE'
+             if ncmts=nth then do
+                  nn=wordpos('CMT',infos)
+                    if nn>0 then reslist.nn=cmt_data
+                  nn=wordpos('CMT_DESCRIPTOR',infos)
+                    if nn>0 then reslist.nn=substr(ain,iat_b,(1+iat-iat_b))
+             end /* do */
+          end
+
+          when extype=ext.4 then do     /* application */
+             napps=napps+1
+             call application_block
+             ares=result
+             archy=archy' APE'
+             if nth=napps then do
+               nn=wordpos('APP_DESCRIPTOR',infos)
+                 if nn>0 then reslist.nn=substr(ain,iat_b,(1+iat-iat_b))
+               nn=wordpos('APP_ID',infos)
+                 if nn>0 then reslist.nn=app_id
+               nn=wordpos('APP_AUTH',infos)
+                  if nn>0 then reslist.nn=app_auth
+               nn=wordpos('APP_DATA',infos)
+                   if nn>0 then reslist.nn=app_data
+             end
+          end /* do */
+
+          otherwise  do
+             if chkerr=0 then   RETURN ''
+             return 'ERROR Bad extension code: '||c2x(extype)
+          end
+       end      /* extype select */
+   end          /* extention descriptor */
+
+   when blockid=desc.3 then do
+      archy=ARCHY' TRM'
+      leave      /* terminator */
+   end
+
+   otherwise do
+      if chkerr=0 then  return ''
+      return 'ERROR Bad extension code: ' blockid
+   end
+
+end  /* select */
+
+if ares<>'' then do     /* ERROR DETECTED */
+   if chkerr=0 then return ''
+   return 'ERROR 'ares
+end
+
+if chkerr=1 then iterate   /* always scan entire file */
+
+/* else see if all items gotten */
+idon=0
+do mm=1 to reslist.0
+   if reslist.mm='' then leave
+   idon=idon+1
+end /* do */
+if idon=reslist.0 then leave  /* got desired info, so stop looking */
+
+end     /* forever */
+
+if chkerr=1 then return 'OK 'archy  /* no errors detected */
+
+nn=wordpos('#IMGS',infos)
+  if nn>0 then reslist.nn=nimgs
+nn=wordpos('#CMTS',infos)
+  if nn>0 then reslist.nn=ncmts
+nn=wordpos('#APPS',infos)
+   if nn>0 then reslist.nn=napps
+nn=wordpos('#PTS',infos)
+   if nn>0 then reslist.nn=nptxts
+nn=wordpos('#GCS',infos)
+    if nn>0 then reslist.nn=ngcs
+
+/* concatenate results list, and return */
+if reslist.0=1 then return reslist.1
+
+rr=reslist.1
+do mm=2 to  reslist.0
+   rr=rr||seperator||reslist.mm
+end /* do */
+return rr
+
+
+/************/
+do_image:
+      l1=substr(ain,iat+1,2)
+      lcl_left=c2d(reverse(l1))
+      l2=substr(ain,iat+3,2)
+      lcl_top=c2d(reverse(l2))
+
+      l1=substr(ain,iat+5,2)
+      lcl_width=c2d(reverse(l1))
+      l2=substr(ain,iat+7,2)
+      lcl_height=c2d(reverse(l2))
+    
+      l3=substr(ain,iat+9,1)
+      ctable0=x2b(c2x(l3))
+      lcl_ct_flag=left(ctable0,1)
+      lcl_interlace=substr(ctable0,2,1)
+      t1=right(ctable0,3) ; t1=right(t1,8,0)
+      lcl_ct_size=x2d(b2x(t1)) ; lcl_ct_size=2**(lcl_ct_size+1)
+
+       skip=lcl_ct_flag*lcl_ct_size*3
+       acolortable=''
+       if skip>0 then
+          acolortable=substr(ain,iat+10,skip)
+
+       iat=iat+9+skip    /* iat is now just before the table based image */
+
+/* chew up the data block */
+       iat=iat+1        /* skip the lzw bits variable */
+       img_data=chew_data()
+       if imgdata="" then return 'Bad Image Data '
+       return ""
+
+
+/*********/
+graphics_control:
+       iat=iat+2
+       pk=substr(ain,iat,1) ; pk=x2b(c2x(pk))
+       tc_flag=right(pk,1)
+       iat=iat+1
+       tmp=reverse(substr(ain,iat,2)) 
+       delay=x2d(c2x(tmp))
+       iat=iat+2
+       tc_index=x2d(c2x(substr(ain,iat,1)))
+       iat=iat+1
+       term=x2d(c2x(substr(ain,iat,1)))
+       if term<>0 then return 'Bad Graphics Control Extension '
+return ""
+
+/*********/
+application_block:
+iat=iat+1
+app_blocksize=x2d(c2x(substr(ain,iat,1)))
+if app_blocksize<>11 then do
+    return 'Bad application block size '
+end /* do */
+
+iat=iat+1
+
+app_id=substr(ain,iat,8)
+iat=iat+8
+app_auth=substr(ain,iat,3)
+iat=iat+2
+app_data=chew_data()
+if app_data="" then return 'Bad application block data '
+
+return ""
+
+/***********/
+plain_text:
+iat=iat+1
+pt_data=''
+app_blocksize=x2d(c2x(substr(ain,iat,1)))
+if ptextblocksize<>12 then do
+    return 'Bad Plain Text Block Size '
+end /* do */
+
+  l1=substr(ain,iat+1,2)
+pt_left=c2d(reverse(l1))
+  l2=substr(ain,iat+3,2)
+pt_top=c2d(reverse(l2))
+
+   l1=substr(ain,iat+5,2)
+pt_width=c2d(reverse(l1))
+   l2=substr(ain,iat+7,2)
+pt_height=c2d(reverse(l2))
+iat=iat+4
+pt_data=chew_data()
+if pt_data="" then return 'Bad Plain Text Data '
+return ""
+
+/*********/
+is_comment:
+cmt_data=chew_data()
+if chewerr=1 then return 'Bad Comment Data '
+return ""
+
+/*********/
+chew_data:procedure expose iat ain amess filesize chewerr
+       chewerr=1
+       amess=''
+       do forever       /* data blocks */
+         if iat>filesize then do
+             return ""
+         end /* do */
+         iat=iat+1      /* size of block */
+         ii=substr(ain,iat,1) ; ii=c2d(ii)
+         if ii=0 then do 
+             leave
+         end /* do */
+         iat=iat+1
+         amess=amess||substr(ain,iat,ii)
+         iat=iat+ii-1
+       end /* do */
+chewerr=0
+return amess 
+
+
+
+

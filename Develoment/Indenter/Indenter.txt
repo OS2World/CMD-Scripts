@@ -1,0 +1,79 @@
+Indenter.cmd - The OS/2 REXX Command File Indenter - Formatter
+
+
+This program formats REXX source code to properly indent Do / End structures.
+
+It doesn't do anything else (that I know of....)
+
+This program is copyrighted freeware.  Use at will.
+
+
+
+The author can be contacted at Indenter@NerdWorld.org
+
+J R Casey Bralla
+Indenter@NerdWorld.org
+
+
+
+
+Shameless plug:   Read an on-line Sci-Fi Novel!
+
+"Darkness on Harvey's World"
+
+
+  Harvey's World seemed like a paradise, perfect for colonization.  Its
+broad rolling grasslands were warmed by gentle breezes and blanketed
+with docile herbivores.  But when the first small survey colony arrived
+and started sending bizarre reports of unexplained darkness, then
+abruptly stopped sending reports three days after landing, a rescue ship
+was rushed to help.
+
+
+  As the rescuers neared Harvey's World and began to receive
+automated telemetry from the stricken ship, they learned that only four
+of the twenty-four crew members were still alive . . .   barely.  The
+survivors' medical telemetry made no sense, but their final log entries
+made even less sense.
+
+
+  What happened to the survey colony?  What was the darkness that
+enveloped the sunny green paradise?  Can the rescue team save the
+remaining survivors without succumbing to whatever caused the
+disaster?  Harvey's World looked gorgeous and safe, an ideal colony
+planet.  But something had destroyed the colony ship and crew within
+three days.  The first rule of a space rescue is "Don't Die Trying."
+
+
+http://www.nerdworld.org/harvey00.html
+
+---------
+
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: Indtr100.zip
+       Short Description: REXX Command Formatter - Indenter
+        Long Description: Formats OS/2 REXX command files to indent Do / End structures.
+                          Copyrighted Freeware.
+
+      Proposed directory
+           for placement: /pub/os2/dev/rexx
+
+               Your name: Casey Bralla
+           Email address: Indenter@NerdWorld.org
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.nerdworld.org/indenter.html
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 (any)
+ Additional requirements:
+
+                Replaces: (none)
+
+
+
