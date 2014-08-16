@@ -1,0 +1,31 @@
+
+Function name: w.cmd
+Author:        Peter Flass <Flass@LBDC.Senate.State.NY.US>
+Function:      Provides functionality simpiar to REXX's
+               builtin 'word()' function, but recognizes
+               quoted strings as a single word.
+Usage:         To use as a standalone function, include in
+               your searchpath.  To use as an imbedded function,
+               remove the comments surrounding the line 'W:Procedure'
+               and include in your Rexx command.
+               
+               In either case, call via:
+                  result = w(string_to_scan,word_number)
+               where 'string_to_scan' is the character string to be examined
+               and 'word_number' is the number of the word to be extracted
+               (1 thru the number of 'words' in the string)
+
+               A 'word' is either a blank-delimited string of characters
+               without surrounding quotes (may contain embedded quotes)
+               or a blank-delimited quoted string which may contain
+               embedded blanks, etc.  The types of quotes used must match
+               (' with ', " with ").  Two consecutive matching quotes
+               will be translated to a single quote.  The enclosing quotes 
+               are removed from the result string.
+
+               Examples:
+                 W('abc def',2)         -> def
+                 W(" 'abc def' ghi ",2) -> ghi
+                 W(' ''abc'' def',1)    -> 'abc'
+                 W('abc',2)             -> null string ('')
+

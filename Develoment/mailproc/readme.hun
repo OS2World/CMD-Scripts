@@ -1,0 +1,138 @@
+				MailProc 1.01
+				=============
+
+
+1. Bevezet‚s
+
+Az‚rt ¡rtam ezt a programot, hogy k‚pes legyek a munkahelyi g‚pem emailen
+keresztli el‚r‚s‚re. Ez ugyanis az egyetlen m¢dja annak, hogy a munkahelyi
+g‚pemet az interneten keresztl el‚rjem. Amennyiben a MailProc fut az eml¡tett 
+PC-n, akkor az automatikusan feldolgozza az  ltalam kld”tt speci lis t rgy£ 
+leveleket. A feldolgozott levelek t”rzs‚ben tal lhat¢ sorokat kl”n ll¢
+parancsk‚nt kezeli, amelyeket CMD f jlba gy–jt, amit azt n lefuttat. A
+kimenetet (‚s a hibazeneteket) a program logf jlba ¡rja, amelyet v laszk‚nt 
+elkld a parancs email felad¢j nak c¡m‚re. Ily m¢don szinte b rmilyen
+feladatot v‚gre lehet hajtani a MailProc-ot futtat¢ g‚pen.
+
+
+2. Telep¡t‚s
+
+A MailProc mindenf‚le OS/2 Warpra telep¡thet“, amelyen fut a TCP/IP ‚s a
+REXX socket k”nyvt r is telep¡tve van. A m–k”d‚shez szks‚g van egy pop
+accountra ‚s egy SMTP szerverre, amelyen keresztl leveleket kldhetnk.
+
+Ha ezt a readme-t olvasod, akkor m r biztosan kicsomagoltad a programot
+tartalmaz¢ zip f jlt. A CMD f jlokat m sold be abba a k”nyvt rba, amelyikb“l
+futtatni akarod a programot. A MailProc elvileg minden olyan f jlrendszerre
+telep¡thet“, amelyet az OS/2 t mogat.
+
+A csomag ”sszetev“i default be ll¡t sokat tartalmaznak. Az email account
+el‚r‚s‚hez szks‚ges param‚tereket ‚s a parancs emailek t rgy t (amely
+tulajdonk‚ppen a jelsz¢ a g‚phez) mindenkinek  t kell  ll¡tani! Legy‚l
+r‚sen! Ha nem v ltoztatod meg a default t rgyat, akkor b rki, aki let”lti
+ezt a csomagot, korl tlan el‚r‚st szerezhet a g‚pedhez!
+
+A default be ll¡t sok megv ltoztat s hoz meg kell nyitni a CMD f jlokat
+egy tetsz“leges text editorban ‚s  t ll¡tani a "... you must configure..."
+sorok alatti param‚tereket. A "...you may configure..." sz”veget tartalmaz¢
+sorok alatti param‚tereket ig‚ny szerint lehet m¢dos¡tani. Semmik‚ppen se
+m¢dos¡tsuk a "Do not change anything under this line!!!" sor alatti k¢dot,
+csak ha nagyon biztosak vagyunk a dolgunkban!
+
+
+3. A mindenk‚ppen  t ll¡tand¢ param‚terek
+
+3.1 MAILPROC.CMD (f“program)
+pop		: Az email let”lt‚shez haszn lt pop szerver neve.
+smtp		: Az email kld‚shez haszn lt smtp szerver neve.
+user		: A pop felhaszn l¢ bel‚p‚si neve.
+pwd 		: A pop jelsz¢ a convert.cmd-vel  talak¡tott, k”zvetlenl
+                  nem olvashat¢ form ja. 
+
+3.2 GETCMAIL.CMD (a parancs emailek let”lt‚se a pop szerverr“l)
+cmail_subject	: A parancs email t rgya.
+
+3.3 SNDCMAIL.CMD (v lasz kld‚se smtp szerveren keresztl)
+mail_from	: A v lasz email kld“j‚nek c¡me (munkahelyi c¡m).
+def_mail_to	: A default c¡mzett c¡me (otthoni email).
+
+
+4. Az ig‚ny szerint be ll¡tand¢ param‚terek
+
+4.1 MAILPROC.CMD (f“program)
+begin_hour1 	: Az emailellen“rz‚s kezd“¢r ja munkanapokon.
+end_hour1 	: Az emailellen“rz‚s v‚g¢r ja munkanapokon.
+period1 	: Az ellen“rz‚sek k”z”tt m sodpercben kifejezett sznet 
+		  munkanapokon.
+begin_hour2 	: Az emailellen“rz‚s kezd“¢r ja h‚tv‚g‚n.
+end_hour2 	: Az emailellen“rz‚s v‚g¢r ja h‚tv‚g‚n.
+period2 	: Az ellen“rz‚sek k”z”tt m sodpercben kifejezett sznet 
+		  h‚tv‚g‚n.
+logfile 	: A LOGS alk”nyvt rban tal lhat¢ f“ logf jl neve.
+dialeron	: Az internetszolg ltat¢ h¡v s t v‚gz“ parancs (vissza kell,
+		  hogy t‚rjen).
+dialeroff	: A t rcs z¢programot le ll¡t¢ parancs.
+
+4.2 GETCMAIL.CMD (a parancs emailek let”lt‚se a pop szerverr“l)
+NewMailFileMask : F jlmask a parancs, log ‚s zenet f jlokhoz.
+max_mail_size   : A parancs email maxim lis m‚rete.
+tracing		: Kieg‚sz¡t“ loggol s  llapota.
+tracefile	: A LOGS alk”nyvt rban tal lhat¢ kieg‚sz¡t“ log f jl neve.
+
+4.3 SNDCMAIL.CMD (v lasz kld‚se smtp szerveren keresztl)
+mailerstring 	: A MailProc-ot azonos¡t¢ karakterl nc.
+def_subj	: A v laszlevelek default t rgya.
+tracing 	: Kieg‚sz¡t“ loggol s  llapota.
+tracefile	: A LOGS alk”nyvt rban tal lhat¢ kieg‚sz¡t“ log f jl neve.
+
+
+5. A MailProc haszn lata
+
+A helyesen konfigur lt MailProc a munkak”nyvt rban kiadott mailproc
+paranccsal ind¡that¢. n szem‚ly szerint az OS/2 Startup gy–jt“j‚n
+keresztl ind¡tom. A MailProc l‚tre fog hozni h rom alk”nyvt rt az
+els“ ind¡t s ut n: WAIT, DONE ‚s LOGS. A WAIT alk”nyvt rban a v‚gre-
+hajt sra v rakoz¢, a DONE-ban pedig a m r v‚grehajtott feladatokat
+tal ljuk. A LOGS alk”nyvt r tartalmazza a program  ltal k‚sz¡tett
+logf jlokat.
+
+
+Miel“tt r k‚rdezn‚l, tekintsd meg az al bbi parancs email p‚ld kat:
+
+M–velet:		Parancsok:
+----------------------------------------------------------------------
+Text f jl let”lt‚se	type <a let”ltend“ f jl neve>
+----------------------------------------------------------------------
+Bin ris f jl let”lt‚se	mpack.exe -s myfile -o file.txt <f jln‚v>
+			type file.txt
+
+A bin ris f jlok MIME k¢dol s hoz haszn lhat¢ mpack ‚s munpack
+programokat a hobbes.nmsu.edu-r¢l lehet beszerezni.
+
+
+6. Menteget“z‚s
+
+Ez a program b rki  ltal ingyenesen haszn lhat¢. A szerz“ nem v llalja a
+felel“ss‚get a haszn latb¢l ered“ k rok‚rt. Nagyon val¢sz¡n–tlen, hogy a
+program b rmilyen k rt is okozna. V‚ssk azonban j¢l az esznkbe, hogy az
+a szem‚ly, aki parancs emaileket tud v‚grehajtani g‚pnket, teljes hozz -
+f‚r‚ssel rendelkezik a g‚p, ‚s az ahhoz kapcsolt h l¢zati egys‚gek er“for-
+r saihoz! Amennyiben £gy akarja, m‚g a merevlemezt is meg tudja form zni!
+Tartsd titokban a parancs email t rgy t!
+
+
+7. Kapcsolatfelv‚tel a szerz“vel
+
+Amennyiben b rmilyen probl‚m d, k‚rd‚sed, vagy megjegyz‚sed van, ¡rj 
+egy emailt a kadzsol@xenia.sote.hu c¡mre. A program legutols¢ v ltozata
+let”lthet“ a http://xenia.sote.hu/~kadzsol/rexx/sajat/mailproc.zip c¡mr“l.
+
+
+8. K”sz”netnyilv n¡t s
+
+A szerz“ h l val tartozik P.J. Muellernek ‚s C. Lechleitnernek az rnr.cmd 
+‚s getpop.cmd programok publik l s ‚rt.
+
+
+K d r Zsolt
+05.30.1999.

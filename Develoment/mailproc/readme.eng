@@ -1,0 +1,133 @@
+				MailProc 1.01
+				=============
+
+
+1. Introduction
+
+I have written this program to be able to access my office computer via
+email which is the only way it can communicate with the internet. When 
+MailProc runs on my office computer, it will process the emails containing
+a special subject and reply with the result. During processing each line 
+of the body will be treated as a separate command. These commands will be
+put in a CMD file, which is then passed to the OS/2 command processor. 
+The output (and the errors) of the CMD is redirected to a log file, which 
+is then mailed back to the sender of the command email. In this way you
+can have unlimited access to the computer running MailProc.
+
+
+2. Installation
+
+You can install MailProc on every OS/2 Warp machine with TCP/IP and REXX 
+socket support installed. To be able to use the program you should have a 
+pop account and access to an SMTP server which will accept mail from you. 
+
+Since you are reading this, you have probably already unzipped the zip
+file in a directory. Copy the CMD files to a directory where you want to
+have the program installed. MailProc can be installed on every file system
+OS/2 can access.
+
+The components of this package come with default settings. You must change 
+some basic setting needed to access your email account and specify the 
+subject of the command emails (basically your password to MailProc). Please
+be aware! If you do not change the default, anyone downloading this zip file
+will find it and may gain unlimited access to your computer!!!
+
+To change the default configuration you should open the CMD files with a 
+text editor and change the parameters under the comment line containing 
+"... you must configure...". You may change additional settings located 
+under the comment lines containing "...you may configure...". Do not change
+anything under the line "Do not change anything under this line!!!" unless
+you know what you are doing. 
+
+
+3. Summary of the parameters you must change
+
+3.1 MAILPROC.CMD (main program)
+pop		: The name of the pop server you use to receive email.
+smtp		: The name of the smtp server you use to send email.
+user		: Your pop user id (login name on the pop server).
+pwd 		: Your pop password transformed with convert.cmd to make 
+		  it non readable. 
+
+3.2 GETCMAIL.CMD (get command emails via pop server)
+cmail_subject	: Secret subject of the command email.
+
+3.3 SNDCMAIL.CMD (send reply via smtp server)
+mail_from	: Email address sender reply message (your office email).
+def_mail_to	: Email address default recipient (your home email).
+
+
+4. Summary of the parameters you may change
+
+4.1 MAILPROC.CMD (main program)
+begin_hour1 	: Begin hour for polling emails on workdays.
+end_hour1 	: End hour for polling emails on workdays.
+period1 	: Pause between polls in seconds on workdays.
+begin_hour2 	: Begin hour for polling emails on weekends.
+end_hour2 	: End hour for polling emails on weekends.
+period2 	: Pause between polls in seconds on weekends.
+logfile 	: The name of the main log file located in the LOGS dir.
+dialeron	: Command to dial your isp (should return).
+dialeroff	: Command to stop the dialer.
+
+4.2 GETCMAIL.CMD (get command emails via pop server)
+NewMailFileMask : File mask for command, log and message files.
+max_mail_size   : Maximum size command email.
+tracing		: State extra logging.
+tracefile	: The name of the extra log file in de LOGS directory.
+
+4.3 SNDCMAIL.CMD (send reply via smtp server)
+mailerstring 	: String identifying MailProc.
+def_subj	: Default reply subject.
+tracing 	: State extra logging.
+tracefile	: The name of the extra log file in de LOGS directory.
+
+
+5. Using MailProc
+
+If you correctly configured MailProc, you should be able to start is
+by simply issuing mailproc in its directory. I start it via de Startup 
+folder of my OS/2 system. MailProc will create 3 directories in its
+work directory: WAIT, DONE and LOGS. In WAIT you will find the jobs
+which are waiting to be processed and DONE contains the correctly 
+processed jobs. In the LOGS directory you can find the log files the
+program produces.
+
+A few ideas of command emails before you ask:
+
+Action:			Commands:
+----------------------------------------------------------------------
+Receive a text file	type <file to receive>
+----------------------------------------------------------------------
+Receive a binary file	mpack.exe -s myfile -o file.txt <file to rec.>
+			type file.txt
+
+You can find mpack and munpack on hobbes.nmsu.edu to convert binary
+files to MIME text and vica versa.
+
+
+6. Disclaimer
+
+This is a freeware product and can be used at your own risk. It is highly
+improbable that it can cause any damage. However, you should keep in mind
+that the person, who can execute command emails on your system, has in
+principle unlimited access. He/She can access all the data located on 
+your PC or located on network resources attached to your PC. He/She can
+even format your PC! Keep your subject a secret!
+
+
+7. Contacting the Author
+
+If you have any suggestions, comments or bug reports, please send me an
+email. My address is kadzsol@xenia.sote.hu. You can find the latest version 
+of this package at http://xenia.sote.hu/~kadzsol/rexx/sajat/mailproc.zip.
+
+
+8. Acknowledgments
+
+Special thanks to P.J. Mueller and C. Lechleitner for publishing rnr.cmd 
+and getpop.cmd.
+
+
+Zsolt K d r
+05.30.1999.

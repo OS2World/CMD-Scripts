@@ -1,0 +1,70 @@
+MkBkObj utility V0.21
+
+(C) 1994-95 by Ralf G. R. Bergs <rabe@rwth-aachen.de>
+Released as "Freeware"
+
+
+This is a simple, but nevertheless quite useful REXX script that can
+be used to create program objects for .INF and other documentation files
+in a simple manner.
+
+To use it, install it by starting the INSTALL.CMD script. When asked,
+enter the destination directory (without leading backslash, e.g.
+"g:\tools") and press return. This copies MkBkObj.CMD to the desti-
+nation directory and creates a program object for it on your desktop.
+
+Whenever you want to create a program object for one or several
+.INF or other doc files, you just drag the files from your drives
+object to the "Make Book Object" icon.
+".INF" files get installed with VIEW.EXE as their viewer app, all
+other files get E.EXE as viewer app.
+
+This is released as "Freeware" in the hope that it may be useful.
+However, no warranty whatsoever is given. If it kills your cat,
+bad luck. :-)
+
+
+
+Limitations:
+
+- If an object with the same object ID as the to-be-created object
+  already exists, MkBkObj will fail silently. I don't consider this
+  to be a big problem, since it only happens very seldomly, but if
+  you do think it's a problem for you, feel free to send me mail.
+  Maybe I will re-consider adding a check for this to give the
+  object a unique ID.
+
+
+
+History:
+
+0.21   03/16/95   simplify stem/ext parsing algorithm (thanks to
+                    Paul Gallagher <paulg@resmel.bhp.com.au> for
+                    suggesting this)
+
+0.2    10/23/94   only load 'SysCreateObject' if not yet resident
+                    (thanks to Jason B. Tiller
+                    <jtiller@ringer.jpl.nasa.gov> for suggesting this)
+                  use "lastpos" instead of "pos" to separate extension
+                    (thanks to Jason B. Tiller
+                    <jtiller@ringer.jpl.nasa.gov> for suggesting this)
+                  use "substr" with a default argument (thanks to Jason
+                    B. Tiller <jtiller@ringer.jpl.nasa.gov> for suggesting
+                    this)
+                  improved error check
+                  give usage notice if necessary
+
+0.1    10/17/94   added "MINIMIZED=YES" to install program (thanks to
+                    Don Hawkinson <don.hawkinson@twsubbs.twsu.edu>)
+                  corrected minor bug in calculation of "ext" when
+                    filename had no extension
+
+0.01   09/15/94   initial release
+
+
+Ralf G. R. Bergs
+HÅckeswagener Str. 42
+51647 Gummersbach
+Fed. Rep. of Germany
+phone/fax: +49 2261 21968
+Internet E-mail: rabe@rwth-aachen.de

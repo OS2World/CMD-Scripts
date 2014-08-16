@@ -1,0 +1,9 @@
+New in version 1.01
+
+- Fixed problem not responding to command emails in case of case mismatch
+  of subjects. 
+
+- Increased pause time from 10s to 60s per job. 
+
+
+03.05.2000

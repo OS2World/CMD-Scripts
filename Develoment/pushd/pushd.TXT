@@ -1,0 +1,64 @@
+PUSHD version 2.1    Sept. 22, 1993
+
+This package contains REXX programs for changing directories.
+pushd, popd, and dirs are near-Unix (csh) equivalents.  "d" is
+a replacement for cd (I wish OS/2 would allow aliases, so that
+"cd" would call d.cmd.  I've heard that 4os2 has this behavior).
+
+All the programs allow you to change drives as well as directories.
+You can use the forward slash, '/', as well as the backslash, '\'.
+For directory names with embedded spaces, use quotes around it.
+The pushd,popd,dirs trio access a stack of directories as follows:
+
+pushd pushes your current directory onto the stack and cd's to
+the new directory.  If there is no argument, pushd exchanges
+the top two entries of the stack (and cd's to the new top of
+stack).  The +n option allows you to rotate the stack to the
+nth entry (experiment to see how this works).  The top entry
+in the stack (your current directory) is the 0th entry.
+
+popd pops off the top directory, and cds to the new top of stack.
+The +n option will delete the nth entry from the stack, without
+changing directories.
+
+dirs just shows you what the stack looks like.
+
+Examples (C is FAT, D & E are HPFS):
+    [E:\] pushd /tmp
+    e:\tmp e:\
+
+    [E:\tmp] pushd c:/dos
+    c:\DOS e:\tmp e:\
+
+    [C:\DOS] pushd
+    e:\tmp c:\DOS e:\
+
+    [E:\tmp] popd +1
+    e:\tmp e:\
+
+    [E:\tmp] pushd d:\os2\mdos
+    d:\os2\mdos e:\tmp e:\
+
+    [D:\os2\mdos] pushd
+    e:\tmp d:\os2\mdos e:\
+
+    [E:\tmp] pushd +2
+    e:\ e:\tmp d:\os2\mdos
+
+    [E:\] d apps
+
+    [E:\apps] dirs
+    e:\apps e:\tmp d:\os2\mdos
+
+An environment variable called PUSHD is used to save the
+directory stack.  This method allows you to maintain separate
+directory stacks in each window.  This is considered a *feature*,
+not a *bug*! :-).
+
+Ken Neighbors
+wkn@leland.stanford.edu
+
+History:
+1.0  pushd and popd written
+2.0  added dirs, +n option, and comments
+2.1  added support for directory names with embedded spaces

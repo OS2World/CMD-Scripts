@@ -1,0 +1,58 @@
+Input file: Test4bitPalette_PC.tif
+Byte Order: LE - "little Endian" "Intel"
+
+Image#  Tag#  Type NValues Value/Offset
+     1   254     4       1            0
+     1   256     4       1           50
+     1   257     4       1           50
+     1   258     3       1 04000000 Hex
+     1   259     3       1 01000000 Hex
+     1   262     3       1 03000000 Hex
+     1   273     4       1          104
+     1   277     3       1 01000000 Hex
+     1   278     4       1           50
+     1   279     4       1         1250
+     1   282     5       1         1354
+     1   283     5       1         1362
+     1   284     3       1 01000000 Hex
+     1   296     3       1 01000000 Hex
+     1   320     3      48 08000000 Hex
+ 
+ 
+Tag   256: "NElements" 50
+Tag   257: "NLines" 50
+Tag   258: "Bits per Channel"
+               Channel #Bits
+                     1     4
+Tag   259: "Compression" 1   (No Compression).
+Tag   262: "Photometric Interpretation" 3   (Color table [palette] used).
+Tag   273: "Strip Offsets"
+               Strip OffsetByte
+                   1        104
+Tag   277: "Samples (Channels) per Pixel" 1
+Tag   278: "Rows per Strip" 50
+Tag   279: "Strip Byte Counts"
+               Strip     #Bytes
+                   1       1250
+Tag   282: "Number of Pixels per Resolution Unit, X axis" 1
+Tag   283: "Number of Pixels per Resolution Unit, Y axis" 1
+Tag   284: "Planar Configuration" 1   (components for each pixel stored contiguously).
+Tag   296: "Resolution Unit" 1   (No resolution unit specified).
+Tag   320: "Color palette."
+               Entry#    Red Green  Blue
+                   0 57344  4096  9216
+                   1 56576 40192 19200
+                   2 40960  2560 21504
+                   3 24576  6400 43008
+                   4 41216 28160 38400
+                   5 63232 54528  6400
+                   6 11008  5888 58112
+                   7 57088 41216 47616
+                   8 60416 24320 27136
+                   9 26368 22784 60416
+                  10 43520 38400 58112
+                  11 59904 55552 60416
+                  12 24832 55296  4608
+                  13  5888 62720  1024
+                  14 44544 42752 15616
+                  15 38656 49920  8448

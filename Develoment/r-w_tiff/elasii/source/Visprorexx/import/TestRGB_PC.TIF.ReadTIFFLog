@@ -1,0 +1,41 @@
+Input file: TestRGB_PC.TIF
+Byte Order: LE - "little Endian" "Intel"
+
+Image#  Tag#  Type NValues Value/Offset
+     1   254     4       1            0
+     1   256     4       1           50
+     1   257     4       1           50
+     1   258     3       3 08000000 Hex
+     1   259     3       1 01000000 Hex
+     1   262     3       1 02000000 Hex
+     1   273     4       1           14
+     1   277     3       1 03000000 Hex
+     1   278     4       1           50
+     1   279     4       1         7500
+     1   282     5       1         7514
+     1   283     5       1         7522
+     1   284     3       1 01000000 Hex
+     1   296     3       1 02000000 Hex
+ 
+ 
+Tag   256: "NElements" 50
+Tag   257: "NLines" 50
+Tag   258: "Bits per Channel"
+               Channel #Bits
+                     1     8
+                     2     8
+                     3     8
+Tag   259: "Compression" 1   (No Compression).
+Tag   262: "Photometric Interpretation" 2   (RGB data).
+Tag   273: "Strip Offsets"
+               Strip OffsetByte
+                   1         14
+Tag   277: "Samples (Channels) per Pixel" 3
+Tag   278: "Rows per Strip" 50
+Tag   279: "Strip Byte Counts"
+               Strip     #Bytes
+                   1       7500
+Tag   282: "Number of Pixels per Resolution Unit, X axis" 133
+Tag   283: "Number of Pixels per Resolution Unit, Y axis" 133
+Tag   284: "Planar Configuration" 1   (components for each pixel stored contiguously).
+Tag   296: "Resolution Unit" 2   (inches).
