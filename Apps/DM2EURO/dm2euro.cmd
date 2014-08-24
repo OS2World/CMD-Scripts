@@ -1,5 +1,8 @@
-/* REXX-Programm zur Umrechnung  DM --> Euro   */
-/* Hermann Mahr, h_mahr@hrzpub.tu-darmstadt.de */   
+/* Name: DM2EURO                                       */
+/* Description: REXX program to conver DM --> Euro     */
+/* Author: Hermann Mahr, h_mahr@hrzpub.tu-darmstadt.de */
+/* License: Freeware                                   */
+
 numeric digits 12
 u=1.95583
 parse arg DM
@@ -14,7 +17,7 @@ do
   exit
 end
 
-/* Fr die interne Umrechnung ein bei der Eingabe eventuell    */      
+/* FÂr die interne Umrechnung ein bei der Eingabe eventuell    */      
 /* verwendetes Dezimalkomma durch einen Dezimalpunkt ersetzen. */      
 kk=Pos(",",DM)
 if kk<>0 then DM=OverLay(".",DM,kk)
@@ -31,7 +34,7 @@ end
 Euro=DM/u
 Euro=Format(Euro, ,2) 
                
-/* Fr die Bildschirmausgabe Dezimalpunkt */      
+/* FÂr die Bildschirmausgabe Dezimalpunkt */      
 /* durch Dezimalkomma ersetzen.           */      
 kp=Pos(".",u)
 if kp<>0 then u=OverLay(",",u,kp)
