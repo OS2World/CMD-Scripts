@@ -1,0 +1,27 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: REXXCAT.ZIP
+       Short Description: Rexx CueCat scan decoder
+        Long Description: While not having the full "functionality" of CRQ, RexxCat will at least let you use CueCat as a barcode reader.  Corrected for UA5 codes.
+
+      Proposed directory
+           for placement: /pub/os2/dev/rexx
+
+               Your name:
+           Email address:
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: (none)
+
+      Would you like the
+   contact email address
+    included in listings? No
+
+Operating System/Version: OS/2 (Only tested on Warp 4)
+ Additional requirements: Rexx
+
+                Replaces: (none)
+
+
+

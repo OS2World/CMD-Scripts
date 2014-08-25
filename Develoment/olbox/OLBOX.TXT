@@ -1,0 +1,128 @@
+Listbox in OREXX
+1999 (C) Antal Koos
+-------------------
+
+This is a free software.
+This software is WITHOUT ANY WARRANTY and you use it AT YOUR OWN RISK.
+The author is not liable for any damages arising out of using the software.
+You must agree to these terms or DO NOT USE this software.
+
+
+VERSION
+-------
+ 0.98	The 1st release.
+
+ 0.99   Methods 'SetDefaultItem','SetHeight' are corrected.
+
+ 1.00   Multiply selection supported.New methods: SetMulSelection,GetFirstSelected,
+        GetnextSelected.
+        WARNING:The return value of the 'Execute' method are changed!
+
+
+
+METHODS:
+--------
+ lb=Init( list.[,nlines][,x][,y][,width])
+ ----------------------------------------
+
+ list.0 = the number of item strings
+ list.1 ... = the item strings
+ nlines = the number of the visible lines
+ x, y   =  upper left coordinate
+ width  = the displayed length of item strings
+
+ Init returns egy OLBOX object.
+
+
+ str=lb~LibVersion
+ -----------------
+ Returns the version string.
+
+
+ idx=lb~String
+ -------------
+ Returns the last selected item number.
+
+
+ lb~SetCorner( x, y)
+ -------------------
+ Set the listbox upper left position.
+
+
+ lb~SetList( list.[,width])
+ --------------------------
+ Set the listbox items and width.
+
+
+ list.= lb~GetList
+ -----------------
+ Returns a copy of the listbox strings.
+
+
+ lb~SetHeight( nlines)
+ ---------------------
+ Set the number of the visible lines.
+
+
+ rtcd=lb~Execute
+ ------------------
+ Runs the listbox process.
+ Returns: .true/.false if the pressed key was Enter/Esc.
+ On pressing Esc all the selected items will be deselected.
+
+
+ lb~Refresh
+ ----------
+ Refresh the displayed listbox.
+
+
+ lb~SetDefaultItem( def)
+ -----------------------
+ Set the default selected item.
+
+
+ lb~SetUserFunc( key, cstr)
+ --------------------------
+ Set instructions to be executed when a key pressed.
+ The cstr can be one or more REXX instruction which will be executed by the
+ INTERPRET command. You can make a reference to LD. ( Listbox Descriptor) and 
+ item. (item.0= number of items, item.1= the 1st string) structures.
+ The displayed listbox will be refreshed if the following is implied in cstr:
+ 'refresh=.true'
+ See TMENU.CMD and PKEY.CMD for more info!
+
+
+ lb~UnsetUserFunc( key)
+ ----------------------
+ Reset the (key,cstr) pair.
+
+
+ lb~Sort
+ -------
+ Simple sorting for the listbox strings.
+
+
+ lb~SetMulSelection( flag [,skey])
+ ---------------------------------
+ Enables or disables the multiply selection mode and set the selection key.
+ If flag is .true then multiply selection enabled otherwise disabled.
+ The default value is disabled.
+ Skey is the selection key; the default is Space.
+
+
+ found.=lb~GetFirstSelected
+ --------------------------
+ Get the first selected item.
+ found.index = the item number; found.str = the item string.
+ Found.index is 0 if none is selected.
+
+
+ found.=lb~GetNextSelected
+ -------------------------
+ Get the next selected item.
+ found.index = the item number; found.str = the item string.
+ Found.index is 0 if there are no more selected items.
+
+-----------------------------------------------------------------------------------
+Contact: akoos@mvm.hu
+
