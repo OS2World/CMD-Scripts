@@ -1,0 +1,5 @@
+I got this utility from ftp-os2.nmsu.edu, but since it seems to have
+disappeared, here it is again. This selectively deletes the applets that
+come with OS/2 2.0. It is written in Visual REXX, and therefore requires
+the VREXX DLLs from ftp-os2.nmsu.edu.
+

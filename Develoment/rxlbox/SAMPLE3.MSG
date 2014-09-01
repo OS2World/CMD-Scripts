@@ -1,0 +1,104 @@
+; -------- sample message file for the RXLBOX sample no. 3
+;
+
+; message 6 used by: MINIMENU.CMD, SETVARS.INI
+6=CID Installation v3.00
+
+
+; -------- messages for RXLBOX.CMD
+;
+1801=Invalid usage: Parameter missing
+1802=Inputfile "%1" not found
+1803=Inputfile "%1" is empty
+1804=Error opening the inputfile "%1"
+1805=The queue "%1" does not exist
+1806=The queue "%1" is empty
+1807=The line %1 of the menu description is invalid (The line reads: %2)
+1808=Menu "%1" not found
+1809=Menu "%1" is empty
+1810=Line %1: Menu %1 is already defined
+1811=
+1812=Line %1: Macroname to long
+1813=Invalid menu keyword found: "%1"
+1814=line %1: Macro "%2" is already defined
+1815=Line %1: Keyword missing
+1816=Line %1: Invalid MENUITEM/ACTION keyword found
+1817=Line %1: Invalid REXX-Statement, the line reads "%2"
+1818=Line %1: Helptext topic "%1" already defined
+1819=Line %1: Helptext topic is to large (max. 14 lines)
+1820=Line %1: The name of a menu can not begin with "!" or "_"
+1821=The parameter "%1" is invalid
+
+1899=%1 error in line %2, rc = %3 %4
+
+1900=Checking the parameter ...
+1901=Reading the menu description ...
+1902=Creating the menu structure ...
+1903=Preparing the menu ...
+1904=Fehler: %1
+1910=List of all menus found in
+1911=Choose a menu from the list
+1912=Your choice:
+1913=Press any key to continue
+1914=List of all macros found in
+1915=*** Keyword "%1" not defined for this menu ***
+1916=List of all menus called so far
+1917=Choose a macro from the list
+1918=error evaluating "%1"
+
+; -------- messages for SETVARS.INI
+; 2001=
+;
+2001=MiniMenu - Mini menu for the CID installation
+2002=Choose a file to edit; use F10 to exit
+2003=Your choice:
+2004=Press any key to continue ...
+2005=Press any key to continue ...
+2006=Select the configuration for this PC
+2007=Press F10 if done
+2008=Machine type is
+2009=Location is
+2010=Language is
+2011=Select the type of this machine
+2012=Select the location for this machine
+2013=Select the language for this machine
+
+2014=Harddisk is
+2015=Select the harddisk for this machine
+2016=Change the hardware specifications (only valid for Desktop PCs!)
+2017=Display adapter is
+2018=Network adapter is
+2019=CD ROM drive is
+2020=Sound card is
+
+2021=Select the display adapter for this machine
+2022=Select the network adapter for this machine
+2023=Select the CD-ROM drive for this machine
+2024=Select the Sound card for this machine
+
+2025=Enter the IP ID for this machine (e.g. 154)
+2026=The current IP ID is
+2027=Accept the IP ID and leave the menu
+
+2028=Error: The IP id must be a numeric value in the range 0 to 254!
+2029=Warning: Configuration has changed. Setting %1 to "%2".
+2030=Reading the messages from the message file ...
+2031=Change serial number and type number
+2032=Enter the data for this PC
+2033=Machine type is
+2034=Model number is
+2035=Serial number part 2 is
+2036=Serial number part 1 is
+2037=Accept the values and leave the menu
+2038=Highlight the value to change, enter the new value and press <ENTER>
+2039=Enter the machine type (e.g. P133, P166) and press <ENTER>
+2040=Enter the model number (e.g. 12345) and press <ENTER>
+2041=Enter the serial number part 1 (e.g. 55) and press <ENTER>
+2042=Enter the serial number part 2 (e.g. 12345) and press <ENTER>
+2043=Choose this entry to accept the values and leave the menu
+2044=Accept the values and leave the menu
+
+; -------- messages
+; 2501=
+;
+

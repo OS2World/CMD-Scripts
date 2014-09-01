@@ -1,0 +1,36 @@
+RxLogin version 1.0b2 - Brought to you by darkpoet productions, inc.
+        ------------------------------------------------
+
+RxLogin is a really simple way of securing your OS/2 machine - the program
+is designed to simply keep prompting for a password until the correct one
+is entered.
+
+The program will not echo the characters typed - instead, one '*' is
+displayed for each key pressed. The program will keep accepting letters
+until the enter key is pressed, allowing for password strings that can be
+as long as needed.
+
+RxLogin can take one parameter - the password can be passed to it on the
+command line. If there is no command line parameter, rxLogin will prompt
+the user for one to use.
+
+Usage:
+
+  rxLogin [password]
+    [password]          : optional text password
+
+I would suggest installing this in your CONFIG.SYS with a line similar to:
+
+    RUN=E:\BIN\rxLogin HELPME!
+
+which would prevent boot-up from completing until the password (HELPME!) is
+entered.  Just make sure you don't forget the password.  *grin*
+
+Since Digital Productions is no longer supporting this program, I've taken it
+upon myself to revamp the coding, add color, and maybe put in some more options
+as time progresses.  This program is emailware.  All I ask if you use this, is
+send me mail, stating how you use it, what you'd like to see added into it, or
+something, just so I know what's happening with this program.  You can contact
+me at darkpoet@bellsouth.net, and my web page/zine will be coming up soon, at
+http://www.pcrealm.net/~darkpoet.
+

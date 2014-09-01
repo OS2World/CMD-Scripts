@@ -1,0 +1,270 @@
+About RxMulch
+=============
+
+RxMulch is a simple REXX-program which allows for counting the occurrences of a
+string in a file and for replacing strings in a file.
+
+You may tell RxMulch the strings on the command-line or use a simple ASCII-file
+which may contain several search- and replacement-strings (each being on its
+own line).
+
+It is also possible to use RxMulch as a function for other REXX-programs.
+
+Possible usages:
+
+  - replacing (multiple) strings in a file,
+  - replacing strings in a file (e.g. e-mail-address that changed),
+  - removing/adding blank-lines from/to files, etc.
+  - replacing control-characters with their hexadecimal- or decimal-values
+    shown as a clear string and vice-versa (nice to analyze binary values in
+    control-files),
+  - patching a string in a file without DEBUG,
+
+You can undo changes by merely preceding the switch or the controlfile with a
+minus (-).
+
+RxMulch always shows you the number of occurrences resp. changes which took
+place.
+
+Hint: information for the user is being displayed on STDERR:, therefore messages
+      do not interfere with pipes if you are using STDIN and STDOUT as source
+      and target.
+
+You can use control-files to define the search and replace strings, see
+sample-files:
+
+              ASC2UNIX.CTL (change CRLF to LF)
+
+              COMMCHAR.CTL (show control-characters with their communication
+                            names; leave CRLF unchanged to make the file
+                            editable)
+
+              CRLF.CTL     (remove empty lines once, i.e. CRLFCRLF -> CRLF)
+
+              CTL_CHAR.CTL (show control-characters with their control-sequences
+                            names; leave CRLF unchanged to make the file
+                            editable)
+
+              DEC_CHAR.CTL (show control-characters with their decimal values;
+                            leave CRLF unchanged to make the file editable)
+
+              HEX_CHAR.CTL (show control-characters with their hexadecimal
+                            values; leave CRLF unchanged to make the file
+                            editable)
+
+              HTML.CTL (example for exchanging HTML/SGML-entities: German
+                        umlauts with codepage 850)
+
+              VENTURA.CTL   (make Ventura CHP-files editable; they contain
+                             absolute path-names; don't forget the STY-file)
+
+
+rxMulch.cmd: program to find/replace characters (strings) in file; allows
+             definition of hexadecimal or decimal value of single
+             characters
+
+usage:
+
+ rxMulch [infile] [outfile] {[-]controlfile | /[-]switch}
+   infile:      if missing from STDIN:
+
+   outfile:     if missing, RxMulch will replace infile;
+                if no infile than output to STDOUT:
+
+   controlfile OR switch MUST be present:
+
+   controlfile: change for every search-string/replace-string line the
+                'search-string' into 'replace-string'; if more than one
+                search/replace-line is given, subsequent search/replaces
+                start from the beginning.
+                If the controlfile is preceded with a minus (-) the
+                meaning of the 'search-string' and 'replace-string' is
+                swapped.
+                If a line is empty or if there is a semi-colon (;) at the very
+                first column, the line is treated as a comment.
+
+
+   switch:      If the switch is preceded with a minus (-) the meaning of
+                the 'search-string' and 'replace-string' is swapped.
+
+                'C'search-string/replace-string
+                ... Change all occurrences of 'search-string' to
+                    'replace-string'.
+
+                '[L[1|2|3|4|5]][H[1|2]]'
+                ...  change low-/high-characters to any of the following
+                     representations:
+
+                     L: change all low-char values c2d(0-32)
+                         L .... defaults to L1
+                         L1 ... char(0-32) to decimal
+                         L2 ... char(0-32) to hexadecimal
+                         L3 ... char(0-32) to control-sequence
+                         L4 ... char(0-32) to abbreviated comm-characters
+                         L5 ... char(0-32) to all representations above
+
+                     H: change all high-char values c2d(128-255)
+                         H  ... defaults to H1
+                         H1 ... char(128-255) to decimal
+                         H2 ... char(128-255) to hexadecimal
+
+                     The appropriate search-string/replace-string pairs are
+                     generated automatically.
+
+                'F'search-string/replace-string
+                ... count the number of occurrences of 'search-string'
+
+   search-string/replace-string:
+               (delimiter)search-values(delimiter)replace-values(delimiter)
+
+         delimiter:
+                very first character in search-string/replace-string
+
+         search-values
+         replace-values:
+                any ASCII-string intermixed with the following escape-codes
+
+                escape-codes:
+                    @C    ... CR
+                    @L    ... LF
+                    @T    ... TAB
+                    @E    ... ESC
+                    @Z    ... CTL-Z
+                    @@    ... @ (escape for @)
+                    @Xnn
+                    @Hnn  ... char with the hexadecimal of value 'nn'
+                    @Dnnn ... char with the decimal value 'nnn'
+
+RxMulch can be called as a function from another REXX-program, e.g.
+
+   some_variable = RxMulch(REXXstring, "[/][-]switch")
+
+examples:
+
+    rxMulch infile outfile controlfile
+        ... change 'infile' according to 'controlfile', place results into
+            'outfile'
+
+
+
+    rxMulch infile controlfile
+        ... change 'infile' according to 'controlfile', place results into
+            'infile' (i.e. replace 'infile' itself)
+
+
+
+    rxMulch infile crlf.ctl
+        ... remove empty lines (i.e. CRLFCRLF -> CRLF)
+
+or via the commandline:
+
+    rxMulch infile /C.@c@l@c@l.@c@l.
+        ... change 'infile' according to commandline switch (replace
+            consecutive carriage-return/linefeeds with one
+            carriage-return/linefeed, i.e. remove one empty line), replace
+            'infile'; could be also expressed as:
+                  rxMulch infile /C.@xd@xa@xd@xa.@xd@xa.
+                  rxMulch infile /C!@d13@d10@d13@d10!@d13@d10!
+                  rxMulch infile /C/@d13@d10@d13@d10/@c@l/
+
+
+
+    rxMulch infile -crlf.ctl
+        ... add an empty line after each line (i.e. CRLF -> CRLFCRLF)
+
+or via commandline:
+
+    rxMulch infile /-C.@c@l@c@l.@c@l.
+        ... change 'infile' according to commandline switch (replace a
+            carriage-return/linefeed with two consecutive
+            carriage-return/linefeeds, i.e. insert an empty line after each
+            line), replace 'infile'; could be also expressed as:
+                  rxMulch infile /C,@c@l,@c@l@c@l,
+                  rxMulch infile /C=@x0d@x0a=@x0d@x0a@x0dx@0a=
+                  rxMulch infile /C=@d13@d10=@d13@d10@x0dx@0a=
+
+
+
+    rxMulch infile asc2unix.ctl
+        ... change an ASCII-text file to Unix-style (i.e. CRLF -> LF)
+
+
+
+    rxMulch infile -asc2unix.ctl
+        ... change a Unix-text file to ASCII-style (i.e. LF -> CRLF)
+
+
+
+
+    rxMulch < some_in_file > some_out_file controlfile
+        ... change 'some_in_file' according to 'controlfile', place results
+            into 'some_out_file'; 'some_in_file' and 'some_out_file' are
+            redirected ('<' and '>'). rxMulch therefore can be used in pipes
+            too.
+
+
+
+    rxMulch infile outfile1 /C.Microsoft Excel.Lotus 1-2-3.
+        ... change 'infile' according to commandline switch (replace all
+            occurrences of 'Microsoft Excel' with 'Lotus 1-2-3'), place
+            results into 'outfile1'
+
+
+
+    rxMulch outfile1 outfile2 /-C.Microsoft Excel.Lotus 1-2-3.
+        ... change 'outfile1' according to commandline switch (replace all
+            occurrences of 'Lotus 1-2-3' with 'Microsoft Excel', note the
+            minus (-) right before the switch-character), place results into
+            'outfile2'; could be also expressed as:
+                  rxMulch outfile1 outfile2 /C.Lotus 1-2-3.Microsoft Excel.
+
+
+    rxMulch infile /C.;.@c@l.
+        ... change 'infile' according to commandline switch (replace
+            semicolons (;) with a carriage-return/linefeed), replace
+            'infile'; could be also expressed as:
+                  rxMulch infile /C.;.@xd@xa.
+                  rxMulch infile /C.;.@x0d@x0a.
+                  rxMulch infile /C.;.@d13@d10.
+
+
+
+    rxMulch infile /C=@x00@x00@x00@x00=@x01@x01@x01@x01=
+        ... change 'infile' according to commandline switch (replace all
+            hexadecimal strings of 0x00000000 with 0x01010101), replace
+            'infile'; could be also expressed as:
+                  rxMulch infile /C=@x0@x0@x0@x0=@x1@x1@x1@x1=
+                  rxMulch infile /C/@d0@d0@d0@d0/@d1@d1@d1@d1/
+
+
+
+    rxMulch infile /F.OS/2.
+        ... count occurrences of string 'OS/2' in 'infile'
+
+
+
+    rxMulch infile /F.@c@l@c@l.
+        ... count number of lines in 'infile', which are immediately
+            followed by a blank line
+
+
+
+examples for calling RxMulch from a REXX-procedure:
+
+    string1 = 'this is nice'
+    string2 = RxMulch(string1, '/c.this.that.')  /* change 'this' to 'that' */
+        ... string2 = 'that is nice'
+    string2 = RxMulch(string2, '/-c.this.that.') /* change 'that' to 'this' */
+        ... string2 = 'this is nice'
+    occurrences = RxMulch(string2, 'f.this.')    /* count 'this' in string2 */
+        ... occurrences = 1
+
+
+
+Rony G. Flatscher
+Wirtschaftsuniversitaet Wien
+Vienna/Austria/Europe
+1996-11-25
+------------------------------------------------------------
+1996-11-25 Version taking advantage of Object Rexx (usage of CHANGESTR yields
+           performance increases of factor 50 and more), if installed

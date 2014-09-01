@@ -1,0 +1,581 @@
+What follows, is a *complete* ASCII-list of the figures I submitted Miller &
+Freeman (producer of "OS/2 Developer") together with my article for this year's
+"REXX Report, Summer '95", September 95).  So it includes also the tables for 
+all documented keyword/value pairs of the discussed WPS object classes.
+
+
+   REXX Report    Issue: Summer '95, page 42-51
+   Article title: The Workplace Shell: Objects to the Core     
+   Author:        Rony G. Flatscher
+   Description:   utilizing REXX to communicate with the Workplace Shell
+
+   Program requirements: OS/2 Warp (well, should work under 2.11 too :) )
+
+
+The figures representing the REXX-programs are in separate files of this 
+archive.
+
+Also, I added a little REXX-script which allows to start seamless enhanced
+Windows sessions from REXX (the article itself should explain enough to be able
+to deal with all aspects of the WPS object classes discussed therein).
+                                                               
+Hope this helps some of you.
+
+---rony, 95-10-07
+
+===================== cut here for Figure 1 - begin ================
+SOMObject
+   SOMClass
+   SOMClassMgr
+** WPObject
+      WPAbstract
+           WPClock
+           WPCountry
+         * WPDisk
+           WPKeyboard
+         * WPLaunchPad
+           WPMouse
+         * WPPalette
+            * WPColorPalette
+            * WPFontPalette
+            * WPSchemePalette
+           WPPower
+         * WPPrinter
+            * WPRPrinter
+        ** WPProgram
+        ** WPShadow
+              WPNetLink
+           WPShredder
+           WPSound
+           WPSpecialNeeds
+           WPSpool
+           WPSystem
+           WPWinConfig
+      WPFileSystem
+           WPDataFile
+              WPBitmap
+              WPIcon
+              WPMet
+              WPPif
+              WPPointer
+            * WPProgramFile
+                 WPCommandFile
+        ** WPFolder
+              WPDesktop
+              WPDrives
+              WPMinWinViewer
+              WPNetgrp
+              WPNetwork
+              WPRootFolder
+            * WPServer
+              WPSharedDir
+              WPStartup
+              WPTemplates
+      WPTransient
+           WPJob
+           WPPdr
+           WPPort
+           WPQdr
+
+---------------------------------------------------------------------
+Figure 1, "The Workplace Object Class Hierarchy."
+===================== cut here for Figure 1 - end ==================
+
+
+
+
+===================== cut here for Figure 2 - begin ================
+
+KEYNAME      ! VALUES                ! REMARKS
+--------------------------------------------------------------------------------
+CCVIEW       ! DEFAULT, YES, NO      ! Create new view on user open ?
+
+DEFAULTVIEW  ! SETTINGS, DEFAULT, id ! Set defautlview on user open.
+
+HELPLIBRARY  ! filename              ! Set the help library.
+
+HELPPANEL    ! id                    ! Set help id.
+
+HIDEBUTTON   ! YES, NO               ! Use hide-button on window?
+
+ICONFILE     ! filename              ! Set icon.
+
+ICONPOS      ! x,y                   ! Set icon position in folder
+                                     ! in percent coordinates.
+
+ICONRESOURCE ! id,module             ! Set DLL and icon ID within.
+
+MINWIN       ! HIDE, VIEWER, DESKTOP ! Determine where to minimize.
+
+NOCOPY       ! YES, NO               ! Copy of object not allowed?
+
+NODELETE     ! YES, NO               ! Deletion of object not allowed?
+
+NODRAG       ! YES, NO               ! Dragging of object not allowed?
+
+NODROP       ! YES, NO               ! Dropping on object not allowed?
+
+NOLINK       ! YES, NO               ! Creating links of object not allowed?
+
+NOMOVE       ! YES, NO               ! Moving of object not allowed?
+
+NOPRINT      ! YES, NO               ! Printing of object not allowed?
+
+NORENAME     ! YES, NO               ! Renaming of object not allowed?
+
+NOSETTINGS   ! YES, NO               ! Opening of settings page not allowed?
+
+NOSHADOW     ! YES, NO               ! Same as NOLINK
+
+NOTVISIBLE   ! YES, NO               ! Object not visible on desktop ?
+
+OBJECTID     ! <name>                ! Any unique string preceeded with a "<"
+                                     ! and terminated with a ">".
+
+OPEN         ! SETTINGS, DEFAULT     ! Opening settings view or default view.
+
+TEMPLATE     ! YES, NO               ! Object is a template?
+
+TITLE        ! Title                 ! Set title of the object.
+---------------------------------------------------------------------
+Figure 2, "The Setup String Parameters for WPObject."
+===================== cut here for Figure 2 - end ================ =
+
+
+
+
+
+===================== cut here for Figure 3 - begin ============== =
+
+   REXX-FUNCTION                 ! Win*-API-CALL
+-----------------------------------------------------------
+
+Querying, installing and removing WPS object classes:
+
+ * SysQueryClassList             ! WinEnumObjectClasses()
+   SysRegisterObjectClass        ! WinRegisterObjectClass()
+   SysDeregisterObjectClass      ! WinDeregisterObjectClass()
+
+
+Creating, manipulating, deleting WPS objects:
+
+   SysCopyObject                 ! WinCopyObject()
+ * SysCreateObject               ! WinCreateObject()
+   SysCreateShadow               ! WinCreateShadow()
+ * SysDestroyObject              ! WinDestroyObject()
+ * SysMoveObject                 ! WinMoveObject()
+   SysOpenObject                 ! WinOpenObject()
+   SysSaveObject                 ! WinSaveObject()
+ * SysSetObjectData              ! WinSetObjectData()
+---------------------------------------------------------------------
+Figure 3, "The REXX WPS-interface functions being passthrus of their
+corresponding Win-API-calls. Cf. the REXX online help."
+===================== cut here for Figure 3 - end ================ =
+
+
+
+===================== cut here for Figure 4 - begin =================
+/* WPS_QCLS.CMD: query and display installed WPS object classes     */
+
+/* load OS/2's RexxUtil functions, if not loaded already            */
+IF RxFuncQuery('SysLoadFuncs') THEN
+DO
+    CALL RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+    CALL SysLoadFuncs
+END
+
+CALL SysQueryClassList "ObjCls."   /* get a list of object classes  */
+CALL sort                          /* sort in alphabetic order      */
+
+SAY "The following WPS object classes are installed:"
+DO i = 1 TO ObjCls.0
+   PARSE VAR ObjCls.i classname classDLL
+   SAY RIGHT(i, 4) LEFT(classname" ", 35, ".") classDLL
+END
+EXIT
+
+/* one of Knuth's algorithms; sort object classes in stem ObjCls.   */
+SORT: PROCEDURE EXPOSE ObjCls.
+   M = 1                           /* define M for passes           */
+   DO WHILE (9 * M + 4) < ObjCls.0
+      M = M * 3 + 1
+   END
+
+   DO WHILE M > 0                  /* sort stem                     */
+      K = ObjCls.0 - M
+      DO J = 1 TO K
+         Q = J
+         DO WHILE Q > 0
+            L = Q + M
+            /* make comparisons case-independent                    */
+            IF TRANSLATE(ObjCls.Q) <<= TRANSLATE(ObjCls.L) THEN
+               LEAVE
+            tmp      = ObjCls.Q    /* switch elements               */
+            ObjCls.Q = ObjCls.L
+            ObjCls.L = tmp
+            Q = Q - M
+         END
+      END
+      M = M % 3
+   END
+   RETURN
+---------------------------------------------------------------------
+Figure 4, "Querying installed WPS object classes."
+===================== cut here for Figure 4 - end ===================
+
+
+
+
+
+===================== cut here for Figure 5 - begin =================
+/* WPS_NDEL.CMD: make all WPS-default objects non-deletable         */
+
+/* query all WPS-OBJECTID's (OS2.INI, app; "PM_Workplace:Location") */
+CALL SysIni "USER", "PM_Workplace:Location", "ALL:", "object_id"
+
+leadin_string = "<WP_"     /* work on WPS-objects only              */
+setup = "NODELETE=YES;"    /* setup string: change to not deletable */
+SAY "Trying to make all WPS-objects non-deletable:"; SAY
+
+DO i = 1 TO object_id.0    /* loop over all entries                 */
+   IF ABBREV(object_id.i, leadin_string) THEN   /* WPS-OBJECTID ?   */
+   DO
+      ok = SysSetObjectData(object_id.i, setup) /* change state     */
+      SAY LEFT(object_id.i || " ", 57, ".") WORKED(ok)
+   END
+END
+EXIT                                    /* end of program           */
+
+
+/* procedure to indicate successful/not successful                  */
+WORKED: PROCEDURE
+   IF ARG(1) THEN RETURN "successful."
+             ELSE RETURN "*** NOT succesful ***"
+---------------------------------------------------------------------
+Figure 5, "Making default WPS-objects non-deletable."
+===================== cut here for Figure 5 - end ===================
+
+
+
+
+
+===================== cut here for Figure 6 - begin =================
+/* WPS_TITL.CMD: show setting a title                               */
+
+/* setting a title with SysCreateObject                             */
+title = "This is a title,^this is the second line;^this the third !"
+objectid     = "<RGF Testfolder for title>"
+setup_string = "ICONPOS=15,30;OBJECTID=" || objectid || ";"
+
+ok = SysCreateObject("WPFolder",,       /* instance of WPFolder     */
+                     title,,            /* object title             */
+                     "<WP_DESKTOP>",,   /* location: desktop        */
+                     setup_string,,     /* setup string             */
+                     "F")               /* fail, if object exists   */
+SAY "creating:" objectid "-" worked(ok)
+"@PAUSE"
+
+/* note how to escape a semi-colon which usually ends a key-value   */
+setup_title = "This is a title,^this is the 2nd line^;^this the 3rd!"
+
+setup_string = "TITLE=" || setup_title || ";"
+ok = SysSetObjectData(objectid, setup_string)       /* change title */
+SAY "changing title:" objectid "-" worked(ok)
+"@PAUSE"
+
+SAY "cleaning up..."
+ok = SysDestroyObject(objectid)         /* delete folder            */
+SAY "destroying (deleting):" objectid "-" worked(ok)
+
+EXIT
+
+/* procedure to indicate successful/not successful                  */
+WORKED: PROCEDURE
+   IF ARG(1) THEN RETURN "successful."
+             ELSE RETURN "*** NOT succesful ***"
+---------------------------------------------------------------------
+Figure 6, "Setting an object title at creation time and with SysSetObjectData."
+===================== cut here for Figure 6 - end ===================
+
+
+
+
+
+===================== cut here for Figure 7 - begin ============== =
+
+KEYNAME      ! VALUES                ! REMARKS
+--------------------------------------------------------------------------------
+ALWAYSSORT   ! YES, NO               ! Sort always ?
+
+BACKGROUND   ! N,M,S,B,C             ! Set folder background, characters in this
+                                     ! list represent:
+
+             ! N                     ! Image file name.
+             ! M                     ! Image mode, one of three characters:
+             !                       ! N (normal), T (tiled) or S (scaled).
+             ! S                     ! Scaling factor.
+             ! B                     ! Background type, one of two characters:
+             !                       ! I (image) or C (color only)
+             ! C                     ! Background color in RGB notation.
+
+             ! Example with a scaled bitmap:
+             ! "BACKGROUND=D:\BITMAP\WARP.BMP,S,3,I"
+
+             ! Example with cyan-like color background:
+             ! "BACKGROUND=(none),,,C,28 233 233"
+
+DEFAULTVIEW  ! ICON, TREE, DETAILS   ! Default view of container.
+
+DETAILSCLASS ! classname             ! Set object class for details.
+
+DETAILSFONT  ! size.font_name        ! Set font for detail view (e.g. 10.Helv).
+
+DETAILSVIEW  ! s1[,s2,...sn]         ! Set details view to ... (see WPS docs)
+
+ICONFONT     ! size.font_name        ! Set font for icon view (e.g. 10.Helv).
+
+ICONNFILE    ! index,filename        ! Set "open" icon, index is always 1.
+
+ICONNRESOURCE! index,id,modname      ! Set "open" icon, icon ID within DLL;
+             !                       ! index is always set to 1.
+
+ICONVIEW     ! s1[,s2,...sn]         ! Set icon view styles (see below).
+
+ICONVIEWPOS  ! x,y,cx,cy             ! Initial view position and size of open
+             !                       ! folder in percentage coordinates.
+
+OPEN         ! ICON, TREE, DETAILS,  ! Open folder in respective view.
+             ! DEFAULT               !
+
+REMOVEFONTS  ! YES, NO               ! Remove instance fonts from folder?
+
+SORTCLASS    ! classname             ! Set class object to sort by.
+
+TREEFONT     ! size.font_name        ! Set font for tree view (e.g. 10.Helv).
+
+TREEVIEW     ! s1[,s2,...sn]         ! Set tree view styles (see below).
+
+WORKAREA     ! YES, NO               ! Set folder to be a workarea?
+
+
+VIEW STYLES           ! DESCRIPTION
+-----------------------------------------------------------------
+
+FLOWED                ! Flowed icon view.
+
+NONFLOWED             ! Non-flowed icon view.
+
+NONGRID               ! Non-gridded icon view.
+
+NORMAL                ! Normal size icons.
+
+MINI                  ! Small icons.
+
+INVISIBLE             ! No icons.
+
+LINES                 ! Lines in tree view.
+
+NOLINES               ! No lines in tree view.
+
+You may combine view styles by delimiting the view style values with a comma,
+e.g. "ICONVIEW=FLOWED,MINI;".
+---------------------------------------------------------------------
+Figure 7, "The Setup String parameters for WPFolder."
+===================== cut here for Figure 7 - end ================ =
+
+
+
+
+
+===================== cut here for Figure 8 - begin =================
+/* WPS_TSTF.CMD: test folders, shadows and moving objects           */
+
+/******* create four folders on the desktop to play with ************/
+DO i = 1 TO 4
+   objectid = "<RGF Testfolder_" || i || ">" /* unique objectid     */
+   title    = "Testfolder #" i
+   folder.i = objectid                       /* save for later use  */
+   y_pos = 100 - i*20                        /* placement on y-axis */
+   setup = "ICONPOS=5," || y_pos || ";" ||,  /* icon placement      */
+           "ICONVIEWPOS=15," || y_pos   ||,  /* initial folder dim: */
+                        ",35,20;"       ||,  /* relative to icon    */
+           "OBJECTID=" || objectid || ";"    /* assign objectid     */
+
+   ok = SysCreateObject(,           /* create object                */
+         "WPFolder",,               /* Object type: WPS-Folder      */
+         title,,                    /* Title                        */
+         "<WP_DESKTOP>",,           /* create on desktop            */
+         setup,,                    /* setup-string                 */
+         "F")                       /* fail, if object exists       */
+
+   SAY "creating:" objectid "-" worked(ok)
+END
+folder.0 = 4                        /* indicate 4 elements in array */
+SAY                                 /* display empty line           */
+
+/******* change state-data to open folder in icon view **************/
+"@PAUSE"
+DO i = 1 TO 3                       /* open first three folders     */
+   setup = "OPEN=ICON;"             /* open them using icon view    */
+   ok = SysSetObjectData(folder.i, setup)
+   SAY "setup object data ["setup"] for" folder.i  "-" worked(ok)
+END
+
+/******* create shadow of OS/2 Configuration Folder *****************/
+shadObjID = "<RGF Testshadow_1>"        /* OBJECITD of shadow       */
+folder.5  = shadObjID                   /* memorize                 */
+folder.0  = 5                           /* now we have 5 elements   */
+setup = "SHADOWID=<WP_CONFIG>;" ||,     /* shadow OS2-config folder */
+        "OBJECTID=" || shadObjID || ";" /* OBJECTID of shadow       */
+
+ok = SysCreateObject(,                  /* create object            */
+      "WPShadow",,                      /* Object type: WPS-Shadow  */
+      title,,                           /* Title                    */
+      folder.1,,                        /* put into folder # 1      */
+      setup,,                           /* setup-string             */
+      "F")                              /* fail, if object exists   */
+SAY "creating shadow for" folder.5  "-" worked(ok)
+SAY                                     /* display empty line       */
+
+/******* move Testfolder # 4 between the first three folders ********/
+location1 = 1                         /* shadow in folder #1        */
+location2 = 0                         /* folder #4 on desktop       */
+
+DO FOREVER
+   SAY "Press enter to animate (enter 'exit' to end):"
+   PARSE UPPER PULL input             /* get input from user        */
+   IF LEFT(input, 1) = "E" THEN LEAVE /* just check first letter    */
+
+   location1 = (location1 //  3) + 1  /* next folder for shadow     */
+   location2 = (location2 //  3) + 1  /* next folder for folder # 4 */
+
+   ok = SysMoveObject(shadObjID, folder.location1)   /* move shadow */
+   SAY "moving shadow" shadObjID "to" folder.location1 "-" worked(ok)
+   ok = SysMoveObject(folder.4, folder.location2)    /* move folder */
+   SAY "moving folder" folder.4 "to" folder.location2 "-" worked(ok)
+   SAY                                /* display empty line         */
+END
+
+/******* delete test folders ? (delete, if first letter is "Y" ******/
+SAY "Delete test folders ? (Yes/No)"
+PARSE UPPER PULL input
+IF LEFT(input, 1) = "Y" THEN         /* delete test folders ?       */
+DO i = folder.0 TO 1 BY -1           /* delete, start with # 3      */
+   ok = SysDestroyObject(folder.i)
+   SAY "destroying (deleting):" folder.i "-" worked(ok)
+END
+
+EXIT
+
+/* procedure to indicate successful/not successful                  */
+WORKED: PROCEDURE
+   IF ARG(1) THEN RETURN "successful."
+             ELSE RETURN "*** NOT succesful ***"
+---------------------------------------------------------------------
+Figure 8, "Creating Folders, a Shadow and Moving objects."
+===================== cut here for Figure 8 - end ===================
+
+
+
+
+
+
+===================== cut here for Figure 9 - begin ================
+
+KEYNAME      ! VALUES                     ! REMARKS
+--------------------------------------------------------------------------------
+
+
+ASSOCFILTER  ! filters                   ! Set filename filters.
+
+ASSOCTYPE    ! type                      ! Set association types.
+
+EXENAME      ! filename                  ! Program to be executed.
+
+MAXIMIZED    ! YES, NO                   ! Maximized upon startup?
+
+MINIMIZED    ! YES, NO                   ! Minimized upon startup?
+
+PROGTYPE     ! FULLSCREEN                ! Full-screen OS/2 session.
+             ! PM                        ! PM application.
+             ! PROG_30_STD               ! WINOS2 standard mode.
+             ! PROG_31_ENH               ! WINOS2 3.1 enhanced mode.
+             ! PROG_31_ENHSEAMLESSCOMMON ! WINOS2 3.1 enhanced mode, seamless
+             !                           ! common session.
+             ! PROG_31_ENHSEAMLESSVDM    ! WINOS2 3.1 enhanced mode, seamless
+             !                           ! session.
+             ! PROG_31_STD               ! WINOS2 3.1 standard mode.
+             ! PROG_31_STDSEAMLESSCOMMON ! WINOS2 3.1 standard mode, seamless
+             !                           ! common session.
+             ! PROG_31_STDSEAMLESSVDM    ! WINOS2 3.1 standard mode, seamless
+             !                           ! session.
+             ! SEPARATEWIN               ! WINOS2 session in separate VDM.
+             ! VDM                       ! Full screen DOS session.
+             ! WIN                       ! Full screen WINOS2 session.
+             ! WINDOWABLEVIO             ! Windowed OS/2 session.
+             ! WINDOWEDVDM               ! Windowed DOS session.
+             ! WINDOWEDWIN               ! Windowed WINOS2 session.
+
+NOAUTOCLOSE  ! YES, NO                   ! Do not close window upon program
+             !                           ! termination?
+
+PARAMETERS   ! params                    ! Set program parameters.
+
+SET          ! XXX=VVV                   ! Set environment variables. Set
+             !                           ! VDM characteristics for DOS
+             !                           ! sessions.
+
+STARTUPDIR   ! pathname                  ! Set the working directory.
+---------------------------------------------------------------------
+Figure 9, "The Setup String parameters for WPProgram."
+===================== cut here for Figure 9 - end ==================
+
+
+
+
+
+
+===================== cut here for Figure 10 - begin =================
+/* WPS_NOWH.CMD: demo setting and starting DOS-programs from nowhere*/
+
+/* change the location to "<WP_DESKTOP>" to check the settings-page */
+location = "<WP_NOWHERE>"               /* the "NOWHERE"-location   */
+
+title    = "Test of a DOS-Program from nowhere :-)"
+objectid = "<RGF TEST_DOS_IN_NOWHERE>"
+setup    = "PROGTYPE=WINDOWEDVDM;"                              ||,
+           "EXENAME=*;"                                         ||,
+           "PARAMETERS=/k mem.exe;"                             ||,
+           "STARTUPDIR=?:\;"                                    ||,
+           "SET COM_RECEIVE_BUFFER_FLUSH=SWITCH TO FOREGROUND;" ||,
+           "SET DOS_DEVICE=\os2\mdos\ANSI.SYS;"                 ||,
+           "SET DOS_VERSION=NETX.EXE^,5^,00^,255,"              ||,
+                           "WIN200.BIN^,10^,10^,4;"             ||,
+           "SET DOS_UMB=1;"                                     ||,
+           "SET EMS_MEMORY_LIMIT=0;"                            ||,
+           "SET IDLE_SECONDS=1;"                                ||,
+           "SET IDLE_SENSITIVITY=10;"                           ||,
+           "SET XMS_MEMORY_LIMIT=4096;"                         ||,
+           "OPEN=DEFAULT;"                                      ||,
+           "OBJECTID=" || objectid || ";"
+
+ok = SysCreateObject("WPProgram", title, location, setup,,
+                     "R")         /* replace, if object exists      */
+
+SAY "creating:" ojbectid "-" worked(ok)
+"@PAUSE"
+
+SAY "Cleaning up ..."
+ok = SysDestroyObject(objectid)   /* OBJECTID of object             */
+SAY "destroying (deleting):" objectid "-" worked(ok)
+
+EXIT
+
+/* procedure to indicate successful/not successful                  */
+WORKED: PROCEDURE
+   IF ARG(1) THEN RETURN "successful."
+             ELSE RETURN "*** NOT succesful ***"
+---------------------------------------------------------------------
+Figure 10, "Creating and Starting a Customized DOS-Program from Nowhere."
+===================== cut here for Figure 10 - end ===================
+

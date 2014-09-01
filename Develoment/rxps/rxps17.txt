@@ -1,0 +1,9 @@
+Archive Name       : rxps17.zip
+Program Title      : ps  (Process Status)
+Current Version    : 1.7
+Program Description: REXX ps command for OS/2 x.x
+Operating System   : OS/2 x.x, with REXX suupport installed.
+Program Source     : Duonet OS/2 BBS (612)636-2155
+Author             : Peter Gamache (darky@duonet.mn.org, after June 1993)
+Proposed directory : pub/os2/all/rexx
+Comments           : This is a fairly simple script.  Just execute and see.

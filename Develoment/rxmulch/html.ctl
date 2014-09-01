@@ -1,0 +1,12 @@
+; Control-Datei fÅr HTML-Dokumente, die deutsche Sonderzeichen beinhalten
+; Eingabedatei fÅr RxMulch.CMD
+; rgf, 1995-04-05
+
+/é/&Auml;/
+/Ñ/&auml;/
+/ö/&Uuml;/
+/Å/&uuml;/
+/ô/&Ouml;/
+/î/&ouml;/
+/·/&szlig;/
+

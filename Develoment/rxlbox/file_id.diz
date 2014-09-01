@@ -1,0 +1,42 @@
+RXLBOX v1.30 is a powerfull
+textmode menu program for 
+OS/2 written in plain REXX.
+
+No additional DLLs are necessary,
+even REXXUTIL is not used!
+
+All with simple, plain REXX and
+ANSI sequences.
+
+RXLBOX uses the cursor keys,
+function keys and an input
+line for navigation.
+
+RXLBOX is completly configurable 
+using a menu description file
+(including menus, messages, 
+online help screens, function 
+keys and macros).
+RXLBOX supports nested menus, menus
+for user input and an external
+message handling routine.
+
+RxLBox uses REXX as macro language.
+
+New in version 1.30:
+  support for the EXTPROC feature
+
+
+Author:
+  Bernd Schemmer
+  Baeckerweg 48
+  60316 Frankfurt
+  Germany
+
+EMail:
+  CompuServe: 100104,613
+  Internet:   100104.613@compuserve.com
+
+[Author of REXX Tips & Tricks]
+
+Free for private use
