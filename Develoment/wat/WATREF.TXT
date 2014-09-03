@@ -1,0 +1,341 @@
+                        WATools Function Reference
+
+WATools v1.0 - OS/2 Workstation Automation Tools
+	Written By Russell Gosse, Team OS/2
+	Email: rgosse@interlog.com
+
+
+These functions are specified as the first parm when calling WAT.CMD.  The 
+synatx is:
+
+   rc = WAT('function','parm','parm'...) or,
+   call WAT 'function','parm','parm'...
+
+      'function' = any one of the functions listed below,
+      'parm',... = are the parms requried by the functions
+
+      if a parm value is enclosed in square brackets [  ], it is optional.
+
+All functions return a value.  If that value is not specified below, then refer
+to WATCODE.TXT for an explaination of all possible return codes (I was just too
+lazy to add them here!)
+
+
+Sample:
+
+/* REXX - WATools Sample */
+
+rc = WAT('init')                   --> initialize API environment
+if rc = 0 then do
+   rc = WAT('conn','A')            --> connect to CM/2 session A
+   if rc = 0 then do
+      text = WAT('read','5 10',15) --> read 15 bytes of text from col 5 row 10
+      call WAT 'pfkey','8'         --> send PFkey 8
+      call WAT 'wait'              --> wait for host to respond
+      pos = WAT('find','Total = ') --> look for text 'Total = '
+      text = WAT('read',pos,25)    --> read 25 bytes from find postion
+      call WAT 'disc'              --> disconnect from CM/2 session
+   end
+   else do
+      say 'Unable to connect to session.'
+      exit
+   end
+end
+else
+   say 'Unable to initialize API!'
+call WAT 'reset'                   --> reset API environment
+exit
+
+
+Please Email any ideas for enhancements and I will get them done for you.  I 
+already have some new ideas in mind so watch for version 1.1 ....
+
+
+                              ** FUNCTIONS **
+
+_______________________________________________________________________________
+CONN           
+
+   In order to interface with a CM/2 host window, your application must connect
+   to it first.  You can only have one active connection at a time.  Use the 
+   DISC function before connecting to another session.
+
+   rc = WAT('CONN',sessid)
+
+   Prerequisite Call:   INIT
+
+   Parms:   sessid      Single-letter CM/2 session id. that identifies the
+                        host session window to connect to.
+
+   Note:    If connected, the CM/2 session window title and the OS/2 task list 
+            will be changed to indicate that the session is conected to a
+            WATools application.  The DISC function will clear this.  I intend 
+            to enhance this by allowing you to specify a title.
+
+_______________________________________________________________________________
+CURSORPOS
+
+   Sets or retrieves the current cursor postion on the connected session. 
+   EHLLAPI functions use offset screen postion values which starts as '1'
+   in the upper left-hand corner of the screen and continues to the
+   bottom right-hand corner.  For example, on a 24 x 80 screen, the last screen
+   position would be 1920, row 2, column 1 would be position 81 and so on.  At
+   times, I find it easier to use a 'col row' format so I wrote WAT functions 
+   to use both formats.  This function returns an offset value.
+
+   rc = WAT('CURSORPOS'[,pos])
+
+   Prerequisite Call:   CONN
+
+   Parms:   pos         If specified, its the offset or 'col row' screen 
+                        postion to move the cursor to.  If you just want to tab
+                        across screen fields, see the SEND function.
+
+   Returns: The offset value of the current cursor postion if the 
+            pos parameter is not specified.
+
+_______________________________________________________________________________
+DISC           
+
+   Disconnects your application from a CM/2 host session window.
+
+   rc = WAT('DISC')
+
+   Prerequisite Call:    CONN
+             
+_______________________________________________________________________________
+FIND
+
+   Locates a string of text on the connected session window and returns 
+   the offset screen position, if found.  This function will only locate 
+   case_sensitive ASCII text.  It does not handle extended attributes,
+   such as colour.  If there is enough demand, I will add this enhancement.
+
+   rc = WAT('FIND',text[,pos][,dir])
+
+   Prerequisite Call:    CONN
+
+   Parms:   text        Case-sensitive text string to search for,
+
+            pos         Screen position where to start the search from.  This 
+                        can be an offset value, 'col row' value or null.  If 
+                        you do not specifiy this value, the current cursor
+                        postion is used.  If both pos and dir are null, the
+                        entire screen will be searched starting from position
+                        '1'.
+
+            dir         By default, the search is done in a forward fashion 
+                        from the specified position.  You can specify 'B' for a
+                        backwards search that starts from the last screen
+                        position (bottom right-hand corner).
+
+   Returns: Offset screen postion where the text was found or '0'b(not found).
+
+_______________________________________________________________________________
+INFO
+
+   Returns information about the specified session id.
+
+   rc = WAT('INFO'[,sessid])
+
+   Prerequisite Call:   INIT
+
+   Parms:   sessid      Single-letter CM/2 session id. that identifies the
+                        host session window.  If not specified, the 
+                        currently connected session is used.
+
+   Returns: 'type cols rows'  This is a text string containing some basic
+                              attributes about the session.  It will tell
+                              what type of host session it is and the number
+                              of rows and columns on the screen:
+
+                  type  -  can be one of the following:
+                              H3    -  host 3270
+                              P3    -  host 3270 printer
+                              H5    -  host 5250
+                              P5    -  host 5250 printer
+                  rows  -  number of rows on screen
+                  cols  -  number of columns on screen
+
+_______________________________________________________________________________
+INIT
+
+   Initializes and loads CM/2 EHLLAPI functions.  This should be the first 
+   function you call in your application and only needs to be called once.
+
+   rc = WAT('INIT')
+
+_______________________________________________________________________________
+LIST           
+
+   Lists all, or specific, active CM/2 sessions.
+
+   rc = WAT('LIST'[,type])
+
+   Prerequisite Call:   INIT
+
+   Parms:   type        If not specified, all sessions are listed.  To list 
+                        only host sessions, specify  'H'.  To only list printer
+                        sessions, specify 'P'.
+
+   Returns: 'x sess1 sess2 ... sessx'  This string lists all specified 
+                                       session ids. (single-letter).  The
+                                       first word in the string is a number
+                                       that indicates the total number of
+                                       sessions, of this type, found.
+
+_______________________________________________________________________________               
+PFKEY
+
+   Sends a PFKey keystroke to the connected session.
+
+   rc = WAT('PFKEY',keynum)
+
+   Prerequisite Call:   CONN
+
+   Parms:   keynum      PFkey number (1 - 24)
+
+_______________________________________________________________________________
+READ
+
+   Reads a string of text from the connected session.
+
+   rc = WAT('READ'[,pos,len])
+
+   Prerequisite Call:   CONN
+
+   Parms:   pos         Screen postion to read from.  Either an offset
+                        value, a 'column row' coordinate or null,
+
+            len         Number of characters (length) to read or null.
+
+   Returns: 'text'  String of characters (ASCII).  If no parms are
+                    supplied, the entire screen is returned.  If only pos 
+                    is specified, all text from pos to the last screen 
+                    position is returned.  If only len is specified, then 
+                    the current cursor position is assumed.
+
+_______________________________________________________________________________
+READROW
+
+   Reads an entire row from the connected session.
+
+   rc = WAT('READROW',row)
+
+   Prerequisite Call:   CONN
+
+   Parms:   row         Screen row number
+
+   Returns: 'text'  All characters (ASCII) in the specified row.
+
+_______________________________________________________________________________
+READWORD
+
+   Reads a word from the specified row.  A word is a string of text that is 
+   separated from other text by at least one blank.  This function could be 
+   useful for reading columns of text on a screen.
+
+   rc = WAT('READWORD',row,word_num)
+
+   Prerequisite Call:   CONN
+
+   Parms:   row         Screen row number,
+
+            word_num    Number representing the nth word in the row.
+
+   Returns: 'word'  The word text from the specified row.
+
+_______________________________________________________________________________
+RESET          
+
+   Resets the EHLLAPI environment (should be last function called)
+
+   rc = WAT('RESET')
+
+_______________________________________________________________________________
+SEND
+
+   Sends a string of text to the connected session.
+
+   rc = WAT('SEND',string)
+
+   Prerequisite Call:   CONN
+
+   Parms:   string      Any mixed-case text, or one of the following:
+                           ENTER -  sends enter key,
+                           HOME  -  homes the cursor,
+                           EOF   -  erase EOF,
+                           PA1   -  PA1 key,
+                           PA2   -  PA2 key,
+                           TABF  -  tab forward,
+                           TABB  -  tab backwards,
+                           CLEAR -  clear key,
+                           END   -  move to end of field,
+                           PRINTPS  -  screen print.
+
+_______________________________________________________________________________
+WAIT
+
+   Waits for system to unlock the session to allow input.  This is used to wait
+   for the 'X SYSTEM' to clear after sending a transaction to the Host. 
+   Waiting for the Host can be tricky to monitor.  Sometimes, it's possible to
+   enter keystrokes but then a response comes from the host unexpectedly.  TSO
+   is a good example of this.  Whenever you receive a message, the screen 
+   clears and the message shows up that ends with a '***'.
+
+   rc = WAT('WAIT'[,timeout])
+
+   Prerequisite Call:   CONN
+
+   Parms:   timeout     Number of seconds to wait for screen to unlock.  The
+                        default is 30 seconds.
+
+   Returns: '0'  Session unlocked.
+
+   Note:    Typically, you will want to call this function after any 
+            transactions are sent to the Host.
+
+_______________________________________________________________________________
+WAITFOR
+
+   Waits for a text string to appear on the screen.
+
+   rc = WAT('WAITFOR',text[,timeout])
+
+   Prerequisite Call:   CONN
+
+   Parms:   text        Text string to wait for (case-sensitive),
+
+            timeout     Number of seconds to wait for the text to appear.
+                        The default is 30 seconds.
+
+   Returns: '0'  Text was found.
+
+_______________________________________________________________________________
+CONVERTPOS     
+
+   Converts a screen postion value from one format to another.  As mentioned 
+   before, these routines can use the offset value or the 'col row' value. 
+   This function converts from one format to the other.
+
+   rc = WAT('CONVERTPOS',pos)
+
+   Prerequisite Call:   CONN
+
+   Parms:   pos         Offset or 'col row' screen postion
+                           'col row' =  string containing screen column and row
+                           values which are separated with at least one 
+                           blank space.
+               
+   Returns: 'pos'  The converted postion value.
+
+   Note:    EHLLAPI functions use the absolute, or offset, screen postion.  I
+            find it easier, at times, to use the 'col row' format which is why 
+            I wrote these WAT functions to accept both types.
+_______________________________________________________________________________
+
+
+
+
+
+

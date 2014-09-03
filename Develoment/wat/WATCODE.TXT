@@ -1,0 +1,19 @@
+                           WATools Return Codes
+
+
+'-1'  =  No Function Specified
+'-2'  =  Invalid or Missing Parameter
+'-3'  =  Postion Value Is Not Within Screen Size
+'-4'  =  No CM/2 Sessions Active
+'-5'  =  Not Currently Connected To A Session
+'-6'  =  Unknown Function Specified
+'-7'  =  Session Is Already In Use By Another Function
+'-8'  =  Unsupported Function (CM/2)
+'-9'  =  System Error Occurred
+'-10' =  Session Not Found
+'-11' =  Session Is Busy
+'-12' =  Error Occurred While Trying To Send Keystroke
+'-13' =  Bad Mnemonic
+'-14' =  Timeout Occurred
+'-99' =  EHLLAPI Has Not Been Loaded
+

@@ -1,0 +1,66 @@
+README.TXT - readme file for VOPNFDR.CMD v1.3 by M. Woo (October 1993)
+
+VOpenFolder is a little REXX script that works in conjunction with the
+IBM EWS package, VREXX (Visual REXX) by Richard B. Lam.
+
+I don't often open folders to get at things, but I got really tired of 
+going through multiply-nested folders just to get to the one I wanted. 
+What I wanted was a way to open whichever folder I wished in only one
+step, regardless of how deeply nested it was.  VOpenFolder does this,
+using a Presentation Manager listbox dialog.
+
+Program Notes:
+
+This REXX script was written assuming that one is using OS/2 v2.1, and that
+it is installed on the C: drive.  If your setup is different, you will have
+to modify the line which reads, 
+
+call SysFileTree "c:\desktop\*", "dirs.", "DSO" 
+
+to reflect where your computer's desktop directory is, and in the case of
+OS/2 2.0, what it is called.
+
+Additionally, this REXX script has ONLY been tested under OS/2 2.1 so I
+have no idea of how it will work on a different setup.
+
+My thanks to Jack S. Tan, who went out of his way to write the add and
+sort routines for me.
+
+My thanks to Ken Neighbors, who suggested opening the folder twice to
+get it to open in the foreground.  This works great for my other
+little program, OpenFolder, but because of the way VREXX handles its
+dialog boxes, this doesn't always work with VOpenFolder. :-(
+
+Since this program uses both REXX and VREXX, it is *extremely* slow to
+execute.  Removing the sort routine will speed up loading, but it will
+still be slow to initialize.  Fortunately, once onscreen, the listbox
+will stay there until you cancel it, so you only have to suffer through
+the initial loading time once.
+
+Note that the position and size of the listbox can be customized as
+per your preferences, by changing the parameters of VDialogPos and
+VListBox, respectively.  You might also want to delete all of my dumb
+comment lines. :-)
+
+I can be contacted through the end of December, 1993 at either:
+Internet: m-woo@uiuc.edu (if that doesn't work, melissa@romulus.ehs.uiuc.edu)
+Fidonet:  Melissa Woo (or Sysop) 1:233/4.0 or 1:233/4.100
+Unfortunately, I don't have any idea where I will be after December.  
+(Anyone want to hire a soon-to-be Ph.D. in radiation biophysics? :-) )
+
+Program history:
+
+Version
+	1.0  my first attempt at using VREXX -- result was a workable,
+             but ugly, version of VOpenFolder
+	1.1  added Jack S. Tan's add and sort routines to alphabetize the
+             folder names
+	1.2  added program comments
+	1.3  public release; added Ken Neighbors' "open folder twice" 
+             suggestion
+
+Disclaimer:
+
+The user assumes all responsibility for any damage done by this program.  No
+warranty is offered, and I can only guarantee that the program will take up
+space on your hard drive.
