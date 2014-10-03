@@ -1,0 +1,8 @@
+(V1.00) mkflag - FREEWARE
+There are many OS/2 tools (compilers,
+linkers, resources, ect.) from different
+vendors with many flags (option switchs) that
+are short and easily misinterpetted. This
+script is to document these flags in make
+files and batch files.
+Author: Greg Jarvis <gjarvis@ieee.org>

@@ -1,0 +1,147 @@
+OW 1.4
+switch = "/-"
+0            8086 instructions
+1            80186 instructions
+2            80286 instructions
+3            optimize for 386
+4            optimize for 486
+5            optimize for Pentium
+6            optimize for Pentium Pro
+aa           allow non const initializers for local aggregates or unions
+ad      generate make style auto depend file
+adbs         force slashes to backward '\' slashes (auto dep gen)
+add     set source dependancy name in auto depend file
+adfs         force slashes to forward '/' slashes (auto dep gen)
+adhp        default for no header path
+adt     set make style auto depend target name
+ai           turn off type checking on static initialization
+aq           turn off qualifier mismatch warning for const/volatile
+bd           build target is a dynamic link library (DLL)
+bm           build target is a multi-thread environment
+bt=     build target for operating system <id>
+bw           build target is a default windowing application
+d       precompilation #define <id> [text]
+d+           allow extended -d macro definitions
+d0           no debugging information
+d1{+}        line number debugging information
+d2           full symbolic debugging information
+d3           full symbolic debugging with unreferenced type names
+db           generate browsing information
+e=      set limit on number of error messages
+ecc          set default calling convention to __cdecl
+ecd          set default calling convention to __stdcall
+ecf          set default calling convention to __fastcall
+eco          set default calling convention to _Optlink
+ecp          set default calling convention to __pascal
+ecr          set default calling convention to __fortran
+ecs          set default calling convention to _Syscall
+ecw          set default calling convention to __watcall (default)
+ee           call epilogue hook routine
+ef           use full pathnames in error and warning messages
+ei           force enums to be at least as large as an int
+em           force enum base type to use minimum integral type
+en           emit routine names in the code segment
+ep      call prologue hook routine with <num> stack bytes available
+eq           do not display error messages (they are still written to a file)
+fh      use pre-compiled headers
+fhq     do not display pre-compiled header activity warnings
+fi=     force <file> to be included
+fo      set object or preprocessor output file name
+fp2          generate 287 floating-point code
+fp3          generate 387 floating-point code
+fp5          optimize floating-point for Pentium
+fp6          optimize floating-point for Pentium Pro
+fpc          calls to floating-point library
+fpi          inline 80x87 instructions with emulation
+fpi87        inline 80x87 instructions
+fpr          generate backward compatible 80x87 code
+fr      set error file name
+fti          print informational message when opening include file
+g=      set code group name
+hc           generate Codeview debugging information
+hd           generate DWARF debugging information
+hw           generate Watcom debugging information
+i=      add another include path
+j            change char default from unsigned to signed
+mc           compact memory model (small code/large data)
+mh           huge memory model (large  code/huge data)
+ml           large memory model (large code/large data)
+mm           medium memory model (large code/small data)
+ms           small memory model (small code/small data)
+nc=     set code class name
+nd=     set data segment name
+nm=     set module name
+nt=     set name of text segment
+oa           optimization-> relax aliasing constraints
+ob           optimization-> branch prediction
+oc           optimization-> disable <call followed by return> to <jump> optimization
+od           optimization-> disable all optimizations
+oe      optimization-> expand user functions inline (<num> controls max size)
+of           optimization-> generate traceable stack frames as needed
+of+          optimization-> always generate traceable stack frames
+oh           optimization-> enable expensive optimizations
+oi           optimization-> expand intrinsic functions inline
+ok           optimization-> push register saves into flow graph
+ol           optimization-> enable loop optimizations
+ol+          optimization-> enable loop unrolling optimizations
+om           optimization-> generate inline code for math functions
+on           optimization-> allow numerically unstable optimizations
+oo           optimization-> continue compilation if low on memory
+op           optimization-> generate consistent floating-point results
+or           optimization-> reorder instructions for best pipeline usage
+os           optimization-> favor code size over execution time in optimizations
+ot           optimization-> favor execution time over code size in optimizations
+ou           optimization-> all functions must have unique addresses
+ox           optimization-> equivalent to -obmiler -s
+oz           optimization-> NULL points to valid memory in the target environment
+pc           preprocess-> preserve comments
+pil          preprocessor ignores #line directive
+pl           preprocess-> insert #line directives
+pw=     preprocess-> wrap output lines at <num> columns. Zero means no wrap.
+r            save/restore segment registers across calls
+ri           return chars and shorts as ints
+s            remove stack overflow checks
+sg           generate calls to grow the stack
+st           touch stack through SS first
+tp=     set #pragma on( <id> )
+u       undefine macro <id>
+v            output function declarations to .def
+vcap         VC++ compatibility: alloca allowed in argument lists
+w=      set warning level number
+wcd=        warning control: disable warning message <num>
+wce=        warning control: enable warning message <num>
+we           treat all warnings as errors
+wo           warn about problems with overlaid code
+wx           set warning level to maximum setting
+zW           more efficient Microsoft Windows entry sequences
+za           disable extensions (i.e., accept only ISO/ANSI C)
+zc           place const data into the code segment
+zdf          DS floats i.e. not fixed to DGROUP
+zdp          DS is pegged to DGROUP
+ze           enable extensions (i.e., near, far, export, etc.)
+zev          enable arithmetic on void derived types
+zff          FS floats i.e. not fixed to a segment
+zfp          FS is pegged to a segment
+zg           generate function prototypes using base types
+zgf          GS floats i.e. not fixed to a segment
+zgp          GS is pegged to a segment
+zk0          double-byte character support: Kanji
+zk0u         translate double-byte Kanji to Unicode
+zk1          double-byte character support: Traditional Chinese
+zk2          double-byte character support: Korean
+zk3          double-byte character support: Simplified Chinese
+zkl          double-byte character support: local installed language
+zku=        load UNICODE translate table for specified code page
+zl           remove default library information
+zld          remove file dependency information
+zlf          add default library information to object files
+zls          remove automatically inserted symbols
+zm           place each function in separate segment
+zp=     pack structure members with alignment {1,2,4,8,16}
+zpw          output warning when padding is added in a struct
+zq           operate quietly
+zro          omit floating point rounding calls (non ANSI)
+zs           syntax check only
+zt      set far data threshold (i.e., larger objects go in far memory)
+zu           SS != DGROUP (i.e., don't assume stack is in your data segment)
+zw           generate code for Microsoft Windows

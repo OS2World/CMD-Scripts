@@ -1,0 +1,238 @@
+gcc 3.3.5
+switch = "-"
+### Like -v except the commands are not executed and all command arguments are quoted.
+-help Print (on the standard output) a description of the command line options understood by gcc.
+-target-help Print (on the standard output) a description of target specific command line options for each tool.
+-version Display the version number and copyrights of the invoked GCC.
+D   Define macro as 1 (if defn is missing) or defn
+E Stop after the preprocessing stage; do not run the compiler proper.
+H  Print the name of each header file used
+I  Search the directory dir for header files
+L Search the directory dir for -l files
+M  Output a dependence rule for make for each input file
+MD  Like -M but put dependency information in a .d file
+MM  Same as -M but ignore system include files
+MMD  Like -MM but put dependency information in a .d file
+O Optimize.
+O0 Do not optimize.
+O1 Optimize.
+O2 Optimize even more.
+O3 Optimize yet more.
+Os Optimize for size.
+Q  Compiler prints out each function name as it is compiled
+S  Stop after the stage of compilation proper; do not assemble
+W Print extra warning messages for these events: temize ullet tem A function can return either with or without a value.
+Wabi (C++ only) Warn when G++ generates code that is probably not compatible with the vendor-neutral C++ ABI.
+Waggregate-return Warn if any functions that return structures or unions are defined or called.
+Wall  Enable most warning messages
+Warn if a prototype causes a type conversion that is different from what would happen to the same argument in the absence of a prototype.
+Wbad-function-cast (C only) Warn whenever a function call is cast to a non-matching type.
+Wcast-align Warn whenever a pointer is cast such that the required alignment of the target is increased.
+Wcast-qual Warn whenever a pointer is cast so as to remove a type qualifier from the target type.
+Wchar-subscripts Warn if an array subscript has type char.
+Wcomment Warn whenever a comment-start sequence /* appears in a /* comment, or whenever a Backslash-Newline appears in a // comment.
+Wctor-dtor-privacy (C++ only) Warn when a class seems unusable because all the constructors or destructors in that class are private, and it has neither friends nor public static member functions.
+Wdisabled-optimization Warn if a requested optimization pass is disabled.
+Weffc++ (C++ only) Warn about violations of the following style guidelines from Scott Meyers' Effective C++ book: temize ullet tem Item 11: Define a copy constructor and an assignment operator for classes with dynamically allocated memory.
+Wendif-labels Warn whenever an #else or an #endif are followed by text.
+Werror Make all warnings into errors.
+Werror-implicit-function-declaration Give a warning (or error) whenever a function is used before being declared.
+Wfloat-equal Warn if floating point values are used in equality comparisons.
+Wformat Check calls to printf and scanf, etc., to make sure that the arguments supplied have types appropriate to the format string specified, and that the conversions specified in the format string make sense.
+Wformat-nonliteral If -Wformat is specified, also warn if the format string is not a string literal and so cannot be checked, unless the format function takes its format arguments as a va_list.
+Wformat-security If -Wformat is specified, also warn about uses of format functions that represent possible security problems.
+Wformat=2 Enable -Wformat plus format checks not included in -Wformat.
+Wimplicit Same as -Wimplicit-int and -Wimplicit-function-declaration.
+Wimplicit-function-declaration Give a warning (or error) whenever a function is used before being declared.
+Wimplicit-int Warn when a declaration does not specify a type.
+Winline Warn if a function can not be inlined and it was declared as inline.
+Wlarger-than-len Warn whenever an object of larger than len bytes is defined.
+Wlong-long Warn if long long type is used.
+Wmain Warn if the type of main is suspicious.
+Wmissing-braces Warn if an aggregate or union initializer is not fully bracketed.
+Wmissing-declarations (C only) Warn if a global function is defined without a previous declaration.
+Wmissing-format-attribute If -Wformat is enabled, also warn about functions which might be candidates for format attributes.
+Wmissing-noreturn Warn about functions which might be candidates for attribute noreturn.
+Wmissing-prototypes (C only) Warn if a global function is defined without a previous prototype declaration.
+Wnested-externs (C only) Warn if an extern declaration is encountered within a function.
+Wno-deprecated (C++ only) Do not warn about usage of deprecated features.
+Wno-deprecated-declarations Do not warn about uses of functions, variables, and types marked as deprecated by using the deprecated attribute.
+Wno-div-by-zero Do not warn about compile-time integer division by zero.
+Wno-format-extra-args If -Wformat is specified, do not warn about excess arguments to a printf or scanf format function.
+Wno-format-y2k If -Wformat is specified, do not warn about strftime formats which may yield only a two-digit year.
+Wno-format-zero-length If -Wformat is specified, do not warn about zero-length formats.
+Wno-import Inhibit warning messages about the use of #import.
+Wno-multichar Do not warn if a multicharacter constant ('FOOF') is used.
+Wno-non-template-friend (C++ only) Disable warnings when non-templatized friend functions are declared within a template.
+Wno-pmf-conversions (C++ only) Disable the diagnostic for converting a bound pointer to member function to a plain pointer.
+Wno-protocol If a class is declared to implement a protocol, a warning is issued for every method in the protocol that is not implemented by the class.
+Wnon-virtual-dtor (C++ only) Warn when a class appears to be polymorphic, thereby requiring a virtual destructor, yet it declares a non-virtual one.
+Wnonnull Warn about passing a null pointer for arguments marked as requiring a non-null value by the nonnull function attribute.
+Wold-style-cast (C++ only) Warn if an old-style (C-style) cast to a non-void type is used within a C++ program.
+Woverloaded-virtual (C++ only) Warn when a function declaration hides virtual functions from a base class.
+Wpacked Warn if a structure is given the packed attribute, but the packed attribute has no effect on the layout or size of the structure.
+Wpadded Warn if padding is included in a structure, either to align an element of the structure or to align the whole structure.
+Wparentheses Warn if parentheses are omitted in certain contexts, such as when there is an assignment in a context where a truth value is expected, or when operators are nested whose precedence people often get confused about.
+Wpointer-arith Warn about anything that depends on the ``size of'' a function type or of void.
+Wredundant-decls Warn if anything is declared more than once in the same scope, even in cases where multiple declaration is valid and changes nothing.
+Wreorder (C++ only) Warn when the order of member initializers given in the code does not match the order in which they must be executed.
+Wreturn-type Warn whenever a function is defined with a return-type that defaults to int.
+Wselector Warn if multiple methods of different types for the same selector are found during compilation.
+Wsequence-point Warn about code that may have undefined semantics because of violations of sequence point rules in the C standard.
+Wshadow Warn whenever a local variable shadows another local variable, parameter or global variable or whenever a built-in function is shadowed.
+Wsign-compare Warn when a comparison between signed and unsigned values could produce an incorrect result when the signed value is converted to unsigned.
+Wsign-promo (C++ only) Warn when overload resolution chooses a promotion from unsigned or enumeral type to a signed type, over a conversion to an unsigned type of the same size.
+Wstrict-aliasing This option is only active when -fstrict-aliasing is active.
+Wstrict-prototypes (C only) Warn if a function is declared or defined without specifying the argument types.
+Wswitch Warn whenever a switch statement has an index of enumeral type and lacks a case for one or more of the named codes of that enumeration.
+Wswitch-default Warn whenever a switch statement does not have a default case.
+Wswitch-enum Warn whenever a switch statement has an index of enumeral type and lacks a case for one or more of the named codes of that enumeration.
+Wsynth (C++ only) Warn when G++'s synthesis behavior does not match that of cfront.
+Wsystem-headers Print warning messages for constructs found in system header files.
+Wtraditional (C only) Warn about certain constructs that behave differently in traditional and ISO C.
+Wtrigraphs Warn if any trigraphs are encountered that might change the meaning of the program (trigraphs within comments are not warned about).
+Wundeclared-selector Warn if a @selector(...) expression referring to an undeclared selector is found.
+Wundef Warn if an undefined identifier is evaluated in an #if directive.
+Wuninitialized Warn if an automatic variable is used without first being initialized or if a variable may be clobbered by a setjmp call.
+Wunknown-pragmas Warn when a #pragma directive is encountered which is not understood by GCC.
+Wunreachable-code Warn if the compiler detects that code will never be executed.
+Wunused All the above -Wunused options combined.
+Wunused-function Warn whenever a static function is declared but not defined or a non\-inline static function is unused.
+Wunused-label Warn whenever a label is declared but not used.
+Wunused-parameter Warn whenever a function parameter is unused aside from its declaration.
+Wunused-value Warn whenever a statement computes a result that is explicitly not used.
+Wunused-variable Warn whenever a local variable or non-constant static variable is unused aside from its declaration To suppress this warning use the unused attribute (see also: Variable Attributes).
+Wwrite-strings When compiling C, give string constants the type const char[length] so that copying the address of one into a non-const char * pointer will get a warning; when compiling C++, warn about the deprecated conversion from string constants to char *. -Wconversion
+ansi In C mode, support all ISO C90 programs.
+aux-info Output to the given filename prototyped declarations for all functions declared and/or defined in a translation unit, including those in header files.
+c  Compile or assemble the source files, but do not link
+fabi-version= Use version n of the C++ ABI.
+falign-functions Align the start of functions to the next power-of-two greater than n, skipping up to n bytes.
+falign-jumps Align branch targets to a power-of-two boundary, for branch targets where the targets can only be reached by jumping, skipping up to n bytes like -falign-functions.
+falign-labels Align all branch targets to a power-of-two boundary, skipping up to n bytes like -falign-functions.
+falign-loops Align loops to a power-of-two boundary, skipping up to n bytes like -falign-functions.
+falt-external-templates Similar to -fexternal-templates, but template instances are emitted or not according to the place where they are first instantiated.
+fbranch-probabilities After running a program compiled with -fprofile-arcs (
+fcaller-saves Enable values to be allocated in registers that will be clobbered by function calls, by emitting extra instructions to save and restore the registers around such calls.
+fcheck-new Check that the pointer returned by operator new is non-null before attempting to modify the storage allocated.
+fcond-mismatch Allow conditional expressions with mismatched types in the second and third arguments.
+fconserve-space Put uninitialized or runtime-initialized global variables into the common segment, as C does.
+fconstant-string-class=class-name Use class-name as the name of the class to instantiate for each literal string specified with the syntax @"...".
+fcrossjumping Perform cross-jumping transformation.
+fcse-follow-jumps In common subexpression elimination, scan through jump instructions when the target of the jump is not reached by any other path.
+fcse-skip-blocks This is similar to -fcse-follow-jumps, but causes CSE to follow jumps which conditionally skip over blocks.
+fdelayed-branch If supported for the target machine, attempt to reorder instructions to exploit instruction slots available after delayed branch instructions.
+fdelete-null-pointer-checks Use global dataflow analysis to identify and eliminate useless checks for null pointers.
+fdiagnostics-show-location= Only meaningful in line-wrapping mode.
+fdollars-in-identifiers Accept $ in identifiers.
+fexpensive-optimizations Perform a number of minor optimizations that are relatively expensive.
+fexternal-templates Cause #pragma interface and implementation to apply to template instantiation;
+ffast-math Sets -fno-math-errno, -funsafe-math-optimizations,  -fno-trapping-math, -ffinite-math-only and  -fno-signaling-nans.
+ffinite-math-only Allow optimizations for floating-point arithmetic that assume that arguments and results are not NaNs or +-Infs.
+ffloat-store Do not store floating point variables in registers, and inhibit other options that might change whether a floating point value is taken from a register or memory.
+ffor-scope If -ffor-scope is specified, the scope of variables declared in a for-init-statement is limited to the for loop itself, as specified by the C++ standard.
+fforce-addr Force memory address constants to be copied into registers before doing arithmetic on them.
+fforce-mem Force memory operands to be copied into registers before doing arithmetic on them.
+ffreestanding Assert that compilation takes place in a freestanding environment.
+fgcse Perform a global common subexpression elimination pass.
+fgcse-lm When -fgcse-lm is enabled, global common subexpression elimination will attempt to move loads which are only killed by stores into themselves.
+fgcse-sm When -fgcse-sm is enabled, A store motion pass is run after global common subexpression elimination.
+fgnu-runtime Generate object code compatible with the standard GNU Objective-C runtime.
+fhosted Assert that compilation takes place in a hosted environment.
+fif-conversion Attempt to transform conditional jumps into branch-less equivalents.
+fif-conversion2 Use conditional execution (where available) to transform conditional jumps into branch-less equivalents.
+finline-functions Integrate all simple functions into their callers.
+finline-limit= By default, gcc limits the size of functions that can be inlined.
+fkeep-inline-functions Even if all calls to a given function are integrated, and the function is declared static, nevertheless output a separate run-time callable version of the function.
+fkeep-static-consts Emit variables declared static const when optimization isn't turned on, even if the variables aren't referenced.
+floop-optimize Perform loop optimizations:
+fmerge-all-constants Attempt to merge identical constants and identical variables.
+fmerge-constants Attempt to merge identical constants (string constants and floating point constants) across compilation units.
+fmessage-length= Try to format error messages so that they fit on lines of about n characters.
+fmove-all-movables Forces all invariant computations in loops to be moved outside the loop.
+fms-extensions Accept some non-standard constructs used in Microsoft header files.
+fms-extensions Disable pedantic warnings about constructs used in MFC, such as implicit int and getting a pointer to member function via non-standard syntax.
+fnext-runtime Generate output compatible with the NeXT runtime.
+fno-access-control Turn off all access checking.
+fno-asm Do not recognize asm, inline or typeof as a keyword, so that code can use these words as identifiers.
+fno-branch-count-reg Do not use ``decrement and branch'' instructions on a count register, but instead generate a sequence of instructions that decrement a register, compare it against zero, then branch based upon the result.
+fno-builtin Don't recognize built-in functions that do not begin with __builtin_ as prefix.
+fno-builtin-function Don't recognize built-in functions that do not begin with __builtin_ as prefix.
+fno-const-strings Give string constants type char * instead of type const char *.
+fno-cprop-registers After register allocation and post-register allocation instruction splitting, we perform a copy-propagation pass to try to reduce scheduling dependencies and occasionally eliminate the copy.
+fno-default-inline Do not assume inline for functions defined inside a class scope.
+fno-default-inline Do not make member functions inline by default merely because they are defined inside the class scope (C++ only).
+fno-defer-pop Always pop the arguments to each function call as soon as that function returns.
+fno-elide-constructors The C++ standard allows an implementation to omit creating a temporary which is only used to initialize another object of the same type.
+fno-enforce-eh-specs Don't check for violation of exception specifications at runtime.
+fno-for-scope If -ffor-scope is specified, the scope of variables declared in a for-init-statement is limited to the for loop itself, as specified by the C++ standard.
+fno-function-cse Do not put function addresses in registers; make each instruction that calls a constant function contain the function's address explicitly.
+fno-gnu-keywords Do not recognize typeof as a keyword, so that code can use this word as an identifier.
+fno-guess-branch-probability Do not guess branch probabilities using a randomized model.
+fno-implement-inlines To save space, do not emit out-of-line copies of inline functions controlled by #pragma implementation.
+fno-implicit-inline-templates Don't emit code for implicit instantiations of inline templates, either.
+fno-inline Don't pay attention to the inline keyword.
+fno-math-errno Do not set ERRNO after calling math functions that are executed with a single instruction, e.g., sqrt.
+fno-nonansi-builtins Disable built-in declarations of functions that are not mandated by ANSI/ISO C.
+fno-operator-names Do not treat the operator name keywords and, bitand, bitor, compl, not, or and xor as synonyms as keywords.
+fno-optional-diags Disable diagnostics that the standard says a compiler does not need to issue.
+fno-peephole Disable any machine-specific peephole optimizations.
+fno-rtti Disable generation of information about every class with virtual functions for use by the C++ runtime type identification features (dynamic_cast and typeid).
+fno-sched-interblock Don't schedule instructions across basic blocks.
+fno-sched-spec Don't allow speculative motion of non-load instructions.
+fno-sign ed-bitfields Control whether a bit-field is signed or unsigned, when the declaration does not use either signed or unsigned.
+fno-trapping-math Compile code assuming that floating-point operations cannot generate user-visible traps.
+fno-unsigned-bitfields Control whether a bit-field is signed or unsigned, when the declaration does not use either signed or unsigned.
+fno-weak Do not use weak symbol support, even if it is provided by the linker. -nostdinc++ Do not search for header files in the standard directories specific to C++, but do still search the other standard directories.
+fno-zero-initialized-in-bss If the target supports a BSS section, GCC by default puts variables that are initialized to zero into BSS.
+fomit-frame-pointer Don't keep the frame pointer in a register for functions that don't need one.
+foptimize-register-move Attempt to reassign register numbers in order to maximize the amount of register tying.
+foptimize-sibling-calls Optimize sibling and tail recursive calls.
+fpermissive Downgrade some diagnostics about nonconformant code from errors to warnings.
+freduce-all-givs Forces all general-induction variables in loops to be strength-reduced.
+fregmove Attempt to reassign register numbers in order to maximize the amount of register tying.
+frename-registers Attempt to avoid false dependencies in scheduled code by making use of registers left over after register allocation.
+freorder-blocks Reorder basic blocks in the compiled function in order to reduce number of taken branches and improve code locality.
+freorder-functions Reorder basic blocks in the compiled function in order to reduce number of taken branches and improve code locality.
+frepo Enable automatic template instantiation at link time.
+frerun-cse-after-loop Re-run common subexpression elimination after loop optimizations has been performed.
+frerun-loop-opt Run the loop optimizer twice.
+fsched-spec-load Allow speculative motion of some load instructions.
+fsched-spec-load-dangerous Allow speculative motion of more load instructions.
+fschedule-insns If supported for the target machine, attempt to reorder instructions to eliminate execution stalls due to required data being unavailable.
+fschedule-insns2 Similar to -fschedule-insns, but requests an additional pass of instruction scheduling after register allocation has been done.
+fsignaling-nans Compile code assuming that IEEE signaling NaNs may generate user-visible traps during floating-point operations.
+fsigned-bitfields Control whether a bit-field is signed or unsigned, when the declaration does not use either signed or unsigned.
+fsigned-char Let the type char be signed, like signed char.
+fsingle-precision-constant Treat floating point constant as single precision constant instead of implicitly converting it to double precision constant.
+fstats Emit statistics about front-end processing at the end of the compilation.
+fstrength-reduce Perform the optimizations of loop strength reduction and elimination of iteration variables.
+fstrict-aliasing Allows the compiler to assume the strictest aliasing rules applicable to the language being compiled.
+fsyntax-only Check the code for syntax errors, but don't do anything beyond that.
+ftemplate-depth-n Set the maximum instantiation depth for template classes to n.
+fthread-jumps Perform optimizations where we check to see if a jump branches to a location where another comparison subsumed by the first is found.
+funsafe-math-optimizations Allow optimizations for floating-point arithmetic that (a) assume that arguments and results are valid and (b) may violate IEEE or ANSI standards.
+funsigned-bitfields Control whether a bit-field is signed or unsigned, when the declaration does not use either signed or unsigned.
+funsigned-char Let the type char be unsigned, like unsigned char.
+fuse-cxa-atexit Register destructors for objects with static storage duration with the __cxa_atexit function rather than the atexit function.
+fvtable-gc Emit special relocations for vtables and virtual function references so that the linker can identify unused virtual functions and zero out vtable slots that refer to them.
+fwritable-strings Store string constants in the writable data segment and don't uniquize them.
+g  Produce debugging information
+gen-decls Dump interface declarations for all classes seen in the source file to a file named sourcename.decl.
+h   Display command-line help on topic (* = index)
+l  Search the library named library when linking
+no-implicit-templates Never emit code for non-inline templates which are instantiated implicitly (i.e.  by use); only emit code for explicit instantiations.
+no-integrated-cpp Performs a compilation in two passes: preprocessing and compiling.
+o Place output in file file.
+p  Generate extra code to write profile information
+pass-exit-codes Normally the gcc program will exit with the code of 1 if any phase of the compiler returns a non-success return code.
+pedantic Issue all the warnings demanded by strict ISO C and ISO C++; reject all programs that use forbidden extensions, and some other programs that do not follow ISO C and ISO C++.
+pedantic-errors Like -pedantic, except that errors are produced rather than warnings.
+pipe Use pipes rather than temporary files for communication between the various stages of compilation.
+std= Determine the language standard.
+traditional Formerly, these options caused GCC to attempt to emulate a pre-standard C compiler.
+traditional-cpp Formerly, these options caused GCC to attempt to emulate a pre-standard C compiler.
+trigraphs Support ISO C trigraphs.
+v  Print the commands executed to run the stages of compilation
+w Inhibit all warning messages.
+x Specify explicitly the language for the following input files (rather than file name suffix).

@@ -1,0 +1,13 @@
+Works  with  any  version
+switch = "/-"; caseignore = 1
+C   Character code page
+CODEPAGE    Character code page
+COUNTRY    DBCS range or country code
+D   DBCS range or country code
+I   Compiles the source file as an online document
+L   Language ID
+LANGUAGE    Language ID
+LEVEL  Warning level
+S   Suppresses the performance of the search function
+W   Warning level
+X   Generates and displays a cross-reference list

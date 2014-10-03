@@ -1,0 +1,45 @@
+OW 1.4
+switch = "/-"
+0          8086 instructions (p protected mode, r register passing, s stack passing)
+1          80186 instructions (p protected mode, r register passing, s stack passing)
+2          80286 instructions (p protected mode, r register passing, s stack passing)
+3          80386 instructions (p protected mode, r register passing, s stack passing)
+4          80486 instructions (p protected mode, r register passing, s stack passing)
+5          Pentium instructions (p protected mode, r register passing, s stack passing)
+6          Pentium Pro instructions (p protected mode, r register passing, s stack passing)
+?      print this message
+bt=    set the build target to <os>
+c                  disable output OMF COMMENT record about data in code
+d  define text macro
+d1                 line number debugging support
+e                  stop reading ASM file at END directive
+e  set error limit number
+fi=    force <file_name> to be included
+fo=    set object file name
+fp0                floating-point for 8087
+fp2                floating-point for 287
+fp3                floating-point for 387
+fp5                floating-point for Pentium
+fp6                floating-point for Pentium Pro
+fpc                calls to floating-point library
+fpi                inline 80x87 instructions with emulation
+fpi87              inline 80x87 instructions
+fr=    set error file name
+h            print this message
+i= add directory to list of include directories
+j  force signed types to be used for signed values
+m memory model: (Tiny, Small, Medium, Compact, Large, Huge, Flat)
+nd=    set data segment name
+nm=    set module name
+nt=    set name of text segment
+o                  allow C form of octal constants
+q           operate quietly
+s            force signed types to be used for signed values
+w  set warning level number
+we                 treat all warnings as errors
+wx                 set warning level to the highest level
+zcm                set C name mangler to MASM compatible mode
+zld                suppress generation of file dependency info in object file
+zq     operate quietly
+zz                 remove '@size' from STDCALL function names
+zzo                don't mangle STDCALL symbols (backward compatible)

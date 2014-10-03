@@ -1,0 +1,14 @@
+VAC 3.08 OR TOOLKIT 4.5 RC16 & RC
+switch = "-"
+?   Access Help
+D   Preprocessor define
+cc  Country code
+cp  DBCS codepage or (16 bit only: lead/trail byte info).
+d   Preprocessor define (-d defname)
+h   Access Help
+i   Include file path
+n   Don't show logo
+p   Pack - 386 resources will not cross 64K boundaries
+r   Create .res file
+w2  Suppress warnings
+x   Exepack - Compress resources, using method 1 or 2

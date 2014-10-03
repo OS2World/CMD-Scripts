@@ -1,0 +1,132 @@
+INTRODUCTION
+
+There are many OS/2 tools (compilers, linkers, resources, ect.) from different
+vendors with many flags (option switchs) that are short and easily
+misinterpetted. This script is to document these flags in make files and batch
+files.
+
+Examine file "makefile" comments as it demonstrates features and tips that are
+not mention here.
+
+LICENSE
+
+The mkflag package is distributed under the Lesser General Public License
+(LGPL). For a copy of this license see the file "lgpl.txt".
+
+FILES
+
+bin\mkflag.cmd      trival batch
+mkflag.cmd          REXX script
+mkflag.doc          this file
+lgpl.txt            license
+
+    Samples
+makefile        sample makefile
+CFLAGS.FLG
+LFLAGS.FLG
+make.cmd        sample batch
+defaults.tina   defaults for my notebook with hostname tina
+
+    Description
+gcc_fsf     gcc
+icc_ibm     VAC, toolkit, CSet, DDK
+ilink_ibm
+ipfc_ibm
+rc_ibm
+masm_ms     DDK
+wasm_ow     Open Watcom
+wcc386_ow
+wcc_ow
+wrc_ow
+wic_warpin  warpin
+
+    Packing zip
+file_id.diz             BBS description
+package\mkflag*.txt     hobbes upload template
+pack.cmd                script to zip appropiate files
+g.cmd                   quick and dirty script to capture gcc online help
+
+
+INSTALL
+
+1) At command prompt enter "switchrx" to verify or change that Object REXX is
+the default rather than Classical REXX.
+
+2) Create a home directory with an environment variable "home" pointing to it.
+You might already have this.
+
+3) Create sub-directory "mkflag" and all files in it. Eg. "D:\home\mkflag"
+
+4) Copy batch file "bin\mkflag.cmd" to a directory in your %path%.
+
+COMMAND LINE
+
+mkflag [<file>]
+
+The <file> specifies name of makefile to document. If <file> isn't given then
+the name "makefile" is assumed.
+
+MAKEFILE
+
+#mkflag <descfile> [<source>]
+
+descfile
+         Flag description file for a particular tool family. Name of file
+         contains at least one underscore. See next section for file format to
+         roll your own.
+
+source
+         If source is a number then instead of using the 1st uncommented line,
+         the nth line is used which is useful in rules. If source is not a
+         number then a response file named source is read which is useful
+         complicated makefiles in which you generate response file by putting
+         'echo' statements in your rules to evaluate macros according to
+         specific tools.
+
+
+DESCRIPTION
+
+Description file is a text file:
+
+1st line
+         any comment
+
+2nd line
+         REXX code to be interpreted. Must define a switch string telling what
+         characters can be used to prefix flags. Optional caseignore flag: set
+         this to 1 if flags are case insensitive.
+
+rest of lines
+         Each line consist of one flag and a corresponding description. Flags:
+         do contain any switch character; start in column 1; only the minimum
+         number of characters needed; if caseignore then upper case the flag.
+         Descriptions can be any length although a short one is preferred, upon
+         documenting long descriptions are wrapped which can be controlled (see
+         defaults). All lines must be sorted which can be easily done in EPM by
+         marking the lines and issuing a "sort" command.
+
+DEFAULTS
+
+This is an optional simple one line text file containing information on
+formatting the description which is highly user specific. Also, many developers
+have both a desktop and a notebook computers with different formatting
+requirements but want to keep files synchronized. A file, "defaults", with
+extension %hostname% is used.
+
+The file line is interpreted as REXX code to set variables as follows.
+
+width (default 24)
+        The column width of actual flag used.
+
+wrap (default 130)
+        For long lines, lines are wrapped.
+
+FUTURE PLANS
+
+I always welcome new description files. For corrections to description files may
+require further investigation before any changes are excepted.
+
+Description "gcc_fsf" is missing "-Z" flags (I don't have much experiece with gcc).
+
+I welcome suggestions to the script.
+

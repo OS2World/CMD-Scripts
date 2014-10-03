@@ -1,0 +1,33 @@
+OW 1.4
+switch = "/-"
+30           stamp file as requiring Windows 3.0
+31           stamp file as requiring Windows 3.1 (default)
+?            print this help message
+D      behave as if #define NAME value was at top of file
+ad           generate auto dependency information for use by wmake
+bt=nt        build a Win32 resource file
+bt=os2       build an OS/2 resource file (default)
+bt=windows   build a Win16 resource file
+c=     set code page conversion file
+e            for a DLL, global memory above EMS line
+fe=        set the output executable file to name
+fo=        set the output resource file to name
+i=     look in path for include files
+k            don't sort segments (same as -s0)
+l            program uses LIM 3.2 EMS directly
+m            each instance of program has its own EMS bank
+o            preprocess only
+p            private DLL
+q            operate quietly
+r            only build the resource file
+s0     no sorting, leave segments in the linker order
+s1     move preload segments to front and mark for fast load if possible
+s2     (default) move preload, data, and non-discardable segments to front and mark for fast load if possible
+t            protected mode only
+x            ignore the INCLUDE environment variable
+zk0    (default) Japanese (Kanji, CP 932)
+zk1    Chinese (Traditional, CP 950)
+zk2    Korean (Wansung, CP 949)
+zk3    Chinese (Simplified, CP 936)
+zm           output Microsoft/IBM format .res files
+zn           don't preprocess the file

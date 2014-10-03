@@ -1,0 +1,66 @@
+-------------------------------------------
+Ant 5.1 files for OS/2 Warp and eComStation
+-------------------------------------------
+
+
+
+-------------------------
+1. What is this good for?
+-------------------------
+
+These files allow you to start Ant with one command, without typing
+"java org.apache...". Also, it sets your CLASSPATH library before starting
+Ant, so you need not modify your CONFIG.SYS.
+
+Ant is a Java based build tool. In theory it is kind of like "make"
+without makes wrinkles and with the full portability of pure java code.
+Ant is an open source project (a subproject of Tomcat - Jakarta). You can get
+more information at "http://jakarta.apache.org/ant/index.html".
+
+If you have Ant 6.0 or newer, you should not need these files since OS/2
+CMD scripts created by Zdenek Wagner are already part of Ant.
+
+
+------------------
+2. What do I need?
+------------------
+
+You need:
+ - OS/2 Warp 4.x or eComStation with Rexx installed
+ - IBM Java 1.3 properly installed
+ - Ant 5.1 (or newer) installed -- just unzip jakarta-ant-1.5-bin.zip
+
+
+----------------------------
+3. How do I use these files?
+----------------------------
+
+Follow these steps in order to successfully run Ant 5.1
+under your OS/2 (eCS) system:
+
+1. Make sure you have Java 1.3 installed.
+
+2. Go to "http://jakarta.apache.org/ant/index.html" and download file
+   "jakarta-ant-1.5-bin.zip". Unzip the file in an arbitrary directory.
+   Several subdirectories will be created.
+
+3. Move all *.CMD files from this archive to the "bin" subdirectory.
+
+4. Add the "bin" subdirectory to your PATH variable.
+
+5. Add the following line to your CONFIG.SYS:
+   SET ANT_HOME=<the base directory where you put Ant>
+
+6. Reboot.
+
+7. Now, go to the directory where you have put "build.xml" (your project build
+   file) and just type "Ant".
+
+
+---------------------
+4. Who is the author?
+---------------------
+
+Jarda KACER, Czech OS/2 User Group
+mailto:jkacer@kiv.zcu.cz
+http://home.zcu.cz/~jkacer

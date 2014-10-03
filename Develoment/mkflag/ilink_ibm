@@ -1,0 +1,52 @@
+VAC 3.08
+switch = "/-"; caseignore = 1
+?         Display help
+A         Set alignment factor
+BAS       Set preferred loading address
+BR        Add browse information
+C         Include debugging information
+DB        Pack debugging information
+DE        Include debugging information
+DEF       Search default libraries
+DLL       Generate DLL
+E         Compress data
+EXEC      Generate .EXE file
+EXT       Use extended dictionary to search libraries
+FO        Create executable output file even if errors
+FR        Use free format command line syntax
+H         Display help
+I         Display status of linking process
+IG        Ignore capitalization in identifiers
+L         Include line numbers in map file
+LO        Display logo, echo response file
+M         Generate map file
+NOBAS     NO Set preferred loading address
+NOBR      NO Add browse information
+NOC       NO Include debugging information
+NOD       NO Search default libraries
+NODB      NO Pack debugging information
+NODEB     NO Include debugging information
+NOE       NO Use extended dictionary to search libraries
+NOEXE     NO Compress data
+NOFO      NO Create executable output file even if errors
+NOFR      NO Use free format command line syntax
+NOI       NO Ignore capitalization in identifiers
+NOIN      NO Display status of linking process
+NOL       NO Display logo, echo response file
+NOLI      NO Include line numbers in map file
+NOM       NO Generate map file
+NOOLD     NO Ignore template resolution directives in old object files
+NOOPTF    NO Remove unreferenced functions
+NOP       NO Pack neighboring code with similar attributes
+NOPACKD   NO Pack neighboring data with similar attributes
+O         Name output file
+OLD       Ignore template resolution directives in old object files
+OPTF      Remove unreferenced functions
+PACKC     Pack neighboring code with similar attributes
+PACKD     Pack neighboring data with similar attributes
+PDD       Generate physical device driver
+PM        Specify application type
+SE        Set maximum number of segments
+SEC       Set attributes for segment
+ST        Set stack size of application
+VDD       Generate virtual device driver

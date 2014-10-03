@@ -1,0 +1,18 @@
+warpin 1.09
+switch = "-"
+U    wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+U+   wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+X    Extracts the archive's script into the given <filename>.
+a    Adds the files in <mask> to decimal <pckno> in archive <arc>.
+c    wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+d    Deletes files from the given archive.
+h   The different <modes> are (type "wic -h<mode>" for details):
+i    Installs an archive using an XML CID script.
+l    Lists the files in <pckno> in <arc>; without <pckno>, a summary is shown.
+q    Compares the given archive against the database.
+r    wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+s    Sets <file> as the install script for archive <arc>.
+t    Loads and tests the specified script file for integrity.
+u    wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+v    wic <arc> -a {<pckno> [-r] [-c<dir>] <mask>...}... [-u[<exe>] | -U[+]] [-v]
+x    Extracts files from the given archive.
