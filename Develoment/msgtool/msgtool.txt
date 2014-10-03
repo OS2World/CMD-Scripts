@@ -1,0 +1,29 @@
+
+msgtool
+=======
+
+- About
+
+	msgtool is a multiplatform MSG file "decompiler".
+
+	I wrote msgtool several years ago and I release this version now.
+	
+	msgtool expects the MSG file as parameter, writes the "decompiled" information in the standard output and other information in the standard error.
+ 
+- Requirements
+
+	Any REXX interpreter
+
+- License
+
+	Public domain
+
+- Changelog
+
+	0.1.0 (20040728)
+		First public version (released in 2010)
+
+- Author
+
+	Salvador Parra Camacho
+	sparrac at gmail (dot) com
