@@ -1,0 +1,74 @@
+  Description:
+  ------------
+  DS3W4NWR.CMD is a REXX script that patches DualStor v3.0 so that it
+  will run on OS/2 Warp v4.0, even if the Novell Netware Requester is
+  installed. This patch will disable all netware support in DualStor
+  v3.0, however, you will still be able to backup and restore from
+  mapped drives.
+
+
+  Disclaimer:
+  -----------
+  This is not an official patch from IBM. Neither IBM nor the author of
+  this patch shall be held responsible for any losses that might occur
+  from applying this patch or from using the patched version of DualStor
+  v3.0 for OS/2.
+
+
+  Author:
+  -------
+  Leif Simmons
+  email: d91-lss@sm.luth.se
+
+
+  Problem Description:
+  --------------------
+  DualStor crashes on Warp v4.0 if the Novell Requester is installed.
+
+  Error message: E:\APPS\DUALSTOR\DUALSTRP.EXE
+                 c0000005
+                 1e590030
+                 P1=00000000  P2=ffffffff  P3=XXXXXXXX  P4=XXXXXXXX
+                 EAX=001fbc14  EBX=0003bc18  ECX=00000000  EDX=17dbadcc
+                 ESI=0003bc4c  EDI=0003bc18
+                 DS=0053  DSACC=d0f3  DSLIM=1fffffff
+                 ES=0053  ESACC=d0f3  ESLIM=1fffffff
+                 FS=150b  FSACC=00f3  FSLIM=00000030
+                 GS=3403  GSACC=10f3  GSLIM=00003fff
+                 CS:EIP=f2cf:00000030  CSACC=00fb  CSLIM=000000bf
+                 SS:ESP=001f:0000bc14  SSACC=00f3  SSLIM=0000bfff
+                 EBP=0003bc3c  FLG=00012286
+                 IPNWUTIL.DLL 0002:00000030
+
+  If you experience this error, then this patch might help you get
+  DualStor up and running.
+
+  Note: This patch might also work if you are experiencing problems with
+        the Netware Requester v2.11c5 on Warp v3.0
+
+
+  Applying the patch:
+  -------------------
+  * Copy the DS3W4NWR.CMD file to the directory where you installed
+    DualStor (typically C:\DUALSTOR).
+  * Make a backup copy of the DUALSTRP.EXE file
+  * Run the DS3W4NWR.CMD script
+
+  IMPORTANT: Do not apply this patch if you have previously applied any
+             patch for DualStor that modifies or replaces the
+             DUALSTRP.EXE file.
+
+
+  What the patch does:
+  --------------------
+  When DualStor starts, it seems to detect if the netware requester is
+  installed by trying to load the NWCALLS.DLL. What this patch does is
+  that it makes DualStor try to load a DLL called "DS3W4NW.DLL" instead,
+  and since that DLL does not exist, DualStor does not detect any
+  installed netware requester. Note that this effectively disables all
+  netware support in DualStor v3.0. However, you can still backup from
+  and restore to mapped drives.
+
+  The other thing this patch does, is that it modifies the Product
+  Information window to display "Unofficial patch for Warp v4.0 Novell
+  Requester has been applied.".

@@ -1,0 +1,23 @@
+My cultural background is such that I am prone to expend an inordinate
+amount of energy to make my life easier.  Making life easier is the
+entire objective of this little utility which largely automates the
+application of fixpacks to IBM's Visual Age C++ compiler for OS/2.
+
+I wrote a primitive version of this script about three years ago as an
+aid to other developers on a project at IBM.  About one year ago I read
+the notes concerning the recommended order for applying fixpacks and
+although the primitive version had always worked for me, this new
+version follows the recommended order.
+
+Simply put all the fixpacks (as .zip files) that you wish to apply in
+the same directory and from that directory execute this script.
+A reboot is called for half way through after applying the WorkFrame
+update (CTWnnn.ZIP).  Return to the fixpack directory and re-run the
+script.   It will continue from the point where it left off.
+
+The script invokes two external programs, unzip (Info-Zip version) and
+rm.  I include rm.exe in the package.  I assume everyone already has
+unzip.
+
+Jon Saxton
+8 Feb 1998

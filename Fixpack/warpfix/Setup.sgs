@@ -1,0 +1,78 @@
+.***************************************************************
+.* Filename: Setup.SGS                                       *
+.*                                                             *
+.* This file is parsed by SGUIDE.EXE to generate panels for    *
+.* the Guidance on Adding a Printer WarpGuide.                 *
+.*                                                             *
+.* Panels for the following steps will be generated:           *
+.* 1. Intro panel                                              *
+.* 2. Choose the Port                                          *
+.* 3. Choose the Printer                                       *
+.* 4. Name the Printer                                         *
+.* 5. Complete the Installation.                               *
+.*                                                             *
+.* If "I have a disk" is chosen in step 3 the steps are:       *
+.* 4. Enter the Drive (Drivers Not Found, Drive Not Ready)     *
+.* 5. Choose from the Printers Found                           *
+.* 6. Name the Printer                                         *
+.* 7. Complete the Installation                                *
+.***************************************************************
+.* TRANSLATOR DIRECTIONS:                                      *
+.*                                                             *
+.* If the words do not fit in the panel, a scroll bar will     *
+.* be dynamically created on the right side of the panel.      *
+.* To eliminate the scroll bars adjust the low-res-size,       *
+.* med-res-size, and high-res-size of the <sguide> tag.        *
+.* To test the size of the translated panels.  Put the         *
+.* the printer.sgs file in the os2\help directory and type     *
+.* "sguide printer" from a OS/2 window command line.           *
+****************************************************************
+<sguide notebook low-res-size=(.9,.9) med-res-size=(.8,.8) high-res-size=(.7,.7)>
+<title>Easy WarpFix to ease OS/2 fixing (Ver. 19.11.97)
+.*******RSU CSF Download Panel *****
+<panel name=main hide-previous next=install
+       enable-done hide-undo hide-help
+       image-lib=syswzmri.dll image-id=1000>
+<title>Get RSU CSF package
+<p>To install OS/2 Fixpaks easily, you will need <b>RSUCSF.ZIP</b>, which is usually found at <b>ftp://ftp.boulder.ibm.com/ps/products/os2/rsu</b>. If you're online, you can get this now by pressing <b>Get RSUCSF</b>, or you can continue with the next page, if you already downloaded RSUCSF.ZIP to the same directory as this script.</p>
+<al>
+<li action="start netscape ftp://ftp.boulder.ibm.com/ps/products/os2/rsu/rsucsf.zip">~Get RSUCSF
+</al>
+<p>This will start Netscape to get the file. The default download directory will be the directory, where you've started this script from. Please save the file to this directory or the Create Fix won't work.</p>
+<p>If you've already installed Fix OS/2, you should exit now.</p>
+<hr>
+<p>(c) Peter Franken, 18. Nov. 1997</p>
+</panel>
+.****** Install Fix Object panel *************************************
+<panel name=install 
+       previous=main
+       next=info
+       enable-done hide-undo hide-help
+       image-lib=syswzmri.dll image-id=1001>
+<title>Create Fix OS/2 object</title>
+<p>If you would like to <b>create</b> the <b>Fix OS/2</b> object now, press the button below.</p>
+<al>
+<li action="start cmd /c InstFix.cmd">~Create Fix OS/2
+</al>
+<p>The routine will unpack RSUCSF to a subdirectory of your \OS2\INSTALL directory. A new object, <b>Fix OS/2</b>, will be generated in your Installation/Remove folder and you'll find a shadow to it on your desktop.</p>
+<p>There will be <b>no</b> changes applied to your Config.sys.</p>
+<p><h5>If no Fix OS/2 object will be created, start InstFix.cmd from the command line to see the detailed error message.</h5></p>
+<hr>
+<p>(c) Peter Franken, 18. Nov. 1997</p>
+</panel>
+.****** Install Fix Object panel *************************************
+<panel name=info hide-next
+       previous=install
+       enable-done hide-undo hide-help
+       image-lib=syswzmri.dll image-id=1002>
+<title>What do I do now?</title>
+<p>If everything went well, your Installation/Remove folder opened and you found a new object called Fix OS/2. Besides, there is a shadow of the object on your desktop.</p>
+<p>You might delete the shadow any time you want.</p>
+<p><b>How to?</b></p>
+<p>To use the new object, just get and unpack a new Fixpak, and either <b>drop</b> the <b>FIX</b> directory on the Fix OS/2 object, or <b>doubleclick</b> on the <b>CSF_DISK</b> file. The new object will start the OS2SERV program, which will check your system for servicable components and will ask you, if you want them to be serviced.</p>
+<p>I hope, these scripts are useful for you!</p>
+<p>You can reach me as: Peter Franken <b>peter@pool.informatik.rwth-aachen.de</b></p>
+<p>(c) Peter Franken, 18. Nov. 1997</p>
+</panel>
+</sguide>
+

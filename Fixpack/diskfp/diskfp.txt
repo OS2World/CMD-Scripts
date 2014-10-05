@@ -1,0 +1,32 @@
+Readme file for the DISKFP.CMD to apply fixpacks to your OS/2 Warp 4 system.
+
+This file is designed to allow a fixpack to be applied to an OS/2 Warp 4 system. You should not use this command file on prior or subsequent releases of OS/2 - it is designed for Warp 4 ONLY.
+
+To successfully use this command you should have at least two separate OS/2 boot partitions since you need to boot from one to service the other. If you service the active partition the IBM locked file device driver will be added to CONFIG.SYS and will run when you reboot. This *should* still work but has not been tested by the author. If you have a separate OS/2 system it works with just a single reboot rather than the two required if the LFDD is loaded and runs.
+
+To use this command you should type
+
+DISKFP x:\sourcedir y:\targetdir
+
+where x:\sourcedir is the name of a directory that contains the fixpack diskette images and the second of the kicker diskette images. This latter file is probably called CSFBOOT.2DK. The fixpack diskette images are usually called XR_Mnnn.nDK where the "n" is replaced by numbers. The y:\targetdir is the place on disk where the unloaded files are copied to and where you should run the fixpack installation from once this command file has finished executing. You will need a blank 1.44Mb floppy disk in drive A: to use this command. The command file will prompt you for the answer to several other questions when it executes.
+
+You can use your system for other tasks while this command file is running as it does not do anything except unload disk images and copy them to your hard disk.
+
+This command file creates two other command files once it has completed sucessfully. It creates y:\targetdir\APPLY.CMD and y:\targetdir\BACKOUT.CMD. To apply the fixpack to your OS/2 system on drive C: you should tell the command file that this is the drive you want to apply service to when it asks. When it has finished and has created the fixpack directory on disk you should reboot to another OS/2 system (for example from D: instead of C:) and change the active directory to y:\targetdir and type
+
+APPLY
+
+I prefer to use Alt+F1 option F2 to boot to a command prompt to do this but it will also work from an OS/2 fullscreen under PM control. In both cases, when the FSERVICE application finishes running and prompts you to press Ctrl-Alt-Del, I would NOT do so, just press Ctrl-Break and then type EXIT.
+
+To backout of the fixpack you should follow the instructions for applying it but instead of typing APPLY, type
+
+BACKOUT
+
+at a command prompt with y:\targetdir as the current directory.
+
+Once you have installed the fixpack from the HD, you may delete the y:\targetdir directory. If you do this of course, the BACKOUT command will no longer be available to you! I tend to leave mine there until the next fixpack arrives.
+
+The author does not accept any responsibility for any damage that may be caused by use of this command file nor by application of any fixpack to your system. All responsiibility for anything done by this command file or by the fixpack you use it to apply must be accepted by the user.
+
+Trevor Hemsley,
+1st March 1997.

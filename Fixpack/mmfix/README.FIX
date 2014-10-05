@@ -1,0 +1,128 @@
+****************************************************************
+*                                                              *
+*  MMFIX.CMD and MMDEREG.CMD - version 1.1                     *
+*  Copyright (C) R L Walsh 1997 - All Rights Reserved          *
+*                                                              *
+*  email the author at rlwalsh@packet.net                      *
+*                                                              *
+****************************************************************
+
+MMFIX
+lets you deregister selected WPS Multimedia classes without
+having to deregister all of them.  It will make a copy of
+MMPARTS.DLL and patch it.  You will have to edit config.sys,
+run MMDEREG.CMD, then reboot.  This version supports only
+Warp v4 with no fixpacks, Warp v4 with Fixpack 1, and Warp
+v4 with Fixpack 3.  You can patch other versions of MMPARTS
+manually by following the instructions below.
+
+
+MMDEREG
+identifies the function of each WPS Multimedia class and
+lets you deregister / reregister them.  Deregistration is NOT
+effective unless you have run MMFIX.CMD to patch MMPARTS.DLL.
+
+
+NOTE1: the PracticeImage replacement class provides a better
+       solution for image files (BMP, GIF, JPG, etc) if you
+       want to associate them with exe's while keeping the
+       class's other features.  It's available from:
+           http://www.practice.xo.com  -or-
+           ftp://ftp.practice.xo.com/pub/primgfix.zip
+
+NOTE2: MMFIX creates a directory and asks you to put it at the
+       beginning of the LIBPATH in config.sys.  This lets you
+       install and remove the patched dll without having to
+       copy any files - just edit config.sys.  When you are
+       satisfied it suits your needs, the can copy the patched
+       dll to \MMOS2\DLL and restore your original LIBPATH.
+
+
+****************************************************************
+*                                                              *
+*  How to patch MMPARTS.DLL manually                           *
+*                                                              *
+****************************************************************
+
+Patching MMPARTS.DLL involves changing only one byte.  You MUST
+use a hex editor (one capable of displaying the hexadecimal
+value of each byte in a file).  You cannot use a standard text
+editor because it will probably corrupt the file.
+
+1.  In your \MMOS2 directory, create a subdirectory named TEMPDLL
+
+2.  Copy \MMOS2\DLL\MMPARTS.DLL into TEMPDLL
+
+3.  Load this *copy* of MMPARTS into your hex editor
+
+4.  Locate the string "SOMInitModule";  it should appear only once.
+    - if your editor has a search function, search for this string
+    - otherwise, go to the end of the file, then page up until you
+      see it;  it will be approximately 0x1160 (4448 dec.) bytes
+     from the end of the file
+
+5.  In all versions to date, "SOMInitModule" is preceded by
+    "ImgCopyBitmap" and followed by "MMAIFClassDatap";  the byte
+    immediately before the string should always be 0x0D and the
+    two bytes following it must be 0x01 0x00
+
+6.  Change the first letter in "SOMInitModule" to a "T", either
+    directly or by changing its hex value from 0x53 to 0x54;
+    the string should now read "TOMInitModule"
+
+7.  Save the file and exit
+
+8.  In config.sys, add the path for TEMPDLL to the *beginning*
+    of the LIBPATH statement;  for example:
+        LIBPATH=F:\MMOS2\TEMPDLL;.;F:\OS2\DLL;F:\MMOS2\DLL;
+
+9.  Use MMDEREG.CMD to deregister selected classes
+
+10. Reboot
+
+
+****************************************************************
+*                                                              *
+*  How It Works / Potential Problems                           *
+*                                                              *
+****************************************************************
+
+When SOM is asked to load a class, it first looks in the
+specified dll for a function name "SOMInitModule".  If found,
+it invokes this function, expecting that it will load every
+class contained in the dll.  This enhances SOM's efficiency
+by reducing some of the overhead in loading and tracking
+classes.  An unfortunate side effect is that it overrides the
+WPS's class registration mechanism which was intended to give
+the user some control over what gets loaded.  Registering
+just one MM class causes all MM classes to be loaded.
+
+Changing the name of "SOMInitModule" to "TOMInitModule" (or
+anything else) makes it impossible for SOM to locate this
+function.  As a result, SOM loads each class individually in
+response to requests from the WPS.  Only classes registered
+with the WPS will be loaded.
+
+Using MMFIX could cause problems if SOMInitModule does any
+type of initialization for MMPARTS.DLL other than loading the
+33 classes it contains.  This appears not to be the case for
+the versions of MMPARTS in the GA (original) and Fixpack 1
+releases.  MMFIX has been used with these versions for over
+two months with no known side effects.  This could change in
+future versions of MMPARTS.DLL.
+
+If you detect any significant changes in the multimedia classes'
+performance or stability after the application of this patch,
+back it out by removing \MMOS2\TEMPDLL from your LIBPATH, then
+reboot.
+
+Please contact the author regarding any questions or problems.
+Be sure to identify the version of MMPARTS you are using.
+Write to:   "Rich Walsh" <rlwalsh@packet.net>
+
+
+****************************************************************
+
+Rich Walsh
+Sept 15, 1997
+

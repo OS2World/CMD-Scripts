@@ -1,0 +1,259 @@
+HOW TO MAKE A FIXPAK CD
+
+This package describes how you can create your own CD of OS/2 FixPaks,
+which you can install right off the CD -- without having to mess with
+floppy diskettes or CID servers.
+
+
+
+REQUIREMENTS
+
+Making an installable CD of OS/2 FixPaks is quite easy.  You just need a few
+things:
+
+  1. A CD writer and appropriate software.  Actually, you can use the method
+     described here with a hard drive as well, but I'll assume for convenience
+     that you're making a CD.
+
+     I'll assume you know how to use your CD-writing software; instructions on
+     how to use CDRECORD, RSJ, or whatever, are beyond the scope of this
+     document...
+
+
+  2. Version 1.43 (or later) of the IBM Corrective Service Facility (the
+     utility used to install FixPaks).  Earlier versions will probably work
+     too, but it's better to use the latest.  You also need the RSU utility
+     OS2SERV (at least, if you want to make full use of the scripts I've
+     included here).
+
+     You can download the CSF here:
+          ftp://ftp.software.ibm.com/ps/products/os2/rsu/csf143.zip
+     This archive includes the RSU utilities, so you don't have to dig up
+     OS2SERV elsewhere.
+
+
+  3. FixPaks.  More specifically, you need extracted FixPak files, not just
+     the downloadable diskette images.  Therefore, you will most likely also
+     need a mechanism for extracting the diskette images onto a hard drive.
+
+     I've included DSKXTRCT.EXE for this purpose, as well as the alternative
+     (but less useful) DUINPACK.EXE from IBM, in case for some reason DSKXTRCT
+     doesn't work for you...
+
+     IBM FixPaks are kept on the Internet (in diskette image form) at:
+          ftp://ftp.software.ibm.com/ps/products/
+
+     OS/2 FixPaks for the base OS are at:
+          ftp://ftp.software.ibm.com/ps/products/os2/fixes/
+
+     And FixPaks for the LAN, TCP/IP, MPTS components, etc., are located in
+     various other directories.
+
+
+  4. A REXX script or somesuch thing which sets up the necessary environment
+     variables, calculates all the correct command-line parameters, and calls
+     the Corrective Service Facility to install the FixPak.  (Okay, strictly
+     speaking you CAN do it all manually yourself, assuming you know how,
+     but it's rather more trouble.)
+
+     I've provided two such REXX scripts here, which you can use depending on
+     your preferences.
+
+I assume, of course, that you know what FixPaks are, and have at least a
+general idea of how they are organized.  It's up to you to decide which
+FixPaks you want.
+
+
+
+CREATING THE CD
+
+First, unzip the CSF143.ZIP archive into what will be the root directory of
+your FixPak CD.  You should end up with four OS2SERV.* files in the root
+directory (you can move or delete the FTPINSTL files, they're not needed), and
+the directory 'CSF', which contains the Corrective Service Facility files.
+
+Next (assuming you are using the REXX scripts I provide), place FIX.CMD and
+APPLYFIX.CMD into the root directory of the CD as well.
+
+Next, you have to decide on a directory structure for placing the FixPaks on
+the CD.  My own preferred directory structure looks approximately like:
+
+   \
+   +--CSF
+   +--DISKIMGS
+   |     +--WARP3
+   |     +--WARP4
+   |     +--DRIVERS
+   |     +--NETWORK
+   |
+   +--WARP3
+   |     +--FIXPAK40
+   |     ...
+   |
+   +--WARP4
+   |     +--FIXPAK14
+   |     ...
+   |
+   +--DRIVERS
+   |     +--FIXPAK2
+   |
+   +--NETWORK
+         +--MPTS
+         |    +--16
+         |    |   +--WR_8423
+         |    |   ...
+         |    |
+         |    +--32
+         |        +--WR_8610
+         |        ...
+         +--TCPIP
+         |    ...
+         +--LAN
+              ...
+
+
+But you can use anything you want, really, as long as you find it convenient;
+even something as straightforward as
+
+   \
+   +--CSF
+   +--XR_W040
+   +--XR_M014
+   +--XR_D002
+   +--WR_8423
+   +--UN_0980
+   ...
+
+You're also under no obligation to include the disk image files on the CD,
+I just do (hence the \DISKIMGS directory in my first example) because I
+occasionally find them useful to have around.
+
+Once you've decided how the CD is going to be organized, extract the FixPak
+files from the downloaded image files, and place them in the appropriate
+directories.  See the section 'EXTRACTING FIXPAK FILES', below, for directions
+on how to do this.
+
+Finally, once all the files are in place, write them to CD.  And refer to the
+next section, which describes how to use your shiny new FixPak CD.
+
+
+
+USING THE CD
+
+Most service updates are applied to an existing installation, using the IBM
+Corrective Service Facility (CSF).  However, be cautioned that this is not
+always true!
+
+MPTS updates WR_8423, for instance, is actually a complete replacement package,
+which is installed using its own executable install program.  (This is also
+true for WR_8421, which WR_8423 replaced, and the alternative 32-bit versions,
+WR_8600 and WR_8610.)
+
+Check the documentation for each service update; it should make clear what
+method is required for installation.  Of course, you should always study the
+documentation for a FixPak (usually a README file) before installing it anyway.
+
+To install a standard (CSF-enabled) FixPak off the newly-created CD, you can
+use the FIX.CMD script in the root directory.
+
+FIX.CMD will call OS2SERV.EXE (with the required parameters) to apply the
+FixPak.  OS2SERV is a graphical program which offers you a number of options,
+including whether you prefer to use the standard or "advanced" install process.
+(The "advanced" method provides a bit more manual control, but correspondingly
+requires more user input.)
+
+To install a FixPak this way, run this command from the CD's root directory:
+
+        FIX <fixpath>
+
+where '<fixpath>' is the name of the directory on the CD where the FixPak to be
+installed resides.  For instance, if you wish to install the FixPak residing in
+the directory \WARP3\FIXPAK40, you would enter 'FIX \WARP3\FIXPAK40'.
+
+FIX.CMD will automatically prepend a leading backslash ('\') to the fixpath if
+one is not present.  You may specify a drive different from the currently
+active one, but if you do not specify a drive letter, FIX.CMD will assume the
+current drive.  If you do not specify a fixpath at all, FIX.CMD will default
+to the root directory of the current drive (which will probably fail).
+
+Installing a FixPak using FIX.CMD requires that the OS/2 graphical desktop
+(Presentation Manager and/or the Workplace Shell) be up and running.
+
++-----------------------------------------------------------------------------+
+| Alternate methods                                                           |
+|                                                                             |
+| I have provided an alternate, slightly more direct way to install a FixPak. |
+| The APPLYFIX.CMD script does not use OS2SERV, but instead calls SERVICE.EXE |
+| (the same program which the "advanced" method via OS2SERV uses) directly.   |
+| This may be convenient for more advanced users who wish to install using    |
+| SERVICE without having to go through OS2SERV to get there.  To use          |
+| APPLYFIX, run:                                                              |
+|                                                                             |
+|       APPLYFIX <fixpath>                                                    |
+|                                                                             |
+| in exactly the same manner as you would use FIX.CMD, above.  Like the       |
+| former method, the desktop GUI must be running.                             |
+|                                                                             |
+|                                                                             |
+| The other possible method is only for users who truly know what they are    |
+| doing, and it involves calling FSERVICE.EXE directly.  This method has the  |
+| advantage of being useable when OS/2 is booted into command-prompt-only     |
+| mode.  From inside the \CSF directory on the CD, run:                       |
+|                                                                             |
+|        FSERVICE /R:<response file> /S:<fixpath>                             |
+|                                                                             |
+| where '<fixpath>' is as described for FIX.CMD, and '<response file>' is the |
+| response file containing instructions for the FixPak installation.          |
+|                                                                             |
+| Creating a response file is beyond the scope of this document; if you don't |
+| know what they are or how they work, then you shouldn't be using this       |
+| method.  However, the file RESPONSE.WP4 in the \CSF directory is suitable   |
+| for use in a first-time, straightforward install of a base OS/2 FixPak      |
+| (under either Warp 3 or Warp 4) - e.g to install FixPak 40 on a base Warp 3 |
+| system, you could use 'FSERVICE /R:csf\response.wp4 /S:warp3\fixpak40'.     |
+| (Use the file RESPONSE.WP3 for Warp 3 FixPaks earlier than about 35 or so.) |
++-----------------------------------------------------------------------------+
+
+
+
+EXTRACTING FIXPAK FILES
+
+FixPaks generally come in diskette images created with the 'SAVEDSKF' utility,
+and have names like *.DSK or *.?DK.  The actual FixPak files must be extracted
+from these images.  The REXX script EXTRACT.CMD (provided) is the best way of
+doing this; it relies on the DSKXTRCT.EXE utility.  DSKXTRCT.EXE is a very
+handy program written by Alan Arnett, and is available in the archive 
+DSKXTR12.ZIP -- included in this package (and also available at
+http://hobbes.nmsu.edu/pub/os2/system/patches/fixpak ).
+
+To extract the files using this method, make sure that both EXTRACT.CMD and
+DSKXTRCT.EXE are either on the system PATH or in the current directory.  Place
+all the image files on a local drive (preferably the hard drive), and then enter
+the command:
+
+        EXTRACT <files>
+
+where "<files>" is the file specification of the diskette images to be
+extracted.  It will probably be either '*.?DK' or '*.DSK', depending on the
+FixPak.  Obviously, if the image files are not in the current directory, any
+applicable drive and directory qualifiers must be included in the file
+specification.
+
+The EXTRACT script will extract the files into a subdirectory of the current
+working directory called 'csdfiles'.  Therefore, EXTRACT must be run from a
+writable directory with sufficient drive space available (allow at least 25 Mb
+for a base OS/2 FixPak; other products may require less).
+
+The EXTRACT/DSKXTRCT method just described should work for most if not all
+FixPak image files.  It is possible, however, that you may encounter image
+files which are incompatible with this utility.  For this eventuality, the
+IBM DIUNPACK utility has been included.  Usage of DIUNPACK is roughly the
+same as for EXTRACT, but it does not require DSKXTRCT.  The disadvantage of
+DIUNPACK is that it does not perform error-checking on the image files; thus,
+it is recommended that you use EXTRACT/DSKXTRCT method whenever possible.
+
+
+--
+Alex Taylor (C)2000  - alex@eddie.cis.uoguelph.ca
+Last modified on 2000-11-15
+

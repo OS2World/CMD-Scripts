@@ -1,0 +1,58 @@
+WarpFix License Agreement
+
+PLEASE READ THIS LICENSE AGREEMENT CAREFULLY.  YOU MUST
+AGREE TO THE FOLLOWING TERMS AND CONDITIONS BEFORE
+USING ANY OF THE WARPFIX SCRIPTS (the "SOFTWARE").
+IF YOU DO NOT AGREE TO ANY OF THESE TERMS YOU ARE NOT
+ABLE TO USE THE SOFTWARE.
+
+1. Ownership and License.
+
+The Software is owned by Peter Franken and is 
+copyrighted and licensed, not sold. The Software
+consists of machine-readable instructions, audio/
+visual content (such as software documentation) and
+related licensed materials.
+
+Peter Franken grants you free of charge a non-
+exclusive, non-transferable license to download
+the Software and install one or more copies and to use
+the Software for any legal purpose. You may: 1) copy
+the Software for backup. You may not: 1) merge,
+distribute, sublicense, lease, or rent the Software
+except as specifically permitted by this License; 
+2) reverse assemble, reverse compile, or otherwise 
+translate the Software except as specifically
+permitted by law without the possibility of contractual
+waiver.
+
+
+2. Warranty Disclaimer and Limitation of Liability
+
+Peter Franken licenses the Software to you on an "AS IS" basis,
+without warranty of any kind. PETER FRANKEN HEREBY EXPRESSLY
+DISCLAIMS ALL WARRANTIES OR CONDITIONS, EITHER EXPRESS OR
+IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OR CONDITIONS OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE. The entire risk arising from
+use of the Software remains with you.
+
+PETER FRANKEN WILL NOT BE LIABLE FOR ANY DIRECT DAMAGES OR FOR
+ANY SPECIAL, INCIDENTAL, OR INDIRECT DAMAGES OR FOR ANY
+ECONOMIC CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR
+SAVINGS), EVEN IF PETER FRANKEN, OR ITS DISTRIBUTOR, HAS BEEN
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Peter Franken will
+not be liable for the loss of, or damage to, your records
+or data, or any damages claimed by you based on a third
+party claim.
+
+
+3. Termination of License
+
+This License is effective until terminated.
+Licensee may terminate this License at any time by
+destroying all copies of Software including any
+documentation. This License will terminate immediately
+without notice from Peter Franken if Licensee fails to comply
+with any provision of this License. Upon termination,
+Licensee must destroy all copies of Software.

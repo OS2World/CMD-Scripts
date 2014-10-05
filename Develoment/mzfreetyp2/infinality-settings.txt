@@ -1,0 +1,66 @@
+The accompanying batch file is meant to set various tweaks for the infinality patches to the freetype font engine (see mzfreetyp2_beta1.zip et seq).
+
+If starting a Mozilla app or qpdfview from a wrapper:
+
+1. In the wrapper, set the USE_STYLE variable to whichever suits your taste (see the comments in the file and experiment).
+2. Call this .CMD file to set the local environment.
+3. Start the Mozilla app (or qpdfview, etc.).
+
+If setting this in the master environment:
+
+1. In CONFIG.SYS, set the USE_STYLE variable to whichever suits your taste (see the comments in the file and experiment).
+2. Call this .CMD file from CONFIG.SYS to set the master environment.
+
+Any settings in the master environment may be overridden in any local environment. Thus, it is possible to start with a system-wide default, and set various applications as desired.
+
+This is a quick hack of the infinality-settings.sh shell script in the official package.
+
+== Caveats ==
+
+When setting the USE_STYLE variable, you *must* use the name of one of the defined styles in the file, to wit:
+
+DEFAULT          - No setting is necessary (this will be selected "by default"). A compromise that should please most people.
+OSX              - Simulate OSX rendering
+IPAD             - Simulate iPad rendering
+UBUNTU           - Simulate Ubuntu rendering
+LINUX            - Generic "Linux" style - no snapping or certain other tweaks
+WINDOWSXP        - Simulate Windows rendering with normal glyphs
+WINDOWSXPLIGHT   - Simulate Windows rendering with lighter glyphs
+WINDOWS7         - Simulate Windows 7 rendering with normal glyphs
+WINDOWS7LIGHT    - Simulate Windows 7 rendering with lighter glyphs
+ECS              - Based on "Linux" style - no snapping or certain other tweaks
+VANILLA          - Just subpixel hinting
+CUSTOM           - Your own choice.  Set various items to suit.
+----- Infinality styles -----
+CLASSIC          - Infinality rendering circa 2010.  No snapping.
+NUDGE            - CLASSIC with lightly stem snapping and tweaks
+PUSH             - CLASSIC with medium stem snapping and tweaks
+SHOVE            - Full stem snapping and tweaks without sharpening
+SHARPENED        - Full stem snapping, tweaks, and Windows-style sharpening
+INFINALITY       - Settings the developer uses
+DISABLED         - Act as though running without the extra infinality enhancements (just subpixel hinting).
+
+Most shells I've used under OS/2 are case-insensitive, but test to be certain (e.g., SET USE_STYLE=ECS and SET USE_STYLE=ecs should both work). There is currently no error checking for misspellings.
+
+== Why batch and not REXX? ==
+
+It is clumsy (for me, at least) to set the master enviornment from REXX, as REXX provides no direct method for doing that (as far as I know). Further, it's kind of difficult to call a REXX procedure from CONFIG.SYS. Truly, the point of this is to make it the most universally-applicable file for setting a bunch of environment variables, and what better than to just run some batch?
+
+== Contact information ==
+
+Questions, comments, suggestions, bug reports for the .CMD version of this file should be sent to Lewis Rosenthal at:
+lgrosenthal AT 2rosenthals DOT com.
+
+== To do ==
+
+Add help and history to the file.
+Tweak the ECS style to be more eCS-like (suggestions are welcome).
+
+== Acknowledgements ==
+
+Infinality, for making the patches to allow for such flexibility in the freetype space
+Dave Yeo, for building the latest version for OS/2
+
+== History ==
+
+0.1	2013-05-14	Initial release

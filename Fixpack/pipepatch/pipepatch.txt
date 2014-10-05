@@ -1,0 +1,80 @@
+Patching pipe buffer size of CMD.EXE
+
+1. Why?
+
+   The default pipe buffer size of 512 bytes is from OS/2 1.x where computers
+   had only a few MB of physical memory if at all.
+   This requires 4096 task swithes to transfer a single megabyte of data.
+
+3. How?
+
+   - Get lxLite if you do not already have it. (look at hobbes.nmsu.edu)
+   - End ALL running instances of CMD.EXE including hidden ones started by
+     applications or batch files.
+   - You may want to check this with watchcat or some other process explorer.
+   - Run pipepatch.cmd from any directory you like. It will do all other
+     required steps.
+   - DO NOT run pipepatch.cmd from an OS/2 command prompt, because this is an
+     active instance of CMD.EXE and you have to close all instances in the
+     first step. Start it directly with the PMSHELL or some other shell like
+     FC/2.
+
+4. Risks
+
+   The patch is tested with eCS 1.05 (=MCP2). I did a rough test with OS/2
+   Advanced Server Version 3, too. But most likely this will work with ANY
+   32 bit Version of OS/2. OS/2 2.x is completely untested.
+   I would not wonder if the patch itself wolud work with OS/2 1.x too, but
+   most likely pipepatch.cmd will not run.
+
+   Of course, changing CMD.EXE of a running system is a ticklish task. And if
+   this is interrupted at the wrong moment, you do not have a working shell
+   at the path pointed by COMSPEC. The System may not work or boot at all if
+   such an important file is damaged.
+   However, pipepatch.cmd does it's best not to leave the system in an un-
+   useable state regardless of which error occurs. But fatal errors like
+   physical disk I/O problems or power fails cannot be handled. So it is a
+   good advide if you have a boot disk or CD with the necessary components
+   available. The shell of the installation disks is sufficient for this
+   purpose.
+
+4. Tweaking
+
+   pipepatch.cmd sets the buffer size to 65024 bytes by default. You may call
+   pipepatch.cmd with an integer parameter specifying the pipe buffer size in
+   bytes. You may change this number later by calling pipepatch.cmd again.
+
+   Normally it is the larger the buffer the better, but some applications may
+   perform better if the buffer size is dividable by a certain number of bytes
+   or if it is a power of 2. Reasonable pipe buffer sizes are:
+     65024  -  dividable by 512
+     61440  -  dividable by 4096
+     32768  -  power of 2
+   I do not recommend to use buffer sizes not dividable by 512, because latent
+   bugs in applications may appear when blocks of 512 bytes get fragmented.
+
+5. Known problems
+
+   After patching CMD.EXE the execution of REXX scripts may mo longer work.
+   This can be cured be restarting the PMSHELL.
+   This is a general problem and not directly related to pipepatch.cmd. It may
+   arise at other more inocuous occasions too.
+
+5. Details
+
+   CMD.EXE ist mainly 16 bit code. It uses the 16 bit API function DosMakePipe
+   to create the pipes. It passes 0 as size parameter meaning the default
+   value. patchpipe.cmd searches for the call to DosMakePipe and changes the
+   size parameter to an explicit value. To be able to proceed CMD.EXE have to
+   be uncompressed. That is the reason why we need lxLite.
+
+   Pipepatch.cmd works in two phases. In the first phase it generates a
+   patched version of CMD.EXE at a temporary location.
+   In the second phase it starts itself with this teporary CMD.EXE instance
+   and replaces the original one. This must be done because one instance of
+   the old CMD.EXE is currently running pipepatch.cmd in phase 1 and it must
+   terminate before it can be replaced.
+
+
+Marcel MÅller
+mueller@maazl.de
