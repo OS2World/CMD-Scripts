@@ -1,0 +1,102 @@
+
+
+DumpTrapScreen User's Guide v0.4				12 Oct 2004
+================================
+
+DumpTrapScreen takes the output of a trap dump file and extracts the trap 
+screens and other useful information.  DumpTrapScreen will work for dump files 
+written to either diskette or hard disk.  However, it is most useful for dump 
+files on diskette.  Only the first dump diskette is required.
+
+DumpTrapScreen is implemented as a Classic REXX script.
+
+
+Installation
+============
+
+DumpTrapScreen may be installed in a directory of your choice.  If you use it a 
+lot, which hopefully is not the case, you should install it to a directory in 
+the PATH.
+
+
+Trap Dump Setup
+===============
+
+For kernel traps, you will need to enable trap dumps.  This can be done from 
+config.sys with:
+
+ trapdump=R0
+
+or from the OS/2 command line with:
+
+ trapdump R0
+
+This will enable dumps to diskette for kernel ring 0 traps.  There are 
+several other setup options.  Use:
+
+  view cmdref trapdump
+
+to review to the other options.  If you have the disk space available, a dump 
+partition makes the job of trap analysis much easier.
+
+Additional information is in \os2\system\ras\procdump.doc.
+
+When the system traps, you will be prompted to insert a formatted diskette 
+in the drive.  Insert the diskette, tell the dump utility to continue and 
+wait for the utility to finish writing the first diskette.  When prompted to 
+insert the second diskette, remove the first diskette and reboot the 
+computer.  DumpTrapScreen only needs the first diskette.
+
+DumpTrapScreen can be used to extract trap screens from process dump 
+files.  However, the Process Dump Formatter is usually a better tool for this 
+task.
+
+
+Using DumpTrapScreen
+====================
+
+To run DumpTrapScreen, invoke the script with the name of the trap dump file 
+as a parameter.  If the dump file is on diskette, this file will be named:
+
+  a:\dumpdata.001
+
+Output will be written to the standard output (STDOUT).  STDOUT will be the 
+screen unless you redirect it to a file.
+
+There are several command line switch options.  Switches are unix style.  
+They begin with a dash (-) and are case-sensitive.  Slashes (/) will not 
+work.  The switch options are:
+
+  -h	Display usage help
+  -d	Display debug info
+  -c	Write dump header to tmpdump.out
+  -V	Display version info
+
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU General 
+Public License.  The GPL Software License can be found in gnugpl2.txt or at 
+http://www.gnu.org/licenses/licenses.html#GPL
+
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net
+

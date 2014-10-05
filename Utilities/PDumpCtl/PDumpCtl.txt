@@ -1,0 +1,282 @@
+
+PDumpCtl v0.9 User Guide
+2014-02-07 SHL
+
+PDumpCtl is a wrapper for the OS/2 Process Dump Facility.  It makes it easy
+to configure the the Dump Facility for the typical situations.
+
+This package includes two versions of the tool.  PDumpCtl.cmd is written in
+REXX.  PDumpCtl4.cmd is written for 4OS2.
+
+PDumpCtl4.cmd is deprecated.  However, it is useful if REXX support is not
+available on the system where you need to capture the dump file.  PDumpCtl4
+supports most, but not all, of the options supported by PDumpCtl.
+
+== Installation ==
+
+Install the script to any convenient directory.  Installing to a directory in
+the PATH is recommended.
+
+A dump directory is required.  If a directory name is not specified on the
+command line, PDumpCtl assumes the directory is named Dumps and attempts to
+locate the directory automatically.  PDumpCtl looks in the root of all local
+volumes and in the %TMP% directory.
+
+If PDumpCtl can not locate a dump directory or the dump directory specified
+on the command line does not exist, PDumpCtl will complain and quit.
+
+Be sure to place the dump directory on a volume with sufficient free space.
+Depending of the options selected, dump files can be anywhere from 1MB to
+size of physical RAM and they are not automatically deleted or overwritten.
+A typical firefox process dump will be in the 100MB to 200MB range because
+both private and shared data will be required to analyze the failure.
+
+PROCDUMP.EXE and PDUMPUSR.EXE must be installed.  They are typically
+installed to \OS2\SYSTEM on your boot volume.  If they were not installed
+when eCS/OS2 was installed, copy them from the installation CD.  For
+eComStation, copy PROCDUMP.EXE and PDUMPUSR.EXE from
+\OS2IMAGE\FI\SYSMGT\OS2\SYSTEM on the CD to \OS2\SYSTEM on the boot volume.
+Copy PROCDUMP.DOC from OS2IMAGE\FI\SYSMGT\OS2\SYSTEM\RAS to \OS2\SYSTEM\RAS.
+
+If you are using PDumpCtl4.cmd, you need to have 4OS2 installed on the
+system, but it does not need to be the default shell.
+
+== Usage ==
+
+To see the available options, use
+
+ PDumpCtl -?
+
+which will display
+
+  Control Process Dump Facility in batch or interactive mode
+
+  Usage: %@lower[%0]  [-?] [-i] [commands...] [procname|pid] [dirname]
+
+    -h -?     Display this message
+    -i        Run interactive (default is batch mode)
+    -p        Enable Proliant mode, disables sysvm to prevent system traps
+    -V        Display version number and quit
+
+    pid       Select PID to dump, default radix is hex
+              Prefix with 0x or 0n if ambiguous
+    procname  Select process to dump
+              Quote if name looks like a number
+    dirname   Set Dump directory, quote if name looks like a number
+              Defaults to ?:\Dumps or %TMP%\Dumps
+    commands  Batch mode commands
+      a       Set up to dump all memory
+      d       Force dump, requires PID or process name
+      f       Set up for full dump, system default plus system details
+      o       Turn off Dump Facility
+      n       Reset dump settings and add useful system wide details
+      r       Reset dump settings to system default values
+      s       Add shared memory to dump settings
+      v       View dump settings
+      x       Set up for extended dump - full plus shared memory
+
+The force dump command requires that a PID or process name be specified.
+Other commands to not require this.
+
+Command line switches must appear first.  Command line arguments can be
+entered in any order.  PDumpCtl will try to figure out what you mean.
+
+PDumpCtl operates in two modes - batch or interactive.
+
+In batch mode, PDumpCtl processes the batch mode commands on the command
+line and exits.
+
+In interactive mode, PDumpCtl processes any batch mode commands on the
+command line and then prompts the user for additional commands.
+
+See the Examples section for typical PDumpCtl command lines.
+
+In interactive mode, PDumpCtl prompts for commands with
+
+  D)ump N)orm. I)nst. F)ull S)hare X)tend. A)ll R)eset O)ff V)iew H)elp Q)uit ? h
+
+where the available commands are
+
+  D - Force dump using current settings
+  N - Reset to Normal style - summ,mvdm,sem,sysldr,sysfs,sysvm,syssem
+  I - Reset to Instance style - summ,instance,mvdm,sem,sysldr,sysfs,sysvm,syssem
+  F - Select Full style - adds sysldr,sysvm,private,instance,syssem,sysio
+  S - Add Shared - adds shared to current settings
+  X - Select Extended - adds sysldr,syspg,private,instance,syssem,sysio,shared
+  A - Select All style - adds paddr(all) - resets all other settings
+  R - Reset to Default style - selects system default settings
+  O - Turn off dump facility
+  V - View current settings
+  H - Display this screen
+  Q - Quit
+  ? - Display this screen
+  ! - Shell
+
+The "Choosing a Dump Style" selection discusses the availabe dump styles in
+more detail.
+
+When PDumpCtl exits, the current Dump Facility settings are retained.  This
+is useful when you need to wait for a trap to occur.  If this is not what you
+want, use the O command to turn off the Dump Facility before quitting
+PDumpCtl.
+
+The same is true when PDumpCtl starts.  The script does not change the
+Dump Facility settings unless requested.  If the Dump Facility is off when
+you start the script, use the N command to turn on the Dump Facility and
+select the Normal dump style.
+
+The View command displays the current settings as defined by the Process Dump
+Facility.  PDumpCtl.cmd contains short explanations of these settings.
+\OS2\SYSTEM\RAS\PROCDUMP.DOC contains full explanations of these settlings.
+
+If you are using PDumpCtl4.cmd, usage is the same.
+
+If 4OS2 is not your default shell, start PDumpCtl4.cmd with the command
+
+  4OS2 /c PDumpCtl4
+
+If 4OS2 or PDumpCtl4.cmd are not in the PATH, you will need to supply full
+path names.
+
+Once you have a dump file, you can view it with the Process Dump Facility
+(pmdf).  If you need help getting started with pmdf, see
+
+  http://www.warpcave.com/os2diags/ProcDumpRef.txt
+
+== Choosing a Dump Style ==
+
+PDumpCtl defines the following process dump styles
+
+  Default
+  Normal
+  Instance
+  Full
+  Extended
+  All
+
+The Default style produces the smallest dump file and the All style produces
+the largest.
+
+The Default style selects the process dump settings defined by the kernel or
+by the PDUMPUSR command in config.sys.  Unless overridden by a PDUMPUSR
+command in config.sys, this style is equivalent to
+
+  PDUMPUSR SUMM,MVDM,SEM,SYSFS
+
+which typically result in a dump file of 1MB or so.  This style is not
+recommended because it omits data often required to effectively analyze
+application failures.
+
+The Normal dump style is equivalent to
+
+  PDUMPUSR SUMM,MVDM,SEM,SYSLDR,SYSFS,SYSVM,SYSSEM
+
+which typically results in a dump file of 3MB or so.  This is the recommended
+dump style.  It should be used, unless it is already known that private
+and/or shared data will be needed to effectively analyze the failure.  The
+dump file is relatively small, but includes the system wide data that is
+almost always needed to analyze failures in complex applications.
+
+This is a good choice if you want to capture a dump file for all process
+exceptions.  The dump files are small enough not to fill up the volume too
+quickly, but contains enough data to do useful analysis for a wide variety of
+process failures.
+
+The Instance dump style is equivalent to
+
+  PDUMPUSR SUMM,INSTANCE,MVDM,SEM,SYSLDR,SYSFS,SYSVM,SYSSEM
+
+which typically results in a dump file of 3MB plus the size of the process's
+instance data.  This style is a good choice if the Normal style does not
+include all the private data you need to analyze, but the stack traces are
+good enough that you don't need to have the executable code included in the
+dump file.
+
+The Full dump style is equivalent to
+
+  PDUMPUSR SUMM,PRIVATE,INSTANCE,MVDM,SEM,SYSLDR,SYSFS,SYSVM,
+           SYSSEM,SYSIO
+
+These settings can result in a relatively large dump file because the dump
+file will include all of the process's private code and data.  Depending on
+the application the dump file can be 100MB or larger.
+
+This dump style is useful when the process private executable code
+needs to be be analyzed.
+
+The Extended dump style is equivalent to
+
+  PDUMPUSR SUMM,PRIVATE,SHARED,INSTANCE,MVDM,SEM,SYSLDR,SYSFS,
+           SYSVM,SYSSEM,SYSIO,SYSPG
+
+These settings result in larger dump file than the Full style because the
+dump file will also include all of the process's shared data.  Depending on
+the application the dump files can be 100MB or larger.
+
+This dump style is required when the content of the code and data in shared
+memory needs to be analyzed.
+
+The All dump style is equivalent to
+
+  PDUMPUSR PADDR(ALL)
+
+This is effectively the same a writing a system dump, but the system is not
+rebooted after the dump file is written.  The dump file will be large since
+all physical memory will be written to the dump file.
+
+This dump style is rarely used.  In rare cases, attempting to capture a Full
+or Extended dump results in sufficient paging activity to hang the Process
+Dump Facility.  The solution is to capture an All style dump which does not
+require any paging.
+
+If you are not sure which dump style you should use, ask a developer for
+guidance.
+
+== Examples ==
+
+To capture of process dump for a running httpd process that has hung:
+
+ PDumpCtl r x d o httpd
+
+which resets the Dump Facility, configures for an extended dump of httpd.exe,
+forces the dump, turns off the Dump Facility and exits.
+
+To capture a process dump for firefox.exe when it traps:
+
+ PDumpCtl r x firefox
+
+which resets the Dump Facility, configures for an extended dump of httpd.exe
+and exits.  After the dump file has been captured:
+
+  PDumpCtl r o
+
+which resets the Dump Facility to the default settings and turns off the Dump
+Facility.
+
+To run PDumpCtl in interactive mode:
+
+  PDumpCtl -i
+
+which starts PDumpCtl in interactive mode and prompts for commands.  The dump
+settings will apply to any process.
+
+To run PDumpCtl in interactive mode for firefox.exe:
+
+  PDumpCtl -i firefox
+
+which starts PDumpCtl in interactive mode, sets the process name to firefox
+and prompts for commands.  The dump settings will apply only to firefox.exe.
+
+== Proliant Servers ==
+
+On some Proliant servers, some dump styles will cause the Process Dump
+Facility to hang or trap because these dump styles normally add SYSVM to the
+dump options.  To avoid this, use the -p option when starting PDumpCtl.
+
+== Known Issues ==
+
+None, as of today.
+
+Good luck,
+
+Steven

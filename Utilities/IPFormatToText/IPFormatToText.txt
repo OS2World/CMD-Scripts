@@ -1,0 +1,96 @@
+
+
+IPFormatToText User's Guide v0.3
+================================
+
+IPFormatToText takes the output of ipformat and rewrites the DATA sections
+as text.  Ipformat formats these sections as a combination of hex and text.
+If the logged DATA is mostly readable text, as is the case with many TCP/IP
+application protocols, the output of IPFormatToText is easier to read and
+analyze than the output of ipformat alone.
+
+
+Installation
+============
+
+The script may be installed in a directory of your choice. If you use it a
+lot, you probably will want to install it in a directory in the PATH.
+
+
+Usage
+=====
+
+To run the script, invoke it with the names of one or more files containing
+ipformat output.  If run with no arguments, the script will read from stdin.
+Output will be written to stdout.
+
+There are some optional command line switches.  Switches are unix style and
+begin with a dash (-) and are case-sensitive.  Slashes (/) will not work.
+The switches are:
+
+  -h	Display usage help.
+  -V	Display version info and exit.
+
+The following is a typical example of how iptrace, ipformat and
+IPFormatToText would be used together.  Set up your test environment and start
+tracing with
+
+  iptrace
+
+Let iptrace run until you have collected sufficient data.  Then press the
+Enter key to stop iptrace.
+
+Format the captured data with
+
+  ipformat >ipformat.lst
+
+If ipformat displays the message
+
+ Opening IPTRACE.DMP ...  FAILED
+
+You are not in the directory that contains iptrace.dmp.  You need to resolve
+this problem before continuing.
+
+If ipformat displays the messages
+
+ Opening IPTRACE.DMP ...  Successful
+ Reading packet headers ...  Unable to read 1st header
+
+iptrace has not captured any data.  You need to resolve this problem before
+continuing.
+
+Reformat the ipformat output with
+
+  IPFormatToText ipformat.lst >ipformat.txt
+
+Ipformat to text will contain the reformatted output.
+
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU   General
+Public License.  The GPL Software License can be found in   gnugpl2.txt or at
+http://www.gnu.org/licenses/licenses.html#GPL
+
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net
+
+Fri Mar 22 13:21:02 2013 SHL

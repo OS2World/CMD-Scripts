@@ -1,0 +1,111 @@
+
+
+RepointRepository User's Guide                                27 Dec 2011
+==============================
+
+RepointRepository is a somewhat intelligent utility to rewrite the CVS/Root
+and CVS/Repository files in a CVS sandbox after the repository location has
+moved.
+
+For safety, the default RepointRepository action is to scans the sandbox and
+report the changes that would to be made.  A switch option must to supplied
+to enable file updates.
+
+Installation
+============
+
+Install the executable in a directory of your choice. You should probably
+install it to a directory in the PATH.
+
+Usage
+=====
+
+RepointRepository expects to be run from a directory tree containing a a CVS
+sandbox.  If run from elsewhere, it will not break anything, but it will not
+find anything that needs to be updated either.
+
+The script takes a CVS repository location (i.e. a CVSROOT value) and a
+module name and determines which Root and Repository files need to be
+rewritten.
+
+The command line syntax is:
+
+  RepointRepository [-h] [-u] CvsRoot [CvsModule]
+
+where the the switch options are
+
+  -h    Display this message.
+  -u    Update files.  Otherwise just scan and report.
+
+The command argument are
+
+  CvsRoot    A new repository location which can be specified in the form
+
+            :pserver:username@hostname:pathname
+            :pserver:guest@cvs.netlabs.org:/netlabs.cvs/odin32xp
+            :local:pathname
+            :local:d:/DevData/CVSRepository
+            :ext:pathname
+            :ext:/usr/local/cvsroot
+            %CVSROOT%
+
+  CvsModule  The new module name.  To leave the module name unchanged omit
+             this argument.
+
+Switches must begin with a dash (-) and are case-sensitive.
+
+If the CvsRoot value is incomplete, you will be prompted to supply the
+missing pieces.
+
+The current module name can be found in the CVS/Repository file of the top
+level directory.  In general, you will not want to change the module name, so
+the argument can be omitted.  The module name can be either a relative or
+absolute path.  A relative path is relative to the value of CVSROOT.  An
+absolute path is relative to the root of the repository.  Relative paths are
+preferred.  To convert absolute paths to relative paths, supply ".", without
+the quotes, as the CvsModule argument.
+
+Run the script without the -u option and check that the proposed changes make
+sense.  Then run the script with the -u option to rewrite the Root and
+Repository files.
+
+It is probably a good idea to logout of the repository before updating the
+Root and Repository files.  This will prevent cluttering up %HOME/.cvspass
+with stale data.  The adventurous can always edit .cvspass by hand to match
+the new CVSROOT location.
+
+If you do logout, don't forget to login to the repository after the
+update completes the CVSROOT edits.
+
+After you are logged in, you can check your work with the cvs command
+
+  cvs -nq upd
+
+This should find the server and report any pending updates.
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU   General
+Public License.  The GPL Software License can be found in   gnugpl2.txt or at
+http://www.gnu.org/licenses/licenses.html#GPL
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net
+

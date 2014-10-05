@@ -1,0 +1,234 @@
+Trace Reference                                           10 Dec 2004
+---------------     				     Steven H. Levine
+                                                steve53@earthlink.net
+
+
+0.  Introduction.
+
+This note explains how to set up and record trace data and how to do basic 
+analysis.
+
+1.  Setup.
+    ------
+
+The Trace Facility is an optional component, so you if you not have it
+installed, now is the time to run Selective Install.
+
+Once you have it installed you need to configure it.
+
+To enable the other trace commands, issue the command:
+
+  TRACE ON /B:512
+
+This tells the kernel to allocate 512Kbytes for the trace buffer. The Trace 
+Facility stores trace data in memory until it is retrieved.  Since the 
+buffer is fixed size old data will eventually be overwritten. Sometimes the 
+hardest part of using the trace is limiting the captured data so that the 
+events you are really interested in are not overwritten before you have a 
+chance to retrieve them.
+
+If you need to trace earlier in the boot process, add the statement:
+
+  TRACEBUF=512
+
+to config.sys and reboot.
+
+2.  Recording Trace Data
+    ---------------------
+
+To use the Trace Facility you need to tell the kernel which events to 
+capture. This is done with the TRACE command. The syntax of the command 
+options are typically IBM but using the command is otherwise straight 
+forward. You can select the events and processes to be traced and you can 
+start, stop, suspend and resume tracing.
+
+To make using the trace a bit easier to use, I've supplied a small script. 
+Use it to create a .cmd file and customize it for your specific tracing 
+needs.  I called this one MyTrc.cmd.  You can name yours whatever you like.
+
+If your system does not boot from the C: drive, edit the drive letter to match.
+
+Replace the:
+
+  trace on kernel(55,56,98,99,212,213,255,256,424,425)
+
+statement with one that captures the data you are interested in.  Note that 
+IBM changed the names and organization of the .TDF files for MCP/eCS.  For 
+MCP/eCS this would change to:
+
+  trace on os2krnlr(55,56,98,99,212,213,255,256,424,425)
+
+The .TDF files contain tables that tell the Trace Facility where and how to 
+patch the kernel for each tracepoint.
+
+
+::------------ cut here ----------------
+:: MyTrc.cmd
+
+start tracefmt
+
+setlocal
+
+:: Best if run from trace directory.
+:: Replace c: with boot drive letter.
+c:
+cd \os2\system\trace
+
+echo Use Ctrl-C to quit
+
+trace off
+
+:loop
+
+echo on
+trace on kernel(55,56,98,99,212,213,255,256,424,425)
+trace /q
+trace /r
+@echo off
+
+echo Tracing resumed, press enter to suspend...
+pause >nul
+trace /s
+echo Tracing suspended, press enter to restart...
+pause >nul
+
+goto :loop
+::------------ cut here ----------------
+
+
+The script does two things.  It starts the Trace Formatter and it starts the
+Trace Facility.  Once the Trace Facility is running the script loops and lets
+you suspend and resume to trace. Wnen you are done with the script, press 
+Ctrl-C to kill the script and type:
+
+  trace off
+
+from the command line to turn off the Trace Facility.
+
+It is important to suspend tracing as soon as possible
+after you have captured the events of interest.
+Otherwise, they might be overwritten.
+
+To use to Trace Facility to capture trace data:
+
+ - Start the trace script you created in a command line window.
+ - Wait for the Trace Formatter to start.
+ - Switch back to the trace script window.
+ - Press enter to suspend the trace.
+ - Do what ever you need to get the application to just before the point where it
+   generates the data you need.
+ - Switch to the Trace Formatter window.
+ - Use the File -> Recapture option to read in the contents of the trace buffer.
+ - This gets rid of the really stale trace data.
+ - Switch to the script window.
+ - Press Enter to resume the trace.
+ - Make the application generate trace data.
+ - Switch to the script window.
+ - Press enter to suspend the trace.
+ - Switch to the Trace Formatter window.
+ - Use the File -> Recapture option to read in the contents of the trace buffer.
+ - Scan the trace buffer for interesting events.
+ 
+Note that the Trace Formatter lists the most recent entries first.
+
+4.  Analyzing Trace Data - an Example
+    ----------------------------------
+
+Now for an example, using the command line to generate a file open error 
+with no error message.
+
+Set up as described above.  When ready to generate the error, switch to an 
+unused command line window and type:
+
+  copy xxx yyy >nul 2>nul
+
+This should fail without any error information appearing on the screen.
+
+Switch to the script window and press enter to suspend the trace and continue
+as described above to retrieve and inspect the formatted trace data.  
+Search for the file open request.
+
+If you use 4OS2, you should find a set of reports similar to:
+
+  (OS) DosOpen2 Post-Invocation  Event [9]  Major [5/0x0005]  Minor 
+[98/0x0062]  PID [1655/0x0677]  Length [6]  Time [18:23:43.29]  Action = FFFF  
+ Handle = 0000  Return Code = 006E
+
+  (OS) DosOpen2 Pre-Invocation
+  Event [10]  Major [5/0x0005]  Minor [255/0x00ff]  PID [1655/0x0677]  Length [48]  Time [18:23:43.29]
+  Return IP=4285  CS=DFD7
+  Filename = D:\TMP\0\xxx
+  Mode = 0040   Control = 0001
+  Attrib = 0000   Size = 0000 0000
+
+
+The Pre-Invocation report shows the file name.
+
+The Post-Invocation report shows that the file open request failed with
+error code 6E.  Translating the error code from hexadecimal to decimal and
+checking the handy error list in the "Control Program Guide and Reference" 
+tells us that the code indicates:
+
+  110   ERROR_OPEN_FAILED
+          Open/create failed due to explicit fail command.
+
+This is what we expected.
+
+If you use CMD.EXE, the error will be reported for DosFindFirst.
+
+Now the next time you get an application that complains it can't find a 
+file, but refuses to report the file name, you can go find the name of that 
+mystery file yourself.
+
+This is just a small example of the power of the Trace Facility. It can be 
+used for troubleshooting many other kinds of problems. If you have a problem 
+and are wondering if a trace can help you diagnose it or if you have a trace 
+setup question feel free to contact me.
+
+
+4.  Caveats
+    -------
+
+The .TDF files supplied with the base MCP/eCS are badly broken.  Many of the 
+useful shorthand commands such as:
+
+  trace on kernel(fs=pre+api+post)
+
+do not work.  The best solution is to update to a newer kernel.  The 
+10/26/2001 kernel (14.086) seem to be fixed.  If you must work the the 
+base kernel, you will have to use the numeric codes to supply the trace 
+points and some may still not work.
+
+If you are running MCP/eCS, traceref.inf is missing all of the important 
+trace code details.  You'll have to use the Warp4 version of traceref.inf.
+
+Hopefully, CP1 or CP2 will fix this.
+
+
+4.  Other resources
+    ---------------
+
+    http://www.scoug.com/os24u/2001/scoug008.mrkia.html
+
+      A worked example of a trace scenario:
+
+    \os2\system\ras\trace.doc
+
+      An overview of the trace facility including  the new featurs
+
+    \os2\book\traceref.inf (Warp4)
+
+      Trace documentation accurate as of 1996
+
+    \os2\book\os2trace.inf (MCP/eCS)
+
+      Trace documentation accurate as of 1999
+
+    \os2\book\traceref.inf (MCP/eCS)
+
+      Trace code documentation.  Current version is badly broken
+
+
+Good luck.
+
+Steven

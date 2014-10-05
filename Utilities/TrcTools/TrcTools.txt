@@ -1,0 +1,140 @@
+
+How to use the trace tools
+2011-03-01 SHL
+
+This package includes two scripts (trcinit.cmd and trcctl.cmd) that
+implement an interface to the OS/2 Trace Facility.  These scripts are
+designed to make it easier to capture the specific trace data needed to
+analyze a problem.  The scripts are generic.  The tracepoints and settings
+needed to capture specific data are defined in a configuration file. The
+configuration file name is passed to trcinit on the command line.  If you do
+not supply a configuration file name trcinit will look for the file named
+trcinit.cfg.
+
+You need to have a working OS/2 trace setup to use these scripts.
+
+If you don't have a working OS/2 trace setup, see:
+
+ http://home.earthlink.net/~steve53/os2diags/TraceRef.txt
+
+for a cookbook setup guide.  TraceRef.txt explains how to get the OS/2 Trace
+Facility ready to use on your system.  It also includes a sample script for
+those that want to write their own scripts.  The sample script is
+exactly that - a sample.  It is unlikely to capture data relevant to your
+particular problem.
+
+Once you have the trace facility working, place trcinit.cmd, trcctl.cmd and
+the trace configuration file in a convenient directory.  This will often be
+the application home directory.
+
+If you are working on an application startup problem, shut down the
+application before running trcinit.
+
+Run trcinit from the command line supplying the name of the trace
+configuration file.
+
+Trcinit will setup the tracepoints and invoke trcctl.  Trcctl provides an
+interactive interface to the trace facility.
+
+If application in not running, start it now.
+
+Perform whatever actions are needed to trigger the problem you are
+analyzing.
+
+Switch to the Trace Formatter window and request File -> Recapture.  The
+Trace Formatter will read the captured trace data from memory and display it
+in the formatter window.
+
+The formatted trace data display is in reverse time order, so you usually
+need to read the window from the bottom up.
+
+The trace buffer is fixed size and new data overwrites old data. Request the
+recapture as soon as possible after the problem occurs or you may lose the
+data you need to see.
+
+To write the formatted data to a file, use File -> Save Formatted.
+
+When you are done with the trace, switch back to the trcctl window and enter
+q to shut down trcctl.cmd.  Trcctl will turn off all tracepoints and reset
+the Trace Facility to a disabled state.
+
+You will usually be supplied with a preconfigured configuration file, but
+for the curious, here is an overview of the configuration file options.
+
+Comment lines begin with a semicolon (i.e. ;).  Blank lines are ignored.
+Each configuration commands must be on a single line.  Command lines are of
+the form:
+
+  keyword = value
+
+Command keywords and values are case-insensitive.  Some commands take yes/no
+values.  Yes/no values such as Y, Yes, 1, N, No and 0 are accepted.
+
+The configuration command keywords and their values styles are:
+
+  keyword          value style          default
+  -------          -----------          -------
+  CMD         =    trace command        none
+  DIEONERROR  =    yes/no               yes
+  EXE         =    executable name      none
+  FINDPID     =    yes/no               no
+  PID         =    hexadecimal PID      none
+
+All configuration commands are optional, although a typical configuration
+file will have an EXE command and one or more CMD commands.  A simple example
+would be:
+
+  exe = trace
+  cmd = trace on os2krnlr(fs)
+
+The CMD keyword defines a trace command.  Typically, the command value will
+be a trace command to set specific tracepoints, as shown in the example.  The
+command value is passed to the shell for execution, so this value can be any
+valid shell command.  You can define multiple trace commands by supplying
+multiple CMD commands.  The commands will be executed in the order they
+appear in the configuration file.
+
+The DIEONERROR command defines how certain errors are handled.  If the
+keyword value is set to no, trcinit will continue if an executable or PID
+can not be found or if a CMD command fails. The default action is to quit.
+
+The EXE keyword value specifies an executable to be traced.  Trcinit will
+search the PATH for the executable and will report if the executable can not
+be found.  To trace multiple EXEs, supply multiple EXE commands.  If
+there are no EXE or PID commands, all executables will be traced.
+
+The FINDPID command controls PID lookup.  If the command value is yes,
+trcinit looks up the PID for the executable(s) named by the EXE command(s).
+If the executable is not running, trcinit will report the error and quit.
+The default action is to bypass PID lookup.
+
+The PID command specifies the hexadecimal process ID of a process to be
+traced.  Trcinit will search the process list and report the name of the
+executable corresponding to the PID.  If the search fails, trcinit will
+report the error and quit.  To trace multiple PIDs, supply multiple PID
+commands.  The PID command may not be used with the EXE command unless PID
+lookup is enabled with the FINDPID command.
+
+WARNING
+=======
+
+As of 08 Sep 2004, it is known that krnlrfs tracepoints 281 and 282, which
+are in the QUE group, will trap with kernels between 14.93c and 14.100c.
+This may not be a complete list.  This means, do not specify:
+
+  trace on krnlrfs
+
+or
+
+  trace on krnlfs(que)
+
+Specify explicit tracepoints or groups that do not include the above trace
+points and group.  For example:
+
+  trace on krnlrfs(fs)
+
+is OK.
+
+Good luck,
+
+Steven

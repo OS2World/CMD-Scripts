@@ -1,0 +1,424 @@
+Nowhere Tools v0.1
+2009-12-07 Released
+2011-09-16 Documentation updates
+2011-12-09 Minor documentation updates
+
+== Introduction ==
+
+Most of us have been, at one time or another, been afflicted by multiple
+Nowhere folders.  This is a collection of scripts to a can recovery from this
+affliction.
+
+== What is the Nowhere folder ==
+
+On a pristine system, the Nowhere folder is named Nowhere and is a
+subdirectory of the root directory of the boot volume and has the object id
+<WP_NOWHERE>.
+
+The Nowhere folder is normally not visible in the Drives object and contains
+objects that are also not visible.  There are a variety of reasons for an
+object to be stored in the Nowhere.  The common factor is that the object is
+not intended to be directly manipulated by the user.
+
+We refer to this Nowhere folder and the true Nowhere folder.
+
+== WPS 101 ==
+
+The WPS identifies objects by their object handles.  An object handle is a
+16-bit number.  To simplify processing an increase the total system capacity,
+object handles are prefixed by a code that defines the object type.  The
+object type codes are 1-transient, 2-abstract and 3-persistent.  Transient
+objects exist for the duration of the operation that creates the object.
+Abstract object handles represent objects that are not associated with a
+physical file or directory.  Persistent object handles represent objects that
+are associated with a physical file or directory.
+
+The WPS stores object handles in a number of forms, which can be confusing.
+Some tables store the object handle as a decimal string.  Others store the
+object handle as a hexadecimal string.  Others store the object handle as
+binary integer.
+
+The object handle for a given object can and will vary from system to system.
+
+An object id is a symbolic name for an object.  This allows the WPS to
+locate an object by an invariant, well-known name.
+
+The WPS maintains a table that cross-references object ids and object
+handles.  This table is the os2.ini application named PM_Workplace:Location.
+The keys are object ids.
+
+The WPS maintains tables that cross-references object handles and file and
+directory names.  These tables are stored in the os2sys.ini applications
+named PM_Workplace:Handles1 and PM_Workplace:Handles2.
+The os2sys.ini application PM_Workplace:ActiveHandles selects which
+application is in use.  The object handle is also stored in the .CLASSINFO
+extended attribute of the file or directory.
+
+The WPS maintains a table that lists all the abstract object handles.  This
+table is stored in the os2.ini application named PM_Abstract:Object.  The
+application keys are the hex formatted object handle.  Since the table
+contains only abstract objects, the object type code (i.e. 2) is omitted.
+
+== What Causes Multiple Nowhere Folders ==
+
+If the WPS or the system fails at just the right time, the Nowhere folder can
+lose its object id.  The Nowhere folder could lose its extended attributes or
+the handles table could lose the Nowhere directory entry.
+
+This does not cause problems for the objects in the original Nowhere folder.
+These objects still have valid object handles, so the WPS can find them.
+
+However, the next time the WPS wants to create an object in the Nowhere
+folder, it will need to find the Nowhere folder by its object id and this
+lookup will fail.  The WPS recovers by creating a replacement Nowhere folder
+with a unique numeric suffix and assigns it the object id <WP_NOWHERE> and
+this becomes the Nowhere folder.  The result is folders named Nowhere1,
+Nowhere2 and so on.  The content of the Nowhere folder does not change much
+on most systems, so the object id might be lost long before it triggers the
+creation of a new Nowhere folder.
+
+We refer to the replacement Nowhere folders as extra Nowhere folders.
+
+== Installation ==
+
+Unzip the scripts to a work directory.
+
+Make sure you have checkini.exe installed and know how to run it.  See
+checkini.txt for guidance.
+
+Make sure you have cleanini.exe installed and know how to run it.  See the
+cleanini readme for guidance.
+
+Make sure wptools.dll is somewhere in LIBPATH
+
+== The Scripts ==
+
+CreateANowhereFolder creates a standard WPNowhere folder.
+
+ShowNowhereFoldersContents lists the Nowhere folders and their contents to the
+standard output.
+
+RepairNowhereObjectId resets the Nowhere folder object id to <WP_NOWHERE>.
+
+MakeNowhereFolderVisible modifies the WPS and filesystem attributes of a
+Nowhere folder to make the folder visible in the Drive folder.
+
+MakeNowhereFolderHidden resets the WPS and filesystem attributes to
+their standard values with the result that the Nowhere folder will not
+display in the Drive folder.
+
+MoveNowhereObjects interactively moves objects found in the extra Nowhere
+folders to the standard Nowhere folder.
+
+ShowDockFiles lists the dock files and the object handles they contain to
+the standard output.  The eComCenter/WarpCenter stores SCShadow objects in
+the Nowhere folder.
+
+== Backup up your Desktop ==
+
+Before attempting to fix any WPS problem, the first step is to backup your
+Desktop.  The procedures and scripts discussed in this guide try to avoid
+causing additional problems, but you already have a problem, so there are no
+guarantees.
+
+My preferred backup tool is the combination of Unimaint's Desktop and
+Supplemental backup.  These easily configured to backup multiple generations
+and to backup private INI files and other important configuration files.
+
+If you don't have Unimaint, the built-in eCS/OS2 desktop backup is a viable
+option as are tools like Robosave.  The important thing is that the tool
+must save both the Desktop INIs and the Desktop directory structure.
+
+== Capture the Current WPS State ==
+
+Run
+
+  checkini /s /w
+
+to write a human-readable report of the current state of the WPS INIs and
+related data to checkini.log.  Rename checkini.log with a unique numeric
+suffix so that subsequent checkini runs to not overwrite the report.  For
+example
+
+  rename checkini.log checkini1.log
+
+As you make changes, the content of this report might become stale.  If so,
+generate a fresh report and rename the new report with a unique numeric
+suffix.
+
+This recommendation applies to other reports as well.  You never know when
+you might want to refer to the report generated yesterday.
+
+== Correct Other WPS Errors ==
+
+Before you attempt to repair the Nowhere folders, make sure that there are
+no other WPS errors that might interfere with the process.  Run
+
+  checkini /c
+
+and correct the reported errors.  If you don't understand what checkini is
+reporting, ask your local WPS power user for some assistance.
+
+After the correctable errors have been resolved, run
+
+  cleanini /c /logdel /multipass /reset
+
+to delete the unreferenced location records and reset the Desktop
+
+Repeat this step until checkini reports no unexpected errors.
+
+Make a fresh Desktop backup.
+
+== Fixing the Nowhere Folder Object Id ==
+
+Run
+
+  ShowNowhereFolders >NowhereFolders.lst
+
+to capture the current state of your Nowhere folders.  NowhereFolders.lst is a
+somewhat human-readable dump of the Nowhere folders from the WPS's POV.
+
+If you have ever used the eComCenter/WarpCenter, run
+
+  ShowDockFiles >DockFiles.lst
+
+DockFiles.lst lists the object handles stored in the dock files.
+
+If ShowNowhereFolders reports it can not find the <WP_NOWHERE> folder, you
+need to repair this error.  Otherwise, skip the rest of this step.
+
+Run
+
+  RepairNowhereObjectId
+
+to repair the lost <WP_NOWHERE> object id.  If successful, the script will
+display output similar to
+
+<WP_NOWHERE> now has the current settings:
+Object handle: <WP_NOWHERE>
+Class name   : WPVault
+Title        : NOWHERE
+Location     : <Drive_F>
+Setup string : ICONVIEW=NONGRID,NORMAL;TREEVIEW=LINES,VISIBLE,NORMAL;
+               DEFAULTSORT=-2; ALWAYSSORT=NO;TITLE=NOWHERE;NOMOVE=YES;
+               NODELETE=YES;NOPRINT=YES;NODRAG=YES;NORENAME=YES;
+               HIDEBUTTON=DEFAULT;MINWIN=DEFAULT;CCVIEW=DEFAULT;
+               DEFAULTVIEW=DEFAULT;OBJECTID=<WP_NOWHERE>;
+
+<Drive_F> will be your boot volume.  If the script fails, ask your local WPS
+power user for some assistance.
+
+== Removing the Extra Nowhere Folders ==
+
+Run
+
+  ShowNowhereFolders >NowhereFolders.lst
+
+to capture the current state of the Nowhere folders.
+
+If the report shows that only the true Nowhere folder exists, skip the
+rest of this step.
+
+Otherwise, review the ShowNowhereFolders output.
+
+Delete each extra Nowhere folder that has no content.  Normally, the Nowhere
+folders are not visible in the Drive folder.  They are marked NOTVISIBLE in
+the WPS settings and System and Hidden in the file system settings.  You can
+change the folder's view settings to show hidden files or you can delete the
+folder from the command line or use your favorite file manager.
+
+If after deleting the empty extra Nowhere folders, only the true Nowhere
+folder exists, you are done with this step.  Skip the rest of this step.
+
+Otherwise, you will need to delete any excess or duplicate objects and move
+the remaining objects in the extra Nowhere folders to the true Nowhere
+folder.  Then you can delete the empty extra Nowhere folders.
+
+If you have deleted any extra Nowhere folders, run
+
+  ShowNowhereFolders >NowhereFolders.lst
+
+to capture the current state of the Nowhere folders.
+
+Before proceeding, review the contents of the Nowhere folders and make sure
+the folders contain only objects you want to keep.  If you have any excess
+objects in the Nowhere folders, delete them now.  The excess objects will
+typically be duplicates of objects already in the true Nowhere folder or
+unused shadows.
+
+Be careful to only delete objects that are not in use.
+
+Be careful to move only objects you want to keep to the true Nowhere folder.
+Once objects are in the true Nowhere folder, they will be difficult to
+remove.
+
+When the extra Nowhere folders contain only objects you want to retain and
+move to the true Nowhere folder, run
+
+  MoveNowhereObjects
+
+The script will list the objects it finds in the each extra Nowhere folder
+and offer to move the objects to true Nowhere folder.  Let the script try to
+move the objects.  For as yet unknown reasons, the WPS will prevent some
+objects from being moved.  These will be handled later.
+
+If the script is able to move any objects, return to the start of this step.
+Repeat this step until only objects that can not be moved by
+MoveNowhereObjects remain.
+
+The rest of the moves will have be done from the Desktop with drag and drop.
+
+Run
+
+  MakeNowhereFolderVisible
+
+to make the true Nowhere folder visible.  For each numbered Nowhere folder
+run
+
+  MakeNowhereFolderVisible #
+
+where # is the folder number.  In addition to attempting to make the extra
+Nowhere folder visible, the script adjusts the WPS title setting to match the
+folder name.  The WPS may prevent the script from making the folder visible.
+This will be handled later.
+
+Close the drive drive folder for the boot volume and reopen it and the
+Nowhere folders may be visible.  WPVault objects are odd, so the folders may
+remain not visible.  If this is the case, open the properties notebook for
+the boot drive object and change the include settings to show hidden files.
+Click on the Include tab and change the Include criteria from the typical
+
+  Include Flags Less than              - - H -
+
+to
+
+  Include Flags Greater than or equal  - - - -
+
+Make a note of the original settings so you can restore them later.
+
+After changing the settings, close the drive folder and reopen it.  The
+Nowhere folders should display.
+
+Try to open the extra Nowhere folders from the drive folder.  It is possible
+that one or more of the extra Nowhere folders will refuse to open.  If so,
+open a command line session and for each extra Nowhere folder that refuses to
+open, run
+
+  eautil Nowhere# Nowhere#.eas /s
+
+from the root of the boot volume.  Replace # with the number of the extra
+Nowhere folder that refuses to open.  This will remove the extra Nowhere
+folder's Extended attributes and convert the folder from a WPValut object to
+a normal folder..  Reset the WPS and you should be able open the extra
+Nowhere folders.
+
+You will never be able to open the true Nowhere folder.  This appears to be a
+characteristic of the WPVault class.  However in Tree view, you can click on
+the plus button to the left of the Nowhere folder and expand the tree to show
+the folders that the Nowhere folder contains.
+
+Open each extra Nowhere folder and drag the objects from the extra Nowhere
+folder to the true Nowhere folder.  You do not need to be able to open the
+true Nowhere folder to move the objects to the folder.  Just drop the objects
+on the Nowhere folder object.  It is a valid drop target.
+
+When you have emptied all the extra Nowhere folders and deleted them, run
+
+  MakeNowhereFolderNotVisible
+
+to restore the Nowhere folder to its normally not visible state.
+
+If you have adjusted the boot drive object's Include properties, reset the
+setting to the original value.
+
+== Removing Extra Objects from the True Nowhere Folder ==
+
+If you are lucky, after performing the preceding steps, you should not have
+no extra objects in the true Nowhere folder, but it can happen.
+
+If the true Nowhere folder content is correct, skip this step.
+
+This procedure is a bit complex, so make sure you have a known good, current
+Desktop backup and a known good backup of your true Nowhere folder.
+
+Run
+
+  ShowNowhereFolders >NowhereFolders.lst
+
+to capture the current state of the Nowhere folders.
+
+Determine which objects you want to delete.  In the case of objects with the
+same class and title, you might have to guess.  The same is true for
+WPShadow objects that link to the same object.
+
+For duplicate SCShadow objects, you can delete the objects that are not
+referenced in the dock files.
+
+Make notes of which objects you delete and be prepared to restore the
+Desktop and the Nowhere folder if you guess wrong.
+
+If you delete the wrong object the typical result is something will be
+missing from either the eCenter, the eComCenter, the XCenter or the
+WarpCenter.
+
+Run
+
+  eautil Nowhere Nowhere.eas /s
+
+from the root of the boot volume.  This will remove the Nowhere folder's
+Extended attributes and convert the folder from a WPValut object to a normal
+folder.  Reset the WPS and you should be able open the Nowhere folder.
+
+Run
+
+  RepairNowhereObjectId
+
+to repair the lost <WP_NOWHERE> object id.
+
+Open the Nowhere folder and delete the excess objects.
+
+After the objects have been deleted run
+
+  CreateANowhereFolder
+
+and run
+
+  RepairNowhereObjectId
+
+and reset the Desktop.
+
+Run
+
+  ShowNowhereFolders >NowhereFolders.lst
+
+and verify that folder contains only the expected objects and that the
+Nowhere folder class is WPVault.
+
+== Finish up ==
+
+If you run XWorkplace or eWP, empty the Trash folder.
+
+Run
+
+  checkini
+
+and verify that no expected errors are reported.
+
+Run
+
+  ShowNowhereFolders
+
+and verify that no errors are reported and that only the true Nowhere folder
+exists.
+
+Generate a new Desktop backup.
+
+== Clean up ==
+
+Make a note to delete the various log and listing files you generated two
+weeks from now.  This will should be enough time to ensure that the files
+will not be needed.
+
+Have fun,
+
+Steven

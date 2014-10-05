@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "ー//W3C//DTD HTML 3.2 Final//EN">
+
+<HTML>
+<HEAD>
+<TITLE>フォームのテスト (GET メソッド)</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#ffffff">
+
+<DIV ALIGN="center">
+
+<TABLE WIDTH="85%"><TR><TD ALIGN="center">
+<H1>フォームのテスト (GET メソッド)</H1>
+</TD></TR></TABLE>
+</DIV>
+
+
+<HR size="5">
+
+
+<DIV ALIGN="center">
+
+<TABLE WIDTH="75%"><TR><TD>
+<FORM ACTION="/cgi-bin/test.cgi" METHOD="GET">
+<BR>
+<H2>ラジオボタン</H2>
+<INPUT type="radio" name="server" value="button_1" checked>ボタン1<BR>
+<INPUT type="radio" name="server" value="button_2">ボタン2<BR>
+<INPUT type="radio" name="server" value="button_3">ボタン3<BR>
+<BR>
+<HR SIZE="2">
+<BR>
+一行の入力：<INPUT type="text"  NAME="moji" VALUE="文字" SIZE="40"><BR>
+<BR>
+<HR SIZE="2">
+<BR>
+複数行の入力：<BR>
+<BR>
+<TEXTAREA NAME="mojimoji" ROWS="4" COLS="60">
+文字列入力のエリアです。
+</TEXTAREA>
+<BR>
+<INPUT type="submit" value="確認する"> <INPUT type="reset" value="リセット"><BR>
+<BR>
+</FORM>
+
+</TD></TR></TABLE>
+
+</DIV>
+
+</BODY>
+</HTML>

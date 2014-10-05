@@ -1,0 +1,835 @@
+
+Short form trace code reference
+14 Jan 2005 SHL
+
+This is a list of known OS/2 tracepoints collected from various sources.  If 
+you find errors in this list or have items you would like to add to the list, 
+please contect me.
+
+=== WARNING ====
+
+As of 27 Jul 2004, oskrnlr tracepoints 281 or 282 will trap the kernel for 
+kernel versions 14.93c through 14.100c. Tracepoints 281 an 282 are defined in 
+at least the following groups: VM and VDM.  You have been warned.
+
+==========================================
+=== From Warp4 traceref.inf, 9/12/1996 ===
+==========================================
+
+=== KernelR (Major 5, 0x5) ====
+
+Minor             Group   Remarks
+-----             -----   -------      
+394     (0X018A)  FS      Cluster Allocate Post-Invocation
+393     (0X0189)  FS      Cluster Allocate Pre-Invocation
+395     (0X018B)  FS      Cluster Release Pre-Invocation
+468     (0X01D4)          DOSPROTECTOPEN Pre-Invocation
+370     (0X0172)          Dos32AddMuxWaitSem Post-Invocation
+369     (0X0171)          Dos32AddMuxWaitSem Pre-Invocation
+6       (0X0006)          Dos32AliasMem Post-Invocation
+163     (0X00A3)          Dos32AliasMem Pre-Invocation
+7       (0X0007)          Dos32AllocMem Post-Invocation
+164     (0X00A4)          Dos32AllocMem Pre-Invocation
+8       (0X0008)          Dos32AllocProtectedMem Post-Invocation
+165     (0X00A5)          Dos32AllocProtectedMem Pre-Invocation
+9       (0X0009)          Dos32AllocSharedMem Post-Invocation
+166     (0X00A6)          Dos32AllocSharedMem Pre-Invocation
+378     (0X017A)          Dos32AsyncTimer Post-Invocation
+377     (0X0179)          Dos32AsyncTimer Pre-Invocation
+340     (0X0154)          Dos32CloseEventSem Post-Invocation
+354     (0X0162)          Dos32CloseMutexSem Post-Invocation
+353     (0X0161)          Dos32CloseMutexSem Pre-Invocation
+366     (0X016E)          Dos32CloseMuxWaitSem Post-Invocation
+365     (0X016D)          Dos32CloseMuxWaitSem Pre-Invocation
+336     (0X0150)          Dos32CreateEventSem Post-Invocation
+335     (0X014F)          Dos32CreateEventSem Pre-Invocation
+350     (0X015E)          Dos32CreateMutexSem Post-Invocation
+349     (0X015D)          Dos32CreateMutexSem Pre-Invocation
+362     (0X016A)          Dos32CreateMuxWaitSem Post-Invocation
+361     (0X0169)          Dos32CreateMuxWaitSem Pre-Invocation
+10      (0X000A)          Dos32CreateThread Post-Invocation
+167     (0X00A7)          Dos32CreateThread Pre-Invocation
+11      (0X000B)          Dos32Debug Dos Post-Invocation
+168     (0X00A8)          Dos32Debug Dos Pre-Invocation
+372     (0X0174)          Dos32DeleteMuxWaitSem Post-Invocation
+371     (0X0173)          Dos32DeleteMuxWaitSem Pre-Invocation
+437     (0X01B5)          Dos32DumpProcess Post-Invocation
+436     (0X01B4)          Dos32DumpProcess Pre-Invocation
+49      (0X0031)          Dos32Exit Dos Post-Invocation
+12      (0X000C)          Dos32ExitList Dos Post-Invocation
+51      (0X0033)          Dos32ExitList Dos Post-Invocation
+169     (0X00A9)          Dos32ExitList Dos Pre-Invocation
+13      (0X000D)          Dos32FreeMem Post-Invocation
+170     (0X00AA)          Dos32FreeMem Pre-Invocation
+332     (0X014C)          Dos32FreeResource Post-Invocation
+331     (0X014B)          Dos32FreeRsource Pre-Invocation
+14      (0X000E)          Dos32GetNamedSharedMem Post-Invocation
+171     (0X00AB)          Dos32GetNamedSharedMem Pre-Invocation
+328     (0X0148)          Dos32GetResource Post-Invocation
+327     (0X0147)          Dos32GetResource Pre-Invocation
+15      (0X000F)          Dos32GetSharedMem Post-Invocation
+172     (0X00AC)          Dos32GetSharedMem Pre-Invocation
+16      (0X0010)          Dos32GiveSharedMem Post-Invocation
+173     (0X00AD)          Dos32GiveSharedMem Pre-Invocation
+445     (0X01BD)          Dos32IPROTECTQUERYFHSTATE Post-Invocation
+444     (0X01BC)          Dos32IPROTECTQUERYFHSTATE Pre-Invocation
+443     (0X01BB)          Dos32IProtectSetFHState Post-Invocation
+442     (0X01BA)          Dos32IProtectSetFHState Pre-Invocation
+431     (0X01AF)          Dos32IQUERYFHSTATE Post-Invocation
+430     (0X01AE)          Dos32IQUERYFHSTATE Pre-Invocation
+433     (0X01B1)          Dos32IRead Post-Invocation
+432     (0X01B0)          Dos32IRead Pre-Invocation
+429     (0X01AD)          Dos32ISetFHState Post-Invocation
+428     (0X01AC)          Dos32ISetFHState Pre-Invocation
+435     (0X01B3)          Dos32IWrite Post-Invocation
+434     (0X01B2)          Dos32IWrite Pre-Invocation
+417     (0X01A1)          Dos32InitializePorthole Post-Invocation
+416     (0X01A0)          Dos32InitializePorthole Pre-Invocation
+441     (0X01B9)          Dos32KillThread Post-Invocation
+440     (0X01B8)          Dos32KillThread Pre-Invocation
+338     (0X0152)          Dos32OpenEventSem Post-Invocation
+337     (0X0151)          Dos32OpenEventSem Pre-Invocation
+339     (0X0153)          Dos32OpenEventSem Pre-Invocation
+352     (0X0160)          Dos32OpenMutexSem Post-Invocation
+351     (0X015F)          Dos32OpenMutexSem Pre-Invocation
+364     (0X016C)          Dos32OpenMuxWaitSem Post-Invocation
+363     (0X016B)          Dos32OpenMuxWaitSem Pre-Invocation
+483     (0X01E3)          Dos32PMPostEventSem Post-Invocation
+482     (0X01E2)          Dos32PMPostEventSem Pre-Invocation
+493     (0X01ED)          Dos32PMWaitEvenSem Pre-Invocation
+484     (0X01E4)          Dos32PMWaitEventSem Post-Invocation
+486     (0X01E6)          Dos32PMWaitMuxWaitSem Post-Invocation
+344     (0X0158)          Dos32PostEventSem Post-Invocation
+343     (0X0157)          Dos32PostEventSem Pre-Invocation
+348     (0X015C)          Dos32QueryEventSem Post-Invocation
+347     (0X015B)          Dos32QueryEventSem Pre-Invocation
+488     (0X01E8)          Dos32QueryExtLIBPATH Post-Invocation
+487     (0X01E7)          Dos32QueryExtLIBPATH Pre-Invocation
+419     (0X01A3)          Dos32QueryHeaderInfo Post-Invocation
+418     (0X01A2)          Dos32QueryHeaderInfo Pre-Invocation
+17      (0X0011)          Dos32QueryMem Post-Invocation
+174     (0X00AE)          Dos32QueryMem Pre-Invocation
+18      (0X0012)          Dos32QueryMemState Post-Invocation
+175     (0X00AF)          Dos32QueryMemState Pre-Invocation
+360     (0X0168)          Dos32QueryMutexSem Post-Invocation
+359     (0X0167)          Dos32QueryMutexSem Pre-Invocation
+374     (0X0176)          Dos32QueryMuxWaitSem Post-Invocation
+373     (0X0175)          Dos32QueryMuxWaitSem Pre-Invocation
+334     (0X014E)          Dos32QueryProcAddr Post-Invocation
+333     (0X014D)          Dos32QueryProcAddr Pre-Invocation
+421     (0X01A5)          Dos32QueryProcType Post-Invocation
+420     (0X01A4)          Dos32QueryProcType Pre-Invocation
+410     (0X019A)          Dos32QueryResource Pre-Invocation
+411     (0X019B)          Dos32QueryResourceSize Post-Invocation
+358     (0X0166)          Dos32ReleaseMutexSem Post-Invocation
+357     (0X0165)          Dos32ReleaseMutexSem Pre-Invocation
+356     (0X0164)          Dos32RequestMutexSem Post-Invocation
+355     (0X0163)          Dos32RequestMutexSem Pre-Invocation
+342     (0X0156)          Dos32ResetEventSem Post-Invocation
+341     (0X0155)          Dos32ResetEventSem Pre-Invocation
+127     (0X007F)          Dos32ResumeThread Dos Post-Invocation
+490     (0X01EA)          Dos32SetExtLIBPATH Post-Invocation
+489     (0X01E9)          Dos32SetExtLIBPATH Pre-Invocation
+19      (0X0013)          Dos32SetMem Post-Invocation
+176     (0X00B0)          Dos32SetMem Pre-Invocation
+380     (0X017C)          Dos32StartTimer Post-Invocation
+379     (0X017B)          Dos32StartTimer Pre-Invocation
+155     (0X009B)          Dos32StopTimer Post-Invocation
+312     (0X0138)          Dos32StopTimer Pre-Invocation
+439     (0X01B7)          Dos32SuppressPopUps Post-Invocation
+438     (0X01B6)          Dos32SuppressPopUps Pre-Invocation
+151     (0X0097)          Dos32SuspendThread Dos Post-Invocation
+492     (0X01EC)          Dos32VERIFYPIDTID Post-Invocation
+491     (0X01EB)          Dos32VERIFYPIDTID Pre-Invocation
+345     (0X0159)          Dos32WaitEvenSem Pre-Invocation
+346     (0X015A)          Dos32WaitEventSem Post-Invocation
+368     (0X0170)          Dos32WaitMuxWaitSem Post-Invocation
+367     (0X016F)          Dos32WaitMuxWaitSem Pre-Invocation
+485     (0X01E5)          Dos32WaitMuxWaitSem Pre-Invocation
+392     (0X0188)          Dos32WaitThread Post-Invocation
+391     (0X0187)          Dos32WaitThread Pre-Invocation
+20      (0X0014)          DosAllocHuge Post-Invocation
+177     (0X00B1)          DosAllocHuge Pre-Invocation
+21      (0X0015)          DosAllocProtHuge Post-Invocation
+178     (0X00B2)          DosAllocProtHuge Pre-Invocation
+22      (0X0016)          DosAllocProtSeg Post-Invocation
+179     (0X00B3)          DosAllocProtSeg Pre-Invocation
+23      (0X0017)          DosAllocSeg Post-Invocation
+180     (0X00B4)          DosAllocSeg Pre-Invocation
+24      (0X0018)          DosAllocShrProtSeg Post-Invocation
+181     (0X00B5)          DosAllocShrProtSeg Pre-Invocation
+25      (0X0019)          DosAllocShrSeg Post-Invocation
+182     (0X00B6)          DosAllocShrSeg Pre-Invocation
+26      (0X001A)          DosBeep Post-Invocation
+183     (0X00B7)          DosBeep Pre-Invocation
+27      (0X001B)          DosBufReset Post-Invocation
+184     (0X00B8)          DosBufReset Pre-Invocation
+38      (0X0026)          DosCWait Post-Invocation
+195     (0X00C3)          DosCWait Pre-Invocation
+28      (0X001C)          DosCallNmPipe Post-Invocation
+185     (0X00B9)          DosCallNmPipe Pre-Invocation
+29      (0X001D)          DosChDir Post-Invocation
+186     (0X00BA)          DosChDir Pre-Invocation
+30      (0X001E)          DosChgFilePtr Post-Invocation
+187     (0X00BB)          DosChgFilePtr Pre-Invocation
+31      (0X001F)          DosCliAccess Post-Invocation
+188     (0X00BC)          DosCliAccess Pre-Invocation
+32      (0X0020)          DosClose Post-Invocation
+451     (0X01C3)          DosCloseChangeNotify Post-Invocation
+450     (0X01C2)          DosCloseChangeNotify Pre-Invocation
+33      (0X0021)          DosCloseSem Post-Invocation
+190     (0X00BE)          DosCloseSem Pre-Invocation
+34      (0X0022)          DosConnectNmPipe Post-Invocation
+191     (0X00BF)          DosConnectNmPipe Pre-Invocation
+35      (0X0023)          DosCreateCSAlias Post-Invocation
+192     (0X00C0)          DosCreateCSAlias Pre-Invocation
+36      (0X0024)          DosCreateSem Post-Invocation
+193     (0X00C1)          DosCreateSem Pre-Invocation
+37      (0X0025)          DosCreateThread Post-Invocation
+194     (0X00C2)          DosCreateThread Pre-Invocation
+39      (0X0027)          DosDelete Post-Invocation
+196     (0X00C4)          DosDelete Pre-Invocation
+40      (0X0028)          DosDevConfig Post-Invocation
+197     (0X00C5)          DosDevConfig Pre-Invocation
+42      (0X002A)          DosDevIoctl Post-Invocation
+199     (0X00C7)          DosDevIoctl Pre-Invocation
+41      (0X0029)          DosDevIoctl2 Post-Invocation
+198     (0X00C6)          DosDevIoctl2 Pre-Invocation
+43      (0X002B)          DosDisConnectMmPipe Post-Invocation
+200     (0X00C8)          DosDisConnectMmPipe Pre-Invocation
+44      (0X002C)          DosDupHandle Post-Invocation
+201     (0X00C9)          DosDupHandle Pre-Invocation
+45      (0X002D)          DosEditName Post-Invocation
+202     (0X00CA)          DosEditName Pre-Invocation
+1       (0X0001)          DosEnterCritSec Post-Invocation
+203     (0X00CB)          DosEnterCritSec Pre-Invocation
+405     (0X0195)          DosEnumAttribute Post-Invocation
+404     (0X0194)          DosEnumAttribute Pre-Invocation
+47      (0X002F)          DosError Pre-Invocation
+204     (0X00CC)          DosError Pre-Invocation
+206     (0X00CE)          DosExit Dos Pre-Invocation
+2       (0X0002)          DosExitCritSec Post-Invocation
+207     (0X00CF)          DosExitCritSec Pre-Invocation
+208     (0X00D0)          DosExitList Dos Pre-Invocation
+65      (0X0041)          DosFSAttach Post-Invocation
+222     (0X00DE)          DosFSAttach Pre-Invocation
+66      (0X0042)          DosFSCtl Post-Invocation
+223     (0X00DF)          DosFSCtl Pre-Invocation
+52      (0X0034)          DosFileIO Post-Invocation
+209     (0X00D1)          DosFileIO Pre-Invocation
+53      (0X0035)          DosFileLocks Post-Invocation
+210     (0X00D2)          DosFileLocks Pre-Invocation
+54      (0X0036)          DosFindClose Post-Invocation
+211     (0X00D3)          DosFindClose Pre-Invocation
+56      (0X0038)          DosFindFirst Post-Invocation
+213     (0X00D5)          DosFindFirst Pre-Invocation
+55      (0X0037)          DosFindFirst2 Post-Invocation
+212     (0X00D4)          DosFindFirst2 Pre-Invocation
+57      (0X0039)          DosFindFromName Post-Invocation
+214     (0X00D6)          DosFindFromName Pre-Invocation
+58      (0X003A)          DosFindNext Post-Invocation
+215     (0X00D7)          DosFindNext Pre-Invocation
+59      (0X003B)          DosFindNotifyClose Post-Invocation
+216     (0X00D8)          DosFindNotifyClose Pre-Invocation
+60      (0X003C)          DosFindNotifyFirst Post-Invocation
+217     (0X00D9)          DosFindNotifyFirst Pre-Invocation
+61      (0X003D)          DosFindNotifyNext Post-Invocation
+218     (0X00DA)          DosFindNotifyNext Pre-Invocation
+62      (0X003E)          DosFlagProcess Post-Invocation
+219     (0X00DB)          DosFlagProcess Pre-Invocation
+459     (0X01CB)          DosForceDelete Post-Invocation
+458     (0X01CA)          DosForceDelete Pre-Invocation
+63      (0X003F)          DosFreeModule Post-Invocation
+220     (0X00DC)          DosFreeModule Pre-Invocation
+326     (0X0146)          DosFreeResource Post-Invocation
+325     (0X0145)          DosFreeResource Pre-Invocation
+64      (0X0040)          DosFreeSeg Post-Invocation
+221     (0X00DD)          DosFreeSeg Pre-Invocation
+376     (0X0178)          DosGetCP Post-Invocation
+375     (0X0177)          DosGetCP Pre-Invocation
+67      (0X0043)          DosGetDateTime Post-Invocation
+224     (0X00E0)          DosGetDateTime Pre-Invocation
+68      (0X0044)          DosGetModHandle Post-Invocation
+225     (0X00E1)          DosGetModHandle Pre-Invocation
+69      (0X0045)          DosGetModName Post-Invocation
+226     (0X00E2)          DosGetModName Pre-Invocation
+70      (0X0046)          DosGetPid Post-Invocation
+227     (0X00E3)          DosGetPid Pre-Invocation
+71      (0X0047)          DosGetProcAddr Post-Invocation
+228     (0X00E4)          DosGetProcAddr Pre-Invocation
+72      (0X0048)          DosGetPrty Post-Invocation
+229     (0X00E5)          DosGetPrty Pre-Invocation
+73      (0X0049)          DosGetResource Post-Invocation
+230     (0X00E6)          DosGetResource Pre-Invocation
+324     (0X0144)          DosGetResource2 Post-Invocation
+323     (0X0143)          DosGetResource2 Pre-Invocation
+74      (0X004A)          DosGetSeg Post-Invocation
+231     (0X00E7)          DosGetSeg Pre-Invocation
+75      (0X004B)          DosGetShrSeg Post-Invocation
+232     (0X00E8)          DosGetShrSeg Pre-Invocation
+76      (0X004C)          DosGetVersion Post-Invocation
+233     (0X00E9)          DosGetVersion Pre-Invocation
+77      (0X004D)          DosGiveSeg Post-Invocation
+234     (0X00EA)          DosGiveSeg Pre-Invocation
+78      (0X004E)          DosHoldSignal Post-Invocation
+3       (0X0003)          DosHoldSignal Post-Invocation (2)
+235     (0X00EB)          DosHoldSignal Pre-Invocation
+79      (0X004F)          DosICopy Post-Invocation
+236     (0X00EC)          DosICopy Pre-Invocation
+413     (0X019D)          DosIDevIoctl Post-Invocation
+412     (0X019C)          DosIDevIoctl Pre-Invocation
+80      (0X0050)          DosIExecPgm Post-Invocation
+237     (0X00ED)          DosIExecPgm Pre-Invocation
+464     (0X01D0)          DosIPROTECTWrite Pre-Invocation
+461     (0X01CD)          DosIProtectRead Post-Invocation
+460     (0X01CC)          DosIProtectRead Pre-Invocation
+463     (0X01CF)          DosIProtectSetFileInfo Post-Invocation
+462     (0X01CE)          DosIProtectSetFileInfo Pre-Invocation
+465     (0X01D1)          DosIProtectWrite Post-Invocation
+123     (0X007B)          DosIRead Post-Invocation
+280     (0X0118)          DosIRead Pre-Invocation
+83      (0X0053)          DosISetCP Post-Invocation
+240     (0X00F0)          DosISetCP Pre-Invocation
+407     (0X0197)          DosISetFileInfo Post-Invocation
+406     (0X0196)          DosISetFileInfo Pre-Invocation
+409     (0X0199)          DosISetPathInfo Post-Invocation
+408     (0X0198)          DosISetPathInfo Pre-Invocation
+415     (0X019F)          DosISetRelMaxFH Post-Invocation
+414     (0X019E)          DosISetRelMaxFH Pre-Invocation
+158     (0X009E)          DosIWrite Post-Invocation
+315     (0X013B)          DosIWrite Pre-Invocation
+84      (0X0054)          DosKillProcess Post-Invocation
+241     (0X00F1)          DosKillProcess Pre-Invocation
+85      (0X0055)          DosLoadModule Post-Invocation
+242     (0X00F2)          DosLoadModule Pre-Invocation
+86      (0X0056)          DosMakeNmPipe Post-Invocation
+243     (0X00F3)          DosMakeNmPipe Pre-Invocation
+87      (0X0057)          DosMakePipe Post-Invocation
+244     (0X00F4)          DosMakePipe Pre-Invocation
+89      (0X0059)          DosMkDir Post-Invocation
+246     (0X00F6)          DosMkDir Pre-Invocation
+88      (0X0058)          DosMkDir2 Post-Invocation
+245     (0X00F5)          DosMkDir2 Pre-Invocation
+95      (0X005F)          DosMove Post-Invocation
+252     (0X00FC)          DosMove Pre-Invocation
+403     (0X0193)          DosMuxSemWait Post-Invocation (No Wait)
+96      (0X0060)          DosMuxSemWait Post-Invocation (Waited)
+253     (0X00FD)          DosMuxSemWait Pre-Invocation
+97      (0X0061)          DosNewSize Post-Invocation
+254     (0X00FE)          DosNewSize Pre-Invocation
+101     (0X0065)          DosOpLockRelease Post-Invocation
+258     (0X0102)          DosOpLockRelease Pre-Invocation
+102     (0X0066)          DosOpLockWait Post-Invocation
+259     (0X0103)          DosOpLockWait Pre-Invocation
+99      (0X0063)          DosOpen Post-Invocation
+256     (0X0100)          DosOpen Pre-Invocation
+98      (0X0062)          DosOpen2 Post-Invocation
+255     (0X00FF)          DosOpen2 Pre-Invocation
+425     (0X01A9)          DosOpen2Compt Post-Invocation
+424     (0X01A8)          DosOpen2Compt Pre-Invocation
+471     (0X01D7)          DosOpenChangeNotify Post-Invocation
+470     (0X01D6)          DosOpenChangeNotify Pre-Invocation
+100     (0X0064)          DosOpenSem Post-Invocation
+257     (0X0101)          DosOpenSem Pre-Invocation
+103     (0X0067)          DosPeekNmPipe Post-Invocation
+260     (0X0104)          DosPeekNmPipe Pre-Invocation
+104     (0X0068)          DosPhysicalDisk Post-Invocation
+261     (0X0105)          DosPhysicalDisk Pre-Invocation
+106     (0X006A)          DosPortAccess Post-Invocation
+263     (0X0107)          DosPortAccess Pre-Invocation
+447     (0X01BF)          DosProtectChgFilePtr Post-Invocation
+446     (0X01BE)          DosProtectChgFilePtr Pre-Invocation
+449     (0X01C1)          DosProtectClose Post-Invocation
+448     (0X01C0)          DosProtectClose Pre-Invocation
+453     (0X01C5)          DosProtectEnumAttribute Post-Invocation
+452     (0X01C4)          DosProtectEnumAttribute Pre-Invocation
+455     (0X01C7)          DosProtectFileIO Post-Invocation
+454     (0X01C6)          DosProtectFileIO Pre-Invocation
+457     (0X01C9)          DosProtectFileLocks Post-Invocation
+456     (0X01C8)          DosProtectFileLocks Pre-Invocation
+467     (0X01D3)          DosProtectNewSize Post-Invocation
+466     (0X01D2)          DosProtectNewSize Pre-Invocation
+469     (0X01D5)          DosProtectOpen Post-Invocation
+473     (0X01D9)          DosProtectQFHandState Post-Invocation
+472     (0X01D8)          DosProtectQFHandState Pre-Invocation
+475     (0X01DB)          DosProtectQFileInfo Post-Invocation
+474     (0X01DA)          DosProtectQFileInfo Pre-Invocation
+479     (0X01DF)          DosProtectSetFHandState Post-Invocation
+478     (0X01DE)          DosProtectSetFHandState Pre-Invocation
+481     (0X01E1)          DosProtectSetFileInfo Post-Invocation
+480     (0X01E0)          DosProtectSetFileInfo Pre-Invocation
+108     (0X006C)          DosQCurDir Post-Invocation
+265     (0X0109)          DosQCurDir Pre-Invocation
+109     (0X006D)          DosQCurDisk Post-Invocation
+266     (0X010A)          DosQCurDisk Pre-Invocation
+110     (0X006E)          DosQFHandState Post-Invocation
+267     (0X010B)          DosQFHandState Pre-Invocation
+113     (0X0071)          DosQFSAttach Post-Invocation
+270     (0X010E)          DosQFSAttach Pre-Invocation
+114     (0X0072)          DosQFSInfo Post-Invocation
+271     (0X010F)          DosQFSInfo Pre-Invocation
+111     (0X006F)          DosQFileInfo Post-Invocation
+268     (0X010C)          DosQFileInfo Pre-Invocation
+112     (0X0070)          DosQFileMode Post-Invocation
+269     (0X010D)          DosQFileMode Pre-Invocation
+115     (0X0073)          DosQHandType Post-Invocation
+272     (0X0110)          DosQHandType Pre-Invocation
+116     (0X0074)          DosQNmPHandState Post-Invocation
+273     (0X0111)          DosQNmPHandState Pre-Invocation
+117     (0X0075)          DosQNmPipeInfo Post-Invocation
+274     (0X0112)          DosQNmPipeInfo Pre-Invocation
+105     (0X0069)          DosQNmPipeState Post-Invocation
+262     (0X0106)          DosQNmPipeState Pre-Invocation
+118     (0X0076)          DosQPathInfo Post-Invocation
+275     (0X0113)          DosQPathInfo Pre-Invocation
+119     (0X0077)          DosQSysInfo Post-Invocation
+276     (0X0114)          DosQSysInfo Pre-Invocation
+120     (0X0078)          DosQVerify Post-Invocation
+277     (0X0115)          DosQVerify Pre-Invocation
+121     (0X0079)          DosRawReadNmPipe Post-Invocation
+278     (0X0116)          DosRawReadNmPipe Pre-Invocation
+122     (0X007A)          DosRawWriteNmPipe Post-Invocation
+279     (0X0117)          DosRawWriteNmPipe Pre-Invocation
+125     (0X007D)          DosReallocHuge Post-Invocation
+282     (0X011A)          DosReallocHuge Pre-Invocation
+126     (0X007E)          DosReallocSeg Post-Invocation
+283     (0X011B)          DosReallocSeg Pre-Invocation
+477     (0X01DD)          DosResetChangeNotify Post-Invocation
+476     (0X01DC)          DosResetChangeNotify Pre-Invocation
+284     (0X011C)          DosResumeThread Dos Pre-Invocation
+128     (0X0080)          DosRmDir Post-Invocation
+285     (0X011D)          DosRmDir Pre-Invocation
+129     (0X0081)          DosSelectDisk Post-Invocation
+286     (0X011E)          DosSelectDisk Pre-Invocation
+133     (0X0085)          DosSemSetWait Post-Invocation
+290     (0X0122)          DosSemSetWait Pre-Invocation
+135     (0X0087)          DosSendSignal Post-Invocation
+292     (0X0124)          DosSendSignal Pre-Invocation
+137     (0X0089)          DosSetDateTime Post-Invocation
+294     (0X0126)          DosSetDateTime Pre-Invocation
+138     (0X008A)          DosSetFHandState Post-Invocation
+295     (0X0127)          DosSetFHandState Pre-Invocation
+141     (0X008D)          DosSetFSInfo Post-Invocation
+298     (0X012A)          DosSetFSInfo Pre-Invocation
+139     (0X008B)          DosSetFileInfo Post-Invocation
+296     (0X0128)          DosSetFileInfo Pre-Invocation
+140     (0X008C)          DosSetFileMode Post-Invocation
+297     (0X0129)          DosSetFileMode Pre-Invocation
+142     (0X008E)          DosSetMaxFH Post-Invocation
+299     (0X012B)          DosSetMaxFH Pre-Invocation
+143     (0X008F)          DosSetNmPHandState Post-Invocation
+300     (0X012C)          DosSetNmPHandState Pre-Invocation
+144     (0X0090)          DosSetNmPipeSem Post-Invocation
+301     (0X012D)          DosSetNmPipeSem Pre-Invocation
+145     (0X0091)          DosSetPathInfo Post-Invocation
+302     (0X012E)          DosSetPathInfo Pre-Invocation
+146     (0X0092)          DosSetPrty Post-Invocation
+303     (0X012F)          DosSetPrty Pre-Invocation
+147     (0X0093)          DosSetSigHandler Post-Invocation
+304     (0X0130)          DosSetSigHandler Pre-Invocation
+65521   (0XFFF1)          DosSetTraceInfo Post-Invocation
+32768   (0X8000)          DosSetTraceInfo Pre-Invocation
+148     (0X0094)          DosSetVec Post-Invocation
+305     (0X0131)          DosSetVec Pre-Invocation
+149     (0X0095)          DosSetVerify Post-Invocation
+306     (0X0132)          DosSetVerify Pre-Invocation
+150     (0X0096)          DosSleep Post-Invocation
+307     (0X0133)          DosSleep Pre-Invocation
+308     (0X0134)          DosSuspendThread Dos Pre-Invocation
+152     (0X0098)          DosSystemService Post-Invocation
+309     (0X0135)          DosSystemService Pre-Invocation
+153     (0X0099)          DosTimerAsync Post-Invocation
+310     (0X0136)          DosTimerAsync Pre-Invocation
+154     (0X009A)          DosTimerStart Post-Invocation
+311     (0X0137)          DosTimerStart Pre-Invocation
+156     (0X009C)          DosTransactNmPipe Post-Invocation
+313     (0X0139)          DosTransactNmPipe Pre-Invocation
+157     (0X009D)          DosWaitNmPipe Post-Invocation
+314     (0X013A)          DosWaitNmPipe Pre-Invocation
+397     (0X018D)          File Lock/Unlock Pre-Invocation
+401     (0X0191)          Thread Reschedule Post-Invocation
+
+=== DOSCALL1 (Major 16, 0x10) ===
+
+Minor             Group   Remarks
+-----             -----   -------      
+35      (0X0023)          Dos32RaiseException Pre-Invocation
+32802   (0X8022)          Dos32SetExceptionHandler Post-Invocation
+34      (0X0022)          Dos32SetExceptionHandler Pre-Invocation
+32792   (0X8018)          Dos32SubAlloc Post-Invocation
+24      (0X0018)          Dos32SubAlloc Pre-Invocation
+32794   (0X801A)          Dos32SubFree Post-Invocation
+26      (0X001A)          Dos32SubFree Pre-Invocation
+32796   (0X801C)          Dos32SubSet Post-Invocation
+28      (0X001C)          Dos32SubSet Pre-Invocation
+32804   (0X8024)          Dos32UnsetExceptionHandler Post-Invocation
+36      (0X0024)          Dos32UnsetExceptionHandler Pre-Invocation
+37      (0X0025)          Dos32UnwindException Pre-Invocation
+189     (0X00BD)          DosClose Pre-Invocation, SHL
+32800   (0X8020)          DosErrClass Post-Invocation
+32      (0X0020)          DosErrClass Pre-Invocation
+32776   (0X8008)          DosFSRamSemClear Post-Invocation
+8       (0X0008)          DosFSRamSemClear Pre-Invocation
+32777   (0X8009)          DosFSRamSemRequest Post-Invocation
+9       (0X0009)          DosFSRamSemRequest Pre-Invocation
+33025   (0X8101)          DosGetMessage Post-Invocation
+257     (0X0101)          DosGetMessage Pre-Invocation
+33026   (0X8102)          DosInsMessage Post-Invocation
+258     (0X0102)          DosInsMessage Pre-Invocation
+33027   (0X8103)          DosPutMessage Post-Invocation
+259     (0X0103)          DosPutMessage Pre-Invocation
+32801   (0X8021)          DosQAppType Post-Invocation
+33      (0X0021)          DosQAppType Pre-Invocation
+32782   (0X800E)          DosReadAsync Post-Invocation
+14      (0X000E)          DosReadAsync Pre-Invocation
+32783   (0X800F)          DosScanEnv Post-Invocation
+15      (0X000F)          DosScanEnv Pre-Invocation
+32784   (0X8010)          DosSearchPath Post-Invocation
+16      (0X0010)          DosSearchPath Pre-Invocation
+32785   (0X8011)          DosSemClear Post-Invocation
+17      (0X0011)          DosSemClear Pre-Invocation
+32786   (0X8012)          DosSemRequest Post-Invocation
+18      (0X0012)          DosSemRequest Pre-Invocation
+32787   (0X8013)          DosSemSet Post-Invocation
+19      (0X0013)          DosSemSet Pre-Invocation
+32788   (0X8014)          DosSemWait Post-Invocation
+20      (0X0014)          DosSemWait Pre-Invocation
+32789   (0X8015)          DosSetCp Post-Invocation
+21      (0X0015)          DosSetCp Pre-Invocation
+32790   (0X8016)          DosSetProcCp Post-Invocation
+22      (0X0016)          DosSetProcCp Pre-Invocation
+32791   (0X8017)          DosSubAlloc Post-Invocation
+23      (0X0017)          DosSubAlloc Pre-Invocation
+32793   (0X8019)          DosSubFree Post-Invocation
+25      (0X0019)          DosSubFree Pre-Invocation
+32795   (0X801B)          DosSubSet Post-Invocation
+27      (0X001B)          DosSubSet Pre-Invocation
+32798   (0X801E)          DosWriteAsync Post-Invocation
+30      (0X001E)          DosWriteAsync Pre-Invocation
+
+=== PMSHAPI (Major 192, 0xc0) ====
+
+Minor             Group   Remarks
+-----             -----   -------      
+32835   (0X8043)          ActivateSession Post-Invocation
+67      (0X0043)          ActivateSession Pre-Invocation
+32868   (0X8064)          BadSwitch Post-Invocation
+100     (0X0064)          BadSwitch Pre-Invocation
+32864   (0X8060)          CleanUp Post-Invocation
+96      (0X0060)          CleanUp Pre-Invocation
+32823   (0X8037)          CreateThreadStack Post-invocation
+55      (0X0037)          CreateThreadStack Pre-Invocation
+32807   (0X8027)          EntryProc Post-invocation
+39      (0X0027)          EntryProc Pre-Invocation
+32809   (0X8029)          ExitProc Post-invocation
+41      (0X0029)          ExitProc Pre-Invocation
+32881   (0X8071)          FindSwitchEntry Post-Invocation
+113     (0X0071)          FindSwitchEntry Pre-Invocation
+32889   (0X8079)          fnBadAppDlgProc Post-Invocation
+121     (0X0079)          fnBadAppDlgProc Pre-Invocation
+32856   (0X8058)          InitialiseIniFile Post-Invocation
+88      (0X0058)          InitialiseIniFile Pre-Invocation
+32918   (0X8096)          InitialiseSessionManager Post-Invocation
+150     (0X0096)          InitialiseSessionManager Pre-Invocation
+32816   (0X8030)          InitMinimizeIcon Post-invocation
+48      (0X0030)          InitMinimizeIcon Pre-Invocation
+32887   (0X8077)          lpfnIconWndProc Post-invocation
+119     (0X0077)          lpfnIconWndProc Pre-Invocation
+32886   (0X8076)          lpfnShellWndProc Post-invocation
+118     (0X0076)          lpfnShellWndProc Pre-Invocation
+40      (0X0028)          PMExecRegister Pre-Invocation
+265     (0X0109)          PrfAddProgram Pre-Invocation
+272     (0X0110)          PrfChangeProgram Pre-Invocation
+259     (0X0103)          PrfCloseProfile Pre-Invocation
+261     (0X0105)          PrfCreateGroup Pre-Invocation
+262     (0X0106)          PrfDestroyGroup Pre-Invocation
+258     (0X0102)          PrfOpenProfile Pre-Invocation
+273     (0X0111)          PrfQueryDefinition Pre-Invocation
+263     (0X0107)          PrfQueryProfile Pre-Invocation
+4375    (0X1117)          PrfQueryProfileData Pre-Invocation
+257     (0X0101)          PrfQueryProfileSize Pre-Invocation
+277     (0X0115)          PrfQueryProfileString Pre-Invocation
+306     (0X0132)          PrfQueryProgramCategory Pre-Invocation
+274     (0X0112)          PrfQueryProgramHandle Pre-Invocation
+275     (0X0113)          PrfQueryProgramTitles Pre-Invocation
+260     (0X0104)          PrfRemoveProgram Pre-Invocation
+264     (0X0108)          PrfReset Pre-Invocation
+280     (0X0118)          PrfWriteProfileData Pre-Invocation
+278     (0X0116)          PrfWriteProfileString Pre-Invocation
+32824   (0X8038)          RemoveOS2INI Post-invocation
+56      (0X0038)          RemoveOS2INI Pre-Invocation
+32833   (0X8041)          ReportNoHardErrors Post-invocation
+65      (0X0041)          ReportNoHardErrors Pre-Invocation
+32857   (0X8059)          SetDosWarning Post-Invocation
+89      (0X0059)          SetDosWarning Pre-Invocation
+32919   (0X8097)          SetKBDHotKey Post-Invocation
+151     (0X0097)          SetKBDHotKey Pre-Invocation
+32855   (0X8057)          SheInitializeIniFile Post-Invocation
+87      (0X0057)          SheInitializeIniFile Pre-Invocation
+32865   (0X8061)          ShellPostMessage Post-Invocation
+97      (0X0061)          ShellPostMessage Pre-Invocation
+32866   (0X8062)          ShellSendMessage Post-Invocation
+98      (0X0062)          ShellSendMessage Pre-Invocation
+32769   (0X8001)          ShePIInitialise Post-Invocation
+1       (0X0001)          ShePIInitialise Pre-Invocation
+32904   (0X8088)          SheSystemShutdown Post-Invocation
+136     (0X0088)          SheSystemShutdown Pre-Invocation
+32820   (0X8034)          SheVioModeWait Post-invocation
+52      (0X0034)          SheVioModeWait Pre-Invocation
+32821   (0X8035)          SheVioSavRedrawWait Post-invocation
+53      (0X0035)          SheVioSavRedrawWait Pre-Invocation
+32912   (0X8090)          Shl16LoadPublicFonts Post-invocation
+32805   (0X8025)          ShlLoadFont Post-invocation
+37      (0X0025)          ShlLoadFont Pre-Invocation
+144     (0X0090)          ShlLoadPublicFonts Pre-Invocation
+137     (0X0089)          Start16SystemExecutables Pre-Invocation
+32822   (0X8036)          StartSaveWaitThreads Post-invocation
+54      (0X0036)          StartSaveWaitThreads Pre-Invocation
+32905   (0X8089)          StartSystemExecutables Post-invocation
+32867   (0X8063)          strtrn Post-Invocation
+99      (0X0063)          strtrn Pre-Invocation
+32834   (0X8042)          SwitchToNextSession Post-Invocation
+66      (0X0042)          SwitchToNextSession Pre-Invocation
+9       (0X0009)          Win16SetFgndWindow Pre-Invocation
+32786   (0X8012)          WinAddProgram Post-Invocation
+18      (0X0012)          WinAddProgram Pre-Invocation
+32840   (0X8048)          WinAddSwitchEntry Post-Invocation
+72      (0X0048)          WinAddSwitchEntry Pre-Invocation
+32788   (0X8014)          WinChangeProgram Post-Invocation
+20      (0X0014)          WinChangeProgram Pre-Invocation
+32841   (0X8049)          WinChangeSwitchEntry Post-Invocation
+73      (0X0049)          WinChangeSwitchEntry Pre-Invocation
+32916   (0X8094)          WinCPLRegister Post-invocation
+148     (0X0094)          WinCPLRegister Pre-Invocation
+32791   (0X8017)          WinCreateGroup Post-Invocation
+23      (0X0017)          WinCreateGroup Pre-Invocation
+32838   (0X8046)          WinCreateSwitchEntry Post-Invocation
+70      (0X0046)          WinCreateSwitchEntry Pre-Invocation
+32803   (0X8023)          WinDestroyGroup Post-Invocation
+35      (0X0023)          WinDestroyGroup Pre-Invocation
+32883   (0X8073)          WinEndProgram Post-Invocation
+115     (0X0073)          WinEndProgram Pre-Invocation
+32899   (0X8083)          WinEndSession Post-Invocation
+131     (0X0083)          WinEndSession Pre-Invocation
+32885   (0X8075)          WinEndWindowSession Post-Invocation
+117     (0X0075)          WinEndWindowSession Pre-Invocation
+32792   (0X8018)          WinInitializePL Post-Invocation
+24      (0X0018)          WinInitializePL Pre-Invocation
+32898   (0X8082)          WinInitSession Post-Invocation
+130     (0X0082)          WinInitSession Pre-Invocation
+32776   (0X8008)          WinInitSessionMgr Post-invocation
+8       (0X0008)          WinInitSessionMgr Pre-Invocation
+32900   (0X8084)          WinInitSwEntry Post-Invocation
+132     (0X0084)          WinInitSwEntry Pre-Invocation
+32836   (0X8044)          WinInstStartApp Post-Invocation
+68      (0X0044)          WinInstStartApp Pre-Invocation
+32913   (0X8091)          WinNoShutdown Post-Invocation
+145     (0X0091)          WinNoShutdown Pre-Invocation
+32917   (0X8095)          WinPMFILERegister Post-invocation
+149     (0X0095)          WinPMFILERegister Pre-Invocation
+129     (0X0081)          WinProcessHotKey Pre-Invocation
+32789   (0X8015)          WinQueryDefinition Post-Invocation
+21      (0X0015)          WinQueryDefinition Pre-Invocation
+32902   (0X8086)          WinQueryExtIdFocus Post-invocation
+134     (0X0086)          WinQueryExtIdFocus Pre-Invocation
+32774   (0X8006)          WinQueryProfileData Post-Invocation
+6       (0X0006)          WinQueryProfileData Pre-Invocation
+32770   (0X8002)          WinQueryProfileInt Post-Invocation
+2       (0X0002)          WinQueryProfileInt Pre-Invocation
+5       (0X0005)          WinQueryProfileSize Pre-Invocation
+3       (0X0003)          WinQueryProfileString Pre-Invocation
+32790   (0X8016)          WinQueryProgramTitles Post-Invocation
+22      (0X0016)          WinQueryProgramTitles Pre-Invocation
+32806   (0X8026)          WinQueryProgramType Post-Invocation
+38      (0X0026)          WinQueryProgramType Pre-Invocation
+32800   (0X8020)          WinQueryProgramUse Post-Invocation
+32      (0X0020)          WinQueryProgramUse Pre-Invocation
+32839   (0X8047)          WinQuerySessionTitle Post-Invocation
+71      (0X0047)          WinQuerySessionTitle Pre-Invocation
+32854   (0X8056)          WinQuerySwitchEntry Post-Invocation
+86      (0X0056)          WinQuerySwitchEntry Pre-Invocation
+32871   (0X8067)          WinQuerySwitchList Post-Invocation
+103     (0X0067)          WinQuerySwitchList Pre-Invocation
+32870   (0X8066)          WinQueryTaskSizePos Post-Invocation
+102     (0X0066)          WinQueryTaskSizePos Pre-Invocation
+32869   (0X8065)          WinQueryTaskTitle Post-Invocation
+101     (0X0065)          WinQueryTaskTitle Pre-Invocation
+32787   (0X8013)          WinRemoveProgram Post-Invocation
+19      (0X0013)          WinRemoveProgram Pre-Invocation
+32872   (0X8068)          WinRemoveSwitchEntry Post-Invocation
+104     (0X0068)          WinRemoveSwitchEntry Pre-Invocation
+32903   (0X8087)          WinSetExtIdFocus Post-invocation
+135     (0X0087)          WinSetExtIdFocus Pre-Invocation
+32771   (0X8003)          WinSetFgndWindow Post-invocation
+32773   (0X8005)          WinSetFgndWindow Post-invocation
+32777   (0X8009)          WinSetFgndWindow Post-invocation
+32901   (0X8085)          WinSetSwEntry Post-Invocation
+133     (0X0085)          WinSetSwEntry Pre-Invocation
+32915   (0X8093)          WinSetTitle Post-Invocation
+147     (0X0093)          WinSetTitle Pre-Invocation
+32884   (0X8074)          WinStopProgram Post-Invocation
+116     (0X0074)          WinStopProgram Pre-Invocation
+32880   (0X8070)          WinSwitchProgramRegister Post-invocation
+112     (0X0070)          WinSwitchProgramRegister Pre-Invocation
+32873   (0X8069)          WinSwitchToProgram Post-Invocation
+105     (0X0069)          WinSwitchToProgram Pre-Invocation
+32896   (0X8080)          WinSwitchToProgram2 Post-Invocation
+128     (0X0080)          WinSwitchToProgram2 Pre-Invocation
+32888   (0X8078)          WinSwitchToTaskManager Post-Invocation
+120     (0X0078)          WinSwitchToTaskManager Pre-Invocation
+32837   (0X8045)          WinTerminateApp Post-Invocation
+69      (0X0045)          WinTerminateApp Pre-Invocation
+32775   (0X8007)          WinWriteProfileData Post-Invocation
+7       (0X0007)          WinWriteProfileData Pre-Invocation
+32772   (0X8004)          WinWriteProfileString Post-Invocation
+4       (0X0004)          WinWriteProfileString Pre-Invocation
+32819   (0X8033)          WSHInit Post-invocation
+51      (0X0033)          WSHInit Pre-Invocation
+
+=================================
+=== From trace.doc (9/5/2000) ===
+=================================
+
+=== KernelR (Major 5, 0x5) ===
+
+  Tracepoint                        Minor Group Types    F  Remarks
+  ----------                        ----- ----- -----    -  -------
+  DOS32CANCELLOCKREQUEST            494   FS    PRE,API  *
+  DOS32CANCELLOCKREQUEST            495   FS    POST,API *
+  DOS32SETFILELOCKS                 496   FS    PRE,API  *
+  DOS32SETFILELOCKS                 497   FS    POST,API *
+  DOS32PROTECTSETFILELOCKS          498   FS    PRE,API  *
+  DOS32PROTECTSETFILELOCKS          499   FS    POST,API *
+  DOSCREATESPINLOCK                 500   LOCK  PRE,API  *  SMP only
+  DOSCREATESPINLOCK                 501   LOCK  POST,API *  SMP only
+  DOSACQUIRESPINLOCK                502   LOCK  PRE,API  *  SMP only
+  DOSACQUIRESPINLOCK                503   LOCK  POST,API *  SMP only
+  DOSRELEASESPINLOCK                504   LOCK  PRE,API  *  SMP only
+  DOSRELEASESPINLOCK                505   LOCK  POST,API *  SMP only
+  DOSFREESPINLOCK                   506   LOCK  PRE,API  *  SMP only
+  DOSFREESPINLOCK                   507   LOCK  POST,API *  SMP only
+  DOS32IPROTECTREAD                 508   FS    PRE,API  *
+  DOS32IPROTECTREAD                 509   FS    POST,API *
+  DOS32IPROTECTWRITE                510   FS    PRE,API  *
+  DOS32IPROTECTRWITE                511   FS    POST,API *
+
+=== DOSCALL1 (Major 16, 0x10) ===
+
+  Tracepoint                        Minor Group Types    F  Remarks
+  ----------                        ----- ----- -----    -  -------
+  DOS32WAITCHILD                    262   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32BEEP                         263   IO    PRE,API     32-bit EP to KERNEL API
+  DOS32PHYSICALDISK                 264   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETCP                        265   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32SETPROCESSCP                 266   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32SLEEP                        267   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32DEVCONFIG                    268   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32GETDATETIME                  269   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETDATETIME                  270   TIM   PRE,API     32-bit EP to KERNEL API
+  DOS32EXECPGM                      271   TIM   PRE,API     32-bit EP to KERNEL API
+  DOS32ENTERCRITSEC                 272   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32EXITCRITSEC                  273   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32EXIT                         274   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32KILLPROCESS                  275   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32SETPRIORITY                  276   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32RESUMETHREAD                 277   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32SUSPENDTHREAD                278   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32CREATEPIPE                   279   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32CREATEQUEUE                  280   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32OPENQUEUE      *DO NOT USE*  281   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32CLOSEQUEUE     *DO NOT USE*  282   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32PEEKQUEUE                    283   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32PURGEQUEUE                   284   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32QUERYQUEUE                   285   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32WRITEQUEUE                   286   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS32CALLNPIPE                    287   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32CONNECTNPIPE                 288   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32DISCONNECTNPIPE              289   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32CREATENPIPE                  290   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32PEEKNPIPE                    291   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYNPHSTATE                292   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32RAWREADNPIPE                 293   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32RAWWRITENPIPE                294   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYNPIPEINFO               295   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYNPIPESEMSTATE           296   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32SETNPHSTATE                  297   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32SETNPIPESEM                  298   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32TRANSACTNPIPE                299   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32WAITNPIPE                    300   PIP   PRE,API     32-bit EP to KERNEL API
+  DOS32RESETBUFFER                  301   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETCURRENTDIR                302   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETFILEPTR                   303   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PROTECTSETFILEPTR            304   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32CLOSE                        305   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PROTECTCLOSE                 306   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32COPY                         307   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32DELETE                       308   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32FORCEDELETE                  309   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32DEVIOCTL                     310   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32DUPHANDLE                    311   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32EDITNAME                     312   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32FINDCLOSE                    313   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32FSATTACH                     314   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32FSCTL                        315   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32MOVE                         316   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETFILESIZE                  317   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PROTECTSETFILESIZE           318   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYCURRENTDIR              319   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYCURRENTDISK             320   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYFHSTATE                 321   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PROTECTQUERYFHSTATE          322   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PQUERYFSATTACH               323   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYFSINFO                  324   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYHTYPE                   325   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYVERIFY                  326   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32DELETEDIR                    327   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SEARCHPATH                   328   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETDEFAULTDISK               329   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETFHSTATE                   330   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32PROTECTSETFHSTATE            331   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETFSINFO                    332   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETMAXFH                     333   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETRELMAXFH                  334   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SETVERIFY                    335   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32ERRCLASS                     336   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32ERROR                        337   TK    PRE,API     32-bit EP to KERNEL API
+  DOS32LOADMODULE                   338   LDR   PRE,API     32-bit EP to KERNEL API
+  DOS32FREEMODULE                   339   LDR   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYMODULEHANDLE            340   LDR   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYMODULENAME              341   LDR   PRE,API     32-bit EP to KERNEL API
+  DOS32QUERYAPPTYPE                 342   LDR   PRE,API     32-bit EP to KERNEL API
+  DOS32PFINDNEXT                    343   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32SHUTDOWN                     344   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32OPENCHANGENOTIFY             345   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32RESETCHANGENOTIFY            346   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32CLOSECHANGENOTIFY            347   FS    PRE,API     32-bit EP to KERNEL API
+  DOS32CREATESPINLOCK               348   LOCK  PRE,API     SMP only, 32-bit EP to KERNEL API
+  DOS32ACQUIRESPINLOCK              349   LOCK  PRE,API     SMP only, 32-bit EP to KERNEL API
+  DOS32RELEASESPINLOCK              350   LOCK  PRE,API     SMP only, 32-bit EP to KERNEL API
+  DOS32FREESPINLOCK                 351   LOCK  PRE,API     SMP only, 32-bit EP to KERNEL API
+  DOS32READQUEUE                    352   QUE   PRE,API  +  32-bit EP to QUECALLS API
+  DOS16CREATEQUEUE                  353   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16OPENQUEUE                    354   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16CLOSEQUEUE                   355   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16PEEKQUEUE                    356   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16PURGEQUEUE                   357   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16QUERYQUEUE                   358   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16WRITEQUEUE                   359   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS16READQUEUE                    360   QUE   PRE,API  +  16-bit EP to QUECALLS API
+  DOS32R3EXCEPTIONDISPATCHER        361   EXMG  PRE,API  *  From FP37, Internal DOSCALL1 tracepoint
+  DOS32EXCEPTIONCALLBACK            362   EXMG  PRE,API  *  From FP37, Internal DOSCALL1 tracepoint
+  XCPTEXECUTEUSEREXCEPTIONHANDLER   363   EXMG  PRE,API  *  From FP37, Internal DOSCALL1 tracepoint
+  UT16RETURN                        33028 UT    POST,INT    Internal DOSCALL1 tracepoint
+  UT32RETURN                        33029 UT    POST,INT    Internal DOSCALL1 tracepoint
+
+=== SESMGR (Major 23, 0x17) ===
+
+  Tracepoint                        Minor Group Types    F  Remarks
+  ----------                        ----- ----- -----    -  -------
+  DOS32SELECTSESSION                32          PRE,API  @  32-bit EP to SESMGR API
+  DOS32SETSESSION                   33          PRE,API  @  32-bit EP to SESMGR API
+  DOS32STARTSESSION                 34          PRE,API  @  32-bit EP to SESMGR API
+  DOS32STOPSESSION                  35          PRE,API  @  32-bit EP to SESMGR API
+
+=== The end ===
+

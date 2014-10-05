@@ -1,0 +1,79 @@
+
+
+ClassicRexx.cmd User's Guide v0.2			        26 May 2010
+=================================
+
+ClassicRexx.cmd is a 4OS2 script that prepares a session to run Classic REXX.  
+Some REXX scripts contain errors that make them incompatible with Object 
+REXX.  ClassicRexx.cmd allows these scripts to be run on a system that 
+defaults to Object REXX without running SwitchRx.cmd and rebooting.
+
+Installation
+============
+
+Install the script in a directory of your choice.  You should probably 
+install it to a directory in the PATH.
+
+Usage
+=====
+
+ClassicRexx.cmd can be run with or without arguments.
+
+When run without arguments, the script creates a session set up to run
+Classic REXX and sets the prompt to report the REXX mode.  The prompt should 
+indicate REXXSAA.  Type "exit" without quotes to terminate the session.  If 
+the prompt does not indicate REXXSAA, the setup failed.  Please request help.
+
+When run with arguments, the script creates a Classic REXX session; passes
+the arguments to the session for execution and terminates the session after
+the commands are executed.
+
+The command line syntax is
+
+  ClassicRexx [-h] [args...]
+
+	-h       Display help
+
+the argument options are:
+
+	args...	 Optional command line
+
+Switches must begin with a dash (-) and are case-insensitive.
+
+Notes
+=====
+
+The script uses LIBPATHSTRICT and BEGINLIBPATH.  Some applications may 
+refuse to run correctly in a session that defines these settings.  Some 
+applications may override these settings.  This may result in Object REXX 
+being invoked.
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU General
+Public License.  The GPL Software License can be found in gnugpl2.txt or at
+http://www.gnu.org/licenses/licenses.html#GPL
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+ToDo
+====
+
+Convert script to REXX, if possible.
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net
