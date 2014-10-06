@@ -1,0 +1,85 @@
+/*********************************************************************\
+   Set Object
+   (C) 1993 Jim Moriartey Compuserve 76330,1613
+\*********************************************************************/
+
+call RxFuncAdd "SysLoadFuncs", "RexxUtil", "SysLoadFuncs"
+call SysLoadFuncs
+
+Call SETUP
+filelist='temp.lst'
+Qask ='N'
+gpara=""
+DO UNTIL Qask ='Y'
+ CLS
+  'Dir *.'unext '/f'
+   SAY ''
+    SAY 'Important all Names are CASE SENSITIVE'
+    SAY 'Enter file name to unpack'
+    SAY ' an example is TEST.ZIP'
+    PARSE PULL aname
+     SAY 'Enter Full Path and Drive where you want unpacked files Placed'
+     SAY ' an example is C:\OS2\TEST'
+     PARSE PULL adir
+      CLS
+      SAY 'Your Choices are the Following'
+      SAY ''
+      Say 'The FULL PATH and file name to unpack is :' dir aname
+      SAY ''
+      Say 'The FULL PATH to where you want the contents of the'
+      Say 'of the archive file placed is              :' adir
+      SAY ''
+      SAY 'Enter (Y or y) if Correct (Q or q) to Quit any other key to Re-Enter'
+       Pull Qask
+   If Qask = 'Q' then Exit
+ END
+sdrive = left(adir,2)
+sdrive
+'MD ' adir
+'CD ' adir
+zipper insert(dir,aname)
+"DIR /f > " filelist
+
+
+DO WHILE Lines(filelist)\=0
+    cmdline=Linein(filelist)
+    if right(cmdline,3)='cmd' then Call buildobject  
+    if right(cmdline,3)='CMD' then Call buildobject  
+    if right(cmdline,3)='bat' then Call buildobject  
+    if right(cmdline,3)='BAT' then Call buildobject
+    if right(cmdline,3)='com' then Call buildobject    
+    if right(cmdline,3)='COM' then Call buildobject  
+    if right(cmdline,3)='exe' then Call buildobject  
+    if right(cmdline,3)='EXE' then Call buildobject  
+    if right(cmdline,3)='inf' then Call buildinf
+    if right(cmdline,3)='INF' then Call buildinf 
+    
+END
+
+EXIT
+
+Buildobject:
+ototal =length(cmdline)-4
+spos=lastpos("\", cmdline)
+odir = substr(cmdline,1,spos-1)
+oname = substr(cmdline, spos+1, ototal-spos)
+Nogo = SysCreateObject( "WPProgram", oname, "<WP_DESKTOP>", "EXENAME="cmdline";STARTUPDIR="odir";PARAMETERS="gpara)
+if Nogo = 0 then say "The BUILD operation failed "
+               else say "Object Created"
+Return
+
+Buildinf:
+viewvar='view.exe'
+gpara= cmdline
+ototal =length(cmdline)-4
+spos=lastpos("\", cmdline)
+odir = substr(cmdline,1,spos-1)
+oname = substr(cmdline, spos+1, ototal-spos)
+Nogo = SysCreateObject( "WPProgram", oname, "<WP_DESKTOP>", "EXENAME="viewvar";STARTUPDIR="odir";PARAMETERS="gpara)
+If Nogo = 0 then Say "The BUILD operation failed "
+               else Say "Object Created"
+Return
+
+
+SETUP:
+
