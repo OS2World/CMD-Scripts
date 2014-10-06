@@ -1,0 +1,66 @@
+--------------------- Workplace Shell UnZip  version 1.1 ---------------------
+--------------------- (c) Copyright 1994 Scott Maxwell. ----------------------
+----------------------- by: scott.maxwell@channel1.com -----------------------
+
+If you just want to install WUZ and try it out, simply type 'INST-WUZ' and
+hit <ENTER> and answer the questions that I have tried to make self-obvious.
+When in doubt, take the default.  If you should ever want to remove or
+reinstall WUZ, rerun 'INSTALL'.  It will find the current version and ask
+you what you would like to do with it.
+
+After installing WUZ, you will be able to open all kinds of archives, such
+as ZIP, ZOO, etc. by simply double-clicking on the icon or dragging the icon
+to your spiffy new "WPS Unzip" icon.  WUZ will create a temporary directory
+and extract all of the files. NOTE: You must have the appropriate archive
+unpacker in your path to use WUZ.  Zip users should have Info-Zip's Unzip 5.0
+or later.  If you use PKZIP, read WUZ.DOC to learn how to handle this.
+
+You can also ZIP up whole directories that you don't need very often
+(i.e. games you've already conquered, etc.) by dropping the whole
+folder (directory icon) on the "Zip Directory" icon.  This will replace
+your standard folder icon with a zipped folder icon.  Then to use it again,
+just drop the zipped folder icon on "WPS Unzip".  Not only will this unzip
+the directory, it will also unzip the icon!  Try it, you'll see.
+
+You can also use these utilities from the command line.  Type:
+  WUZ filename
+
+One other little utility that you might find cool from the command line is
+Open-Dir.CMD.  You can use this by typing:
+  OD directory-name
+This opens the specified directory as a folder on your desktop.
+
+There is a lot more information in the WUZ.Doc file.  However, if you are a
+non-technical user, this readme file may have already told you everything
+you need to know.
+
+Legalities
+----------
+
+Okay, now for the legal stuff.  I use these routines constantly and have had
+no problems.  If you do, let me know.  However, I can not be held liable if
+anything nasty happens.  This software is strictly of the "USE AT YOUR OWN
+RISK" variety.
+
+I am asking $20 for WPS Unzip.  I think this is probably fair.  If you make
+a lot of money and WUZ saves you tons of time you could send me more.
+On the other hand, if you are a starving student, just send me email telling
+me what you think and we'll call it even.  I am currently living in Japan
+so I know how hard it can be to send checks from outside the U.S.  If you
+are an international user, send me either cash or email.  If your local
+currency is pretty major, send me that and I'll try to exchange it.
+Any checks should be made out to my mother:
+
+  Patricia Maxwell
+  1587 E. Modesto Ave.
+  Camarillo, CA 93010
+  U.S.A.
+
+It costs me about $20 to cash a check in Japan, so this makes more sense
+for me.
+
+Comments are welcome.  I hope these REXX routines are as useful for you
+as they have been for me.  I haven't found any easier way to explore
+archives.  Send comments to me at scott.maxwell@channel1.com.
+
+--------------------- Usenet: scott.maxwell@channel1.com ---------------------

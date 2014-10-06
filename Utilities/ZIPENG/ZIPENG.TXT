@@ -1,0 +1,653 @@
+     The Zip Engine
+
+     A Shareware Graphical Front-End for File Compression/Decompression
+
+     Midlands OS/2 Enhancement Society (MOSES)
+     Kari Jackson and Bart Toulouse
+
+     March 1993
+
+PROGRAM REQUIREMENTS:
+
+     To use this Program, you must have:
+
+     -an IBM-compatible PC with OS/2 Version 2.0 (we have not tested with
+     the beta version of OS/2 2.1, but it may work just fine, perhaps) and
+     REXX support, preferably the REXX20 fix that came out around June of
+     1992, or the Service Pak which included that fix and was released in
+     October of 1992
+
+     -VREXX Visual REXX for Presentation Manager (free IBM Employee-
+     Written Software)
+
+     -PKZip or another compression/decompression utility that uses
+     IDENTICAL command-line syntax and switches (preferably PKZip version
+     1.10 or 2.04g)
+
+     -the ATTRIB command available on the PATH in your config.sys file,
+     and if your zip/unzip program is a DOS version, then ATTRIB must
+     also be on the autoexec.bat file's PATH
+
+PKZip is a trademark of PKWare, Inc.  PKUnzip is part of the PKZip
+program.  OS/2 is a trademark of IBM Corporation.  Other product names
+and company names are trademarks of their respective owners.
+
+INTRODUCTION:
+     Welcome to The Zip Engine.  This Program was developed specifically
+     to provide a graphical way to use command-line based compression/
+     decompression programs.  The original version of the Program was
+     developed around PKWare, Inc.'s PKZip suite of file compression/de-
+     compression software.
+
+     What's especially unusual about this Program is that it not only
+     makes it easy for you to perform any function that PKZip/PKUnzip can
+     do, but it also makes it easy for you to learn how to use these
+     PKWare programs on your own.  Virtually every time you choose an
+     option from a Zip Engine menu, it shows you what your choice will end
+     up looking like on the command line.  After you've used Zip Engine
+     for a while then, you'll find that whenever you're forced to use
+     PKZip or PKUnzip from the command line, you'll have a better
+     understanding of what, where, when, why, and how it's done.
+
+INSTALLATION:
+     -Copy the files ZIPENG.CMD, ZIPVIEW.CMD, ZIPEDIT.CMD, ZIPENG.TEX, and
+     ZIPENG.ICO to a directory on your OS/2 Path.  Create a program object
+     for the ZIPENG.CMD file.  To create a program object, the absolute
+     quickest way we've found so far is to open the folder where you want
+     the program object to be when you finish (anything BUT a Drives
+     folder).  Then, click on the ZIPENG.CMD file icon with mouse button
+     2.  On the pop up menu that appears, there is an option for "Create
+     Another".  Select this option, and select Default.  A window will
+     open with objects for the target of the operation (the reason you
+     opened the target folder earlier).  Select your target, and that's
+     it.  Note that the program object you've created in this process will
+     be named "OS/2 Command File," or something equally useless.  That's
+     all right; we'll change it in a moment.
+
+     -Adjust the settings for the Zip Engine program object.  Apply button
+     2 to the Zip Engine program object you created in the previous step,
+     and from the pop-up menu that appears, apply button 1 to the arrow to
+     the right of the word Open.  Then from the cascaded menu, select
+     Settings.  Use button 1 to get to the second page (Session), check
+     the Start Minimized box, and OS/2 Full Screen.  Next, change the name
+     of the program object.  Use button 1 to get to the General page and
+     change the name there.  And on page four (Window), check Display
+     Existing Window.  Once you start using The Zip Engine, and find you
+     can't live without it (we're being facetious, not necessarily
+     conceited), you'll probably want to make it your default file
+     compression/decompression utility.  Here's how.  Click on the
+     Associations page of the Settings notebook.  In the "New name:" box,
+     type *.ZIP and click the Add button.  Remember that when you create
+     this association, any previous association of this type (*.ZIP) will
+     be REPLACED by this one.  Double-click on the system icon at the top
+     left corner of the settings notebook to close it.
+
+     -Yes, we could have easily written a .CMD batch file to do all that
+     for you.  But since not all programs do so, we think it's more
+     important that you know how to do it yourself.  It's better to teach
+     a man to fish than to give him a fish.  Therefore, instructions on
+     how to create a program object are better than an automatic batch
+     file.
+
+     -Verify that REXX is properly installed on your system.
+
+     -Verify that VREXX is properly installed on your system.
+
+     -If you want to be able to view the ZIPENG.DOC file from within the
+     Zip Engine program, copy it into either a directory on your
+     CONFIG.SYS file's PATH command, or else into the directory which will
+     always be your current directory while you're running The Zip Engine.
+     Then you can access the .DOC file from the "About The Zip Engine"
+     dialog box on the main menu.
+
+     This completes the installation process.
+
+USING THE ZIP ENGINE:
+     This Program works by building a command line which is sent to the
+     compression/decompression software.  This command line is built from
+     user input specified through The Zip Engine.  The Zip Engine can be
+     started by itself, or in conjunction with a compressed file (.ZIP
+     extension) for further processing.  Use the Program in any of the
+     following ways:
+
+     DOUBLE-CLICK THE ZIP ENGINE PROGRAM OBJECT:
+     Using this method, all command line options will be input from within
+     The Zip Engine.  From the OS/2 command line, typing ZIPENG or START
+     ZIPENG will produce the same result.
+
+     DRAG AND DROP A FILE ONTO THE ZIP ENGINE PROGRAM OBJECT:
+     This option specifies a file for The Zip Engine to process.  This
+     option is only applicable to existing compressed files (.ZIP
+     extension).  New compressed files cannot be created with this method.
+     From the OS/2 command line, typing either ZIPENG FILENAME.ZIP or
+     START ZIPENG FILENAME.ZIP will produce the same result.  When doing
+     this from the command line, it is possible for you to specify a .ZIP
+     file that does not yet exist.  The Program will then create it during
+     operation.
+
+VERY IMPORTANT NOTE:
+     The only file you're supposed to drag and drop onto The Zip Engine is
+     a .ZIP file (this includes any file that was compressed by a program
+     that makes .ZIP files, even one that was created with a different
+     extension), and only one at a time!  You cannot drag files you want
+     zipped up, because the file that's dropped on The Zip Engine is going
+     to be the first filename on the command line, and as far as PKZip is
+     concerned, the first file on the command line is the .ZIP file.  No
+     matter what you want to have done to the file you drag and drop, The
+     Zip Engine and the Zip/Unzip program are going to treat it as the
+     .ZIP file to be modified or extracted.  Period.  The Zip Engine will
+     never accept a group of files dragged to it as files to zip into a
+     .ZIP file.  It won't happen, so don't bother trying.
+
+     And if you drag more than one file onto The Zip Engine at one time,
+     what OS/2 is going to do is run one copy of the Program for each
+     file.  That isn't going to work, because only one copy of The Zip
+     Engine can run at a time.  The first one will run fine, but the
+     others will crash, causing OS/2 to give you the famous "A program in
+     this session encountered an error and cannot continue" message.  Just
+     click on OK there, and as far as we have seen, nothing bad will
+     happen at all.  So don't panic if you forget, and drag more than one
+     file to The Zip Engine at once.  It won't trash your hard drive or
+     anything.  It just won't work, that's all.  Only the first instance
+     of The Zip Engine that started up, with the first filename you
+     dragged, will work.
+
+     So to summarize, here are two Zip Engine Rules to Live By:
+1.)  DON'T EVER DRAG MORE THAN ONE FILE TO THE PROGRAM AT ONE TIME.
+2.)  DON'T EVER DRAG A FILE YOU DON'T WANT TREATED AS A .ZIP FILE.
+
+     DOUBLE-CLICK ON THE COMPRESSED FILE:
+     If you associate compressed files (.ZIP extensions) by extension in
+     the program settings for The Zip Engine (as described above under
+     INSTALLATION), double clicking on the compressed file will cause The
+     Zip Engine to activate, with the file you double-clicked as the file
+     to process.  If the proper association is made, this action emulates
+     the drag-and-drop method.
+
+NOTE:
+     No matter what method is used to activate The Zip Engine, the Program
+     will return the user to its main menu after specified processing is
+     complete.  When the first processing session is complete, and the
+     user is returned to this menu, the Program will support further
+     compression/decompression operations.  Keep in mind though, that no
+     matter how you started the Program, each time the main menu shows up
+     after your first operation is over it will be "clean."  In other
+     words, it won't remember the .ZIP file you used during the first
+     session since it has to assume that you're finished working with that
+     particular .ZIP file.  We tried, but couldn't get the Program to read
+     your mind in cases where you want to perform more than one operation
+     on the same .ZIP file.
+
+     The ZIPENG.INI configuration routine allows you to disable the
+     feature that takes you back to the main menu after the first zip/
+     unzip process is complete, if you so desire.
+
+ZIP SOFTWARE:
+     As far as we know, PKWare's PKZip is the only zip/unzip software that
+     is completely syntax-compatible with PKZip, but we must assume that
+     there's another one out there somewhere, or will be someday.  This is
+     why the Program allows you to specify executable files other than
+     PKZIP.EXE and PKUNZIP.EXE.
+
+     The Zip Engine assumes that you're using a PKZip version whose number
+     starts with 1, such as 1.10.  If you're using PKZip 2.04c or later
+     (or the 1.93a alpha version---but that may or may not be compatible
+     with Zip Engine), you'll need to use the Edit-the-.INI-File routine
+     to tell Zip Engine you have version 2, in order to use any of the new
+     features of PKZip 2.04c (or perhaps 1.93a).
+
+     By the way, if you have anything higher than 1.10 which is neither
+     1.93a, 2.04c, 2.04e, nor 2.04g, then it's most likely a hacked
+     version!  As of 3/21/93, these are the ONLY four versions later than
+     1.10 which have ever been released by PKWare.  A hacked version can
+     be something that hasn't been modified in any way except to change
+     the version number reported, or it can be something dangerous like a
+     Trojan or virus.  There is at least one hacked version which claims
+     to be PKZip 2.XX, but FORMATS YOUR HARD DRIVE when you try to use it.
+
+     Version 2.04c had several problems that were fixed by 2.04e, and
+     2.04e had some small problems that were fixed by 2.04g.  Plus, 2.04e
+     (which Zip Engine was updated for) has some options that were not in
+     version 2.04c.  So if you use 2.04c there are some Zip Engine options
+     (-m- and -&v) that won't work for you.  And an alpha version (like
+     1.93a) of any product should never be used for real work.
+
+     So as of 3/21/93, the ONLY PKZip version later than 1.10 which should
+     be used (with Zip Engine or any other way), is 2.04g.  No other.
+
+     When PKZip 2.04c was released, we added all of its new options, and
+     again for version 2.04e.  These options will show up on the Zip
+     Engine menus if you use the Edit-the-.INI-File routine to tell Zip
+     Engine that you're using version 2.  If you don't do that, then all
+     you'll see is the options that applied to the PKZip 1.10 version.
+     Version 2.04g didn't add any new abilities; only improvements upon
+     the old abilities.
+
+DOS-BASED ZIP SOFTWARE:
+     Since only a finite number of characters are allowed on a DOS-
+     emulation command line, the shorter the names of the directories
+     you're using are, the more stuff you can jam into a command line.
+     This applies to the path to your zip software too.  (This only
+     applies to users of DOS-based zip software, so we couldn't really
+     make it an official Zip Engine Rule to Live By.)  So if you often run
+     into the command line length limit, you might move your zip/unzip
+     programs to a directory that's closer to the root, or has a shorter
+     name, or even to the root directory itself.  Then get the OS/2
+     version of the new PKZip as soon as PKWare releases it.
+
+OS/2-BASED ZIP SOFTWARE:
+     As of this writing, the Program has been tested with PKWare version
+     1.02 for OS/2, which is the latest OS/2 version of PKWare we know of
+     so far.  The following problems are associated with this version:
+
+     Version 1.02 for OS/2 will only run in full screen mode.  The Zip
+     Engine prefers a windowed version.  The Zip Engine is going to tell
+     OS/2 to start an OS/2 windowed session in which to run the PKWare
+     program, but when the PKWare program starts it tells OS/2 that it
+     can't run in a window.  So OS/2 gives it a full screen session in-
+     stead, and it runs there.  You're on the Desktop watching Zip En-
+     gine's dialog boxes, but your zipping and unzipping is happening in
+     a full screen session in the background where you can't see it at
+     all.  Then when the PKWare program is done running, OS/2 immediate-
+     ly closes that full screen session and returns to the windowed
+     session that Zip Engine had originally told OS/2 to open.  Whatever
+     PKWare output was on the screen in the full screen session, for you
+     to see, is long gone!  This could sometimes be a problem.
+
+     The Zip Engine was developed using mainly the PKZip DOS Version 1.10,
+     so it supports all of the options provided by PKZip Version 1.10.
+     Earlier versions of PKZip don't support all of these options, so
+     obviously if you use PKZip version 1.02 you won't be able to use all
+     of the options supplied by the Zip Engine menus.
+
+STICKY ALT KEY:
+     If your mouse appears to have no effect on anything all of a sudden,
+     don't worry, that just means OS/2's Sticky Alt Key problem has
+     cropped up for a moment.  Just hit the Left Alt key and whatever
+     button you'd been clicking on will immediately take effect.
+
+THE MURPHY EFFECT:
+     For reasons we can't really explain, the dialog boxes generated by
+     Zip Engine seem to be the first things to head to the bottom of the
+     heap when some other window is brought to the foreground.  If your
+     Alarms applet pops up a dialog box or if you leave Zip Engine for a
+     moment to do something else, you'll probably lose the Zip Engine
+     dialog box you had been looking at.  If that happens, just Alt-Tab or
+     Alt-ESC through your open windows until it comes back to the fore-
+     ground.
+
+     We've even heard of one case (a beta tester who had the System Editor
+     open on his desktop) where the Zip Engine dialog box didn't come to
+     the foreground even when it was first started up!  He double-clicked
+     on the Zip Engine object and waited, and waited, and finally he moved
+     his System Editor window out of the way and there was the Zip Engine
+     main menu, waiting for him in the background all that time!  So if
+     you ever start Zip Engine and it never comes up, look around on your
+     desktop if you have other windows open that are large enough to hide
+     Zip Engine's main menu.
+
+COMMAND LINE (Ugh) USERS AND THE MURPHY EFFECT:
+     If you run the Program from the command line, don't look for the
+     dialog box in the command line session.  The Zip Engine program is
+     running in that session but the dialog boxes are not.  They're on the
+     desktop, like any other Presentation Manager program.
+
+          KARI'S DISCLAIMER:
+          I apologize to anyone who may be offended by the phrase "command
+          line (Ugh)" which is scattered so profusely throughout this
+          document.  I love the command line.  I live in the command line.
+          Bart hates the command line.  We tease each other about it.
+          It's just friendly banter.  I let him get away with typing
+          "(Ugh)" every time he typed "command line" because he lets me
+          get away with most everything I want.  (Oh, he's gonna give me a
+          nasty look for saying that.)  Anyway "command line (Ugh)" is
+          supposed to be funny.  Please, don't anybody think that we're
+          putting down command-line-lovers!  It's a joke.  After all, The
+          Zip Engine is mainly aimed at people who don't like to zip and
+          unzip files from the command line.
+
+WINDOW LIST AND THE MURPHY EFFECT:
+     The Zip Engine dialog boxes do not show up in the Window List.  What
+     does show up in the Window List with the "Zip Engine" name is the
+     session the ZIPENG.CMD file is running in.  All it is, is a big black
+     blank screen.  Switching to it with the Window List won't help you
+     find your dialog box.  We're sorry, but we don't know of anything
+     that can be done about it.  VREXX just does not tell OS/2 to add the
+     dialog box windows to the Window List.
+
+WANTON MINIMIZERS:
+     If you start The Zip Engine from the Command Line (Ugh), remember to
+     leave the window that command line is in open while the Program runs.
+     If you close or minimize the window while the Program is running,
+     you'll most likely have problems.  The window can be minimized
+     between steps in The Zip Engine, but if you forget to bring it back
+     up before your next interaction with a Zip Engine dialog box, don't
+     blame us for the results.
+
+VREXX SPECIFICS:
+     If you've never used a VREXX application before, you should know that
+     VREXX needs to be initialized and shut down just like OS/2 does.  The
+     Zip Engine takes care of this process for you, as long as you
+     properly exit from it.  If you shut the Program down externally
+     (through the Window List, for example), VREXX won't work properly
+     with any program again until you reboot your system or use a
+     process-killing utility to kill VREXX.  And if you try to do a
+     shutdown while VREXX is in this state, it won't work.  You'll have to
+     do a Ctrl-Alt-Del reboot instead.  (DON'T do a Reset since that
+     doesn't flush the disk cache!  Ctrl-Alt-Del at least does that even
+     though it doesn't close the Desktop "folder" and save your icon
+     positions.)  Do not close the "Watch the Command Line Being Built"
+     window either!  If you don't want to see it, just use the mouse to
+     drag it down to the bottom of the screen where you can't see it.  But
+     you really shouldn't do that, because important messages are shown in
+     that window from time to time.
+
+     It is also possible that some extreme error in the Zip Engine program
+     could cause it to abort without cleaning up VREXX.  (You know what
+     they say, "no program can ever be completely bug-free", but we surely
+     have tried!)  If The Zip Engine ever aborts and your next attempts at
+     running it or any other VREXX application fail, then just reboot or
+     use a process-killing utility to kill VREXX and then things will be
+     fine again.  And if you feel like it, we'd appreciate it if you could
+     remember everything you'd done that led up to the problem, and tell
+     us about it, so we can fix it before it happens to anyone else.
+
+     The message "A program in this session encountered an error and
+     cannot continue" just happens sometimes on exiting a VREXX program.
+     This applies to Zip Engine and all the other VREXX programs we have,
+     so we believe it's VREXX's fault, not Zip Engine's.  Anyway we've
+     never seen any sort of harm come from it.  Just click on OK.
+
+     For some reason it is apparently not always possible to get two VREXX
+     programs to run at the same time.  In our experience, it usually
+     works if one of them was started from the command line, and it
+     usually doesn't work if both were started from WorkPlace Shell
+     program objects.  But we have friends who have totally different
+     experiences with this question.  So we don't know what causes it or
+     what to do about it.  It looks like a person who has a VREXX program
+     running constantly for some purpose, just will not be able to use Zip
+     Engine or any other VREXX program.  Or perhaps they will.  Try it,
+     and see.  If you get "A program in this session has encountered an
+     error and cannot continue" every time you try to run Zip Engine with
+     some other VREXX program running, then you know that you're one who
+     can't.
+
+     For some strange unknown reason, when you go to modify an existing
+     .ZIP file, the text in the "Watch the Command Line" window changes
+     color as soon as you choose the .ZIP file you want to modify.  It
+     changes to the same color as the text in the dialog boxes, instead
+     of remaining the color that Window text is supposed to be.  I can
+     only assume that it's a bug in VREXX that's causing this, because
+     other functions which use the exact same subroutine in the Program
+     with every other variable exactly the same, do not have this prob-
+     lem.
+
+HPFS VS. DOS:
+     The Zip Engine can work quite well with long filenames with strange
+     characters and spaces in them.  However, DOS-based zip programs
+     can't.  If you're planning to use The Zip Engine as a front end for a
+     DOS-based utility, keep this limitation in mind.
+
+HPFS AND QUOTATION MARKS:
+     Don't forget to type filenames that have spaces with quotation marks
+     around them, in the places where you actually have to do any typing
+     in Zip Engine.  For example, "C:\DIRNAME\THIS FILE.NAME" will work
+     properly.  C:\DIRNAME\THIS FILE.NAME would not.  The Zip Engine will
+     see that as one file named C:\DIRNAME\THIS and one named FILE.NAME.
+     The quotation marks really need to be there.
+
+4OS2 AND 4DOS USERS:
+     This Program was developed on a system using JPSoftware's 4OS2 rather
+     than IBM's CMD, and 4DOS rather than IBM's COMMAND, as the command
+     interpreters.  It has been extensively tested with CMD and COMMAND
+     also.  It works either way.
+
+VIEWING TEXT FILES WITHIN A .ZIP:
+     The Zip Engine allows you to view text files within a .ZIP file
+     without actually unzipping it.  The Program unzips the file into a
+     temporary directory and lets you choose which files to view, and then
+     shows you the FIRST 630 LINES of each of your chosen files, and then
+     when you're through viewing, the Program deletes that temporary
+     directory, leaving no messy temp files on your drive or anything.  We
+     have no idea why VREXX will not show more than the first 632 or 628
+     lines of a file, so we gave up and told Zip Engine to not even
+     attempt going higher than 630.  Serious problems resulted from trying
+     it on very large files (over 1250 lines long) so this seemed like the
+     best way to assure that those serious problems never happen to
+     anyone.  The problems don't occur unless more than 1250 lines are
+     attempted, so why bother attempting that many lines when only around
+     630 of them will show up anyway?  That would be a waste of CPU time.
+
+     Since text files are created to be viewed with a text viewer, and The
+     Zip Engine views them in graphics mode, text that's supposed to
+     appear in columns won't.  Nothing we can do about it.  That's just a
+     problem with viewing text in graphics mode.
+
+CANCEL BUTTONS:
+     The CANCEL buttons give different results on different dialog boxes.
+     Usually, you use CANCEL to skip the operation you were working on and
+     return to the main menu.  But there are exceptions, and some things
+     that may not be totally intuitive.  They are explained here.
+        On the Zip Special Optional Switches and Unzip Special Optional
+     Switches dialog boxes, clicking CANCEL means you want to return to
+     the main menu.  If you just don't want to select any optional
+     switches, click on OK, not CANCEL.  If no switches are checked, then
+     none will be used.  No need to CANCEL just to avoid the use of
+     switches.  (If you check a switch that you didn't mean to check, just
+     click on it again to uncheck it.  No need to CANCEL there either.)
+        On dialog boxes UNDER the Special Optional Switches boxes (for
+     example, if you check the Zip -m switch you'll get a further dialog
+     box asking WHICH files you want to move into the .ZIP file), CANCEL
+     means just to skip using the switch that the dialog box is asking
+     about.  It does not mean cancel the entire operation and return to
+     the main menu.
+        There are situations in which you might be confronted with a
+     checkbox of filenames (for example, if you choose to delete files
+     from within a .ZIP, or view text files within a .ZIP).  There are ten
+     filenames per checkbox, and more checkboxes keep coming until you've
+     seen every filename available.  If you find all the files you want
+     right on the first page and you know that there are several more
+     pages to go, you can avoid clicking on OK on every one of those pages
+     by clicking on CANCEL on the first page that doesn't contain any
+     files you want, or any page thereafter.  DO NOT click on CANCEL on a
+     page that contains files you've checked, because the Program does not
+     receieve input from a dialog box where CANCEL is chosen, even if
+     something on that dialog box is checked.  Click OK on any page that
+     contains filenames you're selecting.  You can click on CANCEL on any
+     page thereafter to continue with the operation without being
+     subjected to any further filenames.
+        When viewing text files within a .ZIP file, and you've chosen more
+     than one file to view, and you find everything you wanted to see
+     before you get done viewing all the files you'd chosen, you may click
+     on CANCEL to continue without viewing the rest of the files you'd
+     checked.
+        On Password boxes, if you're using PKZip version 2, you're allowed
+     to leave them BLANK and yet still use the -s switch in your command.
+     (PKZip then asks you during execution of the command, to supply the
+     password.)  If you don't want to use the -s switch, then you need to
+     click CANCEL on the Password boxes, rather than OK.  Whereas with
+     PKZip version 1, clicking OK on a blank Password box drops the -s
+     switch entirely, since PKZip version 1 doesn't allow you to specify
+     the password during execution.  WARNING:  If you do use PKZip version
+     2 and click on OK without typing a password, the PKWare program is
+     going to stop and wait for you to supply a password.  You have to
+     switch to the PKZip session and type a password (or just type
+     anything at all and hit Enter if you didn't mean to use the -s
+     switch) before the PKWare program will do anything.  At any rate, you
+     need to use CANCEL instead of OK on password boxes if you want to use
+     PKZip version 2 without the -s switch, and that's the reason why the
+     password dialog box comes up so far to the left--so that the CANCEL
+     button is closer to where your mouse pointer is.
+
+CLOSING PKZIP WINDOWS:
+     By default, The Zip Engine automatically closes the windows in which
+     PKZip/Unzip runs as soon as PKZip/Unzip is finished with them.  If
+     you want them to stay open so you can read what the PKWare program
+     has to say, you can make that happen by saying so in the Edit-the-
+     .INI-File routine of The Zip Engine.  But then you'll always have to
+     switch to the PKZip/Unzip window and type EXIT to make it close.
+     That can get a bit irritating, so I want to give you a tip on how to
+     make that easier.
+
+     If you're using a DOS version of PKZip, make sure the line
+          DEVICE=d:\OS2\MDOS\ANSI.SYS
+     is in your OS/2 config.sys file (where "d" is the letter of the drive
+     where you have OS/2 installed).  If it isn't, put it there, at the
+     end, and reboot your computer.  Don't worry; DOS devices loaded via
+     config.sys do not take up any memory inside your DOS sessions!  Now
+     you want to edit your OS/2 autoexec.bat file.  Insert the following
+     lines BEFORE your PROMPT command:
+          ECHO ON
+          @PROMPT $e[0;68;"EXIT";13p    << This command is case-sensitive!
+
+          @ECHO OFF
+     Make sure to leave that blank line in there between @PROMPT and @ECHO
+     just like that!  Those commands will cause your F10 key to execute
+     the EXIT command for you all by itself!  The F1 key is 0;59 and F10
+     is 0;68 and the other F key codes are in order between those two
+     numbers, so you can use a different number in place of 68 in that
+     @PROMPT command if you don't want to use your F10 key for this
+     purpose.  And this will work for ALL of your DOS sessions, not just
+     the PKZip/Unzip ones.  You'll be able to close any DOS window or full
+     screen session by hitting your F10 key (or whichever one you assign)
+     at the prompt.  Don't worry, it won't cause any problem for your
+     programs.  Nearly all programs (one exception is Prodigy) ignore
+     ANSI key reassignments and use the function keys for their own
+     purposes.  This will cause your F10 key to execute EXIT only when you
+     are at the command line.  Almost nowhere else.
+
+     If you're using an OS/2 version of PKZip, this is not nearly so easy.
+     You'd have to have the KEYS command turned OFF (which is just not
+     acceptable to most people) and have the ANSI command turned ON (which
+     is the default) and add the $e[0;68;"EXIT";13p part to the end of the
+     PROMPT command in your OS/2 config.sys file and reboot.  That's the
+     only way you could use ANSI to reassign a function key in ALL OS/2
+     sessions.  Remember it wouldn't do any good to do it just in the Zip
+     Engine session because the PKZip/Unzip action does not occur in the
+     Zip Engine session!  It has its own session.  But there are other
+     ways to assign commands or keystrokes to function keys, besides just
+     by using ANSI.  One example is 4OS2's ALIAS command, if you're using
+     4OS2.  If you're not, you should look into it.  Greatest thing since
+     even before sliced bread.  Here's my 4OS2 ALIAS that makes my F5 key
+     execute the EXIT command for me:
+          ALIAS @F5=`EXIT <up><up>r`
+     That goes into startup.cmd after 4OS2's SHRALIAS command and of
+     course those <up> symbols mean 4OS2's ESC command which looks like an
+     up arrow.
+
+PKZIP.CFG FILE:
+     Yes, there are a FEW limitations in The Zip Engine.  We're sorry.
+     The Program does not offer you any way to use the switches which
+     override PKZIP.CFG options, the way you can do at the command line,
+     except to just manually add them to Zip Engine's command when it
+     offers you the chance to edit the command before executing it.  So
+     PKZIP.CFG should not be used with Zip Engine.  The Zip Engine does
+     allow you to configure default options that are to be used with every
+     Zip/Unzip command, however.  For example if you need to use the -)
+     switch to get PKZip 2.04c to work on your system, you can tell Zip
+     Engine's configuration-file-editing routine to put -) onto all of
+     your Zip/Unzip command lines.
+
+DIRECTORY NAMED $:
+     Since The Zip Engine uses $ as the symbol that tells it to extract a
+     .ZIP file into a directory with the same name (for example, if you
+     want Zip Engine to create a directory named \THISFILE to extract
+     THISFILE.ZIP into, you can type \$ when Zip Engine asks you what
+     directory to extract into), it is not possible to extract a .ZIP file
+     into a directory that really is named $.  Sorry.  Hopefully no one
+     will ever want to.
+
+SVGA:
+     Some of my beta testers tell me that the Zip Engine dialog boxes
+     don't look good at SVGA resolution, because the dialog box stays the
+     same while the text gets smaller.  I don't have access to any mach-
+     ine that runs SVGA, so I can't get a look at it or figure out what
+     to do about it.  When Bart gets home from Saudi, perhaps he can get
+     his video card to do SVGA and then we'll be able to work on it.  So
+     in the next version of Zip Engine, look for dialog boxes that look
+     good at VGA and SVGA resolutions.  On the other hand, I have a feel-
+     ing that it just might be a VREXX problem that we can't do anything
+     about.  We'll see.
+
+DISCLAIMER:
+     While this Program has been thoroughly reviewed and tested, it is
+     provided solely "as is" and without warranty of any kind.  MOSES,
+     Kari Jackson, and Bart Toulouse specifically disclaim all warranties,
+     expressed or implied, including but not limited to implied warranties
+     of merchantability and fitness for a particular purpose with respect
+     to defects in any portion of the package.  In no event shall MOSES,
+     Kari Jackson, or Bart Toulouse be liable for any loss of profit or
+     any other damage, including but not limited to special, incidental,
+     commercial, consequential or other damages of any kind resulting from
+     defects in this software or its documentation.  USE THIS PROGRAM AT
+     YOUR OWN RISK.
+
+SHAREWARE:
+     This Program is shareware, not freeware.  What that means is this:
+     It may be freely distributed to anyone as long as all of its files
+     and documentation are distributed together.  It may be freely used
+     for evaluation purposes, to decide whether you like it.  If you do
+     like it and want to continue using it, you are supposed to register
+     it.  We will not have you arrested or sue you if you don't, but you
+     should feel guilty about it if you have a conscience.
+
+     To avoid these guilty feelings, register the shareware you use.  To
+     register Zip Engine, just send $10 to Kari Jackson
+                                           3201 Monroe Street
+                                           Omaha NE 68107-4048
+     Yes, you betcha I'll give half of it to Bart.  I sure wouldn't steal
+     from my best friend.  I'd give you his address too, so you could send
+     some to him instead to make sure I don't keep it all, but he's in
+     Saudi protecting us from The Evil Saddam right now so I haven't asked
+     him for permission to publish his address.  Besides, being in the Air
+     Force, who knows how long he'll have his present address anyway?
+
+BUG REPORTS:
+     If you find any bugs in this Program, please let me know on Prodigy
+     (DWDP74A), GEnie (K.JACKSON26), or the OS/2 conference on RIME (Kari
+     Jackson), or write me a letter.  Try to give me as much detail as you
+     can---what kind of system you have, how much memory, how much free
+     hard drive space, what version of Zip/Unzip program you're using,
+     what version of OS/2 (the original GA release, or the Service Pak, or
+     the 2.1 beta with Windows 3.1 support, etc.), exactly what you were
+     doing when the problem occurred, exactly what happened during the
+     problem, whether the same thing happens in other circumstances too,
+     etc.  If you send me $3 along with the bug report, I'll consider you
+     a registered user (no guilty feelings) and mail you a new copy of Zip
+     Engine as soon as I fix that bug.  If I can't reproduce that bug on
+     my system or any of my friends' systems, or if your bug is only
+     something that's already explained in this .DOC file, then I'll
+     return your $3 to you or send you a new version with someone else's
+     reported bugs fixed (if anyone else finds any bugs--ha ha!), as you
+     desire.  So if you're not positive that it's an absolute definite
+     BUG and you send the $3, then please let me know what you want me to
+     do with your $3 if your bug turns out not to be a bug.  Because re-
+     member, the $3 is not for registration.  It's for the disk, postage,
+     and mailer for the bug fix.  If you find a real bug, then you're
+     registered.  If not, then not.
+
+     And if you do find a bug, please go easy on me.  This is the first
+     version of Zip Engine, and Zip Engine is the first major REXX
+     program I've ever written.  It has been strenuously beta tested for
+     MONTHS by several people including two who REALLY enjoyed doing it,
+     which means they tested it inside out and upside down with every
+     imaginable permutation of every imaginable command, and they even
+     tested really crazy things like using directory names that don't
+     exist and all sorts of things that no one should ever do, but they
+     tried it anyway.  I mean they SERIOUSLY tried to idiot-proof this
+     program!  Their names are Chris Alumbaugh and Steve Weeks and I thank
+     them profusely!  But anyway, there's a chance that there's something
+     that EVEN THEY did not think of testing.  Doubtful, but possible.  We
+     sure did TRY to make Zip Engine as perfect as possible.
+
+FUTURE VERSIONS:
+     The next version of The Zip Engine will be written with a REAL
+     Visual REXX program, and compiled into an .EXE file, and every-
+     thing.  So if by chance you don't like this Program in its current
+     form, please don't give up on it.  When you see a new version in a
+     few months, try it out.  It will be a lot different.
+
+     After that, I intend to add support for .LZH, .ARJ, .ARC, and maybe
+     even .ZOO and .PAK files, along with the .ZIP files.
+
+                              <<<End of File>>>

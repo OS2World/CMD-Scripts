@@ -1,0 +1,305 @@
+/* DO NOT MODIFY THIS FILE IN ANY WAY!!!  SEE WARNING AT END OF FILE. */
+/* Lines for Files to Delete from the .ZIP File: input box: */
+Specify the files you want to delete.  Use of wildcards    
+is fine, so you can type *.COM *.EXE to delete all the   
+files with those extensions from the .ZIP file.  Or you  
+can type AUTOEXEC.BAT CONFIG.SYS to delete just those  
+two files.  Or, if you want a checkbox from which you     
+can choose whatever individual files you want, click   
+on CANCEL here.  
+Just be aware that many DOS programs (like zippers)      
+can't handle command lines longer than 127 characters.    
+So don't specify too many individual filenames!   
+/* Lines for .ZIP File to Create: input box: */
+Type the full drive:\pathname\filename of the file you   
+want to create.  For example, D:\ZIPENGIN.ZIP or     
+C:\UTIL\ZIPFILES\TESTING.ZIP      
+Your default directory name is already filled in for 
+you if you have used the Edit-the-Config routine to   
+specify one.  If you don't want to use that directory  
+name this time, then just backspace over it and type    
+a new name.  Or if you do, then just add a filename    
+to the end of it.
+/* Lines for Target Directory Name: input box: */
+   Type the full drive:\pathname of the directory into which you want to     
+place the extracted files.  Like C:\UTIL or A:\ or B:\DOWN\NEW       
+   If there's already a directory name there, and you don't want to use that      
+one, just backspace or edit it.
+   If the directory you want to unzip into does not exist, Zip Engine will   
+create it as long as its parent exists.  For example, if C:\DOWN\NEW does       
+not exist but C:\DOWN does, then Zip Engine will create NEW if you say so.       
+   If you want to create a directory with the same name as the file you're     
+unzipping, use $ as the directory name.  Like if your .ZIP file is THIS.ZIP      
+then type C:\UNZIP\$ to have Zip Engine create C:\UNZIP\THIS        
+/* Lines for Directory of Files to Zip: input box: */
+Type the full drive:\pathname of the directory which contains the files    
+you want to zip.  For example, C:\PRODIGY\PRO-UTIL or C:\OS2          
+or D:\ or whatever. 
+Or if you're not adding any files to the .ZIP file you're working with,  
+choose CANCEL now to continue without specifying any files to add, and       
+we'll add '-x*.*' to the command line instead, so that the Zip program     
+won't just add all the files from the current directory as it would by  
+default.
+/* Lines for Files to Zip: input box: */
+Now specify the files you want to zip from that directory.   
+For example, *.* for all the files, or *.EXE for all the 
+.EXE files, or TEXT*.*  *.EXE for all the .EXE files   
+and all the files that start with TEXT, or AUTOEXEC.BAT      
+CONFIG.SYS to do just those two files.  Or, if you want    
+a checkbox from which you can choose whatever individual      
+files you want, click on CANCEL here.   
+Just be aware that many DOS programs (like zippers) can      
+not handle command lines longer than 127 characters.  So     
+don't specify too many individual filenames!  
+/* Lines for Careful! message box: */
+This command may not be successful.  DOS programs can only
+process the first 127 characters of any command, and OS/2 passes
+some extra characters to the DOS session.  So watch the number
+in the lower right corner of the 'Watch the Command Line Being
+Built' window (which is the length of the command you're building)
+and if your command does not work, then you'll have an idea of
+what the limit is on your system so that next time, you'll know
+not to exceed that limit.  If you often run into this problem,
+then you should consider getting an OS/2 zipper to replace your
+current one.
+/* Lines for Finished building command line.... message box: */
+The Command Line is complete now.  It is shown in the dialog box below, 
+and you may edit it if desired (especially in cases where you have chosen 
+default options in the Edit-the-Config routine and you want to get rid of
+one of them for this particular operation).  If you edit it and change
+your mind, clicking on CANCEL will allow you to execute the command 
+as it was before you edited it, or alternately abort the entire opera-
+tion.  Click on OK in the dialog box below when you're satisfied with the 
+command and ready to execute it.  Note that if you have a long command it 
+is split into sections.  Each can be no longer than 80 characters.  And
+be very careful not to add or remove spaces at the ends of each section!
+/* Lines for Cancel? message box: */
+Do you want to execute the command as it was before you edited
+it, or do you want to abort the operation and return to the
+main menu?  OK to execute, or CANCEL for main menu.
+/* Lines for Sorry! message box under the -& switch in Zopt: */
+You cannot use the 'paths and subdirs' switches
+with the -&s switch.  That's ok, because the -&s
+takes care of everything the 'paths and subdirs'
+switches do.  Dropping the 'paths and subdirs'
+switches now.
+/* Lines for Files to Exclude from the .ZIP File: input box: */
+Specify the files you want to exclude.  Use of wild-   
+cards (* or ?) is fine.  For example, you might type   
+*.EXE  *.COM  *.BAT  to exclude all the files with    
+those extensions.  Or say AUTOEXEC.BAT CONFIG.SYS           
+to exclude just those two files.  Or, if you want a  
+checkbox from which you can choose whatever indiv-      
+idual files you want, click on CANCEL here.   
+Just be aware that many DOS programs (like zippers)     
+can't handle command lines longer than 127 characters.      
+So don't specify too many individual filenames!   
+/* Lines for Files to Exclude from Extraction: input box: */
+Specify the files you want to exclude.  Use of wild-   
+cards (* or ?) is fine.  For example, you might type   
+*.EXE  *.COM  *.BAT  to exclude all the files with    
+those extensions.  Or say AUTOEXEC.BAT  CONFIG.SYS          
+to exclude just those two files.  Or, if you want a  
+checkbox from which you can choose whatever indiv-      
+idual files you want, click on CANCEL here.   
+Just be aware that many DOS programs (like unzippers)       
+can't handle command lines longer than 127 charac-    
+ters.  So don't specify too many individual filenames!  
+/* Lines for Really? message box: */
+Are you sure you want to relabel the entire target drive
+with the volume label that's inside the .ZIP file, if any?
+Click on NO to drop the -$ switch.
+/* Lines for Files to Extract from the .ZIP File: input box: */
+Specify the files you want to extract.  Use of wildcards   
+is fine, so you can type *.COM *.EXE to extract all the   
+files with those extensions from the .ZIP file.  Or you  
+can type AUTOEXEC.BAT CONFIG.SYS to extract just those          
+two files.  Or, if you want a checkbox from which you     
+can choose whatever individual files you want, click on    
+CANCEL here.  
+Just be aware that many DOS programs (like zippers) can      
+not handle command lines longer than 127 characters.    
+So don't specify too many individual filenames!    
+/* Lines for Input the Date: input box: */
+Type the date you wish to use in MMDDYY format.      
+For example, type 120192 for Dec 1, 1992.     
+(Leave this line blank to use today's date.)  
+/* Lines for OPTIONAL Temporary directory: input box in Temp: subroutine: */
+Type the full drive:\pathname of the directory you   
+want Zip to use as a working directory, if any.   
+For example, D:\TEMP or F:\DOWNLOAD\WORKING           
+You should choose a directory on the fastest drive   
+you have, provided that it has enough free space.   
+If there's already a directory name there, and you  
+don't want to use that one, just backspace over it.  
+/* Lines for Temporary directory: input box in ViewExec: subroutine: */
+Type the full drive:\pathname of the directory   
+you want Unzip to use as a working directory.    
+For example, D:\TEMP or F:\DOWNLOAD\WORKING           
+/* Lines for Oops! message box in ViewExec: subroutine: */
+Sorry, there's a problem here.  We can't create the temporary     
+directory so we have to abort this operation in order to avoid     
+the possibility of deleting any of your files.     
+/* Lines for WAIT!  Warning! message box in ViewDiskFiles: subroutine: */
+Move this little dialog box out of your way while you read your .INF
+file, but DO NOT CLICK ON OK until you've CLOSED the VIEW program
+(by double-clicking mouse button one on the little square in the top
+left corner of the VIEW window).  If you ignore this piece of advice,
+the Zip Engine program will try to delete its temporary files while
+VIEW is still using one of them, and OS/2 won't allow that to happen
+so you'll have temp files left behind on your hard drive to find two
+months from now and wonder where they came from.
+/* Lines for Edit the .INI File: message box in EditCfg: subroutine: */
+Welcome to the ZIPENG.INI modifying routine.  In order for you to get
+here, either you chose this option from the main menu or else your zip/
+unzip programs could not be found.  Now let's see your .INI file.....
+ZIPENG.INI file cannot be found in the current directory or on
+the PATH, which are the only places The Zip Engine looks for it.
+We'll have to create a new ZIPENG.INI file in the current directory
+now.  If you want to move it later, you may.  By the way, your current
+/* Lines for Exit Line: message box: */
+The eighth possible line in the .INI file is "exit action" which tells
+the Program what you want to do after the first zip/unzip function is
+completed.  The default is to go back to this Program's main menu,
+where you can perform more zip/unzip functions.  If you ever do more
+than one zip/unzip function in a row, this saves you the time it takes
+this Program to initialize itself.  But if you rarely want to perform
+more than one function at a time, and you don't want to have to click
+on CANCEL to exit this Program afterward, then choose EXIT below.  Then
+this Program will just exit instead of returning you to the main menu
+when your first zip/unzip function is completed.
+/* Lines for Zipper Line: input box: */
+The first possible line in the .INI file is "zipper", which tells   
+the Program the full drive:\path\filename.ext of your zip program.     
+Shown below is whatever is already assigned to your "zipper" line,       
+if anything.  You may leave it as it is, change it to whatever you     
+like, or leave it blank to remove the whole line from the .INI   
+file.  But if you do that (remove the line), your zip program must     
+be named PKZIP.EXE and must be on the PATH command in the           
+OS/2 CONFIG.SYS file or the Zip Engine program will not work.       
+/* Lines for Unzipper Line: input box: */
+The second possible line in the .INI file is "unzipper", which tells    
+the Program the full drive:\path\filename.ext of your unzip program.    
+Shown below is whatever is already assigned to your "unzipper" line,      
+if anything.  You may leave it as it is, change it to whatever you    
+like, or leave it blank to remove the whole line from the .INI  
+file.  But if you do that (remove the line), your unzip program must    
+be named PKUNZIP.EXE and must be on the PATH command in the           
+OS/2 CONFIG.SYS file or the Zip Engine program will not work.      
+/* Lines for Directory Lines: multbox: */
+The next three possible lines in the .INI file are "temporary directory",
+"extract directory", and "default directory".  The input box shows what
+you now have assigned to those lines, if anything.  You may leave them as
+they are, change them to whatever you want, or leave them blank to remove
+them from the .INI file altogether.  The Program will not allow you to
+specify "\" (root directory of current drive), however---that could cause
+all sorts of problems if you ever happen to use The Zip Engine with a 
+floppy drive as your current drive.  So if you want to specify the root
+directory, include the drive letter along with it, as in "C:\" or "D:\".
+     The "temporary directory" line tells Zip Engine where to create its
+own temp files, and what to use whenever you unzip files with the "-b"
+switch (though the Program does allow you to override that setting for
+the "-b" switch if you so desire).
+     The "extract directory" line tells Zip Engine what directory name
+to supply for your approval each time you see the Target Directory
+Name: input box.
+     The "default directory" line tells Zip Engine what directory to show
+you in the FileBox dialog boxes and to supply for your approval each time
+you see the .ZIP File to Create: input box.  If you always keep all of
+your .ZIP files in a certain directory, then you probably want to put
+its name here.  If you leave this line blank, Zip Engine will use the
+current directory for those functions.
+/* Lines for Default options information window: */
+The last three possible lines in the .INI file are 'zip options', 'unzip
+options', and 'global options', which tell the Program to use certain
+switches on your command lines without you telling it each time to do so.
+Do NOT put anything here until you are very familiar with both your
+zipper's syntax AND this Program.  What you put here for zip options
+will go on the command line during any procedure that takes you to the
+'Zip Special OPTIONAL Switches' dialog box.  What you put here for un-
+zip options will go on the command line during any procedure that takes
+you to the 'Unzip Special OPTIONAL Switches' dialog box.  What you put
+here for global options will go on the command line during any proced-
+ure that uses your Zip/Unzip program in any way, even things that happen
+in the background such as the unzipping of a .ZIP file into a temporary
+directory in order to let you view text files within the .ZIP file.  Be
+careful to use only options that you want used EVERY time Zip Engine
+performs ANY sort of Zip/Unzip operation.  Remember that's only for the
+global options.  The zip options and unzip options are more forgiving,
+because they only apply to the commands which you have a chance to edit
+before executing.  So for example, if you like to use the -$ switch with
+zip ALMOST all the time, you can put it here and then at times when you
+don't want to use it, you can just edit it out of the finished command
+line before executing it.  DO NOT choose an option from the Special OP-
+TIONAL Switches dialog boxes that has already been specified here, be-
+cause it'll already BE on the command line.  Note that there is no error
+checking in this routine, so don't put anything into these default options
+lines that you're not SURE is valid and appropriate.  And DO NOT put any-
+thing into the zip options and unzip options lines that is also in your
+global options line, or it will show up twice on the command line.
+----------
+Click on the "Options lines:" dialog box above when ready to fill it in.
+/* Lines for About..... message box: */
+                       The Zip Engine.
+     A graphical approach to zipping and unzipping files.
+   Copyright 1992-93 by Kari Jackson and Bart Toulouse.
+                          Version 1.0
+        3201 Monroe Street, Omaha NE  68107-4048
+   Click on OK to view the Zip Engine program's .DOC file
+       or click on CANCEL to return to the main menu.
+/* Lines for Sorry! message box in About..... routine: */
+The ZIPENG.DOC file cannot be found either in the current directory
+or an any of the directories on your CONFIG.SYS file's PATH
+command.  Returning you to the main menu......
+/* Lines for Sorry! message box in PAR2.q = '-s' routine: */
+You did not specify any files to add to this
+.ZIP file.  You can only add password protec-
+tion to the files that are being added.
+Therefore, you cannot use the -s switch at
+this time.
+/* Lines for Sorry! message box in CreateError: subroutine: */
+We were not able to create the temporary file which is
+needed in order to complete this procedure.  The most
+common reason for this to occur is a full root direc-
+tory.  The root directory of a hard drive can contain
+no more than 512 entries (or 112 for a double-density
+floppy, or 224 for a high-density floppy).  If you're
+already at the limit, then Zip Engine cannot create
+another.  If the root directory size limit is not the
+problem, then you should run CHKDSK and see what it
+finds.  Returning you to the main menu now.
+/* Lines for VSAY window in ViewOnly: subroutine: */
+When the Unzip program's window comes up, click on it to bring it to the
+foreground, and type your password (or if you clicked on OK by mistake,
+just type anything and hit Enter).  You will not see the Unzip program
+ask you for input, since its output is being redirected into a temp file.
+/* Lines for Window Action window: */
+The ninth possible line in the .INI file is "start switch" which tells
+the Program how you want your zip/unzip windows to behave.  By default,
+the windows are opened by the START command with the /C switch, which
+means they close by themselves as soon as the zip/unzip command has
+finished.  This means you don't have to close them yourself, but it
+also means it's not terribly easy for you to see the output of the zip/
+unzip command if you want to.  If you often want to see that output,
+you can tell Zip Engine to START those windows with the /K switch
+instead, which means they'll stay open so you can see the output, and
+then you'll have to type the EXIT command in those windows yourself to
+close them when you're done reading them.
+/* Lines for EditColors: subroutine: */
+The last lines in the .INI file specify the colors you
+want to use for Zip Engine windows.  That is, not dialog
+boxes---those use the Menu Text and Dialog Background
+colors from whatever color scheme is current on your
+Desktop.  This is about the windows that open up for
+information purposes only, with no mouse buttons on them,
+like this one.  The default window colors are white on
+blue.  This Edit-the-.INI-File routine will not use
+your chosen colors, but the rest of The Zip Engine will.
+
+* *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** *
+* This file must NOT be modified in ANY way.  If you even open it with a text *
+* editor and save it without changing anything, it could be ruined.  Because  *
+* most text editors do not preserve spaces at the end of lines.  This file's  *
+* end-of-line spaces ARE NECESSARY.  If you've opened this file to look at it,*
+* get out, go away, close the file without SAVING it!  Now!                   *
+* *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** *
