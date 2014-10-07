@@ -1,0 +1,70 @@
+The command line arguments accepted by the Python client (and its derivatives) are as follows:
+
+--max_uploads <arg>
+    the maximum number of uploads to allow at once. (defaults to 4) Note that
+    this does not affect the number of connections, only the number of
+    simultaneous unchoked uploads.
+--keepalive_interval <arg>
+    number of seconds to pause between sending keepalives (defaults to 120.0)
+--download_slice_size <arg>
+    How many bytes to query for per request. (defaults to 16384)
+--request_backlog <arg>
+    how many requests to keep in a single pipe at once. (defaults to 5)
+--max_message_length <arg>
+    maximum length prefix encoding you'll accept over the wire - larger values
+    get the connection dropped. (defaults to 8388608)
+--ip/-i <arg>
+    ip to report you have to the tracker. (defaults to '')
+--minport <arg>
+    minimum port to listen on, counts up if unavailable (defaults to 6881)
+--maxport <arg>
+    maximum port to listen on (defaults to 6999)
+--responsefile <arg>
+    file the server response was stored in, alternative to url (defaults to
+    '')
+--url <arg>
+    url to get file from, alternative to responsefile (defaults to '')
+--saveas <arg>
+    local file name to save the file as, null indicates query user (defaults
+    to '')
+--timeout <arg>
+    time to wait between closing sockets which nothing has been received on
+    (defaults to 300.0)
+--timeout_check_interval <arg>
+    time to wait between checking if any connections have timed out (defaults
+    to 60.0)
+--max_slice_length <arg>
+    maximum length slice to send to peers, larger requests are ignored
+    (defaults to 131072)
+--max_rate_period <arg>
+    maximum amount of time to guess the current rate estimate represents
+    (defaults to 20.0)
+--bind <arg>
+    ip to bind to locally (defaults to '')
+--upload_rate_fudge <arg>
+    time equivalent of writing to kernel-level TCP buffer, for rate adjustment
+    (defaults to 5.0)
+--display_interval <arg>
+    time between updates of displayed information (defaults to 0.5)
+--rerequest_interval <arg>
+    time to wait between requesting more peers (defaults to 300)
+--min_peers <arg>
+    minimum number of peers to not do rerequesting (defaults to 20)
+--http_timeout <arg>
+    number of seconds to wait before assuming that an http connection has
+    timed out (defaults to 60)
+--max_initiate <arg>
+    number of peers at which to stop initiating new connections (defaults to
+    40)
+--check_hashes <arg>
+    whether to check hashes on disk (defaults to 1)
+--max_upload_rate <arg>
+    maximum kB/s to upload at, 0 means no limit (defaults to 0)
+--alloc_pause <arg>
+    seconds to wait before displaying allocation feedback (defaults to 3.0)
+--snub_time <arg>
+    seconds to wait for data to come in over a connection before assuming it's
+    semi-permanently choked (defaults to 60.0)
+--spew <arg>
+    whether to display diagnostic info to stdout (defaults to 0)
+

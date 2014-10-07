@@ -1,0 +1,71 @@
+After editing Time.CMD I suggest to rename it to something like MP3.CMD, 
+but only if you're fully aware of the fact that Time.CMD assumes the use
+of a fixed drive letter and directory (the "usbdrive" variable). Time is 
+a FAT MP3 player-brand, and you cannot execute Time accidently by typing
+"time". Hence the 
+
+Yet another unexpected prompt may be the deletion of e.g. M:\*.*. That's 
+perhaps not as safe as deleting *.MP3 or files synchronisation, but this
+requires you to pay attention to the destruction. Please note it'll also 
+delete other files, e.g. a backup or some PDF file.
+
+
+WARNING: you have to edit and check lines 5, 6 and 7 of Time.CMD first.
+
+
+Line 5:
+=======
+
+   mp3='C:\Susan\Multimedia\Music'       
+
+This should point to the base directory of your MP3 file library. Do not    
+add a trailing "\", so use "A:" if your base directory is "A:\".
+   
+
+Line 6:
+=======
+
+   size=256                            
+   
+This is the size, in MiB, of your device. In general it's recommended to
+exceed the real size of its storage capacity. That way Time.CMD will try
+to copy more files to the device, so it's more likely that Time.CMD will 
+use all free space.
+
+This number of MiBs is not a limit. If the real free storage capacity of
+your device is less, then Time.CMD may result in a few "disk full"-error
+messages. That's okay, because each failed attempt was an opportunity to
+try to use the last free MiBs of your device's storage capacity.
+
+If the number of MiBs is less than the real storage capacity, then it is
+possible that Time.CMD will exceed the limit by the size of your largest
+MP3 file.
+
+
+Line 7:
+=======
+
+   usbdrive='B:\'                      
+   
+This is the target drive *AND* directory of the MP3 player, so it always
+has to end with a "\". Please note that Time.MP3 will always assume that
+this is the right drive and directory. If it's the wrong drive, then the
+prompt when Time.CMD tries to delete e.g. B:\*.* is your final chance to
+avoid having to restore your backup files.
+
+
+By the way: the purpose of Time.CMD is to copy MP3 files, with any short 
+or long filename, to a device like a 256 MiB MP3 player which uses a FAT
+file system, with or without an ability to play files in a random order.
+E.g. "C:\Susan\Multimedia\Music\Dixie\Elvis Presley - Dead or alive.MP3"
+will, if randomly selected and assuming enough free storage capacity, be
+copied to B:\000001A0.MP3. If it's the first copied file, then it should
+be the first MP3 file the player will play. "It worked for me".
+
+
+You'll also have to delete lines 8 and 9, once. Line 8 prints a message,
+which points to reading this file. Line 9 exits before any damage can be
+caused. This are/were the lines you have/had to delete:
+
+   SAY 'Please read TIME.TXT first, you have to edit this file.'
+   EXIT

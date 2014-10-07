@@ -1,0 +1,100 @@
+RENEX.CMD v0.94
+
+  RENEX.CMD (REName by EXpression) is a command-line utility for batch-renaming
+  files according to regular expression syntax.
+
+
+
+REQUIREMENTS
+
+  Besides OS/2 and REXX support, RENEX requires that you have Patrick McPhee's
+  REXXRE (REXX Regular Expression) Library installed.  The latest version should
+  be available at the author's website: http://www.interlog.com/~ptjm/
+  and can also be found on Hobbes under the /pub/os2/dev/rexx directory.
+
+  You need to understand extended regular expression syntax in order to use
+  RENEX.  The PDF documentation provided with REXXRE includes a brief
+  introduction.
+
+
+
+SYNTAX
+
+  RENEX [options] "source template" ["target template"]
+
+  The quotation marks around the source and target templates are mandatory.
+
+Options:
+
+    /Y  Don't prompt for confirmation (the default is to prompt for confirmation
+        for before renaming each file)
+    /C  Case-sensitive matching (the default is to match filenames without case-
+        sensitivity)
+
+Source Template:
+
+  The source template is an extended regular expression (ERE) that matches
+  filenames in the current directory which are to be listed and/or renamed.
+
+  If you plan to specify a target template as well, you will want to define
+  groups (by using parentheses) within the source template ERE which the
+  target template can use for substitution.
+
+Target Template:
+
+  The target template, if specified, is the pattern according to which the
+  matched filenames will be renamed.  This is NOT a regular expression; it is
+  a normal string, except that you may use the substitution variables \1, \2,
+  \3, ... up to \9 to indicate substitution of groups defined in the source
+  template (as per regular expression backreference rules).  You may specify up
+  to nine such substitutions, including duplicates.  In other words, you could
+  have nine different substitution variables (\1 through \9), or you could have
+  one variable nine times, or anything in between.
+
+  Since the \ character is not a legal filename character, any \ in the target
+  template which is not followed by a number will simply be discarded when the
+  template is parsed.  In addition, any \ followed by a number which does not
+  refer to a defined group in the source template will also be discarded.  For
+  instance, in the following:
+
+  renex "^[0-9]+.*" "something\1"
+
+  the \1 in the target template is invalid, since no groups are defined in the
+  source template.  It would be discarded when parsing occurs, and the end
+  result would be to try and rename every target file to the same thing,
+  "something", which is probably not the desired result.  The correct form
+  would probably be something like:
+
+  renex "^([0-9]+.*)" "something\1"
+
+  which defines one group (the entire source template), which is then
+  substituted for the \1 in the target template.  Therefore, the resulting
+  command would prefix every matching filename with "something".
+
+  If you don't specify a target template, RENEX simply lists all the files
+  that match the source template.
+
+
+
+EXAMPLES
+
+  1. List all files ending with either ".HTM" or ".HTML".
+
+     renex ".*\.htm[l]?$"
+
+  2. Rename all files ending in ".HTM" so that they end in ".HTML" instead.
+
+     renex "(.*)\.htm$" "\1.html"
+
+  3. Rename the numbered files "0001.GIF" through "9999.GIF" by prefixing
+     "TILES" to each filename.
+
+     renex "^([0-9]{4})\.gif$" "tiles\1.gif"
+
+
+
+NOTICES
+
+  RENEX.CMD is (C) 2005 Alex Taylor.
+  REXXRE is (C) 2003 Patrick TJ McPhee.
+

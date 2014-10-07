@@ -1,0 +1,310 @@
+RRBACKUP.CMD - REXX + RAR Backup Utility
+Version 1.1 (C) 2003 Alex Taylor
+
+
+INTRODUCTION
+
+RRBACKUP is a REXX-based utility for backing up directory trees or entire
+partitions under OS/2.  It uses the RAR archiver (see 'About RAR', below)
+to create its backup archives.  The archives are saved to a local or
+network drive, and may subsequently be copied onto backup media such as
+CD-R or DVD-R.
+
+RRBACKUP was designed to provide a front-end to RAR's powerful backup
+facilities, without the need for complex and arcane command-line syntax.
+It tries to use 'sensible' defaults when creating backups, and provides a
+relatively straightforward set of command-line options.  It also supports
+backing up to remote LAN drives.
+
+
+
+REQUIREMENTS
+
+To use RRBACKUP, you must have the following:
+
+  * The RAR archiver (OS/2 version); it must be named RAR32.EXE, and be
+    available on the PATH.  Version 3.00 or later is recommended.
+
+  * The EMX runtime DLLs (required by RAR), available on the LIBPATH.
+
+  * OS/2 REXX must be installed, including the REXXUTIL library.
+
+  * Sufficient hard drive space (either locally or on the LAN) for storing
+    the backup archives.
+
+
+
+USING RRBACKUP
+
+As noted under 'Requirements', RAR, EMX and REXX must all be installed and
+working.  Copy RRBACKUP.CMD to a suitable location (preferably on your PATH),
+and invoke it with the following syntax:
+
+    RRBACKUP [parameters]
+
+where [parameters] consists of one or more of the following, separated by
+spaces, in any order:
+
+    <source>        The top-level name of the directory to be backed up.  To
+                    back up an entire partition, enter the drive specification
+                    followed by a backslash, e.g. 'C:\'.  You can also back up
+                    a single file by specifying the fully-qualified filename.
+
+                    NOTE: The source parameter is the only valid parameter which
+                    is not preceded by a '-' or '/' character.  The first such
+                    parameter which is specified on the command line will be
+                    assumed to be the source parameter; any other parameter not
+                    preceded by '-' or '/' will be ignored.
+
+    By default, RRBACKUP backs up the entire directory tree specified by the
+    source parameter, including subdirectories.  It also clears the archive
+    attributes for each file and directory, if possible.
+
+    This behaviour can be altered by using one of the following three options:
+
+    /COPY           Back up all files, but do not clear the archive attributes.
+                    (The term comes from the implication that we are 'copying'
+                    the files for some purpose other than archiving.)
+
+    /DIFF           Back up only files which have their archive attributes set,
+                    but do not clear the archive attributes on these files.
+                    This is known as a 'differential' backup, since the presumed
+                    effect is to back up only those files which have been
+                    changed or added since the most recent non-differential
+                    (full or incremental) backup.  
+
+    /INC            Back up only files which have their archive attributes set,
+                    and clear the archive attributes on these files.  This is
+                    known as an 'incremental' backup; the presumed effect is to
+                    back up only those files which have been changed or added
+                    since the most recent backup of any kind (full, incremental
+                    or differential).
+
+    You are strongly advised NOT to alternate the use of /INC or /DIFF when
+    backing up files relative to the same original full backup, as each option
+    only makes sense when used consistently.
+
+    To explain the difference between /DIFF and /INC a bit more clearly: 
+     - In both cases, you are presumed to performed a full backup (without
+       /DIFF, /INC or /COPY specified) at some point previously.
+     - When all subsequent backups are performed using /DIFF, restoring the
+       system to its most recent state requires the full backup archive plus the
+       LAST differential archive.
+     - When all subsequent backups are performed using /INC, restoring the
+       system to its most recent state requires the full backup archive plus ALL
+       incremental archives, restored in chronological order from oldest to 
+       newest.
+    Basically, /DIFF makes the logic of doing a restore easier; /INC, however,
+    tends to make backing up a lot faster as time goes on.
+
+    The main shortcoming of both /INC and /DIFF is that files which have been
+    removed (or renamed to something else) since the last full backup will come
+    back again when you do a restore.  At present, only a full backup can pick
+    up deleted files and directories.
+
+    Note that performing a /COPY backup has no effect on subsequent differential
+    or incremental backups (which is, of course, the purpose of the option).
+
+
+    The following parameters are used to customize the backup process:
+
+    /D              Append the current date (in the form YYYYMMDD) to the name
+                    of the backup archive(s).  Do not use this option if the
+                    archives are being written to a FAT partition, as it will
+                    increase the archive filenames well beyond 8.3 characters.
+
+    /L:<filespec>   Specify the name of a log file to record the output from
+                    RAR.  If this option is not specified, the output will
+                    simply be displayed on the screen.
+
+    /N:<name>       Specify the name of the backup archive(s).  This is a string
+                    which must be a legal filename (without extension) for the
+                    filesystem on which the archives will be written.  If this
+                    option is not specified, the default archive name is
+                    'BACKUP'.
+
+    /O              Only back up the top level of the specified directory; do
+                    not recurse into subdirectories.
+
+    /S:<size>       Specifies the maximum size of each archive file, in MB.  If
+                    the archive exceeds this size, it will be split up into
+                    multiple files, each of which (except the last) will be
+                    exactly this size.  If not specified, the default is 630 MB.
+                    The maximum allowable size is probably 2048 MB, given that
+                    RAR likely does not use the OS/2 large-file-access APIs.
+
+    /T:<name>       Target directory into which the archive files will be
+                    written.  This is normally a drive or directory specification.
+                    However, a UNC-style LAN resource name (of the form
+                    \\servername\resource) may also be specified; in this case,
+                    the /U and /P parameters are also required unless you are
+                    already logged on to the LAN.
+
+    /X:<f1[,f2..]>  Filenames or masks of files to exclude from the backup.
+                    Note that the file "WP ROOT. SF" is always excluded
+                    automatically.
+
+    /Y              Do not prompt the user for confirmation; start the backup
+                    immediately.
+
+    The following parameters are required if and only if the /T parameter
+    specifies a UNC-format LAN resource name, AND you are not currently
+    logged on with a valid LAN user ID and password.
+
+    /P:<password>   LAN password to use; this parameter is required if the
+                    /U parameter is specified.
+
+    /U:<userid>     LAN user ID to log on with.  Requires the /P parameter
+                    to be specified as well (otherwise RRBACKUP will abort).
+                    Once the backup is complete, this user will be logged
+                    off automatically.
+
+    /V:<type>       Verification type to use when logging on to the LAN.  <type>
+                    must be one of the following:
+                        NONE      No domain; verify with resource owner.
+                        DOMAIN    Verify on the default domain controller.
+                        <other>   Verify on the domain named <other>.
+                    If this option is not specified, the default verification
+                    method defined in IBMLAN.INI will be used.
+
+
+The syntax may look fairly involved, but most of these parameters are optional.
+A standard partition backup with default options can omit most of them.  Some
+examples follow.
+
+
+
+EXAMPLES
+
+1) Back up all of drive D: to an archive file (or files) named 'BACKUP_D' in
+   the directory F:\BACKUPS:
+
+       rrbackup d:\ /n:backup_d /t:f:\backups
+
+
+2) Back up all of drive C: (except for any file named 'SWAPPER.DAT') to an
+   archive file (or files) on drive Z: named 'CDRIVE', with today's date
+   appended:
+
+       rrbackup c:\ /n:cdrive /d /x:swapper.dat /t:z:\
+
+
+3) Back up all of drive E: to the LAN directory \\SERVER\BACKUPS, logging
+   on to the Peer workstation with the user ID 'admin' and password 'secret',
+   without changing the archive bits of the files backed up; the archive
+   file(s) will be called simply 'BACKUP':
+
+       rrbackup e:\ /t:\\server\backups /u:admin /p:secret /v:none /copy
+
+
+4) Back up the directory F:\MYDATA to archive file(s) named 'MYDATA' in the
+   directory W:\TEMP, with a maximum archive file size of 10 MB, without
+   prompting for confirmation, and excluding all files whose names end with
+   '.BAK' and '.LOG':
+
+       rrbackup f:\mydata /t:w:\temp /s:10 /n:mydata /x:*.bak,*.log /y
+
+
+
+BATCH OPERATION
+
+Generally, you will want to run multiple backups of various sources (most
+commonly, of different drives) in one go.  RRBACKUP itself provides no built-
+in facility for doing this, so you will probably want to write your own 
+batch file.
+
+As RRBACKUP is a REXX script, you need to use the OS/2 'call' command to run
+it from a script.  For example, using a standard (non-REXX) batch file:
+
+  @echo off
+  call rrbackup c:\ /n:backup_c /t:f:\backups /x:swapper.dat /y
+  call rrbackup d:\ /n:backup_d /t:f:\backups /x:d:\tmp\* /y
+
+Or, from REXX:
+
+  /* My backup script */
+  bkp_target = 'f:\backups'
+  '@call rrbackup c:\ /n:backup_c /t:'bkp_target '/x:swapper.dat /y'
+  '@call rrbackup d:\ /n:backup_d /t:'bkp_target '/x:d:\tmp\* /y'
+
+(In the case of REXX, make sure that the 'call' command appears INSIDE the
+quotes, so that it will be processed by CMD and not by the REXX interpreter.)
+
+
+
+RESTORING
+
+To restore a directory or partition from an archive file, simply invoke RAR
+directly.  The syntax is:
+
+    rar x <archive> <path>
+
+where <archive> is the name of the (first) archive file, and <path> is the
+top-level directory into which the files should be restored (in the case of
+a full partition backup, this would be the root directory of the partition).
+
+If the backup files are located on physically separate media, such as a set
+of CD-Rs, use the syntax:
+
+    rar xvp <archive> <path>
+
+This will cause RAR to pause and prompt you to insert the medium containing
+the next volume when necessary.
+
+Example:
+
+To restore F:\BACKUPS\BACKUP_D.RAR to drive D:, use:
+
+    rar x f:\backups\backup_d.rar d:\
+
+When restoring a complete partition like this, you are advised to reformat
+the partition first.
+
+
+
+LIMITATIONS
+
+ * RRBACKUP is not currently designed to handle spaces in its command-line
+   options.  This is mainly a problem if you want to specify an explicit file
+   or path (e.g. with the /T or /X parameters) whose name contains spaces.
+
+ * RAR cannot clear the archive bits on files which are currently locked in-use;
+   nor can it successfully back up the extended attributes of such files.  This
+   makes it unsuitable for backing up the currently-booted system volume.  You
+   are recommended to boot to a maintenance volume before backing up your system
+   drive.  (Make sure that your maintenance volume has EMX, RAR and REXX
+   installed, including the REXXUTIL.DLL library.)
+
+ * RRBACKUP only supports backing up to random-access disks.  Direct backups to
+   tape or CD/DVD is not supported, although the archive files can be copied to
+   such media after the fact.
+
+ * There is no graphical user interface (and probably there never will be).
+   RRBACKUP also does not currently make use of configuration files; all desired
+   options must be specified on the command line.
+
+
+
+ABOUT RAR
+
+RAR is a command-line file archiver & compressor similar to ZIP and ARJ.
+Current versions are available from http://www.rarlab.com/download.htm or
+the Hobbes OS/2 archive.
+
+Unlike ZIP or ARJ, RAR is shareware: it is free to download and evaluate
+(the license mentions a 40-day evaluation period, although the program will
+continue to function indefinitely).  Some features like advanced logging
+are only available to registered users, although RRBACKUP is not equipped
+to take advantage of them.
+
+RRBACKUP uses RAR because it has some specific advantages:
+
+ * Archives can be split into multiple volumes, based on a prespecified
+   size limit.
+
+ * Compression is slightly better than ZIP or ARJ.
+
+RAR is (C) 1993-2004 Eugene Roshal; see http://www.rarlab.com for more
+information.
+
+
