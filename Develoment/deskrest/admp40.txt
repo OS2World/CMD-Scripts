@@ -1,0 +1,41 @@
+ 
+ 
+   Adapter Support Matrix for LAN Server Version 4.0 on SMP Platforms
+ 
+ 
+   4 October 1994
+ 
+ 
+This document contains a list of Network Adapter Cards and NDIS MAC
+Drivers which are supported on LAN Server Version 4.0 on OS/2 SMP
+systems.
+ 
+-----------------------------------------------------------------------------
+ 
+Please note that the device drivers for some of the supported
+adapter cards are not delivered in the LAN Server 4.0 base product.
+ 
+NOTE: * = driver is in the product
+ 
+ 
+* 3Com EtherLink II-16 (3C503-16)
+* 3Com EtherLink III (3C509)
+* 3Com EtherLink III-EISA (3C579)
+* 3Com TokenLink III EISA (3C679)
+  Compaq NetFlex-2 ENET-TR Controller
+* IBM LAN Adapter for Ethernet
+* IBM Token-Ring Network 16/4 Adapter
+* IBM Token-Ring Network 16/4 ISA-16 Adapter
+* Intel EtherExpress 16C (PCLA8100)
+* Intel TokenExpress ISA/16S (PCLA8130A)
+* Intel TokenExpress 16/4 LAN Adapter for EISA (EILA8235)
+* Intel TokenExpress EISA/32 LAN Adapter (EILA8245)
+  Madge Smart 16/4 EISA Ringnode (52-08)
+* Madge Straight Blue 16/4 ISA (62-01)
+  Olicom USA, Inc. EISA/32 Adapter (OC-3135)
+  Proteon p1990plus ProNET - 4/16 Plus
+  Racal InterLan ES3210
+ 
+-----------------------------------------------------------------------------
+ 
+

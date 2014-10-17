@@ -1,0 +1,105 @@
+ 
+ 
+   Adapter Support Matrix for DOS LAN Services Version 4.0
+ 
+ 
+   4 October 1994
+ 
+ 
+This document contains a list of Network Adapter Cards and NDIS MAC
+Drivers which are supported on DOS LAN Services Version 4.0 on DOS
+uniprocessor systems.
+ 
+-----------------------------------------------------------------------------
+ 
+Please note that the device drivers for some of the supported
+adapter cards are not delivered in the DOS LAN Services 4.0 product.
+ 
+NOTE: * = driver is in the product
+ 
+ 
+* 3Com EtherLink II (3C503)
+* 3Com EtherLink II-16 (3C503-16)
+* 3Com EtherLink II-16-TP (3C503-16-TP)
+* 3Com EtherLink/MC (3C523B)
+* 3Com EtherLink/MC-TP (3C523B-TP)
+  3Com EtherLink MC-32 (3C527B)
+* 3Com EtherLink III-Combo (3C509-COMBO)
+* 3Com EtherLink III-TP (3C509-TP)
+* 3Com EtherLink III-TPO (3C509-TPO)
+  3Com EtherLink III-MCA-TP (3C529-TP)
+  Artisoft NodeRunner/SI 2000/T
+  Artisoft NodeRunner/SI 2000/A
+  Artisoft NodeRunner/SI 2000M/TC
+  Artisoft LANTastic NodeRunner 2000/C
+  Artisoft LANTastic NodeRunner 2000/A
+  Artisoft LANTastic NodeRunner 2000M/TC
+  Cabletron Ethernet DNI Adapter (E2112)
+  Cabletron Ethernet DNI Adapter (E2119)
+  Cabletron Ethernet DNI Adapter (E3112)
+  Cabletron Ethernet DNI Adapter (E3119)
+  Cabletron Token-Ring DNI Adapter (T2015)
+  DCA IRMAtrac EISA
+  Digital EtherWorks 3 Turbo TP (DE204-AA)
+  D-Link Ethernet Interface Card for the PC XT/AT (DE-220CT)
+  D-Link Ethernet Interface Card for the PC XT/AT (DE-220T)
+  D-Link Ethernet Card for EISA bus PC (DE-400)
+  D-Link Token-Ring Adapter for the PC/AT and PS/2 (DT-220)
+* Eagle Novell NE2000T
+* Eagle Novell NE2000plus
+* Eagle Novell NE2000Tplus
+* Eagle Novell NE2000plus-3
+* Eagle EtherXpert EP2000plus
+* Eagle EtherXpert EP2000Tplus
+  Eagle Novell NE3210
+  Eagle EtherXpert EP3210
+* Eagle Novell NE/2T
+  Hewlett-Packard 27247
+  Hewlett-Packard JP2405A
+  IBM Adapter/A for Ethernet Twisted-Pair Networks
+* IBM LAN Adapter for Ethernet
+  IBM LAN Adapter/A for Ethernet
+* IBM Token-Ring Network Adapter II
+* IBM Token-Ring Network 16/4 Adapter
+* IBM Token-Ring Network 16/4 ISA-16 Adapter
+* IBM Token-Ring Network Adapter/A (69X8138)
+* IBM Token-Ring Network 16/4 Adapter/A (16F1163)
+* IBM Token-Ring Network 16/4 Adapter/A (74F9410)
+* Intel EtherExpress 16C (PCLA8100)
+* Intel EtherExpress FlashC (PCLA8105)
+* Intel EtherExpress 16 (PCLA8110)
+* Intel EtherExpress 16TP (PCLA8120)
+* Intel EtherExpress FlashTP (PCLA8125)
+* Intel EtherExpress MCA (MCLA8110)
+* Intel EtherExpress MCATP (MCLA8120)
+* Intel TokenExpress ISA/16S (PCLA8130A)
+* Intel TokenExpress 16/4 LAN Adapter for EISA (EILA8235)
+  Intel TokenExpress EISA/32 LAN Adapter (EILA8245)
+  Madge Smart 16/4 AT PLUS Ringnode (52-03)
+  Madge Smart 16/4 EISA Ringnode (52-08)
+  Madge Smart 16/4 MC Ringnode (54-08)
+  Madge Smart 16/4 MC32 Ringnode (54-09)
+  Madge Smart 16/4 ISA Client Plus (22-01)
+* Olicom USA, Inc. ISA 16/4 Adapter (OC-3117)
+* Olicom USA, Inc. MCA 16/4 Adapter (OC-3129)
+* Olicom USA, Inc. EISA 16/4 Adapter (OC-3133)
+  Olicom USA, Inc. EISA/32 Adapter (OC-3135)
+  Olicom USA, Inc. Pocket Token-Ring Adapter (OC-3210)
+* Proteon p1392plus ProNET - 4/16 Plus
+  Proteon p1990plus ProNET - 4/16 Plus
+  Racal InterLan InterLan MCA-TP (163-3143)
+  Racal InterLan InterLan T/R 16/4 ISA (167-3193)
+  Racal InterLan InterLan T/R 16/4 MCA (163-3137)
+* SMC EtherCard PLUS Elite 10T (8003WC)
+* SMC EtherCard PLUS Elite 16T (8013WC)
+* SMC EtherCard PLUS Elite 16 Combo (8013EWC)
+* SMC EtherCard PLUS Elite 10 T/A (8013WP/A)
+  SMC EtherCard Elite 16T Ultra (8216T)
+  SMC TokenCard Elite/A (8115T/A)
+  SMC TokenCard Elite Master 32 (83M32)
+  Thomas-Conrad 16/4 Token-Ring Adapter/MC (TC4046)
+  Xircom Pocket Token Ring Adapter III (PT3-16CTP)
+ 
+-----------------------------------------------------------------------------
+ 
+

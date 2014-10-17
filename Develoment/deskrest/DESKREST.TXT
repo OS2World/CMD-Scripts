@@ -1,0 +1,52 @@
+				DeskRest V 0.9
+                                      ------------------
+
+(c) Olaf Kolling '95
+   CIS: 100342,1303
+e-Mail: kolling@fh-albsig.de
+
+
+Das Script "deskrest.cmd" darf frei kopiert und verwendet werden. Fšr die Weitergabe darf jedoch keine Bezahlung verlangt
+werden, die ber die reinen Kopierkosten hinausgeht.
+
+**************************************************************************************************************************
+
+Das Rexx-Script "deskrest.cmd" dient dazu, die Variable <WP_DESKTOP> in der User-Ini Datei (OS2.INI) wiederherstustellen.
+Diese Variable ist eine Art Zeiger auf das Verzeichnis, das die Arbeitsoberfl„che enth„lt. Die Variable wird z.B. von den 
+meisten Installationsscripten benutzt, um den Desktop zu finden.
+Bei Programmen die in die Verwaltung der Workplace-Shell eingreifen kann es vorkommen, daá diese Variable besch„digt oder 
+gel”scht wird. Dadurch kann das Programm "pmshell.exe" beim n„chsten Systemstart die Arbeitsoberfl„che nicht mehr finden 
+und legt dann ein "Temor„res Arbeitsverzeichnis" an. An diesem Punkt máte man normalerweise ein Desktop-Backup zurck-
+spielen (falls vorhanden) oder gar eine Neuinstallation vornehmen.
+
+Hier setzt jetzt "deskrest.cmd" an, indem es die Variable wieder restauriert. 
+Um die dazu n”tigen Systemfunktionen benutzen zu k”nnen muá allerdings die Workplace-Shell aktiv sein. 
+Durch folgende Vorgehensweise kann dies auch dann erreicht werden, wenn <WP_DESKTOP> besch„digt ist:
+
+ 1. In die Config.Sys folgende Zeile einfgen:
+       SET DESKTOP="kompletter Pfad des Arbeitsverzeichnisses" (z.B. C:\ARBEITSOBERFLCHE)
+
+ 2. Rechner neu booten
+
+ 3. Jetzt sollte die Workplace-Shell wieder wie vorher aussehen
+
+ 4. OS/2-Fenster ”ffnen
+
+ 5. deskrest.cmd aufrufen und das Desktop-Verzeichnis auch hier angeben
+
+ 6. wenn das Script Erfolg meldet weiter mit 7. sonst leider "Pech gehabt"
+
+ 7. den DESKTOP-Eintrag in der Config.Sys wieder entfernen (ist jetzt berflssig)
+
+ 8. den Rechner neu booten
+
+
+Sollten Sie "Pech gehabt" haben, schreiben Sie mir bitte eine Mail, evtl. kann ich Ihnen trotzdem helfen.
+
+**************************************************************************************************************************
+
+Falls Sie Fehler finden oder Anregungen haben schreiben Sie mir bitte eine entsprechende Mail.
+
+
+Olaf Kolling
+

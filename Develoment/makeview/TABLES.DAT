@@ -1,0 +1,74 @@
+/****************************************************************
+    This file describes the system tables for SQL/DS systems that
+    are required by VX-REXX.
+****************************************************************/
+   
+/*  SYSTABLES: List the tables in the database.
+    creator     - qualifier of table or view CHAR(8)
+    name        - name of the table or view VARCHAR(18)
+    type        - T = table, V = view CHAR(1)
+    remarks     - user comment (optional) VARCHAR(254)
+*/
+systables.col.creator = "CREATOR"
+systables.col.name = "TNAME"
+systables.col.type = "TABLETYPE"
+systables.col.remarks = "REMARKS"
+systables.table = "SYSCATALOG"
+
+/*  SYSCOLUMNS: List all columns in the database.
+    tbcreator   - qualifier of table or view CHAR(8)
+    tbname      - name of the table or view what contains column VARCHAR(18)
+    name        - column name VARCHAR(18)
+    remarks     - user comment (optional) VARCHAR(254)
+    coltype     - data type of column CHAR(8)
+    length      - length of column SMALLINT
+    scale       - scale for decimals SMALLINT
+    nulls       - Y=null allowed, N=not null, D=not null with default CHAR(1)
+    colno       - column ordinal SMALLINT
+    keyseq      - ordinality within primary key SMALLINT
+*/
+syscolumns.col.tbcreator = "CREATOR"
+syscolumns.col.tbname = "TNAME"
+syscolumns.col.name = "CNAME"
+syscolumns.col.remarks = "REMARKS"
+syscolumns.col.coltype = "COLTYPE"
+syscolumns.col.length = "SYSLENGTH" /* will not work for decimals */
+syscolumns.col.scale = "0"
+syscolumns.col.nulls = "NULLS"
+syscolumns.col.colno = "COLNO"
+syscolumns.col.keyseq = "0"
+syscolumns.table = "SYSCOLUMNS"
+
+/*  SYSRELS: List database table relationships.
+    creator     - qualifier of dependent table
+    tbname      - name of dependent table
+    reftbcreator- qualifier of the parent table CHAR(8)
+    reftbname   - name of the parent table VARCHAR(18)
+    relname     - name of relationship CHAR(8)
+    fkcolnames  - list of foreign key column names VARCHAR(320)
+    pkcolnames  - list of primary key column names VARCHAR(320)
+*/
+sysrels.col.creator = "'_X_'"
+sysrels.col.tbname = "'_X_'"
+sysrels.col.reftbcreator = "'_X_'"
+sysrels.col.reftbname = "'_X_'"
+sysrels.col.rename = "'_X_'"
+sysrels.col.fkcolnames = "'_X_'"
+sysrels.col.pkcolnames = "'_X_'"
+sysrels.table = "SYSCOLUMNS"
+
+/*  SYSINDEXES: List all indexes in the database.
+    creator     - qualifier of the index CHAR(8)
+    name        - name of the index VARCHAR(18)
+    colnames    - list of column names VARCHAR(320)
+    uniquerule  - D=duplicates ok, U=unique, P=primary key CHAR(1)
+    tbcreator   - qualifier of the table on which the index is defined CHAR(8)
+    tbname      - name of the table on which the index is defined VARCHAR(18)
+*/
+sysindexes.col.creator = "'_X_'"
+sysindexes.col.name = "'_X_'"
+sysindexes.col.colnames = "'_X_'"
+sysindexes.col.uniquerule = "'_X_'"
+sysindexes.col.tbcreator = "'_X_'"
+sysindexes.col.tbname = "'_X_'"
+sysindexes.table = "SYSCOLUMNS"
