@@ -1,0 +1,94 @@
+   Program: ACTSCLOK.CMD - set system date and time from Automatic                
+                Computer Time Service (ACTS) maintained by the                    
+                National Institute of Standards                                   
+
+   Version: 1.1 - November, 1992
+
+   Author:  Chuck Giglia, Delaware Valley OS/2 Users Group
+            1129 Webster Drive, Wilmington, Delaware 19803                        
+            Compuserve: 72317,3704
+            Delaware Valley OS/2 Users Group BBS (302-477-0236): /0
+                                                                                  
+   Acknowledgements:                                                              
+            Many thanks to Jerry am Ende of the Delaware Valley OS 2              
+            Users Group for his enthusiasm toward REXX which piqued               
+            my interest in improving on his TIMESET.CMD routine.                  
+            Also, I appreciate the design ideas I got from reading John
+            Deurbrouck's article in the October 27, 1992 issue of PC Magazine.
+            His program was a bit flashier, but it was written for                
+            Windows in C and I didn't think this problem needed a                 
+            graphical solution.                                                   
+                                                                                  
+   Warrantee:
+            I hope you can use this routine to your advantage, but I
+            provide no warrantees nor do I guarantee that it performs             
+            any useful function.                                                  
+                                                                                  
+            Your feedback or ideas for improvement are appreciated.               
+                                                                                  
+   Product Description                                                            
+        ACTSCLOK.CMD is an OS/2 REXX command file which sets the System Date
+        and Time of the invoking computer to the current date and time from       
+        the Automated Computer Time Service (ACTS) maintained by the National     
+        Institute of Standards. The ACTS returns Greenwich Mean Time (GMT),       
+        so ACTSCLOK.CMD provides for handling a positive or negative offset       
+        from GMT and allows the user to enable or disable Daylight Saving         
+        Time (DST) adjustment.                                                    
+                                                                                  
+   Usage is:                                                                      
+         ACTSCLOK <offset> <dstIndicator> <comPort> <PhoneNumber> <dialPrefix>    
+                <offset>       = Minutes from GMT (i.e. EST = -300).              
+                                The default is -300                               
+                <dstIndicator> = Adjust for DST? (Y or N). The default is Y       
+                <comPort>      = COM port to use (COM1, COM2, etc.). The          
+                                default is COM1                                   
+                <PhoneNumber>  = Area code and phone number of the ACTS.          
+                                The default is 303-494-4774.                      
+                <dialPrefix>   = Any dialing prefixes or codes required to dial   
+                                the ACTS. The default is 1, (the comma causes     
+                                the modem to pause briefly before continuing)     
+                                                                                  
+        Individual command line arguments may be forced to use the default by     
+        coding an exclamation point (!) in that argument's position. For example  
+        to accept all defaults except the COM port and dialing prefix, use:      
+                                                                                  
+                        ACTSCLOK ! ! COM2 ! 9,                                    
+                                                                                  
+        This example will set the system clock to 300 minutes before GMT during   
+        Standard Time or 240 minutes before GMT during Daylight Saving Time.      
+        The system will use COM2 to dial 9,303-494-4774 to connect to the ACTS.
+
+        Run ACTSCLOK without any arguments (or with a single question mark (?) 
+        as its sole argument) to obtain help.
+
+   Future Plans:
+        There's no guarrantee I'll get to these, but a few fixes and improvements 
+        came to mind as I was adding this documentation. They include:
+
+          - Testing ACTSCLOK on a wider range of communications hardware. I've
+            run it successfully using a Practical Peripherals PM 2400FX96SA and
+            a Racal Vadic 2400PA. There's no reason it shouldn't work with any
+            Hayes compatible modem, but I ran into trouble when trying to run
+            over a network to a shared modem pool - just didn't seem to dial the
+            modem.
+
+          - Can't figure out why the modem doesn't hang up when ACTSCLOK sends
+            the hang up command (ATH). If you read the REXX code, you'll see I've
+            tried a couple things, but it still doesn't do it. For now, you're
+            left with either manually reseting the modem or waiting for the ACTS
+            to time you out and hang up.
+
+          - Enabling ACTSCLOK to run on a schedule (i.e. once a month, etc.). It
+            seems a bit extravagant to put this routine into the OS/2 2.0 startup
+            folder and have it run daily (although this may be useful to some).
+
+   Release Notes:
+          10/28/92  Version 1.0 -  Initial Release
+
+          11/4/92   Version 1.1 -  Added functionality to automatically determine
+                                   date format set for system - Thanks again to
+                                   Jerry am Ende for his input here.
+                                   Also, corrected small problem with time adjustments
+                                   crossing into yesterday.
+
+

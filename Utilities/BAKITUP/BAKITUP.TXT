@@ -1,0 +1,143 @@
+BAKITUP.CMD
+
+This is a FREE program.  You may use it or modify it to
+you heart's content.  Just think nice thoughts about me if
+you like it, and think no thoughts about me if you don't.
+Needless to say, there are no warranties of any sort, and you use
+it at YOUR OWN RISK.
+ 
+Maurice Fox
+
+This is a little REXX file to automate use of the OS/2
+BACKUP program.  It can be used directly, or you could use
+it as a template for other purposes.  I will admit up front that
+I don't have a snazzy tape backup system, so I just use the backup
+program that comes with OS/2, just as I used its DOS predecessor
+for years.  The motivation for this routine is the following:
+
+1.  Back up the files that I want to have backed up
+2.  Don't back up other files
+3.  Keep a log on a separate diskette, listing only the files
+    backed up, without cluttering it with empty subdirectory
+    names as BACKUP's /S option does
+4.  Make it convenient to start over with a new set of backup
+    diskettes, or to continue with one previously started
+
+It works by searching the specified subdirectories of the 
+specified disks for the files desired and running BACKUP only 
+it finds matching files.  When it runs, it first prompts for
+you to put the log diskette in its drive, then asks whether you
+want a new set or not.  If you reply starts with the letter N
+(or n) (short for NEW) the parameters for BACKUP are set to
+back up all files, and the BACKUP.LOG file is deleted from the
+log diskette.  Otherwise, it is set to back up only modified
+files, and the BACKUP.LOG file is left intact.  As shipped, it
+works for me, but you will want to customize it to your own setup.
+You do that with any convenient text editor, as explained below.
+If you have a lot of subdirectories, the initial start of a new
+set if backup diskettes will be a bit tedious, but subsequent
+runs, adding to the backup diskettes only the modified files,
+will be a breeze.
+
+INSTALLATION
+
+Copy the file BAKITUP.CMD to a convenient directory.  The easiest
+way is to use one that is on your PATH.
+
+USE
+
+(You need to customize it first, as described below.)
+
+From an OS/2 command prompt, either full screen or windowed,
+enter the command
+
+   BAKITUP
+
+and follow the prompts.  The first prompt is to put the log
+diskette in a diskette drive.  The second prompt asks whether
+you want to start a new set or not.  A "new set" is what you do
+the first time you use BAKITUP, or when you have accumulated so
+many backup diskettes you want to start over again.  The remaining
+prompts all come from the system BACKUP command, and just ask you
+to stick diskettes in the drive and hit Enter.  If you are as
+error-prone as I am, you may wish to replace the system message
+file with one that gives a better warning that a new diskette
+is needed.  That file and instructions for installing it
+should accompany this file.
+
+CUSTOMIZING BAKITUP.CMD FOR YOUR OWN USE
+
+The things you can change are the following:
+1.  The directories to be searched
+2.  The file specifications to be searched for
+3.  The place to put the backup files
+4.  The place to put the log file
+5.  The command to be executed
+
+This is sort of in order of decreasing likelihood of your 
+wanting to change something.
+
+Everything is governed by variables coded into the file, so
+to change anything, you need a text editor that saves plain
+ASCII files.  The system editor that comes with OS/2 will work
+just fine.  If you use a word processor, be sure to have it save
+the file in ASCII format.
+
+TO CHANGE THE DIRECTORIES AND FILE SPECS
+
+Find line 122 of the program, where you will find a set of
+pairs of variables, starting with the pairs paths.0 and files.0.
+There is a sequence of them, currently ten pairs.  Inspect the
+values, and you can see how it works.  Each value of paths is
+the starting point for a search tree.  The program inspects 
+that directory and each of its subdirectories for files that
+match each of the specifications contained in the corresponding
+files variable.  (As currently arranged, it does not inspect hidden
+directories, but you could change that by modifying the dattribs
+variable, which is set on line 52.)
+
+When you add or delete files/paths pairs, you need to change the
+value of the variable limit, which is currently at line 152.  To
+keep things working sensibly, be sure that you have paths and
+files paired and numbered consecutively, no gaps.
+
+TO CHANGE THE DESTINATION OF THE BACKUP FILES AND THE LOG FILE
+
+Change the value of the two variables backupdisk
+and logdisk, which are set on lines 8 and 9, respectively. 
+(Clever names, hey?) BACKUP insists that they be different disks.
+This arrangement puts them both on diskettes, but you could log to
+a hard disk if you wanted to.
+
+TO CHANGE THE COMMAND TO BE EXECUTED
+
+Change the value of extcmd, located at line 14 of the file.
+---------
+Another closet user of BACKUP is revealed!
+
+The files in this package are the following:
+
+READ.ME  (This file)
+
+OSO001.MSG A patched version of the system message file for
+           OS/2 2.0 with service pack.
+
+OSO001.txt Explanation and instructions for OSO001.MSG
+
+BAKITUP.CMD A REXX command file to manage the OS/2 BACKUP
+            command
+
+BAKITUP.TXT Explanation and instructions for BAKITUP.CMD
+
+DISCLAIMER:  This material is FREE, without warranty of any kind.
+User assumes all risks!
+
+Author:
+
+Maurice Fox
+1609 North Jackson Street
+Arlington, VA 22201
+
+Send messages to the OS/2 Shareware Bulletin Board
+or the CPCUG MIX.
+

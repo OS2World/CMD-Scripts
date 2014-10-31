@@ -1,0 +1,35 @@
+PURPOSE:  OSO001.MSG is a patched version of the system
+message file for OS/2 2.0.  It was made from the one furnished
+with the system by patching it with DEBUG.  The only difference
+is that the prompt for inserting a new backup diskette for
+BACKUP is conspicuously different from the one calling for the
+last backup diskette.  It reads "NEW DISK, STUPID", and contains
+a couple of beeps to help alert the user that a disk change is
+needed.  I made the change because the prompts for the a new
+disk and for the old disk are easily mistaken, and if you hit 
+Enter at the wrong time you can clobber a backup diskette.
+ 
+For my money, this is a change that IBM ought to make to the
+BACKUP program, but until they do so, I will use this method.
+
+NOTE:  This file has only been used with OS/2 2.0 with the 
+service pack installed.  It probably would work on 2.0 GA.  
+
+INSTALLATION:  The only hard thing is to get to an OS/2 command
+prompt without having the system controlling access to the
+original OSO001.MSG file.  To do that, boot your system with the
+installation diskette, and follow the directions until the blue
+screen appears and asks you to press Enter to continue or press
+Esc.  Press Esc and you will get an OS/2 command prompt.
+
+Change drive to your OS/2 boot drive.  Change the directory
+to \OS2\SYSTEM.  Copy the existing OSO001.MSG file to a name
+of your choice (I used OSO001.BAK) just in case you want to
+recover.  Copy the patched OSO001.MSG to the \OS2\SYSTEM directory
+and reboot normally.
+
+REMOVAL:  Follow the steps described above to get to the OS/2
+boot drive without system control of the OSO001.MSG file.  Then
+delete the patched version of OSO001.MSG and rename the backup
+copy to be OSO001.MSG.  Reboot normally.
+

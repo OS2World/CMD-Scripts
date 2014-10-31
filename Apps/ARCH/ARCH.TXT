@@ -1,0 +1,8 @@
+ArcH.CMD - Archive Handler v1.1 by Sean Camanyag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The documentation is in ArcH.CMD; view it using
+any file lister. 
+
+Sean Camanyag
+scamany@eis.calstate.edu
+   bgc1@delphi.com
