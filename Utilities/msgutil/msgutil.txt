@@ -1,0 +1,72 @@
+
+
+msgutil User's Guide v0.2				    15 Apr 2012
+=========================
+
+This is my private version of msgutil.cmd for MR/2 ICE.  It corrects defects
+in the msgutil.org supplied with MR/2 and adds features I find useful.
+
+The script is not yet fully generic, but I'm willing to consider
+modifications that make it easier for others to use this script without
+edits.  Search the script for the string "SHL Localize" for examples of the
+edits that you might find useful.
+
+This script does not contain any specific cross platform support since I run
+only the OS/2 version of MR/2.
+
+
+Installation
+============
+
+Make a back up of your existing msgutil.cmd and copy this version in its
+place.
+
+Check for hardcoded settings that do not match your requirements and change
+them as needed.
+
+
+Usage
+=====
+
+MR/2 invokes msgutil with two arguments, a function key number and a fully
+qualified message file name.  If you run msgutil from the command line you
+must pass fully qualified file names.  The code also assumes it is running
+from the MR/2 working directory.
+
+
+Customizing
+===========
+
+msgutil is REXX, so you can modify it to do more or less than it currently
+does.
+
+
+License
+=======
+
+My modifications to msgutil.cmd are free software licensed under the terms
+of the GNU General Public License.  The GPL Software License can be found
+in gnugpl2.txt or at http://www.gnu.org/licenses/licenses.html#GPL
+
+The other portions of this script are licensed under the original copyright
+terms.
+
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net

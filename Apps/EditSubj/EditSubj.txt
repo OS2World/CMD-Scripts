@@ -1,0 +1,74 @@
+
+
+EditSubj User's Guide v0.2				    06 Jan 2005
+==========================
+
+EditSubj does in place editing of mail message Subject lines.  It was
+originally implemented to clean up the sorting of oddly formed Re: phrases
+which the default MR2/ICE sort does not order to my taste.
+
+
+Installation
+============
+
+The preferred install location is the MR/2 ICE Scripts subdirectory, but the
+script may be installed elsewhere as long as you don't get too creative.
+
+
+Usage
+=====
+
+The usual way to run EditSubj is to run it from an Incoming filter.  For
+best performance, match on the subject to be edited before invoking the
+script.
+
+As with all filters, EditSubj expects the message file name to passed on the
+command line.  There are no addition command line switches or
+arguments available.
+
+
+Customizing
+===========
+
+EditSubj is REXX, so you can modify it to do more or less than it currently
+does.
+
+To add additional replacement strings to the predefined set, add entries to
+the MatchList and ReplList stems.  Do not forget to adjust the stem item count.
+
+EditSubj is optimized for speed so it does an in place edit of the message.
+This means the line length is not allowed not change.  To implement this
+restriction, spaces are appended, as needed, to the end of the edited line.
+
+If you want to implement something that requires the line lengths to change,
+you will need to read the message body into memory, edit it in memory and
+rewrite the entire message.  If you shorten the message length, you will need
+to delete the file before rewriting it.
+
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU   General
+Public License.  The GPL Software License can be found in   gnugpl2.txt or at
+http://www.gnu.org/licenses/licenses.html#GPL
+
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net

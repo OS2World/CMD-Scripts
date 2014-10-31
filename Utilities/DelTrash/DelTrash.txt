@@ -1,0 +1,98 @@
+
+
+DelTrash User's Guide v0.2				      27 Nov 03
+===========================
+
+DelTrash does a more or less controlled delete of the MR/2 ICE Trash 
+folders.
+
+Unlike the built-in MR/2 ICE code, DelTrash can process all user profiles in 
+a single run.
+
+DelTrash is safe to run when MR/2 ICE is active because MR/2 ICE rebuilds 
+the Trash folder index each time the folder is opened.
+
+It is recommended, but not required, that the Trash folder for the current 
+profile be closed when running DelTrash.
+
+Installation
+============
+
+The preferred install location is the MR/2 ICE Scripts subdirectory, but the 
+script may be installed elsewhere as long as you don't get too creative.  The 
+script makes a best efforts search for your MR/2 ICE installation.
+
+
+Usage
+=====
+
+To run DelTrash in default mode, run it with no switches or arguments.  It 
+will find the profile accounts and delete the eligible files.
+
+There are several optional command line switches available.  Switches are 
+unix style and begin with a dash (-) and are case-sensitive.  Slashes (/) 
+will not work.  The switches are:
+
+  -d	Debug messages
+  -h	Display usage help.
+  -t	Run in test mode.  Find and display files eligible for delete but
+	delete nothing.
+  -v    Verbose messages 
+  -V	Display version info and exit.
+
+You can select which profile accounts to process by listing them on the 
+command line after any switches.  For example:
+
+  DelTrash Mail eCS
+
+will process only the Mail and eCS accounts.  The default action is to 
+process all profile accounts.
+
+You can override the default 3 day cutoff by on the command line by entering 
+a numeric value after any switches.  For example:
+
+  DelTrash 5
+
+will set the cutoff to 5.
+
+The file date definition used to by DelTrash is somewhat different than 
+that used by MR/2 ICE.  MR/2 ICE encodes the date the message was moved to 
+the Trash folder in the file extension.  DelTrash uses the actual filesystem 
+date.  If you move a very old messages to the Trash folder, DelTrash will 
+delete them from the Trash folder sooner than the built-in MR/2 ICE delete 
+logic.
+
+To run against all profile accounts with no prompting and the default 3 day 
+cutoff, use:
+
+  DelTrash
+
+To see what the above would delete, use:
+
+  DelTrash -t
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU   General 
+Public License.  The GPL Software License can be found in   gnugpl2.txt or at 
+http://www.gnu.org/licenses/licenses.html#GPL
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net

@@ -1,0 +1,111 @@
+
+
+ClnICENews User's Guide v0.6				      27 Nov 03
+============================
+
+ClnICENews does a more or less controlled delete of the parts of the MR/2 ICE
+news database that tend to get corrupted.  It also can delete the backup
+files left over from prior news database rebuilds.
+
+ClnICENews can process one or more profile accounts in a single run.
+
+The next time MR/2 ICE activates the profile account, the deleted files will 
+be detected and rebuilt.
+
+MR/2 ICE must be shutdown when ClnICENews is run unless ClnICENews is run in 
+test mode or in old files only mode or if you use the force option.
+
+The database files that may be deleted are:
+
+  ArtArtNo.idx
+  OvrArtNo.idx
+  OvrMsgId.idx
+
+The backup files that may be deleted are:
+
+  Article.old
+  groups.old
+  Overview.old
+
+Installation
+============
+
+The preferred install location is the MR/2 ICE Scripts subdirectory, but the 
+script may be installed elsewhere as long as you don't get too creative.  The 
+script will make a best efforts search for your MR/2 ICE installation.
+
+
+Usage
+=====
+
+To run ClnICENews in default mode, run it with no switches or arguments.  It
+will find the profile accounts, news directories and the eligible files and 
+will prompt you to confirm each file delete.
+
+There are several optional command line switches available.  Switches are
+unix style and begin with a dash (-) and are case-sensitive.  Slashes (/)
+will not work.  The switches are:
+
+  -f	Force to run even if mr2i.exe running.
+  -h	Display usage help.
+  -o	Select old backup files only.
+  -t	Run in test mode.  Find and display files eligible for delete but
+	delete nothing.
+  -V	Display version info and exit.
+  -y	Answer yes to all questions.  This is for the adventurous.  The
+	selected files will be deleting without prompting.
+
+You can select which profile accounts to process by listing them on the 
+command line after the switches.  The default is to process all profile 
+accounts.  For example:
+
+  ClnICENews Mail eCS
+
+will process only the Mail and eCS accounts.
+
+To run against all profile accounts with no prompting, use:
+
+  ClnICENews -y
+
+To see what the above would delete, use:
+
+  ClnICENews -t
+
+If you know what you are doing, you can force to script to run while MR/2 ICE 
+is active with:
+
+  ClnICENews -f
+
+It is safe to delete the old backup files from any profile account and the 
+news index files from an inactive account.  However, do not attempt to delete 
+the index files for the active account.  If you do and you destroy your news 
+setup, you are on your own.  You have been warned.
+
+
+License
+=======
+
+This program is free software licensed under the terms of the GNU   General 
+Public License.  The GPL Software License can be found in   gnugpl2.txt or at 
+http://www.gnu.org/licenses/licenses.html#GPL
+
+
+Warranty
+========
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, THIS WORK IS PROVIDED WITHOUT ANY
+EXPRESSED OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING BUT NOT LIMITED TO,
+ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY
+OR TITLE.  EXCEPT AS OTHERWISE PROVIDED BY LAW, NO AUTHOR, COPYRIGHT HOLDER
+OR LICENSOR SHALL BE LIABLE TO YOU FOR DAMAGES OF ANY KIND, EVEN IF THEY
+HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+Support
+=======
+
+Please address support questions and enhancement requests to:
+
+  Steven H. Levine
+  steve53@earthlink.net
+
