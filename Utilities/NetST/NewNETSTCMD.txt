@@ -1,0 +1,72 @@
+*********************
+*  New NETSTCMD.CMD  *
+*     www.os2irc.org     *
+*********************
+
+New NETSTCMD.CMD is an updated intelligent script to start Peer Services.
+NETEND.CMD is a new script that intelligently does a clean shutdown of Peer Services when used with eStyler.
+Both scripts are useful on Laptops where systems may or may not have network access.
+The scripts check for network access and determine whether a Network logon/logoff is necessary or not.
+
+* Dosn't show "Black" command windows.
+* System boots up and LAN Dialog pops up requesting USERID & PASSWORD.
+* If USERID is logged on another workstation, dosn't show annoying popup message.
+* Clear LogOn/LogOff...again no Command Windows Pop-up in front of the users face.
+
+INSTALLATION:
+*********************
+COPY the new NETSTCMD.CMD & NETEND.CMD to the x:\IBMLAN\NETPROG directory on your boot drive where eComStation is installed. The original NETSTCMD.CMD will be overwritten. Backup the original if you want to keep it!
+
+"x:" is the drive where eComStation is installed.
+
+Here are some recommended changes to have a clean "Logon" or "Logoff" window open without seeing the "Black command window".
+This provides a cleaner look for logon and logoff on systems with Peer Services installed. By forcing the user to logoff, a clean logoff prevents the Domain Logon from showing on the next reboot.
+
+
+
+1.) Move "Start File & Print Client" object from "Startup" folder to 
+"Local System" folder
+
+2.) Edit x:\TCPIP\BIN\TCPSTART.CMD to read as follows:
+
+Find the section: "echo ..... FINISHED STARTING THE TCP/IP PROCESSES"
+
+After that line enter the following..leaving out quotation marks:
+
+"echo .... Starting Peer Networking Services
+START /C /MIN x:\IBMLAN\NETPROG\NETSTCMD.CMD"
+
+So it should look like this:
+------------------------------------------------------------------
+echo ..... FINISHED STARTING THE TCP/IP PROCESSES
+
+echo .... Starting Peer Networking Services
+START /C /MIN x:\IBMLAN\NETPROG\NETSTCMD.CMD
+
+:DONESERVERS
+------------------------------------------------------------------
+
+3.) Open "eStyler Preferences" found in the "System Setup" 
+folder located in the "Appearance" folder of the eCenter.
+
+4.) Click on the "ShutDown" Tab...Click to page 2 of 2.
+
+5.)  In the field marked "Program:" enter:
+
+x:\IBMLAN\NETPROG\NETEND.CMD
+
+6.) In the field marked "Window:" choose "Minimized"
+
+7.) Click the "Add" button at the bottom
+
+8.) Thats it!
+
+Note:  Make sure that in the "System Shutdown" dialog box (it will show when you shut your system down), that you have the box "Execute shutdown programs" checked!
+
+Note: If their is a problem during the starting of File/Print 
+services..or LogOn...the sessions won't close and will stay visible in
+the eCenter's Window List.
+
+Please send comments, problems, suggestions to jksamphereNOSPAM@tds.net
+Support is available on the IRC Undernet Network in the #os/2warp channel.
+
