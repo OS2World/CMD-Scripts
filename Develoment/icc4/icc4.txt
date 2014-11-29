@@ -1,0 +1,192 @@
+icc4 supported options.
+Other options are ignored.
+
+-C[+|-]
+   -C+: Perform compile only, no link.
+   -C-: Perform compile and link.  
+   Default: -C-
+-D<name> Define preprocessor macros to the value '1'.
+-D<name>=<value> Define preprocessor macros to the value given.
+-Fc[+|-]
+   -Fc+: Perform syntax and semantic check only.
+   Default: -Fc-
+-Fe<name> Specify the name of the executable file.
+   If you specify name.exe, you need not specify -Ge+ option.
+   If you specify name.dll, you need not specify -Ge- option.
+-Fm[+|-]
+   -Fm+: Produce a linker map file.
+   -Fm-: Produce no linker map file.
+   Default: -Fm-
+-Fm<name> Specify the name of the linker map file.
+-Fo[+|-]
+   -Fo+: Generate the object file.
+   -Fo-: Generate no object file.
+   Default: -Fo-
+-Fo<dir><name> Specify the name/path of the object file.
+-G3 Generate code optimized for use on an x86 processor.
+-G4 Generate code optimized for use on an 80486 processor.
+-G5 Generate code optimized for use on an Pentium processor.
+-G6 Generate code optimized for use on an Pentium2 processor.
+-Gd[+|-]
+   -Gd+: Use the version of the runtime library that is dynamically linked.
+   -Gd-: Use the version of the runtime library that is statically linked.  
+   Default: -Gd-
+-Ge[+|-]
+   -Ge+: Use the version of the runtime library that assumes an EXE is being built.
+   -Ge-: Use the version of the runtime library that assumes a DLL is being built.  
+   Default: -Ge+
+-Gf[+|-]
+   -Gf+: Generate fast floating-point code.
+   -Gf-: Not generate fast floating-point code.
+   Default: -Gf-
+-Gh[+|-]
+   -Gh+: Generate profiler hooks in function prologs.
+   -Gh-: Do not generate profiler hooks in function prologs.
+   Default: -Gh-
+-Gi[+|-]
+   -Gi+: Generate fast integer code.
+   -Gi-: Do not generate fast integer code.  
+   Default: -Gi-
+-Gl[+|-]       
+   -Gl+: Enable smart linking.
+   -Gl-: Disable smart linking. 
+   Default: -Gl-
+-Gm[+|-]
+   -Gm+: Link with multithread runtime libraries.
+   -Gm-: Link with singlethread runtime libraries.
+   Default: -Gm+
+-Gn[+|-]       
+   -Gn+: Do not generate default libraries in object.
+   -Gn-: Generate default libraries in object.
+   Default: -Gn-
+-Gp[+|-]      
+   -Gp+: Generate code that allows the __parmdwords() function to work.
+   -Gp-: Do not support use of the __parmdwords() function.
+   Default: -Gp-
+-Gr[+|-]       
+   -Gr+: Allow object code to run at ring 0.
+   -Gr-: Do not allow object code to run at ring 0.  
+   Default: -Gr-
+-Gs[+|-]       -Gs+
+   -Gs+: Suppress stack probes in function prologs.
+   -Gs-: Do not suppress stack probes in function prologs.
+   Default: -Gs-
+-Gt[+|-]
+   -Gt+: Store variables so that they do not cross 64K boundaries.
+   -Gt-: Store variables so that they can cross 64K boundaries.
+   Default: Gt-
+-Gx[+|-] 
+   -Gx+: Disable the generation of C++ exception handling code.
+   -Gx-: Enable the generation of C++ exception handling code.
+   Default: -Gx-
+-H<num> Set the maximum length of external names.
+   Default: -H255
+-I<path>[;<path>] Specify where to search for include files.
+-J[+|-]
+   -J+: Make default char type unsigned.  
+   -J-: Make default char type signed.
+   Default: -J+
+-Mp Set the default calling convention to _Optlink. This is default.
+-Ms Set the default calling convention to _System.
+-Mc Set the default calling convention to __cdecl.
+-Mt Set the default linkage to __stdcall.
+-Nd<name> Specify the name for the default data, uninitialized data, and constant segments. 
+   Default: use DATA32, BSS32 and CONST32_RO.
+-Nt<name> Specify the name for the default text segment.
+   Default: -NtCODE32
+-Nx<name> Specify segment name for exception handling code and data.
+   Default: use  EH_CODE and EH_DATA.
+-O[+|-|2|3|4]
+   -O-: Disable optimization of generated code.
+   -O+, -O2, -O3, -O4: Enable optimization of generated code.
+   Default: -O-
+-Oc[+|-]      
+   -Oc+: Optimize for code size rather than speed.
+   -Oc-: Disable this optimization.
+   Default: -Oc-
+-Oi[+|-]       
+   -Ot+: Turn on function inlining.
+   -Ot-: Turn off function inlining.
+ Default: -Ot-
+-Op[+|-]      
+   -Op+: Disable all stack pointer optimizations and forces the stack to be chained.
+   -Op-: Enables all stack pointer optimizations and allow stack to be unchained.
+   Default: -Op-
+-Oq[+|-]       -Oq-
+   -Oq+: Forces the stack to be chained.
+   -Oq-: Allow stack to be unchained.
+   Default: -Oq-
+-Os[+|-]       -Os-
+   -Os+: Invoke instruction scheduler.  
+   -Os-: Do not invoke instruction scheduler.  
+   Default: -Os-
+-qalias=<val> Specifies the aliasing assertion to be applied to your compilation unit.
+   val=allp,typ,addr,ansi
+-qarch=<val> Specifies the architecture on which the executable program will be run.
+   val=blend,x86,486,pentium,pentium2
+   Default: -qarch=blend
+-qbitfields=[signed|unsigned] Specifies sign of bitfields.
+   Default: -qbitfields=unsigned.
+-qdbgunref Generate symbol table information for unreferenced variables.
+-qdbgnounref Do not generate symbol table information for unreferenced variables. This is default.
+-qdigraph Allow special digraph and keyword operators.
+-qnodigraph Do not allow special digraph and keyword operators. This is default.
+-qignerrno Tell the optimizer that the program will never refer to or set errno.
+-qignprag=<val> Ignore the aliasing pragmas disjoint and/or isolated_call.
+   val=disjoint,isolated,all
+-qinitauto=<val> Initialize automatic storage by the value.
+   val is two digits hex
+-qisolated_call=<name>[:<name>] List functions that do not change data objects at time of function call.
+-qlibansi Process standard C libary names as system function.
+-qnolibansi Do not process standard C libary names as system function. This is default.
+-qlonglong Allow long long integers. This is default.
+-qnolonglong Do not allow long long integers.
+-qro Put string literals in read only area. This is default.
+-qnoro Do not put string literals in read only area.
+-qrtti=<val> Generate run-time type information.
+   val=dynamiccast,typeinfo,all
+-qnortti Do not generate run-time type information. This is default.
+-qtune=<val> Specifies the architecture system for which the executable program is optimized.
+   val=blend,x86,486,pentium,pentium2
+   Default: -qtune=blend
+-R[e|n]
+   -Re: Produce code to run with a complete runtime environment.
+   -Rn: Produce code to run with no runtime environment.
+   Default: -Re
+-Sp[1|2|4|8|16] Pack aggregate members on specified alignment.
+   Default: -Sp4
+-STACK=<val> Specifies the stack size. <val> can be decimal or hex (ex. 0x1000).
+-Ti[+|-] 
+   -Ti+: Generate debugging information.
+   -Ti-: Do not generate debugging information.
+   Default: -Ti-
+-Tm[+|-]
+   -Tm+: Generate debugging information.
+   -Tm-: Do not generate debugging information.
+   Default: -Tm-
+-Tx[+|-]       
+   -Tx+: Generate full exception register dump.
+   -Tx-: Do not generate full exception register dump.
+   Default: -Tx-
+-U<name> Undefine user macro.
+-W0 Output only severe and unrecoverable error messages generated by the compiler.
+-W1 Output error, severe, and unrecoverable error messages generated by the compiler.
+-W2 Output warning, error, severe and unrecoverable error messages generated by the compiler.
+-W3 Output all messages generated by the compiler. This is default.
+-PMTYPE=[VIO|PM] Specify OS/2 application type.
+   Default: -PMTYPE=VIO
+-EXEPACK=[YES|NO|1|2] Compress executable.
+   Default: -EXEPACK=2
+-OPTFUNC Remove unreferenced functions.      
+-NOOPTFUNC Do not remove unreferenced functions. This is default.
+-SHOWPROGRESS=<value> Show the progress of build by the interval of value seconds.
+-CODESTORE=<codestore> Specify the code store file. The file type must be ".ics".
+-NOCODESTORE Does not use code store file.
+   Default: -CODESTORE=icc4.ics
+   The icc4.ics is stored at the directory that TMP points.
+-CLEANCODESTORE Clear the code store file.
+
+Difference between icc4 and icc:
+                icc4 icc
+-G3 Means:      x86  80386
+-Gm Default is: -Gm+ -Gm-

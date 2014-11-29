@@ -1,0 +1,4 @@
+ICC4 1.08 - ICC4 is a front end to use
+VisualAge C++ 4.0's vacbld command like icc
+of old icc. This is only for C++ source
+files.
