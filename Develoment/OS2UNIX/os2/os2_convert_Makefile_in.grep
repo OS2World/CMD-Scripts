@@ -1,0 +1,5 @@
+^LIBADD[\t ]*=
+^INCLUDES[\t ]*=
+^CFLAGS[\t ]*=
+^SOURCES[\t ]=
+^PROGRAMS[\t ]*=

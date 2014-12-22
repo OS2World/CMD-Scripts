@@ -1,0 +1,127 @@
+/*-----  os2unix  version 2.2                         (January 16, 2005)   */
+
+
+ 
+   Purpose: Modifiy scripts (configure ...), Makefile.in's, and
+            Makefile.in.in (in po directory), to run configure 
+            and make WITHOUT os2 ported autoconf. 
+ 
+            At least you will succeed at 9 of 10. 
+
+Required Executables
+====================
+   HOBBES=ftp://hobbes.nmsu.edu/pub/os2
+   LEO=ftp://ftp.leo.org/pub/comp/os/os2/leo
+   JSAWA=http://www2s.biglobe.ne.jp/~vtgf3mpr
+
+  GNU find (find.exe)
+      LEO/gnu/systools/gnufind.zip   ; v4.1
+      HOBBES/util/disk/gnufind.zip   ; v4.1
+  GNU sed 
+      JSAWA/gnu/sed.htm              ; v3.02.80
+  GNU grep (grep.exe)
+      JSAWA/gnu/grep.htm              ; v2.3h or later
+  
+  file - determine file type
+      JSAWA/index-e.htm
+      HOBBES/util/file/file330.zip
+
+  
+
+Installation 
+============
+
+          - copy os2unix.cmd in your PATH_DIRECTORY
+          - copy os2/*.* in SOME_DIRECTORY
+                      e.g. SOME_DIRECTORY => c:/usr/share/os2unix
+
+          - edit line 8 of os2unix.cmd
+              from
+                 OS2UNIX_DIR="i:/RedHat/SOURCES"
+              to
+                 OS2UNIX_DIR="c:/usr/share/os2unix"
+
+
+Usage
+=====
+
+Run `os2unix' without argument to see an instruction 
+
+   To modify `configure', `Makefile.in's and shell scripts, do like this 
+in a top source directory
+ 
+            x:/source> tar zxvf SOMEWHERE/foo.tar.gz
+            x:/source/foo> os2unix -all
+     If patch files are in subdirectory os2/
+            x:/source/foo> os2unix -patch
+
+            x:/source/foo> sh configure --help
+            x:/source/foo> sh configure [SOME_ARGUMENT]
+            x:/source/foo> make
+            x:/source/foo> make install prefix=x:/foo
+        or
+            x:/source/foo> make install DESTDIR=x:
+           
+
+FAQs
+====
+   Q1 -  How can I do when  `os2unix -all' fails
+   A1 -  You may not instaled `file' utility  or installed one 
+         may corrupt. 
+
+         Please do `os2unix -c', `os2unix -m' and `os2unix -mi', separately. 
+         
+
+
+
+History
+=======
+2005/1/16  version 2.2 released
+ - some modification to process later version of configure.
+2001/4/3  version 1.5 released
+ - Use `config.site' to run configure
+ - `os2_convert_configure.sed' simplified because of introduction of
+   `config.site'
+
+2001/3/6  version 1.4 released
+	   a lot of improvement ; see *.cmd and *.sed
+
+2001/2/15   - version 1.3 released
+ - os2unix.cmd updated
+     * autodetect whether GNU find is available
+     * autodetect whether file command is available
+ - new : os2_convert_Makefile_in.grep, os2_convert_Makefile_in_lib_prog.sed
+     * autodetect Makefile.in for library and program
+     * debug mode added to Makefile.in
+          ifeq ($(debug),on)
+             CFLAGS += -DEMX_DEBUG
+          endif
+       If sources contain "#ifdef EMX_DEBUG", to enable debug codes, 
+       execute "make debug=on" 
+   
+   
+2001/2/11   - version 1.2 released
+ - os2unix.cmd updated
+ - os2_convert_Makefile_in.sed updated
+
+2001/1/28  - version 1.1 released
+ - os2_convert_Makefile_in.sed updated
+     s/CXXLIBS = @CXXLIBS@/CXXLIBS = @CXXLIBS@ -lstdcpp/
+     s/LDFLAGS=@LDFLAGS@/LDFLAGS=@LDFLAGS@ -Zexe/
+     s@LIBTOOL =@LIBTOOL = sh@
+
+2001/1/27 - version 1.0 released
+
+
+
+  If you have questions and suggestions, please mail me. 
+ 
+
+
+                                             SAWATAISHI JUN, YOKOHAMA JAPAN
+                                                       <jsawa@attglobal.net>
+                           http://www2s.biglobe.ne.jp/~vtgf3mpr/indxos2.htm
+
+
+
+/*----- end of document -----------------------------------------------------*/

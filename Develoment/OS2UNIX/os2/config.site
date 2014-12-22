@@ -1,0 +1,74 @@
+#!sh
+#ac_cv_host=i386-pc-gnu
+#ac_cv_host=i386-pc-os2-emx
+#ac_cv_target=os2-emx
+
+SHELL=sh
+PATH=`cmd.exe /c "echo %PATH%" | sed -e 's@\\\\@/@g'`
+PATH_SEPARATOR=';'
+
+#2005/1/10 fixed :: for f in INSTALL PERL M4 EXPR XGETTEXT MSGMERGE; do
+for f in INSTALL M4 EXPR XGETTEXT MSGMERGE; do
+ export $f="`type $f.exe|sed -e 's@\\\\@/@g' -e 's@.* @@'`"
+done
+ac_cv_path_PERL=perl.exe
+ac_cv_path_install=${INSTALL}
+ac_cv_prog_LN_S='cp -p'
+cl_cv_prog_LN_S='cp -p'
+cl_cv_prog_LN='cp -p'
+LN_S='cp -p'
+SED=sed
+EGREP='grep -E'
+FGREP='grep -F'
+GREP=grep
+DVIPS=dvips
+LATEX=latex
+MAKEINDEX=mendex
+MAKE=make
+ACLOCAL=${ACLOCAL-"${UNIXROOT}/usr/bin/aclocal"}
+AUTOCONF=${AUTOCONF-"${UNIXROOT}/usr/bin/autoconf"}
+AUTOMAKE=${AUTOMAKE-"${UNIXROOT}/usr/bin/automake"}
+AUTOHEADER=${AUTOHEADER-"${UNIXROOT}/usr/bin/autoheader"}
+MAKEINFO=${MAKEINFO-"makeinfo --no-split"}
+AMTAR=${AMTAR-"tar.exe"}
+AR=ar
+F77=g77
+CC=gcc
+CXX=gcc
+AWK=gawk
+LEX=flex
+LD=ld.exe
+RANLIB=echo
+YACC='bison -y'
+BMTYPE=int
+BMBYTES=4
+PRINTABLE_OS_NAME=OS/2
+CFLAGS='-D__EMX__ -DOS2 -Zmtd -D__ST_MT_ERRNO__  -O2'
+CXXFLAGS='-D__EMX__ -DOS2 -Zmtd -D__ST_MT_ERRNO__ -O2'
+LDFLAGS='-Zmtd -D__ST_MT_ERRNO__ -O2 -s -Zsysv-signals -Zstack 512'
+ac_exeext=.exe
+ac_exec_ext=.exe
+ac_cv_exeext=.exe
+ac_cv_path___CHGRP=echo
+ac_cv_path___CHOWN=echo
+ac_cv_path___RSH=echo
+function test
+{ 
+  if [  "$1" = "-x" ] ; then  
+    shift
+    if [ -f "$1" ] ; then return ; fi
+    if type $1.cmd 1>nul 2>&1  ; then  return ; fi
+    if type $1.exe 1>nul 2>&1  ; then  return ; fi
+    x=`type $* 1>nul 2>&1|  sed -e 's@^.* @@' -e 's@\\\\@/@g' -e 's@\\.$@@'`
+    if [ -n "$x" ] ; then
+      grep '^\(#!\|[ \t]*extproc\)' "$x">nul 2>&1 
+    else
+      return 1
+    fi
+  else
+    builtin test "$@"
+  fi ;\
+}
+
+
+### EOF ######################################################################

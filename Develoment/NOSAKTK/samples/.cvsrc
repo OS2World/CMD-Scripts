@@ -1,0 +1,31 @@
+#
+#                   Sample CVS configuration file of the
+#             OS/2 Netlabs Open Source Archive Client (NOSAC)
+#
+#  for more information about this file see the CVS reference (CVS.INF),
+#             section "Default options and the ~/.cvsrc file"
+
+
+# append options for special commands to the appropriate cvs command and uncomment it:
+
+#add
+#checkout
+#commit
+#diff
+#log
+#login
+#logout
+#rdiff
+#release
+#remove
+#rtag
+#status
+#tag
+#update
+
+
+# append global options for all commands to the cvs line and uncomment it:
+# recommended: -z6 (use compession level 6)
+
+#cvs
+

@@ -1,0 +1,25 @@
+
+Unzip this package into a directory and execute
+INSTALL.CMD. Execute Readme.cmd in order to get
+more info before installation.
+
+This package requires the Concurrent Versions
+System (CVS) for OS/2, the EMX runtime and the
+Zip and UnZip program of Info-Zip being
+installed on your system. The inf file contains
+a download URLs for all of these, execute
+   readme Concurrent Versions System
+   readme Info-Zip
+   readme EMX runtime
+to load Netscape Navigator and download it.
+
+IF CVS is not yet installed on your system, you
+can let INSTALL.CMD do that for you: just provide
+the current version of CVS for OS/2 (CVS*.ZIP) in
+the same directory as INSTALL.CMD.
+
+This archive may only be distributed
+unmodified ! See docs for more details.
+
+
+.

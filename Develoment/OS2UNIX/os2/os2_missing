@@ -1,0 +1,7 @@
+#! sh
+echo ""
+echo "Warnig !!"
+echo "\t missing script is disabled to avoiod running autoconf, automake...."
+echo ""
+exit 0
+
