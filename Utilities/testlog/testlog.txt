@@ -1,0 +1,27 @@
+        Archive Filename: testlog*.zip
+       Short Description: Creates a log file to submit with a bug report
+        Long Description: Creates a log file that you can submit with your
+                          test results when reporting a problem with a driver.
+                          This is a REXX script which collects all the data
+                          about your system and the driver under test, and puts
+                          it into a single log file with appropriate dividers
+                          between the sections in the file. Currently collects
+                          data for uniaud, genmac, acpi, multimac.
+      Proposed directory
+           for placement: /pub/os2/apps
+
+               Your name: David Azarewicz
+           Email address: david@88watts.net
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.88watts.net
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version:
+ Additional requirements:
+
+                Replaces: (none)
+
