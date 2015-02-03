@@ -1,0 +1,34 @@
+KWHELP.NDX | is a more comprehensive NDX file to replace the supplied
+-----------+ index file (EPMKWHLP.NDX).  This NDX file was generated
+directly from the contents of the INF file in most cases.  It also includes
+all structures and constants, plus SOM keywords, EPM commands and
+procedures, IPF tags, DOS and REXX commands.  It does NOT replace
+DDE4.NDX (CSet/2 index).
+
+To enable, put KWHELP.NDX in a DPATH directory and change your HELPNDX
+environment variable to reference it.  A typical setting might be:
+   SET HELPNDX=DDE4.NDX+KWHELP.NDX
+
+NOTE: This index file has not been tested with KWIKINF.
+
+
+KWHELP.E | is a replacement for EPM's standard KWHELP.E, which provides
+---------+ on-line programming keyword help via Ctrl+H or Ctrl+DblClick.
+This replacement adds:
+    * generic "h" command to allow looking up a topic in a book
+    * list of available books generated from BOOKSHELF environment
+    * filetype-sensitivity in the index search -- the "EXTENSIONS:"
+      tags are not ignored.
+    * index search will search for case-insensitive match if no exact
+      match is found.
+
+Requires the ETPM compiler, which is available on Compuserve and OS/2
+BBS's.
+
+
+Please send comments, suggestions, bug reports to:
+
+Mat Kramer, MekTek, 75746.2404@compuserve.com
+
+
+
