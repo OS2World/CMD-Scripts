@@ -1,0 +1,61 @@
+                                    *** RxStartx ***                                    
+    Why this program?
+     
+ Why this program? This program appeared due to the fact that I absolutely 
+disliked startx from the Xfree86/OS2 distribution. So I decided to write an 
+alternative thereto. 
+ 
+   Advantages  
+ 
+In advantage of startx RxStartx:
+
+   @ more quickly launches XFree86 than startx does (makes no pause after 
+     xserver start), 
+ 
+   @ before xserver launching it checks availability of the X11 port,
+ 
+   @ includes internal support for FONT server,
+ 
+   @ is simple in configuring and written on REXX which allows adopting it for 
+     your special needs. 
+ 
+   Installation.  
+ 
+To install RxStartx do the following:
+
+  1. Unpack the files from the archive into your XFree86 directory.
+ 
+  2. Edit the file \XFree86\bin\rxstartx.cmd specifying there the parameters of 
+     x-server, Window Manager and the path to your xmodmap file. 
+ 
+  3. ´If you don't use an external fontserver just miss this item!Ã
+    Specify your fontserver and the port it uses into the file 
+    \XFree86\bin\rxstartx.cmd. For xfstt following parameters will suit: 
+ 
+  
+fontserver='xfstt --once' /* fontserver name */
+fontserver.!port   = 7100 /* fontserver port */
+
+ 
+  4. Launch the X-Server typing RXSTARTX in the OS/2 command prompt.
+ 
+  Additional information  
+ 
+The file \XFree86\lib\xinit\beforestart.cmd contains the list of programs 
+launched before starting x-server, and the file 
+\XFree86\lib\xinit\afterstart.cmd - the list of programs to be launched after 
+starting x-server and WM. File E:\XFree86\lib\X11\xinit\afterexit.cmd - the 
+list of programs to be launched after starting x-server shutdown. 
+The programs MUST be run with the "start" or "detach" commands.
+ 
+   Author 
+ 
+You can mail all comments, bugreports and greetings to me or write into <the 
+X11/OS2 forum>. 
+ 
+  Download the program 
+ 
+You can always download the newest version of RxStartx from 
+http://os2.ru/materials/xfree86/rxstartx.shtml.en .
+
+Alex Samorukov, samm@os2.ru.
