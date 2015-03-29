@@ -1,0 +1,91 @@
+//THE DESKTOP
+#begin <WP_DESKTOP>
+#setup ICONSHADOWCOLOR=0 0 255;BACKGROUND=C:\lezing\os2gg.gif,S,1,I,127,127,127;ICONTEXTCOLOR=0 0 0;ICONTEXTBACKGROUNDCOLOR=255 255 255;
+#end
+
+// Maak een OS/2 gg Folder
+#begin <OS2GG>
+#create <WP_DESKTOP>, WPFolder, OS/2-gg Lezing, NODELETE=YES
+#setup ICONVIEW=FLOWED, NORMAL;NODELETE=NO;ICONRESOURCE=110, PMWP;ICONNRESOURCE=1,111,PMWP;ALWAYSSORT=YES;DEFAULTVIEW=ICON;SELFCLOSE=0;
+#setup ICONVIEWPOS=20 20 60 60;
+#setup OPEN=ICON;
+#end
+
+// Maak een shadow van de presentatie
+#begin c:\lezing\rexxwps.sdd
+#setup OBJECTID=<WPSREXX>;
+#end
+
+#begin <WPSREXX_SHADOW>
+#create <OS2GG>, WPShadow, Workplace Shell and REXX, SHADOWID=<WPSREXX>;
+#end
+
+// Maak een shadow van de voorbeelden
+#begin c:\lezing\desktop.cmd
+#shadow <OS2GG>
+#end
+
+#begin c:\lezing\os2gg.cnf
+#shadow <OS2GG>
+#end
+
+#begin c:\lezing\herstel.cnf
+#shadow <OS2GG>
+#end
+
+#begin c:\home\david\data\crtobj.txt
+#shadow <OS2GG>
+#end
+
+#begin c:\lezing\wptools\wptools.txt
+#shadow <OS2GG>
+#end
+
+#begin c:\home\david\data\rexx\sdc
+#shadow <OS2GG>
+#end
+
+#begin <SDC>
+#create <OS2GG>, WPProgram, Simple Desktop^Configurator, OBJECTID=<SDC>;
+#setup EXENAME=c:\home\david\data\rexx\sdc\run.exe;PROGTYPE=PM;STARTUPDIR=c:\home\david\data\rexx\sdc;
+#end
+
+// Maak een programma object voor desktop.cmd
+#begin <DESKTOP_CMD>
+#create <OS2GG>, WPProgram, Laat hierop een^.CNF bestand vallen^om de desktop aan te passen, OBJECTID=<DESKTOP_CMD>;
+#setup ASSOCFILTER=*.CNF;EXENAME=c:\lezing\desktop.cmd;PROGTYPE=WINDOWABLEVIO;STARTUPDIR=c:\lezing;NOAUTOCLOSE=YES;
+#end
+
+// Maak een programma object voor wptools.cmd
+#begin <WPTOOLS_CMD>
+#create <OS2GG>, WPProgram, WPTools^Voorbeeld, OBJECTID=<WPTOOLS_CMD>;
+#setup EXENAME=c:\lezing\wptools.cmd;PROGTYPE=WINDOWABLEVIO;STARTUPDIR=c:\lezing;NOAUTOCLOSE=YES;
+#end
+
+// Maak een programma object voor WPS Reference
+#begin <WPS_REF>
+#create <OS2GG>, WPProgram, Workplace Shell Reference, OBJECTID=<WPS_REF>;
+#setup EXENAME=view.exe;PARAMETERS=WPSREF;
+#end
+
+// Maak een programma object voor REXX Reference
+#begin <REXX_REF>
+#create <OS2GG>, WPProgram, REXX Reference, OBJECTID=<REXX_REF>
+#setup EXENAME=view.exe;PARAMETERS=REXX.INF
+#end
+
+// Maak een shadow naar open.cmd
+#begin c:\lezing\open.cmd
+#shadow <OS2GG>
+#end
+
+// Maak een shadow naar open2.cmd
+#begin c:\lezing\open2.cmd
+#shadow <OS2GG>
+#end
+
+// Maak een shadow naar clock.cmd
+#begin c:\lezing\clock.cmd
+#shadow <OS2GG>
+#end
+
