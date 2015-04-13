@@ -1,0 +1,56 @@
+Short Filename Namer 1.0
+------------------------
+
+This REXX script will recursively read all files from a given directory,
+mangle their names into non-conflicting 8.3 format and link them to a given
+directory on a TVFS (virtual) partition.  It will also change such
+characters as '(space)','+','[',']',';','=' and ',' that are FAT
+incompatible to apropriate "equivalents".  A whole drive can be mapped this
+way without touching your original files!!
+
+It takes the first 8 characters of a filename and the first 3 character
+after the last dot in that filename to constitute a DOS compatible
+filename.  Periods in the first 8 characters will be elimated.  Incompatible
+characters will be vaporised.  Then, some filename conflict checking will be
+made, and if found, it will stamp a ~# before the period or at the end of
+the filename to differiciate them.  On HPFS, since filenames are always in
+alphanumeric order, ~# will be incremented by their respective long
+filename sorting order.  BEWARE!!  SFN.CMD makes no directory checking, it
+will FAIL miserably if either realpath or virtualpath doesn't exist.
+
+The program isn't super fast.  The main reason being that I can't use use
+TVFS REXX support as it contains a _serious_ flaw:  it doesn't work with
+filenames with spaces.  DOH!!!!  Complain to TVFS author.
+
+For myself, I seem to have problem remounting drives (gives garbage) and
+unlinking the root dir is a pain in the butt with tvulink -d x: * ...  It's
+a miracle TVFS works at all (at least for me).  Well, better than nothing!
+
+Limitations
+-----------
+
+- The directories are read only (0 bytes free), although the files are not.
+- Renaming is futile.
+- There seems to be a problem with % signs in filenames, can't figure out
+  why... must be a hidden bug (err feature) in REXX.
+
+
+I make NO warranty for this code, and everyone is free to do whatever they
+want with it... gimme the credits though :)
+
+
+Contacting the Author
+=====================
+
+Samuel Audet
+
+E-mail:       guardia@cam.org
+Homepage:     http://www.cam.org/~guardia
+IRC nick:     Guardian_ (be sure it's me before starting asking questions though)
+Talk Client:  Guardian@guardian.dyn.ml.org
+
+Snail Mail:
+
+   377, rue D'Argenteuil
+   Laval, Quebec
+   H7N 1P7   CANADA
