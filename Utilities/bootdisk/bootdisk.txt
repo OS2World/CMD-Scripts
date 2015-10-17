@@ -1,0 +1,19 @@
+/* BOOTDISK.CMD for OS/2 2.1 GA by James K. Beard CIS 71675,566        */
+/* Two-disk OS/2 2.1 GA boot; packs 1.2 MB in A:, 1.1 MB in B:
+   Supported on floppy are CHKDSK, FORMAT, FDISK, BACKUP, RESTORE
+   Sufficient room remains on B: (if 1.44 MB) for HPFS, your SCSI
+   drivers, the IBM Tiny Editor, etc.  Use the procedure in Appendix C
+   of the OS/2 manual to backup and restore the worplace shell, or use
+   the shareware WPSBACKUP.
+
+   Modified from MAKEBOOT.CMD version 1.00 by Donald L. Meyer,
+   internet:   dlmeyer@uiuc.edu
+
+     This program accepts one parameter:
+     * "RECON" tells program to skip main install, and only do optional
+       installation of things like SCSI support, etc.
+    Thanks go out to Morton Kaplon  (73457,437 @ Compuserve) for
+    doing the legwork determining which files/drivers were/weren't
+    necessary for Donald L. Meyer's 2.0 version, and David Moskowitz's
+    article in "OS/2 2.1 Unleashed" (Sams, 1993) pp 57-59. */
+

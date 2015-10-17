@@ -1,0 +1,77 @@
+ Volume in drive A is unlabeled      Serial number is 2240:C014
+ Morton F. Kaplon CIS : 73457,437
+ Directory of  a:\*.*
+
+ Boot Disk for OS/2 2.1 GA isomg FAT File System   Mon  06-28-1993
+ This is the minimum I have been able to attain. It will just
+ fit on a 1.2 MB floppy
+
+ Use  sysinstx to create the bootable floppy; From c:  sysinstx a:
+ sysinstx.com is on the Installation Diskette
+ The rest should already be on the C: drive of installed 2.1
+
+ 4-22-93  14:50     401   0   ___A_  BKSCALLS.DLL
+ 4-22-93  14:51     398   0   ___A_  BMSCALLS.DLL
+ 4-25-93  16:04    9443   0   ___A_  BVHINIT.DLL
+ 4-22-93  14:54     454   0   ___A_  BVSCALLS.DLL
+ 4-22-93  16:59    3632   0   ___A_  CLOCK01.SYS   Use CLOCK02.SYS if PS-2
+ 4-29-93  21:41   90624  53   ___A_  CMD.EXE
+ 6-28-93  20:29     411   0   ___A_  CONFIG.SYS
+ 4-29-93  21:52   25610   0   ___A_  COUNTRY.SYS
+ 4-29-93  21:30   90854   0   ___A_  DOSCALL1.DLL
+ 6-24-93  22:45    1536   0   RHSA_  EA DATA. SF   Created by sysinstx
+ 4-25-93  17:47   25102   0   ___A_  IBM1FLPY.ADD  Use IBM2FLPY.ADD if PS-2
+ 4-25-93  20:30    9684   0   ___A_  IBMINT13.I13
+ 4-22-93  17:37   29525   0   ___A_  KBD01.SYS     Use KBD02.SYS if PS-2
+ 4-22-93  15:32     858   0   ___A_  KBDCALLS.DLL
+ 4-22-93  16:09     508   0   ___A_  MSG.DLL
+ 4-22-93  16:08     466   0   ___A_  NLS.DLL
+ 6-24-93  22:39    1099   0   RHSA_  OS2BOOT       Created by sysinstx
+ 4-25-93  16:12   56000   0   ___A_  OS2CHAR.DLL
+ 4-22-93  15:39   33236   0   ___A_  OS2DASD.DMD
+ 5-06-93  16:13  734366   0   ___A_  OS2KRNL
+ 4-25-93  15:19   28160   0   ___A_  OS2LDR
+ 4-22-93  11:31    8516   0   ___A_  OS2LDR.MSG
+ 4-29-93  21:27   15250   0   ___A_  QUECALLS.DLL
+ 5-03-93  20:12    5590   0   ___A_  SCREEN01.SYS  Use SCREEN02.SYS if PS-2
+ 4-25-93  16:18   32806   0   ___A_  SESMGR.DLL
+ 4-25-93  16:11    1825   0   ___A_  VIOCALLS.DLL
+   1,206,354 bytes in 26 file(s)         1,211,392 bytes allocated
+     246,272 bytes free
+
+Config.sys to be used with above file set
+
+buffers=32
+iopl=yes
+memman=noswap
+SET OS2_SHELL=CMD.EXE
+protshell=cmd.exe
+diskcache=64,LW
+protectonly=yes
+libpath=.;\;
+set path=\;\
+set dpath=\;
+set keys=on
+BASEDEV=OS2DASD.DMD
+basedev=ibm1flpy.add       If PS-2 use ibm2flpy.add
+basedev=ibmint13.i13
+REM basedev=print01.sys    Remove REM if print01.sys used
+
+Note that print01.sys is not used. This means that printing is not
+supported from this floppy. If used be sure basedev=print01.sys is
+in config.sys.
+REPLACE PRINT01.SYS with PRINT02.SYS if PS-2
+
+The basedev=ibmint13.i13 should support just about any hard drive
+I believe and this has the smallest size. It is smaller than the
+os2scsi.dmd which also supports SCSI but is not required.
+
+If installing High Performance File System the following should
+be in config.sys and the files on the floppy
+IFS=HPFS.IFS  /CACHE:64 /CRECL:4   129090 bytes
+IFS=CDFS.IFS /Q                     40292 bytes
+I am not sure the CDFS.IFS is required if CDROM not used.
+In any event when these are added to the floppy it does require
+a 1.44 MB floppy.
+
+

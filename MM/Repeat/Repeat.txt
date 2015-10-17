@@ -1,0 +1,103 @@
+
+This archive contains the PMREXX script "Repeat.CMD".
+
+PURPOSE
+=======
+The function of Repeat.CMD is to play a given multimedia file
+a number of times in a row, or to keep playing it continuously.
+For example, you can use it with OS/2's built-in Software Motion Video
+to create a continuously running video clip on your screen.
+
+DIRECTIONS FOR USE
+==================
+Repeat.CMD must be run as a PMREXX script. That is, you cannot run it
+directly from the command line; you must start PMREXX, passing
+Repeat.CMD as its first argument. For example:
+
+   [E:\MMOS2\MOVIES] start pmrexx repeat file=MACAW.AVI
+
+This will start playing the video clip MACAW.AVI. To have it play
+a certain number of times and then stop, use:
+
+   [E:\MMOS2\MOVIES] start pmrexx repeat file=MACAW.AVI count=3
+
+To stop the play, close the PMREXX session (NOTE: not just the
+device!) from the Window List. For example, if you gave the
+command in the first example above, you would have two entries
+in the Window List: "The PM/REXX Interface" and "IBM Ultimotion(TM)".
+To stop the video clip, select "The PM/REXX Interface" from the
+Window List, click the right mouse button to get the pop-up menu,
+and choose "Close".
+
+The best way to use Repeat.CMD is to create a Program Reference object.
+If you specify FILE='%*' in the Parameters field, you can
+play any multimedia file by simply dropping it on the Program Reference.
+This archive includes a REXX script, INSTALL.CMD, that installs two such
+Program References on your Desktop. (You can drag these to a more
+appropriate location; e.g. the Movies folder.)
+
+ARGUMENTS TO REPEAT.CMD
+=======================
+Repeat.CMD can take a number of "keyword=value" pairs as arguments.
+The keyword must be one of: FILE, DEV, FROM, TO, TIMEFMT, or COUNT.
+Each keyword may occur at most once on a single command line.
+The keyword is not case sensitive. There may not be any space
+between the keyword and the "=", nor between the "=" and the value.
+
+The meaning of the keywords is:
+
+FILE=filename           Play the given multimedia file. If FILE
+                        is given, and DEV is not given, the file
+                        is examined to decide which device it should
+                        be played on.
+                        If the filename contains spaces, it must
+                        be enclosed in single or double quotes,
+                        as in: FILE='file name'.
+
+DEV=device              Play the given device.
+
+                        Either the FILE or the DEV argument (or both)
+                        must be specified, the other arguments are
+                        optional.
+
+TIMEFMT=format          Specify the time format. Exact values depend
+                        on the device.
+
+FROM=start              Specify the starting position. Exact values
+                        depend on the device, and presumably on the
+                        TIMEFMT. On the Software Motion Video device,
+                        if TIMEFMT is not given, the position is specified
+                        simply as a frame number (zero being the first frame).
+
+TO=end                  Specify the ending position. See FROM.
+
+COUNT=count             Specify the number of times the play command
+                        is to be performed. If COUNT is omitted, the
+                        playing repeats forever (until you stop it
+                        from the Window List).
+
+ACKNOWLEDGMENTS
+===============
+This script was created by modifying the example REXX Script, PLAY.CMD,
+included in the MMOS2 directory of the Multimedia PM package.
+
+CAVEATS
+=======
+Repeat.CMD was primarily intended to play Software Motion Video clips.
+It has not been tested with other types of multimedia files.
+It might need slight modifications because, if you do not specify
+the FROM argument, it inserts a "from 1" into the play command;
+depending on the device and the TIMEFMT, that might not be
+appropriate.
+
+The script has been tested with HPFS file names for the FILE argument.
+If you need to use values with spaces in them for the other arguments,
+slight modifications to the MCI commands might again be necessary.
+See the REXX code.
+
+AUTHOR
+======
+Ari Schot, 29 September 1993
+Internet: delft@fwi.uva.nl
+
+
