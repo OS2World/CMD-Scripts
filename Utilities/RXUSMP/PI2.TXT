@@ -1,0 +1,23 @@
+Rexx program "PI2.CMD" written based on the "RxQProcStatus()" function of the
+RXU.ZIP (YDBAUTIL) function package.
+
+PI2 is a Rexx program which displays process status information (similar to
+that which PSTAT.EXE displays).  It provides the ability to "filter" the
+process display by executable name, PID and PPID (parent process-id).  It will
+list processes, "children" modules (i.e. DLLs), "parent" modules (i.e. those
+which directly use the module (e.g. EXEs).
+
+Not all the features work properly yet (e.g. ANCESTORS).  PI2 was meant more
+as a demo of how results from "RxQProcStatus()" might be used rather than a
+full function program, although I have found it quite useful for displaying
+a filtered list of running processes (when I only want to see info on one or
+a few processes without wading through PSTAT output, or visually searching
+through the PSPM2.EXE window for the name I'm after).
+
+You could enhance PI2.CMD to display a process tree, like that in PSPM2 but
+as text lines (exercise in recursion through PID<->PPID relationships, etc.).
+
+For this version of PI2.CMD to work, you must download RXU.ZIP v1.5 from OS2DF1
+Rexx/Other library (v1.4 will suffice, except for PARENT,CHILDREN,DEPENDENTS,
+etc.)
+
