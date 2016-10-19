@@ -1,0 +1,52 @@
+/*********************************************************************\
+   MakeObj
+   (C) 1993 Ingo Pflanz, Regensburg              e-mail c4284@rrzc1.rz.uni-regensburg.de
+
+   inspired by:
+   (C) 1993 Thomas Christinck, Braunschweig      Compuserve 100031,41
+   (C) by Stangl Roman, 1993 and his PC/2
+
+
+"Quick"-help :
+
+
+This little batchfile is intended to easy creation of program-objects.
+
+Just call the "install.cmd". You will be asked for an directory,
+where the "MakeObj.cmd" will be copied or give the directory on the
+commandline. The directory you specify must already exist, no errorchecking
+will be taken. The default is \OS2 in the bootdrive.
+
+
+
+After the installation, you can find the MakeObj in the OPEN"-menu
+of every executable file (better : file-object). A filter is set for
+the type EXE, CMD, COM, BAT.
+
+What you can do now :
+      Just open a driveobject,
+      Mark some EXE's,
+      Click on MakeObj in the OPEN-menu
+
+What will happen :
+      for every marked file a programobject will be
+      created on the DeskTop.
+      Values are set for the name and the workingdirectory.
+
+And after that :
+      You can easily move the new objects to any folder ...
+
+      Or you can drag the object to 'Programm Installation' page of PC/2.
+      You just have to change the objectID (the second line) from 
+      'programmname' to '<programmname>'. Now you can start the object via
+      PC/2.
+
+
+Hope you find it nice, Ingo.
+
+If you have any suggestions, error reports or already made any changes, please
+contact me. My e-mail address is 'c4204@rrzc1.rz.uni-regensburg.de'. It is valid
+until the end of 1993 (but you can try it later maybe I will stay in Regensburg)
+
+                                    ... and its FREEWARE !
+
