@@ -1,0 +1,99 @@
+  Swap Monitor V 0.35 * (c) 1996-1998 Alessandro Cantatore - Team OS/2 Italy
+
+  **************************************************************************
+
+  NOTA:
+
+  In nessun caso l'autore del programma pu• essere ritenuto responsabile di
+  DANNI causati dal programma.
+
+  L'USO DEL PROGRAMMA Ô GRATUITO e libero su qualsiasi numero di macchine.
+
+  E' permesso MODIFICARE il programma per adattarlo alle proprie esigenze.
+
+  E' permesso DISTRIBUIRE il programma purch‚ siano inclusi tutti i file
+  contenuti nell'archivio originale senza alcuna modifica.
+
+  Non Š permessa la VENDITA del programma, ma Š permesso richiedere un prezzo
+  ragionevole per coprire le spese del mezzo di distribuzione.
+
+  E' permesso usare i lavori di GRAFICA inclusi nell'archivio come bitmap,
+  icone, o inclusi negli eseguibili come risorse SOLO PER USO PERSONALE!
+  E' vietato usare alcuno dei summenzionati lavori grafici in altri
+  programmi senza previa autorizzazione dell'autore del programma.
+
+  --------------------------------------------------------------------------
+  L'USO DEL PROGRAMMA IMPLICA L'APPROVAZIONE DELLE SUMMENZIONATE CONDIZIONI!
+  --------------------------------------------------------------------------
+
+  Alessandro Cantatore
+  alexcant@tin.it
+  FIDONET: 2:335/705.2
+
+  **************************************************************************
+  Il programma permette di monitorare la dimensione del file di swap
+  allo scopo di determinare la quantit… da impostare nella direttiva
+  SWAPPATH del config.sys.
+
+  Installazione:
+
+  Rinominate il file italiano.cmd e italiano.txt swapmon.cmd e swapmon.txt
+  copiandoli in una directory a vostro piacimento insieme a swapmon.ico.	
+
+  Uso:
+
+  Dopo aver settato la dimensione del file di swap di OS/2 al minimo
+  (per esempio: SWAPPATH=C:\OS2\SYSTEM 2048 512), riavviare il sistema
+  e avviare il programma swapmon.cmd.
+  
+  Il programma monitorer… sullo schermo la dimensione corrente del file
+  di path e il massimo valore da essa raggiunto e memorizzer… nel file
+  swapmon.log (nella stessa directory da cui si sar… avviato swapmon.cmd)
+  la dimensione massima raggiunta dal file di SWAP.
+
+  Se il programma viene avviato senza parametri, monitorizzer… il file di swap
+  ogni secondo e scriver… nel file swapmon.log una sola riga riportante il
+  valore massimo raggiunto dall'ultima volta che il programma Š stato avviato.
+
+  Specificando gli opportuni parametri Š possibile cambiare l'intervallo di
+  monitorizzazione (il valore di default Š 1 secondo) e la modalit… di
+  registrazione della dimensione nel file di log (di default nel file viene
+  scritta una sola riga che viene aggiornata ogniqualvolta viene superata
+  la massima dimensione precedentemente registrata).
+
+  Il primo parametro rappresenta l'intervallo in secondi. Tale parametro
+  pu• essere seguito o sostituito dal parametro relativo alla modalit…
+  di registrazione del file di log, che pu• assumere uno dei seguenti valori:
+
+  Specificando "/A" (oppure "-A", "/a" o "-a") ogni volta che la massima
+  dimensione del file di swap viene superata, tale dimensione viene riportata
+  in una nuova riga del file di log invece di sovrascrivere la riga preesistente.
+
+  Specificando "/Sn" (oppure "-S", "/s" o "-s") la dimensione del file di swap
+  viene registrata nel file di log ogni "n" minuti. Se il valore di n non Š
+  specificato viene assunto il valore di default, cioŠ 10 minuti. La dimensione
+  viene registrata indipendentemente dal fatto che sia maggiore, minore o uguale
+  alla precedente e viene rappresentata graficamente da una barra che permette
+  di valutare pi— comodamente la variazione del file di swap nel corso del tempo.
+
+  Specificando "/O" o qualsiasi altro parametro non valido si ottiene la modalit…
+  di registrazione del file di log di default.
+
+  Specificando come unico parametro "-?" (oppure "/?, "/h", "/H, "-h" o "-H") si
+  ottengono brevi note sull'uso del programma.
+
+  La dimensione del file di swap aumenta secondo le necessit… del sistema, ma
+  tende a decrescere con una certa lentezza. Il modo migliore per raccogliere
+  il massimo delle informazioni con il minimo carico della CPU si ha forse
+  specificando i seguenti parametri:
+  SWAPMON 30 /S
+  Alla conclusione della giornata di lavoro, dalla finestra del programma si
+  potr… determinare il massimo valore assoluto raggiunto dalla dimensione del
+  file di swap, mentre dal grafico presente in swapmon.log si avr… l'idea
+  di come tale dimensione sia variata nel corso della giornata.
+
+  Nella direttiva SWAPPATH del config.sys dovr… essere riportata come dimensione
+  iniziale del file di SWAP (il secondo numero) il valore massimo registrato da
+  SWAPMON.CMD a meno che tale massimo non sia episodico e non si abbiano problemi
+  di spazio libero su disco.
+

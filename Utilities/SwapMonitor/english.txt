@@ -1,0 +1,92 @@
+  Swap Monitor V 0.35 * (c) 1996-1998 Alessandro Cantatore - Team OS/2 Italy
+
+  **************************************************************************
+
+  NOTE:
+
+  Under no circumstances the author is liable for any LOSS OR DAMAGE.
+
+  You are FREE TO USE this version of the program on as many machines as you
+  like.
+
+  You are FREE TO MODIFY the program to suit your needs.
+
+  You are FREE TO DISTRIBUTE the program provided that you include all the
+  files in the archive without any modification.
+
+  YOU ARE NOT ALLOWED TO SELL THE PROGRAM, but can charge a reasonable amount
+  to cover the cost of the distribution media.
+
+  You can use the original ARTWORKS included in the archive as bitmaps,
+  icons, or included in the executables as resources ONLY FOR PERSONAL USE!
+  You are forbidden to use any of the above mentioned artworks in your
+  programs without asking the author for permission.
+
+  -------------------------------------------------------------------------
+  THE USE OF THE PROGRAM IMPLIES ACCEPTANCE OF THE CONDITIONS STATED ABOVE!
+  -------------------------------------------------------------------------
+
+
+  Alessandro Cantatore
+  alexcant@tin.it
+  FIDONET: 2:335/705.2
+
+  **************************************************************************
+
+  Swap Monitor allows to monitor the size of the swap file with the purpose
+  to determine the optimal value for the "initial" option of the config.sys
+  SWAPPATH statement.
+
+  Installation:
+
+  Rename the english.cmd and english.txt files	as swapmon.cmd and swapmon.txt
+  and copy them in any directory togther with the swapmon.ico file.
+
+  Usage:
+
+  After having setted the initial value of the swap file size at its minimum
+  (for instance: SWAPPATH=C:\OS2\SYSTEM 2048 512), reboot the system and start
+  swapmon.cmd.
+  
+  The program will show on the screen the current and the maximum size of the
+  swap file and will write the values in the log file swapmon.log (in the same
+  path swapmon.cmd has been started from).
+
+  If you start the program without any parameter the swap file size will be
+  checked once per second and will write in swapmon.log just the maximum size
+  reached by the swap file.
+
+  The monitoring interval and the logging mode may be changed through the
+  program parameteres. The default value for interval is 1 second and the
+  default logging mode is to write only one line with the maximum value of
+  the swap file size, overwriting it as soon that the previous value has been
+  surpassed.
+
+  The first parameter is the interval value, it is facultative and may be
+  followed by the logging mode parameter:
+  - "/A" (or "-A", "/a" o "-a")
+    each time the previous maximum swap file size is surpassed, the new size
+    is appended in a new line rather than overwriting the previous line.
+  - "/Sn" (oppure "-S", "/s" o "-s")
+    the swap file size is written in the log file every "n" minutes. If no value
+    is given for "n" then the program uses the default value of 10 minutes.
+    The swap file size is written in spite of the fact it is smaller or bigger
+    than the previous value and a bar is added on the right in order to allow
+    an easy avaluation of the swap file size changements.
+  - "/O" or invalid parameters
+    means default logging mode.
+
+  Entering as parameter "-?" (or "/?, "/h", "/H, "-h" o "-H") a message about
+  the program usage is displayed on the screen.
+
+  The system increases the swap file size as needed, but it usually doesn't
+  reduce it as quickly. Perhaps, the best way to get informations about the swap
+  file size is by specifing as parameters:
+  SWAPMON 30 /S
+  At the end of the work day, the program window will show the maximum size reached
+  by the swap file, while swapmon.log will allow to check how the swap file size
+  has changed during the day.
+  The maximum value should be used as the initial parameter in the config.sys	
+  SWAPPATH directive unless it has been reached for a very short period, working
+  on something unusual or unless you do not have so much free space on the hard
+  disk.
