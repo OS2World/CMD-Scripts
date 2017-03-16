@@ -1,0 +1,108 @@
+/* ****** 1UP Changes for A4 Paper ****** */
+
+/* Mode=1 and bopt */
+  /* A4 Paper - Replace with the following lines:
+  cpl=88      /* Char/Line  */
+  lpp=84      /* Lines/Page */
+  qq=X2C(1B5B460400000000040F1B41061B301B5B53080000003B0000143BF6)
+  End of A4 Paper changes   */
+
+/* Mode=1 Else */
+  /* A4 Paper - Replace with the following lines:
+  cpl=128     /* Char/Line  */
+  lpp=125     /* Lines/Page */
+  qq=X2C(1B5B460400000000040F1B41061B321B5B53080000003B0000143BF6)
+  End of A4 Paper changes   */
+
+/* Mode=2 and bopt */
+  /* A4 Paper - Replace with the following lines:
+  cpl=73      /* Char/Line  */
+  lpp=83      /* Lines/Page */
+  qq=X2C(1B451B266C26411B266C31451B287330541B283130551B28733130481B266C3844)
+  End of A4 Paper changes   */
+
+/* Mode=2 Else */
+  /* A4 Paper - Replace with the following lines:
+  cpl=125     /* Char/Line  */
+  lpp=83      /* Lines/Page */
+  qq=X2C(1B451B266C26411B266C31451B287330541B283130551B287331362E36481B266C3844)
+  End of A4 Paper changes   */
+
+/* Mode=3 */
+ /* A4 Paper - Replace with the following lines:
+ If bopt Then cpl=101
+ Else cpl=129 /* Char/Line */
+ End of A4 Paper changes   */
+
+/* Mode=3 */
+/* A4 Paper - Replace with the following lines:
+Call Out '/tm { 803 } bind def /bm { 20 } bind def'
+Call Out '/lbox { newpath setgray setlinewidth 22 811 moveto'
+Call Out ' 22 20 lineto 573 20 lineto 573 811 lineto closepath stroke } def'
+Call Out '/llin { newpath setgray setlinewidth 22 811 moveto'
+Call Out ' 573 811 lineto stroke } def'
+End of A4 Paper changes */
+ /* A4 Paper - Replace with the following lines:
+ Call Out ' 22 814 moveto ('||nf||') show 604 814 moveto'
+ Call Out ' ('||nd||') show 331 814 moveto (Page) show 357 814 moveto'
+ End of A4 Paper changes */
+
+/* ****** End of 1UP A4 Paper changes ****** */
+
+
+/* ****** 2UP Changes for A4 Paper ******   */
+
+/* Mode=1 and bopt */
+  /* A4 Paper - Replace with the following lines:
+  cpl=64      /* Char/Line  */
+  lpp=116     /* Lines/Page */
+  qq=X2C(1B5B460400000000041B6C1B3A1B41061B301B5B53080000003B0000143BF6)
+  End of A4 Paper changes   */
+
+/* Mode=1 Else */
+  /* A4 Paper - Replace with the following lines:
+  cpl=92      /* Char/Line  */
+  lpp=180     /* Lines/Page */
+  qq=X2C(1B5B460400000000041B6C0F1B41061B321B5B53080000003B0000143BF6)
+  End of A4 Paper changes   */
+
+/* Mode=2 and bopt */
+  /* A4 Paper - Replace with the following lines:
+  cpl=47      /* Char/Line  */
+  lpp=114     /* Lines/Page */
+  qq=X2C(1B451B266C26411B266C314F1B266C31451B287330541B283130551B28733130481B266C3844)
+  End of A4 Paper changes   */
+
+/* Mode=2 Else */
+  /* A4 Paper - Replace with the following lines:
+  cpl=89      /* Char/Line  */
+  lpp=114     /* Lines/Page */
+  qq=X2C(1B451B266C26411B266C314F1B266C31451B287330541B283130551B287331362E36481B266C3844)
+  End of A4 Paper changes   */
+
+/* Mode=3 */
+ /* A4 Paper - Replace with the following lines:
+ If bopt Then cpl=91
+ Else cpl=117 /* Char/Line */
+ End of A4 Paper changes   */
+
+/* Mode=3 */
+/* A4 Paper - Replace with the following lines:
+Call Out '/tm { 555 } bind def /bm { 15 } bind def'
+Call Out '/lf { currentpoint exch pop lspace sub dup bm lt { pop lm 533 lt { /lm'
+Call Out ' { 533 } def tm } { showpage saveobj restore incp opg /saveobj save def'
+Call Out ' /lm { 26 } def tm } ifelse } if lm exch moveto } bind def'
+Call Out '/lbox { newpath setgray setlinewidth 22 563 moveto'
+Call Out ' 22 15 lineto 525 15 lineto 525 563 lineto closepath stroke } def'
+Call Out '/rbox { newpath setgray setlinewidth 529 563 moveto'
+Call Out ' 529 15 lineto 1032 15 lineto 1032 563 lineto closepath stroke } def'
+Call Out '/llin { newpath setgray setlinewidth 22 563 moveto'
+Call Out ' 1032 563 lineto stroke } def'
+End of A4 Paper changes */
+ /* A4 Paper - Replace with the following lines:
+ Call Out ' 22 568 moveto ('||nf||') show 997 568 moveto'
+ Call Out ' ('||nd||') show 491 568 moveto (Page) show 546 568 moveto'
+ End of A4 Paper changes */
+
+/* ****** End of 2UP A4 Paper changes ****** */
+

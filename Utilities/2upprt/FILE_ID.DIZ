@@ -1,0 +1,8 @@
+REXX command files to print 2UP in landscape
+mode or 1UP in portrait mode on laser
+printers using PPDS, HPLJ or PostScript
+commands. Will number lines or support ANSI
+control characters. Suppresses multiple
+blank lines and page ejects. Includes VREXX
+support. Supports A4 (European) paper size.
+ÿ

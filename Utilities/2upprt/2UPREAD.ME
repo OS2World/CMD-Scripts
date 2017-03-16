@@ -1,0 +1,185 @@
+                                2UPPRT.ZIP
+                          Version 2.3 - 03/20/93
+
+   Title   : V2.3 - Print 2UP or 1UP on Lasers - PPDS, HPLJ,PS
+   Keywords: 2UP 1UP REXX LASER LANDSCAPE PORTRAIT PRINT ANSI HPLJ PPDS
+
+   REXX command files to print 2UP in landscape mode or 1UP in portrait mode
+   on laser printers using PPDS, HPLJ or PostScript commands. Will number
+   lines or support ANSI control characters. Suppresses multiple blank lines
+   and page ejects. Includes VREXX support. Supports A4 (European) paper size.
+
+2UPPRT.ZIP Contents:
+                     2UP.CMD
+                     1UP.CMD
+                     2UP.ICO
+                     1UP.ICO
+                     21UPA4.CHG (Changes for A4 paper)
+                     2UPPRT.CHG (Changes to 2UPPRT)
+                     2UPREAD.ME (This file)
+
+2UP.CMD:
+
+   This REXX command will print a file in landscape mode - 2 columns wide.
+
+   This is a modified version of REXXPR.ZIP found on CompuServe.
+
+   - IBM PPDS Mode is the default. If you want to print in HP or
+     PostScript Mode then change LINE 2 to: mode=2 or 3.
+     NOTE: For DeskJet users: Set mode=2 and change lpp=114 for 2UP and
+           lpp=76 for 1UP. Thanks to Alex Yeilding for this information.
+
+   - To enable VREXX support change LINE 3 to: vrexx=1.
+     Do NOT do this unless you have the VREXX2.ZIP package installed.
+
+   - A4 Paper - The changes for A4 paper size are contained in the
+                21UPA4.CHG file. Merge these changes into 2UP.CMD and
+                1UP.CMD. The locations to change are noted in 21UPA4.
+                Thanks to Mike Walsh for suggesting and testing some
+                changes for A4 paper. (Please let me know if you find
+                errors in this function, not every possibility was tested.)
+
+   - The LPT1, LPT2 and LPT3 port assignments are the default ones for
+     the IBM 40x9 LaserPrinter AES Code. You may change them.
+
+   - Lines longer than the line length are continued onto the next line
+     up to a maximum of 3 print lines for 2UP and 2 print lines for 1UP.
+
+   - Consecutive blank lines are suppressed.
+
+   - Control characters imbedded in the file, such as new page and tabs,
+     are translated to blanks, so you should expand all tabs before
+     printing in order to get better looking output.
+
+   - Format: 2UP filespec <B> <N>
+                              <A>
+                              <F>
+                              <H>
+
+             The following option (if specified) MUST be the FIRST
+             option:
+
+             B - will print in larger type. Use this if the normal type
+                 is too small for you to comfortably read. Of course this
+                 reduces the amount you may print on a page (see the table
+                 below). You may use this option in conjunction with any
+                 of the following options.
+
+             The following options are MUTUALLY EXCLUSIVE:
+
+             N - will Number the lines as they are printed.
+
+             A - uses ANSI print controls as the first character on each
+                 line. Consecutive blank lines are NOT suppressed.
+                 Lines longer than the line length are truncated.
+                 The bar frame and the header lines are NOT printed.
+                 This option is NOT supported in PostScript mode.
+                 ANSI Controls:
+                                Code  Action before printing
+                                ----- ----------------------
+                                blank space 1 line
+                                0     space 2 lines
+                                -     space 3 lines
+                                1     skip to line 1 on a new page
+                                +     suppress space (NOT implemented,
+                                                      treated as blank)
+
+             F - will NOT print the bar Frame around the output.
+
+             H - will NOT print the bar frame or the Header lines.
+
+1UP.CMD:
+
+   This REXX command is the same as 2UP except it prints in portrait mode
+   - 1 column wide.
+
+   - Format: 1UP filespec <B> <N>
+                              <A>
+                              <F>
+                              <H>
+
+SPECIFICATION TABLE:
+
+   The following table shows the variables that change depending on the
+   type of printing and options chosen:
+
+                             ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+                             º        2UP         ºº        1UP         º
+                             ÌÍÍÍÍÍÍÑÍÍÍÍÍÍÑÍÍÍÍÍÍ¹ÌÍÍÍÍÍÍÑÍÍÍÍÍÍÑÍÍÍÍÍÍ¹
+                  Mode       º PPDS ³  HP  ³  PS  ºº PPDS ³  HP  ³  PS  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Printer    º LPT1 ³ LPT2 ³ LPT3 ºº LPT1 ³ LPT2 ³ LPT3 º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Char/Line  º  87  ³  84  ³ 110  ºº 132  ³ 129  ³ 133  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º 184  ³ 118  ³ 186  ºº 121  ³  78  ³ 123  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+     A4 Paper:    Char/Line  º  92  ³  89  ³ 117  ºº 128  ³ 125  ³ 129  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º 180  ³ 114  ³ 174  ºº 125  ³  83  ³ 131  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+     OPTIONS: N - Char/Line  º  -4  ³  -4  ³  -4  ºº  -4  ³  -4  ³  -4  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              F - Char/Line  º  +2  ³  +2  ³  +2  ºº  +4  ³  +4  ³  +4  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +2  ³  +2  ³ N/C  ºº  +1  ³  +1  ³ N/C  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              H - Char/Line  º  +2  ³  +2  ³  +2  ºº  +4  ³  +4  ³  +4  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +6  ³  +6  ³ N/C  ºº  +3  ³  +3  ³ N/C  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              A - Char/Line  º  +2  ³  +2  ³ N/A  ºº  +4  ³  +4  ³ N/A  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +6  ³  +6  ³ N/C  ºº  +3  ³  +3  ³ N/C  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+ OPTION B and:               º                    ºº                    º
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+                  Char/Line  º  59  ³  49  ³  86  ºº  91  ³  76  ³ 104  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º 120  ³ N/C  ³ 140  ºº  79  ³ N/C  ³  92  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+     A4 Paper:    Char/Line  º  64  ³  47  ³  91  ºº  88  ³  73  ³ 101  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º 118  ³ N/C  ³ 136  ºº  84  ³ N/C  ³  98  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+     OPTIONS: N - Char/Line  º  -4  ³  -4  ³  -4  ºº  -4  ³  -4  ³  -4  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              F - Char/Line  º  +2  ³  +2  ³  +2  ºº  +4  ³  +4  ³  +4  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +2  ³  +2  ³ N/C  ºº  +1  ³  +1  ³ N/C  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              H - Char/Line  º  +2  ³  +2  ³  +2  ºº  +4  ³  +4  ³  +4  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +6  ³  +6  ³ N/C  ºº  +3  ³  +3  ³ N/C  º
+                             ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄ¶
+                             ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄ¶
+              A - Char/Line  º  +2  ³  +2  ³ N/A  ºº  +4  ³  +4  ³ N/A  º
+                             ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶ÇÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄ¶
+                  Lines/Page º  +6  ³  +6  ³ N/C  ºº  +3  ³  +3  ³ N/C  º
+                             ÈÍÍÍÍÍÍÏÍÍÍÍÍÍÏÍÍÍÍÍÍ¼ÈÍÍÍÍÍÍÏÍÍÍÍÍÍÏÍÍÍÍÍÍ¼
+                                N/C - No Change     N/A - Not Applicable
+
+OBJECTIVE and LOGIC:
+
+   The objective of these programs is to print as much information, in a
+   readable form, in as small amount of paper as possible. To meet this
+   objective I have elected to translate page ejects to blanks and
+   suppress multiple blank lines. If you change this to allow page ejects
+   then it will mess up the line counts and formatting. By using this
+   logic I can typically print 100 pages of formatted output on 30-38
+   pages of paper (instead of 50) and it is still very readable.
+
+If you make any other enhancements I would appreciate a note and a copy
+of the new file or if you have suggestions please let me know.
+
+Roger Lapp   -   70573,2577 (CompuServe)   -   TMGC69A (Prodigy)
+

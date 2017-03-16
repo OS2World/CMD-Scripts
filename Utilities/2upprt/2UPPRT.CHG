@@ -1,0 +1,27 @@
+      2UPPRT.ZIP
+   List of Changes
+
+ V2.3:
+ -----
+  1. Increased the Char/Line and Lines/Page for PostScript normal
+     printing.
+  2. A note about using the DeskJet was added to 2UPREAD.ME.
+  3. 1UP.ICO has been updated.
+  4. Minor adjustments for the B option.
+
+ V2.2:
+ -----
+  1. Fixed an error in 2UP.CMD and 1UP.CMD when using the A option.
+  2. 2UPREAD.ME has been updated to show the size changes when using
+     the A option.
+
+ V2.1:
+ -----
+  1. 2UPV.CMD and 1UPV.CMD have been merged into 2UP.CMD and 1UP.CMD.
+  2. 1UP.ICO, 21UPA4.CHG and 2UPPRT.CHG (this file) have been added.
+  3. PostScript support has been added.
+  4. Option B has been added to print in a larger typestyle.
+  5. The changes for A4 paper have been moved to 21UPA4.CHG.
+  6. 2UPREAD.ME has been rewritten to show the option effects more
+     clearly.
+
