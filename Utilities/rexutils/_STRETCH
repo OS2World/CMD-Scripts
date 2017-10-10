@@ -1,0 +1,17 @@
+/* _STRETCH        REXX External function by Gord Snider                     */
+_stretch: /* procedure */ /* v02.00 2010/10/29 */
+/* PURPOSE: To expand a string by adding padding characters between each pair
+of original characters in the string.
+
+    SYNTAX: _STRETCH( string, 'padding')
+
+Padding may be 1 or more characters. Default padding is a single blank.
+*/
+parse arg string, padding
+if padding == '' then padding = ' '           /* default padding, 1 blank */
+op = ''                                       /* output string */
+do i = 1 for length( string) - 1
+   op = op || substr( string, i, 1) || padding
+end i
+op = op || substr( string, i, 1)
+return op

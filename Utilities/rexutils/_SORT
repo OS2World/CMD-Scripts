@@ -1,0 +1,27 @@
+/* _SORT           REXX External function by Gord Snider                     */
+_sort: 
+/* This is a type of bubble sort.  
+It is a simple algorithm useful for short lists.
+It will be slow for longer lists.
+It takes a quoted, unsorted list of items, numeric or alpha, separated 
+by spaces, and returns a sorted list of items separated by spaces.
+Each item in the list is added at the end of the array (k) and is 
+compared to the item above it, then it bubbles up to its ordered location.
+*/
+parse arg itemlist
+items = words( itemlist)
+parse var itemlist sorted.1 itemlist                       /* item 2 will be compared to it */
+/* Loop for number of times to bubble. */
+do k = 2 to items                                          /* k is ++ for each item added to sorted list. */
+   parse var itemlist sorted.k itemlist
+   do i = k to 2 by -1                                     /* number of comparisons to make */
+      h = i - 1
+      if sorted.i < sorted.h
+         then parse value sorted.i sorted.h with sorted.h sorted.i     /* switch 'em */
+   end i
+end k
+sorted = sorted.1                                          /* prevent leading space */
+do x = 2 to items
+   sorted = sorted sorted.x 
+end
+return sorted

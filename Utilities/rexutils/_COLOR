@@ -1,0 +1,71 @@
+/* _COLOR          REXX External function by Gord Snider                     */
+/* Used to set ANSI color and attribute for screen output text data.
+This function takes 1, 2, 3, 4, or 5 arguments: the data to be colored; the
+foreground color; the background color; the text attribute; the switch.
+
+Specifying only the data to be colored results in bright white characters.
+e.g. _color( "Hi, there!")
+
+All foreground colors default to high intensity because the low intensity
+can be hard to see unless the screen BRIGHTNESS and CONTRAST controls are just
+right.
+
+Colors may be spelled out in full or you may use a 3 character color code;
+black,  red,  green,  yellow,  blue,  magenta,  cyan,  white
+blk,    red,  grn,    ylw,     blu,   mga,      cyn,   wht
+
+Attributes may be spelled out in full or you may use a 2 character attribute code:
+none,  high,  low,  italic,  underline,  blink,  rapid,  reverse,  invisible
+no,    hi,    lo,   it,      un,         bl,     ra,     re,       in
+
+The switch, if specified,  must have a value of one, "1", or zero, "0"
+i.e. TRUE or FALSE. It is used to turn the color on or off on a per-execution
+basis.  If switch is specified as "0" then the whole _color function is
+suppressed for that execution.  The default is "1".
+
+Specify the data and, e.g.  a foreground color of red and a background color
+of blue like this;
+e.g. _color( "Hi, there!", "red", "blu")
+Specifying spaces as the data and a background color results in a low-intensity
+band of that color.
+e.g. _color( "       ",,"cyan")
+
+NOTE: This function uses ANSI terminal emulation control characters to effect
+      the change in intensity and the colored text.  This feature is believed
+      to be available only in the OS/2-eCS operating system by default.
+NOTE:  ON SOME COMPUTER SYSTEMS ONLY LOW, HIGH, INVISIBLE and REVERSE WORK.
+NOTE:  IF YOU SPECIFY INVISIBLE DO NOT SPECIFY ANY COLOR.
+*/
+_color:
+parse arg data, . , . , . , .                              /* To retain case of the data */
+      arg   . , fg, bg, at, sw                             /* To upper case the option settings */
+
+palette  = 'BLACK BLK RED RED GREEN GRN YELLOW YLW BLUE BLU MAGENTA MGA CYAN CYN WHITE WHT'
+
+if fg \= '' then                                           /* fg color specified */
+      if wordpos( fg, palette) > 0 then                    /* fg color valid */
+            fg = '3' || word( '0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7', wordpos( fg, palette)) || ';'
+         else return 'FG color choice not in fg palette.'
+
+if bg \= '' then                                           /* bg color specified */
+      if wordpos( bg, palette) > 0 then                    /* bg color valid */
+            bg = '4' || word( '0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7', wordpos( bg, palette)) || ';'
+        else return 'BG color choice not in bg palette.'
+   else nop
+
+attribute = 'NONE NO HIGH HI LOW LO ITALIC IT UNDERLINE UN BLINK BL RAPID RA REVERSE RE INVISIBLE IN'
+
+select
+/* when fg = '30' then at = 0 || ';'  */
+   when sw =   0  then do
+         fg = ''
+         bg = ''
+         at = 0 || ';'
+      end
+   when at \= '' then if wordpos( at, attribute) > 0 then
+         at = word( '0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8', wordpos( at, attribute)) || ';'
+      else return 'Attribute choice not available.'
+   otherwise at = '1;'                                     /* no fg color specified - bright white */
+end   /* select */
+
+return '1B5B'x||at||fg||bg||'m'||data||'1B5B'x||'0;m'

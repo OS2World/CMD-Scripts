@@ -1,0 +1,10 @@
+/* _COMMAS         REXX External function by Gord Snider                     */
+_commas: /* add commas to a large number for display purposes */
+/* PROCEDURE implied by external function */
+numeric digits 15          /* 000,000,000,000,000  hundreds of terabytes */
+arg number
+parse value number + 0 with integer '.' decimal +0
+do i = length( integer) - 3 to 1 by -3 while datatype( substr( integer, i, 1), 'N')
+      integer = insert( ',', integer, i)
+end i
+return integer||decimal

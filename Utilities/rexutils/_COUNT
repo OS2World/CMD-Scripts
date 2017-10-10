@@ -1,0 +1,29 @@
+/* _COUNT          REXX External function by Gord Snider                     */
+/* PURPOSE: Counts the number of a character in a string.  Takes 2 arguments,
+the character to be searched for, and the string to search in.
+
+    SYNTAX: _COUNT( needle, haystack)
+
+Needle must be a single character.
+*/
+
+_COUNT:
+PARSE ARG needle, haystack
+count = 0
+span = Length( needle)
+IF span = 0 THEN DO
+      SAY "Needle not specified."
+      EXIT
+END
+
+IF span > 1 THEN DO
+      SAY "Needle too long."
+      EXIT
+END
+
+DO i1 = 1 TO Length( haystack)
+  IF Substr( haystack, i1, 1) = needle THEN
+     count = count + 1
+END i1
+
+RETURN count

@@ -1,0 +1,32 @@
+/* _SCALE          REXX External function by Gord Snider                     */
+_SCALE:
+/*
+This function can take zero, one, or two arguments, i.e. start_col and/or
+length of scale, separated by a comma.
+
+NOTE: This function assumes that RexxUtil DLL has already been loaded.
+NOTE: This function uses RexxUtil.DLL features that make it likely to
+      work only in OS/2-compatible systems.
+*/
+
+PARSE VALUE SysTextScreenSize() WITH . cols                /* to set maximum length of scale */
+PARSE ARG start , length
+
+IF start  = "" | start  < 1 | start  > cols - 2 THEN  start = 1          /* Default scale start column */
+IF length = "" | length < 1 | length > cols - 2 THEN length = cols - 2   /* Default scale length */
+
+/* No going beyond window width. */
+IF start + length > cols - 2 THEN length = cols - start - 1
+
+/* Set the scale starting column, if not 1. */
+CALL CharOut "STDOUT", Copies( " ", start - 1)
+
+/* Set number of times to issue 10 block. */
+DO i2 = 1 FOR (length % 10)
+   CALL CharOut "STDOUT", "----+----"Right( i2, 1)         /* Draw most of the scale. */
+END i2
+
+/* Fill in final characters */
+CALL CharOut "STDOUT", substr( "----+----" , 1, length // 10) "0D0A"x
+
+RETURN

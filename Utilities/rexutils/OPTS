@@ -1,0 +1,10 @@
+/* opts     as of 2013/10/25 */
+arg . '/'switches +0                                  /* split off the switches from the rest */
+opt. = 0                                              /* unset options will be FALSE */
+mod. = ''                                             /* unset option mods will be NULL */
+do while pos( '/', switches) > 0                      /* each option must have leading slash */
+   parse var switches '/'opt'/'switches +0            /* parse next option/modification set */
+   parse upper var opt opt 2 mod                      /* split option from any modification */
+   opt.opt = 1                                        /* capture option name, option value = TRUE */
+   mod.opt = mod                                      /* capture option's modification, if any */
+end   /* opts */

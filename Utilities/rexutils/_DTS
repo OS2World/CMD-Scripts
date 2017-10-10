@@ -1,0 +1,7 @@
+/* _DTS            REXX External function by Gord Snider                     */
+/* DateTimeStamp
+This External Function returns a date-time stamp in the form
+yyyy/mm/dd-hh:mm:ss
+*/
+
+return insert( '/', insert( '/', insert( '-', date( 'S'), 8), 6), 4) || time()

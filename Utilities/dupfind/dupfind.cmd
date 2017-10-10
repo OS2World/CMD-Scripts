@@ -115,7 +115,7 @@ if rc = '' then
     end
 
 /* use value in LOGFILES environment variable if it is set */
-outputDir = VALUE("LOGFILES",,"OS2ENVIRONMENT");
+outputDir = VALUE("LOGFILES",,"ENVIRONMENT");
 /* if LOGFILES is not set then use current directory */
 if outputDir = '' then
     do
