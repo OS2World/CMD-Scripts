@@ -1,0 +1,51 @@
+MCD.CMD executes the OS/2-command "MD" for all specified directories
+and executes the OS/2-command "CD" for the last specified directory.
+
+Executing MCD.CMD without an executable parameter just executes the
+OS/2-command "CD".
+
+
+Syntax:
+
+  MCD <directory> <...>
+
+
+Examples:
+
+  MCD "A Long Name" SHORT "Another long name" SHORT.2
+
+    Will be executed as:
+
+      MD "A Long Name"
+      MD "SHORT"
+      MD "Another long name"
+      MD "SHORT.2"
+      CD "SHORT.2"
+
+  MCD "A long name" ""
+
+    Will be executed as:
+
+      MD "A long name"
+      CD "A long name"
+
+  MCD SHORT SHORT.2
+
+    Will be executed as:
+
+      MD "SHORT"
+      MD "SHORT.2"
+      CD "SHORT.2"
+
+  MCD \
+
+    Will be executed as:
+
+      MD "\" (returns an OS/2-error message, SYS1248)
+      CD "\"
+
+   MCD
+
+     Will be executed as:
+
+       CD
