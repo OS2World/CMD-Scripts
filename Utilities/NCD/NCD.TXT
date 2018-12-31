@@ -1,0 +1,20 @@
+The 2 files included in this package emulate the Norton Change Directory
+DOS program. The file named XCD.CMD uses the basic features of REXX and can
+be run from either a full screen group or an OS/2 window. The file named 
+VCD.CMD makes use of the Visual REXX package and should only be run from
+an OS/2 window. 
+
+I say should, because although it will run from a full 
+screen group, the directory selection window only appears on the WPS 
+desktop. I have not found a way in REXX to determine if I am currently 
+running in a full screen group or an OS/2 window session.
+
+The CMD files are pretty well comented so they should be easy to understand
+and modify.
+
+If anyone has any suggestions on how to improve the program, I can be 
+reached on Compuserve at 76666,1043 or at (714)380-6362.
+
+Hope it proves useful.
+
+Larry Wasserman

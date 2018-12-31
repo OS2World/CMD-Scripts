@@ -1,0 +1,114 @@
+        …                                           ª
+        π              Zip to Lzh 1.7               Ã
+        π            ------------------             Ã
+        π   (or Any archive to Any other archive)   Ã
+        π                 --------                  Ã
+        π                    ZTL                    Ã
+        »ÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀº
+
+        ---------------------------------------------
+       [ totally freeware by Tim Middleton 1:250/202 ]
+        ---------------------------------------------
+
+ZTL [<filespec>] [/b] [/d] [/i] [/t<archive-type>] [/w<drive:>] [/?]
+
+    <filespec> - The file(s) to convert; can include any
+                    a path and wildcards (default is *.zip).
+            /b - Update FILES.BBS after archive conversion.
+                    (for Maximus bbs use).
+            /d - do NOT delete the original archive when
+                    done. (default deletes original)
+            /i - do NOT convert internal archives of the
+                    same extention as in <filespec>.
+            /t - declare extension of the target archive.
+                    (default is LZH)
+            /w - declare a work drive (not directory).
+            /? / quick help screen
+
+
+IMPORTANT:
+    You  must  edit  the  first  few lines of the program to make sure
+    that YOUR archivers are defined correctly.  This is  not  hard  to
+    do,  and  the  area  that you need to chang is clearly marked out.
+    Take a look at the program with a text editor  and  you  will  see
+    what to  do.    As many archivers as you want can be defined using
+    the following format (where EXT  is  the  file  extension  of  the
+    archiver):
+
+        EXT.1='archiver unarchive_command'
+        EXT.2='archiver archive_command'
+
+    ie.
+        ZIP.1='PKUNZIP2'
+        ZIP.2='PKZIP2'
+        LZH.1='LH X'
+        LZH.2='LH A'
+
+NOTES:
+        - Just in case you run dos or windoze and haven't
+            realized it yet... this is for OS/2!!
+        - for best preformance put ZTL.CMD somewhere in
+            your path statement, naturally.
+        - If you just type ZTL with no parameters the
+            default will convert all ZIPs in the current
+            directory, including internal archives, to
+            LZH then delete the original archive files.
+        - Put the arguments in any order on the end of
+            the command line after the file name.
+        - <filespec> can include wildcards but wants an
+            idenifying extension (ie. *.zip or t*.zip);
+            however if no extension is given the extension
+            '.zip' will be added.
+        - <filespec> can include drives and paths.
+        - If you chose as target archive the same as the
+            original the original archive will be over-
+            written regardless of the /d flag.
+        - Immeditately folling the archiver definitions there
+            is a short section where you can define commands
+            to execute on the files in you archive before it
+            is rearchived.  In this way you can scan for
+            viruses and/or delete unwanted files.  See the
+            examples in the program with a text editor.
+            (Delete the sample commands if you don't want them).
+        - the /w work drive switch only wants a drive
+            (ie. e:, d:, etc) and not a directory.
+            If you give a directory it will be ignored.
+        - for Maximus/2 sysops the /b switch should be
+            invaluable as it will update your FILES.BBS.
+        - To run ZTL to convert all archive types in a
+            directory you should create a .cmd file
+            that runs ZTL for each file extenstion you
+            want to be convertered.
+        - With this realease long archive names with
+            spaces in them are not supported... though
+            long file names with no spaces should work.
+            I don't have enough RAM to run HPFS so I
+            haven't been able to test it out yet.  I will
+            add this feature if interest is shown.
+        - Archive file will be output in upper case.
+
+Please feel free to send me any suggestions or compliments.
+If you change my code please send me an update!!  I want the
+better version <g>.  I'm on FidoNet at Tim Middleton 1:250/202.
+
+
+Revision 'History':
+
+ZTL 1.7 - Feb 9/93
+~~~~~~~
+          - Well, world, here it is escaping through the unsuspecting
+               phone lines.  Finally free of the endless revisions on
+               my lonely system!
+
+/*=================================================================*/
+/* Hope you find this useful.  Send me any suggestions via NetMail.*/
+/* Tim Middleton 1:250\202              Toronto, Canada, Feb. 1993 */
+/*                                                                 */
+/*    Special Thank-Yous to:                                       */
+/*        Terence sin (1:250/604) fer putting up with me calling   */
+/*            his board every five minutes to upload him a new     */
+/*            version to try out.... wheeeeee.                     */
+/*        Mika Becker (1:250/202) who's BBS I call my own... uh..  */
+/*            I mean my _home_!  the Beladau bbs (416)975-1813.    */
+/*        And Yous for using my program! I hopes it useful.        */
+/*-----------------------------------------------------------------*/

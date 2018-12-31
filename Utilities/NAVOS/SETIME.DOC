@@ -1,0 +1,51 @@
+
+                         setime.CMD
+
+INTRODUCTION
+============
+
+ setime is an OS/2 REXX Command File that will dial the Naval
+ Observatory and set the system clock to the Naval Observatory time.
+
+ setime is not precisely accurate in that it does not take into account
+ the time lag from the communications thru program execution thru the
+ setting of the system time.  However, it should set the system clock to
+ within a second of Naval Observatory Time.
+
+ This is the very first version of setime.  I've tested it on a US
+ Robotics HST modem, only.  I suspect that there might be subtle
+ differences in the Hayes AT command set for other modems and they
+ might not respond the same as my modem.
+
+
+DISCLAIMERS
+===========
+
+ setime is freeware.  Feel free to copy it, modify it, do whatever you
+ wish to it.  Just don't hold me responsible for any problems it might
+ cause you or you system.
+
+
+PROGRAM EXECUTION
+=================
+
+ At the OS/2 command line type:
+
+    setime <year> <offset> <PhoneNumber> <ComPort>"
+
+            <year>        = 2 digit year (e.g. 1992 = 92)
+            <offset>      = Hours that your local time differs from
+                             Greenwich Mean Time. Eastern Daylight
+                             Time = 4 (i.e. 12:00 noon GMT is 08:00 EDT)
+            <PhoneNumber> = Phone Number of Naval Observatory
+                             1-202-653-0351 is default
+            <ComPort>     = ComPort where your modem is connected
+                             COM1 is default
+
+ If for some reason setime cannot connect, it will timeout after 45
+ seconds.
+
+Author: Jerry am Ende
+        5411 Pinehurst Dr.
+        Wilmington, DE 19808
+        Compuserve 73237,131
