@@ -1,0 +1,108 @@
+    FileName:  SAVEINI.CMD
+    Date:      August 1, 1993
+    Author:    Chris Hascall
+               49 McKinley Street
+               South Portland ME 04106   USA
+               1 (207) 799-8679
+
+    SAVEINI may be a bit of a misnomer as the title of this REXX program.
+    In actuality, I needed a utility which would quickly and efficiently
+    create current copies of the five major configuration files required
+    within OS/2 ver 2.XX.
+
+    Therefore, SAVEINI was created.  I use it on a regular basis to make
+    copies of the AUTOEXEC.BAT, CONFIG.SYS, STARTUP.CMD, WIN.INI and SYS-
+    TEM.INI files.
+
+    One of my objectives was to create copies regularly but to ensure that
+    older copies would not be over-written. Using two switches and some
+    careful checking, I feel the program accomplishes that end.
+
+    SAVEINI will run from an OS/2 CLI as well as from within PMREXX, the
+    latter of which is my personal preference.  Program execution. in
+    either case is very simple.
+
+    Using the following, defined  switches will allow two scenarios.
+
+         Switches:    (preceded by a '/' or '-')
+
+                  ? - to produce a help "screen"
+
+                  A - when present, indicates that prompting is
+                      required for alternate file extension
+
+                  O - automatically overwrite existing copies
+                      without prompting
+
+    First, though use of the "O" switch by itself, SAVEINI will do its
+    thing with only one interruption.  The user-defined file extension
+    is used to create copies and any existing files in the target directory
+    will be over-written.
+
+    The second switch, "A", when used by itself, will allow interactive
+    control to the extent that the user is prompted for an extension
+    during execution.  If files already exist, a description of each is
+    displayed and the program terminates. This is the safe process.
+
+    The command line necessary to execute SAVEINI is simple:
+
+              Usage:    SAVEINI <switches>
+            Example:    SAVEINI /A /O
+
+    To run with PMREXX, the following will do it;
+
+                        PMREXX SAVEINI.CMD /A /O
+
+    SAVEINI.TXT (continued)
+
+
+    In order to get this script going, minor changes are required within
+    the "sin_init" procedure.  Several global definitions will need to be
+    changed depending on the system in which the program will be run.
+
+    Change the following accordingly;
+
+        global.save_dir      = "D:\OS2\HOLDINI\"
+                               the directory in which the configuration
+                               files will be stored.
+
+        global.f_extension   = "SAV"
+                               the default file extension to be assigned
+                               to each file if no override provided via
+                               the "/A" option. For HPFS drives, this
+                               may be a multi-part name.
+
+        global.auto_exec     = "D:\4DOS\AUTOEXEC.BAT"
+                               the full path and name of the OS/2
+                               autoexec.bat file.
+
+        global.config_s      = "D:\CONFIG.SYS"
+                               the full path and name of the OS/2
+                               config.sys file.
+
+        global.start_up      = "D:\STARTUP.CMD"
+                               the full path and name of the OS/2
+                               startup.cmd file.
+
+        global.win_ini       = "F:\OS2\MDOS\WINOS2\WIN.INI"
+                               the full path and name of the WINOS2
+                               win.ini file.
+
+        global.win_sys_ini   = "F:\OS2\MDOS\WINOS2\SYSTEM.INI"
+                               the full path and name of the WINOS2
+                               system.ini file.
+
+    Please feel free to modify SAVEINI as you see fit, but, should you
+    encounter any bugs, or come up with any improvements, I would ap-
+    preciate receiving your comments, suggestions or changes.
+
+    Also, if you will be redistributing SAVEINI, please enclose the or-
+    iginal code as well as this text file along with your modified ver-
+    sion.
+
+    I hope you are able to make use of this short REXX program.  If you
+    have any ideas for other utility programs, and perhaps are not a
+    "programmer", let me know your ideas and I'll try to put something
+    together for you.
+
+    chris hascall

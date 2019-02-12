@@ -1,0 +1,75 @@
+Application Name: PPIPFC.CMD Version 1.10
+
+Requirements:     OS/2 Extended Edition 1.2 or later.
+                  OS/2 Standard Edition 1.3
+
+Description:      A Pre-Processor for the Information Presentation
+                  Facility Compiler. Because the IPFC program cannot
+                  read a definitions file (.h file) you cannot use
+                  identifiers on the res= parameter to :h tags, you must
+                  specify a hard-coded resource number. PPIPFC.CMD is
+                  designed to read a .h file and obtain a list of
+                  definitions and then substitute those definitions into
+                  your .ipf file.
+
+Invocation:       The following example is how the test.ipf file was
+                  created from the test.txt and test.h files included
+                  in this package:
+
+                  ppipfc test.txt test.ipf test.h
+
+The following files make up the REXHLAPI.ZIP file:
+
+  ppipfc.cmd - PPIPFC program.
+  ppipfc.doc - This file.
+  test1.h    - Example definitions file.
+  test1.txt  - Example ipf file prior to pre-processing.
+  test1.ipf  - Output file of test1.txt and test1.h.
+
+
+Notes:
+  The documentation for this CMD is located in the comment header of the
+  PPIPFC.CMD file.
+
+  No warranties, guarantees, etc. are implied, and no liability is
+  assumed for the code, examples, or documentation.
+
+  This software is user-supported software and may be freely
+  copied and used by anyone who wishes to do so as long as the
+  following conditions are met:
+
+  1. These functions may not be used by any program for
+     which a fee is charged unless the owner of the program
+     has paid the registration fee.
+
+  2. If you transmit a copy of this software to another
+     party you must give them the complete unaltered
+     contents of the PPIPFC.ZIP file.
+
+  3. If you make any modifications to these functions you
+     must change the name of the PPIPFC.CMD file to some other name.
+
+  If you feel that this program has benefited you, please
+  register it by sending $25.00 to:
+
+       Pedagogic Software
+       W. David Ashley
+       5 Timberline Dr.
+       Trophy Club, Tx 76262
+
+  If you have questions, comments or suggestions please contact me
+  through the OS/2 Shareware BBS or at the address below:
+
+      W. David Ashley
+      5 Timberline Dr.
+      Trophy Club, Tx 76262
+
+
+
+Version 1.00 - 03/21/1991
+-------------------------
+
+  1. Original release.
+
+
+
