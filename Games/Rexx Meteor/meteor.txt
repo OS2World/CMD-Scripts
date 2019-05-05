@@ -1,0 +1,54 @@
+METEOR.CMD
+
+Introduction
+============
+
+  METEOR is an OS/2 REXX arcade type game.  I realize that REXX is a poor
+  language choice for arcade games, and this program is meant mostly as a
+  novelty, but it's still kinda fun to play.
+
+Disclaimers
+===========
+
+  METEOR is freeware.  Feel free to copy it, modify it, do whatever you
+  want to it.  Please note, however, that I'm not responsible for any
+  problems it might cause you or your PC.
+
+Features
+========
+  * Digital sound effects. (if you have MMPM/2 installed)
+  * The top ten high scoring games are saved as demos.
+  * It's networkable. (sort of, run it from a mapped network drive and
+    all the high score/demos will be shared among all users.  This
+    allows you to compete and view each other's performances.)
+  * Reasonably well structured code. (for you REXX programmers)
+  * Colorful (ANSI character) graphics.
+  * Fast, furious action even on slower PCs. (That's probably an exaggeration)
+
+Program Usage
+=============
+
+  At the OS/2 command prompt, type: METEOR [/s]
+
+      /s = disable digital sound
+
+  You'll get an instruction/high score screen.  It's a good idea to read
+  the instruction screen carefully before playing.  It's also a good
+  idea to watch a demo first.
+
+  Hints:
+    * TAP the keys, don't hold them down.
+    * Keep an eye on the info area on the left side of the screen.
+    * Look ahead.
+    * All the bonus objects (colored letters) are helpful.
+
+Comments are Welcome
+====================
+  Thanks for playing Meteor!
+
+  Author: Jeff Byrd
+          821 Colfax Dr.
+          Nashville TN  37214
+          jeff.byrd@mcmail.vanderbilt.edu
+
+
