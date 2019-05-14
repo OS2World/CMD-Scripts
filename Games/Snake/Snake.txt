@@ -1,0 +1,8 @@
+Bei diesem Spiel muss eine immer laenger
+werdende Schlange durch ein Labyrinth
+gesteuert werden. Es sind alle Froesche
+zu fressen. Mauern und Igeln ist
+auszuweichen. Die Schlangen-Mampfer
+machen Jagd auf die Schlange. Das Spiel
+ist vollstaendig in REXX implementiert
+und liegt im Quelltext vor.
