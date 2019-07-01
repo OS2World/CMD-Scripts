@@ -1,4 +1,4 @@
-*** IRxRadio (c) 2007 Wolfgang Reinken ***
+*** IRxRadio (c) 2007-2019 Wolfgang Reinken ***
 
 README
 ======
@@ -18,24 +18,24 @@ INSTALLATION:
         or a directory of your LIBPATH. You can obtain RXU.DLL from:
         http://hobbes.nmsu.edu/pub/os2/dev/rexx/rxu1a.zip
 
-    3.  If not already done so place RXEXTRAS.DLL into the program directory
-        or a directory of your LIBPATH. You can obtain RXEXTRAS.DLL from:
-        http://hobbes.nmsu.edu/pub/os2/dev/rexx/rxx1g.zip
+    3.  If not already done so place RXMOUS.DLL into the program directory
+        or a directory of your LIBPATH. You can obtain RXMOUS.DLL from:
+        http://hobbes.nmsu.edu/pub/
 
     4.  If not already done so install MPLAYER according to the install
         instructions given in that package. Copy MPLAYER.EXE into the 
         program directory if it isn't in a directory of your program search 
         path. You can obtain MPLAYER from:
-        http://users.on.net/~psmedley/os2ports/mplayer.html
+        http://hobbes.nmsu.edu/download/pub/os2/apps/mmedia/video/players/mplayer-SVN-r34646-OS2-4.4.6.zip
 
 
   REQUIREMENTS:
   -------------
 
-    The components have been tested on eCS 1.0 and eCS 1.2 but should run on other 
+    The components have been tested on eCS 1.0 to eCS 2.2 and ArcaOS but should run on other 
     versions of OS/2 too.
 
-    REXX-Libraries RXU.DLL and RXEXTRAS.DLL (see above)
+    REXX-Libraries RXU.DLL and RXMOUS.DLL (see above)
 
     Multmedia Player MPLAYER (see above)
 
@@ -47,7 +47,7 @@ INTRODUCTION
 
     Starting the program:
 
-    - start a OS/2 or cCS command window
+    - start a OS/2 or eCS command window
     - change to program directory
     - type in IRXRADIO.CMD
     - if necessary change the window size or font size
@@ -59,7 +59,7 @@ LICENSE
 
     This package is freeware; all rights reserved.
 
-    (C) Copyright IRxRadio.CMD: Wolfgang Reinken, 2007
+    (C) Copyright IRxRadio.CMD: Wolfgang Reinken, 2007-2019
 
     For details, see online help.
 
@@ -72,4 +72,3 @@ CONTACT
 
     
 
-
