@@ -1,0 +1,7 @@
+OBJECTID.CMD is a simple utility that will output all Object ID's
+in use.
+
+USAGE:  Type OBJECTID from the OS/2 commmand prompt and Object 
+ID's will be output to the screen.  Type OBJECTID > FILENAME.TXT 
+and output will be placed in FILENAME.TXT.
+

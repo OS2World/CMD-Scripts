@@ -1,0 +1,7 @@
+QCLASS.CMD is a simple utility that will list all registered 
+classes by class number, class name, and DLL.
+
+USAGE:  Type QCLASS from an OS/2 command prompt and class 
+information will be output to the screen.  Type QCLASS > 
+FILENAME.TXT and output will be written to the file FILENAME.TXT.
+
