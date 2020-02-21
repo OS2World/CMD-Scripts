@@ -1,0 +1,228 @@
+        ***************************************************************
+
+        File:   BACK2FAT.DOC
+
+        Author: Ralf Hauser (c³o)
+                e-mail:  affie@frege.sns.neuphilologie.uni-tuebingen.de
+
+        Date:   22-07-92
+
+        Desc.:  To all those who have a OS/2 drive with a HPFS partition,
+                another drive with a FAT partition and a tape streamer
+                without OS/2 2.0 support...
+
+                Requires EABACKUP V2.x (available from hobbes)
+                     and ZOO V2.x (available from hobbes) or any
+                     other file compression utility.
+
+        __________________________________________________________________
+        __ BACK2FAT.DOC __________________________________________________
+
+        BACK2FAT.CMD acts as a shell in calling other (PD) programs to
+        create a backup of a specified fileset from a HPFS drive to a
+        FAT drive.
+
+        BACK2FAT.CMD is designed as a template for your own backup jobs.
+
+        BACK2FAT.CMD is a REXX program which may easily be changed for
+        personal preferences and other environments.
+
+        (I hope it doesn't bore if I now start with my personal story...)
+        I have been using OS/2 2.0 with pleasure for two months now.
+        The only drop of bitterness so far ist that one vital program does
+        not run in the DOS box:
+
+              SYTOS plus for DOS
+
+        This is vital in so far as my WANGTEK tape streamer with its own
+        controller/adapter is worthless under OS/2 ...
+
+        Rumors telling me that a support should be introduced in this fall
+        but Pinocchio is a true story either.
+
+        So I have written my first REXX program (it's not my last one but,
+        personally, I prefer C and C++) to have a 'comfortable' shell for
+        the classic backup programs EABACKUP and ZOO.
+
+        So I do backup my files to my second (FAT) harddrive, boot under
+        pure DOS, run SYTOS and sleep much better from now on!
+
+        If you, the honorable reader of this magnificient document, have
+        similar problems, my (\TMP) solution might help you.
+
+        So this is what you have to do:
+
+        __________________________________________________________________
+        __ INSTALL _______________________________________________________
+
+        BACK2FAT requires ...
+
+           þ OS/2 2.0 (That's what the mess is alll about)
+           þ EABACKUP Version 2.x for backing up Extended Attributes
+           þ ZOO Version 2.x for backing up files
+
+        If you prefer another file compression utility you must adapt
+        BACK2FAT accordingly. (This is quite definitely your problem!)
+        (You need to know how to program in REXX which is *no* magic.)
+
+        Copy BACK2FAT.CMD (and this DOC file) to a directory of your
+        choice.
+
+           Either:
+
+              Copy EABACKUP.EXE to the same directory
+              Copy ZOO.EXE to the same directory
+
+           Or:
+
+              Be shure that EABACKUP.EXE is in a directory of your PATH
+                      environment.
+              Be shure that ZOO.EXE is in a directory of your PATH
+                      environment.
+
+        If you do not know, what a PATH environment is (maybe because
+        you are totally object-oriented and do not care for those technical
+        details), refer to your OS/2 Online Manual for a description or
+        fulfill the first condition!
+
+        That's it.
+
+        BACK2FAT automatically searches for its spawned programs and
+        generates an error message if it cannot find them. This is
+        done by a nice REXX system call...
+
+        NOTE: On my system I have installed the APA's PJ03945 and PJ04178
+              and I don't know whether my program requires them or not.
+              I didn't have the time to check this out, sorry.
+              These patches are available from hobbes as something like
+              REXX20.ZOO
+
+        __________________________________________________________________
+        __ ADAPTION ______________________________________________________
+
+        BACK2FAT.CMD is designed as a template for your own backup jobs.
+
+        So this means you have to do a little bit!!!
+
+        You do not have know anything about REXX or so, it's really easy
+        do 'patch' the program, don't be shy...
+
+
+        The program must be called with at least one argument describing
+        a fileset. A fileset is a drive/path specification of the files
+        which are to be backuped.
+
+        The filesets are hardcoded within the program and must be edited
+        to fit to your environment!
+
+        There are 5 filesets already defined in the program which suit to
+        my environment. Unless you change your whole filesystem to the
+        same structure as mine you have to edit the fileset names and
+        their underlying filespecs!
+
+        So use your favorite editor (e.g EDLIN) and edit BACK2FAT.CMD
+        Around line #212 there should be something like
+
+        ----
+        global.fileset.1     = "OS2  -->   C:\OS2"    /* OS2 system files */
+        global.fileset.2     = "APP  -->   C:\APP"    /* applications */
+        global.fileset.3     = "BIN  -->   C:\BIN"    /* 'binaries', tools */
+        global.fileset.4     = "ETC  -->   C:\ETC"    /* other system files */
+        global.fileset.5     = "LIB  -->   C:\LIB"    /* libraries */
+        /* ... more ... */
+        global.fileset_num   = 5       /* must contain number of filesets! */
+        ---
+
+        If your built-in-pattern-matcher works with a low-priority threshold
+        you should already recognize the trick.
+
+        If you just see objects (letters, punctuation signs, crazy things)
+        I have to catch another breath and explain it:
+
+        A fileset definition looks like:
+
+        global.fileset.1  = "OS2  -->   C:\OS2"  /* OS2 system files */
+
+        ^^^^^^^^^^^^^^ ^  ^  ^     ^     ^       ^^^^^^^^^^^^^^^^^^^^^^
+                ³      ³  ³  ³     ³     ³                 ³
+                ³      ³  ³  ³     ³     ³                 À REXX comment
+                ³      ³  ³  ³     ³     ³
+                ³      ³  ³  ³     ³     À file specification (used as backup source)
+                ³      ³  ³  ³     À separator (must be here)
+                ³      ³  ³  À fileset (command line argument)
+                ³      ³  ³
+                ³      ³  À guess what it does
+                ³      ³
+                ³      À must be a unique number for each definition!!!
+                ³
+                À REXX Stuff
+
+        So invent an own name for a fileset and attach a file specification
+        to it!
+        Be shure that all fileset definitions have a uniqe number!
+        Be shure that the first fileset definition has number "1"!
+        After having defined all your filesets be shure that the next line
+        is:
+
+        global.fileset_num   = 5       /* must contain number of filesets! */
+                               ^
+                               ³
+                               À must be the number of the last definition!
+
+
+        YOU GOT IT, EH???
+
+        After having saved the file with your personal editor save and exit
+        command (for EDLIN its: W <Ù, Q <Ù) run it!
+
+        __________________________________________________________________
+        __ ADAPTION TO ANOTHER COMPRESSION PROGRAM _______________________
+
+        This is for those being familiar with the sophisticated REXX
+        language (SAA, haha).
+
+        You need to change the "global.eabckup_pgm" and "global.eabckup_add"
+        constants in the "b2f_init" procedure.
+        Also, you have to rewrite the "b2f_backup" procedure.
+
+        I think that the program has good comments and is not too
+        compleictaddade, eh, complicated for someone else to edit.
+
+        Feel free to work on it, let me know your modifications!
+
+        __________________________________________________________________
+        __ RUNNING IT ____________________________________________________
+
+        Running it without any arguments or with a "/?" or "-?" switch
+        will display further instructions.
+
+        (This was really a fast explanation, was it?)
+
+        __________________________________________________________________
+        __ DONATIONS _____________________________________________________
+
+        If you want to send money, feel free to do it.
+
+        I will not prevent you from doing so.
+
+        (Since I only have a NEC 3D Multisync which is not capable of
+        displaying 1024 x 768 x 16 non-interlaced I urgently need money.)
+
+        If you do not want to send any money, spend it for your own
+        pleasure and think of me ...
+
+        __________________________________________________________________
+        __ AUTHOR ________________________________________________________
+
+        Ralf Hauser
+        Seminar fr Sprachwissenschaft
+        Kleine Wilhelmstraáe 113
+        7400 Tbingen
+        Germany West or West Germany or so
+
+        e-mail:  affie@frege.sns.neuphilologie.uni-tuebingen.de
+
+
+        <EOF>
+
+

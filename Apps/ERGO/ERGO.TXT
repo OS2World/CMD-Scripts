@@ -1,0 +1,1 @@
+Ergonomic prompt for os/2. written in rexx.

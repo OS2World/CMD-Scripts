@@ -1,0 +1,150 @@
+FILE NAME:     CPICTELL.DOC
+
+PACKAGE NAME:  CPICTELL
+
+COPYRIGHTS:
+          This package contains code made available by IBM Corporation on an
+          AS IS basis.  Any one receiving the package is considered to be
+          licensed under IBM copyrights to use the IBM-provided source code
+          in any way he or she deems fit, including copying it, compiling it,
+          modifying it, and redistributing it, with or without modifications. 
+          No license under any IBM patents or patent applications is to be
+          implied from this copyright license.
+
+          A user of the package should understand that IBM cannot provide
+          technical support for the package and will not be responsible for
+          any consequences of use of the program.
+
+          Any notices, including this one, are not to be removed from the
+          package without the prior written consent of IBM.
+
+AUTHOR:
+          John E. Diller
+          VNET:     JEDILLER at RALVM6           Tie Line: 444-5496
+          Internet: jediller@ralvm6.vnet.ibm.com     (919) 254-5496
+
+FUNCTION:
+          Documentation for the CPICTELL package.  The CPICTELL package is a
+          sample using the REXX CPI-C interface which allows one to send a
+          message from one OS/2 workstation to another.
+
+RELATED FILES:
+
+ CPICTELL.CMD -     A CPICREXX application for OS/2.  A command line REXX
+                    exec which sends a message to the specified destination.
+ CPICHEAR.CMD -     A CPICREXX application for OS/2. This REXX exec receives
+                    the message sent using CPICTELL.CMD and displays it using
+                    to the OS/2 workstation screen using the POPUP.EXE which
+                    is included with the package.
+
+ CPICHEAR.EXE -     This is a very small C program. It starts CPICHEAR.CMD. 
+                    This program is included so the CPICHEAR.CMD can run
+                    without a special definition for the transaction program.
+
+ CPICHEAR.C   -     C source for CPICHEAR.EXE
+ CPICHEAR.DEF -     Definition file used to produce CPICHEAR.EXE
+ CPICHEAR.MAK -     Make file used to produce CPICHEAR.EXE
+
+ POPUP.EXE    -     This is a small C program designed so the CPICHEAR.CMD
+                    can "POPUP" the message it receives on the screen.
+
+ POPUP.C      -     C source for POPUP.EXE
+ POPUP.DEF    -     Definition file used to produce POPUP.EXE
+ POPUP.MAK    -     Make file used to produce POPUP.EXE
+
+ CPICHEAR.NDF -     A sample NDF (Node Definition File) definition for
+                    CPICHEAR.CMD.  If this is used, then the CPICHEAR.EXE is
+                    not needed.
+
+PORTABILITY NOTES:
+          This sample was designed using the REXX CPI-C interface available
+          on an OS/2 system running either Extended Services or Networking
+          Services/2.  To migrate the sample to a different REXX CPI-C
+          platform, at least some of the following changes may be required.
+
+          -    The XCSCST call in CPICTELL.CMD may need to be eliminated or
+               replaced.  There may be a need to define some security on the
+               machines running the sample.
+          -    ADDRESS CPICOMM may not how REXX calls CPI-C in another
+               platform.  The CPICREXX.EXE is called conditionally to set up
+               the CPICREXX environment.  This may be different on another
+               platform.
+          -    The POPUP.EXE may not execute in another platform.  See usage
+               notes on how the POPUP.EXE may be replaced.
+
+USAGE NOTES:
+          This package was designed to use on OS/2 using either Extended
+          Services or Networking Services/2 using minimal configuration.
+
+          To send a message from one machine to another the following should
+          be true at both machines.
+
+          -    The OS/2 Communications Manager is started.
+          -    The CPICREXX.EXE has been executed to initialize the CPI-C
+               REXX environment.  The CPICREXX.EXE comes with both Extended
+               Services and Networking Services/2.  Normally the CPICREXX.EXE
+               is found in the \CMLIB\APPN directory.  The CPICTELL.CMD or
+               CPICHEAR.CMD will attempt to run CPICREXX.EXE if it has not
+               been run.
+
+          In addition the machine receiving the message should
+
+          -    have its attach manager started.
+          -    CPICHEAR.EXE, CPICHEAR.CMD, POPUP.EXE are all in the system
+               PATH as specified in the CONFIG.SYS file.
+          -    have a properly-defined TP definition for CPICHEAR.  See the
+               sample TP definition in the CPICHEAR.NDF file.  Extended
+               Services and Networking Services/2 allow system default
+               information.  The DEFINE_DEFAULTS verb specified in the
+               xxxxxxxx.NDF file (where xxxxxxxx is the active communication
+               manager configuration.  The NDF file is an ASCII-readable file
+               found in the \CMLIB\APPN directory) is used for this purpose. 
+               It may not be necessary to add an explicit TP definition for
+               CPICHEAR under the following conditions.
+
+               --   Default TP directory (system default information)
+                    contains the CPICHEAR.EXE.  (The DEFINE_DEFAULTS verb
+                    allows the system PATH to be specified as the default TP
+                    directory.)
+               --   Conversation security required is NO (system default
+                    information - DEFINE_DEFAULTS default value.)
+               --   Implicit partner LU support is YES (system default
+                    information - DEFINE_DEFAULTS default value.)  This is
+                    not needed if the partner LU which sends the message is
+                    explicitly defined.
+
+          POPUP.EXE was designed to help ensure a person using the OS/2
+          workstation that receives the message, also sees the message.  The
+          POPUP.EXE will place the message on the full workstation screen. 
+          The message will remain on the screen until the 'ENTER' key is hit. 
+          There are other choices to ensure the message is read.  You can
+          replace the POPUP.EXE by using the REXX say and pull commands as
+          follows.
+
+'popup message from:' plu 'at' time() '-' buffer
+
+          is replaced by
+
+say 'message from:' plu 'at' time() '-' buffer
+say
+say ' Press enter to end'
+pull .
+
+
+          and
+
+
+'popup CPICHEAR message fails at' err_at 'rc =' rc 'retc =' retc 'from' plu
+
+          is replaced by
+
+say 'CPICHEAR message fails at' err_at 'rc =' rc 'retc =' retc 'from' plu
+say
+say ' Press enter to end'
+pull .
+
+
+          You should then ensure the TP program type is not "background." 
+          This is done with the DEFAULT_TP_PROGRAM_TYPE parameter on the
+          DEFINE_DEFAULTS verb or the PROGRAM_TYPE parameter on the DEFINE_TP
+          verb in the configuration node definition file.

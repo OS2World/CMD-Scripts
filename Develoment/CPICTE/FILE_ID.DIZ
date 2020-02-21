@@ -1,0 +1,5 @@
+Contains a pair of sample programs written in
+rexx which use the CPI-C interface. These
+programs run on OS/2 under either extended
+services or networking services/2.
+

@@ -1,0 +1,7 @@
+CHECK_DEAMONS.CMD; This program will monitor
+the deamons it knows about, every <interval>
+minutes (you define the intervals,
+default=2), restarting them, if they are not
+active, and terminating them if there are too
+many copies of it active.
+

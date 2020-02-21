@@ -1,0 +1,31 @@
+// This sample transaction program definition is part of the CPICTELL package.
+//
+// Add this definition to the xxxxxxxx.NDF file. Where xxxxxxxx is the name
+// of your communication manager configuration. Typically xxxxxxxx.NDF is
+// found in the \CMLIB\APPN directory. After changing run APPNV.
+//
+// APPNV xxxxxxxx /e  <-This will dynamically update your active configuration.
+//
+// APPNV xxxxxxxx     <-Must restart the configuration for this to be active.
+//
+// The CPICHEAR.EXE is not need if this TP definition is used.
+//
+// If CPICHEAR.CMD is not in your system PATH, then you should give the
+// full file location in the parm_string. Example:
+// parm_string (/K C:\MYDIR\NEW\SAMPLES\CPICHEAR.CMD).
+//
+// If CPICHEAR has been changed so the POPUP.EXE is not used, then BACKGROUND
+// may not be a good PROGRAM_TYPE.
+//
+
+DEFINE_TP
+   TP_NAME                  (CPICHEAR)
+   FILESPEC                 (C:\OS2\CMD.EXE)
+   PARM_STRING              (/K CPICHEAR.CMD)
+   CONVERSATION_TYPE        (MAPPED)
+   CONV_SECURITY_RQD        (NO)
+   SYNC_LEVEL               (EITHER)
+   TP_OPERATION             (NONQUEUED_AM_STARTED)
+   PROGRAM_TYPE             (BACKGROUND)
+   RECEIVE_ALLOCATE_TIMEOUT (60);
+

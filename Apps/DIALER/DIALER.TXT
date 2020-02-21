@@ -1,0 +1,4 @@
+DIALER.CMD; This is a fancy-schmancy phone
+dialer program. You need VREXX installed for
+it to work.
+

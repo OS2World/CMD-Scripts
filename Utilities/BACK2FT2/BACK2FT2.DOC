@@ -1,0 +1,88 @@
+
+    February 6, 1993
+
+                        BACK2FT2.DOC
+                       --------------
+
+    BACK2FT2.CMD is the modified version of Ralf Hauser's original
+    BACK2FAT.CMD.  With his "best wishes", I have made some minor
+    changes to the original program which will now allow for using
+    the program with PKZIP and ARJ as well as with ZOO.
+
+    Changes in Version 1.02:
+    ------------------------
+
+    -  added the ability to backup with PKZIP and ARJ
+    -  added more flexibility via command line switches. most
+       notably;
+           -  the ability to uniquely name the "filename" portion
+              of the output file set.
+           -  designate which utility program to use
+           -  convert all command line arguements to upper case
+              for easier manipulation
+           -  inserted additional code necessary to handle mul-
+              tiple compression utilities
+
+    Notes:
+    ------
+
+    If you are a registered user of the ARJ compression utility, the
+    "tmpfile" filelist approach used by Ralf will work although the code
+    in the b2f_backup procedure will require further, slight modification.
+
+    Also, using the ARJ utility, the '-b1' switch can be added to make
+    backups to an already existing backup file with the same output file-
+    name.
+
+    I have not made any allowance in this version for return codes other
+    than what was originally specified.  This should be done in order to
+    act properly when ARJ or PKUNZIP fail to compress properly.  I have,
+    however, increased the return code value to any code > than 2 which
+    seems to correct the ZOO problem specified by Ralf in his documenta-
+    tion.
+
+    Caveats:
+    --------
+
+    I have not tested the quality of the compressed files by doing a full
+    restore.  I have performed restores on test sub directories and all
+    seems to work correctly.  The program does accomplish the desired
+    end and has given me the solution to the "HPFS to FAT" backup problem
+    using a DOS-based tape drive.
+
+    Operation:
+    ----------
+
+    I have created a 75mg FAT drive which I use as the receptacle for my
+    backups and which is totally dedicated to this end (what a waste!).
+    Be as it may, after I have run this utility and Dave Terry's WPSBackup
+    program for preserving the desktop, I have a directory structure which
+    looks like the following:
+
+                       SubDirectories   Usage
+             G:\       TEMP             Used to keep copies of BU utilities
+                       EAJD             Backed up files/ea's from Drive D:
+                       EAJF             Backed up files/ea's from Drive F:
+                       WPS              Backed up desktop
+
+    The process I have used is to first backup the WPS Desktop.
+    Run the BACK2FAT program to preserve files on HPFS drives D: and F:
+    To accomplish this, BACK2FAT must be run twice.  I have set up a pro-
+    cess to accomplish the first two procedures on a timed basis at night.
+    The last step is to reboot DOS 5.0 and run the tape backup program
+    which performs a full backup on Drive G:.  This also may be done auto-
+    matically by using the "timed approach" from within DesqView.
+
+    ----------------------------------------------------------------------
+    I hope that you find the two versions of BACK2FAT usefull.  Should you
+    elect to make further modifications, please include the new "version"
+    with the original package along with your documentation of changes.
+
+    Please send copies of changes to Ralf at the address stated in his
+    documentation and to me.  Good luck!
+
+    chris hascall
+    49 McKinley Street
+    South Portland ME USA 04106
+
+    1 (207) 799-8679
