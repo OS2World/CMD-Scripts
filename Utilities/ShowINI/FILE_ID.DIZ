@@ -1,0 +1,14 @@
+Two OS/2 REXX files that:
+
+SHOWINI.CMD allows you to 
+ - interactively edit & print OS/2-INI-files
+ - to backup/restore/update OS/2-INI-files
+   to/from INI- or TEXT-formats
+BOXEDIT.CMD
+ - Allows editing text in an
+   ASCII-OS2-window.
+
+If nothing else, they show the power of the
+REXX language and can serve as an example of
+complex REXX programming.
+

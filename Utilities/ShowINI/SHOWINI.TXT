@@ -1,0 +1,363 @@
+Infos on SHOWINI.CMD
+====================
+
+SHOWINI.CMD allows you to 
+
+      - interactively edit & print OS/2-INI-files and
+      - to backup/restore/update OS/2-INI-files to/from INI- or TEXT-formats
+
+
+1) Working interactively with OS/2-INI-files
+============================================
+
+SHOWINI.CMD allows you to interactively
+ 
+    a) view
+    b) print to text-(ASCII)-file
+    c) edit
+    d) move/copy
+    e) delete
+    f) configure SHOWINI.CMD
+
+Toplevel entries ("Application entries") and key-entries in OS/2-INI-files. Just
+enter:
+
+     showini
+
+Initially you will **not** see the menu choices for editing, moving/copying and
+deleting INI-entries for safety reasons. In addition there is an option to log 
+backup/update/restore operations; if you set this option to no an existing 
+logfile will be erased (it has a name of "SHOWINI.LOG" and resides in the same 
+directory as SHOWINI.CMD itself).
+
+Also, you will get a choice to work with OS2.INI (USER) and OS2SYS.INI (SYSTEM).  
+With "s" for scan you can have SHOWINI.CMD to automatically scan for valid 
+OS/2-INI-files on all local and/or remote drives or a specific drive, it will 
+successfully ignore Winodows-INI-files.  
+
+Once you configure one of the above manipulative functions the configuration 
+choice will be shown, if you reset them, it will not be shown anymore.  
+Therefore you could safely leave this program on a machine for end-users.
+
+In order to activate the edit, move/copy and/or delete functions, you need to 
+enter "c" (configure) on the main menu.  This option will allways be accessible 
+from the INI- and TopLevel-menus, no matter whether it is displayed or not.  All 
+these settings will be stored in OS2.INI under the TopLevel-entry called "RGF 
+Showini.cmd".  Hint:  If there are many entries in an INI-file, use the 
+MODE-command to get more lines or more columns and/or lines:
+
+       e.g. "MODE co80,100" for 100 lines or
+            "MODE co132,50" for 132 columns and 50 lines on an XGA-adapter
+
+Hint: Wherever it is possible from the program logic, you may immeditiately end 
+SHOWINI.CMD by typing "q" (quit). Attention: if quitting the program, changes to
+the settings are not stored in OS2.INI.
+
+
+2) Batchfile-commands
+=====================
+
+SHOWINI.CMD allows for
+
+        backing up and ***restoring*** INI-files while the system is running ! 
+
+This means that you can backup even OS2.INI and OS2SYS.INI while the system is 
+up and restore them from a backup while the system is running. SHOWINI.CMD 
+by default produces **10-generation** backups.
+
+
+a) syntax:
+----------
+
+   showini /switch[generations]  {filename | /modifier}  
+
+       switch:    B[T]   ... make a BACKUP of an OS/2-INI-file
+                  U[T]   ... UPDATE original OS/2-INI using a backup
+                  R[T]   ... RESTORE original OS/2-INI using a backup, i.e. 
+                             delete keys not found in backup
+                    T    ... backup is a text-file (i.e. ASCII-file), else 
+                             backup is a valid OS/2-INI-file
+
+       generations: an optional number between 1-10, indicating how many
+                    backup-files you want, respectively, which backup you 
+                    wish to use; please note: backups will be numbered from
+                    0 (= 1. generation) thru 9 (= 10. generation), e.g. 
+                    ".IN0", ".TX9"
+
+       filename: filename of OS/2-INI-file or the filename of the backup
+       --- or ---
+       modifier: 
+                look for all OS/2-INI-files on the filesystem[s]:
+
+                 L[OCAL]  ... only LOCAL filesystems are scanned
+                 R[EMOTE] ... only REMOTE filesystems are scanned
+                 A[LL] ...... both, LOCAL and REMOTE filesystems are scanned
+                 D[RIVES]:letters ... only the given driveletters are scanned,
+                                      where letters is e.g. ACDEH
+
+                 process OS/2-system INI-files:
+
+                 S[YSTEM] ... "OS2SYS.INI" affected only
+                 U[SER] ..... "OS2.INI" afftected only
+                 B[OTH] ..... both, "OS2SYS.INI" and "OS2.INI" affected
+
+
+
+b) examples (pertaining to single files):
+-----------------------------------------
+
+   showini /b d:\os2\os2.ini
+        ... make a backup of OS2.INI, resulting backup will be in an 
+            OS/2-INI-format ("/B") and will have an extension of ".IN0", 
+            ".IN1", ".IN2", ".IN3", ".IN4", ".IN5", ".IN6", ".IN7", ".IN8",
+            ".IN9" depending on how many backups exist already.
+
+   showini /bt4 e:\os2\os2sys.ini
+        ... make a backup of OS2SYS.INI, resulting backup will be in a
+            TEXT-format ("/BT", i.e. ASCII, editable by any text-editor) and 
+            will have an extension of ".TX0", ".TX1", ".TX2", ".TX3", depending
+            on how many backups exist already.
+
+            Note: There are four generations desired ("/BT4") only. In case
+                  there are more generations present, because beforehand you
+                  used the default of 10 generations, all superfluos backups
+                  will be deleted (oldest first) !
+
+   showini /u c:\mamma_mia\mutter.in9
+        ... update "mutter.ini" according to the backup-values in "mutter.in9" 
+            which is in an OS/2-INI-format ("/U"). 
+
+            Note: If "mutter.ini" does not exist, SHOWINI.CMD prompts the user
+                  whether to create it !
+
+   showini /rt q:vater.tx5
+        ... restore "vater.ini" according to the backup-values in "vater.tx5"
+            which is in TEXT-format ("/RT", i.e. ASCII-format, editable by 
+            any text-editor).
+
+            Note: The "restore"-operation deletes all Toplevels and Keys in the 
+                  original OS/2-INI-file, which are not found in the backup. If 
+                  you do not want to delete those entries, use the "update"-mode
+                  instead !
+
+            Note: If "vater.ini" does not exist, SHOWINI.CMD prompts the user
+                  whether to create it !
+
+            Note: If the name of the original OS/2-INI-file in the backup 
+                  "vater.tx5" is another name like "father.ini", SHOWINI.CMD 
+                  will work on that INI-file.
+
+The switches B, U, R pertain to OS/2-INI-backup-files, BT, UT, RT to 
+TEXT-backup-files.
+
+
+
+c) examples (pertaining to filesystems, or OS2.INI, OS2SYS.INI):
+----------------------------------------------------------------
+
+   showini /b /local
+   --- same as:
+   showini /b /l
+
+        ... make a backup of all OS/2 INI-files on all local drives, resulting
+            backups will be in an OS/2-INI-format ("/B") and will have an
+            extension of ".IN0", ".IN1", ".IN2", ".IN3", ".IN4", ".IN5", 
+            ".IN6", ".IN7", ".IN8", ".IN9" depending on how many backups exist
+            already.
+
+   showini /b5 /local
+   --- same as:
+   showini /b5 /l
+
+        ... make a backup of all OS/2 INI-files on all local drives, resulting
+            backups will be in an OS/2-INI-format ("/B") and will have an
+            extension of ".IN0", ".IN1", ".IN2", ".IN3", ".IN4", depending on
+            how many backups exist already.
+
+            Note: There are five generations desired ("/BT5") only. In case
+                  there are more generations present, because beforehand you
+                  used the default of 10 generations, all superfluos backups
+                  will be deleted (oldest first) !
+
+   showini /bt /local
+   --- same as:
+   showini /bt /l
+
+        ... make a backup of all OS/2 INI-files on all local drives, resulting
+            backups will be in TEXT-format ("/BT") and will have an
+            extension of ".TX0", ".TX1", ".TX2", ".TX3", ".TX4", ".TX5", 
+            ".TX6", ".TX7", ".TX8", ".TX9" depending on how many backups exist
+            already.
+
+   showini /b /remote
+   --- same as:
+   showini /b /r
+
+        ... make a backup of all OS/2 INI-files on all remote drives, resulting
+            backups will be in an OS/2-INI-format ("/B") and will have an
+            extension of ".IN0", ".IN1", ".IN2", ".IN3", ".IN4", ".IN5", 
+            ".IN6", ".IN7", ".IN8", ".IN9" depending on how many backups exist
+            already.
+
+   showini /bt1 /all
+   --- same as:
+   showini /bt1 /a
+
+        ... make a backup of all OS/2 INI-files on all drives, local and remote,
+            resulting backups will be in TEXT-format ("/BT") and will have an
+            extension of ".TX0".
+
+            Note: There is one generation desired ("/BT1") only. In case there
+                  are more generations present, because beforehand you used more
+                  than one generation, all superfluos backups will be deleted
+                  (oldest first) !
+
+   showini /b /drives:adf
+   --- same as:
+   showini /b /d:adf
+
+        ... make a backup of all OS/2 INI-files on drives "A", "D", "F",
+            resulting backups will be in an OS/2-INI-format ("/B") and will have
+            an extension of ".IN0", ".IN1", ".IN2", ".IN3", ".IN4", ".IN5",
+            ".IN6", ".IN7", ".IN8", ".IN9" depending on how many backups exist
+            already.
+
+
+    showini /u /a
+
+        ... update all OS/2-INI-files found on all drives, remote and local, 
+            with backups in OS/2-INI-format. 
+
+            Note: The latest backup will be used for updating the original 
+                  OS/2-INI-files.
+
+    showini /ut5 /a
+
+        ... update all OS/2-INI-files found on all drives, remote and local, 
+            with backups in TEXT-format. SHOWINI.CMD uses the 5th backup
+            (i.e. extension ".TX4"), if not found any backup which is before the
+            5th.
+
+
+    showini /r /a
+
+        ... update all OS/2-INI-files found on all drives, remote and local, 
+            with backups in OS/2-INI-format.
+
+            Note: The "restore"-operation deletes all Toplevels and Keys in the 
+                  original OS/2-INI-file, which are not found in the backup. If 
+                  you do not want to delete those entries, use the "update"-mode
+                  instead !
+
+            Note: The latest backup will be used for updating the original 
+                  OS/2-INI-files.
+
+
+   showini /b /user
+   --- same as:
+   showini /b /u
+
+        ... backup "OS2.INI".
+
+   showini /rt4 /system
+   --- same as:
+   showini /rt4 /s
+
+        ... restore "OS2SYS.INI" from a TEXT-backup. Use the fourth, if not 
+            found a younger, generation.
+
+   showini /ut /both
+   --- same as:
+   showini /ut /b
+
+        ... update both, "OS2.INI" and "OS2SYS.INI", with the latest 
+            TEXT-backup.
+
+3) EXIT-codes
+=============
+
+ 0 ... everything went o.k.
+-1 ... user aborted program
+-2 ... wrong switch or invalid filename
+-3 ... invalid backup-file
+
+
+4) minimal layout of text-(ASCII)-backup-files
+==============================================
+
+        ; a line starting with a semi-column is a comment and is ignored
+        ; blank lines are ignored as well
+
+        ; the file entry must be included and be given before the TopLevel- and
+        ; key-entries; it may span multiple lines (for long filenames) and has
+        ; the principal layout
+        ;
+        ;          "File [file name]"
+        ; delimiter for the value is allways an opening and ending square 
+        ; bracket
+
+        File  [D:\work\klondike.ini] 
+        
+        ; A TopLevel (application) entry starts with the keyword "Top"; is being
+        ; followed by the datatype [A], [A0] or [H] for ASCII, ASCII-Z, resp.
+        ; hexadecimal; the last entry is the value enclosed in square brackets.
+        ; 
+        ; The same syntax applies to the key-names ("Key") and finally to the
+        ; values themselves ("Val").
+        ;
+        ; Any Value for TopLevel-names, Key-names and Key-values may span 
+        ; multiple lines; if so, subsequent lines must not contain a key-word,
+        ; but the data-type and the value.
+
+
+        Top [A]  [PATIENCE]
+            Key  [A]  [CardBack]
+
+        ; the key-value is of ASCII-string, terminated by \0; note that the 
+        ; terminating '00'x is not contained within the value part:
+
+                 Val  [A0] [2]
+
+        ; the following key-value spans two lines:
+
+            Key  [A]  [ColorSet]
+                 Val  [A0] [13]
+                      [A0] [03]
+        
+        ; this is an example for hexadecimal values for all three, 
+        ;TopLevel-name, key-name and key-value:
+
+        Top [H]  [01020304050607]
+            Key  [H]  [08091011]
+                 Val  [H]  [12131415]
+
+        ; note values enclosed in the square-bracket-delimiters may contain
+        ; square brackets themselves:
+
+        Top [A]  [This is another TopLevel-entry [yes, another]]
+            Key  [A]  [This is another key-entry]
+                 Val  [A]  [This is a plain ASCII-entry.]
+            Key  [A]  [This is the second key-entry, within this TopLevel.]
+                 Val  [A0] [This is an ASCII-Z entry.]
+
+For further examples of the syntax of the text-(ASCII)-file see any printout or
+text-(ASCII)-backup.
+        
+
+CONCLUDING remarks
+==================
+
+Be patiened if you are running SHOWINI.CMD in batch-mode. All update- and 
+insert-operations on OS/2-INI-files are ***extremely*** slow ! Hopefully this 
+behaviour will be improved in a later release (actual release level OS/2 2.00). 
+For the release level 2.0 beware of using SHOWINI.CMD without applying the CSD 
+for REXX from IBM (e.g. found on hobbes, Compuserve etc.).
+
+
+
+Rony G. Flatscher,
+Vienna/Austria/Europe,
+Wirtschaftsuniversitaet Wien
+1992-07-01
+
+

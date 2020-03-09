@@ -1,0 +1,49 @@
+BOXEDIT.CMD
+===========
+
+Allows editing text in an ASCII-OS2-window. 
+
+usage:   BOXEDIT(first_row first_col last_row last_col style [, [initial_text] [,[A|H] [, prompt] ]] )
+returns: edited text
+
+argument 1: rectangular dimensions plus optional style
+            ... first_row = 0-based, first_col = 0-based
+            style ... "", 1, 2, 3
+
+argument 2: initial text (optional) to be edited
+
+arbument 3: optional type of text
+            A ... ASCII-Text (default)
+            H ... hexadecimal Text, i.e. string of hexadecimal digits e.g. "01AB1A"
+
+argument 4: prompt to be displayed (optional)
+
+
+Following key-combinations can be used while editing:
+
+        ESC             ... abort editing, return unchanged text
+        F10             ... save edited text, return it
+
+        ENTER           ... get to beginning of next line
+
+        TAB             ... advance cursor 8 characters
+        BACK-TAB        ... move cursor 8 characters backward
+
+        CTRL-RIGHT      ... move cursor to beginning of next word
+        CTRL-LEFT       ... move cursor to beginning of present/previous word
+
+        END             ... move cursor to last column of current line
+        HOME            ... move cursor to first column of current line
+
+        CTRL-END        ... move cursor to last line, last column of box
+        CTRL-HOME       ... move cursor to first line, first column of box
+
+        CTRL-ENTER      ... insert blank line, move current line down
+        CTRL-BACKSPACE  ... delete current line
+
+Rony G. Flatscher,
+Vienna/Austria/Europe,
+Wirtschaftsuniversitaet Wien
+1992-06-03
+
+

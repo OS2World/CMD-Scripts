@@ -1,0 +1,26 @@
+new features:
+ 
+   - number of backup generations controllable (from 1-10, was 10 before)
+   - batch-backup possible by telling it to scan all local drives, all
+     remote drives, specific drives by supplying a letter-string,
+   - update and restore can be automated by having SHOWINI.CMD scan
+     the drives by itself,
+   - backup/update/restore OS2.INI (**very** important, because it
+     contains the WPS persistent object-definitions, a key to WPS!) and
+     OS2SYS.INI or both without specifying the paths,
+   - logging of all backup/update/restore operations (called SHOWINI.LOG
+     placed into the same directory as SHOWINI.CMD itself), configurable.
+ 
+I am using a CRONRGF-entry to automatically backup OS2.INI and OS2SYS.INI
+on every monday at 10a.m., backup will be a plain TEXT-file:
+ 
+0 10 1-31 * 1 showini /bt /both
+ 
+and to backup all local-INI-files on the first monday of a month, keeping
+three backups at most (backups are in OS/2-INI-format):
+ 
+0 11 1-7 * 1 showini /b3 /local
+ 
+The package does not contain the interim REXXUTIL.DLL fix. Therefore every-
+one has to get the official IBM-fix-release you sent me.
+
