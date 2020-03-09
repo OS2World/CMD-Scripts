@@ -1,0 +1,86 @@
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³    RAFL.CMD -- REXX Archive File Lister 1.0       by Russel Havens       ³
+ ³                                                      on 10-02-92         ³
+ ³                                                 (rather late at night!)  ³
+ ³              Written in OS/2 REXX using Visual REXX                      ³
+ ³                                                                          ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+-----What RAFL does-----
+
+    RAFL is a REXX script which will allow you to pick archive files
+from a file list box and then see what files are in them.  It determines
+archive type by signature and supports .ZIP, .ARJ and .LZH files.  It is
+simple to use.  Just run it and you'll see that it's obvious.  **MAKE
+SURE TO READ THE SYSTEM REQUIREMENTS BELOW!  RAFL REQUIRES VREXX, UNARJ,
+UNZIP, LH and EPM TO RUN!**
+
+
+-----First Things First-----
+
+    First of all, RAFL is committed to the public domain.  Free for use by
+any who want to use it.  Free for modification by anybody who wants to
+modify it.  Free for mangling by anyone who wants to mangle it.
+
+    Second of all, I wrote this to learn about Visual REXX in particular
+and REXX scripts in general.  It is not warranteed to do anything but take
+up disk space.  And in no way will the author (that's me, Russel Havens) be
+liable for any damages, real, consequential, unreal, inconsequential, etc.,
+etc., etc., from using this script.  In other words, its on your system, so
+what happens there is your doing!
+
+    Now third of all, to be honest, the only "bad" things that even
+*could* happen are that 1) RAFL creates a file in the current directory
+with the unlikely name of AFL%%TMP.$$$, so it will overwrite any file
+with the same name in the current directory. 2) if RAFL doesn't find
+VREXX.EXE in the PATH or VREXX.DLL and DEVBASE.DLL in the DPATH, it will
+probably freak and you will probably have to close the window.
+
+
+-----System Requirements-----
+
+    VREXX requires OS/2 2.0 or later, so RAFL does too.  It should do
+fine with the minimum OS/2 2.0 requirements for RAM, disk space, etc.
+
+    RAFL requires Visual REXX to be installed.  That means that
+VREXX.EXE needs to be in the PATH and VREXX.DLL & DEVBASE.DLL need to be
+in the DLL Path (DPATH).
+
+    RAFL does not do its own archive work, so it requires UNZIP.EXE,
+UNARJ.EXE and LH.EXE in the PATH.
+    UNZIP.EXE was originally written by Samuel H. Smith, but in its
+current rev. (version 5.0, out in Aug. '92) has more authors than you can
+shake a stick at.
+    UNARJ.EXE is a 32-bit port of Robert K. Jung's UNARJ done by Robert
+Grey.  It was originally called GNUNARJ, but I renamed mine to be more
+like my DOS UNARJ and to shorten the name down a bit, since it is a
+command line program and every keystroke saved speeds things up for me.
+    LH.EXE is an .LZH compatible archiver copyrighted by A:Ware Inc.
+The latest version I have is 2.14, dated 9/19/89.  Still, it works quite
+nicely as an archiver.
+    These programs are all free for personal use and are available in
+their separate archives.
+    RAFL also uses EPM.EXE, which is the advanced editor included with
+the OS/2 2.0 package.  Needless to say, it needs to be in the path as
+well.
+
+-----In Closing-----
+    Thank you, IBM for supplying us with OS/2 and REXX!  Thank you, IBM and
+Richard B. LAM for supplying us with VREXX!
+    I hope this is of use.  Perhaps in the future, I will make RAFL
+capable of full archive shell capabilites like SHEZ or ARCMASTER.  Who
+knows?  If anybody cares to let me know how wonderful this is,  or
+whether to continue work on it or even <gasp> that they don't like RAFL,
+drop me a line at:
+
+                Russel Havens
+                73 Roosevelt Ave.
+                American Fork, UT 84003
+
+
+    In the mean time, ENJOY!
+
+RH
+-----Copyrights-----
+    Visual REXX, REXX and OS/2 are copyrighted by IBM.  RAFL is not
+copyrighted by anybody that I know of. ;-)
