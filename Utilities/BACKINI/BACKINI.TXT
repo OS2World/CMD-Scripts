@@ -1,0 +1,33 @@
+
+BACKINI.CMD is a small REXX program that makes backups of all the *.ini files
+found in the C:\os2 directory.  You can easily modify it to use a different 
+drive.  If your *.ini files are the normal locations this will back up the two
+major ini files, os2.ini and os2sys.ini.
+
+Backini.cmd is intended to be included in your startup folder.  To do this copy
+the file to c:\os2.   Create a shadow of the backini.cmd file in the startup 
+folder.
+
+The program works by maintaining a copy of a dir *.ini of c:\os2 in a file named
+ini.lst.  Each time the computer is started, the program runs, reads the ini.lst
+file and creates a new one.  It compares the new one against the old one, and if 
+there are any items in the new one that are not in the old one, or that show any
+changes in the creation date or size, it creates backup(s).
+
+The backups maintained are *.cur, a copy of the present ini file, *.bak a backup
+of the previous version, and *.bk2 a backup of the version prior to the previous
+one.
+
+If the ini file is newly created, the program creates all the backup files (in this 
+case these are all copies of the present one), and then will gradually "ripple"
+changes through the backup layers.
+
+Because the os2.ini and os2sys.ini file frequently change, you will find that
+these get backed up most times the computer is run.
+
+This is the first REXX program I have ever written, so it is wide open for 
+improvement.
+
+I have put a copyright on it, but you are free to use and modify the progam
+if you make available for public use any general improvements that you make 
+so all may benefit.
