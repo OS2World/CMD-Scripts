@@ -1,0 +1,110 @@
+CMDSHELL verson 1.0, (c) 1/29/1994, John M. Warren
+
+WARRANTY 
+
+        No warranty whatsoever.
+
+
+REGISTRATION
+         "I have 500,000 copies in use.", always looks good on a resume!
+
+         This program is free.  However,  I'm in desperate need of an OS/2
+         C++ compiler ($350.00) so I can begin writing some really usefull
+         utilites/games/applications and other stuff for OS/2.  So any
+         contributions to fund my continuing education into C++ programming
+         is greatly appreciated. However, a simple note that you are using
+         it will get you added to my future mailing list, if you contribute
+         then of course your added automatically.
+         Please send checks, or requests to be added to my mailing list to :
+
+   John M. Warren
+   OS/2 Utilites
+   P.O. Box 609
+   Vernon, Fl. 32462
+
+   I can be contacted at my bbs for technical support.
+
+   The Code 3 BBS, The Programmers
+   Connection 904-535-1705 14.4k
+   Source Code, Game Code, & over 1.5G of shareware   Full access first call.
+   1 Hour per day.  No UL/DL restrictions.
+			
+
+WHAT IS CMDSHELL
+
+
+     CMDSHELL (Command Shell) is a small REXX program that I cooked up.
+     I have quite a few programs which are command line programs, or rather
+     programs that run by typing instructions at the OS/2 command prompt.
+     Wow, wouldn't it be nice to have a Presentation Manager icon that you
+     could click on to run these command line utilities..........well that's
+     fine, but what if you wanted to change the command line parameters every
+     time you ran the program?   Without CMDSHELL you would have to modify
+     the settings of the program each time before you ran it. Then this
+     program is for you.   With CMDSHELL you can easily set up your OS/2
+     programs to ask you for command line parameters before the program is
+     actually ran.   Why didn't IBM think of this?  Well I told them about it!
+
+     Ok, here is an example for you non-techies out there.  Ok say you want to
+     set up a program object so that when it was clicked on, that it would give
+     you a directory listing of C: drive.   However, sometimes you want to
+     display the directory listing the old fashioned way....in a single column,
+     and sometimes you want to display the directory listing in the "/Wide"
+     format.   Without CMDSHELL you would have to create two program objects.
+     The first would contain the command "DIR C:" and the second would contain
+     the command "DIR C: /W".  Fine, but what if you wanted to use "/P"
+     parameter to display only a page at the time?  Bummer, you would have to
+     create program object number 3, "DIR /P".  See what I mean?   Why not just
+     use CMDSHELL, it will ask you to type in the parameters before the program
+     is ran.
+
+
+USING CMDSHELL
+
+
+    1.  Simply create a new program object.
+    2.  Under the "Path and file name" instead of putting the name and path of
+         your executable program, put the name and path of this command file.
+
+         example :     C:\OS2\CMDSHELL.CMD
+
+    3.  Next, under the "Parameters" field add the path and filename of your
+         program.
+
+         example :   DIR C:
+
+                      (important hint : you can parameters that
+                                        you use ALL the time after
+                                        the filename too.)
+
+For convenience sake I would recommend opening your Templates folder, making
+a copy of the "Program" object and perform step 2.   From then on you could
+just copy this template object and would only have to fill in the path and
+filename.
+
+
+Heres what it looks like :
+
+     ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+     ³ [ ]  Program Name - Settings                           ³
+     ³ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ³
+     ³ ³                                          General   ³ ³
+     ³ ³                                         ÚÄÄÄÄÄÄÄÄÄÂÙ ³
+     ³ ³  Required                               ³         ³  ³
+     ³ ³    Path & Filename                      ÃÄÄÄÄÄÄÄÄÂÙ  ³
+     ³ ³   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄ¿ ³        ³   ³
+     ³ ³   ³ C:\PROGRAMS\CMDSHELL.CMD³ ³ FIND..³ ÃÄÄÄÄÄÄÄÄÙ   ³
+     ³ ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÀÄÄÄÄÄÄÄÙ ³            ³
+     ³ ³        ^----------------------------------- you will need to modify
+     ³ ³                                         ³   the path to the location
+     ³ ³  Optional                               ³   where you put CMDSHELL.CMD
+     ³ ³    Parameters                           ³            ³
+     ³ ³   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿           ³            ³
+     ³ ³   ³ DIR                     ³ <------------ the optional path and
+     ³ ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ           ³   name of the program to
+     ³ ³     Working Directory                   ³   execute. ³
+     ³ ³   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿           ³            ³
+     ³ ³   ³                         ³ <------------ optional location of the
+     ³ ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ           ³   program your going to run
+     ³ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ            ³
+     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
