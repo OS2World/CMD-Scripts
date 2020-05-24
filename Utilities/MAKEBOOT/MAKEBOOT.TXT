@@ -1,0 +1,85 @@
+    Makeboot
+
+    This program will create a bootable 3.5" High Density floppy
+    for OS/2 2.11.
+
+    Copyright 1993,1994,  R. J. O'Reilly
+
+
+Disclaimer:
+
+    I allow you to use and distribute MakeBoot freely under the
+    condition that I am in no way responsible for any damage or
+    loss you may suffer.
+    Also I cannot support the product formally.  If it doesn't work
+    for you, post in the OS2USE forum and I will try to respond. I
+    may not be able to respond however.
+
+
+R. J. O'Reilly   Compuserve 72400,3533
+
+Caveats:
+
+1.  This program only works for 3.5" High Density diskettes.
+    There isn't enough room on a 5.25" diskette for the files I use anyway.
+2.  It has to be your A: drive. If you don't have a 3.5" A: drive, you are
+    not going to be able to use the boot diskette.
+3.  Also unfortunately it does not work with PS/2 systems. Sorry. Some of the
+    PS/2 files are different and I don't have any way to test that
+    configuration.
+
+Installation:
+
+    Unzip the file makeboot.cmd and place it in your c:\os2\install
+    directory.
+
+
+Use:
+
+    At an OS/2 prompt, type MAKEBOOT<enter> . You will need the 2.11
+    distribution diskettes, so have them ready the first time you use
+    the program.
+
+
+Notes:
+
+It is useful to have a small editor on the BOOT DISK. There are
+several IBM EWS products. Two that the I know of are TED & T2.
+The space left on the boot disk will not be adequate to install the
+editor. The files seem to grow a bit with each release. It's getting
+to be close to even get the necessary files on the diskette!
+
+You will also want to install chkdsk.com on a diskette so that you can
+do a chkdsk from a floppy boot. This is the most common reason for doing
+a floppy boot.
+
+I therefore suggest that you format another floppy disk and put CHKDSK.COM
+and the VIO text based editor of your choice on this diskette for use when 
+you boot from your bootable floppy.
+
+License Cost:
+
+For private use,the program is yours to use without charge. However, if 
+you wish to send me gift, I will accept it.<g>
+
+For commercial use, there is a charge of $10.00 Canadian. I will also accept 
+American funds.
+
+Enjoy!
+
+RJ O'Reilly
+5 Maywood Rd.
+Sherwood Park, Alberta, Canada
+T8A 0J9
+
+History:
+
+??-??-?? RJ O;Reilly  Created for OS/2 2.0 SP   Version 2.01.00
+94-03-03 RJ O'Reilly  Converted to 2.11         Version 2.11.00
+94-03-10 RJ O'Reilly  Refined                   Version 2.11.01
+
+     Copyright 1993,1994,  R. J. O'Reilly                    
+     OS/2 is a Trademark of IBM Corp.                        
+
+
+
