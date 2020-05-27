@@ -1,0 +1,334 @@
+RCOPY(c) Version 1.2  02/94  Dean. R. Ammons [73200,2513] All Rights Reserved
+
+
+   RCOPY is an extension of the OS/2 2.x COPY command.  With the available
+   options, a single RCOPY usage can perform tasks that would require
+   several OS/2 commands.  In addition to the parameter controlled
+   functions, RCOPY will:
+
+      *  Displays progress messages.
+
+      *  If the selected filename already exists in the target directory,
+         RCOPY will issue a warning pause, showing the size, time and date
+         of the current and new file.
+
+      *  As a disk gets close to filling up, RCOPY will attempt to load the
+         smaller files until the smallest file remaining will not fit.
+
+      *  When a disk does become full, RCOPY will pause to allow inserting
+         a new disk.
+
+      *  Pressing any other key will pause processing.
+
+      *  Unless overridden, a "Y/N" prompt will be issued before a new
+         directory is created.
+
+
+   RCOPY Parameters
+   ----------------
+
+   RCOPY provides several optional command parameters to customize a
+   process.
+
+      SYNTAX:  RCOPY from_spec [to_specs] [options]
+
+   Entering a "?" at the end of the entered options will display a help
+   screen displaying the available parameters.  Any additional options
+   entered at the help prompt will be added to the startup options.
+
+   [from] Enter the from_spec just like you would for the OS/2 Copy
+          command, including wildcard characters.  Unlike the OS/2 Copy,
+          RCOPY allows entering multiple from specs, each separated by a "+"
+          or comma (RCOPY *.EXE+*.COM A:\). Optionally, a file containing a
+          list of the from specs can be used.  The list of specifications
+          will be processed as if they were enter on the command line.  To
+          use this option, prefix the filename with the character "@"
+          (RCOPY @RCOPY.LST A:\).
+
+   [to]   Enter the to_spec just like you would for the OS/2 Copy.  If
+          there is no to_spec, the current directory will be used.
+
+          If the to_spec does not exist, RCOPY will prompt to determine if
+          it is a filename or directory.  To avoid this prompt, attach a
+          "\" to a new directory name or "." to a filename
+          (RCOPY *.* A:\NEWDIR\   RCOPY *.CMD A:\NEWFILE.)
+
+
+
+   /A     Processes only files that have been marked updated by OS/2.
+
+   /AD    Assume the to_spec is a directory if it does not exist.
+
+   /AF    Assume the to_spec is a file if it does not exist.
+
+   /AFX   If the to_spec does not exist and there is no extension, a new
+          directory is assumed.
+
+   /AP    Append all the from_spec files to the end of the to_spec file.
+          (RCOPY FILE.A+FILE.B+FILE.C FILE.APP /AP)
+
+   /AN    Assume a New Disk when the current disk becomes full.  The Bypass
+          and Split file options will not be available.
+
+   /AS    Auto Split files when a disk becomes full and there is enough room
+          to do the split (bypassing initial "load disk" prompt).
+
+   /B     After processing, remove the OS/2 update mark.
+
+   /BO    Process only files that exist in both the from and to
+          directories.
+
+   /D:)(=?
+          Select using the file date.  The selection criteria can be a date
+          (YYMMDD) or the number of days. The optional conditions are:
+
+            ( - File date is older than requested.
+            ) - File date is newer than requested.
+            = - File date is equal to requested (default).
+
+          Two /D: parameters can be used to select files between two dates.
+          To select all 1993 files, the parameter "/D:)921231/D:(940101"
+          would be used.  Files must meet BOTH conditions to be selected.
+          To select files that meet one OR the other condition, include the
+          parameter "/DO".
+
+   /DF    Delete all files on the to_spec drive before processing.
+
+   /DF2   If multiple output disks are required, delete all files starting
+          with disk #2.  Files will be added to the first disk without
+          deleting.
+
+   /DC    Create duplicate directory on the to_spec disk for every directory
+          processed on the from_spec disk without prompting.
+
+             * RCOPY C:\OS2\*.* A:\ /DC would create A:\OS2
+             * RCOPY C:\OS2\*.* A:\TEMP would create A:\TEMP\OS2
+
+   /DEL   The from_spec files will be DELETED instead of copied or moved.
+          For example, to delete all files with an .BAK extension on the C:
+          drive:   RCOPY C:\*.BAK /DEL/S
+
+   /DD:?  Drop the first "?" levels of the to_specs directory tree.
+
+             RCOPY C:\OS2\SYSTEM D:\ /DC/DD:1
+               Copy all the files from C:\OS2\SYSTEM to D:\OS2
+             RCOPY C:\OS2\SYSTEM D:\ /DC/DD:2
+               Copy all the files from C:\OS2\SYSTEM to D:\
+
+          Prefixing the level number with '-' will cause the first '?'
+          levels of the from_specs dirctory to be dropped.
+
+               Copy all the files from C:\OS2\SYSTEM to D:\SYSTEM
+
+   /DR:?  Repeat the same process for "?" drives.
+
+   /DO    When two /D:, /T: or /SZ: parameters are used, invoke the "OR"
+          condition instead of "AND".
+
+   /ED    Delete all the files in the to_specs directories before
+          processing from_spec files.
+
+   /FA    Format all output each destination diskette before processing.
+
+   /H     Allows processing both HIDDEN and SYSTEM files.
+
+   /IP:pathname
+          Process only files that exists in PATHNAME.
+
+            RCOPY C:\*.* \TEMP /IP:\OS2\SYSTEM /S
+            Copy all files on "C" drive to \TEMP only if each file already
+            exists in \OS2\SYSTEM
+
+   /IP-:pathname
+          Process only files that DO NOT exists in PATHNAME.
+
+   /L     List files that meet selection criteria - NO processing occurs.
+
+   /LG    Processing activities will be appended to the end of the file
+          RCOPY.LOG in the same directory where RCOPY.CMD is stored. To
+          create RCOPY.LOG in a different location, use /LG:<location> or
+          /LG:<location><new log file name>. Prefixing <location> with "@"
+          will cause RCOPY to create a new log file each time.
+
+   /M     Move the selected from_spec files to the to_specs location.
+          Default is copy.
+
+   /MU    Process multiple input disks.  To define how many input
+          diskettes, use /MU:nn.
+
+   /N     Process only those files that do not already exist on the to_spec
+          directory.
+
+   /NS    Suppress "beeps" issued at various prompts.
+
+   /NT    Do not display totals when processing terminates.
+
+   /OD:?  Specify a list of directories that are to be bypassed during
+          processing (RCOPY *.* C:\ /OD:\OS2,\MUGLIB).  All sub-directories
+          belonging to the requested directory will also be bypassed.  A
+          filename listing the directories can also be used by prefixing
+          with "@" (RCOPY *.* C:\ /OD:@DIR.LST). To bypass just the first
+          directory of a tree, attach a '\' to the directory name (RCOPY
+          *.* C:\ /OD:\OS2\,\MUGLIB).
+
+   /OF:?  Specify a list of filenames or patterns to be bypassed during
+          processing (RCOPY *.* C:\ /OF:*.BAK,*.ZIP,*.$*).  A filename
+          listing the specs can also be used by prefixing with "@" (RCOPY
+          *.* C:\ /OF:@FILE.LST).
+
+   /P     Pause before each file is processed.
+
+   /PE    Pause at the end of processing.  Useful when executing RCOPY from
+          a window that closes on exit. To control the length of the pause,
+          enter /PEx, where "x" is the number of seconds to pause.
+
+   /PGM:xxx
+          Execute the command "xxx" against all the selected files. When this
+          option is invoked, RCOPY will not copy, move or delete the selected
+          files. Multiple /PGM: options can be requested.
+
+             $   Replaced with the full filenames of each selected file.
+             #   Replace with filename of each selected file (no path).
+             ]   Replaced with '/'.
+             {   Replaced with directory of file selected for processing.
+             %   Replaced with drive of file selected for processing
+             )   Replaced with '>'
+             (   Replaced with '<'
+             !   Replaced with '|'
+
+          The following example shows how to print then zip every file on the
+          C: drive with a ".DOC" extension.
+
+             RCOPY C:\*.DOC /S/PGM:PRINT/PGM:PKZIP2 -U ZIPFILE $ )NUL
+
+          If a command is prefixed with "-", the commands will be written
+          to PGM.CMD instead of being executed.
+
+             RCOPY C:\*.DOC /S/PGM:-PRINT/PGM:PKZIP2 -U ZIPFILE $ )NUL
+
+          RCOPY defaults to passing ALL the selected files to the "/PGM:"
+          program.  To limit the number of files passed use the option
+          "/PGMn:", where "n" is the number of files to pass. For example, to
+          pass 30 selected files to PKZIP2 and one to PRINT per execution:
+
+             RCOPY C:\*.DOC /S/PGM:PRINT/PGM30:PKZIP2 -U ZIPFILE $ )NUL
+
+   /R     Replace duplicate files without prompting.
+
+   /RD    Reset date of processed files to current date.
+
+   /RE    Remove empty directories after MOVE process.
+
+   /RO    Allow MOVING or DELETING Read-Only Files.  Copying Read-Only
+          files will always work.
+
+   /S     Process all from_spec sub-directories.
+
+   /SA    Instead of replacing a file, rename it by changing the last to
+          positions of the file's extension to "01" to "99".
+
+   /SD    The progress display shows only the files processed and the final
+          totals.
+
+   /SD2   The progress display shows only the files processed.
+
+   /SE    Skip files that are EXACT duplicates.
+
+   /SF:nnn
+          Splits the selected files into sub-files of "nnn" kilobytes
+          (kbyte=1024 bytes).  The sub-files are named filename.001,
+          filname.002, etc and will be stored in the copy-to directory.
+
+   /ST:?  Reserve "?" amount of freespace on the to_specs drive.  Once the
+          minimum is reached, RCOPY will issue the load-next-disk prompt.
+
+   /SZ:)(=?
+
+          Select a file based on its size. Same rules as /D:
+
+   /T     Test mode.  No actual processing takes place, but normal
+          processing messages are still issued
+
+   /T:)(=?
+          Select a file based on its file time. Same rules as /D:
+
+   /U     Process only files that either do not exist in the to_specs
+          directory or are newer than those that do exist.
+
+   /US    Unsplits, or joins, the multiple files created using the "/SF:"
+          option.  For example, "RCOPY MYFILE.ZIP /US" will join the files
+          MYFILE.001, MYFILE.002, ... into the file MYFILE.ZIP. The join file
+          will be stored in the copy-to directory.  If the split files are
+          stored on multiple diskettes, use the "/MU" option (diskettes must
+          be processed in correct sequence).
+
+   /V     Verify a process using the OS/2 verify option.
+
+   /WA    Pause RCOPY's initial processing and prompt for a diskette.
+
+   /WY    Display the files that were skipped and tell why.
+
+   RCOPY Return Codes
+   ------------------
+
+   RCOPY returns five values.
+
+      1)  Return code "0" if process completed successfully or "1" if not
+      2)  Number of files copied/moved/deleted, depending on option used. If
+          the /SF: option is used, this will be the number of split files
+          created.  If the /US options is used, this will be the number of
+          joined files created.
+      3)  Number of input disks processed
+      4)  Number of files processed, including those skipped or bypassed
+      5)  Number of bytes copied/moved/deleted
+
+   The syntax to capture these values:
+
+    parse value RCOPY(specs) with ret_cd copied nbr_disks processed bytes .
+
+   The following parameters are available for passing the values in 2-5
+   from one execution of RCOPY to another.
+
+     /#ND:n  - Number Disks
+     /#FC:n  - Files copied
+     /#FP:n  - Files processed
+     /#BC:n  - Bytes copied
+
+   When these values are passed to RCOPY, they are included in final totals.
+   (useful when command file does multiple RCOPYs with different options).
+
+
+Example of RCOPY Uses
+---------------------
+
+1)  Move all the files on the A: drive to the appropriate sub-directories on
+    the C: drive, replacing files that already exists and removing the
+    directories from A:.
+
+      call RCOPY 'A:\*.* C:\ /S/DC/M/RE'
+
+2)  Copy all the files on the C: drive to the appropriate sub-directories on
+    the A: drive that were updated today, bypassing directories listed in the
+    file RCOPY.OD and bypassing the filespecs in the file RCOPY.OF.
+
+      call RCOPY 'C:\*.* A:\ /S/DC/V/OD:@C:\RCOPY.OD/OF:@C:\RCOPY.OF/D:)1'
+
+3)  The following is an example of multiple RCOPY runs, with each execution
+    using the statistics from the previous run (10,000 bytes is reserved for
+    the file INSTALL.CMD).
+
+      /* */
+      parse value RCOPY('*.ZIP+*.CMD A:\ /AN/SD2/NT/DF/ST:10000) with
+        retcd copied nbrdisks processed bytes  .
+      if retcd<>0 then
+         EXIT
+      .....
+        Code to create INSTALL.CMD
+      .....
+      if nbrdisks>1 then
+         do
+           say 'Please Re-Insert Disk #1'
+           pause
+         end
+      call RCOPY 'INSTALL.CMD A:\ /SD/V/#FC:'||copied||'/#FP:'||processed||
+        '/#ND:1/#BC:'||bytes
