@@ -1,0 +1,259 @@
+--------------------- Workplace Shell UnZip  version 1.1 ---------------------
+--------------------- (c) Copyright 1994 Scott Maxwell. ----------------------
+----------------------- by: scott.maxwell@channel1.com -----------------------
+
+
+If you don't want to read this big file right now, read Readme.WUZ
+instead.  You might want to read this later, though.
+
+
+
+Welcome to WPS UnZip!
+
+Actually, it does more than just unzip.  It can also handle ARC, ARJ, LZH,
+TAR, Z and ZOO files.  You need to have unpackers for each format but then
+WPS Unzip will handle the rest.  WUZ is already set up to use OS/2 versions
+of Zoo 2.1, Info-Zip's Unzip 5.0, UnArj 2.41, LH2 2.14, Gnu Tar and Compress.
+If you want to use a different dearchiver or add another archive type, you
+may have to make some changes to Wuz.Cmd.  See "Adding a New Archive Type" at
+the end of this file.  The default dearchiver is UnZip if the file extension
+is not recognized.  I use this to drag-and-drop QWK files when I just want to
+look at my bulletins.
+
+To install, just type Inst-WUZ and select a directory for the executable files
+from the menu.  Then enter the name of the directory where you want temporary
+directories to be made.  I use E:\Download\Temp.  This will copy all of the
+executable and icon files to the specified directory and create an icon on the
+desktop called "WPS Unzip" which is associated with *.arc, *.arj, *.lzh, *.tar,
+*.z, *.zif, *.zip and *.zoo.  It will also create a second icon for zipping
+up whole directories in place called "Zip Directory".  To uninstall, simply
+rerun Inst-WUZ and select uninstall from the menu.
+
+Now all of your archive files should have a cool zipper icon.  If you don't
+see the zipper right away, try clicking the right button over the file icon
+and it should change.
+
+You can open an archive in one of three ways:
+1) Double click on the file icon.
+2) Drag the file icon to the WPS Unzip icon
+3) Type WUZ <filename> from a command line
+Note: Technique 2 or 3 may be used to extract self-extracting archives (*.EXE)
+
+WUZ will then create a directory of the same name as the archive in whatever
+directory you told it to during the install, in my case E:\Download\Temp.
+After creating the directory, WUZ will extract the archive file into it, open
+the directory as a folder on the Desktop and open a separate OS/2 window
+set to the new directory.  This will give you easy access from both the WPS
+and the command line.  Also, since each archive creates its own extract
+directory, you can open as many archives at the same time as you like.
+If you are using 4OS2, the command-line window will be opened as local so
+it won't use any of your aliases.  WUZ needs to do this so it can create
+some custom keyboard aliases.
+
+To remove the extracted files and the temporary directory, you can type ZClr.
+ZClr -x will close the OS/2 window as well.  If you are using 4OS2, you can
+just type Alt-x.
+
+If you are using ZIP archives, two other options are available: updating and
+refreshing.  ZUPDATE will add any new files you have added to the extract
+directory to the original archive and optionally remove any files that you
+have deleted.  For instance, rename Try.Cmd to Tried.Cmd and do ZUPDATE and
+you will be asked if you want to delete Try.Cmd from the archive.  Then
+Tried.Cmd will be added to the archive.  If you are using 4OS2, just hit
+Alt-u.  ZFRESH will update only those files that already exist in the
+archive and have changed in the extract directory.  Alt-f for 4OS2 users.
+
+I don't like seeing ZClr.Cmd, ZFresh.Cmd and ZUpdate.Cmd all the time, so I
+have hidden them.  If you want to unhide them so that you can use them
+from the WPS, just comment out the lines in Wuz.Cmd that hide them.
+
+NOTE: If you double-click on ZClr.Cmd from the WPS while the command-line
+      window is still open and in the extract directory, OS/2 will not be
+      able to remove the extract directory.
+
+
+Zipping Directories in Place
+----------------------------
+
+Sometimes I have whole directories I don't really need but I don't really
+want to erase either.  The most common example of this is games that I've
+finished but still might want to show to friends some time.  For situations
+like these, use Zip Directory.
+
+You can use Zip Directory in one of two ways:
+1) Open the drive tree from Drives and drag-and-drop the icon of the
+   subdirectory you want to zip up onto your "Zip Directory" icon.
+2) Type ZIP-DIR <subdirectory-name> from a command line
+
+This will not only move the whole directory into an icon, it will also
+change the folder icon into a zipped folder icon.  If you were to open the
+folder now, you would find a file called <subdirectory-name>.ZIF.
+
+You can unzip this in one of five ways:
+1) Drag the zipped folder icon from your drive tree to "WPS Unzip"
+2) Drag the .ZIF file to "WPS Unzip"
+3) Double click on the .ZIF file
+4) Type WUZ <subdirectory-name> from a command line
+5) Type WUZ <.ZIF filename> from a command line
+
+After unzipping the files, WUZ will change the icon from a zipped folder to
+an unzipped folder.  If you rezip the directory, Zip Directory will simply
+update any files that have changed or been added and remove everything else so
+rezipping should be much faster.
+
+
+Other Goodies
+-------------
+
+This archive also includes Open-Dir.Cmd which opens the specified directory
+as a folder on the desktop and Kill-Dir.Cmd which deletes the specified
+directory and all of its files.  These are pretty useful in their own right.
+Open-Dir.Cmd is also installed as OD.Cmd so typing "od subdirectory" will
+do it.
+
+ZipStrip.Cmd may also be of interest.  It compares the files in the current
+directory to those in any ZIP file and offers to remove files from the ZIP
+that do not exist in the current directory or one of its subdirectories.
+This can take a little while.  I will probably rewrite this in C++ when
+I get a chance.
+
+
+Things You Might Want to Change
+-------------------------------
+
+If you don't want a command-line, you can set KeepCommandLineWindow to 0
+at the top of Wuz.Cmd.  If you want Wuz to open the command-line and folder
+on the desktop before it is finished unpacking the archive, set WaitForUnzip
+to 0.  If you want WUZ to unzip the archive in the first window, set
+UnzipInCommandLineWindow to 0.
+
+If you don't want to watch the archive being unpacked, you can open the
+settings page of "WPS Unzip", select Session and set Start Minimized then set
+UnzipInCommandLineWindow to 0 in WUZ.Cmd.  If you do this and set
+KeepCommandLineWindow to 0 in Wuz.Cmd, WUZ will only create the folder.
+While your at it, you could set Start Minimized on "Zip Directory" as well.
+For WPS purists, this is the way to go!
+
+If you would rather the command-line always load another program, i.e. a text
+file viewer, etc. set FinalCommand to whatever you like in Post-Wuz.Cmd.  If
+you want to add any other commands to be executed every time, add them between
+the two comment lines at the top of Post-WUZ.Cmd.  This is a good place to
+load aliases for 4OS2 users since SHRALIAS is disabled for WUZ command line
+windows.
+
+IMPORTANT:  Inst-Wuz will automatically preserve any of these changes that
+	    you make if you reinstall.  Therefore, never modify these files
+	    in the directory you are installing from.  Always modify them
+	    in the executable directory.
+
+	    I will always keep these variables intact in new versions so you
+	    should never have to worry about losing your changes when
+	    reinstalling unless you modify something other than what I
+	    have mentioned above.
+
+
+Coming Soon
+-----------
+
+I will probably rewrite ZipStrip in C++ for speed.
+
+Also, I will probably try to figure out a way to add Update and Refresh
+choices to the folder menu so that this feature can be accessed more easily
+form the WPS.
+
+I should also be releasing my Extended Folder real-soon-now.  It will
+eventually provide an enhanced icon folder but currently it just adds
+Open Parent and Open Command-Line to the object menu of every folder.
+I will almost certainly need to use this to add Update and Refresh to the
+object menus of extract directories.
+
+
+For Rexx Programmers
+--------------------
+
+First of all, I believe the install program "INST-WUZ.CMD" is pretty
+intelligent.  If you want to modify this and use it to install your own
+programs, you may do so.  I only ask that you leave in my seven line banner
+at the top.
+
+There are two routines here that you might want to put in your REXX
+library.  One is Check4OS2 which returns 1 if the current shell is 4OS2
+instead of CMD.  The other is DIRECTORY which simply makes the standard
+DIRECTORY command always append a '\' and accept directory names with a
+trailing backslash.  The standard DIRECTORY command chokes on trailing
+backslashes unless you are specifying the root and it never returns
+a name with a trailing backslash unless the current directory is the root.
+My routine makes everything a bit more consistent and robust.
+
+One other routine that you might want to check out is GetDriveSpec in Wuz.CMD.
+This will take a filename and return FullPath, FullName, Ext and NameOnly.
+This can even handle relative paths on different drives without changing
+your current directory on any drive.
+
+
+
+Adding a New Archive Type
+-------------------------
+
+If you want to add a different archiver, here is what you need to do.
+Edit Wuz.Cmd and go down to the Extractor.Ext = whatever section.
+The following explanation will make a lot more sense if you are looking
+at Wuz.Cmd as you read this.
+
+A generic archiver definition consists of the following specifications:
+
+Extractor.<ext> = '<dearchiver>'- where Ext is the actual extension you want
+				  to use and <dearchiver> includes any
+				  necessary switches.  You should always
+				  setup your dearchiver to extract subdirec-
+				  tories and automatically overwrite if
+				  possible.
+CopyTo.<ext>	= Yes/No	- Some dearchivers must extract to the same
+				  directory that the archive is in.  These
+				  will require that the archive be copied to
+				  the extract directory first.  Usually,
+				  however, this will be no.
+Update.<ext>	= '<archiver>'	- This should be your archive command with
+				  switches to update files and work
+				  recursively.
+UpdateP.<ext>	= '<exclude>'	- This is a switch to stick on to the tail
+				  end of the archive command to exclude
+				  ZCLR.CMD, ZUPDATE.CMD and ZFRESH.CMD.
+Fresh.<ext>	= '<archiver>'	- This should be your archive command with
+				  switches to update only those files that
+				  have changed and already exist in the
+				  archive.  Don't forget any necessary
+				  switches to work recursively through any
+				  subdirectories.
+
+
+Legalities
+----------
+
+Okay, now for the legal stuff.  I use these routines constantly and have had
+no problems.  If you do, let me know.  However, I can not be held liable if
+anything nasty happens.  This software is strictly of the "USE AT YOUR OWN
+RISK" variety.
+
+I am asking $20 for WPS Unzip.  I think this is probably fair.  If you make
+a lot of money and WUZ saves you tons of time you could send me more.
+On the other hand, if you are a starving student, just send me email telling
+me what you think and we'll call it even.  I am currently living in Japan
+so I know how hard it can be to send checks from outside the U.S.  If you
+are an international user, send me either cash or email.  If your local
+currency is pretty major, send me that and I'll try to exchange it.
+Any checks should be made out to my mother:
+
+  Patricia Maxwell
+  1587 E. Modesto Ave.
+  Camarillo, CA 93010
+  U.S.A.
+
+It costs me about $20 to cash a check in Japan, so this makes more sense
+for me.
+
+Comments are welcome.  I hope these REXX routines are as useful for you
+as they have been for me.  I haven't found any easier way to explore
+archives.  Send comments to me at scott.maxwell@channel1.com.
+
+--------------------- Usenet: scott.maxwell@channel1.com ---------------------

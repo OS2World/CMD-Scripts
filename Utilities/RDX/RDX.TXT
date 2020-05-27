@@ -1,0 +1,234 @@
+RDX Version 2.00
+================
+
+RDX is a command-line directory changer written in REXX for OS/2 V2.x. It
+will locate directories based on partial names, optionally containing
+wildcards, search multiple drives and includes a lookup table option so
+that frequently-used (at the user's discretion) directories can be located
+conveniently and quickly without a disk search.
+
+This program requires that the OS/2 REXX interpreter and REXX utility 
+functions (REXXUTIL.DLL) have been properly installed. These can be added 
+if necessary by using Selective Install and checking the "REXX" box.
+ 
+Anyone is free (encouraged) to use, distribute or modify this program to
+suit their own needs. If you distribute a modified version, please document
+the changes and give it another name.
+
+                                                     James Brombergs
+                                            bro561@geel.dwt.csiro.au
+
+COMMAND  LINE  OPTIONS
+======================
+
+(Options are not case-sensitive).
+
+RDX [/H] [/?]
+
+       Show instructions and command line options.
+
+RDX /L
+
+Edit lookup table
+
+       Interactively add and delete items, or view the table. 
+
+       The lookup table can be used to store abbreviations for the paths of
+       frequently-used directories.
+
+       DO NOT MAKE RDX.CMD READ-ONLY IF YOU INTEND TO USE THIS
+
+
+RDX [/+] [/B] [/T] [[-]drivelist:]dirname
+
+Search for a directory
+
+       /+     Include drives A and B when searching multiple drives.
+
+       /B     Stop at first matching directory without prompting.
+
+       /T     Search lookup table only - do not search drives.
+
+       drivelist     List of drive letters followed by a colon eg. CDG:
+
+                 * =        Searches all drives (excludes A: and B: unless /+
+                            switch is given).
+
+               ddd =        Searches drives in list.
+
+              -ddd =        Searches all drives except those in the list (also
+                            excludes A: and B: unless /+ switch is given).
+
+
+       dirname       A partial directory name to search for. <dirname> may
+                     contain wildcards ? and *. By default, <dirname> is assumed
+                     to end with a * wildcard. Other wildcards do not work with
+                     lookup table keys.
+
+
+Notes
+-----
+<dirname> and <drivelist> are not case-sensitive. eg a directory called
+"Rexx" can be found by searching for "REXX" or "rexx".
+
+Don't enclose <dirname> in quotes or use embedded spaces. If you want to
+search for a directory name that contains spaces, either use the partial
+name before the first space or replace the spaces with ? wildcards.
+
+If there is only one possible directory matching <dirname>, RDX will change
+to that directory without prompting even if the /B switch has not been
+used. If multiple drives are being searched, this only applies to the last
+drive.
+
+If the /+ switch is used without a <drivelist>, the switch is ignored and
+only the current drive is searched. If it is used with <drivelist> other
+than *, the <drivelist> takes precedence.
+
+The command syntax is (deliberately) similar to that of CDX, a DOS
+directory changer written by Michael Holmes and Bob Flanders.
+
+
+Examples
+--------
+Assume that drives A: B: C: D: E: are available.
+
+RDX WIN
+       Searches the lookup table for any keys starting with "WIN".
+
+       Searches the current drive, and finds all directory names starting
+       with "WIN" eg. \OS2\MDOS\WINOS2, etc.
+
+RDX ?IN
+       Searches the lookup table for keys starting with "?IN". Note that the
+       question mark is _not_ treated as a wildcard.
+
+       Searches the current drive only and finds directory names starting
+       with any character followed by "IN" eg. \OS2\MDOS\WINOS2,
+       \BORLANDC\BIN, etc.
+
+RDX /+ *:*.*
+       Searches the lookup table for keys starting with "*.*".
+
+       Searches all drives including A: and B: and finds any _directory_
+       names that contain a dot.
+
+RDX /+ -AD:BIT
+       Searches the lookup table for keys starting with "BIT"
+       Searches drives B:, C: and E: for directory names starting with "BIT".
+
+
+SEARCHING  FOR  DIRECTORIES
+===========================
+
+When RDX finds a directory matching the given specifications, either in the
+lookup table or on a disk drive, it will display the full path followed by
+a question mark, unless the /B switch was used. If the /B switch was used,
+it will change to the directory without prompting.
+
+When a directory is offered, press <SPACE> to search for the next match,
+<ESCAPE> to cancel the search and revert to the original directory, or any
+other key to change to change to the directory that was found.
+
+If at some stage of the search there is only one possible directory that
+matches the specifications, RDX will change to that directory without
+prompting.
+
+Notes
+-----
+RDX constructs a complete directory list for a drive before looking for 
+matches, so it can take a while to search a large hard disk partition, and 
+even longer to search a CD-ROM.
+
+
+LOOKUP  TABLE
+=============
+
+The lookup table stores a list of keys and corresponding directories, so
+that frequently-used directories can be located very quickly. If there are
+any entries in the lookup table, the table is automatically searched first,
+and any matching keys are offered before any disk drives are searched.
+
+If you find that you use the same directory often when you open an OS/2
+command-line, you can create an identifier (key) for it and add it to the
+lookup table to quickly change to the directory you want. For instance, if
+your REXX code is in a directory called E:\os2\Programming\Rexx, create a
+key "RX" and set the corresponding path to "E:\OS2\PROGRAMMING\REXX". Then
+you can change to this directory at any time by typing "RDX RX".
+
+Keys may contain any characters except spaces. Duplicate keys are allowed
+in the table, if they match the search criteria, they will be offered in
+the order that they are found. The search is not case-sensitive. Keys need
+not bear any resemblance to the directories they correspond to.
+
+Since * and ? are legal characters in lookup table keys, searches based on
+wildcards will be treated literally when searching the lookup table. The
+wildcards will still be expanded when drives are searched.
+
+
+Editing the Lookup Table
+------------------------
+When RDX is started with the /L switch, it will show a menu offering the
+choices :
+
+(A)dd Entry
+       Add a new key and directory path to the table. New entries are added
+       at the end. Keep this in mind if you use duplicate keys. You will be
+       prompted for the key, and then for the corresponding path. Enter a
+       fully qualified path name (including drive, path and terminating
+       directory name). RDX will check the path for illegal characters, then
+       attempt to change to the directory. If it cannot, the following
+       message will be displayed :
+
+       Cannot locate the directory. Is that OK (Y/N)?
+
+       Enter 'N' if you made a mistake, or 'Y' if you intend to create the
+       directory later, or if it is on a drive that is not currently
+       available (eg. network, floppy, CD-ROM, etc.)
+
+(D)elete Entry
+       Shows a list of all entries in the table, stopping after each screen.
+       Type the number next to the entry you want to delete.
+
+(V)iew Table
+       Shows a list of all entries in the table, stopping after each screen.
+
+(C)ancel and Exit
+       Exit without saving changes to the lookup table.
+
+(S)ave and Exit
+       Exit and save changes to the lookup table. If you see the message
+
+       Cannot replace original file
+
+       this means that the original file (RDX.CMD or whatever you have 
+       called it) could not be deleted for some reason. The program will 
+       terminate at this point, leaving a file called "RDX#####.CMD" (where 
+       # is a random digit) in the current directory. Delete the original 
+       file and rename this file.
+
+Notes
+-----
+The lookup table is stored as a stem variable within the RDX.CMD file, for
+performance considerations. When the table is changed, the entire command
+file must be rewritten, so RDX.CMD should not be made read-only.
+
+You can rename RDX.CMD and still use these features. The name will be 
+determined at run-time.
+
+The table can be edited directly. Load RDX.CMD into your favourite text
+editor and find the comment /*LOOKUP*/, indicating the beginning of the
+table. Do not change this comment or the /*ENDLOOKUP*/ comment which
+indicates the end of the table. This is also the easiest way to change the
+order of table entries. The format of the table is :
+
+       lookUp.0 = integer         the number of entries in the table.
+
+       lookUp.n.key = "string"    string contains key n
+       lookUp.n.dir = "string"    string contains path n
+
+If you don't want to use the lookup table at all, and want to get rid of
+the code, find the comment that says LOOKUP TABLE EDITING ROUTINES. Delete
+everything from here to the end of the file.
+
+
+
