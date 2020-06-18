@@ -1,0 +1,26 @@
+/*****************************************************************************/
+/*                                                                           */
+/* RR - ReXX REQUESTER                                                       */
+/*                                                                           */
+/* Revision 0.10 (30/01/93)                                                  */
+/*                                                                           */
+/* (C) Copyright 1993 by Martin Adirsch.                                     */
+/*                                                                           */
+/* This is 'FreeWare'.  As such, it may be copied and distributed            */
+/* freely.  If you want to use part of it in your own program, please        */
+/* give credit where credit is due.  If you want to change the               */
+/* program, please refer the change request to me or send me the             */
+/* modified script code.  I can be reached as FIDO-POINT 2:240/602.26        */
+/*                                                                           */
+/* You may notice, that there are several options, which are still out       */
+/* of function. This will change soon ;-).                                   */
+/*                                                                           */
+/*****************************************************************************/
+
+What's new in Vers. 0.11
+========================
+
+- a new styled mainmenu
+- rr.cmd now supports packed filelists (ARJ,ZIP,LZH)
+
+

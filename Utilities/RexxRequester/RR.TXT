@@ -1,0 +1,88 @@
+/*****************************************************************************/
+/* RR - ReXX REQUESTER                                                       */
+/*                                                                           */
+/* Revision 0.10 (30/01/93)                                                  */
+/*                                                                           */
+/* (C) Copyright 1993 by Martin Adirsch.                                     */
+/*                                                                           */
+/* This is 'FreeWare'.  As such, it may be copied and distributed            */
+/* freely.  If you want to use part of it in your own program, please        */
+/* give credit where credit is due.  If you want to change the               */
+/* program, please refer the change request to me or send me the             */
+/* modified script code.  I can be reached as FIDO-POINT 2:240/602.26        */
+/*                                                                           */
+/* You may notice, that there are several options, which are still out       */
+/* of function. This will change soon ;-).                                   */
+/*****************************************************************************/
+
+To install RR just do the following:
+
+1.) Create a directory, or copy RR.CMD and RR.CFG to a directory where all
+    Filelists are stored.
+
+2.) Now change RR.CFG with an ASCII-Editor. Use the same SYNTAX as used for the
+    Example-Filelists.
+
+    Important: RR.CMD does not support blank lines in RR.CFG
+
+3.) Now change line 30-39 in RR.CMD with an ASCII-Editor:
+
+    outbound='d:\bink\outbound\'  <----- This is where RR.CMD puts the
+                                         *.req- and *.clo-Files
+    lister='@ call d:\os2tools\L' <----- set'lister=1'if you don't use an
+                                         external lister
+    Passwort='!PASSWORD'          <----- Put in Req. Passwort (_capital_ let-
+                                         ters only, "!" is necessary. )
+
+    temp_dir='d:\temp\'           <----- your directory for temporary files
+
+    arj_pack='@ call d:\os2tools\unarj e '  <----.
+    zip_pack='@ call d:\os2tools\pkunzip '  <----|
+    lh_pack='@ call d:\os2tools\lh x '      <----|
+                                                 |
+    .--------------------------------------------'
+    |
+    `---> The RR.CMD-supported Packer: put in the right path-name.
+          It is IMPORTANT that the name of a packed filelist is the same
+          as the archiv-name, but ending on ".LST"
+
+          Example: The filelist in 22400602.arj must have the name:
+                   2240602.LST
+
+    filelist_dir='d:\bink\rr\'    <----- your directory for filelists
+
+
+
+That's all ;-).
+
+Remember: RR.CMD is still not complete. It works fine but, there is still a
+          lot to do. Specially the ERROR-Routines are missing. It is easy to
+          blow off RR.CMD. If you use it correctly there are no problems.
+          I would apreciate YOUR HELP and IDEAS to make RR.CMD better and
+          better.
+
+          To do tagging: - pressing SPACEBAR will show the TAGSYMBOL ">>"
+                         - use cursorblock to move TAGSYMBOL
+                         - pressing SPACEBAR again will tag and ask for
+                           confirmation.
+                         - use ESC to quit the tag-mode
+
+          ReXX is GREAT:
+
+!!!  This ReXX-Script works faster than _all_ other REQUEST TOOLS I know  !!!
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Features of RR.CMD
+------------------
+
+- Global search: RR.CMD searches through 48 filelists
+- FAST ! To search through 4.2MB's of unpacked filelists RR.CMD needs only
+  25 seconds (486/33)
+- Detailed search
+- With RR.CMD you can handle up to 48 filelists
+- Build-in Lister with tagging support
+- Use of an external lister is possible
+- ARJ, LZH, ZIP supported
+
+
