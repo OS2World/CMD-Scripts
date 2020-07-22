@@ -1,0 +1,32 @@
+This archive, EA.LZH,  was created by LH2 (lharc for OS/2) v 0.80.
+
+EA.LZH contains the Extended Attributes (EAs) of the files that are
+in the LZH file that you found EA.LZH in.  EAs are new to OS/2
+version 1.20.  If you are a DOS user,  or are using OS/2 prior to
+1.20,  you may not be able to use the files that came with EA.LZH.
+(You definitely can't use the files IN ea.lzh).
+
+To avoid collision,  the file names used in EA.LZH are the same as
+the file they belong to.
+
+If you are using OS/2 1.20 (or greater),  you can use the
+C:\OS2\EAUTIL.EXE program to join the EAs in this archive to their
+appropriate files.   This operation is automatically done by LH2
+version 0.80 (or greater);  the fact that you are reading this file
+means that you are using an old version of LH2,  or you have used
+some other utility to extract this archive (such as LHARC under
+MSDOS).
+
+To join the EAs manually,  extract the contents of EA.LZH into a
+separate directory, such as C:\TMP (so as not to overwrite the real
+files),  and use the eautil thusly:
+
+ EAUTIL /j <filename> c:\tmp\<filename>
+
+To avoid this manual step, get a copy of LH2 0.80 (or greater). It's
+free.  The following bbs's will probably have it:
+
+ RT Lab bbs (416)867-9663 (fidonet 1:250/628)  [me]
+ Fernwood   (203)483-0348 (fidonet 1:141/209)  [Emmitt Dove]
+
+Peter Fitzsimmons, Mon  01-07-1991.
