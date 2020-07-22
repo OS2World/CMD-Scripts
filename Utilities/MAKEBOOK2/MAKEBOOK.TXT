@@ -1,0 +1,75 @@
+MAKEBOOK.CMD
+Version 1.02
+By: Derek Berube
+
+Package Contents
+================
+
+MAKEBOOK.CMD    the actual REXX program.
+MAKEBOOK.TXT    the document you now have in your hands (or your favorite
+                editor).
+MAKEBOOK.ICO    the nifty designer icon for MakeBook
+
+About MAKEBOOK
+==============
+
+        MAKEBOOK.CMD is a REXX utility designed to create icons for the OS/2
+on-line reference manuals located on your OS/2 system.  This utility will
+search all available drives (including network drives) for OS/2 .INF files and
+create icons for them with the appropriate titles.
+        MAKEBOOK.CMD uses the following logic process when it searches your
+hard disk for .INF files:
+
+1.)  MAKEBOOK.CMD starts with the root directory of drive C: and searches all
+     available subdirectories for files with a .INF extension.
+2.)  When MAKEBOOK.CMD obtains a listing of all files on drive C: with an .INF
+     extension, it compares the filename with two different lists of .INF file
+     names.  
+     a.)  The first list MAKEBOOK.CMD uses is a listing known OS/2 .INF
+          files and their corresponding titles.  When MAKEBOOK.CMD finds a 
+          match in this list, the name of this book is automatically set to the
+          appropriate title for the book.
+     b.)  If an .INF file name is not found in the first list, MAKEBOOK.CMD
+          checks with a second list.  The second list contains the names of
+          files that are not OS/2 on-line books but do end with an .INF 
+          extension.  MAKEBOOK.CMD will display a message that the file found
+          is not an OS/2 on-line book and an icon will not be created.
+     c.)  If an .INF file is not found in either of the above lists, an icon 
+          will be created for the book using the file name for a title.
+3.)  All icons will be created in a folder created on your OS/2 desktop titled 
+     "MAKEBOOK.CMD - Find Results."
+
+        MAKEBOOK.CMD is a REXX utility which means that you can modify it to
+include descriptive titles for .INF files not listed in either of the two 
+lists.  The logic used by MAKEBOOK.CMD is a simple IF...THEN statement.  The 
+following is an example from the list of known .INF files:
+
+when BookName="REXX.INF" then BookName="REXX Information"
+
+The following is an example from the list of files with a .INF extension which
+are not OS/2 .INF files:
+
+when BookName="OEMSETUP.INF" then Say "OEMSETUP.INF"NADA
+
+NOTE: NADA is a variable used to store the generic text string "is not an OS/2
+      on-line book"  This is used in order to keep the size of MAKEBOOK.CMD
+      down to a minimium.
+
+The BookName variable is a global variable which initially holds the file name 
+of the .INF file in question.  The value of BookName will change depending on
+whether the file name is found in either of the lists.
+
+History
+=======
+03.16.93 v1.00
+        *  Initial Release
+07.07.93 v1.01
+        *  Fixed a problem with parameters field of the object that is created.
+           The drive on which the .INF file resides is not included in the
+           parameters section; therefore, when you go to look at the
+           book, you get an error that "Cannot open input files."
+07.27.93 v1.02
+        *  Fixed a problem with the Express Setup query in that it would not
+           recognize the capital letter Y or N.  The Express Setup option will
+           no longer echo your key to the screen.
+
