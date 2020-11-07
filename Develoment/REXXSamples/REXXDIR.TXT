@@ -1,0 +1,27 @@
+
+ The volume label in drive C is OS2.
+ The Volume Serial Number is E551:2C15
+ Directory of C:\
+
+PRTXL    CMD     8357  12-06-89  10:23a
+BREAK    CMD    10622  12-06-89  10:27a
+TESTIT   CMD       59  11-22-89   2:31p
+STARTUP  CMD      256  11-30-89   8:04a
+CONFIG   CMD     1084  12-06-89   9:19p
+TTTTTT   CMD       67  11-15-89   4:47p
+WORD     CMD       57  11-20-89  12:26p
+TEST     CMD      174  11-18-89   3:07p
+TINT     CMD      192  11-22-89   7:02p
+REXXDIR  CMD     2635  12-05-89   5:47p
+SQUARED  CMD      115  11-24-89   9:23a
+CNVRT    CMD     1544  12-06-89  10:29a
+MONDAY   CMD      110  12-04-89   9:24a
+TREXX    CMD       22  12-04-89   3:27p
+RANDREX2 CMD      106  12-04-89   3:33p
+RANDREXX CMD     3258  12-04-89   5:15p
+REXXBEEP CMD     1877  12-05-89   5:39p
+TDIR     CMD      127  12-05-89   2:18p
+CHRIS    CMD      259  12-05-89   3:38p
+READIT   CMD       72  12-05-89   4:57p
+REXXRAND CMD     3212  12-05-89   5:48p
+     21 File(s)   9111552 bytes free

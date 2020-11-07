@@ -1,0 +1,42 @@
+These are 3 REXX samples for OS/2. I tried to demonstrate
+a variety of features and functions so that someone new to the REXX
+language can see enough to get an idea what its about. They should
+run under the 1.2 EE version of REXX but I don't know if they work
+for any other versions.
+
+REXXRAND.CMD       Creates a set of random numbers and displays
+                   in groups of 2. Extensive error checking for
+                   parameters. Type REXXRAND <CR> for help.
+
+REXXDIR.CMD        A REXX DIR assist. You give it the file name
+                   and the number of lines you can display on your
+                   terminal and it handles the scrolling. Type
+                   REXXDIR <CR> for help.
+                   ( Creates a file REXXDIR.TXT when it runs )
+
+
+REXXBEEP.CMD       A REXX Music ( sound is more like it) program.
+                   It reads a file and plays the notes in the file
+                   on the speaker. Type REXXBEEP ? <CR> for help.
+                   ( Uses REXXBEEP.MUS as a default infile )
+
+
+REXX in OS/2 does create a tokenized version that it appends to
+the file after the CTRL-Z ( EOF ) mark. This happens the first time
+you run the program. If you make no changes, it runs the tokenized
+version. If you copy or edit, the tokenized version is deleted.
+
+Reading external files uses the SAA features. LINEIN for instance
+replaced EXECIO on VM and READ on a real old version of REXX I have.
+( If LINEIN isn't recognized, try READ)
+
+As I get some more examples done I will pass them along. If you have
+any suggestions for new commands send them thru the IBM board to
+Bill DICKENSON
+
+Thanks
+
+P.S.
+I did this without a manual. My IBM rep has promised me a manual
+"REAL SOON NOW". When I get it I'll write some more ambitious stuff.
+
