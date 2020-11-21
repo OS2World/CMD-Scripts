@@ -1,0 +1,197 @@
+/***********************************************************************/
+/* (os2)             Help file for FILELIST (FL)                  0.9  */
+/***********************************************************************/
+
+ Command-line invocation:
+
+ fl [[dir] ...] [(sort[a|d] opt ...[)]] [(Profile file [)]] [(Noprofile[)]]
+
+  Where:
+    dir ...       Specifications of directory(ies) to edit.
+    (Noprofile    Do not use a profile file.
+    (Profile file The name of the profile file to use.  If not specified,
+                  the file "PROFILE.FL" will be used.
+    (Sort opt     The sort order to use when displaying specified
+                  directory(ies).
+    (Wide         Use multiple columns (if possible).
+
+ Notes:
+  - The capitalised portion of a command is the minimum abbreviation
+    for the command.
+  - UP, DOWN, NEXT differ from XEDIT and Kedit in that they do not
+    accept numerical arguments abutted to the command name.
+    Thus "N3" is not supported.
+
+
+ FL Commands:
+ ------------
+
+ BAckward [n|*]
+       scroll backwards [n] screens
+ BOTtom
+       move to the bottom of the file
+ CCancel
+       qquit from all files in the ring
+ DEFine key-name [command [args]]
+       assign one or many commands to a key
+ DOS [command]
+       execute an operating system command
+ DOSNowait command
+       execute an operating system command - no prompt
+ Down [relative_target]
+       move forward in the file a number of lines
+ Edit [dir name]
+       edit another file/directory or switch to next file
+ FList [dir name]
+       edit another file/directory or switch to next file
+ FOrward [n]
+       scroll forwards [n] screens
+ HELP
+       edit help file for FL
+ Next [relative_target]
+       move forward in the file a number of lines
+ NEXTWindow
+       switch focus of editing session to other window
+ OS [command]
+       execute an operating system command
+ OSNowait command
+       execute an operating system command - no prompt
+ QUIT
+       exit from the current file if no changes made
+ RESet ALL|Block|Prefix
+       cancel the marked block or prefix commands or both
+ RUN [command]
+       execute an operating system command
+ SET set_command [set_command parameter(s) ...]
+       execute various set commands
+ SHOWkey
+       display current key value and command assignation
+ SOS sos_command
+       execute various sos commands
+ TEXT text
+       simulate keyboard entry of characters
+ TOP
+       move to the top of the file
+ Up [relative_target]
+       move backward in the file a number of lines
+ Xedit [dir name]
+       edit another file/directory or switch to next file
+
+
+ SET commands
+ ------------
+
+ [SET] CASE Mixed|Lower|Upper
+       set case sensitivity parameters
+ [SET] COLOUR area [modifier[...]] [foreground background]
+ [SET] COLOR  area [modifier[...]] [foreground background]
+       set colours for display
+ [SET] CURLine M[+n|-n] | [+|-]n
+       set position of current line on screen
+ [SET] IMPcmscp ON|OFF
+ [SET] IMPOS ON|OFF
+       set implied operating system command processing
+ [SET] MSGLine ON [M[+n|-n]|[+|-]n]
+       set position of message line
+ [SET] NUMber ON|OFF
+       turn prefix numbers on or off
+
+
+ SOS commands
+ ------------
+
+ SOS DELBAck
+       delete the character to the left of the cursor
+ SOS DELChar
+       delete character under cursor
+ SOS STARTENDChar
+       move cursor to end/start of focus line
+ SOS TABFIELDB
+       move cursor to previous enterable field
+ SOS TABFIELDf
+       move cursor to next enterable field
+ SOS UNDO
+       undo changes to the current line
+
+
+ COLOR commands
+ --------------
+
+ Area =
+    Arrow    =    The arrow in the command line;
+    Cmdline  =    The command line;
+    CUrline  =    The current line in the file area;
+    Filearea =    The file area;
+    Idline   =    The file/directory name line;
+    Msgline  =    The message/error area;
+    Pending  =    The pending command in the prefix area;
+    PRefix   =    The prefix area;
+    STatarea =  * The status area;
+    TOfeof   =  * The top and bottom marker.
+
+                * not yet implemented
+
+ Modifier =
+    BLINK BRIGHT BOLD HIGH
+
+ Back/Foreground =
+    BLACK BLUE GREEN CYAN RED MAGENTA YELLOW WHITE
+
+
+ FL prefix commands:
+ -------------------
+ /      - make line current line
+
+ All other prefix commands are considered "regular" commands.  They
+ accept the following shortcuts as parameter:
+
+      /     =     The whole file name (drive+path+name+ext);
+      /n    =     The file name;
+      /e,/t =     The file extension (or "type");
+      /p    =     The file path;
+      /d,/m =     The file drive (or "mode");
+      /o    =     Nothing;
+      //    =     A "/" symbol.
+
+ "Regular" commands are only allowed within directory buffers.
+
+
+ Default Key Assignments:
+ ------------------------
+ The first column is the name of the key in its normal state. Shifted
+ keys have a 'S-' prefix, control keys have a 'C-' prefix and Alt keys
+ have a 'A-' prefix. Thus key names for F1 are: F1,S-F1,C-F1 and A-F1.
+ The key names are the same as displayed by the showkeys command.
+
+ ---------+-------------------+---------------+-------------+-------------
+ Key Name | Normal            | Shifted       | Control     | Alt
+ ---------+-------------------+---------------+-------------+-------------
+ F1       | help              |               |             |
+ F2       | refresh           |               |             |
+ F3       | quit              |               |             |
+ F4       | kedit             |               |             |
+ F5       | copy / a:         |               |             |
+ F6       | copy / b:         |               |             |
+ F7       | backward 1        |               |             |
+ F8       | forward 1         |               |             |
+ F9       | shell             |               |             |
+ F10      | recall            |               |             |
+ F11      |                   |               |             |
+ F12      | nextwindow        |               |             |
+ CURU     | cursor left       |               |             |
+ CURD     | cursor down       |               |             |
+ CURL     | cursor left       |               |             |
+ CURR     | cursor right      |               |             |
+ INS      |                   |               |             |
+ DEL      | sos delchar       |               |             |
+ HOME     | cursor home save  |               |             |
+ END      | sos startendchar  |               |             |
+ PGUP     | backward 1        |               | top         |
+ PGDN     | forward 1         |               | forward *   |
+ BKSP     | sos delback       |               |             |
+ ENTER    | enter             |               |             |
+ NUMENTER | sos doprefix      |               |             |
+ ESC      | sos undo          |               |             |
+ TAB      | sos tabfieldf     | sos tabfieldb |             |
+ ---------+-------------------+---------------+-------------+-------------
+

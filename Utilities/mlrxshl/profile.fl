@@ -1,0 +1,18 @@
+/* profile.fl - Xedit colo[u]rs                                950202 */
+
+'SET COLOR FILEAREA GREEN'
+'SET COLOR CMDLINE  YELLOW'
+'SET COLOR ARROW    BRIGHT GREEN'
+'SET COLOR PREFIX   GREEN'
+'SET COLOR IDLINE   BRIGHT GREEN'
+'SET COLOR PENDING  YELLOW'
+'SET COLOR CURLINE  BRIGHT CYAN'
+'SET COLOR MSGLINE  BOLD RED'
+
+/* prefix content */
+fill = '====='
+
+/* You can use any FILELIST command, as long as they are enclosed     */
+/* with singles or doubles quotes.                                    */
+'SET CURL M'
+

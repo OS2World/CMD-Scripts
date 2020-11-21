@@ -1,0 +1,100 @@
+/* readme  - this is the readme file of the MlRxShl package  20060525 */
+
+MlRxShl provides tools which improve the command-line environment.  But
+it's NOT another cmd.exe replacement.
+
+The following text describes the content of this package, and what
+features it provides.
+
+This package contains the following files:
+
+   cmdshl.cmd     -- the command shell front end.
+   df.cmd         -- an Unix-like DF command.
+   file_id.diz    -- a short description used by BBS.
+   fl.cmd         -- a filelist-like file manager.
+   fl.hlp         -- the fl.cmd online help.
+   less.cmd       -- a better more.
+   mlrxshl.inf    -- the complete documentation.
+   mlrxshl0.ipf   -- the documentation header source code.
+   mlrxshl0.inf   -- the documentation header.
+   popd.cmd       -- a 'pop dir' command.
+   profile.fl     -- a FL profile sample.
+   profile.shl    -- a CMDSHL profile sample.
+   profile1.shl   -- a commented version of PROFILE.SHL.
+   pushd.cmd      -- a 'push dir' command.
+   query.cmd      -- extracts various information from %ETC%\connect.log
+   readme         -- this file!
+   rexxvio.dll    -- the text-mode interface for REXX.
+   rexxvio.old    -- the text-mode interface for REXX (no >2GB support).
+   sdir.cmd       -- puts some colors in your directory listings.
+   whence.cmd     -- find a file along a path (PATH by default).
+
+
+FEATURES:
+=========
+
+   The five provided tools are completely independent.
+
+ CmdShl
+ ------
+
+   CmdShl is a command interpreter front-end.  It provides improved
+   editing commands, alias, filename completion, ...
+
+   It can use cmd.exe, 4os2.exe or any other command interpreter which
+   provides a Rexx environment.
+
+ Fl.cmd
+ ------
+
+   Fl is yet another character-mode file manager.  It mimics the
+   features of FILELIST.
+
+ less.cmd
+ --------
+
+   Less is (yet another) better more.  This one can act as a filter or
+   as a command, allows horizontal and vertical scrolling, can locate
+   specific text strings, ..., and, most of all, has a much faster
+   display speed than more.exe.
+
+   And less.cmd is so small (less than 2Kb :-)...
+
+ SDir.cmd
+ --------
+
+   SDir is a drop-in replacement for the default DIR command.  It
+   provides user-definable highlighting.
+
+ Query.cmd
+ ---------
+
+   QUERY is a command used to extract various data.  It is especially
+   useful if you are using Ultimedia Mail/Lite as your mail reader or
+   IBM Global Network as your Internet provider.  It was created to
+   simply obtain data that were concealed or not otherwise directly
+   available.
+
+
+INSTALLATION:
+=============
+
+   Unpack the archive in a temporary directory and read the online help
+   for details on how to install the features you are interested in by
+   issuing the following command:
+
+      VIEW MLRXSHL0+MLRXSHL
+
+
+MORE INFORMATION:
+=================
+
+   You can read more about the current release of MlRxShl by pointing
+   your WWW browser at <URL:http://lafaix.online.fr/os2/os2betaus.html>.
+   The complete online help is available in HTML format, so that you
+   can read it before downloading this package.
+
+
+--
+Martin Lafaix
+lafaix@online.fr

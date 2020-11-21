@@ -1,0 +1,252 @@
+/* profile.shl - sample bindings                               990601 */
+
+
+/* This profile file demonstrates typical profile usage:              */
+/*                                                                    */
+/*       - Improving/tailoring existing commands, adding shortcuts    */
+/*         [The auto-close '(', the insert-date key (F8), and S-F7,   */
+/*         which displays all possible filenames.]                    */
+/*                                                                    */
+/*       - Adding new functions                                       */
+/*         [The persistent command history, F2 (save), F5 (load) and  */
+/*         F7 (name), tools to search items through command history   */
+/*         as well as screen management system with C-UP, C-DOWN and  */
+/*         C-PADPLUS.]                                                */
+/*                                                                    */
+/*       - National Language Support                                  */
+/*         [on-line messages in French.]                              */
+/*                                                                    */
+/*       - Useful global aliases and rules                            */
+
+
+/* In a profile file, you can use any REXX instruction, but, due to   */
+/* the current implementation, it must fit in one line.               */
+/*                                                                    */
+/* That is, you can use:                                              */
+/*                                                                    */
+/*     if foo = 'XYZZY' then say 'Nothing happens'; else  x = x + 1   */
+/*                                                                    */
+/* But you can't use:                                                 */
+/*                                                                    */
+/*     if foo = 'XYZZY' then                                          */
+/*        say 'Twice as much happens'                                 */
+/*     else                                                           */
+/*        x = x + 1                                                   */
+/*                                                                    */
+/* Alternatively, you can use the comma as a line continuation marker */
+/*                                                                    */
+/*     foo = 'Hello',                                                 */
+/*           'world'                                                  */
+/*                                                                    */
+/* Another important difference with standard REXX scripts is that    */
+/* you cannot call CmdShl commands in a REXX structure using the      */
+/* standard way.  You have to use the eval function.  That is,        */
+/*                                                                    */
+/*     if answer = 'YES' then                                         */
+/*        'DEFINE F12 OSNOWAIT shutdown'                              */
+/*     else                                                           */
+/*        'DEFINE F12 TEXT shutdown'                                  */
+/*                                                                    */
+/* does not work.  You have to use:                                   */
+/*                                                                    */
+/*     if answer = 'YES' then                                         */
+/*        call eval 'DEFINE F12 OSNOWAIT shutdown'                    */
+/*     else                                                           */
+/*        call eval 'DEFINE F12 TEXT shutdown'                        */
+/*                                                                    */
+/* [But it works just fine outside of a structure.]                   */
+
+
+/* Note: when a command name is in mixed case, like DEFine below, it  */
+/*       means that you can use DEF, DEFI, DEFIN or DEFINE.           */
+
+/*                                                                    */
+/* There's currently only one "pseudo" command, DEFine, which is most */
+/* useful in profile file. Its syntax is as follows:                  */
+/*                                                                    */
+/*     DEFine key value                                               */
+/*                                                                    */
+/* Key is a user-defined key or a predefined one:                     */
+/*                                                                    */
+/*     A-F10, BKSP, CURD, CURL, CURR, CURU, C-CURL, C-CURR, C-END,    */
+/*     C-HOME, C-PGDN, C-PGUP, DEL, END, ENTER, ESC, F1, F2, F3, F4,  */
+/*     F5, F6, F7, F8, F9, F10, F11, F12, HOME, INS, PGDN, PGUP,      */
+/*     SPACE, S-TAB, TAB                                              */
+/*                                                                    */
+/*     [Shifted keys have a "S-" prefix, control keys have a "C-"     */
+/*      prefix and Alt keys have a "A-" prefix.]                      */
+/*                                                                    */
+/* and value is an internal action or MC nnn, OSNowait nnn or         */
+/* TEXT nnn:                                                          */
+/*                                                                    */
+/*     backmatch, backsp, cdown, cleft, cright, ctrlend, ctrlhome,    */
+/*     ctrlleft, ctrlright, cup, del, end, enter, esc, match, home,   */
+/*     ins, tab, space, expand                                        */
+/*                                                                    */
+/*     TEXT nnn simulates the keyboard entry of nnn                   */
+/*                                                                    */
+/*     OSNowait cmd executes cmd (via the CmdShl interpreter)         */
+/*                                                                    */
+/*     MC separator cmd1 separator cmd2... allows the usage of more   */
+/*     than one command for a key                                     */
+/*                                                                    */
+/* All other "pseudo" commands are executed via CmdShl's interpreter. */
+
+/* [In fact, the DEFine command could have been implemented as an     */
+/*  alias:                                                            */
+/*                                                                    */
+/*     ALIAS DEFINE=RX _args="%*";                                    */
+/*                     parse value _args with key rest;               */
+/*                     if length(key) > 1 then                        */
+/*                        key = value(translate(key,"_","-"));        */
+/*                     if rest \= "" then                             */
+/*                        call value "key._"c2x(key), rest;           */
+/*                     else interpret "drop key._"c2x(key)            */
+/*                                                                    */
+/*  It is functionally equivalent.]                                   */
+
+/* user-defined key name - note the usage of "_" in place of "-" in   */
+/*                         the key name (you can't use "-" in a REXX  */
+/*                         variable name).                            */
+/*                                                                    */
+/*                         The value of a key name is the hexadecimal */
+/*                         value returned by the getKey function when */
+/*                         pressing it (you can use the following     */
+/*                         CmdShl command to find it) :               */
+/*                                                                    */
+/*                         RX call getkey; say "'"substr(ckey,2)"'x"  */
+
+/* Note: by default, variables are hidden when inside a getLine call. */
+/*       If you want to expose some of them, add them to the global   */
+/*       variable -- global = global "newname1 newname2"              */
+/*                                                                    */
+/*       So, each time you use one of your variable in the right hand */
+/*       side of a DEFine command, you have to expose it.             */
+
+
+S_F7 = '005A'x; C_CURU = '008D'x; C_CURD = '0091'x; C_PADPLUS = '0090'x
+
+/* defining key value - a shifted key can use "-" or "_" in its name  */
+'DEFINE F3 OSNOWAIT EXIT'
+
+
+/* you can even do complex things:                                    */
+'DEFINE (  MC /TEXT ()/cleft'
+
+'DEFINE F8 OSNOWAIT RX line = insert(date(),line,currOfs); currOfs = currOfs+length(date())'
+
+'DEFINE S-F7 osn rx if currTab = 0 then currTab = findcontextcompletion(); if currTab \= 0 then do; say; do i = 1 to tree.0; say tree.i; end; call charout, print(); oline=""; parse value SysCurPos() with origRow origCol .; key="tab"; end'
+
+
+/* we can even add a new feature: loading/saving commands history     */
+
+/* first, we define a file name (and make it public, F7 requires it): */
+history = expand('%tmp%\history.shl'); global = global 'history'
+
+/* then, an alias, LOADHIST, which loads the commands history         */
+'ALIAS LOADHIST=RX drop prevLine.; i = 0; call stream history, "c", openread; do while lines(history); i = i+1; prevLine.i = linein(history); end; prevLine.0 = i; call stream history, "c", "close"'
+/* now, we define three function keys, F2 (save), F5 (load/refresh)   */
+/* and F7 (name)                                                      */
+'DEFINE F2 OSNOWAIT RX "@del /f" history; do i = 1 to prevLine.0; call lineout history, prevLine.i; end; call stream history, "c", "close"'
+'DEFINE F5 OSNOWAIT LOADHIST'
+'DEFINE F7 OSNOWAIT RX call charout ,"1b"x"[s"||"1b"x"[0;0H"||"1b"x"[1;37;42m"||"1b"x"[KNew history name: "; history=getLine(history); call charout ,"1b"x"[0;0H"||"1b"x"[0;34;47m"||"1b"x"[K"helpstring"1b"x"[0m"||"1b"x"[u"'
+
+/* finally, we load the default history                               */
+'LOADHIST'
+
+
+/* We can even define a screen management system.                     */
+scr.0 = 0; global = global 'scr.'
+
+'ALIAS PUSHSCR=RX i = scr.0 + 1; scr.i._C = SysCurPos(); scr.i._P = currOfs origRow origCol; scr.i._L = line; scr.i._S = VioReadCellStr(0,0); scr.i._O = oldDir; scr.i._D = directory(); scr.0 = i'
+'ALIAS POPSCR=RX i = scr.0; if i > 0 then do; call VioWrtCellStr 0,0,scr.i._S; line = scr.i._L; call SysCurPos word(scr.i._c,1), word(scr.i._c,2); parse var scr.i._P currOfs origRow origCol; oldDir = scr.i._O; call directory scr.i._D; scr.0 = i-1; end'
+'ALIAS SWAPTMPSCR=RX i = scr.0 + 1; scr.i._C = scr._C; scr.i._P = scr._P; scr.i._L = scr._L; scr.i._S = scr._S; scr.i._O = scr._O; scr.i._D = scr._D; scr.0 = i'
+'ALIAS SWAPSCR=RX if scr.0 > 0 then do; scr._C = SysCurPos(); scr._P = currOfs origRow origCol; scr._L = line; scr._S = VioReadCellStr(0,0); scr._O = oldDir; scr._D = directory(); call eval "POPSCR & SWAPTMPSCR"; end'
+
+'DEFINE C-CURD OSNOWAIT PUSHSCR'
+'DEFINE C-CURU OSNOWAIT POPSCR'
+'DEFINE C-PADPLUS OSNOWAIT SWAPSCR'
+
+/* We redefine C-K to a smarter duplication function.                 */
+'DEFINE C-K MC /dup/tab'
+
+/* We define tools to search through command history.                 */
+C_F = '06'x; C_R = '12'x; global = global 'item'; item = ''
+'DEFINE C-R OSN RX oldLine=currLine;call charout ,"1b"x"[s"||"1b"x"[0;0H"||"1b"x"[1;37;42m"||"1b"x"[KSearch for: "; item=getLine(item); call charout ,"1b"x"[0;0H"||"1b"x"[0;34;47m"||"1b"x"[K"helpstring"1b"x"[0m"||"1b"x"[u";',
+           'if item \= "" then do;prevLine.0=prevLine.0-1;currLine=oldLine-1;if currLine=0 then currLine=prevLine.0;do prevLine.0 while pos(item,prevLine.currLine) = 0;currLine = currLine-1;',
+           'if currLine=0 then currLine=prevLine.0;end;if pos(item,prevLine.currLine) \= 0 then line=prevLine.currLine;currOfs=length(line);xOfs=0;end'
+'DEFINE C-F OSN RX if item\="" then do; oldCur=currLine;currLine = currLine-1;if currLine = 0 then currLine=prevLine.0;',
+           'do prevLine.0 while pos(item,prevLine.currLine) = 0;currLine = currLine-1;if currLine=0 then currLine=prevLine.0;end;if pos(item,prevLine.currLine) \= 0 then line=prevLine.currLine;currOfs=length(line);xOfs=0; end'
+
+/* Here, we redefine help messages in French...                       */
+defHelp = "Utilisez la command DEFINE pour (re)d‚finir le r“le des touches"nl||,
+          "du clavier."nl||nl||,
+          "SYNTAXE:    DEF touche [valeur]"nl||,
+          "         DEFINE touche [valeur]"nl||nl||,
+          "          touche  Sp‚cifie le nom de la touche … d‚finir."nl||,
+          "          valeur  Valeur affect‚e … la touche. Ce peut ˆtre une"nl||,
+          "                  commande interne, MC xxx, OSNowait yyy ou TEXT zzz."nl||nl||,
+          "Exemples:"nl||,
+          "          DEF F12 TEXT dir /w"nl||,
+          "       DEFINE F3  OSNOWAIT exit"nl||,
+          "          DEF F12"
+aliasHelp = "Utilisez la commande ALIAS pour afficher, d‚finir ou"nl||,
+            "supprimer un alias."nl||nl||,
+            "SYNTAXE: ALIAS [LIST|alias=[chaŒne]|@fichier]"nl||nl||,
+            "          LIST     Affiche la liste des alias en cours."nl||,
+            "          alias    Sp‚cifie le nom de l'alias."nl||,
+            "          chaŒne   Valeur alphanum‚rique affect‚e … l'alias."nl||,
+            "          fichier  Nom d'un fichier contenant un ensemble de"nl||,
+            "                   d‚finitions d'alias."nl||nl||,
+            "Dans la d‚finition d'un alias, %* correspond aux paramŠtres"nl||,
+            "pass‚s sur la ligne de commande."
+ruleHelp = "Utilisez la commande RULE pour afficher, d‚finir ou"nl||,
+           "supprimer une rŠgle."nl||nl||,
+           "SYNTAXE: RULE [LIST|rŠgle=[chaŒne]|@fichier]"nl||nl||,
+           "          LIST     Affiche la liste des rŠgles en cours."nl||,
+           "          rŠgle    Sp‚cifie le nom de la rŠgle."nl||,
+           "          chaŒne   Valeur alphanum‚rique affect‚e … la rŠgle."nl||,
+           "          fichier  Nom d'un fichier contenant un ensemble de"nl||,
+           "                   d‚finitions de rŠgles."nl||nl||,
+           "Dans la d‚finition d'une rŠgle, %*, %c, %d, %e, %f, %l, %o,"nl||
+           "%u et %x d‚notent le type des paramŠtres."
+cmdHelp = "Utilisez la commande CMDSHL pour augmenter les capacit‚s de"nl||,
+          "votre interpr‚teur de commande."nl||nl||,
+          "SYNTAXE: CMDSHL [/I|/O] [/P profile] [/C cmd|/K cmd]"nl||nl||,
+          "          /I    S‚lecte le mode Insertion par d‚faut."nl||,
+          "          /O    S‚lecte le mode surfrappe par d‚faut."nl||,
+          "          /P    Utilise le fichier profile sp‚cifi‚."nl||,
+          "          /C    Ex‚cute la commande cmd et met fin … l'ex‚cution"nl||,
+          "                de CMDSHL."nl||,
+          "          /K    Ex‚cute la commande cmd sans mettre fin … l'ex‚cution"nl||,
+          "                de CMDSHL."nl||nl||,
+          "Par d‚faut, le mode Insertion est actif et le fichier PROFILE.SHL"nl||,
+          "est utilis‚ comme profile s'il existe sur le chemin sp‚cifi‚ par"nl||,
+          "la variable d'environnement DPATH."
+cdHelp = "Tapez CD -        Pour retourner au r‚pertoire pr‚c‚dent."nl||,
+         "Tapez CD s1 s2    Pour remplacer s1 par s2 dans le r‚pertoire en cours."
+quitHelp = "Utilisez la commande QUIT pour quitter CMDSHL."nl||nl||,
+           "SYNTAXE: QUIT"
+
+
+/* useful aliases... from my point of view :-) */
+'ALIAS rlogin=cls ^& ckermit ^& UTIL\telnet %1.unice.fr ^& cd -'
+'ALIAS xrn=e:\local\yarn ^& yarn.exe ^& cd -'
+'ALIAS open=rx xline = "%*"; if xline = "" then xline = directory(); else xline = findcommand(); call SysOpenObject xline,"DEFAULT",1; call SysOpenObject xline,"DEFAULT",1'
+'ALIAS tc=java TCTypeCheck %*'
+'ALIAS dir='SysSearchPath('PATH', 'sdir.cmd')' %*'
+'ALIAS netscape=rx url=stream("%1", "c", "query exists"); if url="" then call eval("start netscape.exe %1"); else call eval("start netscape.exe" url)'
+'ALIAS loop=rx do %*'
+'ALIAS qd=query date'
+'ALIAS qt=query time'
+'ALIAS recurse=rx orgdir=directory(); call SysFileTree "*","dirs.","DSO"; do i=1 to dirs.0; call directory dirs.i; call eval "%1*^&rx needCR=0"; end; call directory orgdir'
+'ALIAS revmap=rx call SysFileTree "*","dirs.","DSO"; do i=dirs.0 to 1 by -1; call eval "%1*" dirs.i "^&rx needCR=0"; end'
+'ALIAS map=rx call SysFileTree "*","dirs.","DSO"; do i=1 to dirs.0; call eval "%1*" dirs.i "^&rx needCR=0"; end'
+'ALIAS except=rx parse value "%1*" with "(" liste ")" cmde; line=""; currOfs=0; call findmulticompletion liste; do _i = 1 to tree.0; "attrib +H" tree._i; end; call eval cmde, "except"; do _i = 1 to tree.0; "attrib -H" tree._i; end'
+
+/* useful rule... from my point of view :-) */
+'RULE WHENCE=%f %e'
+'RULE UNZIP=%u %(*.zip *.exe *.jar) %*'
+'RULE VIEW=%(*.inf *.hlp) %*'
+'RULE recurse=%x'
+'RULE except=(%*) %x'

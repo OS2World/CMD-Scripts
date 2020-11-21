@@ -1,0 +1,9 @@
+MLRXSHL provides tools which improve the
+command-line environment.  It contains
+CmdShl, a command interpreter front-end
+(with aliases, filename completion, "live"
+command checking, etc.), Fl, a filelist-like
+text-mode file manager, Less, a better more,
+and some other useful tools.
+[FREEWARE, w/ source code. 20060527 release]
+Author: Martin Lafaix (lafaix@online.fr)

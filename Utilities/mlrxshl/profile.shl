@@ -1,0 +1,76 @@
+/* profile2.shl - sample bindings                              990601 */
+S_F7 = '005A'x; C_CURU = '008D'x; C_CURD = '0091'x; C_PADPLUS = '0090'x
+'DEFINE F3 OSNOWAIT EXIT'
+'DEFINE (  MC /TEXT ()/cleft'
+'DEFINE F8 OSNOWAIT RX line = insert(date(),line,currOfs); currOfs = currOfs+length(date())'
+'DEFINE S-F7 osn rx if currTab = 0 then currTab = findcontextcompletion(); if currTab \= 0 then do; say; do i = 1 to tree.0; say filespec('n',tree.i); end; call charout, print(); oline=""; parse value SysCurPos() with origRow origCol .; key="tab"; end'
+history = expand('%tmp%\history.shl'); global = global 'history'
+'ALIAS LOADHIST=RX drop prevLine.; i = 0; call stream history, "c", openread; do while lines(history); i = i+1; prevLine.i = linein(history); end; prevLine.0 = i; call stream history, "c", "close"'
+'DEFINE F2 OSNOWAIT RX "@del /f" history; do i = 1 to prevLine.0; call lineout history, prevLine.i; end; call stream history, "c", "close"'
+'DEFINE F5 OSNOWAIT LOADHIST'
+'DEFINE F7 OSNOWAIT RX call charout ,"1b"x"[s"||"1b"x"[0;0H"||"1b"x"[1;37;42m"||"1b"x"[KNew history name: "; history=getLine(history); call charout ,"1b"x"[0;0H"||"1b"x"[0;34;47m"||"1b"x"[K"helpstring"1b"x"[0m"||"1b"x"[u"'
+'LOADHIST'
+scr.0 = 0; global = global 'scr.'
+'ALIAS PUSHSCR=RX i = scr.0 + 1; scr.i._C = SysCurPos(); scr.i._P = currOfs origRow origCol; scr.i._L = line; scr.i._S = VioReadCellStr(0,0); scr.i._O = oldDir; scr.i._D = directory(); scr.0 = i'
+'ALIAS POPSCR=RX i = scr.0; if i > 0 then do; call VioWrtCellStr 0,0,scr.i._S; line = scr.i._L; call SysCurPos word(scr.i._c,1), word(scr.i._c,2); parse var scr.i._P currOfs origRow origCol; oldDir = scr.i._O; call directory scr.i._D; scr.0 = i-1; end'
+'ALIAS SWAPTMPSCR=RX i = scr.0 + 1; scr.i._C = scr._C; scr.i._P = scr._P; scr.i._L = scr._L; scr.i._S = scr._S; scr.i._O = scr._O; scr.i._D = scr._D; scr.0 = i'
+'ALIAS SWAPSCR=RX if scr.0 > 0 then do; scr._C = SysCurPos(); scr._P = currOfs origRow origCol; scr._L = line; scr._S = VioReadCellStr(0,0); scr._O = oldDir; scr._D = directory(); call eval "POPSCR & SWAPTMPSCR"; end'
+'DEFINE C-CURD OSNOWAIT PUSHSCR'
+'DEFINE C-CURU OSNOWAIT POPSCR'
+'DEFINE C-PADPLUS OSNOWAIT SWAPSCR'
+'DEFINE C-K MC /dup/tab'
+C_F = '06'x; C_R = '12'x; global = global 'item'; item = ''
+'DEFINE C-R OSN RX oldLine=currLine;call charout ,"1b"x"[s"||"1b"x"[0;0H"||"1b"x"[1;37;42m"||"1b"x"[KSearch for: "; item=getLine(item); call charout ,"1b"x"[0;0H"||"1b"x"[0;34;47m"||"1b"x"[K"helpstring"1b"x"[0m"||"1b"x"[u";',
+           'if item \= "" then do;prevLine.0=prevLine.0-1;currLine=oldLine-1;if currLine=0 then currLine=prevLine.0;do prevLine.0 while pos(item,prevLine.currLine) = 0;currLine = currLine-1;',
+           'if currLine=0 then currLine=prevLine.0;end;if pos(item,prevLine.currLine) \= 0 then line=prevLine.currLine;currOfs=length(line);xOfs=0;end'
+'DEFINE C-F OSN RX if item\="" then do; oldCur=currLine;currLine = currLine-1;if currLine = 0 then currLine=prevLine.0;',
+           'do prevLine.0 while pos(item,prevLine.currLine) = 0;currLine = currLine-1;if currLine=0 then currLine=prevLine.0;end;if pos(item,prevLine.currLine) \= 0 then line=prevLine.currLine;currOfs=length(line);xOfs=0; end'
+defHelp = "Utilisez la command DEFINE pour (re)d‚finir le r“le des touches"nl"du clavier."nl||nl||,
+          "SYNTAXE:    DEF touche [valeur]"nl"         DEFINE touche [valeur]"nl||nl||,
+          "          touche  Sp‚cifie le nom de la touche … d‚finir."nl||,
+          "          valeur  Valeur affect‚e … la touche. Ce peut ˆtre une"nl"                  commande interne, MC xxx, OSNowait yyy ou TEXT zzz."nl||nl||,
+          "Exemples:"nl"          DEF F12 TEXT dir /w"nl"       DEFINE F3  OSNOWAIT exit"nl"          DEF F12"
+aliasHelp = "Utilisez la commande ALIAS pour afficher, d‚finir ou"nl"supprimer un alias."nl||nl||,
+            "SYNTAXE: ALIAS [LIST|alias=[chaŒne]|@fichier]"nl||nl||,
+            "          LIST     Affiche la liste des alias en cours."nl||,
+            "          alias    Sp‚cifie le nom de l'alias."nl||,
+            "          chaŒne   Valeur alphanum‚rique affect‚e … l'alias."nl||,
+            "          fichier  Nom d'un fichier contenant un ensemble de"nl"                   d‚finitions d'alias."nl||nl||,
+            "Dans la d‚finition d'un alias, %n[*] correspond aux paramŠtres"nl"pass‚s sur la ligne de commande."
+ruleHelp = "Utilisez la commande RULE pour afficher, d‚finir ou"nl"supprimer une rŠgle."nl||nl||,
+           "SYNTAXE: RULE [LIST|rŠgle=[chaŒne]|@fichier]"nl||nl||,
+           "          LIST     Affiche la liste des rŠgles en cours."nl||,
+           "          rŠgle    Sp‚cifie le nom de la rŠgle."nl||,
+           "          chaŒne   Valeur alphanum‚rique affect‚e … la rŠgle."nl||,
+           "          fichier  Nom d'un fichier contenant un ensemble de"nl"                   d‚finitions de rŠgles."nl||nl||,
+           "Dans la d‚finition d'une rŠgle, %*, %c, %d, %e, %f, %l, %o et"nl"%x d‚notent le type des paramŠtres."
+cmdHelp = "Utilisez la commande CMDSHL pour augmenter les capacit‚s de"nl"votre interpr‚teur de commande."nl||nl||,
+          "SYNTAXE: CMDSHL [/I|/O] [/P profile] [/C cmd|/K cmd]"nl||nl||,
+          "          /I    S‚lecte le mode Insertion par d‚faut."nl||,
+          "          /O    S‚lecte le mode surfrappe par d‚faut."nl||,
+          "          /P    Utilise le fichier profile sp‚cifi‚."nl||,
+          "          /C    Ex‚cute la commande cmd et met fin … l'ex‚cution"nl"                de CMDSHL."nl||,
+          "          /K    Ex‚cute la commande cmd sans mettre fin … l'ex‚cution"nl"                de CMDSHL."nl||nl||,
+          "Par d‚faut, le mode Insertion est actif et le fichier PROFILE.SHL"nl"est utilis‚ comme profile s'il existe sur le chemin sp‚cifi‚ par"nl"la variable d'environnement DPATH."
+cdHelp = "Tapez CD -        Pour retourner au r‚pertoire pr‚c‚dent."nl||,
+         "Tapez CD s1 s2    Pour remplacer s1 par s2 dans le r‚pertoire en cours."
+quitHelp = "Utilisez la commande QUIT pour quitter CMDSHL."nl||nl||,
+           "SYNTAXE: QUIT"
+'ALIAS rlogin=cls ^& f:\local\ckermit ^& UTIL\telnet %1.unice.fr ^& cd -'
+'ALIAS xrn=e:\local\yarn ^& yarn.exe ^& cd -'
+'ALIAS open=rx xline = "%*"; if xline = "" then xline = directory(); else xline = findcommand(); call SysOpenObject xline,"DEFAULT",1; call SysOpenObject xline,"DEFAULT",1'
+'ALIAS tc=java TCTypeCheck %*'
+'ALIAS dir='SysSearchPath('PATH', 'sdir.cmd')' %*'
+'ALIAS netscape=rx url=stream("%1", "c", "query exists"); if url="" then call eval("start netscape.exe %1"); else call eval("start netscape.exe" url)'
+'ALIAS loop=rx do %*'
+'ALIAS qd=query date'
+'ALIAS qt=query time'
+'ALIAS recurse=rx orgdir=directory(); call SysFileTree "*","dirs.","DSO"; do i=1 to dirs.0; call directory dirs.i; call eval "%1*^&rx needCR=0"; end; call directory orgdir'
+'ALIAS revmap=rx call SysFileTree "*","dirs.","DSO"; do i=dirs.0 to 1 by -1; call eval "%1*" dirs.i "^&rx needCR=0"; end'
+'ALIAS map=rx call SysFileTree "*","dirs.","DSO"; do i=1 to dirs.0; call eval "%1*" dirs.i "^&rx needCR=0"; end'
+'ALIAS except=rx parse value "%1*" with "(" liste ")" cmde; line=""; currOfs=0; call findmulticompletion liste; do _i = 1 to tree.0; "attrib +H" tree._i; end; call eval cmde, "except"; do _i = 1 to tree.0; "attrib -H" tree._i; end'
+'RULE WHENCE=%f %e'
+'RULE recurse=%x'
+'RULE except=(%*) %x'
+'RULE UNZIP=%u %(*.zip *.exe *.jar) %*'
+'RULE VIEW=%(*.inf *.hlp) %*'
