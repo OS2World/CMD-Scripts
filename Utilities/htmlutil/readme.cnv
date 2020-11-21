@@ -1,0 +1,115 @@
+HTMLutil - readme.cnv - 950823
+
+This (very preliminary) package for HTML contains the following files:
+
+   HTMLconv.cmd   - Text to/from, IPF to HTML converter ;
+   ipftags.437    - symbols definitions for IPF (code page 437) ;
+   ipftags.850    - symbols definitions for IPF (code page 850) ;
+   htmltags.437   - symbols definitions for HTML (code page 437) ;
+   htmltags.850   - symbols definitions for HTML (code page 850) ;
+   htmltags.def   - HTML definition file for EBOOKIE ;
+   profile.cnv    - a sample profile file for HTMLconv ;
+   readme.cnv     - this file.
+
+
+What's that?
+============
+
+   HTMLutil tries to help you creating HTML documents.  It contains
+   HTML definition files for EBOOKIE, an excellent package for EPM,
+   and a converter, which can be used to convert from HTML to text,
+   from text to HTML and from IPF to HTML.
+
+
+What's new?
+===========
+
+   o bkmtags.437 and bkmtags.850 renamed ipftags.* ;
+   o more tags in htmltags.def (tables, ...) ;
+   o speed improvement in HTMLconv ;
+   o HTMLconv uses ipftags.* instead of bkmtags.* ;
+   o uppercase tags are now recognized in IPF files ;
+   o HTML file can be 'splitted' by header level ;
+   o minor bug fixes in HTMLconv (version is now 0.09.000) ;
+   o a .BMP to .GIF converter can be used, if available.
+
+
+How to install?
+===============
+
+   Copy HTMLconv.cmd somewhere along your PATH, profile.cnv somewhere
+   along your DPATH and *tags.* somewhere along your EPMPATH.
+
+   That's all.
+
+   [If you're not using EBOOKIE, you can safely remove htmltags.def.]
+
+
+How to use?
+===========
+
+   To use the EBOOKIE part, simply load an HTML file, and execute the
+   following EPM commands :
+
+      bookie on
+      bookief HTMLTAGS.DEF
+
+   [The EBOOKIE package must have been properly installed.]
+
+
+   To use HTMLconv, simply call it with the correct command line
+   parameters (without parameters, a small help screen is displayed).
+
+   Here are typical commands:
+
+      HTMLconv -i mydoc.ipf mydoc.html    - creates mydoc.html and
+                                            toc.html.
+      HTMLconv mydoc.html mydoc.txt       - creates mydoc.txt
+      HTMLconv -t mydoc.txt mydoc.htm     - creates mydoc.htm
+      HTMLconv -i big.ipf big??.html      - creates big01.html,
+                                            big02.html, ... and
+                                            toc.html
+
+   [HTMLconv configuration can be tailored via PROFILE.CNV.]
+
+
+Known problems/limitations:
+===========================
+
+   The HTML to text conversion simply removes HTML tags and translates
+   HTML symbols.
+
+   The text to HTML conversion simply translates symbols.  No
+   formatting is performed.
+
+   [By translating symbols, I mean swapping from, say, '‚' to '&eacute;'
+   and back from '&eacute;' to '‚'...]
+
+   The IPF to HTML conversion is very simple, too:
+
+      It produces a table of content (toc.html by default), which
+      contains links to headers (by default, levels 1, 2 and 3), and a
+      main document, which contains the completely expanded IPF
+      document.
+
+      The following tags are translated:
+
+         :artwork.  :c.  :dl.  :h1. - :h6.  :hp1. - :hp7.  :li.  :link.
+         :note.  :ol.  :p.  :row.  :table.  :ul.  :userdoc.  :xmp.
+
+      [Yes, all others tags are skipped :-( ]
+
+      .im, .br and .* are correctly processed, though.
+
+      And it's slow... (1mn/50kb on my 486DX33)
+
+   You cannot specify the table of contents file name from the command
+   line (toc.html by default), but you can overrides it in your
+   PROFILE.CNV.
+
+
+
+--
+lafaix@alto.unice.fr
+Team OS/2
+

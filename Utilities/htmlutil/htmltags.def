@@ -1,0 +1,89 @@
+* EBOOKIE tag_start=< tag_end=> end_tag=</ a_2=<P> invalid=&lt; symbols=htmltags
+<!doctype 1 HTML PUBLIC "--//IETF//DTD HTML "-//IETF//DTD HTML 3.0//EN" || #\
+<-- 1 || # --
+</a
+</abbrev
+</acronym
+</address
+</b
+</blockquote
+</body
+</cite
+</code
+</dfn
+</dl
+</em
+</font
+</h1
+</h2
+</h3
+</h4
+</h5
+</h6
+</h7
+</head
+</html
+</i
+</kbd
+</listing
+</ol
+</p
+</pre
+</samp
+</sl
+</strong
+</table
+</td
+</title
+</tr
+</tt
+</u
+</ul
+</var
+<a 3 href=# name= || #\</a>
+<abbrev
+<acronym
+<address
+<b 3 || #\</b>
+<blockquote
+<body 1 || #\</body>
+<br 1 + + clear=#
+<cite
+<code
+<dd 2
+<ddhd
+<dfn
+<dl 1 + + compact> || <dt>#\<dd>\</dl> || || <dt>
+<dt 1 >#<dd> || || || <dt>
+<em 3 || #\</em>
+<font 3 size=# || #<font>
+<h1 1 >#</h1
+<h2 1 >#</h2
+<h3 1 >#</h3
+<h4 1 >#</h4
+<h5 1 >#</h5
+<h6 1 >#</h6
+<h7 1 >#</h7
+<head 1 || #\</head>
+<hr 1 + + size=# width= align=
+<html 1 || #\</html>
+<i
+<img 1 src="#" + alt="" align= + vspace= hspace= width= height=
+<kbd
+<li 2 || || || <li>
+<listing
+<ol 1 + + compact || <li>@\</ol> || || <li>
+<p 2
+<pre 1 || #\</pre>
+<samp
+<sl 1 + + compact || <li>@\</sl> || || <li>
+<strong
+<table 1 + width=# cellpadding= cellspacing= border= units=PIXELS || #\</table>
+<td 3 + + align=# valid= || #\</td>
+<title 1
+<tr 3 + + valid=# || #\</tr>
+<tt
+<u 3 || #\</u>
+<ul 1 +  +compact || <li>@\</ul> || || <li>
+<var
+

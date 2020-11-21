@@ -1,0 +1,92 @@
+/* profile.cnv -- a profile file for HTMLconv                  950823 */
+
+/* This profile file demonstrates typical profile usage:              */
+/*                                                                    */
+/*       - setting user-defined default values                        */
+
+/* In a profile file, you can use any REXX instruction, but, due to   */
+/* the current implementation, it must fit in one line.               */
+/*                                                                    */
+/* That is, you can use:                                              */
+/*                                                                    */
+/*     if foo = 'XYZZY' then say 'Nothing happens'; else  x = x + 1   */
+/*                                                                    */
+/* But you can't use:                                                 */
+/*                                                                    */
+/*     if foo = 'XYZZY' then                                          */
+/*        say 'Twice as much happens'                                 */
+/*     else                                                           */
+/*        x = x + 1                                                   */
+/*                                                                    */
+/* Alternatively, you can use the comma as a line continuation marker */
+/*                                                                    */
+/*     foo = 'Hello',                                                 */
+/*           'world'                                                  */
+
+/* The following variables can be adjusted to fit your needs:         */
+/*                                                                    */
+/*     bmpconverter - the (optional) .BMP to .GIF converter           */
+/*     bmpext       - the new extension for converted bitmaps         */
+/*   * doclabel     - what to put at top of document                  */
+/*   * doctagline   - a tagline for the document                      */
+/*     doctype      - the HTML header to use in HTML files            */
+/*     nl           - what to use for endofline token                 */
+/*     split        - where to split                                  */
+/*     toc          - what to put in Table Of Contents                */
+/*     tocf         - file name for Table Of Contents                 */
+/*     toclabel     - what to put at top of Table Of Contents         */
+/*     toctagline   - a tagline for the Table Of Contents file        */
+/*                                                                    */
+/* Note: when prefixed with a '*', variable is interpreted at         */
+/*       execution time.                                              */
+
+/* Default values are:                                                */
+/*                                                                    */
+/* bmpconverter = ''                                                  */
+/* bmpext = ''                                                        */
+/* doclabel = ''                                                      */
+/* doctagline = '<hr>Converted by <b>htmlconv</b> v'version||,        */
+/*              ', (c) Martin Lafaix 1995'nl'</body>'nl'</html>'      */
+/* doctype = '<!doctype html public "-//IETF//DTD HTML 3.0//EN">'     */
+/* nl = '0d'x                                                         */
+/* split = ''                                                         */
+/* toc = '123'                                                        */
+/* tocf = 'toc.html'                                                  */
+/* toclabel = 'Contents'                                              */
+/* toctagline = '<hr>Converted by <b>htmlconv</b> v'version||,        */
+/*              ', (c) Martin Lafaix 1995'nl'</body>'nl'</html>'      */
+
+/* Here, I'm defining a bitmap converter.  It can be a REXX script.   */
+/* It is called by HTMLconv with the following parameters:            */
+/*                                                                    */
+/*     bmpconverter sourcefile destfile                               */
+
+bmpconverter = 'bmp2gif'
+bmpext = 'gif'
+
+/* Here, I'm defining the document header and tagline.  It may look   */
+/* a bit complex, but each value must be a QUOTED valid REXX expr.    */
+/* In fact, they are used the following way:                          */
+/*                                                                    */
+/*     interpret 'dummy='doclabel                                     */
+
+doclabel = '"Go to the <a href="buildname(destf,1)">first</a>, <a href="buildname(destf,destl-1)">previous</a>, <a href="buildname(destf,destl+1)">next</a>, last section, <a href='tocf'>table of contents</a>.<hr>"'
+doctagline = '"<hr>Go to the <a href="buildname(destf,1)">first</a>, <a href="buildname(destf,destl-1)">previous</a>, <a href="buildname(destf,destl+1)">next</a>, last section, <a href='tocf'>table of contents</a>."'
+
+/* Finally, I'm requesting a split level.  Each :h1. section will be  */
+/* in its own file -- that is:                                        */
+/*                                                                    */
+/* :h1.bla                      \                                     */
+/* :p.foo dsfjkghdkjf           |__ first HTML file                   */
+/* :h2.blah                     |                                     */
+/* :p.bar dsfjkghs sdfg         /                                     */
+/* :h1.blu                      \                                     */
+/* :p.fdsfdsdf                  |__ second HTML file                  */
+/* ...                         ...                                    */
+/*                                                                    */
+/* [If split='12' was used instead, the first file in the previous    */
+/*  example would have been splitted in two.]                         */
+
+split = '1'
+
+
