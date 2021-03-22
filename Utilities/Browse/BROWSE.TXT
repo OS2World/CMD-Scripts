@@ -1,0 +1,110 @@
+BROWSE - VIEW A TEXT FILE LINE BY LINE.  REXX program.  ÄVÄ920810Ä
+         ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+         ³ AUTHOR: Bruce E. H”gman BIX: BHOGMAN      ³
+         ³ (C) COPYRIGHT 1992. ALL RIGHTS RESERVED.  ³  SHAREWARE
+         ³ NASPA: HOGMBRU3 COMPUSERV: 72050,1327     ³  PROGRAM
+         ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ş   BROWSE Text files.
+
+ş   BROWSE binary files.
+
+ş   View file data in ASCII or in hexadecimal.  BROWSE translates some
+    unprintable characters in order to display them on the screen.
+
+ş   Use more than 25 lines per screen (OS/2 2.0 VGA supports up to 60).
+
+ş   Use 80+ columns (when SVGA OS/2 support becomes available).
+
+ş   Set your own preferences for screen color, size and save them.
+
+ş   Choose files from directory and navigate drives and directories.
+
+ş   Edit files using your favorite text editor.
+
+ş   Search for text and display matching lines.
+
+                =========================================
+
+SYNTAX of BROWSE command line:
+
+    BROWSE file_spec    /a /b /w /i /h
+
+/a  View all lines, including all blank lines.  BROWSE suppresses
+    display of groups of blank lines, retaining a single blank line.
+
+/b  Handle the file as a binary file.  Read the file in using a "line"
+    length which is the current screen size, ignoring any CRLF which
+    may be in data.  BROWSE will check to see if the file data should
+    be considered as binary data (executables, .SYS, etc.) using the
+    data in the first 80 bytes of the input file, and will set /B
+    processing itself.
+
+/h  Display help information, command line syntax and keys help.
+
+/i  Initialize stored parm values:  restore to default.
+
+/q  Quiet - suppress display of Copyright notice.
+
+/w  Don't fold long lines.  BROWSE folds lines longer than the current
+    screen width to fit on the screen so you don't have to scroll from
+    side to side to see all the data.  The /w option turns this off.
+
+                =========================================
+
+SOFTWARE REQUIREMENTS:
+
+ş   OS/2 2.0
+
+ş   REXX
+
+ş   ANSI.SYS (BROWSE uses ANSI screen control ESC sequences)
+
+                =========================================
+
+This program is published as shareware by the author, who ascribes to
+the principles and practices of the Association of Shareware
+Professionals.  If you use this program, please support the shareware
+principles by registering this program with the author for a suggested
+fee of $7.  The author will send you the next published version at no
+additional cost.  You may copy this program freely and distribute it as
+long as there is no fee charged for this program by itself.
+
+                =========================================
+
+NEW IN RELEASE ÄVÄ920810Ä
+
+ş   Edit file displayed in directory listing, or edit file being
+    browsed using 'E' letter key to select for edit.
+
+ş   Choose the editor to use with the edit function.  OS/2 Editor is the
+    default.  Note:  command generated is:  E fullfilename You may use
+    'E' to select a directory to edit, in which case the OS/2 editor
+    will produce an error, but other editors will bring up a display of
+    the files in that directory (SPF\2 by Command Technology Corp, or
+    TSPF by Tritus Inc. editors both function in the latter manner).
+
+ş   Select another directory or filename using 'F' key.
+
+ş   Search for text in file under browse and display lines containing
+    text.  This requires that browse.cmd be in the OS/2 PATH, since it
+    uses BROWSE as a subcommand.  Place BROWSE.CMD in \OS2\APPS.
+
+                =========================================
+
+FUTURE RELEASES:
+
+ş   User-programmable keyboard functions (user macros) to support
+    invoking programs or batch files using the currently highlighted
+    list item.
+
+ş   Hex display of file data (1 line data, 2 lines vertical hex).
+
+                =========================================
+
+                           ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+Bruce E. H”gman            ³ AUTHOR: Bruce E. H”gman BIX: BHOGMAN      ³
+629 S. 24th St.            ³ (C) COPYRIGHT 1992. ALL RIGHTS RESERVED.  ³
+Arlington VA 22202-2525    ³ NASPA: HOGMBRU3 COMPUSERV: 72050,1327     ³
+                           ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
