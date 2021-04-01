@@ -1,0 +1,1 @@
+Show if OS/2 Binary file is 32 or 16-bit

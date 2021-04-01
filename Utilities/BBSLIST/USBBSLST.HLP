@@ -1,0 +1,44 @@
+List accuracy is not assured. Use this material entirely at YOUR own
+risk. NO attempt is made to verify (1) BBSs outside 48 states,(2) CP/M or
+ROS, or (3) BBSs that charge fees for more than nominal access.
+
+    Under FEATURES, cols. 75-79 show the size and number of nodes
+    as follows: default = less than 100 megs; 1/ = 100 megs, 1 line
+    50/5 = 5 Gigs and 5 nodes.
+
+T/S: BBS Type and Status
+     TYPE CODES (RBBS-PC is default)      STATUS
+        A = Auntie                            $ = Subscription required
+        B = PCBoard                       HOURS (24 hr is default)
+        C = Phoenix/Collie/Collosus           (N,W) in FEATURES means
+        D = dBBS                              nights & weekends only
+        F = Spitfire
+        G = GAP
+        H = PC-Host
+        I = Magpie
+        J = SuperBBS
+        L = Telegard
+        M = OraComm/Major/Galacticomm
+        N = Genesis
+        O = Opus/Maximus                  BAUD CODE:
+        P = GT PowerComm                      1200/2400 = default
+        Q = QuickBBS/RemoteAccess             9 = 1200/2400/9600 or faster
+        S = Searchlight
+        T = TBBS or TCOMM
+        U = UltraBBS
+        V = WWIV
+        W = Wildcat
+        X = BBS-PC,RyBBS,ROS,Fido,Citadel,Osiris,etc.
+            or custom, unverified or unknown type
+        Y = T.A.G.
+        Z = TPBoard
+
+    Model of 9600+ modem in use:
+    M=Microcom, U=USR, F=FastComm, H=Hayes VSM, V=CCITT V.32 compatible
+-----------------------------------------------------------------------------
+  Note: An asterisk before NAME column means changed since last revision.
+    ! in the NAME,FEATURES column means usually maintains a BBS list.
+    + before NAME means personally verified during last update
+   period. @ before NAME means verified during last update period AND
+   the entry was changed.
+
