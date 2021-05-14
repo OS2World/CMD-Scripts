@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<TITLE>PMShell class list maintenance utility</TITLE>
+</HEAD>
+
+<BODY>
+<A HREF="../../index.html">-> Home</A>
+
+
+<H1>PMShell class list maintenance utility</H1>
+<P>
+  Release: 0.1 (beta)
+</P><P>
+  Features:
+  <UL>
+    <LI>View a list of <EM>all</EM> object classes registered to the PMShell.
+    <LI>Remove dead class entries, does also work when <TT>DeregisterObjectClass</TT> fails.
+    <LI>Backup and restore the class list.
+  </UL>
+</P>
+
+<A HREF="#usage">usage</A>
+<A HREF="#download">download</A>
+<A HREF="#fileformat">fileformat</A>
+<!--A HREF="#history">history</A>
+<A HREF="#todo">todo</A-->
+<A HREF="#contact">contact</A>
+
+<HR>
+<A NAME="usage">
+<H3>Usage</H3>
+  <DL>
+    <DT><KBD>classlist</KBD></DT>
+    <DD>Display all entries from <TT>PM_Objects:ClassList</TT> to stdout.</DD>
+    <DT><KBD>classlist &gt; <I>file</I></KBD></DT>
+    <DD>Read all entries from <TT>PM_Objects:ClassList</TT> and write the result into <KBD><I>file</I></KBD>.</DD>
+    <DT><KBD>classlist <I>file</I></KBD></DT>
+    <DD>Replace the current active class list by the list stored in <KBD><I>file</I></KBD>.
+      You will be asked before the action is taken.</DD>
+  </DL>
+  Removing a dead class entry:
+  <UL>
+    <LI><KBD>classlist &gt; <I>file</I></KBD>
+    <LI>Remove the corresponding line from <KBD><I>file</I></KBD> (See note).
+    <LI><KBD>classlist <I>file</I></KBD>
+    <LI>Press <KBD>Y</KBD> and <KBD><I>Enter</I></KBD>.
+  </UL>
+  <FONT SIZE=-1>
+  Note: Do not use <TT>e.exe</TT> for editing of the class list file
+   because it stores an additional character <TT>^Z</TT> at the end of each file
+   which confuses <TT>classtool</TT>.
+  </FONT>
+</A>
+
+<HR>
+<A NAME="download">
+<H3><FONT COLOR=800080>Download</FONT></H3>
+  This program is freeware.
+<P>
+  ZIP file with source, OS/2 REXX executable and this guide:
+  <A HREF="classtool.zip">Release&nbsp;0.1</A>
+</P>
+</A>
+
+<!--HR>
+<A NAME="history">
+<H3>History</H3>
+<P>
+  <B>Version 0.11</B>
+  <UL>
+    <LI>some bugfixes</LI>
+  </UL>
+</P><P>
+  <B>Version 0.1</B> (first release)
+</P>
+</A-->
+
+<!--HR>
+<A NAME="todo">
+<H3>ToDo</H3>
+<DL>
+  <DT><B>&nbsp;&middot; Unix support</B></DT>
+</DL>
+</A-->
+
+<HR>
+<A NAME="fileformat">
+<H3>File format</H3>
+  The format of the classtool file is ASCII with the following rules:
+  <UL>
+    <LI>The File is a modification of the CSV format with <TT>^I</TT> (Tab) as field delimiter.
+    <LI>Each entry in <TT>PM_Objects:ClassList</TT> is a record.
+    <LI>Each record has 4 colums:
+      <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2><TR VALIGN=TOP ALIGN=LEFT>
+        <TH>No.<HR SIZE=1></TD>
+        <TH>Datatype<HR SIZE=1></TD>
+        <TH>Description<HR SIZE=1></TD>
+       </TR><TR VALIGN=TOP>
+        <TD>1</TD>
+        <TD>32bit integer&nbsp;</TD>
+        <TD><I>unknown</I></TD>
+       </TR><TR VALIGN=TOP>
+        <TD>2</TD>
+        <TD>32bit integer</TD>
+        <TD><I>unknown</I></TD>
+       </TR><TR VALIGN=TOP>
+        <TD>3</TD>
+        <TD>ASCII</TD>
+        <TD>Name of the entry point</TD>
+       </TR><TR VALIGN=TOP>
+        <TD>4</TD>
+        <TD>ASCII</TD>
+        <TD>Name of the DLL</TD>
+      </TR></TABLE>
+  </UL>
+</A>
+
+<HR>
+<A NAME8="contact">
+<H3>Contact</H3>
+<P>
+  Suggestions, help, complaints (but not too much:-): <A HREF="mailto:mueller@maazl.de">mueller@maazl.de</A>
+</P><P>
+  Original homepage: <A HREF="http://www.maazl.de/project/misc/classtool.html">http://www.maazl.de/project/misc/mmpmtool.html</A>
+</P>
+</A>
+
+<HR>
+</BODY>
+</HTML>
