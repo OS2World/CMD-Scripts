@@ -1,0 +1,17 @@
+; Check if OS is Windows 2000/XP
+If Split( "@DOS", "." )[0] = 5
+	$2KKey = "HKEY_CURRENT_USER\Software\Microsoft\"
+	$2KKey = $2KKey + "Windows NT\CurrentVersion\Windows"
+	$ArrayPRN = Split( ReadValue( $2KKey,"Device" ), "," )
+	? "Default printer = " + $ArrayPRN[0]
+	? "Printer port    = " + $ArrayPRN[2]
+Else
+	? "DefPRN2K.kix,  Version 1.01 for Windows 2000"
+	? "Display default printer"
+	?
+	? "Usage:  KIX32  DEFPRN2K.KIX"
+	?
+	? "Written by Rob van der Woude"
+	? "http://www.robvanderwoude.com"
+EndIf
+?

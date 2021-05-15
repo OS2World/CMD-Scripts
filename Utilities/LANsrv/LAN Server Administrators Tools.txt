@@ -1,0 +1,23 @@
+LAN Server Administrators Tools
+https://www.robvanderwoude.com/lsrexxutil.php
+
+LAN Server Administrators Tools
+
+Name 	Description 	LS or Peer
+AllFiles 	List all open files on server 	LS only
+DefPrn 	Shows the default printer and port for the current OS/2 workstation. It will even work for RPL workstations. 	both
+File 	Show who opened specified file on server 	LS only
+Files 	List open files on server for specified user ID 	LS only
+GetIP.cmd 	Batch file showing local PC's IP address 	both,
+plus NT
+HostName 	Display host name for specified IP address 	both
+LastBoot 	Show date and time of last reboot for specified server.
+More or less equivalent to my NT batch & VBScript scripts UpTime.bat and LastBoot.vbs. 	both
+[1] LHomeDir
+[2] RHomeDir 	Restore home directory shares, either localy [1] or remotely [2] 	[1] both (1)
+[2] LS only
+ListPRN.cmd 	Batch file that will list specified (NT) or all (NT and OS/2) network printers' UNC path 	both,
+plus  NT
+NetShare 	List all shared resources on specified server or domain 	both
+WhoAmI 	Show LS info on workstation and current user
+Also available for NT as WhoAmI.bat 	both
