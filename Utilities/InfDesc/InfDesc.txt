@@ -1,0 +1,8 @@
+
+I wrote this little rexx script, to describe .INF files under 4OS2, 4DOS and 4NT.
+
+It basically extracts the title from the INF file, strips the '00'x bits and tells the 4os2 session this is the file.  At the moment it handles only one file at a time, which means that you run "select infdesc (*.inf)" at the command prompt.
+
+It can tickle some bugs in regina.rex (os2), in that if the description has no spaces, the program will read it as two files, and under 4NT, the files have quotes around them, which 4DESC does not like.  But generally it works quite well.
+
+Wendy Krieger
